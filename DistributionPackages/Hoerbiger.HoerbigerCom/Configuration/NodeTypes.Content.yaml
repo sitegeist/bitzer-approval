@@ -1,0 +1,4 @@
+'Hoerbiger.HoerbigerCom:Content':
+  abstract: true
+  superTypes:
+    'Neos.Neos:Content': true

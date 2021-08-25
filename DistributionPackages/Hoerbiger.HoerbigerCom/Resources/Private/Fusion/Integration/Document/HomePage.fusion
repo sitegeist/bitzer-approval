@@ -1,0 +1,1 @@
+prototype(Hoerbiger.HoerbigerCom:Document.HomePage) < prototype(Hoerbiger.HoerbigerCom:Document.WebPage)

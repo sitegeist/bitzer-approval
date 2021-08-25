@@ -1,0 +1,21 @@
+{
+    "name": "hoerbiger/hoerbigercom",
+    "type": "neos-site",
+    "version": "1.0.0",
+    "require": {
+        "neos/neos": "*",
+        "neos/nodetypes-basemixins": "*",
+        "sitegeist/csvpo": "*",
+        "sitegeist/stampede": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hoerbiger\\HoerbigerCom\\": "Classes/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Hoerbiger.HoerbigerCom"
+        }
+    }
+}

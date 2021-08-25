@@ -1,0 +1,4 @@
+'Hoerbiger.HoerbigerCom:Document.Shortcut':
+  superTypes:
+    'Neos.Neos:Shortcut': true
+    'Hoerbiger.HoerbigerCom:Document': true

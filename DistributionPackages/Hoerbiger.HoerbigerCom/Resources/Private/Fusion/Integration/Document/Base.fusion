@@ -1,0 +1,25 @@
+prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Component) {
+    title = ${q(documentNode).property('title')}
+    titleOverride = ${q(documentNode).property('titleOverride')}
+    body = null
+
+    renderer = Neos.Neos:Page {
+        head {
+            metaViewport = '<meta name="viewport" content="width=device-width">'
+            stylesheets = Hoerbiger.HoerbigerCom:Resource.StyleSheets
+
+            titleTag {
+                content = ${props.titleOverride ? props.titleOverride : props.title}
+                content.@process.environmentPrefix {
+                    expression = ${Configuration.setting('Hoerbiger.HoerbigerCom.environmentPrefix') + ' ' + value}
+                    @if.isSet = ${!String.isBlank(Configuration.setting('Hoerbiger.HoerbigerCom.environmentPrefix'))}
+                }
+            }
+        }
+
+        body = ${props.body}
+
+        bodyScripts = Hoerbiger.HoerbigerCom:Resource.BodyScripts
+        bodyScripts.@position = 'before closingBodyTag'
+    }
+}

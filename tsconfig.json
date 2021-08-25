@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "strict": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "target": "ESNext",
+        "jsx": "react",
+        "moduleResolution": "node",
+        "downlevelIteration": true,
+        "lib": [
+            "ESNext",
+            "dom"
+        ]
+    },
+    "include": [
+        "DistributionPackages/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

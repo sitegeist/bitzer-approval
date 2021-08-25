@@ -1,0 +1,10 @@
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document.WebPage': true
+    'Hoerbiger.HoerbigerCom:Constraint.Document.Restricted': true
+  ui:
+    icon: globe
+    label: i18n
+  childNodes:
+    notfound:
+      type: Hoerbiger.HoerbigerCom:Document.Error.404

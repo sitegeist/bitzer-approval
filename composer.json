@@ -1,0 +1,90 @@
+{
+    "name": "sitegeist/neos-base-distribution",
+    "description": "Sitegeist Neos Base Distribution",
+    "config": {
+        "vendor-dir": "Packages/Libraries",
+        "bin-dir": "bin",
+        "platform": {
+            "php": "7.3"
+        }
+    },
+    "require": {
+        "neos/neos": "~7.1.0",
+        "neos/neos-ui": "~7.1.0",
+        "neos/seo": "^3.0",
+        "neos/redirecthandler-ui": "^2.4",
+        "neos/redirecthandler-neosadapter": "^4.3",
+        "neos/redirecthandler-databasestorage": "^5.0",
+
+        "packagefactory/atomicfusion-proptypes": "^2.0",
+        "packagefactory/atomicfusion-classnames": "^1.0",
+
+        "flowpack/nodetemplates": "^1.3",
+
+        "sitegeist/klarschiff": "^2.1",
+        "sitegeist/monocle": "^7.2",
+        "sitegeist/kaleidoscope": "^6.0",
+        "sitegeist/lazybones": "^3.0",
+        "sitegeist/csvpo": "^1.3",
+        "sitegeist/stampede": "^1.1",
+        "sitegeist/archaeopteryx": "^1.0",
+        "hoerbiger/hoerbigercom": "^1.0"
+    },
+    "require-dev": {
+        "neos/buildessentials": "^7.1",
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpunit": "^9.0",
+        "symfony/css-selector": "~2.0",
+        "neos/behat": "^7.1",
+        "deployer/deployer": "^6.2",
+        "editorconfig-checker/editorconfig-checker": "^10.0",
+        "squizlabs/php_codesniffer": "^3.4",
+        "sitegeist/magicwand": "^4.3",
+        "phpstan/phpstan": "^0.12.42"
+    },
+    "suggest": {
+        "ext-pdo_sqlite": "For running functional tests out-of-the-box this is required"
+    },
+    "scripts": {
+        "post-update-cmd": "Neos\\Flow\\Composer\\InstallerScripts::postUpdateAndInstall",
+        "post-install-cmd": "Neos\\Flow\\Composer\\InstallerScripts::postUpdateAndInstall",
+        "post-package-update": "Neos\\Flow\\Composer\\InstallerScripts::postPackageUpdateAndInstall",
+        "post-package-install": "Neos\\Flow\\Composer\\InstallerScripts::postPackageUpdateAndInstall",
+
+        "flush": [
+            "./flow flow:cache:flush --force",
+            "./flow flow:package:rescan",
+            "./flow doctrine:migrate",
+            "./flow resource:publish"
+        ],
+
+        "cleanup:php": [
+            "rm -rf ./Data/Temporary/*",
+            "rm -rf ./Packages/*",
+            "rm -rf ./bin/*"
+        ],
+
+        "lint:editorconfig": "ec",
+        "lint:phpcs": "phpcs --colors --standard=PSR2 ./DistributionPackages/*/Classes",
+        "lint:phpstan": "phpstan analyse",
+        "lint:php": [
+            "@lint:phpcs",
+            "@lint:phpstan"
+        ],
+
+        "clone": [
+            "./flow clone:list",
+            "./flow clone:preset"
+        ],
+
+        "deploy:develop": "dep deploy develop -vv",
+        "deploy:staging": "dep deploy staging -vv",
+        "deploy:master": "dep deploy master -vv"
+    },
+    "repositories": {
+        "local": {
+            "type": "path",
+            "url": "./DistributionPackages/*"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+'Hoerbiger.HoerbigerCom:Document':
+  abstract: true
+  superTypes:
+    'Neos.Neos:Document': true
+
+  constraints:
+    nodeTypes:
+      '*': false
+      'Neos.Neos:Document': false
+      'Hoerbiger.HoerbigerCom:Document': true
+      'Hoerbiger.HoerbigerCom:Constraint.Document.Restricted': false

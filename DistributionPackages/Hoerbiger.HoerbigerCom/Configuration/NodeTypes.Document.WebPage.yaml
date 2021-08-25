@@ -1,0 +1,11 @@
+'Hoerbiger.HoerbigerCom:Document.WebPage':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+
+  ui:
+    icon: file
+    label: i18n
+
+  childNodes:
+    main:
+      type: 'Hoerbiger.HoerbigerCom:Collection.Content.Main'
