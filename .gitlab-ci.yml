@@ -22,8 +22,8 @@ merge-requests:
   stage: housekeeping
   script:
     # extract parts from branch name
-    - 'mrTicketNumber=`echo $CI_COMMIT_REF_NAME | cut -d "-" -f1`'
-    - 'mrTicketTitle=`echo $CI_COMMIT_REF_NAME | cut -d "-" -f2 | sed -r "s/([A-Z])/ \l\1/g"`'
+    - mrTicketNumber=$(echo "$CI_BUILD_REF_NAME" | cut -s -d- -f1)
+    - mrTicketTitle=$(echo "$CI_BUILD_REF_NAME" | cut -s -d- -f2 | sed -r 's/[[:upper:]]/ &/g' | tr "[:upper:]" "[:lower:]")
 
     # build title and description
     - 'mrTitle="$mrTicketTitle #$mrTicketNumber"'
