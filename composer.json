@@ -1,34 +1,15 @@
 {
-    "name": "sitegeist/neos-base-distribution",
-    "description": "Sitegeist Neos Base Distribution",
+    "name": "hoerbiger/hoerbiger-neos-distribution",
+    "description": "Hoerbiger Neos Distribution",
     "config": {
         "vendor-dir": "Packages/Libraries",
         "bin-dir": "bin",
         "platform": {
-            "php": "7.3"
+            "php": "7.4"
         }
     },
     "require": {
-        "neos/neos": "~7.1.0",
-        "neos/neos-ui": "~7.1.0",
-        "neos/seo": "^3.0",
-        "neos/redirecthandler-ui": "^2.4",
-        "neos/redirecthandler-neosadapter": "^4.3",
-        "neos/redirecthandler-databasestorage": "^5.0",
-
-        "packagefactory/atomicfusion-proptypes": "^2.0",
-        "packagefactory/atomicfusion-classnames": "^1.0",
-
-        "flowpack/nodetemplates": "^1.3",
-
-        "sitegeist/klarschiff": "^2.1",
-        "sitegeist/monocle": "^7.2",
-        "sitegeist/kaleidoscope": "^6.0",
-        "sitegeist/lazybones": "^3.0",
-        "sitegeist/csvpo": "^1.3",
-        "sitegeist/stampede": "^1.1",
-        "sitegeist/archaeopteryx": "^1.0",
-        "hoerbiger/hoerbigercom": "^1.0"
+        "hoerbiger/hoerbigercom": "*"
     },
     "require-dev": {
         "neos/buildessentials": "^7.1",
