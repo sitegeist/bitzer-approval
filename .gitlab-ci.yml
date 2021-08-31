@@ -20,19 +20,17 @@ merge-requests:
   only:
     - /^(\d)+[^/]*$/
   stage: housekeeping
-  script:
+  script: |
     # extract parts from branch name
-    - mrTicketNumber=$(echo "$CI_BUILD_REF_NAME" | cut -s -d- -f1)
-    - mrTicketTitle=$(echo "$CI_BUILD_REF_NAME" | cut -s -d- -f2 | sed -r 's/[[:upper:]]/ &/g' | tr "[:upper:]" "[:lower:]")
-
+    mrTicketNumber=$(echo "$CI_COMMIT_REF_NAME" | cut -s -d- -f1)
+    mrTicketTitle=$(echo "$CI_COMMIT_REF_NAME" | cut -s -d- -f2 | sed -r 's/[[:upper:]]/ &/g' | tr "[:upper:]" "[:lower:]")
     # build title and description
-    - 'mrTitle="$mrTicketTitle #$mrTicketNumber"'
-    - 'mrDescription="Automatically created merge request"'
-
+    mrTitle="$mrTicketTitle #$mrTicketNumber"
+    mrDescription="Automatically created merge request"
     # create merge requests for development, staging and master
-    - 'mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d develop --title "$mrTitle" --description "$mrDescription" --labels develop'
-    - 'mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d staging --title "WIP: $mrTitle" --description "$mrDescription" --labels staging'
-    - 'mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d master --title "WIP: $mrTitle" --description "$mrDescription" --labels master'
+    mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d develop --title "$mrTitle" --description "$mrDescription" --labels develop
+    mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d staging --title "WIP: $mrTitle" --description "$mrDescription" --labels staging
+    mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d master --title "WIP: $mrTitle" --description "$mrDescription" --labels master
 
 tests:
   image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
