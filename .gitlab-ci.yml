@@ -28,9 +28,10 @@ merge-requests:
     mrTitle="$mrTicketTitle #$mrTicketNumber"
     mrDescription="Automatically created merge request"
     # create merge requests for development, staging and master
-    mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d develop --title "$mrTitle" --description "$mrDescription" --labels develop
-    mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d staging --title "WIP: $mrTitle" --description "$mrDescription" --labels staging
-    mr -p $CI_PROJECT_ID -s $CI_COMMIT_REF_NAME -d master --title "WIP: $mrTitle" --description "$mrDescription" --labels master
+    # create merge requests for development, staging and master
+    mr -p $CI_PROJECT_ID -d develop --title "$mrTitle" --description "$mrDescription" --labels develop
+    mr -p $CI_PROJECT_ID -d staging --title "WIP: $mrTitle" --description "$mrDescription" --labels staging
+    mr -p $CI_PROJECT_ID -d master --title "WIP: $mrTitle" --description "$mrDescription" --labels master
 
 tests:
   image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
