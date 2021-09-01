@@ -1,0 +1,9 @@
+Neos:
+  Flow:
+    security:
+      authentication:
+        providers:
+          'Neos.Neos:Backend':
+            provider: '\Hoerbiger\HoerbigerCom\Infrastructure\Authentication\SAMLUsernameProvider'
+            entryPoint: ~
+            entryPointOptions: ~
