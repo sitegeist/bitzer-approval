@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom:Document.Fragment.Footer) < prototype(Neos.Fusion:Component) {
-    renderer = Hoerbiger.HoerbigerCom:Component.Organism.SiteFooter
+    renderer = Hoerbiger.HoerbigerCom:Block.SiteFooter
 
     @cache {
         mode = 'cached'

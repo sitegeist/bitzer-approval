@@ -1,6 +1,6 @@
 prototype(Hoerbiger.HoerbigerCom:Document.Fragment.Header) < prototype(Neos.Fusion:Component) {
 
-    renderer = Hoerbiger.HoerbigerCom:Component.Organism.SiteHeader {
+    renderer = Hoerbiger.HoerbigerCom:Block.SiteHeader {
         menuItems = Neos.Fusion:Map {
             items = Neos.Neos:MenuItems
             itemName = 'menuitem'

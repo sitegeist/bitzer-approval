@@ -1,0 +1,13 @@
+prototype(Hoerbiger.HoerbigerCom:Block.SiteFooter) < prototype(Neos.Fusion:Component)  {
+    @styleguide {
+        title = 'Site Footer'
+    }
+
+    i18n = ${CsvPO.create('resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Block/SiteFooter/SiteFooter.translation.csv')}
+
+    renderer = afx`
+        <footer class={styles.siteFooter}>
+            {props.i18n.title}
+        </footer>
+    `
+}

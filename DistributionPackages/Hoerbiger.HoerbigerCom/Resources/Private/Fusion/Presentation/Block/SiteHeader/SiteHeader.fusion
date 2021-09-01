@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom:Component.Organism.SiteHeader) < prototype(Neos.Fusion:Component)  {
+prototype(Hoerbiger.HoerbigerCom:Block.SiteHeader) < prototype(Neos.Fusion:Component)  {
     @styleguide {
         title = 'Site Header'
         props {
@@ -11,7 +11,7 @@ prototype(Hoerbiger.HoerbigerCom:Component.Organism.SiteHeader) < prototype(Neos
         }
     }
 
-    i18n = ${CsvPO.create('resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Component/Organism/SiteHeader/SiteHeader.translation.csv')}
+    i18n = ${CsvPO.create('resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv')}
 
     menuItems = null
 
