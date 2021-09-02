@@ -7,7 +7,7 @@ require 'recipe/flow_framework.php';
 ini_set('display_errors', 1);
 
 // Git
-set('repository', 'ssh://git@git.example.com/example/project.git');
+set('repository', 'ssh://git@git.sitegeist.de:40022/hoerbiger/hoerbiger-websites.git');
 
 // SSH
 set('ssh_type', 'native');
@@ -62,15 +62,28 @@ task('upload', function () {
  * Run node repair
  */
 task('deploy:node_repair', function () {
-    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} node:repair --only addMissingDefaultValues,createMissingChildNodes,reorderChildNodes');
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow node:repair --only addMissingDefaultValues,createMissingChildNodes,reorderChildNodes');
 })->desc('Run node repair');
 
 /**
  * Flow cache flush
  */
 task('deploy:flush_caches', function () {
-    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} cache:flush --force');
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow flow:cache:flush --force');
 })->desc('Run node repair');
+
+
+task('deploy:run_migrations', function () {
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow doctrine:migrate');
+})->desc('Apply database migrations');
+
+/**
+ * Publish resources
+ */
+task('deploy:publish_resources', function () {
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow resource:publish');
+})->desc('Publish resources');
+
 
 /**
  * Deploy and build locally
