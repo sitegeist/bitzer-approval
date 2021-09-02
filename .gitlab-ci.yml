@@ -33,34 +33,34 @@ merge-requests:
     mr -p $CI_PROJECT_ID -d staging --title "WIP: $mrTitle" --description "$mrDescription" --labels staging
     mr -p $CI_PROJECT_ID -d master --title "WIP: $mrTitle" --description "$mrDescription" --labels master
 
-tests:
-  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
-  tags:
-    - docker
-    - autoscale
-  cache:
-    key: kvh
-    paths:
-      - .composer/
-  stage: 'testing'
-  only:
-    - /^(\d)+[^/]*$/
-    - develop
-    - staging
-    - master
-  before_script:
-    - eval $(ssh-agent -s)
-    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-    - mkdir -p ~/.ssh
-    - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
-    - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
-    - docker-php-ext-install exif
-    - composer install
-  script:
-    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.KvhhNet.MedicalStaff/Tests/Unit/Domain/Command/SynchronizePhysiciansTest.php
-    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/MedicalStaff/MedicalNumberTest.php
-    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/Stock/StockReportTest.php
-    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/Integrity/HappenedCriticallyLongAgoTest.php
+#tests:
+#  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
+#  tags:
+#    - docker
+#    - autoscale
+#  cache:
+#    key: kvh
+#    paths:
+#      - .composer/
+#  stage: 'testing'
+#  only:
+#    - /^(\d)+[^/]*$/
+#    - develop
+#    - staging
+#    - master
+#  before_script:
+#    - eval $(ssh-agent -s)
+#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+#    - mkdir -p ~/.ssh
+#    - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
+#    - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
+#    - docker-php-ext-install exif
+#    - composer install
+#  script:
+#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.KvhhNet.MedicalStaff/Tests/Unit/Domain/Command/SynchronizePhysiciansTest.php
+#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/MedicalStaff/MedicalNumberTest.php
+#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/Stock/StockReportTest.php
+#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/Integrity/HappenedCriticallyLongAgoTest.php
 
 #deployment-develop:
 #  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
