@@ -17,8 +17,8 @@ class SAMLUsernameToken extends AbstractToken
     {
         $serverParams = $actionRequest->getHttpRequest()->getServerParams();
         $credentialsGiven = true;
-        if (isset($serverParams['HOEUsername'])) {
-            $this->credentials['identifier'] = $serverParams['HOEUsername'];
+        if (isset($serverParams['REMOTE_USER'])) {
+            $this->credentials['identifier'] = $serverParams['REMOTE_USER'];
         } else {
             $credentialsGiven = false;
         }
