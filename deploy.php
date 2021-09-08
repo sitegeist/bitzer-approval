@@ -54,7 +54,11 @@ task('upload', function () {
     upload(
         __DIR__ . '/.build/current/',
         '{{release_path}}',
-        ['options' => ['--exclude node_modules/']]
+        ['options' => [
+            '--exclude node_modules/',
+            #'--groupmap=*:1005 --groups'
+            '--chown=:1005'
+        ]]
     );
 });
 
