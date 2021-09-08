@@ -56,7 +56,6 @@ task('upload', function () {
         '{{release_path}}',
         ['options' => [
             '--exclude node_modules/',
-            #'--groupmap=*:1005 --groups'
             '--chown=:1005'
         ]]
     );
