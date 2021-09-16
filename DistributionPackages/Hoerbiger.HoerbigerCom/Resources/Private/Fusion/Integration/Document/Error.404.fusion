@@ -1,4 +1,9 @@
-prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Hoerbiger.HoerbigerCom:Document.WebPage) {
+prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Hoerbiger.Page.forNotFoundPage(documentNode)}
+        }
+    }
     prototype(Neos.Neos:Page) {
         httpResponseHead {
             statusCode = 404

@@ -1,0 +1,18 @@
+//
+// Sitegeist.Monocle Preview Page Configuration
+// @see: https://github.com/sitegeist/Sitegeist.Monocle#preview-configuration
+// also: Hoerbiger.Shared/Configuration/Settings.Sitegeist.Monocle.yaml
+//
+prototype(Sitegeist.Monocle:Preview.Page) {
+    head {
+        metaViewport = '<meta name="viewport" content="width=device-width">'
+        stylesheets = Hoerbiger.HoerbigerCom:Resource.StyleSheets
+    }
+
+    bodyScripts = Hoerbiger.HoerbigerCom:Resource.BodyScripts
+    bodyScripts.@position = 'before closingBodyTag'
+}
+
+prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    isInPreviewMode = ${request.controllerPackageKey == 'Sitegeist.Monocle'}
+}

@@ -1,9 +1,6 @@
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-  constraints:
-    nodeTypes:
-      'Hoerbiger.HoerbigerCom:Document.WebPage': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -11,7 +8,11 @@
         nodeTypes:
           '*': false
     notfound:
-      type: Hoerbiger.HoerbigerCom:Document.Error.404
+      type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.WebPage': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   ui:
     icon: globe
-    label: i18n
+    label: 'Homepage'

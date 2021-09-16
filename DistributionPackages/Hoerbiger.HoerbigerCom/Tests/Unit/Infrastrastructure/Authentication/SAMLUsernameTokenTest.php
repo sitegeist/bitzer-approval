@@ -51,7 +51,7 @@ class SAMLUsernameTokenTest extends UnitTestCase
                     [
                         'DISPLAY_NAME' => 'Peter-Klaus Fledermaus',
                         'e-mail' => 'peter-klaus@fledermaus.de',
-                        'HOEUsername' => 'u1dd_pkf'
+                        'REMOTE_USER' => 'u1dd_pkf'
                     ]
                 )),
                 [

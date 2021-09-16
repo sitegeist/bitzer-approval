@@ -1,0 +1,6 @@
+Neos:
+  Fusion:
+    defaultContext:
+      Shared.SiteHeader: Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory
+      Shared.SiteFooter: Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory
+      Shared.Page: Hoerbiger\Shared\Presentation\Layout\Page\PageFactory

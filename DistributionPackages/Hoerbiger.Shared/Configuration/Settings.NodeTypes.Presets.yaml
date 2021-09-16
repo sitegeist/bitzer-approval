@@ -1,0 +1,81 @@
+Neos:
+  Neos:
+    nodeTypes:
+      presets:
+        properties:
+          'rte':
+            'plain':
+              type: string
+              ui:
+                inlineEditable: true
+                inline:
+                  editorOptions:
+                    autoparagraph: false
+                    formatting:
+                      removeFormat: true
+                      sup: true
+                      sub: true
+            'text':
+              type: 'string'
+              ui:
+                inlineEditable: true
+                inline:
+                  editorOptions:
+                    autoparagraph: true
+                    linking:
+                      anchor: true
+                      title: true
+                      relNofollow: true
+                      targetBlank: true
+                    formatting:
+                      strong: true
+                      p: true
+                      ol: true
+                      ul: true
+                      sub: true
+                      sup: true
+                      a: true
+                      removeFormat: true
+          'image':
+            'square':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 1
+                          height: 1
+            'landscape':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 4
+                          height: 3
+            'panorama':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 3
+                          height: 1
