@@ -41,6 +41,13 @@ final class LinkTarget implements PseudoEnumInterface
         return self::$instances[$string];
     }
 
+    public static function forLinkPropertyValue(string $linkPropertyValue): self
+    {
+        return \mb_substr($linkPropertyValue, 0, 7) === 'node://'
+            ? LinkTarget::self()
+            : LinkTarget::blank();
+    }
+
     public static function self(): self
     {
         return self::from(self::TARGET_SELF);

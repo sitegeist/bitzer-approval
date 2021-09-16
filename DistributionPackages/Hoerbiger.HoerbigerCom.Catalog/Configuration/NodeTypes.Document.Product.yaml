@@ -1,12 +1,15 @@
 'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           '*': false
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
   ui:
     icon: barcode
     label: 'Produkt'

@@ -14,6 +14,8 @@ interface FigureInterface extends ComponentPresentationObjectInterface
 {
     public function getImageSource(): ImageSourceHelperInterface;
 
+    public function getIsToBeLoadedLazily(): bool;
+
     public function getObjectFit(): ?FigureObjectFit;
 
     public function getObjectPosition(): ?FigureObjectPosition;

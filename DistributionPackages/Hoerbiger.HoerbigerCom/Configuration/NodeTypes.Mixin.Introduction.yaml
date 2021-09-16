@@ -1,0 +1,25 @@
+'Hoerbiger.HoerbigerCom:Mixin.Introduction':
+  abstract: true
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  ui:
+    inspector:
+      groups:
+        image:
+          label: 'Key Visual'
+          position: 'after document'
+  properties:
+    headline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      options:
+        preset: 'rte.plain'
+    abstract:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Zusammenfassung eingeben'
+      options:
+        preset: 'rte.text'

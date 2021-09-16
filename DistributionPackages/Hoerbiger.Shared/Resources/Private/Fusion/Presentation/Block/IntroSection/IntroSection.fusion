@@ -29,7 +29,7 @@ prototype(Hoerbiger.Shared:Block.IntroSection) < prototype(PackageFactory.Atomic
         </dd>
         <dt>subheadline:</dt>
         <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheadline} />
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheadline} @if.1={presentationObject.subheadline} />
         </dd>
         <dt>text:</dt>
         <dd>
@@ -37,7 +37,7 @@ prototype(Hoerbiger.Shared:Block.IntroSection) < prototype(PackageFactory.Atomic
         </dd>
         <dt>media:</dt>
         <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
         </dd>
     </dl>`
 }

@@ -1,6 +1,7 @@
 'Hoerbiger.HoerbigerCom:Document.Error.404':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'

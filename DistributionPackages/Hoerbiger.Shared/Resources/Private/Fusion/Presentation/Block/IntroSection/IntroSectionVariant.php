@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\IntroSection;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
@@ -39,6 +40,20 @@ final class IntroSectionVariant implements PseudoEnumInterface
         }
 
         return self::$instances[$string];
+    }
+
+    public static function fromNodeTypeName(NodeTypeName $nodeTypeName): self
+    {
+        switch ($nodeTypeName->getValue()) {
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory':
+                return self::duo();
+            case 'Hoerbiger.HoerbigerCom:Document.WebPage':
+            case 'Hoerbiger.HoerbigerCom:Document.Error.404':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog':
+            default:
+                return self::fullMedia();
+        }
     }
 
     public static function fullMedia(): self

@@ -9,6 +9,7 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
                 height = 1920
                 width = 1080
             }
+            isToBeLoadedLazily = true
             objectFit = 'cover'
             objectPosition = 'topLeft'
         }
@@ -17,7 +18,7 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
     renderer = afx`<dl>
         <dt>imageSource:</dt>
         <dd>
-            <Sitegeist.Lazybones:Image imageSource={presentationObject.imageSource} />
+            <Sitegeist.Lazybones:Image imageSource={presentationObject.imageSource} lazy={presentationObject.isToBeLoadedLazily} />
         </dd>
         <dt>objectFit:</dt>
         <dd>{presentationObject.objectFit}</dd>

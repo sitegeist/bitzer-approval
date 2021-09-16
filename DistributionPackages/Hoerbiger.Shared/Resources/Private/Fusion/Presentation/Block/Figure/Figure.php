@@ -18,16 +18,20 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
 {
     private ImageSourceHelperInterface $imageSource;
 
+    private bool $isToBeLoadedLazily;
+
     private ?FigureObjectFit $objectFit;
 
     private ?FigureObjectPosition $objectPosition;
 
     public function __construct(
         ImageSourceHelperInterface $imageSource,
+        bool $isToBeLoadedLazily,
         ?FigureObjectFit $objectFit,
         ?FigureObjectPosition $objectPosition
     ) {
         $this->imageSource = $imageSource;
+        $this->isToBeLoadedLazily = $isToBeLoadedLazily;
         $this->objectFit = $objectFit;
         $this->objectPosition = $objectPosition;
     }
@@ -35,6 +39,11 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
     public function getImageSource(): ImageSourceHelperInterface
     {
         return $this->imageSource;
+    }
+
+    public function getIsToBeLoadedLazily(): bool
+    {
+        return $this->isToBeLoadedLazily;
     }
 
     public function getObjectFit(): ?FigureObjectFit

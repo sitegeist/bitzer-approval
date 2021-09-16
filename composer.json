@@ -8,6 +8,8 @@
             "php": "7.4"
         }
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "hoerbiger/hoerbigercom": "*",
         "hoerbiger/hoerbigercom-catalog": "*"
@@ -67,6 +69,10 @@
         "local": {
             "type": "path",
             "url": "./DistributionPackages/*"
+        },
+        "inspector-gadget": {
+            "type": "git",
+            "url": "https://github.com/sitegeist/Sitegeist.InspectorGadget.git"
         }
     }
 }
