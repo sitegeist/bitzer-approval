@@ -7,5 +7,3 @@
     nodeTypes:
       '*': false
       'Neos.Neos:Document': false
-      'Hoerbiger.HoerbigerCom:Document': true
-      'Hoerbiger.HoerbigerCom:Constraint.Document.Restricted': false

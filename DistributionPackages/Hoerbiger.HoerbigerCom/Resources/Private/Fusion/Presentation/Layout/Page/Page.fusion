@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom:Component.Template.Page) < prototype(Neos.Fusion:Component) {
+prototype(Hoerbiger.HoerbigerCom:Layout.Page) < prototype(Neos.Fusion:Component) {
     @styleguide {
         title = 'Page'
         props {

@@ -1,6 +1,6 @@
 prototype(Hoerbiger.HoerbigerCom:Document.WebPage) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
-        body = Hoerbiger.HoerbigerCom:Component.Template.Page {
+        body = Hoerbiger.HoerbigerCom:Layout.Page {
             header = Hoerbiger.HoerbigerCom:Document.Fragment.Header
             content = Neos.Neos:PrimaryContent {
                 nodePath = 'main'

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <root>
-    <site name="Hoerbiger.HoerbigerCom" state="1" siteResourcesPackageKey="Hoerbiger.HoerbigerCom" siteNodeName="hoerbiger-hoerbigercom">
+    <site name="hoerbiger.com" state="1" siteResourcesPackageKey="Hoerbiger.HoerbigerCom" siteNodeName="hoerbiger-hoerbigercom">
         <nodes formatVersion="2.0">
-            <node identifier="a44f0678-9744-4334-8e4b-b14c5b74be4d" nodeName="hoerbiger-hoerbigercom">
+            <node identifier="eaeb47cd-3a7e-4932-8111-fa641e9ce66e" nodeName="hoerbiger-hoerbigercom">
                 <variant sortingIndex="100" workspace="live" nodeType="Hoerbiger.HoerbigerCom:Document.HomePage" version="1"
                         removed="" hidden="" hiddenInIndex="">
                     <dimensions/>
@@ -12,12 +12,12 @@
                     <lastModificationDateTime __type="object" __classname="DateTime">2021-08-20T08:58:16+00:00
                     </lastModificationDateTime>
                     <properties>
-                        <title __type="string">Hoerbiger.HoerbigerCom</title>
+                        <title __type="string">Home</title>
                         <uriPathSegment __type="string">hoerbiger-hoerbigercom</uriPathSegment>
                     </properties>
                 </variant>
-                <node identifier="da8e4081-b40f-86a1-3015-9e94e89a8a74" nodeName="main">
-                    <variant sortingIndex="100" workspace="live" nodeType="Hoerbiger.HoerbigerCom:Collection.Content.Main"
+                <node identifier="de4f6e2b-6395-449d-b76b-c56c4d8ce76e" nodeName="main">
+                    <variant sortingIndex="100" workspace="live" nodeType="Neos.Neos:ContentCollection"
                             version="1" removed="" hidden="" hiddenInIndex="">
                         <dimensions/>
                         <accessRoles __type="array"/>
@@ -28,7 +28,7 @@
                         <properties/>
                     </variant>
                 </node>
-                <node identifier="392145e5-66f3-fc79-39c7-bdd76f5608d0" nodeName="notfound">
+                <node identifier="50d8d594-7050-49f5-8901-b834234f85f6" nodeName="notfound">
                     <variant sortingIndex="200" workspace="live" nodeType="Hoerbiger.HoerbigerCom:Document.Error.404" version="1"
                             removed="" hidden="" hiddenInIndex="1">
                         <dimensions/>
@@ -42,8 +42,8 @@
                             <title __type="string">404</title>
                         </properties>
                     </variant>
-                    <node identifier="936373a3-2a04-6ac2-d531-b8e7c4ce1439" nodeName="main">
-                        <variant sortingIndex="100" workspace="live" nodeType="Hoerbiger.HoerbigerCom:Collection.Content.Main"
+                    <node identifier="e7131d66-b204-41e3-ae5b-ad2df5bf9dee" nodeName="main">
+                        <variant sortingIndex="100" workspace="live" nodeType="Neos.Neos:ContentCollection"
                                 version="1" removed="" hidden="" hiddenInIndex="">
                             <dimensions/>
                             <accessRoles __type="array"/>

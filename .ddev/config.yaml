@@ -27,6 +27,9 @@ web_environment:
 - FLOW_REWRITEURLS=1
 - FLOW_PATH_TEMPORARY_BASE=/tmp/neos
 - FLOW_ROOTPATH=/var/www/html
+- DISPLAY_NAME=Admin Admin
+- e-mail=admin@sitegeist.de
+- HOEUsername=admin
 
 
 # This config.yaml was created with ddev version v1.18.0-alpha4
