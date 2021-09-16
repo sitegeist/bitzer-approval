@@ -13,18 +13,13 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
         }
     }
 
-    renderer = afx`<dl>
-        <dt>siteHeader:</dt>
-        <dd>
+    renderer = afx`
+        <div class="flex flex-col">
             <Hoerbiger.Shared:Block.SiteHeader presentationObject={presentationObject.siteHeader} />
-        </dd>
-        <dt>content:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
-        </dd>
-        <dt>siteFooter:</dt>
-        <dd>
+            <main class="flex-grow">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+            </main>
             <Hoerbiger.Shared:Block.SiteFooter presentationObject={presentationObject.siteFooter} />
-        </dd>
-    </dl>`
+        </div>
+    `
 }

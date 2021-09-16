@@ -25,16 +25,15 @@ module.exports = {
 	theme: {
 		colors: {
 			neutral: {
-				DEFAULT: 'rgb(112, 111, 111)',
-				darker: 'rgb(36, 42, 31, 1)',
+				DEFAULT: '#B2B5B7',
 				contrast: '#fff',
 			},
 			brand: {
-				DEFAULT: 'rgb(118, 184, 42)',
+				DEFAULT: '#8D172E',
 				contrast: '#fff',
 			},
 			decorative: {
-				DEFAULT: 'rgb(228, 21, 19)',
+				DEFAULT: '#075289',
 				contrast: '#fff',
 			},
 		},
