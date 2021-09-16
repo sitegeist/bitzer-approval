@@ -29,7 +29,7 @@ web_environment:
 - FLOW_ROOTPATH=/var/www/html
 - DISPLAY_NAME=Admin Admin
 - e-mail=admin@sitegeist.de
-- HOEUsername=admin
+- REMOTE_USER=admin
 
 
 # This config.yaml was created with ddev version v1.18.0-alpha4
