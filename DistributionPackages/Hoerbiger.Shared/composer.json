@@ -1,0 +1,11 @@
+{
+    "name": "hoerbiger/shared",
+    "type": "neos-hoerbiger",
+    "description": "Shared kernel for the Hoerbiger distribution",
+    "version": "1.0.1",
+    "extra": {
+        "neos": {
+            "package-key": "Servicebund.Hoerbiger"
+        }
+    }
+}

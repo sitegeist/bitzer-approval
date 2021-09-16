@@ -1,0 +1,2 @@
+prototype(Hoerbiger.Shared:Resource.Fonts) < prototype(Neos.Fusion:Join) {
+}
