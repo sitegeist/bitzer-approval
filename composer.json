@@ -9,7 +9,8 @@
         }
     },
     "require": {
-        "hoerbiger/hoerbigercom": "*"
+        "hoerbiger/hoerbigercom": "*",
+        "hoerbiger/hoerbigercom-catalog": "*"
     },
     "require-dev": {
         "neos/buildessentials": "^7.1",
