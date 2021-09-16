@@ -1,6 +1,7 @@
 {
   "name": "@hoerbiger/shared",
   "version": "1.0.0",
+  "license": "MIT",
   "scripts": {
     "build": "concurrently 'yarn build:js' 'yarn build:css'",
     "build:js": "webpack --mode production",
