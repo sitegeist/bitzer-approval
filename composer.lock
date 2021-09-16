@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f433dfd4a437da7fcec6404f9d2f90de",
+    "content-hash": "2528af3381b8d31701a282ee222d6913",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2144,6 +2144,33 @@
                     "Hoerbiger\\HoerbigerCom\\": "Classes/",
                     "Hoerbiger\\HoerbigerCom\\Presentation\\": "Resources/Private/Fusion/Presentation/",
                     "Hoerbiger\\HoerbigerCom\\Integration\\": "Resources/Private/Fusion/Integration/"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "hoerbiger/hoerbigercom-catalog",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "./DistributionPackages/Hoerbiger.HoerbigerCom.Catalog",
+                "reference": "641c662b25d6cd19f608de60b6dc7b76ee7dff43"
+            },
+            "require": {
+                "hoerbiger/hoerbigercom": "*"
+            },
+            "type": "neos-hoerbiger",
+            "extra": {
+                "neos": {
+                    "package-key": "Hoerbiger.HoerbigerCom.Catalog"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoerbiger\\HoerbigerCom\\Catalog\\": "Classes/",
+                    "Hoerbiger\\HoerbigerCom\\Catalog\\Presentation\\": "Resources/Private/Fusion/Presentation/"
                 }
             },
             "transport-options": {

@@ -1,0 +1,15 @@
+'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom.Catalog:Document.Product': true
+  ui:
+    icon: boxes
+    label: 'Produktkategorie'

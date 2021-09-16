@@ -1,14 +1,14 @@
 {
     "name": "hoerbiger/hoerbigercom-catalog",
     "type": "neos-hoerbiger",
-    "version": "1.0.1",
+    "version": "1.0.0",
     "require": {
         "hoerbiger/hoerbigercom": "*"
     },
     "autoload": {
         "psr-4": {
             "Hoerbiger\\HoerbigerCom\\Catalog\\": "Classes/",
-            "Hoerbiger\\HoerbigerCom\\Catalog\\Resources\\Private\\Fusion\\Presentation\\": "Classes/Presentation/"
+            "Hoerbiger\\HoerbigerCom\\Catalog\\Presentation\\": "Resources/Private/Fusion/Presentation/"
         }
     },
     "extra": {

@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Catalog.Page.forProductCategory(documentNode)}
+        }
+    }
+}

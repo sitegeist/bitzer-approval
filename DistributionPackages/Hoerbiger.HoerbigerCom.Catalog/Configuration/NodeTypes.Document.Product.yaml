@@ -1,0 +1,12 @@
+'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+  ui:
+    icon: barcode
+    label: 'Produkt'
