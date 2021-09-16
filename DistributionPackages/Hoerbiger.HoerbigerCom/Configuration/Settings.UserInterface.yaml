@@ -1,8 +1,0 @@
-Neos:
-  Neos:
-    userInterface:
-      navigateComponent:
-        nodeTree:
-          loadingDepth: 1
-        structureTree:
-          loadingDepth: 1

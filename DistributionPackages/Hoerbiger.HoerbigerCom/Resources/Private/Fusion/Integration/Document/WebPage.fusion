@@ -1,11 +1,7 @@
-prototype(Hoerbiger.HoerbigerCom:Document.WebPage) < prototype(Neos.Fusion:Component) {
+prototype(Hoerbiger.HoerbigerCom:Document.HomePage) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
-        body = Hoerbiger.HoerbigerCom:Layout.Page {
-            header = Hoerbiger.HoerbigerCom:Document.Fragment.Header
-            content = Neos.Neos:PrimaryContent {
-                nodePath = 'main'
-            }
-            footer = Hoerbiger.HoerbigerCom:Document.Fragment.Footer
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Hoerbiger.Page.forHomePage(documentNode)}
         }
     }
 }

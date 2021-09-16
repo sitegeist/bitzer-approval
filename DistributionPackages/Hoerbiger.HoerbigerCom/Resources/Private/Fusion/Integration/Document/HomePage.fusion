@@ -1,1 +1,7 @@
-prototype(Hoerbiger.HoerbigerCom:Document.HomePage) < prototype(Hoerbiger.HoerbigerCom:Document.WebPage)
+prototype(Hoerbiger.HoerbigerCom:Document.WebPage) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Hoerbiger.Page.forWebPage(documentNode)}
+        }
+    }
+}

@@ -1,16 +1,3 @@
-Neos:
-  Neos:
-    userInterface:
-      defaultLanguage: de
-      translation:
-        autoInclude:
-          'Hoerbiger.HoerbigerCom': ['NodeTypes/*']
-  Flow:
-    i18n:
-      defaultLocale: de
-      fallbackRule:
-        order: [de, en]
-
 Sitegeist:
   CsvPO:
     management:

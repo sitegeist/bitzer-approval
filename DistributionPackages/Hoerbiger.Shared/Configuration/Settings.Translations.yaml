@@ -1,0 +1,15 @@
+Neos:
+  Neos:
+    userInterface:
+      defaultLanguage: de
+  Flow:
+    i18n:
+      defaultLocale: de
+      fallbackRule:
+        order: [de, en]
+
+Sitegeist:
+  CsvPO:
+    management:
+      packageKeys:
+        - 'Hoerbiger.Shared'

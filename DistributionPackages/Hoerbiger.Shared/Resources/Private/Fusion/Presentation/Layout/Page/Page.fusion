@@ -1,0 +1,30 @@
+prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Page\\PageInterface'
+
+    @styleguide {
+        title = 'Page'
+
+        props {
+            siteHeader {
+            }
+            content = '- Add Slot Content -'
+            siteFooter {
+            }
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>siteHeader:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.SiteHeader presentationObject={presentationObject.siteHeader} />
+        </dd>
+        <dt>content:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+        </dd>
+        <dt>siteFooter:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.SiteFooter presentationObject={presentationObject.siteFooter} />
+        </dd>
+    </dl>`
+}

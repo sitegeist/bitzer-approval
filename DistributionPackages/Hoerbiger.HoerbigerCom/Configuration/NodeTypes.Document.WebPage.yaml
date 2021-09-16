@@ -1,15 +1,16 @@
 'Hoerbiger.HoerbigerCom:Document.WebPage':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-  constraints:
-    nodeTypes:
-      'Hoerbiger.HoerbigerCom:Document.WebPage': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           '*': false
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.WebPage': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   ui:
     icon: file
-    label: i18n
+    label: 'Seite'

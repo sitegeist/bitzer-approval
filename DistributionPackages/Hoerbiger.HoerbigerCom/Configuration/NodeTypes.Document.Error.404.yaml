@@ -1,6 +1,15 @@
 'Hoerbiger.HoerbigerCom:Document.Error.404':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+  ui:
+    icon: exclamation-triangle
+    label: '404-Seite'
   properties:
     title:
       defaultValue: '404'
@@ -11,6 +20,3 @@
             disabled: true
     _hiddenInIndex:
       defaultValue: true
-  ui:
-    icon: exclamation-triangle
-    label: i18n
