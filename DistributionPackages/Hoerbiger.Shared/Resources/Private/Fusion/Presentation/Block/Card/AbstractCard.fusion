@@ -1,0 +1,15 @@
+prototype(Hoerbiger.Shared:Block.AbstractCard) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Card\\CardInterface'
+
+    @styleguide {
+        title = 'Card'
+
+        props {
+            media = '- Add Slot Content -'
+            header = '- Add Slot Content -'
+            subheader = '- Add Slot Content -'
+            supportingText = '- Add Slot Content -'
+            buttons = '- Add Slot Content -'
+        }
+    }
+}

@@ -1,0 +1,23 @@
+prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Quotation\\QuotationInterface'
+
+    @styleguide {
+        title = 'Quotation'
+
+        props {
+            text = '- Add Slot Content -'
+            spokenByCharacter = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>text:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
+        </dd>
+        <dt>spokenByCharacter:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.spokenByCharacter} />
+        </dd>
+    </dl>`
+}

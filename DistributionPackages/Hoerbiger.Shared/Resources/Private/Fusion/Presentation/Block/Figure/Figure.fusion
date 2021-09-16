@@ -1,0 +1,27 @@
+prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Figure\\FigureInterface'
+
+    @styleguide {
+        title = 'Figure'
+
+        props {
+            imageSource = Sitegeist.Kaleidoscope:DummyImageSource {
+                height = 1920
+                width = 1080
+            }
+            objectFit = 'cover'
+            objectPosition = 'topLeft'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>imageSource:</dt>
+        <dd>
+            <Sitegeist.Lazybones:Image imageSource={presentationObject.imageSource} />
+        </dd>
+        <dt>objectFit:</dt>
+        <dd>{presentationObject.objectFit}</dd>
+        <dt>objectPosition:</dt>
+        <dd>{presentationObject.objectPosition}</dd>
+    </dl>`
+}

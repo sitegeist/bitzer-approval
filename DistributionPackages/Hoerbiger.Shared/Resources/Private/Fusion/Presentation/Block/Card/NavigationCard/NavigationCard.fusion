@@ -1,0 +1,24 @@
+prototype(Hoerbiger.Shared:Block.Card.NavigationCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+    renderer = afx`<dl>
+        <dt>media:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+        </dd>
+        <dt>header:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
+        </dd>
+        <dt>subheader:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheader} />
+        </dd>
+        <dt>supportingText:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
+        </dd>
+        <dt>buttons:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} />
+        </dd>
+    </dl>`
+}
