@@ -2,20 +2,22 @@
 # Servers
 #
 
-develop.example.com:
-    stage: develop
-    hostname: example.com
-    deploy_path: '/srv/www/develop.example.com'
-    homepage_url: https://develop.example.com
+www-dev.hoerbiger.com:
+  stage: develop
+  hostname: hoerbiger
+  deploy_path: '/home/uext_anf/develop/www/hoerbiger_deployer'
+  homepage_url: https://www-dev.hoerbiger.com
+  dockerComposeLocation: '/srv/dockerdata/www-dev'
+  dockerRoot: '/var/www/html/hoerbiger_deployer'
 
 staging.example.com:
-    stage: staging
-    hostname: example.com
-    deploy_path: '/srv/www/staging.example.com'
-    homepage_url: https://staging.example.com
+  stage: staging
+  hostname: example.com
+  deploy_path: '/srv/www/staging.example.com'
+  homepage_url: https://staging.example.com
 
 www.example.com:
-    stage: master
-    hostname: example.com
-    deploy_path: '/srv/www/www.example.com'
-    homepage_url: https://www.example.com/
+  stage: master
+  hostname: example.com
+  deploy_path: '/srv/www/www.example.com'
+  homepage_url: https://www.example.com/
