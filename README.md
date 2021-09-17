@@ -95,8 +95,49 @@ sudo openfortivpn -c /etc/openfortivpn/hoerbiger
 
 Keep the tab open for keeping the connection alive.
 
-> The follwing part is not yet up to date
+### Deployment
 
+Deployment must be done manually as the deployment server cannot connect to the target servers.
+
+**develop**
+```sh
+bin/dep deploy develop
+```
+**staging**
+```sh
+bin/dep deploy staging
+```
+**master**
+```sh
+bin/dep deploy master
+```
+
+### Running remote Flow commands
+On the target server, the application is run in a docker container, so Flow commands must be executed via docker-compose:
+
+**develop**
+```sh
+cd /srv/dockerdata/www-dev
+
+docker-compose exec php php develop/flow
+```
+
+**staging**
+```sh
+cd /srv/dockerdata/www-stage
+
+docker-compose exec php php staging/flow
+```
+
+**master**
+```sh
+cd /srv/dockerdata/www-prod
+
+docker-compose exec php php master/flow
+```
+
+
+> The follwing part is not yet up to date
 ## Installation
 
 Create a project based on the sitegeist base distribution
