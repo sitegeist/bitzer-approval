@@ -2,23 +2,23 @@ prototype(Hoerbiger.Shared:Block.Card.NavigationCard) < prototype(Hoerbiger.Shar
     renderer = afx`<dl>
         <dt>media:</dt>
         <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
         </dd>
         <dt>header:</dt>
         <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} @if.1={presentationObject.header} />
         </dd>
         <dt>subheader:</dt>
         <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheader} />
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheader} @if.1={presentationObject.subheader} />
         </dd>
         <dt>supportingText:</dt>
         <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
         </dd>
         <dt>buttons:</dt>
         <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} />
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
         </dd>
     </dl>`
 }
