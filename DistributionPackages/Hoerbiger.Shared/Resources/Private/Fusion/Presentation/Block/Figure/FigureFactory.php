@@ -17,7 +17,7 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $node,
         bool $inBackend,
         bool $hasFallbackInBackend = true
-    ): ?FigureInterface {
+    ): ?Figure {
         $imageSource = null;
 
         if ($node->getProperty('image')) {

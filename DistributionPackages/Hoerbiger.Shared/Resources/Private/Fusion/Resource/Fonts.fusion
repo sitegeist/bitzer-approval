@@ -1,2 +1,24 @@
 prototype(Hoerbiger.Shared:Resource.Fonts) < prototype(Neos.Fusion:Join) {
+    trade_gothic = Neos.Fusion:Tag {
+        tagName = 'link'
+        attributes.rel = 'preload'
+        attributes.as = 'font'
+        attributes.type = 'font/woff'
+        attributes.crossorigin = 'anonymous'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.Shared/Public/Fonts/TradeGot.woff'
+        }
+    }
+
+    trade_gothic_bold = Neos.Fusion:Tag {
+        tagName = 'link'
+        attributes.rel = 'preload'
+        attributes.as = 'font'
+        attributes.type = 'font/woff'
+        attributes.crossorigin = 'anonymous'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.Shared/Public/Fonts/TradeGotBol.woff'
+        }
+    }
 }
+

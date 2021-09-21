@@ -35,7 +35,7 @@ final class PartialFigureEclipseFactory extends AbstractComponentPresentationObj
                 Editable::fromNodeProperty($node, 'headline')
             ),
             new Text(
-                TextVariant::regular(),
+                TextVariant::lightContrast(),
                 Editable::fromNodeProperty($node, 'text')
             ),
             (new LinkFactory())->forLinkMixin($node, $subgraph)

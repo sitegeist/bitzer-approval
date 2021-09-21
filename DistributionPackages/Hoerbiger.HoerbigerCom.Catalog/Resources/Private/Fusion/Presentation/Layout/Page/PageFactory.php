@@ -8,6 +8,8 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
 use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
+use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
+use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
@@ -39,10 +41,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
+
+        /** @var SlotInterface $introSection */
+        $introSection = (new IntroSectionFactory())->forIntroductionMixin($document, $inBackend);
+
         return new Page(
             new SiteHeader(),
             Collection::fromIterable(array_filter([
-                (new IntroSectionFactory())->forIntroductionMixin($document, $inBackend),
+                new ContentContainer(
+                    ContentContainerVariant::regular(),
+                    $introSection
+                ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
             new SiteFooter()

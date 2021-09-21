@@ -10,12 +10,19 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
         }
     }
 
-    renderer = afx`<dl>
-        <dt>variant:</dt>
-        <dd>{presentationObject.variant}</dd>
-        <dt>content:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <div class={[
+            "[Layout.ContentContainer (" + presentationObject.variant + ")]",
+            "w-full",
+            "outline-black"
+        ]}>
+            <div class={[
+                presentationObject.variant.isRegular && "max-w-content-full mx-auto p-sm bg-light",
+                presentationObject.variant.isBlank && "w-full",
+                "outline-black"
+            ]}>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+            </div>
+        </div>
+    `
 }

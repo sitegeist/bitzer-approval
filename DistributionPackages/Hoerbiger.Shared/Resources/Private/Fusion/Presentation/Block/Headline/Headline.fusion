@@ -11,14 +11,21 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
         }
     }
 
-    renderer = afx`<dl>
-        <dt>variant:</dt>
-        <dd>{presentationObject.variant}</dd>
-        <dt>type:</dt>
-        <dd>{presentationObject.type}</dd>
-        <dt>content:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
-        </dd>
-    </dl>`
+    renderer = Neos.Fusion:Tag {
+        tagName = ${presentationObject.type}
+
+        attributes.class = Neos.Fusion:DataStructure {
+            name = ${"[Block.Headline (" + presentationObject.variant + ")]"}
+
+            h1 = "font-sans-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl"
+            h1.@if.1 = ${presentationObject.type.isH1}
+
+            h2 = "text-2xl"
+            h2.@if.1 = ${presentationObject.type.isH2}
+        }
+
+        content = PackageFactory.AtomicFusion.PresentationObjects:Slot {
+            presentationObject = ${presentationObject.content}
+        }
+    }
 }

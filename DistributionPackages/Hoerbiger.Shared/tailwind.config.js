@@ -1,19 +1,15 @@
 // const theme = require('tailwindcss/defaultTheme');
 
 const MAX_CONTENT_WIDTH = '1920px';
-const GRID_COL = 'clamp(1.61rem, calc(60 * 100vw / 1920), 40px)';
 const MIN_TOUCH = '48px';
 
-const lg = () => `clamp(1.61rem, calc(60 * 100vw / ${MAX_CONTENT_WIDTH}), 48px)`;
-const md = (reverse = false) => `calc(${reverse ? -.4 : .4} * ${GRID_COL})`;
-const xl = (reverse = false) => `calc(${reverse ? -2 : 2} * ${GRID_COL})`;
-
-const spaces = {
-	lg: lg(),
-	md: md(),
-	xl: xl(),
-	'md-negative': md(true),
-	'xl-negative': xl(true),
+// up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
+const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
+const SPACES = {
+	xs: `calc(.62 * ${SPACE_SM})`,
+	sm: SPACE_SM,
+	md: `calc(2 * ${SPACE_SM})`,
+	lg: `calc(4 * ${SPACE_SM})`,
 };
 
 module.exports = {
@@ -24,6 +20,10 @@ module.exports = {
 	darkMode: false,
 	theme: {
 		colors: {
+			light: {
+				DEFAULT: '#fff',
+				contrast: '#000'
+			},
 			neutral: {
 				DEFAULT: '#B2B5B7',
 				contrast: '#fff',
@@ -36,11 +36,23 @@ module.exports = {
 				DEFAULT: '#075289',
 				contrast: '#fff',
 			},
+			transparent: {
+				DEFAULT: 'transparent',
+				contrast: '#fff',
+			},
 		},
 		fontFamily: {
+			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
 		},
 		extend: {
 			typography: (theme) => ({
+				'copy': {
+					css: {
+						fontSize: '1.25rem',
+						leading: 'calc(1em + .25rem)',
+					},
+				},
 				'brand-contrast': {
 					css: {
 						color: theme('colors.brand.contrast'),
@@ -74,6 +86,17 @@ module.exports = {
 						},
 					},
 				},
+				'transparent-contrast': {
+					css: {
+						color: theme('colors.transparent.contrast'),
+						strong: {
+							color: theme('colors.transparent.contrast'),
+						},
+						a: {
+							color: theme('colors.transparent.contrast'),
+						},
+					},
+				},
 			}),
 
 			gridTemplateColumns: {
@@ -89,19 +112,20 @@ module.exports = {
 			},
 
 			maxWidth: {
-
+				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
+				'10-sm': `calc(10 * ${SPACES.sm})`,
 			},
 
 			space: {
-				...spaces,
+				...SPACES,
 			},
 
 			margin: {
-				...spaces,
+				...SPACES,
 			},
 
 			padding: {
-				...spaces,
+				...SPACES,
 				'ratio-2-1': '50%',
 				'ratio-4-3': 'calc(3 * 100% / 4)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
@@ -109,11 +133,15 @@ module.exports = {
 			},
 
 			gap: {
-				...spaces,
+				...SPACES,
+			},
+
+			inset: {
+				...SPACES,
 			},
 
 			borderRadius: {
-				...spaces,
+				...SPACES,
 			}
 		},
 	},

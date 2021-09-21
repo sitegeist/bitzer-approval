@@ -14,9 +14,16 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
     }
 
     renderer = afx`
-        <div class="flex flex-col">
+        <div
+            class={[
+                "[Layout.Page]",
+                "flex flex-col min-h-screen",
+                "text-light-contrast bg-light font-sans-regular"
+            ]}
+            style="hyphens:auto;word-break:normal;"
+        >
             <Hoerbiger.Shared:Block.SiteHeader presentationObject={presentationObject.siteHeader} />
-            <main class="flex-grow">
+            <main class="flex-grow flex flex-col items-stretch">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </main>
             <Hoerbiger.Shared:Block.SiteFooter presentationObject={presentationObject.siteFooter} />

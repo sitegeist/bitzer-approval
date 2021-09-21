@@ -20,24 +20,30 @@ prototype(Hoerbiger.Shared:Block.IntroSection) < prototype(PackageFactory.Atomic
         }
     }
 
-    renderer = afx`<dl>
-        <dt>variant:</dt>
-        <dd>{presentationObject.variant}</dd>
-        <dt>headline:</dt>
-        <dd>
-            <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} />
-        </dd>
-        <dt>subheadline:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheadline} @if.1={presentationObject.subheadline} />
-        </dd>
-        <dt>text:</dt>
-        <dd>
-            <Hoerbiger.Shared:Block.Text presentationObject={presentationObject.text} />
-        </dd>
-        <dt>media:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <div class={[
+            "Block.IntroSection",
+            "relative w-full h-0 pt-ratio-2-1"
+        ]}>
+            <div
+                class="absolute inset-0 z-10"
+                @if.1={presentationObject.media}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+            </div>
+            <div class="absolute z-20 inset-0 bg-gradient-to-r from-light-contrast/70 to-transparent"></div>
+            <div class={[
+                "absolute left-md right-md bottom-md p-sm",
+                "lg:-translate-y-1/2 lg:bottom-auto lg:top-1/2 lg:right-auto lg:max-w-[35%] lg:w-full",
+                "bg-transparent border-2 border-light flex flex-col space-y-xs z-30 text-light"
+            ]}>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.subheadline}
+                    @if.1={presentationObject.subheadline}
+                />
+                <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} />
+                <Hoerbiger.Shared:Block.Text presentationObject={presentationObject.text} />
+            </div>
+        </div>
+    `
 }

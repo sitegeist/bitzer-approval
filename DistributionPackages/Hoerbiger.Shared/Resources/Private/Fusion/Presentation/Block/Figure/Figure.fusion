@@ -15,14 +15,34 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
         }
     }
 
-    renderer = afx`<dl>
-        <dt>imageSource:</dt>
-        <dd>
-            <Sitegeist.Lazybones:Image imageSource={presentationObject.imageSource} lazy={presentationObject.isToBeLoadedLazily} />
-        </dd>
-        <dt>objectFit:</dt>
-        <dd>{presentationObject.objectFit}</dd>
-        <dt>objectPosition:</dt>
-        <dd>{presentationObject.objectPosition}</dd>
-    </dl>`
+    renderer = afx`
+        <figure class={[
+            "[Block.Figure (" + (presentationObject.objectFit || "no-objectFit") + ", " + (presentationObject.objectPosition || "no-objectPosition") + ")]",
+            "flex max-h-full",
+            (presentationObject.objectFit.isCover || presentationObject.objectFit.isContain) && "w-full h-full"
+        ]}>
+            <Sitegeist.Lazybones:Image
+                imageSource={presentationObject.imageSource}
+                alt={presentationObject.imageSource.alt}
+                title={presentationObject.imageSource.title}
+                srcset={props.srcset}
+                sizes={props.sizes}
+                lazy={presentationObject.isToBeLoadedLazily}
+                class={Array.join(Array.filter([
+                    "w-full h-full",
+                    presentationObject.objectFit.isCover && "object-cover",
+                    presentationObject.objectFit.isContain && "object-contain",
+                    presentationObject.objectPosition.isCenter && "object-center",
+                    presentationObject.objectPosition.isTop && "object-top",
+                    presentationObject.objectPosition.isLeft && "object-left",
+                    presentationObject.objectPosition.isRight && "object-right",
+                    presentationObject.objectPosition.isBottom && "object-bottom",
+                    presentationObject.objectPosition.isLeftTop && "object-left-top",
+                    presentationObject.objectPosition.isLeftBottom && "object-left-bottom",
+                    presentationObject.objectPosition.isRightTop && "object-right-top",
+                    presentationObject.objectPosition.isRightBottom && "object-right-bottom"
+                ]), ' ')}
+            />
+        </figure>
+    `
 }
