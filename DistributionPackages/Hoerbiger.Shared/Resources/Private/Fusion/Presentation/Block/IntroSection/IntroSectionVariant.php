@@ -5,7 +5,8 @@ namespace Hoerbiger\Shared\Presentation\Block\IntroSection;
  * This file is part of the Hoerbiger.Shared package.
  */
 
-use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
+use Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction\IntroSectionVariant as IntroductionIntroSectionVariant;
+use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
@@ -14,7 +15,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class IntroSectionVariant implements PseudoEnumInterface
 {
-    const VARIANT_FULLMEDIA = 'fullMedia';
+    const VARIANT_FULLMEDIATEXTLEFT = 'fullMediaTextLeft';
+    const VARIANT_FULLMEDIATEXTRIGHT = 'fullMediaTextRight';
     const VARIANT_DUO = 'duo';
 
     /**
@@ -32,7 +34,8 @@ final class IntroSectionVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_FULLMEDIA
+            if ($string !== self::VARIANT_FULLMEDIATEXTLEFT
+                && $string !== self::VARIANT_FULLMEDIATEXTRIGHT
                 && $string !== self::VARIANT_DUO) {
                 throw IntroSectionVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -42,23 +45,14 @@ final class IntroSectionVariant implements PseudoEnumInterface
         return self::$instances[$string];
     }
 
-    public static function fromNodeTypeName(NodeTypeName $nodeTypeName): self
+    public static function fullMediaTextLeft(): self
     {
-        switch ($nodeTypeName->getValue()) {
-            case 'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
-            case 'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory':
-                return self::duo();
-            case 'Hoerbiger.HoerbigerCom:Document.WebPage':
-            case 'Hoerbiger.HoerbigerCom:Document.Error.404':
-            case 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog':
-            default:
-                return self::fullMedia();
-        }
+        return self::from(self::VARIANT_FULLMEDIATEXTLEFT);
     }
 
-    public static function fullMedia(): self
+    public static function fullMediaTextRight(): self
     {
-        return self::from(self::VARIANT_FULLMEDIA);
+        return self::from(self::VARIANT_FULLMEDIATEXTRIGHT);
     }
 
     public static function duo(): self
@@ -66,9 +60,14 @@ final class IntroSectionVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_DUO);
     }
 
-    public function getIsFullMedia(): bool
+    public function getIsFullMediaTextLeft(): bool
     {
-        return $this->value === self::VARIANT_FULLMEDIA;
+        return $this->value === self::VARIANT_FULLMEDIATEXTLEFT;
+    }
+
+    public function getIsFullMediaTextRight(): bool
+    {
+        return $this->value === self::VARIANT_FULLMEDIATEXTRIGHT;
     }
 
     public function getIsDuo(): bool
@@ -82,7 +81,8 @@ final class IntroSectionVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::VARIANT_FULLMEDIA),
+            self::from(self::VARIANT_FULLMEDIATEXTLEFT),
+            self::from(self::VARIANT_FULLMEDIATEXTRIGHT),
             self::from(self::VARIANT_DUO)
         ];
     }

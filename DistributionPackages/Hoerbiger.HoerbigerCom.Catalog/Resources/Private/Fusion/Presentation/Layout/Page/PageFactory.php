@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  */
 
 use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory;
+use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionInterface;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -23,27 +24,33 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forCatalog(TraversableNodeInterface $catalog, bool $inBackend): PageInterface
     {
-        return $this->forDocumentWithIntroduction($catalog, $inBackend);
+        /** @var SlotInterface $introSection */
+        $introSection = (new IntroSectionFactory())->forFullMediaIntroduction($catalog, $inBackend);
+
+        return $this->forDocumentWithIntroduction($catalog, $introSection);
     }
 
     public function forProductCategory(TraversableNodeInterface $productCategory, bool $inBackend): PageInterface
     {
-        return $this->forDocumentWithIntroduction($productCategory, $inBackend);
+        /** @var SlotInterface $introSection */
+        $introSection = (new IntroSectionFactory())->forDuoIntroduction($productCategory, $inBackend);
+
+        return $this->forDocumentWithIntroduction($productCategory, $introSection);
     }
 
     public function forProduct(TraversableNodeInterface $product, bool $inBackend): PageInterface
     {
-        return $this->forDocumentWithIntroduction($product, $inBackend);
+        /** @var SlotInterface $introSection */
+        $introSection = (new IntroSectionFactory())->forDuoIntroduction($product, $inBackend);
+
+        return $this->forDocumentWithIntroduction($product, $introSection);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, bool $inBackend): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
-
-        /** @var SlotInterface $introSection */
-        $introSection = (new IntroSectionFactory())->forIntroductionMixin($document, $inBackend);
 
         return new Page(
             new SiteHeader(),

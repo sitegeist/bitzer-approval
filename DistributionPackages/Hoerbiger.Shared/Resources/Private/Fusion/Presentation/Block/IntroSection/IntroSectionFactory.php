@@ -11,17 +11,18 @@ use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
+use Hoerbiger\Shared\Presentation\Block\IntroSection\DuoIntroSection\DuoIntroSection;
+use Hoerbiger\Shared\Presentation\Block\IntroSection\FullMediaIntroSection\FullMediaIntroSection;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use InvalidArgumentException;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class IntroSectionFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forIntroductionMixin(TraversableNodeInterface $node, bool $inBackend): IntroSectionInterface
+    public function forFullMediaIntroduction(TraversableNodeInterface $node, bool $inBackend): IntroSectionInterface
     {
         /** @@var Figure|null $media */
         $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
@@ -30,8 +31,8 @@ final class IntroSectionFactory extends AbstractComponentPresentationObjectFacto
             throw new InvalidArgumentException('Introduction requires Block.Figure for property media.');
         }
 
-        return new IntroSection(
-            IntroSectionVariant::fromNodeTypeName($node->getNodeTypeName()),
+        return new FullMediaIntroSection(
+            IntroSectionVariant::from($node->getProperty('introsection__variant') ?: IntroSectionVariant::VARIANT_FULLMEDIATEXTLEFT),
             new Headline(
                 HeadlineVariant::regular(),
                 HeadlineType::h1(),
@@ -40,6 +41,31 @@ final class IntroSectionFactory extends AbstractComponentPresentationObjectFacto
             null,
             new Text(
                 TextVariant::transparentContrast(),
+                Editable::fromNodeProperty($node, 'abstract')
+            ),
+            $media->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center())
+        );
+    }
+
+    public function forDuoIntroduction(TraversableNodeInterface $node, bool $inBackend): IntroSectionInterface
+    {
+        /** @@var Figure|null $media */
+        $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
+
+        if (!$media) {
+            throw new InvalidArgumentException('Introduction requires Block.Figure for property media.');
+        }
+
+        return new DuoIntroSection(
+            IntroSectionVariant::duo(),
+            new Headline(
+                HeadlineVariant::decorative(),
+                HeadlineType::h1(),
+                Editable::fromNodeProperty($node, 'headline', false)
+            ),
+            null,
+            new Text(
+                TextVariant::lightContrast(),
                 Editable::fromNodeProperty($node, 'abstract')
             ),
             $media->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center())
