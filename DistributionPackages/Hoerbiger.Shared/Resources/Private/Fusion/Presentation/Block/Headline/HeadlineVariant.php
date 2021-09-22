@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class HeadlineVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
+    const VARIANT_DECORATIVE = 'decorative';
 
     /**
      * @var array<string,self>|self[]
@@ -30,7 +31,8 @@ final class HeadlineVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_REGULAR) {
+            if ($string !== self::VARIANT_REGULAR
+                && $string !== self::VARIANT_DECORATIVE) {
                 throw HeadlineVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -44,9 +46,19 @@ final class HeadlineVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_REGULAR);
     }
 
+    public static function decorative(): self
+    {
+        return self::from(self::VARIANT_DECORATIVE);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
+    }
+
+    public function getIsDecorative(): bool
+    {
+        return $this->value === self::VARIANT_DECORATIVE;
     }
 
     /**
@@ -55,7 +67,8 @@ final class HeadlineVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::VARIANT_REGULAR)
+            self::from(self::VARIANT_REGULAR),
+            self::from(self::VARIANT_DECORATIVE)
         ];
     }
 

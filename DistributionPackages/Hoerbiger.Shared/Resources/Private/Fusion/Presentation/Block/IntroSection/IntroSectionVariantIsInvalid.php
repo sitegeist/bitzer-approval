@@ -14,6 +14,6 @@ final class IntroSectionVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid IntroSectionVariant, must be one of the defined constants. ', 1631802185);
+        return new self('The given value "' . $attemptedValue . '" is no valid IntroSectionVariant, must be one of the defined constants. ', 1632226845);
     }
 }

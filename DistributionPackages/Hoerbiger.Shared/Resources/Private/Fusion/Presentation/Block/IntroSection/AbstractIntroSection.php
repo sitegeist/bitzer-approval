@@ -15,7 +15,7 @@ use Hoerbiger\Shared\Presentation\Block\Text\TextInterface;
 /**
  * @Flow\Proxy(false)
  */
-final class IntroSection extends AbstractComponentPresentationObject implements IntroSectionInterface
+abstract class AbstractIntroSection extends AbstractComponentPresentationObject implements IntroSectionInterface
 {
     private IntroSectionVariant $variant;
 

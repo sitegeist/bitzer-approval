@@ -25,6 +25,7 @@ module.exports = {
 				contrast: '#000'
 			},
 			neutral: {
+				lighter: '#F9F9F9',
 				DEFAULT: '#B2B5B7',
 				contrast: '#fff',
 			},
@@ -45,6 +46,12 @@ module.exports = {
 			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
 		},
+
+		boxShadow: {
+			/* Will match to py-3. */
+			'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
+		},
+
 		extend: {
 			typography: (theme) => ({
 				'copy': {
@@ -126,6 +133,7 @@ module.exports = {
 
 			padding: {
 				...SPACES,
+				'ratio-square': '100%',
 				'ratio-2-1': '50%',
 				'ratio-4-3': 'calc(3 * 100% / 4)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
@@ -142,7 +150,9 @@ module.exports = {
 
 			borderRadius: {
 				...SPACES,
-			}
+			},
+
+
 		},
 	},
 	variants: {
