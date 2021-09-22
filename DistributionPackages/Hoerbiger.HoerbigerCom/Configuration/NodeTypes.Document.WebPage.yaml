@@ -1,11 +1,23 @@
 'Hoerbiger.HoerbigerCom:Document.WebPage':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-
-  ui:
-    icon: file
-    label: i18n
-
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
     main:
-      type: 'Hoerbiger.HoerbigerCom:Collection.Content.Main'
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.WebPage': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
+  ui:
+    icon: file
+    label: 'Seite'

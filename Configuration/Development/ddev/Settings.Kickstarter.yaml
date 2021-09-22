@@ -1,0 +1,6 @@
+PackageFactory:
+  AtomicFusion:
+    PresentationObjects:
+      componentGeneration:
+        defaultPackageKey: 'Hoerbiger.Shared'
+        colocate: true

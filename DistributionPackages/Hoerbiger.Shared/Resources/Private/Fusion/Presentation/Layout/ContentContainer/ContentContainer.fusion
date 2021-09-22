@@ -1,0 +1,26 @@
+prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\ContentContainer\\ContentContainerInterface'
+
+    @styleguide {
+        title = 'ContentContainer'
+
+        props {
+            variant = 'regular'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Layout.ContentContainer (" + presentationObject.variant + ")]",
+            "w-full"
+        ]}>
+            <div class={[
+                presentationObject.variant.isRegular && "max-w-content-full mx-auto p-sm bg-light",
+                presentationObject.variant.isBlank && "w-full"
+            ]}>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+            </div>
+        </div>
+    `
+}

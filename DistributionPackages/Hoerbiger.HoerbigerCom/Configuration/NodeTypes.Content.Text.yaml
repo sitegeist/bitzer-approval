@@ -1,0 +1,7 @@
+'Hoerbiger.HoerbigerCom:Content.Text':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+  ui:
+    label: 'Text'
+    icon: align-left

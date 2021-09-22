@@ -1,0 +1,14 @@
+prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\SiteHeader\\SiteHeaderInterface'
+
+    @styleguide {
+        title = 'SiteHeader'
+
+        props {
+        }
+    }
+
+    renderer = afx`
+        <header class="w-full h-full max-h-[48px] bg-neutral text-neutral-contrast">HEADER GRAHAM</header>
+    `
+}

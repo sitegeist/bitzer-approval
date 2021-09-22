@@ -1,0 +1,166 @@
+// const theme = require('tailwindcss/defaultTheme');
+
+const MAX_CONTENT_WIDTH = '1920px';
+const MIN_TOUCH = '48px';
+
+// up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
+const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
+const SPACES = {
+	xs: `calc(.62 * ${SPACE_SM})`,
+	sm: SPACE_SM,
+	md: `calc(2 * ${SPACE_SM})`,
+	lg: `calc(4 * ${SPACE_SM})`,
+};
+
+module.exports = {
+	mode: 'jit',
+	purge: [
+		'./Resources/Private/Fusion/**/*'
+	],
+	darkMode: false,
+	theme: {
+		colors: {
+			light: {
+				DEFAULT: '#fff',
+				contrast: '#000'
+			},
+			neutral: {
+				lighter: '#F9F9F9',
+				DEFAULT: '#B2B5B7',
+				contrast: '#fff',
+			},
+			brand: {
+				DEFAULT: '#8D172E',
+				contrast: '#fff',
+			},
+			decorative: {
+				DEFAULT: '#075289',
+				contrast: '#fff',
+			},
+			transparent: {
+				DEFAULT: 'transparent',
+				contrast: '#fff',
+			},
+		},
+		fontFamily: {
+			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
+		},
+
+		boxShadow: {
+			/* Will match to py-3. */
+			'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
+		},
+
+		extend: {
+			typography: (theme) => ({
+				'copy': {
+					css: {
+						fontSize: '1.25rem',
+						leading: 'calc(1em + .25rem)',
+					},
+				},
+				'brand-contrast': {
+					css: {
+						color: theme('colors.brand.contrast'),
+						strong: {
+							color: theme('colors.brand.contrast'),
+						},
+						a: {
+							color: theme('colors.brand.contrast'),
+						},
+					},
+				},
+				'neutral-contrast': {
+					css: {
+						color: theme('colors.neutral.contrast'),
+						strong: {
+							color: theme('colors.neutral.contrast'),
+						},
+						a: {
+							color: theme('colors.neutral.contrast'),
+						},
+					},
+				},
+				'decorative-contrast': {
+					css: {
+						color: theme('colors.decorative.contrast'),
+						strong: {
+							color: theme('colors.decorative.contrast'),
+						},
+						a: {
+							color: theme('colors.decorative.contrast'),
+						},
+					},
+				},
+				'transparent-contrast': {
+					css: {
+						color: theme('colors.transparent.contrast'),
+						strong: {
+							color: theme('colors.transparent.contrast'),
+						},
+						a: {
+							color: theme('colors.transparent.contrast'),
+						},
+					},
+				},
+			}),
+
+			gridTemplateColumns: {
+				'2-max-1fr': 'max-content 1fr',
+			},
+
+			minWidth: {
+				touch: MIN_TOUCH,
+			},
+
+			minHeight: {
+				touch: MIN_TOUCH,
+			},
+
+			maxWidth: {
+				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
+				'10-sm': `calc(10 * ${SPACES.sm})`,
+			},
+
+			space: {
+				...SPACES,
+			},
+
+			margin: {
+				...SPACES,
+			},
+
+			padding: {
+				...SPACES,
+				'ratio-square': '100%',
+				'ratio-2-1': '50%',
+				'ratio-4-3': 'calc(3 * 100% / 4)',
+				'ratio-16-9': 'calc(9 * 100% / 16)',
+				'ratio-16-10': 'calc(10 * 100% / 16)',
+			},
+
+			gap: {
+				...SPACES,
+			},
+
+			inset: {
+				...SPACES,
+			},
+
+			borderRadius: {
+				...SPACES,
+			},
+
+
+		},
+	},
+	variants: {
+		extend: {
+			transform: ['group-hover'],
+		},
+	},
+	plugins: [
+		require('@tailwindcss/typography'),
+	],
+};

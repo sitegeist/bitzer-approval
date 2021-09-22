@@ -6,7 +6,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     renderer = Neos.Neos:Page {
         head {
             metaViewport = '<meta name="viewport" content="width=device-width">'
-            stylesheets = Hoerbiger.HoerbigerCom:Resource.StyleSheets
+            stylesheets = Hoerbiger.Shared:Resource.StyleSheets
+            fonts = Hoerbiger.Shared:Resource.Fonts
 
             titleTag {
                 content = ${props.titleOverride ? props.titleOverride : props.title}
@@ -18,8 +19,12 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
         }
 
         body = ${props.body}
+        body.@process.contentElementWrapping {
+            expression = Neos.Neos:ContentElementWrapping {
+            node = ${documentNode}
+        }
 
-        bodyScripts = Hoerbiger.HoerbigerCom:Resource.BodyScripts
+        bodyScripts = Hoerbiger.Shared:Resource.BodyScripts
         bodyScripts.@position = 'before closingBodyTag'
     }
 }

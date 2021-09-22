@@ -1,10 +1,26 @@
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   superTypes:
-    'Hoerbiger.HoerbigerCom:Document.WebPage': true
-    'Hoerbiger.HoerbigerCom:Constraint.Document.Restricted': true
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+
+    notfound:
+      type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.WebPage': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   ui:
     icon: globe
-    label: i18n
-  childNodes:
-    notfound:
-      type: Hoerbiger.HoerbigerCom:Document.Error.404
+    label: 'Homepage'

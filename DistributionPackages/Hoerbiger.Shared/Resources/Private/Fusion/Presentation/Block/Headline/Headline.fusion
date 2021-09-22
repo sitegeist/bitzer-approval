@@ -1,0 +1,36 @@
+prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Headline\\HeadlineInterface'
+
+    @styleguide {
+        title = 'Headline'
+
+        props {
+            variant = 'regular'
+            type = 'h1'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = ${presentationObject.type}
+
+        attributes.class = Neos.Fusion:DataStructure {
+            name = ${"[Block.Headline (" + presentationObject.variant + ")]"}
+
+            h1 = "font-sans-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl"
+            h1.@if.1 = ${presentationObject.type.isH1}
+
+            h2 = "text-2xl"
+            h2.@if.1 = ${presentationObject.type.isH2}
+
+            isDecorative = "inline bg-decorative text-decorative-contrast shadow-decorative-heading-3 py-3 translate-x-6 leading-normal sm:leading-normal lg:leading-normal xl:leading-normal"
+            isDecorative.@if.1 = ${presentationObject.variant.isDecorative}
+        }
+
+        content = PackageFactory.AtomicFusion.PresentationObjects:Slot {
+            presentationObject = ${presentationObject.content}
+        }
+
+        @process.wrapDecorative = afx`<div class="ml-5">{value}</div>`
+    }
+}

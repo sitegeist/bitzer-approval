@@ -1,0 +1,25 @@
+prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Text\\TextInterface'
+
+    @styleguide {
+        title = 'Text'
+
+        props {
+            variant = 'regular'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.Text (" + presentationObject.variant + ")]",
+            "prose-copy max-w-none col",
+            presentationObject.variant.isBrandContrast && "prose-brand-contrast",
+            presentationObject.variant.isNeutralContrast && "prose-neutral-contrast",
+            presentationObject.variant.isDecorativeContrast && "prose-decorative-contrast",
+            presentationObject.variant.isTransparentContrast && "prose-transparent-contrast"
+        ]}>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+        </div>
+    `
+}

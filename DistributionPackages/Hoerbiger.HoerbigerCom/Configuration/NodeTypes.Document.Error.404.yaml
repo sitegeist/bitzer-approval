@@ -1,10 +1,21 @@
 'Hoerbiger.HoerbigerCom:Document.Error.404':
   superTypes:
-    'Hoerbiger.HoerbigerCom:Document.WebPage': true
-    'Hoerbiger.HoerbigerCom:Constraint.Document.Restricted': true
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
   ui:
     icon: exclamation-triangle
-    label: i18n
+    label: '404-Seite'
   properties:
     title:
       defaultValue: '404'

@@ -1,0 +1,7 @@
+Neos:
+  Flow:
+    http:
+      middlewares:
+        'languageDetection':
+          position: 'before dispatch'
+          middleware: 'Hoerbiger\Shared\Infrastructure\LanguageDetectionMiddleware'

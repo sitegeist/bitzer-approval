@@ -1,0 +1,55 @@
+prototype(Hoerbiger.Shared:Block.PartialFigureEclipse) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\PartialFigureEclipse\\PartialFigureEclipseInterface'
+
+    @styleguide {
+        title = 'PartialFigureEclipse'
+
+        props {
+            variant = 'imageLeft'
+            figure {
+                imageSource = Sitegeist.Kaleidoscope:DummyImageSource {
+                height = 1920
+                width = 1080
+            }
+                objectFit = 'cover'
+                objectPosition = 'topLeft'
+            }
+            headline {
+                variant = 'regular'
+                type = 'h1'
+                content = '- Add Slot Content -'
+            }
+            text {
+                variant = 'regular'
+                content = '- Add Slot Content -'
+            }
+            link {
+                href = 'https://www.neos.io'
+                target = '_self'
+                rel = 'Text'
+                content = '- Add Slot Content -'
+            }
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>variant:</dt>
+        <dd>{presentationObject.variant}</dd>
+        <dt>figure:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure} />
+        </dd>
+        <dt>headline:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} @if.isToBeRendered={presentationObject.headline} />
+        </dd>
+        <dt>text:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.Text presentationObject={presentationObject.text} />
+        </dd>
+        <dt>link:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.Link presentationObject={presentationObject.link} @if.isToBeRendered={presentationObject.link} />
+        </dd>
+    </dl>`
+}

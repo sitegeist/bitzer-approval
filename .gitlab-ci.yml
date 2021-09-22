@@ -39,7 +39,7 @@ merge-requests:
 #    - docker
 #    - autoscale
 #  cache:
-#    key: kvh
+#    key: ${CI_COMMIT_REF_SLUG}
 #    paths:
 #      - .composer/
 #  stage: 'testing'
@@ -57,10 +57,7 @@ merge-requests:
 #    - docker-php-ext-install exif
 #    - composer install
 #  script:
-#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.KvhhNet.MedicalStaff/Tests/Unit/Domain/Command/SynchronizePhysiciansTest.php
-#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/MedicalStaff/MedicalNumberTest.php
-#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/Stock/StockReportTest.php
-#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Kvh.ShopKvhhNet/Tests/Unit/Domain/Integrity/HappenedCriticallyLongAgoTest.php
+#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Hoerbiger.HoerbigerCom/Tests/Unit
 
 #deployment-develop:
 #  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php

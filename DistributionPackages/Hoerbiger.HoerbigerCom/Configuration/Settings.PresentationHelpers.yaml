@@ -1,0 +1,5 @@
+Neos:
+  Fusion:
+    defaultContext:
+      Hoerbiger.Page: Hoerbiger\HoerbigerCom\Presentation\Layout\Page\PageFactory
+      Hoerbiger.ContentSlot: Hoerbiger\HoerbigerCom\Integration\ContentSlotFactory

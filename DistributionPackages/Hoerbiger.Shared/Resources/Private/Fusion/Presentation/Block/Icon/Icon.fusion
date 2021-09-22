@@ -1,0 +1,19 @@
+prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Icon\\IconInterface'
+
+    @styleguide {
+        title = 'Icon'
+
+        props {
+            collectionName = 'Text'
+            iconName = 'Text'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>collectionName:</dt>
+        <dd>{presentationObject.collectionName}</dd>
+        <dt>iconName:</dt>
+        <dd>{presentationObject.iconName}</dd>
+    </dl>`
+}

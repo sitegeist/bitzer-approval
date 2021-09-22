@@ -1,0 +1,22 @@
+'Hoerbiger.HoerbigerCom:Content.Quotation':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    icon: comment-alt
+    label: 'Zitat'
+
+  properties:
+    text:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Text eingeben'
+    spokenByCharacter:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Name eingeben'

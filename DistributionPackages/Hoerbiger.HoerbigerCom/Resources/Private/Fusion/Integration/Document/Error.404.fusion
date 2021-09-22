@@ -1,0 +1,28 @@
+prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Hoerbiger.Page.forNotFoundPage(documentNode)}
+        }
+    }
+    prototype(Neos.Neos:Page) {
+        httpResponseHead {
+            statusCode = 404
+        }
+    }
+}
+
+error {
+    @context.notfoundDocument = ${q(site).children('notfound').get(0)}
+
+    4xx {
+        @position = 'start'
+        condition = ${statusCode >= 400 && statusCode < 500 && notfoundDocument}
+        renderer = Neos.Fusion:Renderer {
+            @context {
+                node = ${notfoundDocument}
+                documentNode = ${notfoundDocument}
+            }
+            renderPath = '/root'
+        }
+    }
+}

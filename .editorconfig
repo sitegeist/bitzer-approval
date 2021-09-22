@@ -14,7 +14,7 @@ indent_size = 2
 [{package.json,lerna.json,.babelrc,.eslintrc,.stylelintrc}]
 indent_size = 2
 
-[*.{css,js,ts}]
+[*.{css,js,ts,jsx,tsx}]
 indent_style = tab
 
 [Makefile]
