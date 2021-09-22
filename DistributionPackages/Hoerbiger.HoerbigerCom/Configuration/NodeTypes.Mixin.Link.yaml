@@ -3,7 +3,7 @@
   ui:
     inspector:
       groups:
-        image:
+        link:
           label: 'Link'
           icon: 'link'
   properties:

@@ -5,6 +5,8 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
@@ -17,11 +19,15 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
@@ -35,6 +41,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
                 return $this->forTileNavigation($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.Text':
+                return $this->forTextNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
+                return $this->forTextWithImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.Image':
+                return $this->forImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.Quotation':
+                return $this->forQuotationNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
+                return $this->forGalleryNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
+                return $this->forGalleryImageNode($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -113,5 +131,101 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 );
             }
         );
+    }
+
+    public function forTextNode(TraversableNodeInterface $textNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Stack(
+                StackVariant::regular(),
+                Collection::fromIterable([
+                    new Headline(
+                        HeadlineVariant::regular(),
+                        HeadlineType::h2(),
+                        Editable::fromNodeProperty($textNode,'headline')
+                    ),
+                    new Text(
+                        TextVariant::neutralContrast(),
+                        Editable::fromNodeProperty($textNode,'text')
+                    )
+                ], $identity)
+            )
+        );
+    }
+
+    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend): SlotInterface
+    {
+
+        $figure = (new FigureFactory())->forImageMixin($textWithImageNode, $inBackend);
+        $layout = Layout::from($textWithImageNode->getProperty('layout'));
+
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return Collection::fromIterable([
+            $figure,
+            new Headline(
+                HeadlineVariant::regular(),
+                HeadlineType::h2(),
+                Editable::fromNodeProperty($textWithImageNode,'headline')
+            ),
+            new Text(
+                TextVariant::neutralContrast(),
+                Editable::fromNodeProperty($textWithImageNode,'text')
+            )
+        ], $identity);
+    }
+
+    public function forImageNode(TraversableNodeInterface $imageNode, bool $inBackend): SlotInterface
+    {
+        $figure = (new FigureFactory())->forImageMixin($imageNode, $inBackend);
+
+        if (!$figure) {
+            throw new \InvalidArgumentException('Property "image" is required for Content-Element Image.');
+        }
+
+        return new ContentContainer(
+            ContentContainerVariant::blank(),
+            $figure
+        );
+    }
+
+    public function forQuotationNode(TraversableNodeInterface $quotationNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return Collection::fromIterable([
+            Editable::fromNodeProperty($quotationNode, 'text'),
+            Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+        ], $identity);
+    }
+
+    public function forGalleryNode(TraversableNodeInterface $galleryNode): SlotInterface
+    {
+        return Collection::fromNodes(
+            $galleryNode->findChildNodes(),
+            function(TraversableNodeInterface $galleryImage) {
+                return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
+            }
+        );
+    }
+
+    public function forGalleryImageNode(TraversableNodeInterface $galleryImageNode, bool $inBackend): SlotInterface
+    {
+        $figure = (new FigureFactory())->forImageMixin($galleryImageNode, $inBackend);
+
+        if(!$figure) {
+            throw new \InvalidArgumentException('Property "image" is required for Content-Element Image.');
+        }
+
+        return $figure;
     }
 }

@@ -1,0 +1,11 @@
+'Hoerbiger.HoerbigerCom:Collection.Gallery':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.GalleryImage': true
+  ui:
+    label: 'Bild Gallerie'
+    icon: images
