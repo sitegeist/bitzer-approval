@@ -16,24 +16,33 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
  */
 final class Link extends AbstractComponentPresentationObject implements LinkInterface
 {
+    private LinkVariant $variant;
+
     private UriInterface $href;
 
     private LinkTarget $target;
 
     private ?string $rel;
 
-    private SlotInterface $content;
+    private ?SlotInterface $content;
 
     public function __construct(
+        LinkVariant $variant,
         UriInterface $href,
         LinkTarget $target,
         ?string $rel,
-        SlotInterface $content
+        ?SlotInterface $content
     ) {
+        $this->variant = $variant;
         $this->href = $href;
         $this->target = $target;
         $this->rel = $rel;
         $this->content = $content;
+    }
+
+    public function getVariant(): LinkVariant
+    {
+        return $this->variant;
     }
 
     public function getHref(): UriInterface
@@ -51,8 +60,41 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
         return $this->rel;
     }
 
-    public function getContent(): SlotInterface
+    public function getContent(): ?SlotInterface
     {
         return $this->content;
+    }
+
+    public function withContent(?SlotInterface $content): self
+    {
+        return new self(
+            $this->variant,
+            $this->href,
+            $this->target,
+            $this->rel,
+            $content
+        );
+    }
+
+    public function asContainer(): self
+    {
+        return new self(
+            LinkVariant::container(),
+            $this->href,
+            $this->target,
+            $this->rel,
+            $this->content
+        );
+    }
+
+    public function forLabel(): self
+    {
+        return new self(
+            LinkVariant::label(),
+            $this->href,
+            $this->target,
+            $this->rel,
+            $this->content
+        );
     }
 }

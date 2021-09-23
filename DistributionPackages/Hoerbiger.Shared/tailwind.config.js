@@ -10,6 +10,10 @@ const SPACES = {
 	sm: SPACE_SM,
 	md: `calc(2 * ${SPACE_SM})`,
 	lg: `calc(4 * ${SPACE_SM})`,
+	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
+	'minus-sm': `calc(-1 * ${SPACE_SM})`,
+	'minus-md': `calc(-2 * ${SPACE_SM})`,
+	'minus-lg': `calc(-4 * ${SPACE_SM})`,
 };
 
 module.exports = {
@@ -136,6 +140,7 @@ module.exports = {
 				'ratio-square': '100%',
 				'ratio-2-1': '50%',
 				'ratio-4-3': 'calc(3 * 100% / 4)',
+				'ratio-5-4': 'calc(4 * 100% / 5)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
 			},

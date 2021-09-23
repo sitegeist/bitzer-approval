@@ -20,12 +20,26 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
 
         return $href
             ? new Link(
+                LinkVariant::label(),
                 $href,
                 $linkTarget,
                 $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
                 Value::fromString($node->getProperty('link__label'))
             )
             : null;
+    }
+
+    public function forLinkToDocument(TraversableNodeInterface $document, ContentContext $subgraph): Link
+    {
+        $linkTarget = LinkTarget::forNode($document);
+
+        return new Link(
+            LinkVariant::label(),
+            $this->uriService->getNodeUri($document),
+            $linkTarget,
+            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            Value::fromString($document->getLabel())
+        );
     }
 
     public function resolveRawLinkTargetUri(?string $rawLinkTarget, ContentContext $subgraph): ?UriInterface

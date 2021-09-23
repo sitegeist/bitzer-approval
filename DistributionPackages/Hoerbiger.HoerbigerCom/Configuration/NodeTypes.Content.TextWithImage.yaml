@@ -17,7 +17,7 @@
           group: 'image'
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
   postprocessors:
-    layout:
+    layouts:
       postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
       postprocessorOptions:
         enumName: Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout

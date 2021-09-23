@@ -1,0 +1,22 @@
+prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Grid\\GridInterface'
+
+    @styleguide {
+        title = 'Grid'
+
+        props {
+            variant = 'twoColumnsGap'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            '[Layout.Grid]',
+            'grid grid-col',
+            presentationObject.variant.isTwoColumnsGap && "md:grid-cols-2 gap-md"
+        ]}>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+        </div>
+    `
+}

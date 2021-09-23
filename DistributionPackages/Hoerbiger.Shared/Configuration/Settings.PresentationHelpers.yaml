@@ -15,3 +15,5 @@ Neos:
       Shared.Card: Hoerbiger\Shared\Presentation\Block\Card\CardFactory
       Shared.PartialFigureEclipse: Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory
       Shared.Stack: Hoerbiger\Shared\Presentation\Layout\Stack\StackFactory
+      Shared.Grid: Hoerbiger\Shared\Presentation\Layout\Grid\GridFactory
+      Shared.Button: Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory

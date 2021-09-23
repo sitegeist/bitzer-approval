@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
@@ -46,6 +47,19 @@ final class LinkTarget implements PseudoEnumInterface
         return \mb_substr($linkPropertyValue, 0, 7) === 'node://'
             ? LinkTarget::self()
             : LinkTarget::blank();
+    }
+
+    public static function forNode(TraversableNodeInterface $node): self
+    {
+        if ($node->getNodeType()->isOfType('Neos.Neos:Shortcut')) {
+            if ($node->getProperty('targetMode') === 'selectedTarget') {
+                if (\mb_strpos($node->getProperty('target'), 'http') === 0) {
+                    return self::blank();
+                }
+            }
+        }
+
+        return self::self();
     }
 
     public static function self(): self

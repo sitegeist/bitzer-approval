@@ -12,16 +12,22 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
         }
     }
 
-    renderer = afx`<dl>
-        <dt>href:</dt>
-        <dd>{presentationObject.href}</dd>
-        <dt>target:</dt>
-        <dd>{presentationObject.target}</dd>
-        <dt>rel:</dt>
-        <dd>{presentationObject.rel}</dd>
-        <dt>content:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <a
+            href={presentationObject.href}
+            target={presentationObject.target}
+            rel={presentationObject.rel}
+            rel.@if.1={presentationObject.rel}
+            class={[
+                "[Block.Link]",
+                presentationObject.variant.isContainer && "w-full h-full",
+                presentationObject.variant.isLabel && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
+            ]}
+        >
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                @if.1={presentationObject.content}
+                presentationObject={presentationObject.content}
+            />
+        </a>
+    `
 }

@@ -5,20 +5,19 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
-use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
-use Hoerbiger\Shared\Presentation\Block\Figure\Figure;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
-use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -29,9 +28,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
-use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
-
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
@@ -40,7 +36,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
                 return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
-                return $this->forTileNavigation($contentNode);
+                return $this->forTileNavigation($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
                 return $this->forTextNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
@@ -69,67 +65,21 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forTileNavigation(TraversableNodeInterface $node): SlotInterface
+    private function forTileNavigation(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
-        return Collection::fromNodes(
-            TraversableNodes::fromArray($node->getProperty('documents') ?: []),
-            function (TraversableNodeInterface $document) {
-                $figure = null;
-                $imageSource = null;
-                if ($document->getProperty('preview__image')) {
-                    $imageSource = new AssetImageSourceHelper($document->getProperty('preview__image'));
-                    $imageSource->setAlt($document->getProperty('preview__image__alt') ?: $document->getProperty('image__alt') ?: '');
-                    $imageSource->setTitle($document->getProperty('preview__image__title') ?: $document->getProperty('image__title') ?: '');
-                } elseif ($document->getProperty('image')) {
-                    $imageSource = new AssetImageSourceHelper($document->getProperty('image'));
-                    $imageSource->setAlt($document->getProperty('image__alt') ?: '');
-                    $imageSource->setTitle($document->getProperty('image__title') ?: '');
-                }
-                if ($imageSource) {
-                    $figure = new Figure(
-                        $imageSource,
-                        true,
-                        null,
-                        null
-                    );
-                }
+        $cardFactory = new CardFactory();
 
-                $headline = null;
-                $headlineProperty = $document->getProperty('preview__headline')
-                    ?: $document->getProperty('headline')
-                    ?: null;
-                if ($headlineProperty) {
-                    $headline = new Headline(
-                        HeadlineVariant::regular(),
-                        HeadlineType::h2(),
-                        Value::fromString($headlineProperty)
-                    );
-                }
-
-                $text = null;
-                $abstractProperty = $document->getProperty('preview__description')
-                    ?: $document->getProperty('abstract')
-                    ?: null;
-                if ($abstractProperty) {
-                    $text = new Text(
-                        TextVariant::lightContrast(),
-                        Value::fromString($abstractProperty)
-                    );
-                }
-
-                return new NavigationCard(
-                    $figure,
-                    $headline,
-                    null,
-                    $text,
-                    new Link(
-                        $this->uriService->getNodeUri($document),
-                        LinkTarget::self(),
-                        null,
-                        Value::fromString('[mehr erfahren]')
-                    )
-                );
-            }
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Grid(
+                GridVariant::twoColumnsGap(),
+                Collection::fromNodes(
+                    TraversableNodes::fromArray($node->getProperty('documents') ?: []),
+                    function (TraversableNodeInterface $document) use ($subgraph, $inBackend, $cardFactory)  {
+                        return $cardFactory->forNavigationTile($document, $inBackend, $subgraph);
+                    }
+                )
+            )
         );
     }
 
@@ -168,7 +118,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             return $slot;
         };
 
-        return Collection::fromIterable([
+        return Collection::fromIterable(array_filter([
             $figure,
             new Headline(
                 HeadlineVariant::regular(),
@@ -179,7 +129,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 TextVariant::neutralContrast(),
                 Editable::fromNodeProperty($textWithImageNode,'text')
             )
-        ], $identity);
+        ]), $identity);
     }
 
     public function forImageNode(TraversableNodeInterface $imageNode, bool $inBackend): SlotInterface
