@@ -13,7 +13,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <div class={[
             "[Block.Text (" + presentationObject.variant + ")]",
-            "prose-copy max-w-none col",
+            "prose max-w-none column-gap-md lg:column-count-2",
             presentationObject.variant.isBrandContrast && "prose-brand-contrast",
             presentationObject.variant.isNeutralContrast && "prose-neutral-contrast",
             presentationObject.variant.isDecorativeContrast && "prose-decorative-contrast",

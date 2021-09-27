@@ -15,6 +15,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
     const VARIANT_BLANK = 'blank';
+    const VARIANT_REGULARSM = 'regularSm';
 
     /**
      * @var array<string,self>|self[]
@@ -32,7 +33,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_REGULAR
-                && $string !== self::VARIANT_BLANK) {
+                && $string !== self::VARIANT_BLANK
+                && $string !== self::VARIANT_REGULARSM) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -51,6 +53,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_BLANK);
     }
 
+    public static function regularSm(): self
+    {
+        return self::from(self::VARIANT_REGULARSM);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -61,6 +68,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BLANK;
     }
 
+    public function getIsRegularSm(): bool
+    {
+        return $this->value === self::VARIANT_REGULARSM;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -68,7 +80,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_REGULAR),
-            self::from(self::VARIANT_BLANK)
+            self::from(self::VARIANT_BLANK),
+            self::from(self::VARIANT_REGULARSM)
         ];
     }
 

@@ -92,16 +92,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Stack(
-                StackVariant::regular(),
+                StackVariant::sm(),
                 Collection::fromIterable([
                     new Headline(
-                        HeadlineVariant::regular(),
+                        HeadlineVariant::important(),
                         HeadlineType::h2(),
-                        Editable::fromNodeProperty($textNode,'headline')
+                        Editable::fromNodeProperty($textNode, 'headline')
                     ),
                     new Text(
-                        TextVariant::neutralContrast(),
-                        Editable::fromNodeProperty($textNode,'text')
+                        TextVariant::lightContrast(),
+                        Editable::fromNodeProperty($textNode, 'text')
                     )
                 ], $identity)
             )

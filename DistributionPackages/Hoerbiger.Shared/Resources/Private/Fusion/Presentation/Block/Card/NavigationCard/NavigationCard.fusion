@@ -9,7 +9,7 @@ prototype(Hoerbiger.Shared:Block.Card.NavigationCard) < prototype(Hoerbiger.Shar
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
                 </div>
             </div>
-            <div class="flex-grow flex flex-col space-y-xs p-xs mx-sm mt-minus-sm bg-light z-50">
+            <div class="flex-grow flex flex-col space-y-xs p-xs mx-sm mt-minus-sm bg-light z-50 border border-neutral-lighter shadow-card">
                 <div
                     @if.1={presentationObject.subheader}
                     class="uppercase font-sans-bold text-base"
