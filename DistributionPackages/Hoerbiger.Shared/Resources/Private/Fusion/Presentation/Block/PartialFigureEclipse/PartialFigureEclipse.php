@@ -12,6 +12,7 @@ use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineInterface;
 use Hoerbiger\Shared\Presentation\Block\Text\TextInterface;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
  * @Flow\Proxy(false)
@@ -22,24 +23,16 @@ final class PartialFigureEclipse extends AbstractComponentPresentationObject imp
 
     private FigureInterface $figure;
 
-    private ?HeadlineInterface $headline;
-
-    private TextInterface $text;
-
-    private ?LinkInterface $link;
+    private SlotInterface $content;
 
     public function __construct(
         PartialFigureEclipseVariant $variant,
         FigureInterface $figure,
-        ?HeadlineInterface $headline,
-        TextInterface $text,
-        ?LinkInterface $link
+        SlotInterface $content
     ) {
         $this->variant = $variant;
         $this->figure = $figure;
-        $this->headline = $headline;
-        $this->text = $text;
-        $this->link = $link;
+        $this->content = $content;
     }
 
     public function getVariant(): PartialFigureEclipseVariant
@@ -52,18 +45,8 @@ final class PartialFigureEclipse extends AbstractComponentPresentationObject imp
         return $this->figure;
     }
 
-    public function getHeadline(): ?HeadlineInterface
+    public function getContent(): SlotInterface
     {
-        return $this->headline;
-    }
-
-    public function getText(): TextInterface
-    {
-        return $this->text;
-    }
-
-    public function getLink(): ?LinkInterface
-    {
-        return $this->link;
+        return $this->content;
     }
 }

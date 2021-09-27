@@ -13,6 +13,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class GridVariant implements PseudoEnumInterface
 {
+    const VARIANT_TWOCOLUMNS = 'twoColumns';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
 
     /**
@@ -30,7 +31,8 @@ final class GridVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_TWOCOLUMNSGAP) {
+            if ($string !== self::VARIANT_TWOCOLUMNS
+                && $string !== self::VARIANT_TWOCOLUMNSGAP) {
                 throw GridVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -39,9 +41,19 @@ final class GridVariant implements PseudoEnumInterface
         return self::$instances[$string];
     }
 
+    public static function twoColumns(): self
+    {
+        return self::from(self::VARIANT_TWOCOLUMNS);
+    }
+
     public static function twoColumnsGap(): self
     {
         return self::from(self::VARIANT_TWOCOLUMNSGAP);
+    }
+
+    public function getIsTwoColumns(): bool
+    {
+        return $this->value === self::VARIANT_TWOCOLUMNS;
     }
 
     public function getIsTwoColumnsGap(): bool
@@ -55,6 +67,7 @@ final class GridVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::VARIANT_TWOCOLUMNS),
             self::from(self::VARIANT_TWOCOLUMNSGAP)
         ];
     }

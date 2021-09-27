@@ -13,6 +13,7 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
@@ -41,7 +42,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.Text':
                 return $this->forTextNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
-                return $this->forTextWithImageNode($contentNode, $inBackend);
+                return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
                 return $this->forImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
@@ -93,8 +94,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Stack(
-                StackVariant::sm(),
-                Collection::fromIterable([
+                StackVariant::xs(),
+                Collection::fromIterable(array_filter([
                     new Headline(
                         HeadlineVariant::important(),
                         HeadlineType::h2(),
@@ -102,35 +103,50 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ),
                     new Text(
                         TextVariant::lightContrast(),
-                        Editable::fromNodeProperty($textNode, 'text')
+                        Editable::fromNodeProperty($textNode, 'text'),
+                        true
                     )
-                ], $identity)
+                ]), $identity)
             )
         );
     }
 
-    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend): SlotInterface
+    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend, ContentContext $subgraph): SlotInterface
     {
-
-        $figure = (new FigureFactory())->forImageMixin($textWithImageNode, $inBackend);
-        $layout = Layout::from($textWithImageNode->getProperty('layout'));
-
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
-        return Collection::fromIterable(array_filter([
-            $figure,
-            new Headline(
-                HeadlineVariant::regular(),
-                HeadlineType::h2(),
-                Editable::fromNodeProperty($textWithImageNode,'headline')
-            ),
-            new Text(
-                TextVariant::neutralContrast(),
-                Editable::fromNodeProperty($textWithImageNode,'text')
+        $figure = (new FigureFactory())->forImageMixin($textWithImageNode, $inBackend);
+        $textStack = new Stack(
+            StackVariant::xs(),
+            Collection::fromIterable(array_filter([
+                $inBackend || $textWithImageNode->getProperty('headline')
+                    ? new Headline(
+                        HeadlineVariant::important(),
+                        HeadlineType::h2(),
+                        Editable::fromNodeProperty($textWithImageNode, 'headline')
+                    )
+                    : null,
+                new Text(
+                    TextVariant::lightContrast(),
+                    Editable::fromNodeProperty($textWithImageNode, 'text'),
+                    false
+                ),
+                (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph)
+            ]), $identity)
+        );
+        $layout = Layout::from($textWithImageNode->getProperty('layout'));
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Grid(
+                GridVariant::twoColumns(),
+                $layout->getIsImageFirst()
+                    ? Collection::fromIterable([$figure, $textStack], $identity)
+                    : Collection::fromIterable([$textStack, $figure], $identity)
             )
-        ]), $identity);
+        );
     }
 
     public function forImageNode(TraversableNodeInterface $imageNode, bool $inBackend): SlotInterface
@@ -142,7 +158,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
 
         return new ContentContainer(
-            ContentContainerVariant::blank(),
+            ContentContainerVariant::regular(),
             $figure
         );
     }

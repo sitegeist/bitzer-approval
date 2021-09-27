@@ -52,7 +52,8 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
         if ($abstractProperty) {
             $text = new Text(
                 TextVariant::lightContrast(),
-                Value::fromString($abstractProperty)
+                Value::fromString($abstractProperty),
+                false
             );
         }
 

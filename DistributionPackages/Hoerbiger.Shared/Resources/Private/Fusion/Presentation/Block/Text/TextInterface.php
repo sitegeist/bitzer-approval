@@ -14,4 +14,6 @@ interface TextInterface extends ComponentPresentationObjectInterface
     public function getVariant(): TextVariant;
 
     public function getContent(): SlotInterface;
+
+    public function getCanHaveColumns(): bool;
 }

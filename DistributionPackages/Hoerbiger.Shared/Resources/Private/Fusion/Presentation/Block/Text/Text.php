@@ -19,12 +19,16 @@ final class Text extends AbstractComponentPresentationObject implements TextInte
 
     private SlotInterface $content;
 
+    private bool $canHaveColumns;
+
     public function __construct(
         TextVariant $variant,
-        SlotInterface $content
+        SlotInterface $content,
+        bool $canHaveColumns
     ) {
         $this->variant = $variant;
         $this->content = $content;
+        $this->canHaveColumns = $canHaveColumns;
     }
 
     public function getVariant(): TextVariant
@@ -35,5 +39,10 @@ final class Text extends AbstractComponentPresentationObject implements TextInte
     public function getContent(): SlotInterface
     {
         return $this->content;
+    }
+
+    public function getCanHaveColumns(): bool
+    {
+        return $this->canHaveColumns;
     }
 }

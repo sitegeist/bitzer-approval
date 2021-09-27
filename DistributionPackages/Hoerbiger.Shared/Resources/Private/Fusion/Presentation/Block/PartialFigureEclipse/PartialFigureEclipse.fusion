@@ -32,24 +32,33 @@ prototype(Hoerbiger.Shared:Block.PartialFigureEclipse) < prototype(PackageFactor
         }
     }
 
-    renderer = afx`<dl>
-        <dt>variant:</dt>
-        <dd>{presentationObject.variant}</dd>
-        <dt>figure:</dt>
-        <dd>
-            <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure} />
-        </dd>
-        <dt>headline:</dt>
-        <dd>
-            <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} @if.isToBeRendered={presentationObject.headline} />
-        </dd>
-        <dt>text:</dt>
-        <dd>
-            <Hoerbiger.Shared:Block.Text presentationObject={presentationObject.text} />
-        </dd>
-        <dt>link:</dt>
-        <dd>
-            <Hoerbiger.Shared:Block.Link presentationObject={presentationObject.link} @if.isToBeRendered={presentationObject.link} />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <div class={[
+            "[Block.PartialFigureEclipse]",
+            "relative pt-xl",
+            "grid grid-cols-2"
+        ]}>
+            <div class={[
+                "col-span-1 relative z-20",
+                presentationObject.variant.isImageLeft && "col-start-1",
+                presentationObject.variant.isImageRight && "col-start-2"
+            ]}>
+                <div class={[
+                    "absolute top-minus-xl bottom-sm",
+                    presentationObject.variant.isImageLeft && "left-md right-minus-md",
+                    presentationObject.variant.isImageRight && "left-minus-md right-md"
+                ]}>
+                    <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure} />
+                </div>
+            </div>
+            <div class={[
+                "col-span-1 w-full max-w-[90%] relative z-40",
+                "bg-light p-sm border border-neutral-lighter shadow-textbox",
+                presentationObject.variant.isImageLeft && "col-start-2 justify-self-start",
+                presentationObject.variant.isImageRight && "col-start-1 row-start-1 justify-self-end"
+            ]}>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+            </div>
+        </div>
+    `
 }

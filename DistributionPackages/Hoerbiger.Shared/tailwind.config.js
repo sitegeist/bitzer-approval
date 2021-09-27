@@ -61,7 +61,7 @@ module.exports = {
 		boxShadow: {
 			/* Will match to py-3. */
 			'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
-			'card': '0 0 14px rgba(0, 0, 0, .08)',
+			'textbox': '0 0 14px rgba(0, 0, 0, .08)',
 		},
 
 		extend: {
