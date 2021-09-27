@@ -1,6 +1,5 @@
 // const theme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
-const { NewLineKind } = require('typescript');
 
 const MAX_CONTENT_WIDTH = '1920px';
 const MIN_TOUCH = '48px';
@@ -11,11 +10,15 @@ const SPACES = {
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
 	md: `calc(2 * ${SPACE_SM})`,
-	lg: `calc(4 * ${SPACE_SM})`,
+	lg: `calc(3 * ${SPACE_SM})`,
+	xl: `calc(4 * ${SPACE_SM})`,
+	'2xl': `calc(6 * ${SPACE_SM})`,
 	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
 	'minus-sm': `calc(-1 * ${SPACE_SM})`,
 	'minus-md': `calc(-2 * ${SPACE_SM})`,
-	'minus-lg': `calc(-4 * ${SPACE_SM})`,
+	'minus-lg': `calc(-3 * ${SPACE_SM})`,
+	'minus-xl': `calc(-4 * ${SPACE_SM})`,
+	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
 
 module.exports = {
@@ -52,6 +55,7 @@ module.exports = {
 		fontFamily: {
 			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
+			'serif-regular': ['PT Serif', 'serif'],
 		},
 
 		boxShadow: {
@@ -75,6 +79,9 @@ module.exports = {
 							fontFamily: theme('fontFamily.sans-bold'),
 							fontWeight: 600,
 							textDecoration: 'none',
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.light.contrast'),
 						},
 					},
 				},
@@ -143,6 +150,7 @@ module.exports = {
 			maxWidth: {
 				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
+				'quotation': '1152px',
 			},
 
 			space: {
@@ -205,7 +213,3 @@ module.exports = {
 		require('@tailwindcss/typography'),
 	],
 };
-
-
-/*
-*/

@@ -14,6 +14,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
+use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -148,14 +149,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forQuotationNode(TraversableNodeInterface $quotationNode): SlotInterface
     {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
-
-        return Collection::fromIterable([
-            Editable::fromNodeProperty($quotationNode, 'text'),
-            Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
-        ], $identity);
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Quotation(
+                Editable::fromNodeProperty($quotationNode, 'text'),
+                Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+            )
+        );
     }
 
     public function forGalleryNode(TraversableNodeInterface $galleryNode): SlotInterface
