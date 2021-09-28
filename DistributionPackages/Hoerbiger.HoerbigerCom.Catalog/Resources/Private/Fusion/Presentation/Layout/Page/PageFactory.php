@@ -56,7 +56,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             new SiteHeader(),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::regular(),
+                    ContentContainerVariant::regularSm(),
                     $introSection
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))

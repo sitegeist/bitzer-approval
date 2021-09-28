@@ -20,8 +20,11 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             h1 = "font-sans-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl"
             h1.@if.1 = ${presentationObject.type.isH1}
 
-            h2 = "text-2xl"
+            h2 = "text-3xl lg:text-4xl text-brand font-sans-bold"
             h2.@if.1 = ${presentationObject.type.isH2}
+
+            h2Important = "text-5xl lg:text-6xl text-brand font-sans-regular leading-heading"
+            h2Important.@if.1 = ${presentationObject.type.isH2 && presentationObject.variant.isImportant}
 
             isDecorative = "inline bg-decorative text-decorative-contrast shadow-decorative-heading-3 py-3 translate-x-6 leading-normal sm:leading-normal lg:leading-normal xl:leading-normal"
             isDecorative.@if.1 = ${presentationObject.variant.isDecorative}
@@ -32,5 +35,6 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
         }
 
         @process.wrapDecorative = afx`<div class="ml-5">{value}</div>`
+        @process.wrapDecorative.@if.1 = ${presentationObject.variant.isDecorative}
     }
 }

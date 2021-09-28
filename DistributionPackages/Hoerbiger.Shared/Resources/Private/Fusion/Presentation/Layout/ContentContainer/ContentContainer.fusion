@@ -16,7 +16,8 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
             "w-full"
         ]}>
             <div class={[
-                presentationObject.variant.isRegular && "max-w-content-full mx-auto p-sm bg-light",
+                presentationObject.variant.isRegularSm && "max-w-content-full mx-auto p-sm bg-light",
+                presentationObject.variant.isRegular && "max-w-content-full mx-auto p-md bg-light",
                 presentationObject.variant.isBlank && "w-full"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />

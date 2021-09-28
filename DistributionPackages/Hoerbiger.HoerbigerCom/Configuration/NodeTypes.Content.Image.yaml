@@ -5,3 +5,7 @@
   ui:
     label: 'Bild'
     icon: image
+  properties:
+    image:
+      options:
+        preset: 'image.landscape_2_1'

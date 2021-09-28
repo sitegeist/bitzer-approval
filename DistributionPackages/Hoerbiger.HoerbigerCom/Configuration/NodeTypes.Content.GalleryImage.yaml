@@ -5,6 +5,7 @@
   ui:
     label: 'Bild'
     icon: image
-  property:
-    options:
-      preset: 'image.square'
+  properties:
+    image:
+      options:
+        preset: 'image.square'

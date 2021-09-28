@@ -34,13 +34,13 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
                     presentationObject.objectFit.isContain && "object-contain",
                     presentationObject.objectPosition.isCenter && "object-center",
                     presentationObject.objectPosition.isTop && "object-top",
-                    presentationObject.objectPosition.isLeft && "object-left",
-                    presentationObject.objectPosition.isRight && "object-right",
-                    presentationObject.objectPosition.isBottom && "object-bottom",
-                    presentationObject.objectPosition.isLeftTop && "object-left-top",
-                    presentationObject.objectPosition.isLeftBottom && "object-left-bottom",
-                    presentationObject.objectPosition.isRightTop && "object-right-top",
-                    presentationObject.objectPosition.isRightBottom && "object-right-bottom"
+                        presentationObject.objectPosition.isLeft && "object-left",
+                        presentationObject.objectPosition.isRight && "object-right",
+                        presentationObject.objectPosition.isBottom && "object-bottom",
+                        presentationObject.objectPosition.isLeftTop && "object-left-top",
+                        presentationObject.objectPosition.isLeftBottom && "object-left-bottom",
+                        presentationObject.objectPosition.isRightTop && "object-right-top",
+                        presentationObject.objectPosition.isRightBottom && "object-right-bottom"
                 ]), ' ')}
             />
         </figure>

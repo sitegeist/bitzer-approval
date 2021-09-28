@@ -41,7 +41,8 @@ final class IntroSectionFactory extends AbstractComponentPresentationObjectFacto
             null,
             new Text(
                 TextVariant::transparentContrast(),
-                Editable::fromNodeProperty($node, 'abstract')
+                Editable::fromNodeProperty($node, 'abstract'),
+                false
             ),
             $media->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center())
         );
@@ -66,7 +67,8 @@ final class IntroSectionFactory extends AbstractComponentPresentationObjectFacto
             null,
             new Text(
                 TextVariant::lightContrast(),
-                Editable::fromNodeProperty($node, 'abstract')
+                Editable::fromNodeProperty($node, 'abstract'),
+                false
             ),
             $media->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center())
         );

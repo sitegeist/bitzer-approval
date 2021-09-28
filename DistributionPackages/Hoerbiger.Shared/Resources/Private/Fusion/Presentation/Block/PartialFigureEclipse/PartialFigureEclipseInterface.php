@@ -8,9 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineInterface;
-use Hoerbiger\Shared\Presentation\Block\Text\TextInterface;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 interface PartialFigureEclipseInterface extends ComponentPresentationObjectInterface
 {
@@ -18,9 +16,5 @@ interface PartialFigureEclipseInterface extends ComponentPresentationObjectInter
 
     public function getFigure(): FigureInterface;
 
-    public function getHeadline(): ?HeadlineInterface;
-
-    public function getText(): TextInterface;
-
-    public function getLink(): ?LinkInterface;
+    public function getContent(): SlotInterface;
 }

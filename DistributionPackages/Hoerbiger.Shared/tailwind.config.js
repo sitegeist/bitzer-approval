@@ -1,4 +1,5 @@
 // const theme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
 
 const MAX_CONTENT_WIDTH = '1920px';
 const MIN_TOUCH = '48px';
@@ -9,7 +10,15 @@ const SPACES = {
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
 	md: `calc(2 * ${SPACE_SM})`,
-	lg: `calc(4 * ${SPACE_SM})`,
+	lg: `calc(3 * ${SPACE_SM})`,
+	xl: `calc(4 * ${SPACE_SM})`,
+	'2xl': `calc(6 * ${SPACE_SM})`,
+	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
+	'minus-sm': `calc(-1 * ${SPACE_SM})`,
+	'minus-md': `calc(-2 * ${SPACE_SM})`,
+	'minus-lg': `calc(-3 * ${SPACE_SM})`,
+	'minus-xl': `calc(-4 * ${SPACE_SM})`,
+	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
 
 module.exports = {
@@ -22,7 +31,7 @@ module.exports = {
 		colors: {
 			light: {
 				DEFAULT: '#fff',
-				contrast: '#000'
+				contrast: 'rgba(0, 0, 0, .85)'
 			},
 			neutral: {
 				lighter: '#F9F9F9',
@@ -42,22 +51,38 @@ module.exports = {
 				contrast: '#fff',
 			},
 		},
+
 		fontFamily: {
 			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
+			'serif-regular': ['PT Serif', 'serif'],
 		},
 
 		boxShadow: {
 			/* Will match to py-3. */
 			'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
+			'textbox': '0 0 14px rgba(0, 0, 0, .08)',
 		},
 
 		extend: {
 			typography: (theme) => ({
-				'copy': {
+				DEFAULT: {
 					css: {
+						color: theme('colors.light.contrast'),
 						fontSize: '1.25rem',
-						leading: 'calc(1em + .25rem)',
+						strong: {
+							color: theme('colors.light.contrast'),
+							fontFamily: theme('fontFamily.sans-bold'),
+						},
+						a: {
+							color: theme('colors.brand.DEFAULT'),
+							fontFamily: theme('fontFamily.sans-bold'),
+							fontWeight: 600,
+							textDecoration: 'none',
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.light.contrast'),
+						},
 					},
 				},
 				'brand-contrast': {
@@ -97,10 +122,14 @@ module.exports = {
 					css: {
 						color: theme('colors.transparent.contrast'),
 						strong: {
-							color: theme('colors.transparent.contrast'),
+							css: {
+								color: theme('colors.transparent.contrast'),
+							},
 						},
 						a: {
-							color: theme('colors.transparent.contrast'),
+							css: {
+								color: theme('colors.transparent.contrast'),
+							},
 						},
 					},
 				},
@@ -121,6 +150,7 @@ module.exports = {
 			maxWidth: {
 				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
+				'quotation': '1152px',
 			},
 
 			space: {
@@ -136,6 +166,7 @@ module.exports = {
 				'ratio-square': '100%',
 				'ratio-2-1': '50%',
 				'ratio-4-3': 'calc(3 * 100% / 4)',
+				'ratio-5-4': 'calc(4 * 100% / 5)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
 			},
@@ -152,6 +183,14 @@ module.exports = {
 				...SPACES,
 			},
 
+			fontSize: {
+				'5xl': ['3rem', {
+					lineHeight: '1.3em',
+				}],
+				'6xl': ['3.75rem', {
+					lineHeight: '1.3em',
+				}],
+			},
 
 		},
 	},
@@ -161,6 +200,16 @@ module.exports = {
 		},
 	},
 	plugins: [
+		plugin(({addUtilities}) => {
+			addUtilities({
+				'.column-count-2': {
+					'column-count': 2,
+				},
+				'.column-gap-md': {
+					'column-gap': SPACES.md,
+				},
+			}, ['responsive']);
+		}),
 		require('@tailwindcss/typography'),
 	],
 };
