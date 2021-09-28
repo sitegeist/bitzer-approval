@@ -7,5 +7,12 @@
       '*': false
       'Hoerbiger.HoerbigerCom:Content.GalleryImage': true
   ui:
-    label: 'Bild Gallerie'
+    label: 'Bilder-Galerie'
     icon: images
+  options:
+    template:
+      childNodes:
+        'image1':
+          type: 'Hoerbiger.HoerbigerCom:Content.GalleryImage'
+        'image2':
+          type: 'Hoerbiger.HoerbigerCom:Content.GalleryImage'

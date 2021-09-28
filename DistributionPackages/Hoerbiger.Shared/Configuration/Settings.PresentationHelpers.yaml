@@ -17,3 +17,5 @@ Neos:
       Shared.Stack: Hoerbiger\Shared\Presentation\Layout\Stack\StackFactory
       Shared.Grid: Hoerbiger\Shared\Presentation\Layout\Grid\GridFactory
       Shared.Button: Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory
+      Shared.Box: Hoerbiger\Shared\Presentation\Layout\Box\BoxFactory
+      Shared.Row: Hoerbiger\Shared\Presentation\Layout\Row\RowFactory

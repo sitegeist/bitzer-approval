@@ -7,6 +7,8 @@ namespace Hoerbiger\HoerbigerCom\Integration;
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -18,8 +20,12 @@ use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclips
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Box\Box;
+use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
+use Hoerbiger\Shared\Presentation\Layout\Row\Row;
+use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -118,23 +124,30 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         };
 
         $figure = (new FigureFactory())->forImageMixin($textWithImageNode, $inBackend);
-        $textStack = new Stack(
-            StackVariant::xs(),
-            Collection::fromIterable(array_filter([
-                $inBackend || $textWithImageNode->getProperty('headline')
-                    ? new Headline(
-                        HeadlineVariant::important(),
-                        HeadlineType::h2(),
-                        Editable::fromNodeProperty($textWithImageNode, 'headline')
-                    )
-                    : null,
-                new Text(
-                    TextVariant::lightContrast(),
-                    Editable::fromNodeProperty($textWithImageNode, 'text'),
-                    false
-                ),
-                (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph)
-            ]), $identity)
+        if ($figure) {
+            $figure = $figure->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center());
+        }
+
+        $text = new Box(
+            BoxVariant::textCenter(),
+            new Stack(
+                StackVariant::xs(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $textWithImageNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineVariant::important(),
+                            HeadlineType::h2(),
+                            Editable::fromNodeProperty($textWithImageNode, 'headline')
+                        )
+                        : null,
+                    new Text(
+                        TextVariant::lightContrast(),
+                        Editable::fromNodeProperty($textWithImageNode, 'text'),
+                        false
+                    ),
+                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph)
+                ]), $identity)
+            )
         );
         $layout = Layout::from($textWithImageNode->getProperty('layout'));
 
@@ -143,8 +156,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Grid(
                 GridVariant::twoColumns(),
                 $layout->getIsImageFirst()
-                    ? Collection::fromIterable([$figure, $textStack], $identity)
-                    : Collection::fromIterable([$textStack, $figure], $identity)
+                    ? Collection::fromIterable([$figure, $text], $identity)
+                    : Collection::fromIterable([$text, $figure], $identity)
             )
         );
     }
@@ -176,11 +189,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forGalleryNode(TraversableNodeInterface $galleryNode): SlotInterface
     {
-        return Collection::fromNodes(
-            $galleryNode->findChildNodes(),
-            function(TraversableNodeInterface $galleryImage) {
-                return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
-            }
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Row(
+                RowVariant::gallery(),
+                Collection::fromNodes(
+                    $galleryNode->findChildNodes(),
+                    function(TraversableNodeInterface $galleryImage) {
+                        return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                    }
+                )
+            )
         );
     }
 
@@ -192,6 +211,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             throw new \InvalidArgumentException('Property "image" is required for Content-Element Image.');
         }
 
-        return $figure;
+        return $figure->withObjectFitAndPosition(FigureObjectFit::contain(), FigureObjectPosition::center());
     }
 }
