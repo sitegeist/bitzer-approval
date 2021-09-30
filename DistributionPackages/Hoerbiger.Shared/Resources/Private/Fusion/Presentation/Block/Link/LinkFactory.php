@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -52,6 +53,10 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             if ($targetNode) {
                 return $this->uriService->getNodeUri($targetNode);
             }
+        }
+
+        if (\mb_substr($rawLinkTarget, 0, 4) === 'http') {
+            return new Uri($rawLinkTarget);
         }
 
         return null;
