@@ -18,6 +18,7 @@
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom.Catalog:Document.Product': true
+      'Hoerbiger.HoerbigerCom:Document.WebPage': true
   ui:
     icon: boxes
     label: 'Produktkategorie'
