@@ -11,6 +11,7 @@ use Neos\Flow\Security\Account;
 use Neos\Flow\Security\AccountRepository;
 use Neos\Flow\Security\Authentication\Provider\AbstractProvider;
 use Neos\Flow\Security\Authentication\TokenInterface;
+use Neos\Flow\Security\Context as SecurityContext;
 
 /**
  * The SAML username authentication provider
@@ -30,6 +31,12 @@ class SAMLUsernameProvider extends AbstractProvider
     protected $userFactory;
 
     /**
+     * @Flow\Inject
+     * @var SecurityContext
+     */
+    protected $securityContext;
+
+    /**
      * @return array<string>
      */
     public function getTokenClassNames(): array
@@ -41,8 +48,19 @@ class SAMLUsernameProvider extends AbstractProvider
 
     public function authenticate(TokenInterface $authenticationToken): void
     {
-        $authenticationToken->setAccount($this->getAccount($authenticationToken));
-        $authenticationToken->setAuthenticationStatus(TokenInterface::AUTHENTICATION_SUCCESSFUL);
+        if ($authenticationToken->getAuthenticationStatus() === TokenInterface::AUTHENTICATION_NEEDED) {
+            $authenticationToken->setAuthenticationStatus(TokenInterface::AUTHENTICATION_SUCCESSFUL);
+            $authenticationToken->setAccount($this->getAccount($authenticationToken));
+            $this->initializeCsrfProtectionToken();
+        }
+    }
+
+    /**
+     * This is usually done as a side effect in @see \Neos\Neos\Controller\LoginController::onAuthenticationSuccess()
+     */
+    private function initializeCsrfProtectionToken(): void
+    {
+        $this->securityContext->getCsrfProtectionToken();
     }
 
     private function getAccount(TokenInterface $authenticationToken): Account
