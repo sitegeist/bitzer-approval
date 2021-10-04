@@ -1,0 +1,34 @@
+'Hoerbiger.HoerbigerCom:Mixin.Image':
+  abstract: true
+  ui:
+    inspector:
+      groups:
+        image:
+          label: 'Bild'
+          icon: 'image'
+  properties:
+    image:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      ui:
+        label: 'Bild'
+        reloadIfChanged: true
+        inspector:
+          group: 'image'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    image__alt:
+      type: 'string'
+      ui:
+        label: 'Alt-Text'
+        inspector:
+          group: 'image'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    image__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text'
+        inspector:
+          group: 'image'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}

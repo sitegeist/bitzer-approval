@@ -1,0 +1,5 @@
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    catalog:
+      type: 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog'
+      position: before notfound

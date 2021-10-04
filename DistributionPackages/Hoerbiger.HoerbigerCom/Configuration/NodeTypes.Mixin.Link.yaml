@@ -1,0 +1,22 @@
+'Hoerbiger.HoerbigerCom:Mixin.Link':
+  abstract: true
+  ui:
+    inspector:
+      groups:
+        image:
+          label: 'Link'
+          icon: 'link'
+  properties:
+    link__target:
+      type: string
+      ui:
+        label: 'Link'
+        inspector:
+          group: 'link'
+          editor: 'Neos.Neos/Inspector/Editors/LinkEditor'
+    link__label:
+      type: string
+      ui:
+        label: 'Label'
+        inspector:
+          group: 'link'

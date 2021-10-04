@@ -1,0 +1,4 @@
+Neos:
+  Fusion:
+    defaultContext:
+      Catalog.Page: Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page\PageFactory

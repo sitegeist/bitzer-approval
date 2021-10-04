@@ -1,0 +1,24 @@
+prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Headline\\HeadlineInterface'
+
+    @styleguide {
+        title = 'Headline'
+
+        props {
+            variant = 'regular'
+            type = 'h1'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>variant:</dt>
+        <dd>{presentationObject.variant}</dd>
+        <dt>type:</dt>
+        <dd>{presentationObject.type}</dd>
+        <dt>content:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+        </dd>
+    </dl>`
+}
