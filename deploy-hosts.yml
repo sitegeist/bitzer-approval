@@ -4,7 +4,7 @@
 
 www-dev.hoerbiger.com:
   stage: develop
-  hostname: hoerbiger-develop
+  hostname: hoerbiger
   deploy_path: '/srv/dockerdata/www-dev/www/hoerbiger_deployer'
   homepage_url: https://www-dev.hoerbiger.com
   dockerComposeLocation: '/srv/dockerdata/www-dev'
@@ -12,7 +12,7 @@ www-dev.hoerbiger.com:
 
 www-stage.hoerbiger.com:
   stage: staging
-  hostname: hoerbiger-staging
+  hostname: hoerbiger
   deploy_path: '/srv/dockerdata/www-stage/www/hoerbiger_deployer'
   homepage_url: https://www-stage.hoerbiger.com
   dockerComposeLocation: '/srv/dockerdata/www-stage'
@@ -20,7 +20,7 @@ www-stage.hoerbiger.com:
 
 www-prod.hoerbiger.com:
   stage: master
-  hostname: hoerbiger-master
+  hostname: hoerbiger
   deploy_path: '/srv/dockerdata/www-prod/www/hoerbiger_deployer'
   homepage_url: https://www-prod.hoerbiger.com
   dockerComposeLocation: '/srv/dockerdata/www-prod'
