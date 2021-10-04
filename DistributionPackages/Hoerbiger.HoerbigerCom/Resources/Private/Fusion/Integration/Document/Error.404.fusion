@@ -14,9 +14,9 @@ prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Neos.Fusion:Com
 error {
     @context.notfoundDocument = ${q(site).children('notfound').get(0)}
 
-    4xx {
+    404 {
         @position = 'start'
-        condition = ${statusCode >= 400 && statusCode < 500 && notfoundDocument}
+        condition = ${statusCode == 404 && notfoundDocument}
         renderer = Neos.Fusion:Renderer {
             @context {
                 node = ${notfoundDocument}
