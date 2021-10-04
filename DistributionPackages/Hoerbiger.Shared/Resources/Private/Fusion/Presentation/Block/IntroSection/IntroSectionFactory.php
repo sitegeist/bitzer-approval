@@ -15,7 +15,6 @@ use Hoerbiger\Shared\Presentation\Block\IntroSection\DuoIntroSection\DuoIntroSec
 use Hoerbiger\Shared\Presentation\Block\IntroSection\FullMediaIntroSection\FullMediaIntroSection;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
-use InvalidArgumentException;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
@@ -24,11 +23,10 @@ final class IntroSectionFactory extends AbstractComponentPresentationObjectFacto
 {
     public function forFullMediaIntroduction(TraversableNodeInterface $node, bool $inBackend): IntroSectionInterface
     {
-        /** @@var Figure|null $media */
         $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
 
         if (!$media) {
-            throw new InvalidArgumentException('Introduction requires Block.Figure for property media.');
+            throw new \InvalidArgumentException('Introduction requires Block.Figure for property media.');
         }
 
         return new FullMediaIntroSection(
@@ -50,11 +48,10 @@ final class IntroSectionFactory extends AbstractComponentPresentationObjectFacto
 
     public function forDuoIntroduction(TraversableNodeInterface $node, bool $inBackend): IntroSectionInterface
     {
-        /** @@var Figure|null $media */
         $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
 
         if (!$media) {
-            throw new InvalidArgumentException('Introduction requires Block.Figure for property media.');
+            throw new \InvalidArgumentException('Introduction requires Block.Figure for property media.');
         }
 
         return new DuoIntroSection(
