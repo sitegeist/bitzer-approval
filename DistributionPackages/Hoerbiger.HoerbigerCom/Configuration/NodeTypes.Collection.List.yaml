@@ -1,0 +1,42 @@
+'Hoerbiger.HoerbigerCom:Collection.List':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.ListItem': true
+  ui:
+    label: 'Beschreibungsliste'
+    icon: list
+  options:
+    template:
+      childNodes:
+        'listItem1':
+          type: 'Hoerbiger.HoerbigerCom:Content.ListItem'
+        'listItem2':
+          type: 'Hoerbiger.HoerbigerCom:Content.ListItem'
+        'listItem3':
+          type: 'Hoerbiger.HoerbigerCom:Content.ListItem'
+
+'Hoerbiger.HoerbigerCom:Content.ListItem':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    label: 'Listeneintrag'
+    icon: minus
+  properties:
+    term:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Titel'
+    definition:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Beschreibung'

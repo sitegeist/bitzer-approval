@@ -1,0 +1,26 @@
+prototype(Hoerbiger.Shared:Block.DefinitionList.ListItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\DefinitionList\\ListItem\\ListItemInterface'
+
+    @styleguide {
+        title = 'ListItem'
+
+        props {
+            variant = 'regular'
+            term = '- Add Slot Content -'
+            definition = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>variant:</dt>
+        <dd>{presentationObject.variant}</dd>
+        <dt>term:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.term} />
+        </dd>
+        <dt>definition:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.definition} />
+        </dd>
+    </dl>`
+}

@@ -19,3 +19,5 @@ Neos:
       Shared.Button: Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory
       Shared.Box: Hoerbiger\Shared\Presentation\Layout\Box\BoxFactory
       Shared.Row: Hoerbiger\Shared\Presentation\Layout\Row\RowFactory
+      Shared.DefinitionList: Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory
+      Shared.ListItem: Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory

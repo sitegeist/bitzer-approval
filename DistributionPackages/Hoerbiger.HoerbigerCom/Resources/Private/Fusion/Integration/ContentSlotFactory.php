@@ -6,6 +6,10 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionList;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListVariant;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItem;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
@@ -57,6 +61,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Collection.List':
+                return $this->forListNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.ListItem':
+                return $this->forListItemNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.TechnicalSpecs':
+                return $this->forTechnicalSpecsNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.TechnicalSpecsTab':
+                return $this->forTechnicalSpecsTabNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -212,5 +224,61 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
 
         return $figure->withObjectFitAndPosition(FigureObjectFit::contain(), FigureObjectPosition::center());
+    }
+
+    public function forListNode(TraversableNodeInterface $listNode): SlotInterface
+    {
+        return new DefinitionList(
+            DefinitionListVariant::regular(),
+            Collection::fromNodes(
+                $listNode->findChildNodes(),
+                function(TraversableNodeInterface $listItem) {
+                    return Content::fromNode($listItem, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                })
+        );
+    }
+
+    public function forListItemNode(TraversableNodeInterface $listItemNode):SlotInterface
+    {
+        return new ListItem(
+            ListItemVariant::regular(),
+            Editable::fromNodeProperty($listItemNode, 'term'),
+            Editable::fromNodeProperty($listItemNode, 'definition')
+        );
+    }
+
+    public function forTechnicalSpecsNode(TraversableNodeInterface $technicalSpecsNode): SlotInterface
+    {
+        return Collection::fromNodes(
+            $technicalSpecsNode->findChildNodes(),
+            function(TraversableNodeInterface $technicalSpecsTab) {
+                return Content::fromNode($technicalSpecsTab, 'Hoerbiger.HoerbigerCom:ContentSlot');
+            }
+        );
+    }
+
+    public function forTechnicalSpecsTabNode(TraversableNodeInterface $technicalSpecsTabNode) :SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return Collection::fromIterable(array_filter([
+            new Text(
+                TextVariant::lightContrast(),
+                Editable::fromNodeProperty($technicalSpecsTabNode, 'name'),
+                false
+            ),
+            new Text(
+                TextVariant::lightContrast(),
+                Editable::fromNodeProperty($technicalSpecsTabNode, 'text'),
+                false
+            ),
+            Collection::fromNodes(
+                $technicalSpecsTabNode->findChildNodes(),
+                function(TraversableNodeInterface $list) {
+                    return Content::fromNode($list, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                })
+        ]), $identity);
     }
 }
