@@ -47,13 +47,21 @@ EOF
 chmod +x /etc/ppp/ip-up.d/hoerbiger
 ```
 
-**Setting up hosts**
-```sh
-cat >> /etc/hosts <<'EOF'
-172.20.245.102 www-dev.hoerbiger.com
-172.20.245.103 www-stage.hoerbiger.com
-172.20.245.104 www-prod.hoerbiger.com
+**Setting DNS**
+```
+cat >> /etc/systemd/network/10-hoerbiger.network <<EOF
+[Match]
+Name=hoerbiger
+
+[Network]
+DNS=172.20.0.14
+Domains=hoerbiger.com
 EOF
+```
+
+```
+systemctl restart systemd-networkd.service
+systemctl restart systemd-resolved.service
 ```
 
 **Storing the VPN connection data**

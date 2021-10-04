@@ -4,20 +4,24 @@
 
 www-dev.hoerbiger.com:
   stage: develop
-  hostname: hoerbiger
-  deploy_path: '/home/uext_anf/develop/www/hoerbiger_deployer'
+  hostname: hoerbiger-develop
+  deploy_path: '/srv/dockerdata/www-dev/www/hoerbiger_deployer'
   homepage_url: https://www-dev.hoerbiger.com
   dockerComposeLocation: '/srv/dockerdata/www-dev'
   dockerRoot: '/var/www/html/hoerbiger_deployer'
 
-staging.example.com:
+www-stage.hoerbiger.com:
   stage: staging
-  hostname: example.com
-  deploy_path: '/srv/www/staging.example.com'
-  homepage_url: https://staging.example.com
+  hostname: hoerbiger-staging
+  deploy_path: '/srv/dockerdata/www-stage/www/hoerbiger_deployer'
+  homepage_url: https://www-stage.hoerbiger.com
+  dockerComposeLocation: '/srv/dockerdata/www-stage'
+  dockerRoot: '/var/www/html/hoerbiger_deployer'
 
-www.example.com:
+www-prod.hoerbiger.com:
   stage: master
-  hostname: example.com
-  deploy_path: '/srv/www/www.example.com'
-  homepage_url: https://www.example.com/
+  hostname: hoerbiger-master
+  deploy_path: '/srv/dockerdata/www-prod/www/hoerbiger_deployer'
+  homepage_url: https://www-prod.hoerbiger.com
+  dockerComposeLocation: '/srv/dockerdata/www-prod'
+  dockerRoot: '/var/www/html/hoerbiger_deployer'
