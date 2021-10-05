@@ -1,0 +1,26 @@
+'Hoerbiger.HoerbigerCom:Content.TextWithImage':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
+  ui:
+    label: 'Text mit Bild'
+    icon: id-card
+  properties:
+    layout:
+      type: string
+      defaultValue: 'imageFirst'
+      ui:
+        label: 'Ausrichtung'
+        reloadIfChanged: true
+        inspector:
+          group: 'image'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+  postprocessors:
+    layouts:
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
+      postprocessorOptions:
+        enumName: Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout
+        propertyNames:
+          - layout

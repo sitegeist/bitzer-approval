@@ -1,0 +1,21 @@
+prototype(Hoerbiger.Shared:Layout.Box) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Box\\BoxInterface'
+
+    @styleguide {
+        title = 'Box'
+
+        props {
+            variant = 'textCenter'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Layout.Box]",
+            presentationObject.variant.isTextCenter && "flex items-center p-md"
+        ]}>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+        </div>
+    `
+}

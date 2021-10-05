@@ -17,7 +17,7 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $node,
         bool $inBackend,
         bool $hasFallbackInBackend = true
-    ): ?FigureInterface {
+    ): ?Figure {
         $imageSource = null;
 
         if ($node->getProperty('image')) {
@@ -32,10 +32,34 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         return $imageSource
             ? new Figure(
                 $imageSource,
-                false,
+                true,
                 null,
                 null
             )
+            : null;
+    }
+
+    public function forPreviewImageMixin(TraversableNodeInterface $targetDocument, bool $inBackend): ?Figure
+    {
+        $imageSource = null;
+
+        if ($targetDocument->getProperty('preview__image')) {
+            $imageSource = new AssetImageSourceHelper($targetDocument->getProperty('preview__image'));
+            $imageSource->setAlt($targetDocument->getProperty('preview__image__alt') ?? '');
+            $imageSource->setTitle($targetDocument->getProperty('preview__image__title') ?? '');
+
+            return new Figure(
+                $imageSource,
+                true,
+                FigureObjectFit::cover(),
+                FigureObjectPosition::center()
+            );
+        }
+
+        $figure = $this->forImageMixin($targetDocument, $inBackend, true);
+
+        return $figure
+            ? $figure->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center())
             : null;
     }
 

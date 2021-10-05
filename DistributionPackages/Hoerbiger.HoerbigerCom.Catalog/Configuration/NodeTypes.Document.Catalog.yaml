@@ -1,7 +1,7 @@
 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
     main:
@@ -11,6 +11,11 @@
           '*': false
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory': true

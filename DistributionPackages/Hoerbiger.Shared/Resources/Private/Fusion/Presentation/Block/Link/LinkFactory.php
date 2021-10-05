@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -20,12 +21,26 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
 
         return $href
             ? new Link(
+                LinkVariant::label(),
                 $href,
                 $linkTarget,
                 $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
                 Value::fromString($node->getProperty('link__label'))
             )
             : null;
+    }
+
+    public function forLinkToDocument(TraversableNodeInterface $document, ContentContext $subgraph): Link
+    {
+        $linkTarget = LinkTarget::forNode($document);
+
+        return new Link(
+            LinkVariant::label(),
+            $this->uriService->getNodeUri($document),
+            $linkTarget,
+            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            Value::fromString($document->getLabel())
+        );
     }
 
     public function resolveRawLinkTargetUri(?string $rawLinkTarget, ContentContext $subgraph): ?UriInterface
@@ -38,6 +53,10 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             if ($targetNode) {
                 return $this->uriService->getNodeUri($targetNode);
             }
+        }
+
+        if (\mb_substr($rawLinkTarget, 0, 4) === 'http') {
+            return new Uri($rawLinkTarget);
         }
 
         return null;

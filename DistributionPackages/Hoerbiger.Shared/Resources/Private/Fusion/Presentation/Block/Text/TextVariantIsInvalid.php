@@ -14,6 +14,6 @@ final class TextVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid TextVariant, must be one of the defined constants. ', 1631801641);
+        return new self('The given value "' . $attemptedValue . '" is no valid TextVariant, must be one of the defined constants. ', 1631874534);
     }
 }

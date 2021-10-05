@@ -55,4 +55,14 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
     {
         return $this->objectPosition;
     }
+
+    public function withObjectFitAndPosition(FigureObjectFit $objectFit, FigureObjectPosition $objectPosition):self
+    {
+        return new self(
+            $this->imageSource,
+            $this->isToBeLoadedLazily,
+            $objectFit,
+            $objectPosition
+        );
+    }
 }

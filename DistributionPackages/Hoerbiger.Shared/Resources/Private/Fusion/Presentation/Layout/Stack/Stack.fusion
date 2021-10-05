@@ -1,0 +1,28 @@
+prototype(Hoerbiger.Shared:Layout.Stack) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stack\\StackInterface'
+
+    @styleguide {
+        title = 'Stack'
+
+        props {
+            variant = 'regular'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Layout.Stack (" + presentationObject.variant + ")]",
+            "flex flex-col items-start",
+            presentationObject.variant.isNoGap && "space-y-0",
+            presentationObject.variant.isInline && "space-y-[1ch]",
+            presentationObject.variant.isXs && "space-y-xs",
+            presentationObject.variant.isSm && "space-y-sm",
+            presentationObject.variant.isMd && "space-y-md",
+            presentationObject.variant.isLg && "space-y-lg",
+            presentationObject.variant.isXl && "space-y-xl"
+        ]}>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+        </div>
+    `
+}

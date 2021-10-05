@@ -12,11 +12,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 interface LinkInterface extends ComponentPresentationObjectInterface
 {
+    public function getVariant(): LinkVariant;
+
     public function getHref(): UriInterface;
 
     public function getTarget(): LinkTarget;
 
     public function getRel(): ?string;
 
-    public function getContent(): SlotInterface;
+    public function getContent(): ?SlotInterface;
 }

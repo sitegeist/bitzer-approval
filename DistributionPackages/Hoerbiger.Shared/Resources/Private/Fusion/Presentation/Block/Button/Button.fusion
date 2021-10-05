@@ -1,0 +1,56 @@
+prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Button\\ButtonInterface'
+
+    @styleguide {
+        title = 'Button'
+
+        props {
+            type = 'link'
+            variant = 'cta'
+            content = '- Add Slot Content -'
+            href = 'https://www.neos.io'
+            target = 'Text'
+            rel = 'Text'
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = Neos.Fusion:Case {
+            link {
+                condition = ${presentationObject.type.isLink}
+                renderer = 'a'
+            }
+
+            default {
+                @position = 'end 9999'
+                condition = true
+                renderer = 'span'
+            }
+        }
+
+        attributes {
+            class = Neos.Fusion:DataStructure {
+                name = '[Block.Button]'
+
+                base = "px-8 rounded-full cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch"
+                text = "font-semibold"
+
+                cta = "bg-brand text-brand-contrast"
+                cta.@if.1 = ${presentationObject.variant.isCta}
+            }
+
+            href = ${presentationObject.href}
+            href.@if.1 = ${presentationObject.type.isLink}
+
+            target = ${presentationObject.target}
+            target.@if.1 = ${presentationObject.type.isLink}
+
+            rel = ${presentationObject.rel}
+            rel.@if.1 = ${presentationObject.type.isLink}
+        }
+
+        content = PackageFactory.AtomicFusion.PresentationObjects:Slot {
+            presentationObject = ${presentationObject.content}
+        }
+    }
+}

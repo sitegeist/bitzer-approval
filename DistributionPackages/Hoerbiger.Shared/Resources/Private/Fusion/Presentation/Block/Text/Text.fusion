@@ -10,12 +10,17 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
         }
     }
 
-    renderer = afx`<dl>
-        <dt>variant:</dt>
-        <dd>{presentationObject.variant}</dd>
-        <dt>content:</dt>
-        <dd>
+    renderer = afx`
+        <div class={[
+            "[Block.Text (" + presentationObject.variant + ")]",
+            "prose max-w-none",
+            presentationObject.canHaveColumns && "column-gap-md lg:column-count-2",
+            presentationObject.variant.isBrandContrast && "prose-brand-contrast",
+            presentationObject.variant.isNeutralContrast && "prose-neutral-contrast",
+            presentationObject.variant.isDecorativeContrast && "prose-decorative-contrast",
+            presentationObject.variant.isTransparentContrast && "prose-transparent-contrast"
+        ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
-        </dd>
-    </dl>`
+        </div>
+    `
 }

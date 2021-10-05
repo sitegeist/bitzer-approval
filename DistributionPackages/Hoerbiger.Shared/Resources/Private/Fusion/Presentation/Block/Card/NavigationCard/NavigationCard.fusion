@@ -1,24 +1,30 @@
 prototype(Hoerbiger.Shared:Block.Card.NavigationCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
-    renderer = afx`<dl>
-        <dt>media:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
-        </dd>
-        <dt>header:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} @if.1={presentationObject.header} />
-        </dd>
-        <dt>subheader:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheader} @if.1={presentationObject.subheader} />
-        </dd>
-        <dt>supportingText:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
-        </dd>
-        <dt>buttons:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <div class={[
+            "[Block.Card.NavigationCard]",
+            "flex flex-col"
+        ]}>
+            <div class="w-full h-0 pt-ratio-5-4 relative z-30">
+                <div class="absolute inset-0">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
+                </div>
+            </div>
+            <div class="flex-grow flex flex-col space-y-xs p-xs mx-sm mt-minus-sm bg-light z-50 border border-neutral-lighter shadow-textbox">
+                <div
+                    @if.1={presentationObject.subheader}
+                    class="uppercase font-sans-bold text-base"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheader} />
+                </div>
+
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} @if.1={presentationObject.header} />
+
+                <div class="flex-grow">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
+                </div>
+
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
+            </div>
+        </div>
+    `
 }

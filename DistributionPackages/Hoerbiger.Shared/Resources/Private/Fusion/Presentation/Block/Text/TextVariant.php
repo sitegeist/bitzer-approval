@@ -13,7 +13,10 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class TextVariant implements PseudoEnumInterface
 {
-    const VARIANT_REGULAR = 'regular';
+    const VARIANT_LIGHTCONTRAST = 'lightContrast';
+    const VARIANT_BRANDCONTRAST = 'brandContrast';
+    const VARIANT_NEUTRALCONTRAST = 'neutralContrast';
+    const VARIANT_TRANSPARENTCONTRAST = 'transparentContrast';
 
     /**
      * @var array<string,self>|self[]
@@ -30,7 +33,10 @@ final class TextVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_REGULAR) {
+            if ($string !== self::VARIANT_LIGHTCONTRAST
+                && $string !== self::VARIANT_BRANDCONTRAST
+                && $string !== self::VARIANT_NEUTRALCONTRAST
+                && $string !== self::VARIANT_TRANSPARENTCONTRAST) {
                 throw TextVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -39,14 +45,44 @@ final class TextVariant implements PseudoEnumInterface
         return self::$instances[$string];
     }
 
-    public static function regular(): self
+    public static function lightContrast(): self
     {
-        return self::from(self::VARIANT_REGULAR);
+        return self::from(self::VARIANT_LIGHTCONTRAST);
     }
 
-    public function getIsRegular(): bool
+    public static function brandContrast(): self
     {
-        return $this->value === self::VARIANT_REGULAR;
+        return self::from(self::VARIANT_BRANDCONTRAST);
+    }
+
+    public static function neutralContrast(): self
+    {
+        return self::from(self::VARIANT_NEUTRALCONTRAST);
+    }
+
+    public static function transparentContrast(): self
+    {
+        return self::from(self::VARIANT_TRANSPARENTCONTRAST);
+    }
+
+    public function getIsLightContrast(): bool
+    {
+        return $this->value === self::VARIANT_LIGHTCONTRAST;
+    }
+
+    public function getIsBrandContrast(): bool
+    {
+        return $this->value === self::VARIANT_BRANDCONTRAST;
+    }
+
+    public function getIsNeutralContrast(): bool
+    {
+        return $this->value === self::VARIANT_NEUTRALCONTRAST;
+    }
+
+    public function getIsTransparentContrast(): bool
+    {
+        return $this->value === self::VARIANT_TRANSPARENTCONTRAST;
     }
 
     /**
@@ -55,7 +91,10 @@ final class TextVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::VARIANT_REGULAR)
+            self::from(self::VARIANT_LIGHTCONTRAST),
+            self::from(self::VARIANT_BRANDCONTRAST),
+            self::from(self::VARIANT_NEUTRALCONTRAST),
+            self::from(self::VARIANT_TRANSPARENTCONTRAST)
         ];
     }
 
