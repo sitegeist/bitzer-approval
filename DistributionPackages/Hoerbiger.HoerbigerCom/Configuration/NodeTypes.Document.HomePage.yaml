@@ -14,7 +14,7 @@
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-
+          'Hoerbiger.HoerbigerCom:Content.MostWanted': true
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:

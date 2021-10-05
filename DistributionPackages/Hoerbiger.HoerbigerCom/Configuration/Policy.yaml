@@ -1,0 +1,13 @@
+# Security policy for the Hoerbiger.HoerbigerCom package
+
+privilegeTargets:
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'Hoerbiger.HoerbigerCom:MostWanted':
+      matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\WantedNodeController->(register)Action())'
+
+roles:
+  'Neos.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:MostWanted'
+        permission: GRANT
