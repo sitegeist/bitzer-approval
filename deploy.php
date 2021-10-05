@@ -65,7 +65,7 @@ task('upload', function () {
  * Run node repair
  */
 task('deploy:node_repair', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow node:repair --only addMissingDefaultValues,createMissingChildNodes,reorderChildNodes');
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow node:repair --only addMissingDefaultValues,createMissingChildNodes');
 })->desc('Run node repair');
 
 /**
