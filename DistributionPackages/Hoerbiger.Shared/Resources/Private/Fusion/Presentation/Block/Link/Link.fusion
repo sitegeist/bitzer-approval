@@ -1,0 +1,33 @@
+prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Link\\LinkInterface'
+
+    @styleguide {
+        title = 'Link'
+
+        props {
+            href = 'https://www.neos.io'
+            target = '_self'
+            rel = 'Text'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <a
+            href={presentationObject.href}
+            target={presentationObject.target}
+            rel={presentationObject.rel}
+            rel.@if.1={presentationObject.rel}
+            class={[
+                "[Block.Link]",
+                presentationObject.variant.isContainer && "w-full h-full",
+                presentationObject.variant.isLabel && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
+            ]}
+        >
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                @if.1={presentationObject.content}
+                presentationObject={presentationObject.content}
+            />
+        </a>
+    `
+}

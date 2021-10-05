@@ -1,19 +1,24 @@
 // const theme = require('tailwindcss/defaultTheme');
+const plugin = require('tailwindcss/plugin');
 
 const MAX_CONTENT_WIDTH = '1920px';
-const GRID_COL = 'clamp(1.61rem, calc(60 * 100vw / 1920), 40px)';
 const MIN_TOUCH = '48px';
 
-const lg = () => `clamp(1.61rem, calc(60 * 100vw / ${MAX_CONTENT_WIDTH}), 48px)`;
-const md = (reverse = false) => `calc(${reverse ? -.4 : .4} * ${GRID_COL})`;
-const xl = (reverse = false) => `calc(${reverse ? -2 : 2} * ${GRID_COL})`;
-
-const spaces = {
-	lg: lg(),
-	md: md(),
-	xl: xl(),
-	'md-negative': md(true),
-	'xl-negative': xl(true),
+// up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
+const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
+const SPACES = {
+	xs: `calc(.62 * ${SPACE_SM})`,
+	sm: SPACE_SM,
+	md: `calc(2 * ${SPACE_SM})`,
+	lg: `calc(3 * ${SPACE_SM})`,
+	xl: `calc(4 * ${SPACE_SM})`,
+	'2xl': `calc(6 * ${SPACE_SM})`,
+	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
+	'minus-sm': `calc(-1 * ${SPACE_SM})`,
+	'minus-md': `calc(-2 * ${SPACE_SM})`,
+	'minus-lg': `calc(-3 * ${SPACE_SM})`,
+	'minus-xl': `calc(-4 * ${SPACE_SM})`,
+	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
 
 module.exports = {
@@ -24,24 +29,62 @@ module.exports = {
 	darkMode: false,
 	theme: {
 		colors: {
+			light: {
+				DEFAULT: '#fff',
+				contrast: 'rgba(0, 0, 0, .85)'
+			},
 			neutral: {
-				DEFAULT: 'rgb(112, 111, 111)',
-				darker: 'rgb(36, 42, 31, 1)',
+				lighter: '#F9F9F9',
+				DEFAULT: '#B2B5B7',
 				contrast: '#fff',
 			},
 			brand: {
-				DEFAULT: 'rgb(118, 184, 42)',
+				DEFAULT: '#8D172E',
 				contrast: '#fff',
 			},
 			decorative: {
-				DEFAULT: 'rgb(228, 21, 19)',
+				DEFAULT: '#075289',
+				contrast: '#fff',
+			},
+			transparent: {
+				DEFAULT: 'transparent',
 				contrast: '#fff',
 			},
 		},
+
 		fontFamily: {
+			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
+			'serif-regular': ['PT Serif', 'serif'],
 		},
+
+		boxShadow: {
+			/* Will match to py-3. */
+			'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
+			'textbox': '0 0 14px rgba(0, 0, 0, .08)',
+		},
+
 		extend: {
 			typography: (theme) => ({
+				DEFAULT: {
+					css: {
+						color: theme('colors.light.contrast'),
+						fontSize: '1.25rem',
+						strong: {
+							color: theme('colors.light.contrast'),
+							fontFamily: theme('fontFamily.sans-bold'),
+						},
+						a: {
+							color: theme('colors.brand.DEFAULT'),
+							fontFamily: theme('fontFamily.sans-bold'),
+							fontWeight: 600,
+							textDecoration: 'none',
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.light.contrast'),
+						},
+					},
+				},
 				'brand-contrast': {
 					css: {
 						color: theme('colors.brand.contrast'),
@@ -75,6 +118,21 @@ module.exports = {
 						},
 					},
 				},
+				'transparent-contrast': {
+					css: {
+						color: theme('colors.transparent.contrast'),
+						strong: {
+							css: {
+								color: theme('colors.transparent.contrast'),
+							},
+						},
+						a: {
+							css: {
+								color: theme('colors.transparent.contrast'),
+							},
+						},
+					},
+				},
 			}),
 
 			gridTemplateColumns: {
@@ -90,32 +148,50 @@ module.exports = {
 			},
 
 			maxWidth: {
-
+				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
+				'10-sm': `calc(10 * ${SPACES.sm})`,
+				'quotation': '1152px',
 			},
 
 			space: {
-				...spaces,
+				...SPACES,
 			},
 
 			margin: {
-				...spaces,
+				...SPACES,
 			},
 
 			padding: {
-				...spaces,
+				...SPACES,
+				'ratio-square': '100%',
 				'ratio-2-1': '50%',
 				'ratio-4-3': 'calc(3 * 100% / 4)',
+				'ratio-5-4': 'calc(4 * 100% / 5)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
 			},
 
 			gap: {
-				...spaces,
+				...SPACES,
+			},
+
+			inset: {
+				...SPACES,
 			},
 
 			borderRadius: {
-				...spaces,
-			}
+				...SPACES,
+			},
+
+			fontSize: {
+				'5xl': ['3rem', {
+					lineHeight: '1.3em',
+				}],
+				'6xl': ['3.75rem', {
+					lineHeight: '1.3em',
+				}],
+			},
+
 		},
 	},
 	variants: {
@@ -124,6 +200,16 @@ module.exports = {
 		},
 	},
 	plugins: [
+		plugin(({addUtilities}) => {
+			addUtilities({
+				'.column-count-2': {
+					'column-count': 2,
+				},
+				'.column-gap-md': {
+					'column-gap': SPACES.md,
+				},
+			}, ['responsive']);
+		}),
 		require('@tailwindcss/typography'),
 	],
 };

@@ -1,0 +1,54 @@
+'Hoerbiger.HoerbigerCom:Mixin.Introduction':
+  abstract: true
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  ui:
+    inspector:
+      groups:
+        image:
+          label: 'Key Visual'
+          position: 'after document'
+  properties:
+    headline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      options:
+        preset: 'rte.plain'
+    abstract:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Zusammenfassung eingeben'
+      options:
+        preset: 'rte.text'
+
+
+'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+  ui:
+    inspector:
+      groups:
+        adjust:
+          position: after image
+  properties:
+    introsection__variant:
+      type: 'string'
+      defaultValue: 'fullMediaTextLeft'
+      ui:
+        label: 'Layout'
+        reloadIfChanged: true
+        inspector:
+          position: 2
+          group: adjust
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+  postprocessors:
+    introsection__variants:
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
+      postprocessorOptions:
+        enumName: Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction\IntroSectionVariant
+        propertyNames:
+          - introsection__variant

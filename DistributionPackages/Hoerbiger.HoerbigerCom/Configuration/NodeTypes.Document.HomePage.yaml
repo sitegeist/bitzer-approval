@@ -1,12 +1,20 @@
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           '*': false
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:

@@ -4,3 +4,18 @@ Neos:
       Shared.SiteHeader: Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory
       Shared.SiteFooter: Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory
       Shared.Page: Hoerbiger\Shared\Presentation\Layout\Page\PageFactory
+      Shared.Quotation: Hoerbiger\Shared\Presentation\Block\Quotation\QuotationFactory
+      Shared.ContentContainer: Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerFactory
+      Shared.Text: Hoerbiger\Shared\Presentation\Block\Text\TextFactory
+      Shared.Headline: Hoerbiger\Shared\Presentation\Block\Headline\HeadlineFactory
+      Shared.Figure: Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory
+      Shared.IntroSection: Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory
+      Shared.Icon: Hoerbiger\Shared\Presentation\Block\Icon\IconFactory
+      Shared.Link: Hoerbiger\Shared\Presentation\Block\Link\LinkFactory
+      Shared.Card: Hoerbiger\Shared\Presentation\Block\Card\CardFactory
+      Shared.PartialFigureEclipse: Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory
+      Shared.Stack: Hoerbiger\Shared\Presentation\Layout\Stack\StackFactory
+      Shared.Grid: Hoerbiger\Shared\Presentation\Layout\Grid\GridFactory
+      Shared.Button: Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory
+      Shared.Box: Hoerbiger\Shared\Presentation\Layout\Box\BoxFactory
+      Shared.Row: Hoerbiger\Shared\Presentation\Layout\Row\RowFactory

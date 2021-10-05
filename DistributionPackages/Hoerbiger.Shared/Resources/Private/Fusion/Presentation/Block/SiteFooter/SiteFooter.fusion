@@ -8,6 +8,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
         }
     }
 
-    renderer = afx`<dl>
-    </dl>`
+    renderer = afx`
+        <footer class="w-full h-full max-h-[48px] bg-neutral text-neutral-contrast">Footer</footer>
+    `
 }

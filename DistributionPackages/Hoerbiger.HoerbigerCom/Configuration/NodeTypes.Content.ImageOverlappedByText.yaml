@@ -1,0 +1,42 @@
+'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
+    'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
+  ui:
+    label: 'Bild mit überlappendem Text'
+    icon: 'clone'
+  properties:
+    headline:
+      type: string
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      options:
+        preset: 'rte.plain'
+    text:
+      type: string
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Text eingeben'
+      options:
+        preset: 'rte.text'
+    variant:
+      type: 'string'
+      defaultValue: 'imageLeft'
+      ui:
+        label: 'Variante'
+        reloadIfChanged: true
+        inspector:
+          group: adjust
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+  postprocessors:
+    variants:
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
+      postprocessorOptions:
+        enumName: Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseVariant
+        propertyNames:
+          - variant

@@ -1,0 +1,30 @@
+prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Quotation\\QuotationInterface'
+
+    @styleguide {
+        title = 'Quotation'
+
+        props {
+            text = '- Add Slot Content -'
+            spokenByCharacter = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.Quotation]",
+            "flex flex-col w-full max-w-quotation mx-auto relative space-y-xs pl-[60px] lg:pl-[80px]"
+        ]}>
+            <img
+                class="absolute top-[5px] lg:top-[25px] left-0 w-[48px] lg:w-[64px]"
+                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quote.svg')}
+            />
+            <div class="text-4xl lg:text-6xl font-serif-regular">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
+            </div>
+            <div class="text-xl font-sans-bold">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.spokenByCharacter} />
+            </div>
+        </div>
+    `
+}
