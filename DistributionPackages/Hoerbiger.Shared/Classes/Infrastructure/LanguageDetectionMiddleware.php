@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Infrastructure;
 use GuzzleHttp\Psr7\Response;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\Detector;
+use Neos\Neos\Domain\Service\ContentDimensionPresetSourceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
@@ -19,16 +20,20 @@ use Psr\Http\Server\RequestHandlerInterface;
  */
 class LanguageDetectionMiddleware implements MiddlewareInterface
 {
-    protected Detector $localeDetector;
+    private Detector $localeDetector;
 
-    protected StreamFactoryInterface $contentFactory;
+    private StreamFactoryInterface $contentFactory;
+
+    private ContentDimensionPresetSourceInterface $contentDimensionPresetSource;
 
     public function __construct(
         Detector $localeDetector,
-        StreamFactoryInterface $contentFactory
+        StreamFactoryInterface $contentFactory,
+        ContentDimensionPresetSourceInterface $contentDimensionPresetSource
     ) {
         $this->localeDetector = $localeDetector;
         $this->contentFactory = $contentFactory;
+        $this->contentDimensionPresetSource = $contentDimensionPresetSource;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -39,15 +44,10 @@ class LanguageDetectionMiddleware implements MiddlewareInterface
             return $response;
         }
 
-        $uriSegmentsByLocale = [
-            'de' => 'de',
-            'en' => 'en'
-        ];
-
         $browserLanguage = $this->localeDetector
             ->detectLocaleFromHttpHeader($_SERVER['HTTP_ACCEPT_LANGUAGE'])
             ->getLanguage();
-        $languageSegment = $uriSegmentsByLocale[$browserLanguage] ?? 'de';
+        $languageSegment = $this->resolveLanguageUriPathSegment($browserLanguage);
         $targetUri = $request->getUri()->withPath('/' . $languageSegment . $request->getUri()->getPath());
 
         $redirectResponse = new Response();
@@ -60,5 +60,15 @@ class LanguageDetectionMiddleware implements MiddlewareInterface
             ->withStatus(307)
             ->withBody($this->contentFactory->createStream($redirectBodyContent))
             ->withHeader('Location', (string)$targetUri);
+    }
+
+    private function resolveLanguageUriPathSegment(string $browserLanguage): string
+    {
+        /** @var array<string,mixed> $languagePresets */
+        $languagePresets = $this->contentDimensionPresetSource->getAllPresets()['language'];
+        $matchingPreset = $languagePresets['presets'][$browserLanguage]
+            ?? $languagePresets['presets'][$languagePresets['defaultPreset']];
+
+        return $matchingPreset['uriSegment'];
     }
 }
