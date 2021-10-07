@@ -16,6 +16,10 @@
             placeholder: 'Bitte Überschrift eingeben'
       options:
         preset: 'rte.plain'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h1', value)}
+        elasticSearchMapping:
+          type: text
     abstract:
       ui:
         inline:
