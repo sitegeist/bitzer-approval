@@ -10,6 +10,7 @@
         "neos/redirecthandler-ui": "^2.4",
         "neos/redirecthandler-neosadapter": "^4.3",
         "neos/redirecthandler-databasestorage": "^5.0",
+        "neos/content-repository-dimensionspace": "dev-master",
 
         "packagefactory/atomicfusion-presentationobjects": "^3.0",
 
