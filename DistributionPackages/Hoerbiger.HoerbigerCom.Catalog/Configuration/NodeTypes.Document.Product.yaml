@@ -15,7 +15,7 @@
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-          'Hoerbiger.HoerbigerCom:Collection.TechnicalSpecs': true
+          'Hoerbiger.HoerbigerCom:Collection.TabBox': true
   ui:
     icon: barcode
     label: 'Produkt'

@@ -1,0 +1,12 @@
+'Hoerbiger.HoerbigerCom:Mixin.Tab':
+  abstract: true
+  ui:
+    icon: indent
+  properties:
+    label:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Label eingeben'

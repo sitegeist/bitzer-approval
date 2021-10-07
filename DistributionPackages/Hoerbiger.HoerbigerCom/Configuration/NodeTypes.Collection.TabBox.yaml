@@ -1,0 +1,44 @@
+'Hoerbiger.HoerbigerCom:Collection.TabBox':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.TextTab': true
+      'Hoerbiger.HoerbigerCom:Content.DefinitionListTab': true
+  ui:
+    label: 'Tab-Box'
+    icon: th-list
+  options:
+    template:
+      childNodes:
+        'tab1':
+          type: 'Hoerbiger.HoerbigerCom:Content.TextTab'
+        'tab2':
+          type: 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab'
+          childNodes:
+            'listItem1':
+              type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+            'listItem2':
+              type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+            'listItem3':
+              type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+        'tab3':
+          type: 'Hoerbiger.HoerbigerCom:Content.TextTab'
+
+'Hoerbiger.HoerbigerCom:Content.TextTab':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Tab': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+  ui:
+    label: 'Text-Tab'
+
+'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Tab': true
+    'Hoerbiger.HoerbigerCom:Mixin.DefinitionList': true
+  ui:
+    label: 'Beschreibungsliste-Tab'
