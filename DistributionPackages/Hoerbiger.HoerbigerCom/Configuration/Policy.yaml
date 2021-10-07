@@ -1,0 +1,15 @@
+#
+# Security policy for the Hoerbiger.HoerbigerCom package
+#
+
+privilegeTargets:
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'Hoerbiger.HoerbigerCom:Stuff':
+      matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\StuffController->queryAction())'
+
+roles:
+  'Neos.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:Stuff'
+        permission: GRANT
