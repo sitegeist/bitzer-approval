@@ -16,6 +16,8 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
     assetdirectory:
       type: 'Hoerbiger.Shared:Document.AssetDirectory'
+    searchresults:
+      type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:

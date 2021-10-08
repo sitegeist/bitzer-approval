@@ -36,6 +36,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface

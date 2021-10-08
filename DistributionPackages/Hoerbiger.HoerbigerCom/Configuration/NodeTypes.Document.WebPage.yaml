@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -23,3 +24,7 @@
   ui:
     icon: file
     label: 'Seite'
+  properties:
+    searchType:
+      search:
+        indexing: '${"WebPage"}'

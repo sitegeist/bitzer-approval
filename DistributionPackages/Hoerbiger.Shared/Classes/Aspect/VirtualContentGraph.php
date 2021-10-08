@@ -6,18 +6,12 @@ namespace Hoerbiger\Shared\Aspect;
  * This file is part of the Hoerbiger.Shared package.
  */
 
-use Hoerbiger\Shared\Domain\Asset\AssetAdapterFactory;
-use Hoerbiger\Shared\Domain\Asset\AssetDirectoryRepository;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeAggregateIdentifier;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Service\Context;
-use Neos\ContentRepository\Domain\Service\NodeTypeManager;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Aop\JoinPointInterface;
-use Neos\Flow\Persistence\PersistenceManagerInterface;
-use Neos\Media\Domain\Repository\AssetCollectionRepository;
-use Neos\Media\Domain\Repository\DocumentRepository;
 
 /**
  * The virtual content graph.
@@ -31,35 +25,7 @@ use Neos\Media\Domain\Repository\DocumentRepository;
  */
 final class VirtualContentGraph
 {
-    private AssetCollectionRepository $assetCollectionRepository;
-
-    private DocumentRepository $documentRepository;
-
-    private NodeTypeManager $nodeTypeManager;
-
-    private PersistenceManagerInterface $persistenceManagerInterface;
-
-    private AssetDirectoryRepository $assetDirectoryRepository;
-
-    private AssetAdapterFactory $assetAdapterFactory;
-
-    private ?Node $nodeToBeIndexed = null;
-
-    public function __construct(
-        AssetCollectionRepository $assetCollectionRepository,
-        DocumentRepository $documentRepository,
-        NodeTypeManager $nodeTypeManager,
-        PersistenceManagerInterface $persistenceManagerInterface,
-        AssetDirectoryRepository $assetDirectoryRepository,
-        AssetAdapterFactory $assetAdapterFactory
-    ) {
-        $this->assetCollectionRepository = $assetCollectionRepository;
-        $this->documentRepository = $documentRepository;
-        $this->nodeTypeManager = $nodeTypeManager;
-        $this->persistenceManagerInterface = $persistenceManagerInterface;
-        $this->assetDirectoryRepository = $assetDirectoryRepository;
-        $this->assetAdapterFactory = $assetAdapterFactory;
-    }
+    private ?TraversableNodeInterface $nodeToBeIndexed = null;
 
     /**
      * @Flow\Before("method(Flowpack\ElasticSearch\ContentRepositoryAdaptor\Indexer\NodeIndexer->indexNode())")
@@ -100,7 +66,9 @@ final class VirtualContentGraph
             return false;
         }
         $requestedContextProperties = $requestedContext->getProperties();
-        $availableContextProperties = $this->nodeToBeIndexed->getContext()->getProperties();
+        /** @var Node $nodeToBeIndexed */
+        $nodeToBeIndexed = $this->nodeToBeIndexed;
+        $availableContextProperties = $nodeToBeIndexed->getContext()->getProperties();
         // The ES adapter sets this for whatever reason and we don't care
         unset($requestedContextProperties['invisibleContentShown']);
         unset($availableContextProperties['invisibleContentShown']);

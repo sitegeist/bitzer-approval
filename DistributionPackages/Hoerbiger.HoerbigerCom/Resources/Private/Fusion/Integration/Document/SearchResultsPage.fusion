@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom:Document.SearchResultsPage) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Hoerbiger.Page.forSearchResultsPage(documentNode, documentNode.context.inBackend)}
+        }
+    }
+}

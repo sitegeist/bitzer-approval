@@ -27,7 +27,8 @@
             placeholder: 'Bitte Zusammenfassung eingeben'
       options:
         preset: 'rte.text'
-
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
 
 'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia':
   superTypes:

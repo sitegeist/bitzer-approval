@@ -1,0 +1,16 @@
+prototype(Hoerbiger.HoerbigerCom:Application.SearchForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\SearchForm\\SearchFormInterface'
+
+    @styleguide {
+        title = 'SearchForm'
+
+        props {
+            endpointUri = 'https://www.neos.io'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>endpointUri:</dt>
+        <dd>{presentationObject.endpointUri}</dd>
+    </dl>`
+}

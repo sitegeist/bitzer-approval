@@ -35,8 +35,8 @@ class StuffController extends RestController
 
     public function queryAction(string $query): void
     {
-        $things = $this->stuff->findThingsByQuery(StuffQuery::fromJsonString($query));
+        $response = $this->stuff->findThingsByQuery(StuffQuery::fromJsonString($query));
 
-        $this->view->assign('value', $things);
+        $this->view->assign('value', $response);
     }
 }

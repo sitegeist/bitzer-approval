@@ -2,9 +2,11 @@
 namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
 
 /*
- * This file is part of the Hoerbiger.Shared package.
+ * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
+use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -14,12 +16,13 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Media\Domain\Model\Document;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
-final class CardFactory extends AbstractComponentPresentationObjectFactory
+final class CardFactory extends AbstractComponentPresentationObjectFactory implements CardFactoryInterface
 {
     public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ContentContext $subgraph): NavigationCard
     {
@@ -70,4 +73,25 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
+    public function forDocument(Document $document): CardInterface
+    {
+        return new ArticleCard(
+            null,
+            Value::fromString($document->getLabel()),
+            null,
+            null,
+            null
+        );
+    }
+
+    public function forThing(TraversableNodeInterface $thing): CardInterface
+    {
+        return new ArticleCard(
+            null,
+            Value::fromString($thing->getLabel()),
+            null,
+            null,
+            null
+        );
+    }
 }
