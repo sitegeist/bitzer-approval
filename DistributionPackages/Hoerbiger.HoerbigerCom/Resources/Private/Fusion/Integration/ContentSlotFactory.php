@@ -9,6 +9,7 @@ use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
+use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -36,11 +37,16 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
+            case 'Hoerbiger.HoerbigerCom:Content.DummyText':
+                return $this->forDummyTextNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage':
+                return $this->forDummyTextWithImageNode($contentNode, $inBackend, $subgraph);
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
                 return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
@@ -212,5 +218,86 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
 
         return $figure->withObjectFitAndPosition(FigureObjectFit::contain(), FigureObjectPosition::center());
+    }
+
+    public function forDummyTextNode(TraversableNodeInterface $dummyTextNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new DummyContainer(
+                $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/sample.png'),
+                new Stack(
+                    StackVariant::xs(),
+                    Collection::fromIterable(array_filter([
+                        new Headline(
+                            HeadlineVariant::important(),
+                            HeadlineType::h2(),
+                            Editable::fromNodeProperty($dummyTextNode, 'headline')
+                        ),
+                        new Text(
+                            TextVariant::lightContrast(),
+                            Editable::fromNodeProperty($dummyTextNode, 'text'),
+                            true
+                        )
+                    ]), $identity)
+                )
+            )
+        );
+    }
+
+    public function forDummyTextWithImageNode(
+        TraversableNodeInterface $dummyTextWithImageNode,
+        bool $inBackend,
+        ContentContext $subgraph
+    ): SlotInterface {
+
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        $figure = (new FigureFactory())->forImageMixin($dummyTextWithImageNode, $inBackend);
+        if ($figure) {
+            $figure = $figure->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center());
+        }
+
+        $text = new DummyContainer(
+                $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/sample.png'),
+                new Box(
+                BoxVariant::textCenter(),
+                new Stack(
+                    StackVariant::xs(),
+                    Collection::fromIterable(array_filter([
+                        $inBackend || $dummyTextWithImageNode->getProperty('headline')
+                            ? new Headline(
+                            HeadlineVariant::important(),
+                            HeadlineType::h2(),
+                            Editable::fromNodeProperty($dummyTextWithImageNode, 'headline')
+                        )
+                            : null,
+                        new Text(
+                            TextVariant::lightContrast(),
+                            Editable::fromNodeProperty($dummyTextWithImageNode, 'text'),
+                            false
+                        ),
+                        (new LinkFactory())->forLinkMixin($dummyTextWithImageNode, $subgraph)
+                    ]), $identity)
+                )
+            )
+        );
+        $layout = Layout::from($dummyTextWithImageNode->getProperty('layout'));
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Grid(
+                GridVariant::twoColumns(),
+                $layout->getIsImageFirst()
+                    ? Collection::fromIterable([$figure, $text], $identity)
+                    : Collection::fromIterable([$text, $figure], $identity)
+            )
+        );
     }
 }
