@@ -1,0 +1,15 @@
+prototype(Sitegeist.Bitzer:Application.Index) {
+    widgets {
+        approvalAssignments {
+            icon = 'fas fa-user-check'
+            uri = Neos.Fusion:UriBuilder {
+                package = 'Sitegeist.Bitzer.Approval'
+                subpackage = 'Application'
+                controller = 'ApprovalAssignment'
+                action = 'index'
+            }
+            title = ${Translation.translate('approvalAssignments.label', null, [], 'Module.Bitzer.Approval', 'Sitegeist.Bitzer.Approval')}
+            description = ${Translation.translate('approvalAssignments.description', null, [], 'Module.Bitzer.Approval', 'Sitegeist.Bitzer.Approval')}
+        }
+    }
+}

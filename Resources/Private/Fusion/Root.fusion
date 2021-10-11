@@ -1,0 +1,1 @@
+include: 'resource://Sitegeist.Bitzer.Approval/Private/Fusion/**/*.fusion'

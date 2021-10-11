@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file original="Module/Bitzer/Approval" product-name="Sitegeist.Bitzer.Approval" source-language="en" target-language="de" datatype="plaintext">
+    <body>
+      <trans-unit id="approvalAssignments.label" xml:space="preserve" approved="yes">
+        <source>Approval Assignments</source>
+        <target>Freigabezuordnungen</target>
+      </trans-unit>
+      <trans-unit id="approvalAssignments.description" xml:space="preserve" approved="yes">
+        <source>Approval of content in e.g. review workspaces can be assigned to Bitzer agents.</source>
+        <target>Freigabe von Inhalten, z.B. aus Review-Workspaces, kann Bitzer-Agenten zugeordnet werden.</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
