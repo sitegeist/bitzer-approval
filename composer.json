@@ -73,6 +73,14 @@
         "inspector-gadget": {
             "type": "git",
             "url": "https://github.com/sitegeist/Sitegeist.InspectorGadget.git"
+        },
+        "bitzer": {
+            "type": "git",
+            "url": "https://github.com/hedayati-m/bitzer.git"
+        },
+        "bitzer-approval": {
+            "type": "git",
+            "url": "https://github.com/sitegeist/bitzer-approval.git"
         }
     }
 }
