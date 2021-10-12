@@ -1,0 +1,4 @@
+Sitegeist:
+  Bitzer:
+    factories:
+      'Sitegeist\Bitzer\Approval\Domain\Task\Approval\ApprovalTask': 'Sitegeist\Bitzer\Approval\Domain\Task\Approval\ApprovalTaskFactory'

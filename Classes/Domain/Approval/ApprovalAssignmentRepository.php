@@ -5,6 +5,7 @@ use Doctrine\DBAL\Connection;
 use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\Doctrine\ConnectionFactory;
+use Sitegeist\Bitzer\Domain\Agent\Agent;
 use Sitegeist\Bitzer\Domain\Agent\AgentRepository;
 
 /**
@@ -33,16 +34,16 @@ final class ApprovalAssignmentRepository
 
     public function findAll(): ApprovalAssignments
     {
-        $query = $this->databaseConnection->executeQuery(
+        $rows = $this->databaseConnection->executeQuery(
             'SELECT * FROM ' . self::TABLE_NAME
-        );
+        )->fetchAllAssociative();
 
         return new ApprovalAssignments(array_map(
             function (array $tableRow): ?ApprovalAssignment {
                 return $this->mapTableRowToApprovalAssignment($tableRow);
             },
-            $query->fetchAllAssociative())
-        );
+            $rows
+        ));
     }
 
     public function findByIdentifier(ApprovalAssignmentIdentifier $identifier): ?ApprovalAssignment
@@ -60,6 +61,21 @@ final class ApprovalAssignmentRepository
         return $row
             ? $this->mapTableRowToApprovalAssignment($row)
             : null;
+    }
+
+    public function findResponsibleAgentsForWorkspace(string $workspaceName): array
+    {
+        $rows = $this->databaseConnection->executeQuery(
+            'SELECT * FROM ' . self::TABLE_NAME . '
+                WHERE workspace_name = :workspaceName',
+            [
+                'workspaceName' => $workspaceName
+            ]
+        )->fetchAllAssociative();
+
+        return array_filter(array_map(function (array $row): ?Agent {
+            return $this->agentRepository->findByString($row['responsible_agent_identifier']);
+        }, $rows));
     }
 
     public function createAssignment(array $assignmentData): void

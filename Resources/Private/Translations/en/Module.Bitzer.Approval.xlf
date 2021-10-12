@@ -8,6 +8,7 @@
       <trans-unit id="approvalAssignments.descriptions" xml:space="preserve" approved="yes">
         <source>Approval of content in e.g. review workspaces can be assigned to Bitzer agents.</source>
       </trans-unit>
+
       <trans-unit id="index.create" xml:space="preserve" approved="yes">
         <source>Create new approval assignment</source>
       </trans-unit>

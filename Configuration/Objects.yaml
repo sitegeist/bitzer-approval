@@ -1,0 +1,6 @@
+'Sitegeist\Bitzer\Approval\Domain\Task\Approval\ApprovalTaskZookeeper':
+  arguments:
+    1:
+      setting: 'Sitegeist.Bitzer.taskAutoGenerationEnabled'
+    2:
+      setting: 'Sitegeist.Bitzer.Approval.approvalInterval'
