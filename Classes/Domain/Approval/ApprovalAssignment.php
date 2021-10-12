@@ -11,23 +11,51 @@ use Sitegeist\Bitzer\Domain\Agent\Agent;
  */
 final class ApprovalAssignment
 {
-    private Workspace $workspaceToBeApproved;
+    private string $workspaceName;
 
-    private Agent $responsibleAgent;
+    private ?Workspace $workspaceToBeApproved;
 
-    public function __construct(Workspace $workspaceToBeApproved, Agent $responsibleAgent)
-    {
+    private string $responsibleAgentIdentifier;
+
+    private ?Agent $responsibleAgent;
+
+    public function __construct(
+        string $workspaceName,
+        ?Workspace $workspaceToBeApproved,
+        string $responsibleAgentIdentifier,
+        ?Agent $responsibleAgent
+    ) {
+        $this->workspaceName = $workspaceName;
         $this->workspaceToBeApproved = $workspaceToBeApproved;
+        $this->responsibleAgentIdentifier = $responsibleAgentIdentifier;
         $this->responsibleAgent = $responsibleAgent;
     }
 
-    public function getWorkspaceToBeApproved(): Workspace
+    public function getWorkspaceName(): string
+    {
+        return $this->workspaceName;
+    }
+
+    public function getWorkspaceToBeApproved(): ?Workspace
     {
         return $this->workspaceToBeApproved;
     }
 
-    public function getResponsibleAgent(): Agent
+    public function getResponsibleAgentIdentifier(): string
+    {
+        return $this->responsibleAgentIdentifier;
+    }
+
+    public function getResponsibleAgent(): ?Agent
     {
         return $this->responsibleAgent;
+    }
+
+    public function getIdentifier(): ApprovalAssignmentIdentifier
+    {
+        return new ApprovalAssignmentIdentifier(
+            $this->workspaceName,
+            $this->responsibleAgentIdentifier
+        );
     }
 }

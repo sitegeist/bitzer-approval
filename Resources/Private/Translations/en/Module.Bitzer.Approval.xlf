@@ -1,12 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
-  <file original="Module/Bitzer/Approval" product-name="Sitegeist.Bitzer.Approval" source-language="en" datatype="plaintext">
+  <file original="Module.Bitzer.Approval" product-name="Sitegeist.Bitzer.Approval" source-language="en" datatype="plaintext">
     <body>
       <trans-unit id="approvalAssignments.label" xml:space="preserve" approved="yes">
         <source>Approval Assignments</source>
       </trans-unit>
       <trans-unit id="approvalAssignments.descriptions" xml:space="preserve" approved="yes">
         <source>Approval of content in e.g. review workspaces can be assigned to Bitzer agents.</source>
+      </trans-unit>
+      <trans-unit id="index.create" xml:space="preserve" approved="yes">
+        <source>Create new approval assignment</source>
+      </trans-unit>
+      <trans-unit id="index.creationLegend" xml:space="preserve" approved="yes">
+        <source>Approval assignment</source>
+      </trans-unit>
+      <trans-unit id="index.workspace" xml:space="preserve" approved="yes">
+        <source>Workspace</source>
+      </trans-unit>
+      <trans-unit id="index.agent" xml:space="preserve" approved="yes">
+        <source>Agent</source>
+      </trans-unit>
+      <trans-unit id="index.actions" xml:space="preserve" approved="yes">
+        <source>Actions</source>
+      </trans-unit>
+      <trans-unit id="index.edit" xml:space="preserve" approved="yes">
+        <source>Edit approval assignment</source>
+      </trans-unit>
+      <trans-unit id="index.delete" xml:space="preserve" approved="yes">
+        <source>Delete approval assignment</source>
+      </trans-unit>
+      <trans-unit id="index.deleteWarning" xml:space="preserve" approved="yes">
+        <source>Do you really want to delete this assignment?</source>
+      </trans-unit>
+      <trans-unit id="index.deleteExplanation" xml:space="preserve" approved="yes">
+        <source>This operation cannot be undone.</source>
+      </trans-unit>
+      <trans-unit id="index.deleteCancellation" xml:space="preserve" approved="yes">
+        <source>Cancel</source>
+      </trans-unit>
+      <trans-unit id="index.deleteConfirmation" xml:space="preserve" approved="yes">
+        <source>Yes, delete the assignment</source>
+      </trans-unit>
+
+      <trans-unit id="new.create" xml:space="preserve" approved="yes">
+        <source>Assign workspace approval</source>
+      </trans-unit>
+      <trans-unit id="new.workspace" xml:space="preserve" approved="yes">
+        <source>Workspace</source>
+      </trans-unit>
+      <trans-unit id="new.agent" xml:space="preserve" approved="yes">
+        <source>Agent</source>
+      </trans-unit>
+      <trans-unit id="new.createConfirmation" xml:space="preserve" approved="yes">
+        <source>Assign workspace</source>
+      </trans-unit>
+
+      <trans-unit id="edit.update" xml:space="preserve" approved="yes">
+        <source>Reassign workspace approval</source>
+      </trans-unit>
+      <trans-unit id="edit.workspace" xml:space="preserve" approved="yes">
+        <source>Workspace</source>
+      </trans-unit>
+      <trans-unit id="edit.agent" xml:space="preserve" approved="yes">
+        <source>Agent</source>
+      </trans-unit>
+      <trans-unit id="edit.updateConfirmation" xml:space="preserve" approved="yes">
+        <source>Reassign workspace</source>
+      </trans-unit>
+
+      <trans-unit id="flashMessage.workspaceAssigned.title" xml:space="preserve" approved="yes">
+        <source>Workspace assigned</source>
+      </trans-unit>
+      <trans-unit id="flashMessage.workspaceAssigned.body" xml:space="preserve" approved="yes">
+        <source>Workspace "{0}" was successfully assigned to agent "{1}"</source>
+      </trans-unit>
+      <trans-unit id="flashMessage.workspaceReassigned.title" xml:space="preserve" approved="yes">
+        <source>Workspace reassigned</source>
+      </trans-unit>
+      <trans-unit id="flashMessage.workspaceReassigned.body" xml:space="preserve" approved="yes">
+        <source>Workspace "{0}" was successfully reassigned to agent "{1}"</source>
+      </trans-unit>
+      <trans-unit id="flashMessage.workspaceUnassigned.title" xml:space="preserve" approved="yes">
+        <source>Workspace unassigned</source>
+      </trans-unit>
+      <trans-unit id="flashMessage.workspaceUnassigned.body" xml:space="preserve" approved="yes">
+        <source>Workspace "{0}" was successfully unassigned from agent "{1}"</source>
       </trans-unit>
     </body>
   </file>

@@ -1,0 +1,8 @@
+include: resource://Neos.Fusion/Private/Fusion/Root.fusion
+include: *.fusion
+
+Sitegeist.Bitzer.Approval.Application.ApprovalAssignmentController {
+    index = Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Index
+    new = Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.New
+    edit = Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Edit
+}

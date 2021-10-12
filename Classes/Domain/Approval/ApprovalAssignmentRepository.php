@@ -37,24 +37,81 @@ final class ApprovalAssignmentRepository
             'SELECT * FROM ' . self::TABLE_NAME
         );
 
-        return new ApprovalAssignments(array_filter(array_map(
+        return new ApprovalAssignments(array_map(
             function (array $tableRow): ?ApprovalAssignment {
                 return $this->mapTableRowToApprovalAssignment($tableRow);
             },
             $query->fetchAllAssociative())
-        ));
+        );
+    }
+
+    public function findByIdentifier(ApprovalAssignmentIdentifier $identifier): ?ApprovalAssignment
+    {
+        $row = $this->databaseConnection->executeQuery(
+            'SELECT * FROM ' . self::TABLE_NAME . '
+                WHERE workspace_name = :workspaceName
+                AND responsible_agent_identifier = :responsibleAgentIdentifier',
+            [
+                'workspaceName' => $identifier->getWorkspaceName(),
+                'responsibleAgentIdentifier' => $identifier->getResponsibleAgentIdentifier()
+            ]
+        )->fetchAssociative();
+
+        return $row
+            ? $this->mapTableRowToApprovalAssignment($row)
+            : null;
+    }
+
+    public function createAssignment(array $assignmentData): void
+    {
+        $this->databaseConnection->insert(
+            self::TABLE_NAME,
+            [
+                'workspace_name' => $assignmentData['workspaceName'],
+                'responsible_agent_identifier' => $assignmentData['responsibleAgentIdentifier'],
+            ]
+        );
+    }
+
+    public function updateAssignment(ApprovalAssignmentIdentifier $identifier, array $assignmentData): void
+    {
+        $this->databaseConnection->update(
+            self::TABLE_NAME,
+            [
+                'workspace_name' => $assignmentData['workspaceName'],
+                'responsible_agent_identifier' => $assignmentData['responsibleAgentIdentifier'],
+            ],
+            [
+                'workspace_name' => $identifier->getWorkspaceName(),
+                'responsible_agent_identifier' => $identifier->getResponsibleAgentIdentifier()
+            ]
+        );
+    }
+
+    public function deleteAssignment(ApprovalAssignmentIdentifier $identifier): void
+    {
+        $this->databaseConnection->delete(
+            self::TABLE_NAME,
+            [
+                'workspace_name' => $identifier->getWorkspaceName(),
+                'responsible_agent_identifier' => $identifier->getResponsibleAgentIdentifier()
+            ]
+        );
     }
 
     /**
      * @param array<string,string> $tableRow
      */
-    private function mapTableRowToApprovalAssignment(array $tableRow): ?ApprovalAssignment
+    private function mapTableRowToApprovalAssignment(array $tableRow): ApprovalAssignment
     {
-        $workspace = $this->workspaceRepository->findByIdentifier($tableRow['workspace_name']);
-        $agent = $this->agentRepository->findByString($tableRow['responsible_agent_identifier']);
+        $workspaceName = $tableRow['workspace_name'];
+        $responsibleAgentIdentifier = $tableRow['responsible_agent_identifier'];
 
-        return ($workspace && $agent)
-            ? new ApprovalAssignment($workspace, $agent)
-            : null;
+        return new ApprovalAssignment(
+            $workspaceName,
+            $this->workspaceRepository->findByIdentifier($workspaceName),
+            $responsibleAgentIdentifier,
+            $this->agentRepository->findByString($responsibleAgentIdentifier)
+        );
     }
 }

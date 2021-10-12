@@ -1,0 +1,42 @@
+prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.New) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <div class="neos-row-fluid">
+            <legend>{labels.create}</legend>
+        </div>
+        <form enctype="multipart/form-data" action={createUri} method="post">
+            <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
+            <div class="neos-control-group">
+                <label class="neos-control-label" for="workspaceName">{labels.workspace}*</label>
+                <div class="neos-controls">
+                    <select
+                        required
+                        class="neos-span6"
+                        id="workspaceName"
+                        name="moduleArguments[assignmentData][workspaceName]"
+                    >
+                        <Neos.Fusion:Loop items={workspaces} itemName="workspace">
+                            <option value={workspace.name}>{workspace.title}</option>
+                        </Neos.Fusion:Loop>
+                    </select>
+                </div>
+            </div>
+            <div class="neos-control-group">
+                <label class="neos-control-label" for="responsibleAgentIdentifier">{labels.agent}*</label>
+                <div class="neos-controls">
+                    <select
+                        required
+                        class="neos-span6"
+                        id="responsibleAgentIdentifier"
+                        name="moduleArguments[assignmentData][responsibleAgentIdentifier]"
+                    >
+                        <Neos.Fusion:Loop items={agents} itemName="agent">
+                            <option value={agent}>{agent.label}</option>
+                        </Neos.Fusion:Loop>
+                    </select>
+                </div>
+            </div>
+            <div class="neos-footer">
+                <input type="submit" class="neos-button neos-button-primary" value={labels.createConfirmation} title={labels.createConfirmation} />
+            </div>
+        </form>`
+}
