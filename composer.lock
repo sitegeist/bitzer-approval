@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b2162e2995401a04d4fb0cd4e0b37c1e",
+    "content-hash": "3258ce09023c9242270062053f6a134d",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1769,16 +1769,16 @@
         },
         {
             "name": "egulias/email-validator",
-            "version": "3.1.1",
+            "version": "3.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/egulias/EmailValidator.git",
-                "reference": "c81f18a3efb941d8c4d2e025f6183b5c6d697307"
+                "reference": "ee0db30118f661fb166bcffbf5d82032df484697"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/c81f18a3efb941d8c4d2e025f6183b5c6d697307",
-                "reference": "c81f18a3efb941d8c4d2e025f6183b5c6d697307",
+                "url": "https://api.github.com/repos/egulias/EmailValidator/zipball/ee0db30118f661fb166bcffbf5d82032df484697",
+                "reference": "ee0db30118f661fb166bcffbf5d82032df484697",
                 "shasum": ""
             },
             "require": {
@@ -1825,7 +1825,7 @@
             ],
             "support": {
                 "issues": "https://github.com/egulias/EmailValidator/issues",
-                "source": "https://github.com/egulias/EmailValidator/tree/3.1.1"
+                "source": "https://github.com/egulias/EmailValidator/tree/3.1.2"
             },
             "funding": [
                 {
@@ -1833,7 +1833,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-04-01T18:37:14+00:00"
+            "time": "2021-10-11T09:18:27+00:00"
         },
         {
             "name": "flowpack/nodetemplates",
@@ -2547,16 +2547,16 @@
         },
         {
             "name": "neos/cache",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/cache.git",
-                "reference": "5b02250b62d0a6b4315c72931c7d83cc35b8cbbf"
+                "reference": "f3aeee7350d7f766542336cf3ffff2a9ac048a79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neos/cache/zipball/5b02250b62d0a6b4315c72931c7d83cc35b8cbbf",
-                "reference": "5b02250b62d0a6b4315c72931c7d83cc35b8cbbf",
+                "url": "https://api.github.com/repos/neos/cache/zipball/f3aeee7350d7f766542336cf3ffff2a9ac048a79",
+                "reference": "f3aeee7350d7f766542336cf3ffff2a9ac048a79",
                 "shasum": ""
             },
             "require": {
@@ -2598,15 +2598,15 @@
             "description": "Neos Cache Framework",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/cache/tree/7.1.3"
+                "source": "https://github.com/neos/cache/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
-            "time": "2021-08-20T07:17:06+00:00"
+            "time": "2021-09-29T13:05:32+00:00"
         },
         {
             "name": "neos/composer-plugin",
@@ -2967,16 +2967,16 @@
         },
         {
             "name": "neos/eel",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/eel.git",
-                "reference": "e574391171f0db05caf2b78727e94e3f03c33fd6"
+                "reference": "27bd2eb197e9a6d4288fe74aae96c9739ecba411"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neos/eel/zipball/e574391171f0db05caf2b78727e94e3f03c33fd6",
-                "reference": "e574391171f0db05caf2b78727e94e3f03c33fd6",
+                "url": "https://api.github.com/repos/neos/eel/zipball/27bd2eb197e9a6d4288fe74aae96c9739ecba411",
+                "reference": "27bd2eb197e9a6d4288fe74aae96c9739ecba411",
                 "shasum": ""
             },
             "require": {
@@ -3003,19 +3003,19 @@
             ],
             "description": "The Embedded Expression Language (Eel) is a building block for creating Domain Specific Languages",
             "support": {
-                "source": "https://github.com/neos/eel/tree/7.1.3"
+                "source": "https://github.com/neos/eel/tree/7.1.4"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
-            "time": "2021-04-19T13:13:38+00:00"
+            "time": "2021-09-29T13:05:32+00:00"
         },
         {
             "name": "neos/error-messages",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/error-messages.git",
@@ -3046,11 +3046,11 @@
             "description": "Flow error messages",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/error-messages/tree/7.1.3"
+                "source": "https://github.com/neos/error-messages/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -3058,16 +3058,16 @@
         },
         {
             "name": "neos/flow",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/flow.git",
-                "reference": "2b908b94c82fa6615074fe7c94ffe7e7c86715d6"
+                "reference": "89391ad0b56d4a78c383d89a91a9c6862abb0460"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neos/flow/zipball/2b908b94c82fa6615074fe7c94ffe7e7c86715d6",
-                "reference": "2b908b94c82fa6615074fe7c94ffe7e7c86715d6",
+                "url": "https://api.github.com/repos/neos/flow/zipball/89391ad0b56d4a78c383d89a91a9c6862abb0460",
+                "reference": "89391ad0b56d4a78c383d89a91a9c6862abb0460",
                 "shasum": ""
             },
             "require": {
@@ -3117,7 +3117,7 @@
             "require-dev": {
                 "mikey179/vfsstream": "^1.6.1",
                 "phpunit/phpunit": "~9.1",
-                "vimeo/psalm": "~4.1.1"
+                "vimeo/psalm": "~4.9.3"
             },
             "suggest": {
                 "doctrine/data-fixtures": "To manage and execute the loading of data fixtures for the Doctrine ORM or ODM",
@@ -3149,19 +3149,19 @@
             "description": "Flow Application Framework",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/flow/tree/7.1.3"
+                "source": "https://github.com/neos/flow/tree/7.1.4"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
-            "time": "2021-08-25T06:11:53+00:00"
+            "time": "2021-10-12T06:01:14+00:00"
         },
         {
             "name": "neos/flow-log",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/flow-log.git",
@@ -3202,11 +3202,11 @@
             "description": "Flow Framework Logger",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/flow-log/tree/7.1.3"
+                "source": "https://github.com/neos/flow-log/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -3214,16 +3214,16 @@
         },
         {
             "name": "neos/fluid-adaptor",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/fluidadaptor.git",
-                "reference": "6521f5835658c3989a722478c95704eef3322664"
+                "reference": "964ed52aa058cd404612ccfe4bcb2a677190bc4e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/neos/fluidadaptor/zipball/6521f5835658c3989a722478c95704eef3322664",
-                "reference": "6521f5835658c3989a722478c95704eef3322664",
+                "url": "https://api.github.com/repos/neos/fluidadaptor/zipball/964ed52aa058cd404612ccfe4bcb2a677190bc4e",
+                "reference": "964ed52aa058cd404612ccfe4bcb2a677190bc4e",
                 "shasum": ""
             },
             "require": {
@@ -3247,15 +3247,15 @@
             ],
             "description": "Fluid Templating Framework Adaptor",
             "support": {
-                "source": "https://github.com/neos/fluidadaptor/tree/7.1.3"
+                "source": "https://github.com/neos/fluidadaptor/tree/7.1.4"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
-            "time": "2021-08-25T06:11:53+00:00"
+            "time": "2021-09-29T13:05:32+00:00"
         },
         {
             "name": "neos/fusion",
@@ -3499,7 +3499,7 @@
         },
         {
             "name": "neos/http-factories",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/http-factories.git",
@@ -3535,11 +3535,11 @@
             "description": "PSR-17 HTTP Factories",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/http-factories/tree/7.1.3"
+                "source": "https://github.com/neos/http-factories/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5064,7 +5064,7 @@
         },
         {
             "name": "neos/utility-arrays",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-arrays.git",
@@ -5102,11 +5102,11 @@
             "description": "Flow Array Utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-arrays/tree/7.1.3"
+                "source": "https://github.com/neos/utility-arrays/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5114,7 +5114,7 @@
         },
         {
             "name": "neos/utility-files",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-files.git",
@@ -5152,11 +5152,11 @@
             "description": "Flow Files Utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-files/tree/7.1.3"
+                "source": "https://github.com/neos/utility-files/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5164,7 +5164,7 @@
         },
         {
             "name": "neos/utility-mediatypes",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-mediatypes.git",
@@ -5201,11 +5201,11 @@
             "description": "Flow Media Types Utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-mediatypes/tree/7.1.3"
+                "source": "https://github.com/neos/utility-mediatypes/tree/7.1.4"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5213,7 +5213,7 @@
         },
         {
             "name": "neos/utility-objecthandling",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-objecthandling.git",
@@ -5251,11 +5251,11 @@
             "description": "Flow array/object property and type utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-objecthandling/tree/7.1.3"
+                "source": "https://github.com/neos/utility-objecthandling/tree/7.1.4"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5263,7 +5263,7 @@
         },
         {
             "name": "neos/utility-opcodecache",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-opcodecache.git",
@@ -5296,11 +5296,11 @@
             "description": "Flow Opcode Cache Utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-opcodecache/tree/7.1.3"
+                "source": "https://github.com/neos/utility-opcodecache/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5308,7 +5308,7 @@
         },
         {
             "name": "neos/utility-pdo",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-pdo.git",
@@ -5341,11 +5341,11 @@
             "description": "Flow PDO Utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-pdo/tree/7.1.3"
+                "source": "https://github.com/neos/utility-pdo/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5353,7 +5353,7 @@
         },
         {
             "name": "neos/utility-schema",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-schema.git",
@@ -5391,11 +5391,11 @@
             "description": "Flow Schema Utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-schema/tree/7.1.3"
+                "source": "https://github.com/neos/utility-schema/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -5403,7 +5403,7 @@
         },
         {
             "name": "neos/utility-unicode",
-            "version": "7.1.3",
+            "version": "7.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/neos/utility-unicode.git",
@@ -5439,11 +5439,11 @@
             "description": "Flow Unicode Utilities",
             "homepage": "http://flow.neos.io",
             "support": {
-                "source": "https://github.com/neos/utility-unicode/tree/7.1.3"
+                "source": "https://github.com/neos/utility-unicode/tree/7.2.0"
             },
             "funding": [
                 {
-                    "url": "https://neosfunding.sandstorm.de/en",
+                    "url": "https://shop.neos.io/neosfunding/",
                     "type": "custom"
                 }
             ],
@@ -6490,11 +6490,11 @@
         },
         {
             "name": "sitegeist/bitzer",
-            "version": "dev-neos7compatibility",
+            "version": "2.0.x-dev",
             "source": {
                 "type": "git",
-                "url": "https://github.com/hedayati-m/bitzer.git",
-                "reference": "233bf89340b89899f7140139d2cd610e4b553301"
+                "url": "https://github.com/sitegeist/bitzer.git",
+                "reference": "ea024bdb96df7fba95465f377965596ad38b894d"
             },
             "require": {
                 "doctrine/dbal": "*",
@@ -6512,7 +6512,7 @@
                 }
             },
             "description": "A content lifecycle task manager for Neos CMS",
-            "time": "2021-10-08T08:11:53+00:00"
+            "time": "2021-10-12T15:31:24+00:00"
         },
         {
             "name": "sitegeist/bitzer-approval",
@@ -6520,7 +6520,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/bitzer-approval.git",
-                "reference": "9cfac997e0dd45ed03580c0233142b9fa550038d"
+                "reference": "fa817a36e311dc58e514da597e358461ee62a9ba"
             },
             "require": {
                 "neos/content-repository": "~7.0",
@@ -6528,7 +6528,7 @@
                 "neos/fusion-afx": "~7.0",
                 "neos/neos": "~7.0",
                 "neos/neos-ui": "~7.0",
-                "sitegeist/bitzer": "*"
+                "sitegeist/bitzer": "~2.0"
             },
             "default-branch": true,
             "type": "neos-package",
@@ -6538,7 +6538,7 @@
                 }
             },
             "description": "The approval plugin for the Bitzer content lifecycle task manager for Neos CMS",
-            "time": "2021-10-11T12:17:35+00:00"
+            "time": "2021-10-12T15:51:58+00:00"
         },
         {
             "name": "sitegeist/csvpo",

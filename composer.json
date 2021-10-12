@@ -76,7 +76,7 @@
         },
         "bitzer": {
             "type": "git",
-            "url": "https://github.com/hedayati-m/bitzer.git"
+            "url": "https://github.com/sitegeist/bitzer.git"
         },
         "bitzer-approval": {
             "type": "git",
