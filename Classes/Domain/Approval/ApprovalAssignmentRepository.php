@@ -78,7 +78,7 @@ final class ApprovalAssignmentRepository
         }, $rows));
     }
 
-    public function createAssignment(array $assignmentData): void
+    public function assign(array $assignmentData): void
     {
         $this->databaseConnection->insert(
             self::TABLE_NAME,
@@ -89,12 +89,11 @@ final class ApprovalAssignmentRepository
         );
     }
 
-    public function updateAssignment(ApprovalAssignmentIdentifier $identifier, array $assignmentData): void
+    public function reassign(ApprovalAssignmentIdentifier $identifier, array $assignmentData): void
     {
         $this->databaseConnection->update(
             self::TABLE_NAME,
             [
-                'workspace_name' => $assignmentData['workspaceName'],
                 'responsible_agent_identifier' => $assignmentData['responsibleAgentIdentifier'],
             ],
             [
@@ -104,7 +103,7 @@ final class ApprovalAssignmentRepository
         );
     }
 
-    public function deleteAssignment(ApprovalAssignmentIdentifier $identifier): void
+    public function removeAssignment(ApprovalAssignmentIdentifier $identifier): void
     {
         $this->databaseConnection->delete(
             self::TABLE_NAME,

@@ -1,25 +1,15 @@
-prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Edit) < prototype(Neos.Fusion:Component) {
+prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.ReassignmentForm) < prototype(Neos.Fusion:Component) {
     renderer = afx`
         <div class="neos-row-fluid">
-            <legend>{labels.update}</legend>
+            <legend>{labels.reassign}</legend>
         </div>
-        <form enctype="multipart/form-data" action={updateUri} method="post">
+        <form enctype="multipart/form-data" action={reassignUri} method="post">
             <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
             <input type="hidden" name="moduleArguments[identifier]" value={assignment.identifier} />
             <div class="neos-control-group">
-                <label class="neos-control-label" for="workspaceName">{labels.workspace}*</label>
+                <label class="neos-control-label">{labels.workspace}</label>
                 <div class="neos-controls">
-                    <select
-                        required
-                        class="neos-span6"
-                        id="workspaceName"
-                        name="moduleArguments[assignmentData][workspaceName]"
-                    >
-                        <Neos.Fusion:Loop items={workspaces} itemName="workspace">
-                            <option @if.1={workspace.name == assignment.workspaceName} value={workspace.name} selected>{workspace.title}</option>
-                            <option @if.1={workspace.name != assignment.workspaceName} value={workspace.name}>{workspace.title}</option>
-                        </Neos.Fusion:Loop>
-                    </select>
+                    <span class="neos-span6 neos-uneditable-input">{workspaceName}</span>
                 </div>
             </div>
             <div class="neos-control-group">
@@ -39,7 +29,7 @@ prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Edit) < prototype(
                 </div>
             </div>
             <div class="neos-footer">
-                <input type="submit" class="neos-button neos-button-primary" value={labels.updateConfirmation} title={labels.updateConfirmation} />
+                <input type="submit" class="neos-button neos-button-primary" value={labels.reassignmentConfirmation} title={labels.reassignmentConfirmation} />
             </div>
         </form>`
 }

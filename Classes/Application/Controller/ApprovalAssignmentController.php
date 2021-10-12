@@ -56,44 +56,44 @@ final class ApprovalAssignmentController extends ModuleController
         $this->view->assignMultiple([
             'approvalAssignments' => $this->approvalAssignmentRepository->findAll(),
             'csrfProtectionToken' => $this->securityContext->getCsrfProtectionToken(),
-            'newUri' => $this->getActionUri('new'),
-            'editUri' => $this->getActionUri('edit'),
-            'deleteUri' => $this->getActionUri('delete'),
+            'assignmentFormUri' => $this->getActionUri('assignmentForm'),
+            'reassignmentFormUri' => $this->getActionUri('reassignmentForm'),
+            'removeAssignmentUri' => $this->getActionUri('removeAssignment'),
             'labels' => [
-                'create' => $this->getLabel('index.create'),
-                'creationLegend' => $this->getLabel('index.creationLegend'),
+                'assign' => $this->getLabel('index.assign'),
+                'assignmentLegend' => $this->getLabel('index.assignmentLegend'),
                 'workspace' => $this->getLabel('index.workspace'),
                 'agent' => $this->getLabel('index.agent'),
                 'actions' => $this->getLabel('index.actions'),
-                'edit' => $this->getLabel('index.edit'),
-                'delete' => $this->getLabel('index.delete'),
-                'deleteWarning' => $this->getLabel('index.deleteWarning'),
-                'deleteExplanation' => $this->getLabel('index.deleteExplanation'),
-                'deleteCancellation' => $this->getLabel('index.deleteCancellation'),
-                'deleteConfirmation' => $this->getLabel('index.deleteConfirmation')
+                'reassign' => $this->getLabel('index.reassign'),
+                'removeAssignment' => $this->getLabel('index.removeAssignment'),
+                'removeAssignmentWarning' => $this->getLabel('index.removeAssignmentWarning'),
+                'removeAssignmentExplanation' => $this->getLabel('index.removeAssignmentExplanation'),
+                'removeAssignmentCancellation' => $this->getLabel('index.removeAssignmentCancellation'),
+                'removeAssignmentConfirmation' => $this->getLabel('index.removeAssignmentConfirmation')
             ]
         ]);
     }
 
-    public function newAction(): void
+    public function assignmentFormAction(): void
     {
         $this->view->assignMultiple([
             'workspaces' => $this->workspaceRepository->findApprovable(),
             'agents' => $this->agentRepository->findApplicable(),
-            'createUri' => $this->getActionUri('create'),
+            'assignUri' => $this->getActionUri('assign'),
             'csrfProtectionToken' => $this->securityContext->getCsrfProtectionToken(),
             'labels' => [
-                'create' => $this->getLabel('new.create'),
-                'workspace' => $this->getLabel('new.workspace'),
-                'agent' => $this->getLabel('new.agent'),
-                'createConfirmation' => $this->getLabel('new.createConfirmation')
+                'assign' => $this->getLabel('assignmentForm.assign'),
+                'workspace' => $this->getLabel('assignmentForm.workspace'),
+                'agent' => $this->getLabel('assignmentForm.agent'),
+                'assignmentConfirmation' => $this->getLabel('assignmentForm.assignmentConfirmation')
             ]
         ]);
     }
 
-    public function createAction(array $assignmentData): void
+    public function assignAction(array $assignmentData): void
     {
-        $this->approvalAssignmentRepository->createAssignment($assignmentData);
+        $this->approvalAssignmentRepository->assign($assignmentData);
         $this->message('workspaceAssigned', [
             $assignmentData['workspaceName'],
             $assignmentData['responsibleAgentIdentifier']
@@ -101,40 +101,40 @@ final class ApprovalAssignmentController extends ModuleController
         $this->redirect('index');
     }
 
-    public function editAction(string $identifier): void
+    public function reassignmentFormAction(string $identifier): void
     {
         $assignmentIdentifier = ApprovalAssignmentIdentifier::fromString($identifier);
         $this->view->assignMultiple([
             'assignment' => $this->approvalAssignmentRepository->findByIdentifier($assignmentIdentifier),
-            'workspaces' => $this->workspaceRepository->findApprovable(),
+            'workspaceName' => $assignmentIdentifier->getWorkspaceName(),
             'agents' => $this->agentRepository->findApplicable(),
-            'updateUri' => $this->getActionUri('update'),
+            'reassignUri' => $this->getActionUri('reassign'),
             'csrfProtectionToken' => $this->securityContext->getCsrfProtectionToken(),
             'labels' => [
-                'update' => $this->getLabel('edit.update'),
-                'workspace' => $this->getLabel('edit.workspace'),
-                'agent' => $this->getLabel('edit.agent'),
-                'updateConfirmation' => $this->getLabel('edit.updateConfirmation')
+                'reassign' => $this->getLabel('reassignmentForm.reassign'),
+                'workspace' => $this->getLabel('reassignmentForm.workspace'),
+                'agent' => $this->getLabel('reassignmentForm.agent'),
+                'reassignmentConfirmation' => $this->getLabel('reassignmentForm.reassignmentConfirmation')
             ]
         ]);
     }
 
-    public function updateAction(string $identifier, array $assignmentData): void
+    public function reassignAction(string $identifier, array $assignmentData): void
     {
         $assignmentIdentifier = ApprovalAssignmentIdentifier::fromString($identifier);
-        $this->approvalAssignmentRepository->updateAssignment($assignmentIdentifier, $assignmentData);
+        $this->approvalAssignmentRepository->reassign($assignmentIdentifier, $assignmentData);
         $this->message('workspaceReassigned', [
-            $assignmentData['workspaceName'],
+            $assignmentIdentifier->getWorkspaceName(),
             $assignmentData['responsibleAgentIdentifier']
         ]);
         $this->redirect('index');
     }
 
-    public function deleteAction(string $identifier): void
+    public function removeAssignmentAction(string $identifier): void
     {
         $assignmentIdentifier = ApprovalAssignmentIdentifier::fromString($identifier);
-        $this->approvalAssignmentRepository->deleteAssignment($assignmentIdentifier);
-        $this->message('workspaceUnassigned', [
+        $this->approvalAssignmentRepository->removeAssignment($assignmentIdentifier);
+        $this->message('workspaceAssignmentRemoved', [
             $assignmentIdentifier->getWorkspaceName(),
             $assignmentIdentifier->getResponsibleAgentIdentifier()
         ]);

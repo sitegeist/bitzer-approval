@@ -2,10 +2,10 @@ prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Index) < prototype
     renderer = afx`
         <Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.FlashMessages />
         <div class="neos-row-fluid">
-            <a class="neos-button" title={labels.create} href={newUri}>{labels.create}</a>
+            <a class="neos-button" title={labels.create} href={assignmentFormUri}>{labels.assign}</a>
         </div>
         <div class="neos-row-fluid">
-            <legend>{labels.creationLegend}</legend>
+            <legend>{labels.assignmentLegend}</legend>
             <table class="neos-table">
                 <thead>
                 <tr>
@@ -18,25 +18,25 @@ prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Index) < prototype
                 <Neos.Fusion:Loop items={approvalAssignments} itemName="approvalAssignment">
                     <tr>
                         <td>
-                            <i @if.1={!approvalAssignment.workspaceToBeApproved} class="fas fa-edit icon-white"></i>
+                            <i @if.1={!approvalAssignment.workspaceToBeApproved} class="fas fa-exclamation-triangle icon-white"></i>
                             {approvalAssignment.workspaceToBeApproved ? approvalAssignment.workspaceToBeApproved.title : approvalAssignment.workspaceName}
                         </td>
                         <td>
-                            <i @if.1={!approvalAssignment.responsibleAgent} class="fas fa-edit icon-white"></i>
+                            <i @if.1={!approvalAssignment.responsibleAgent} class="fas fa-exclamation-triangle icon-white"></i>
                             {approvalAssignment.responsibleAgent ? approvalAssignment.responsibleAgent.label : approvalAssignment.responsibleAgentIdentifier}
                         </td>
                         <td class="neos-action">
                             <div class="neos-pull-right">
                                 <a data-neos-toggle="tooltip"
                                    class="neos-button neos-button-primary"
-                                   title={labels.edit}
-                                   href={editUri + '&moduleArguments[identifier]=' + approvalAssignment.identifier}
+                                   title={labels.reassign}
+                                   href={reassignmentFormUri + '&moduleArguments[identifier]=' + approvalAssignment.identifier}
                                 >
                                     <i class="fas fa-edit icon-white"></i>
                                 </a>
                                 <button
                                     class="neos-button neos-button-danger"
-                                    title={labels.delete}
+                                    title={labels.removeAssignment}
                                     data-toggle="modal"
                                     href={'#approvalAssignment-' + approvalAssignment.identifier.selector}
                                     data-neos-toggle="tooltip"
@@ -55,20 +55,20 @@ prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Index) < prototype
                         <div class="neos-modal-content">
                             <div class="neos-modal-header">
                                 <button type="button" class="neos-close neos-button" data-dismiss="modal"></button>
-                                <div class="neos-header">{labels.deleteWarning}</div>
+                                <div class="neos-header">{labels.removeAssignmentWarning}</div>
                                 <div>
                                     <div class="neos-subheader">
-                                        <p>{labels.deleteExplanation}</p>
+                                        <p>{labels.removeAssignmentExplanation}</p>
                                     </div>
                                 </div>
                             </div>
                             <div class="neos-modal-footer">
-                                <a href="#" class="neos-button" data-dismiss="modal">{labels.deleteCancellation}</a>
-                                <form class="neos-inline" action={deleteUri} method="post">
+                                <a href="#" class="neos-button" data-dismiss="modal">{labels.removeAssignmentCancellation}</a>
+                                <form class="neos-inline" action={removeAssignmentUri} method="post">
                                     <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
                                     <input type="hidden" name="moduleArguments[identifier]" value={approvalAssignment.identifier} />
-                                    <button type="submit" class="neos-button neos-button-danger" title={labels.deleteConfirmation}>
-                                        {labels.deleteConfirmation}
+                                    <button type="submit" class="neos-button neos-button-danger" title={labels.removeAssignmentConfirmation}>
+                                        {labels.removeAssignmentConfirmation}
                                     </button>
                                 </form>
                             </div>

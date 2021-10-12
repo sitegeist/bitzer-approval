@@ -1,9 +1,9 @@
-prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.New) < prototype(Neos.Fusion:Component) {
+prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.AssignmentForm) < prototype(Neos.Fusion:Component) {
     renderer = afx`
         <div class="neos-row-fluid">
-            <legend>{labels.create}</legend>
+            <legend>{labels.assign}</legend>
         </div>
-        <form enctype="multipart/form-data" action={createUri} method="post">
+        <form enctype="multipart/form-data" action={assignUri} method="post">
             <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
             <div class="neos-control-group">
                 <label class="neos-control-label" for="workspaceName">{labels.workspace}*</label>
@@ -36,7 +36,7 @@ prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.New) < prototype(N
                 </div>
             </div>
             <div class="neos-footer">
-                <input type="submit" class="neos-button neos-button-primary" value={labels.createConfirmation} title={labels.createConfirmation} />
+                <input type="submit" class="neos-button neos-button-primary" value={labels.assignmentConfirmation} title={labels.assignmentConfirmation} />
             </div>
         </form>`
 }
