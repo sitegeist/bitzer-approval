@@ -25,5 +25,12 @@ class Package extends BasePackage
             ApprovalTaskZookeeper::class,
             'whenNodeAggregateWasPublished'
         );
+
+        $dispatcher->connect(
+            PublishingService::class,
+            'nodeDiscarded',
+            ApprovalTaskZookeeper::class,
+            'whenNodeAggregateWasDiscarded'
+        );
     }
 }

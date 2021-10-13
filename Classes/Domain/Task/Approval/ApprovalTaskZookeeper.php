@@ -1,6 +1,7 @@
 <?php declare(strict_types=1);
 namespace Sitegeist\Bitzer\Approval\Domain\Task\Approval;
 
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
@@ -59,6 +60,14 @@ final class ApprovalTaskZookeeper
             $object = NodeAddress::fromNode($node);
             $object = $object->withWorkspaceName($workspace->getName());
             $this->scheduleApprovalTask($object, $agents);
+        }
+    }
+
+    public function whenNodeAggregateWasDiscarded(TraversableNodeInterface $node): void
+    {
+        if (in_array($node->getWorkspace(), $this->workspaceRepository->findApprovable())) {
+            $object = NodeAddress::fromNode($node);
+            $this->markTasksAsComplete($object);
         }
     }
 
