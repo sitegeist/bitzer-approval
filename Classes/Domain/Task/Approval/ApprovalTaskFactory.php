@@ -42,7 +42,12 @@ final class ApprovalTaskFactory implements TaskFactoryInterface
         ?NodeAddress $object,
         ?UriInterface $target
     ): ApprovalTask {
-        $resolvedObject = $this->objectRepository->findByAddress($object);
+        $resolvedObject = $object
+            ? $this->objectRepository->findByAddress($object)
+            : null;
+        $target = $resolvedObject
+            ? $this->buildBackendUri($resolvedObject)
+            : null;
 
         return new ApprovalTask(
             $identifier,
@@ -51,7 +56,7 @@ final class ApprovalTaskFactory implements TaskFactoryInterface
             $actionStatus,
             $agent,
             $resolvedObject,
-            $this->buildBackendUri($resolvedObject)
+            $target
         );
     }
 

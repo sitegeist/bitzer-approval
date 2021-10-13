@@ -1,0 +1,30 @@
+prototype(Sitegeist.Bitzer.Approval:Application.EditApprovalTask) < prototype(Neos.Fusion:Component) {
+    task = null
+    constraintCheckResult = null
+
+    @context {
+        scheduleUri = Neos.Fusion:UriBuilder {
+            package = 'Sitegeist.Bitzer'
+            subpackage = 'Application'
+            controller = 'Bitzer'
+            action = 'schedule'
+        }
+        labels = ${Approval.Labels.forEditApprovalTaskForm()}
+        agents = ${Approval.Agents.getApprovalAgents()}
+        objects = ${Approval.Objects.getObjectsToBeApproved()}
+    }
+
+    renderer = afx`
+        <Sitegeist.Bitzer:FlashMessages />
+        <div class="neos-row-fluid neos-module-container">
+            <Sitegeist.Bitzer:RescheduleTaskForm task={props.task} constraintCheckResult={props.constraintCheckResult} />
+            <Sitegeist.Bitzer:ReassignTaskForm task={props.task} agents={agents} constraintCheckResult={props.constraintCheckResult} />
+        </div>
+        <div class="neos-row-fluid neos-module-container">
+            <Sitegeist.Bitzer:SetTaskPropertiesForm task={props.task} constraintCheckResult={props.constraintCheckResult} />
+            <Sitegeist.Bitzer:SetNewTaskObjectForm task={props.task} objects={objects} constraintCheckResult={props.constraintCheckResult} />
+        </div>
+        <div class="neos-footer">
+            <a class="neos-button" href={scheduleUri}>{q(labels).get('actions.back.label')}</a>
+        </div>`
+}

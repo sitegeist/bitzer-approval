@@ -1,6 +1,4 @@
-<?php
-declare(strict_types=1);
-
+<?php declare(strict_types=1);
 namespace Sitegeist\Bitzer\Approval\Application\Controller;
 
 use GuzzleHttp\Psr7\Uri;
@@ -182,8 +180,5 @@ final class ApprovalAssignmentController extends ModuleController
         $view->setFusionPathPattern(
             'resource://Sitegeist.Bitzer.Approval/Private/Fusion/Integration/ApprovalAssignment'
         );
-        $view->assignMultiple([
-            'flashMessages' => $this->controllerContext->getFlashMessageContainer()->getMessagesAndFlush()
-        ]);
     }
 }

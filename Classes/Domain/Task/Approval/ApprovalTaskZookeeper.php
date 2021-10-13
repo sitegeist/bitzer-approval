@@ -52,11 +52,11 @@ final class ApprovalTaskZookeeper
     public function whenNodeAggregateWasPublished(TraversableNodeInterface $node, Workspace $workspace): void
     {
         if ($workspace->getName() === 'live') {
-            $object = NodeAddress::createFromNode($node);
+            $object = NodeAddress::fromNode($node);
             $this->markTasksAsComplete($object);
         } elseif ($this->isTaskAutoGenerationEnabled && in_array($workspace, $this->workspaceRepository->findApprovable())) {
             $agents = $this->approvalAssignmentRepository->findResponsibleAgentsForWorkspace($workspace->getName());
-            $object = NodeAddress::createFromNode($node);
+            $object = NodeAddress::fromNode($node);
             $object = $object->withWorkspaceName($workspace->getName());
             $this->scheduleApprovalTask($object, $agents);
         }
@@ -71,11 +71,11 @@ final class ApprovalTaskZookeeper
         $taskClassName = TaskClassName::createFromString(ApprovalTask::class);
         $tasks = $this->schedule->findActiveOrPotentialTasksForObject($object, $taskClassName);
         foreach ($tasks as $task) {
-            $activeAgents[$task->getAgent()->getCombinedIdentifier()] = true;
+            $activeAgents[$task->getAgent()->getIdentifier()->toString()] = true;
         }
 
         foreach ($agents as $agent) {
-            if (!isset($activeAgents[$agent->getCombinedIdentifier()])) {
+            if (!isset($activeAgents[$agent->getIdentifier()->toString()])) {
                 $this->bitzer->handleScheduleTask(new ScheduleTask(
                     TaskIdentifier::create(),
                     $taskClassName,

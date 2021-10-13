@@ -1,0 +1,38 @@
+prototype(Sitegeist.Bitzer.Approval:Application.PrepareApprovalTask) < prototype(Neos.Fusion:Component) {
+    constraintCheckResult = ${[]}
+    command = null
+
+    @context {
+        scheduleCommandUri = Sitegeist.Bitzer:ActionUri {
+            action = 'scheduleTask'
+        }
+        scheduleUri = Sitegeist.Bitzer:ActionUri {
+            action = 'schedule'
+        }
+        labels = ${Approval.Labels.forPrepareApprovalTaskForm()}
+        agents = ${Approval.Agents.getApprovalAgents()}
+        objects = ${Approval.Objects.getObjectsToBeApproved()}
+    }
+
+    renderer = afx`
+        <Sitegeist.Bitzer:FlashMessages />
+        <div class="neos-row-fluid neos-module-container">
+            <form action={scheduleCommandUri} method="post">
+                <h2>{q(labels).get('scheduleTask.label')}</h2>
+                <input type="hidden" name="__csrfToken" value={${Security.csrfToken()}} />
+                <input type="hidden" name="moduleArguments[taskClassName]" value={taskClassName} />
+                <div class="neos-row-fluid">
+                    <Sitegeist.Bitzer:Component.ScheduledDate constraintCheckResult={props.constraintCheckResult} command={props.command} />
+                    <Sitegeist.Bitzer:Component.Agent agents={agents} constraintCheckResult={props.constraintCheckResult} command={props.command} />
+                </div>
+                <div class="neos-row-fluid">
+                    <Sitegeist.Bitzer:Component.Description constraintCheckResult={props.constraintCheckResult} command={props.command} />
+                    <Sitegeist.Bitzer:Component.Object objects={objects} constraintCheckResult={props.constraintCheckResult} command={props.command} />
+                </div>
+                <div class="neos-footer">
+                    <a class="neos-button" href={scheduleUri}>{q(labels).get('actions.cancel.label')}</a>
+                    <input class="neos-button neos-button-primary" type="submit" name="" value={q(labels).get('scheduleTask.label')} />
+                </div>
+            </form>
+        </div>`
+}

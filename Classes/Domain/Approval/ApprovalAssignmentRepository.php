@@ -6,6 +6,7 @@ use Neos\ContentRepository\Domain\Repository\WorkspaceRepository;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Persistence\Doctrine\ConnectionFactory;
 use Sitegeist\Bitzer\Domain\Agent\Agent;
+use Sitegeist\Bitzer\Domain\Agent\AgentIdentifier;
 use Sitegeist\Bitzer\Domain\Agent\AgentRepository;
 
 /**
@@ -74,7 +75,7 @@ final class ApprovalAssignmentRepository
         )->fetchAllAssociative();
 
         return array_filter(array_map(function (array $row): ?Agent {
-            return $this->agentRepository->findByString($row['responsible_agent_identifier']);
+            return $this->agentRepository->findByIdentifier(AgentIdentifier::fromString($row['responsible_agent_identifier']));
         }, $rows));
     }
 
@@ -120,13 +121,13 @@ final class ApprovalAssignmentRepository
     private function mapTableRowToApprovalAssignment(array $tableRow): ApprovalAssignment
     {
         $workspaceName = $tableRow['workspace_name'];
-        $responsibleAgentIdentifier = $tableRow['responsible_agent_identifier'];
+        $responsibleAgentIdentifier = AgentIdentifier::fromString($tableRow['responsible_agent_identifier']);
 
         return new ApprovalAssignment(
             $workspaceName,
             $this->workspaceRepository->findByIdentifier($workspaceName),
-            $responsibleAgentIdentifier,
-            $this->agentRepository->findByString($responsibleAgentIdentifier)
+            $responsibleAgentIdentifier->toString(),
+            $this->agentRepository->findByIdentifier($responsibleAgentIdentifier)
         );
     }
 }

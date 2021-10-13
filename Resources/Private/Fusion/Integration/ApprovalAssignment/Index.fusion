@@ -1,6 +1,6 @@
 prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.Index) < prototype(Neos.Fusion:Component) {
     renderer = afx`
-        <Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.FlashMessages />
+        <Sitegeist.Bitzer:FlashMessages />
         <div class="neos-row-fluid">
             <a class="neos-button" title={labels.create} href={assignmentFormUri}>{labels.assign}</a>
         </div>

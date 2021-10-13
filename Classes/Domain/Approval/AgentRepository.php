@@ -8,6 +8,7 @@ use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Model\User;
 use Neos\Neos\Domain\Repository\UserRepository;
 use Sitegeist\Bitzer\Domain\Agent\Agent;
+use Sitegeist\Bitzer\Domain\Agent\Agents;
 
 /**
  * The agent domain repository
@@ -31,10 +32,7 @@ final class AgentRepository
         $this->persistenceManager = $persistenceManager;
     }
 
-    /**
-     * @return array<int,Agent>
-     */
-    public function findApplicable(): array
+    public function findApplicable(): Agents
     {
         $agents = [];
 
@@ -61,6 +59,6 @@ final class AgentRepository
             }
         }
 
-        return $agents;
+        return new Agents($agents);
     }
 }

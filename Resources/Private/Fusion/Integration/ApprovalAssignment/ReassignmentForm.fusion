@@ -22,8 +22,8 @@ prototype(Sitegeist.Bitzer.Approval:Module.ApprovalAssignment.ReassignmentForm) 
                         name="moduleArguments[assignmentData][responsibleAgentIdentifier]"
                     >
                         <Neos.Fusion:Loop items={agents} itemName="agent">
-                            <option @if.1={agent.combinedIdentifier == assignment.responsibleAgentIdentifier} value={agent.combinedIdentifier} selected>{agent.label}</option>
-                            <option @if.1={agent.combinedIdentifier != assignment.responsibleAgentIdentifier} value={agent.combinedIdentifier}>{agent.label}</option>
+                            <option @if.1={agent.identifier.string == assignment.responsibleAgentIdentifier} value={agent.identifier.string} selected>{agent.label}</option>
+                            <option @if.1={agent.identifier.string != assignment.responsibleAgentIdentifier} value={agent.identifier.string}>{agent.label}</option>
                         </Neos.Fusion:Loop>
                     </select>
                 </div>

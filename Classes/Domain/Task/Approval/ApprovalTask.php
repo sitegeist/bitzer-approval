@@ -63,7 +63,7 @@ final class ApprovalTask implements TaskInterface
      */
     public function getImage(): string
     {
-        return 'clipboard';
+        return 'check-double';
     }
 
     /**

@@ -1,0 +1,7 @@
+Neos:
+  Fusion:
+    defaultContext:
+      Approval.Widget: Sitegeist\Bitzer\Approval\Presentation\WidgetFactory
+      Approval.Agents: Sitegeist\Bitzer\Approval\Application\AgentProvider
+      Approval.Labels: Sitegeist\Bitzer\Approval\Application\LabelProvider
+      Approval.Objects: Sitegeist\Bitzer\Approval\Application\ObjectProvider

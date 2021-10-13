@@ -5,7 +5,7 @@
       <trans-unit id="approvalAssignments.label" xml:space="preserve" approved="yes">
         <source>Approval Assignments</source>
       </trans-unit>
-      <trans-unit id="approvalAssignments.descriptions" xml:space="preserve" approved="yes">
+      <trans-unit id="approvalAssignments.description" xml:space="preserve" approved="yes">
         <source>Approval of content in e.g. review workspaces can be assigned to Bitzer agents.</source>
       </trans-unit>
 
