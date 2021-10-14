@@ -1,5 +1,10 @@
 roles:
-  'Neos.Neos:Editor':
-    label: 'Chefredakteur'
   'Neos.Neos:RestrictedEditor':
     label: 'Redakteur'
+  'Hoerbiger.Shared:ChiefEditor':
+    label: Chefredakteur
+    description: Grants access to the content, asset, workspace and history module. Users with this role is able to publish to the live workspace.
+    parentRoles:
+      - 'Neos.Neos:Editor'
+      - 'Sitegeist.Bitzer:Administrator'
+      - 'Sitegeist.Bitzer:Agent'

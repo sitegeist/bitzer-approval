@@ -24,7 +24,8 @@
         "sitegeist/csvpo": "^1.3",
         "sitegeist/stampede": "^1.1",
         "sitegeist/archaeopteryx": "^1.0",
-        "sitegeist/inspectorgadget": "*"
+        "sitegeist/inspectorgadget": "*",
+        "sitegeist/bitzer-approval": "*"
     },
     "autoload": {
         "psr-4": {
