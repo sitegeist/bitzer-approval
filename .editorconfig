@@ -31,3 +31,6 @@ indent_size = 2
 
 [*.feature]
 indent_size = 2
+
+[ssh-config.txt]
+indent_size = 2
