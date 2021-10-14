@@ -1,0 +1,5 @@
+prototype(Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld) <  prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = 'test'
+    }
+}

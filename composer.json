@@ -12,7 +12,8 @@
     "prefer-stable": true,
     "require": {
         "hoerbiger/hoerbigercom": "*",
-        "hoerbiger/hoerbigercom-catalog": "*"
+        "hoerbiger/hoerbigercom-catalog": "*",
+        "hoerbiger/hoerbigercom-application-worlds": "*"
     },
     "require-dev": {
         "neos/buildessentials": "^7.1",

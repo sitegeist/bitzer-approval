@@ -1,0 +1,12 @@
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    applicationWorld1:
+      type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+    applicationWorld2:
+      type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+    applicationWorld3:
+      type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+    applicationWorld4:
+      type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+    applicationWorld5:
+      type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
