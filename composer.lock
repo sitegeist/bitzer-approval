@@ -6494,7 +6494,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/bitzer.git",
-                "reference": "ea024bdb96df7fba95465f377965596ad38b894d"
+                "reference": "00ddac0b03ea55a581eb8c507d86a170f78f87a7"
             },
             "require": {
                 "doctrine/dbal": "*",
@@ -6512,7 +6512,7 @@
                 }
             },
             "description": "A content lifecycle task manager for Neos CMS",
-            "time": "2021-10-12T15:31:24+00:00"
+            "time": "2021-10-13T20:30:42+00:00"
         },
         {
             "name": "sitegeist/bitzer-approval",
@@ -6520,7 +6520,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/bitzer-approval.git",
-                "reference": "fa817a36e311dc58e514da597e358461ee62a9ba"
+                "reference": "c2221db14bb2031f5286e4988ed3a129056a4385"
             },
             "require": {
                 "neos/content-repository": "~7.0",
@@ -6538,7 +6538,7 @@
                 }
             },
             "description": "The approval plugin for the Bitzer content lifecycle task manager for Neos CMS",
-            "time": "2021-10-12T15:51:58+00:00"
+            "time": "2021-10-13T15:48:09+00:00"
         },
         {
             "name": "sitegeist/csvpo",
