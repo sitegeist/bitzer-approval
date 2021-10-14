@@ -28,12 +28,8 @@ final class PartialFigureEclipseVariant implements PseudoEnumInterface
         $this->value = $value;
     }
 
-    public static function from(?string $string = null): self
+    public static function from(string $string): self
     {
-        if($string === null) {
-            $string = self::VARIANT_IMAGELEFT;
-        }
-
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_IMAGELEFT
                 && $string !== self::VARIANT_IMAGERIGHT) {

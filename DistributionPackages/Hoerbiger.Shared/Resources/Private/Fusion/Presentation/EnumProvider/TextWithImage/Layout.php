@@ -28,12 +28,8 @@ final class Layout implements PseudoEnumInterface
         $this->value = $value;
     }
 
-    public static function from(?string $string = null): self
+    public static function from(string $string): self
     {
-        if($string === null) {
-            $string = self::VALUE_IMAGEFIRST;
-        }
-
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VALUE_IMAGEFIRST
                 && $string !== self::VALUE_IMAGELAST) {
