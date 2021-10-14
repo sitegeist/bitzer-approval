@@ -155,7 +155,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 ]), $identity)
             )
         );
-        $layout = Layout::from($textWithImageNode->getProperty('layout'));
+        $layout = Layout::from(
+            $textWithImageNode->getProperty('layout')
+                ?: Layout::VALUE_IMAGEFIRST
+        );
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
@@ -288,7 +291,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 )
             )
         );
-        $layout = Layout::from($dummyTextWithImageNode->getProperty('layout'));
+        $layout = Layout::from(
+            $dummyTextWithImageNode->getProperty('layout')
+                ?: Layout::VALUE_IMAGEFIRST
+        );
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
