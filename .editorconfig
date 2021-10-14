@@ -28,3 +28,6 @@ trim_trailing_whitespace = false
 
 [*.yaml.example]
 indent_size = 2
+
+[*.feature]
+indent_size = 2

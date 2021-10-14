@@ -47,7 +47,7 @@ final class EditorCommandController extends CommandController
         }
 
         $editorRole = new Role('Neos.Neos:RestrictedEditor');
-        $chiefEditorRole = new Role('Neos.Neos:Editor');
+        $chiefEditorRole = new Role('Hoerbiger.Shared:ChiefEditor');
 
         /** @var DoctrineCollection<int,Account> $accounts */
         $accounts = $editor->getAccounts();
@@ -81,7 +81,7 @@ final class EditorCommandController extends CommandController
         }
 
         $editorRole = new Role('Neos.Neos:RestrictedEditor');
-        $chiefEditorRole = new Role('Neos.Neos:Editor');
+        $chiefEditorRole = new Role('Hoerbiger.Shared:ChiefEditor');
 
         /** @var DoctrineCollection<int,Account> $accounts */
         $accounts = $editor->getAccounts();
