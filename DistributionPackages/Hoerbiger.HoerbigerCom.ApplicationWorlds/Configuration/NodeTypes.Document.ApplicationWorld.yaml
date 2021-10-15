@@ -25,19 +25,26 @@
     label: 'Anwendungswelt'
 
   properties:
-    preview__overlay:
+    headline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      options:
+        preset: 'rte.plain'
+    preview__icon:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       ui:
-        label: 'Vorschaubild Overlay'
+        label: 'Anwendungswelt Symbol'
         inspector:
           group: 'preview'
-    preview__overlay__alt:
+    preview__icon__alt:
       type: 'string'
       ui:
         label: 'Alt-Text'
         inspector:
           group: 'preview'
-    preview__overlay__title:
+    preview__icon__title:
       type: 'string'
       ui:
         label: 'Title-Text'

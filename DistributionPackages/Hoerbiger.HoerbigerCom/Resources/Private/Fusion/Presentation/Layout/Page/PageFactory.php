@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  */
 
 use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory;
+use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Block\IntroSection\IntroSectionFactory as ApplicationWorldsIntroSectionFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -13,6 +14,8 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
+use Neos\ContentRepository\Domain\NodeType\NodeTypeConstraints;
+use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -21,13 +24,14 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forHomePage(TraversableNodeInterface $homepage): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
     {
-        return new Page(
-            new SiteHeader(),
-            Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main'))),
-            new SiteFooter()
-        );
+        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld');
+
+        /** @var SlotInterface $introSection */
+        $introSection = (new ApplicationWorldsIntroSectionFactory())->forSliderIntroSection($homepage, $targetNodeTypeName, $inBackend);
+
+        return $this->forDocumentWithIntroduction($homepage, $introSection);
     }
 
     public function forWebPage(TraversableNodeInterface $webPage, bool $inBackend): PageInterface
