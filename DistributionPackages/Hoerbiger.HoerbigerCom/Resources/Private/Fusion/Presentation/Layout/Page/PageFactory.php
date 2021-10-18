@@ -14,7 +14,6 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
-use Neos\ContentRepository\Domain\NodeType\NodeTypeConstraints;
 use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -28,7 +27,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     {
         $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld');
 
-        /** @var SlotInterface $introSection */
         $introSection = (new ApplicationWorldsIntroSectionFactory())->forSliderIntroSection($homepage, $targetNodeTypeName, $inBackend);
 
         return $this->forDocumentWithIntroduction($homepage, $introSection);
