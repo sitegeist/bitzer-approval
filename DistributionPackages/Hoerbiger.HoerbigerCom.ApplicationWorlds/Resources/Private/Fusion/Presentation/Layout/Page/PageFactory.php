@@ -23,7 +23,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): PageInterface
     {
-        /** @var SlotInterface $introSection */
         $introSection = (new IntroSectionFactory())->forApplicationWorld($applicationWorld, $inBackend);
 
         return $this->forDocumentWithIntroduction($applicationWorld, $introSection);

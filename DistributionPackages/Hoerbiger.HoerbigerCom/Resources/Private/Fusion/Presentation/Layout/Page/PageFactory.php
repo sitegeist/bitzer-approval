@@ -6,7 +6,6 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  */
 
 use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory;
-use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Block\IntroSection\IntroSectionFactory as ApplicationWorldsIntroSectionFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -25,9 +24,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
     {
-        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld');
+        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageIntroSectionContent');
 
-        $introSection = (new ApplicationWorldsIntroSectionFactory())->forSliderIntroSection($homepage, $targetNodeTypeName, $inBackend);
+        $introSection = (new IntroSectionFactory())->forSliderIntroSection($homepage, $targetNodeTypeName, $inBackend);
 
         return $this->forDocumentWithIntroduction($homepage, $introSection);
     }

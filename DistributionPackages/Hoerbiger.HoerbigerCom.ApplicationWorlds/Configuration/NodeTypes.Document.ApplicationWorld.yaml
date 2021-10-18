@@ -2,6 +2,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Tag.HomePageIntroSectionContent': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
