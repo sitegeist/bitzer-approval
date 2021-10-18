@@ -1,0 +1,16 @@
+'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList':
+  superTypes:
+    'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Content': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts': true
+  ui:
+    label: 'Produktliste'
+    icon: 'object-group'
+  options:
+    template:
+      childNodes:
+        'group1':
+          type: 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts'
