@@ -1,0 +1,31 @@
+'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts':
+  superTypes:
+    'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  ui:
+    icon: 'object-ungroup'
+    label: 'Produktgruppe'
+    inspector:
+      groups:
+        products:
+          label: 'Produkte'
+          icon: 'barcode'
+  properties:
+    name:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Titel eingeben'
+    products:
+      type: references
+      ui:
+        label: 'Produktseiten'
+        reloadIfChanged: true
+        inspector:
+          group: products
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.Catalog:Document.Product'

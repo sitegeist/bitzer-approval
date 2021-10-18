@@ -1,24 +1,35 @@
 prototype(Hoerbiger.Shared:Block.Card.ProductCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
-    renderer = afx`<dl>
-        <dt>media:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
-        </dd>
-        <dt>header:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} @if.1={presentationObject.header} />
-        </dd>
-        <dt>subheader:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheader} @if.1={presentationObject.subheader} />
-        </dd>
-        <dt>supportingText:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
-        </dd>
-        <dt>buttons:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <div class={[
+            "[Block.Card.ProductCard]",
+            "flex flex-col bg-neutral-lighter"
+        ]}>
+            <div class="w-full h-0 pt-ratio-square relative">
+                <div class="absolute inset-xs">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        @if.1={presentationObject.media}
+                        presentationObject={presentationObject.media}
+                    />
+                </div>
+            </div>
+            <div class="flex-grow flex flex-col p-xs pt-0 space-y-[.5rem]">
+                <div
+                    @if.1={presentationObject.header}
+                    class="font-sans-bold text-3xl min-h-[4.5rem]"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
+                </div>
+                <div
+                    @if.1={presentationObject.buttons}
+                    class="flex flex-col divide-y"
+                >
+                    <Neos.Fusion:Loop items={presentationObject.buttons.items}>
+                        <Neos.Fusion:Augmenter class="grid grid-cols-2-1fr-max gap-xs min-h-touch items-center">
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item}/>
+                        </Neos.Fusion:Augmenter>
+                    </Neos.Fusion:Loop>
+                </div>
+            </div>
+        </div>
+    `
 }
