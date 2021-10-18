@@ -6,7 +6,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  */
 
 use GuzzleHttp\Psr7\Uri;
-use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchForm;
+use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
@@ -24,7 +24,6 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
-use http\Exception\InvalidArgumentException;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -56,17 +55,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         }
         $media = $media->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center());
 
-        $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
-        $uriBuilder->setFormat('json');
-        $endpointUri = new Uri(
-            $uriBuilder->uriFor(
-                'query',
-                [],
-                'Stuff',
-                'Hoerbiger.HoerbigerCom',
-                'Application'
-            )
-        );
 
         return new Page(
             new SiteHeader(),
@@ -83,7 +71,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
-                    new SearchForm($endpointUri)
+                    (new SearchFormFactory())->create()
                 ),
             ]), $identity),
             new SiteFooter()

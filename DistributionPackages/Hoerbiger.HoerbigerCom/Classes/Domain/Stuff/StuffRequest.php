@@ -115,7 +115,7 @@ final class StuffRequest implements \JsonSerializable
     public function withPeriod(SearchPeriod $period): self
     {
         $referenceDate = new \DateTimeImmutable();
-        $referenceDate = $referenceDate->sub($period->getValue());
+        $referenceDate = $referenceDate->sub($period->getInterval());
 
         $request = $this->request;
         $request['query']['bool']['filter']['bool']['must'][] = [

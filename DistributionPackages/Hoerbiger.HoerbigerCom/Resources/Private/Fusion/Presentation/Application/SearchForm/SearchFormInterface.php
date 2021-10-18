@@ -11,4 +11,10 @@ use Psr\Http\Message\UriInterface;
 interface SearchFormInterface extends ComponentPresentationObjectInterface
 {
     public function getEndpointUri(): UriInterface;
+
+    public function getSortingPropertyOptions(): string;
+
+    public function getPeriodOptions(): string;
+
+    public function getLabels(): string;
 }

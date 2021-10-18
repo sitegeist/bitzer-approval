@@ -16,14 +16,41 @@ final class SearchForm extends AbstractComponentPresentationObject implements Se
 {
     private UriInterface $endpointUri;
 
+    private string $sortingPropertyOptions;
+
+    private string $periodOptions;
+
+    private string $labels;
+
     public function __construct(
-        UriInterface $endpointUri
+        UriInterface $endpointUri,
+        string $sortingPropertyOptions,
+        string $periodOptions,
+        string $labels
     ) {
         $this->endpointUri = $endpointUri;
+        $this->sortingPropertyOptions = $sortingPropertyOptions;
+        $this->periodOptions = $periodOptions;
+        $this->labels = $labels;
     }
 
     public function getEndpointUri(): UriInterface
     {
         return $this->endpointUri;
+    }
+
+    public function getSortingPropertyOptions(): string
+    {
+        return $this->sortingPropertyOptions;
+    }
+
+    public function getPeriodOptions(): string
+    {
+        return $this->periodOptions;
+    }
+
+    public function getLabels(): string
+    {
+        return $this->labels;
     }
 }

@@ -5,8 +5,57 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\HoerbigerCom\Domain\Stuff\SearchPeriod;
+use Hoerbiger\HoerbigerCom\Domain\Stuff\SortingProperty;
+use Neos\Flow\Annotations as Flow;
+use Neos\Flow\I18n\Service as LocalizationService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use Sitegeist\CsvPO\Domain\TranslationLabel;
+use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 
 final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
 {
+    /**
+     * @var TranslationLabelSourceRepository
+     * @Flow\Inject
+     */
+    protected $translationLabelSourceRepository;
+
+    /**
+     * @Flow\Inject
+     * @var LocalizationService
+     */
+    protected $localizationService;
+
+    public function create(): SearchForm
+    {
+        $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
+        $uriBuilder->setFormat('json');
+        $endpointUri = new Uri(
+            $uriBuilder->uriFor(
+                'query',
+                [],
+                'Stuff',
+                'Hoerbiger.HoerbigerCom',
+                'Application'
+            )
+        );
+
+        $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
+            'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'
+        );
+        $labels = array_map(function (TranslationLabel $label): string {
+            return $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+                $this->localizationService->getConfiguration()->getCurrentLocale()
+            ))->getTranslation() ?: $label->getIdentifier();
+        }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
+
+        return new SearchForm(
+            $endpointUri,
+            json_encode(SortingProperty::cases()) ?: '[]',
+            json_encode(SearchPeriod::cases()) ?: '[]',
+            json_encode($labels) ?: '{}'
+        );
+    }
 }
