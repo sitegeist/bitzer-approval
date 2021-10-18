@@ -5,15 +5,22 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
         title = 'Icon'
 
         props {
-            collectionName = 'Text'
-            iconName = 'Text'
+            collectionName = 'shared'
+            iconName = 'arrowRight'
         }
     }
 
-    renderer = afx`<dl>
-        <dt>collectionName:</dt>
-        <dd>{presentationObject.collectionName}</dd>
-        <dt>iconName:</dt>
-        <dd>{presentationObject.iconName}</dd>
-    </dl>`
+    renderer = Sitegeist.Stampede:Icon {
+        collection = ${presentationObject.collectionName}
+        icon = ${presentationObject.iconName}
+        class = Neos.Fusion:Join {
+            name = ${"[Block.Icon (" + presentationObject.collectionName + "::" + presentationObject.iconName + ")]"}
+            base = "fill-current"
+            @glue = " "
+        }
+        style = null
+        inline = true
+    }
+
+
 }

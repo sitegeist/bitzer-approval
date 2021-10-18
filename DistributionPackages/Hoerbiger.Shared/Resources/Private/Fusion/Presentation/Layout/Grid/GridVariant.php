@@ -15,6 +15,7 @@ final class GridVariant implements PseudoEnumInterface
 {
     const VARIANT_TWOCOLUMNS = 'twoColumns';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
+    const VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
 
     /**
      * @var array<string,self>|self[]
@@ -32,7 +33,8 @@ final class GridVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_TWOCOLUMNS
-                && $string !== self::VARIANT_TWOCOLUMNSGAP) {
+                && $string !== self::VARIANT_TWOCOLUMNSGAP
+                && $string !== self::VARIANT_THREECOLUMNSGAP) {
                 throw GridVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -51,6 +53,11 @@ final class GridVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_TWOCOLUMNSGAP);
     }
 
+    public static function threeColumnsGap(): self
+    {
+        return self::from(self::VARIANT_THREECOLUMNSGAP);
+    }
+
     public function getIsTwoColumns(): bool
     {
         return $this->value === self::VARIANT_TWOCOLUMNS;
@@ -61,6 +68,11 @@ final class GridVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TWOCOLUMNSGAP;
     }
 
+    public function getIsThreeColumnsGap(): bool
+    {
+        return $this->value === self::VARIANT_THREECOLUMNSGAP;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -68,7 +80,8 @@ final class GridVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_TWOCOLUMNS),
-            self::from(self::VARIANT_TWOCOLUMNSGAP)
+            self::from(self::VARIANT_TWOCOLUMNSGAP),
+            self::from(self::VARIANT_THREECOLUMNSGAP)
         ];
     }
 

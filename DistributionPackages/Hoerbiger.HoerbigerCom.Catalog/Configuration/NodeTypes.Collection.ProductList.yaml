@@ -7,5 +7,10 @@
       '*': false
       'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts': true
   ui:
-    label: 'Produktenliste'
+    label: 'Produktliste'
     icon: 'object-group'
+  options:
+    template:
+      childNodes:
+        'group1':
+          type: 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts'
