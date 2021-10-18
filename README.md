@@ -127,21 +127,21 @@ On the target server, the application is run in a docker container, so Flow comm
 ```sh
 cd /srv/dockerdata/www-dev
 
-docker-compose exec -T php php /var/www/html/develop/flow
+docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow
 ```
 
 **staging**
 ```sh
 cd /srv/dockerdata/www-stage
 
-docker-compose exec -T php php /var/www/html/staging/flow
+docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow
 ```
 
 **master**
 ```sh
 cd /srv/dockerdata/www-prod
 
-docker-compose exec -T php php /var/www/html/master/flow
+docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow
 ```
 
 

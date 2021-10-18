@@ -37,7 +37,10 @@ final class PartialFigureEclipseFactory extends AbstractComponentPresentationObj
         };
 
         return new PartialFigureEclipse(
-            PartialFigureEclipseVariant::from($node->getProperty('variant')),
+            PartialFigureEclipseVariant::from(
+                $node->getProperty('variant')
+                    ?: PartialFigureEclipseVariant::VARIANT_IMAGELEFT
+            ),
             $figure->withObjectFitAndPosition(
                 FigureObjectFit::cover(),
                 FigureObjectPosition::center()
