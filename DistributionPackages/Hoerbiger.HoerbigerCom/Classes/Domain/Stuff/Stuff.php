@@ -48,6 +48,22 @@ final class Stuff
         $this->searchClient->setContextNode($siteNode);
         /** @var TraversableNodeInterface $siteNode */
         $request = StuffRequest::create($siteNode);
+        $request = $request->withPage($query->getPage()->getValue());
+        $period = $query->getPeriod();
+        if ($period) {
+            $request = $request->withPeriod($period);
+        }
+        $request = $request->withSortingProperty($query->getSortingProperty());
+        $searchTerm = $query->getSearchTerm();
+        if ($searchTerm) {
+            $request = $request->withSearchTerm($searchTerm);
+            $request = $request->withMinimumScore(0.1);
+        }
+        $requestBeforeActiveFilters = clone $request;
+        if (!$query->getTypes()->isEmpty()) {
+            $request = $request->withTypes($query->getTypes());
+        }
+        $request = $request->withTypeFacet($requestBeforeActiveFilters->getFilters());
 
         $result = $this->searchClient->getIndex()
             ->request('GET', '/_search', [], json_encode($request) ?: null)
@@ -66,7 +82,8 @@ final class Stuff
         return new StuffResponse(
             (int)($totalNumberOfHits / StuffRequest::DEFAULT_LIMIT) + 1,
             new Things($things),
-            $totalNumberOfHits
+            $totalNumberOfHits,
+            TypeOptions::fromAggregations($result['aggregations'])
         );
     }
 

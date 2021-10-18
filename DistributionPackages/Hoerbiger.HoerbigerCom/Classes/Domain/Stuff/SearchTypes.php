@@ -11,7 +11,7 @@ use Neos\Flow\Annotations as Flow;
  * @Flow\Proxy(false)
  * @implements \IteratorAggregate<int,SearchType>
  */
-final class SearchTypes implements \IteratorAggregate, \Countable
+final class SearchTypes implements \IteratorAggregate, \Countable, \JsonSerializable
 {
     /**
      * @var array<int,SearchType>
@@ -42,5 +42,15 @@ final class SearchTypes implements \IteratorAggregate, \Countable
     public function count(): int
     {
         return count($this->searchTypes);
+    }
+
+    public function isEmpty(): bool
+    {
+        return empty($this->searchTypes);
+    }
+
+    public function jsonSerialize()
+    {
+        return $this->searchTypes;
     }
 }

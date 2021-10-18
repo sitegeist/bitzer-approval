@@ -91,6 +91,131 @@ final class StuffRequest implements \JsonSerializable
         ]);
     }
 
+    public function withPage(int $page): self
+    {
+        $request = $this->request;
+        $request['from'] = ($page - 1) * self::DEFAULT_LIMIT;
+
+        return new self($request);
+    }
+
+    public function withTypes(SearchTypes $types): self
+    {
+        $request = $this->request;
+
+        $request['query']['bool']['filter']['bool']['must'][] = [
+            'terms' => [
+                'searchType' => $types
+            ],
+        ];
+
+        return new self($request);
+    }
+
+    public function withPeriod(SearchPeriod $period): self
+    {
+        $referenceDate = new \DateTimeImmutable();
+        $referenceDate = $referenceDate->sub($period->getValue());
+
+        $request = $this->request;
+        $request['query']['bool']['filter']['bool']['must'][] = [
+            'range' => [
+                'dateModified' => [
+                    'gt' => $referenceDate->format('Y-m-d\TH:i:sP')
+                ]
+            ]
+        ];
+
+        return new self($request);
+    }
+
+    public function withSortingProperty(SortingProperty $sorting): self
+    {
+        $request = $this->request;
+
+        $request['sort'] = [
+            [
+                $sorting->getValue() => 'desc'
+            ]
+        ];
+
+        return new self($request);
+    }
+
+    public function withSearchTerm(SearchTerm $searchTerm): self
+    {
+        $request = $this->request;
+        $request['query']['bool']['should'][] = [
+            'multi_match' => [
+                'query' => $searchTerm->getValue(),
+                'fields' => ['neos_fulltext.*', 'title', 'headline', 'abstract', 'text'],
+                'analyzer' => 'standard',
+                'fuzziness' => 'AUTO'
+            ]
+        ];
+        $request['query']['bool']['should'][] = [
+            'query_string' => [
+                'query' => $searchTerm->getQueryStringValue(),
+                'fields' => ['neos_fulltext.*', 'title', 'headline', 'abstract', 'text'],
+                'analyzer' => 'whitespace',
+                'fuzziness' => 'AUTO'
+            ]
+        ];
+        $request['query']['bool']['minimum_should_match'] = 1;
+        $request['highlight'] = [
+            'number_of_fragments' => 0,
+            'fields' => [
+                'title' => new \stdClass,
+                'headline' => new \stdClass,
+                'abstract' => new \stdClass,
+                'text' => new \stdClass
+            ]
+        ];
+
+        return new self($request);
+    }
+
+    public function withMinimumScore(float $minimumScore): self
+    {
+        $request = $this->request;
+        $request['min_score'] = $minimumScore;
+
+        return new self($request);
+    }
+
+    /**
+     * @param array<string,mixed> $baseFilters
+     */
+    public function withTypeFacet(array $baseFilters): self
+    {
+        $request = $this->request;
+
+        $request['aggregations']['facets']['global'] = new \stdClass();
+        $request['aggregations']['facets']['aggregations']['searchType'] = [
+            'filter' => [
+                'bool' => $baseFilters
+            ],
+            'aggregations' => [
+                'searchType' => [
+                    'terms' => [
+                        'field' => 'searchType',
+                        'size' => 1000
+                    ]
+                ]
+            ],
+        ];
+
+        return new self($request);
+    }
+
+    /**
+     * @return array<string,mixed>
+     */
+    public function getFilters(): array
+    {
+        return $this->request['query']['bool'];
+    }
+
     /**
      * @return array<string,mixed> $request
      */

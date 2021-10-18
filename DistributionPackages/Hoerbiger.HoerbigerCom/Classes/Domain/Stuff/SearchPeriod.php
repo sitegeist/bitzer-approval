@@ -10,7 +10,7 @@ use Neos\Flow\Annotations as Flow;
 /**
  * @Flow\Proxy(false)
  */
-final class SearchPeriod implements \JsonSerializable
+final class SearchPeriod
 {
     const VALUE_P1W = 'P1W';
     const VALUE_P1M = 'P1M';
@@ -21,9 +21,9 @@ final class SearchPeriod implements \JsonSerializable
      */
     private static array $instances;
 
-    private string $value;
+    private \DateInterval $value;
 
-    private function __construct(string $value)
+    private function __construct(\DateInterval $value)
     {
         $this->value = $value;
     }
@@ -36,7 +36,7 @@ final class SearchPeriod implements \JsonSerializable
                 && $string !== self::VALUE_P1Y) {
                 throw SearchPeriodIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
-            self::$instances[$string] = new self($string);
+            self::$instances[$string] = new self(new \DateInterval($string));
         }
 
         return self::$instances[$string];
@@ -57,21 +57,6 @@ final class SearchPeriod implements \JsonSerializable
         return self::from(self::VALUE_P1Y);
     }
 
-    public function getIsP1W(): bool
-    {
-        return $this->value === self::VALUE_P1W;
-    }
-
-    public function getIsP1M(): bool
-    {
-        return $this->value === self::VALUE_P1M;
-    }
-
-    public function getIsP1Y(): bool
-    {
-        return $this->value === self::VALUE_P1Y;
-    }
-
     /**
      * @return array<int,self>|self[]
      */
@@ -84,17 +69,7 @@ final class SearchPeriod implements \JsonSerializable
         ];
     }
 
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
-
-    public function jsonSerialize(): string
+    public function getValue(): \DateInterval
     {
         return $this->value;
     }

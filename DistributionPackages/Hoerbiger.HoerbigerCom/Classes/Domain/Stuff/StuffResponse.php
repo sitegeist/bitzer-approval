@@ -19,11 +19,18 @@ final class StuffResponse implements \JsonSerializable
 
     private int $totalNumberOfResults;
 
-    public function __construct(int $numberOfPages, Things $results, int $totalNumberOfResults)
-    {
+    private TypeOptions $typeOptions;
+
+    public function __construct(
+        int $numberOfPages,
+        Things $results,
+        int $totalNumberOfResults,
+        TypeOptions $typeOptions
+    ) {
         $this->numberOfPages = $numberOfPages;
         $this->results = $results;
         $this->totalNumberOfResults = $totalNumberOfResults;
+        $this->typeOptions = $typeOptions;
     }
 
     /**
@@ -34,7 +41,8 @@ final class StuffResponse implements \JsonSerializable
         return [
             'numberOfPages' => $this->numberOfPages,
             'results' => $this->results,
-            'totalNumberOfResults' => $this->totalNumberOfResults
+            'totalNumberOfResults' => $this->totalNumberOfResults,
+            'typeOptions' => $this->typeOptions
         ];
     }
 }

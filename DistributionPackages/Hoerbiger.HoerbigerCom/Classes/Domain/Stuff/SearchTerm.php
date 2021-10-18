@@ -29,6 +29,11 @@ final class SearchTerm implements \JsonSerializable
         return $this->value;
     }
 
+    public function getQueryStringValue(): string
+    {
+        return '*' . addcslashes($this->value, '+-&|!(){}[]^"~*?:\\/') . '*';
+    }
+
     public function __toString(): string
     {
         return $this->value;
