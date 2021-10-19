@@ -1,0 +1,33 @@
+'Hoerbiger.HoerbigerCom.SuccessStories:Document.SuccessStory':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.DummyText': true
+          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+  ui:
+    icon: file-invoice
+    label: 'Success Story'
+  properties:
+    datePublished:
+      type: DateTime
+      ui:
+        label: 'Publikationsdatum'
+        inspector:
+          group: document
+    alternativeHeadline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      options:
+        preset: 'rte.plain'

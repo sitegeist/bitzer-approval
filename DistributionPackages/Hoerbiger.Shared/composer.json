@@ -29,7 +29,8 @@
     "autoload": {
         "psr-4": {
             "Hoerbiger\\Shared\\": "Classes/",
-            "Hoerbiger\\Shared\\Presentation\\": "Resources/Private/Fusion/Presentation/"
+            "Hoerbiger\\Shared\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+            "Hoerbiger\\Shared\\Integration\\": "Resources/Private/Fusion/Integration/"
         }
     },
     "extra": {

@@ -1,0 +1,8 @@
+Neos:
+  Media:
+    thumbnailPresets:
+      'card.square':
+        width: 550px
+        height: 550px
+        allowCropping: true
+        async: true

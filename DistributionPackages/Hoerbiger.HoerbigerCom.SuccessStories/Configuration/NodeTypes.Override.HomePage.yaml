@@ -1,0 +1,5 @@
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    magazine:
+      type: 'Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine'
+      position: before notfound
