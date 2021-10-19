@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3258ce09023c9242270062053f6a134d",
+    "content-hash": "a1cfa302f0113a113fc24875e9bfd1d1",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -10835,20 +10835,20 @@
         },
         {
             "name": "sitegeist/magicwand",
-            "version": "v4.3.0",
+            "version": "dev-configurableDumpCommand",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/Sitegeist.MagicWand.git",
-                "reference": "3feb9c9b06a0fbb3b8d103e7c4a092cce136e7c5"
+                "reference": "1857956b4cbb853c4f11163db3fd5afcc661c9b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sitegeist/Sitegeist.MagicWand/zipball/3feb9c9b06a0fbb3b8d103e7c4a092cce136e7c5",
-                "reference": "3feb9c9b06a0fbb3b8d103e7c4a092cce136e7c5",
+                "url": "https://api.github.com/repos/sitegeist/Sitegeist.MagicWand/zipball/1857956b4cbb853c4f11163db3fd5afcc661c9b5",
+                "reference": "1857956b4cbb853c4f11163db3fd5afcc661c9b5",
                 "shasum": ""
             },
             "require": {
-                "neos/flow": "^7.0 || dev-master"
+                "neos/flow": "~4.0 || ~5.0 || ~6.0 || ~7.0 || dev-master"
             },
             "type": "neos-package",
             "extra": {
@@ -10946,9 +10946,9 @@
             "description": "Tools that make the Flow/Neos development easier",
             "support": {
                 "issues": "https://github.com/sitegeist/Sitegeist.MagicWand/issues",
-                "source": "https://github.com/sitegeist/Sitegeist.MagicWand/tree/v4.3.0"
+                "source": "https://github.com/sitegeist/Sitegeist.MagicWand/tree/configurableDumpCommand"
             },
-            "time": "2021-02-23T15:46:02+00:00"
+            "time": "2021-10-14T14:15:28+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -11173,7 +11173,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "sitegeist/magicwand": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],
