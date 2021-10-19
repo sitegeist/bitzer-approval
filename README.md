@@ -166,13 +166,28 @@ make up
 
 ## Clone project data
 
-> To clone project data, you must be connected to the hoerbiger VPN
-> 
-> Also, your VPN user must be added to .ddev/config/ssh-config.txt as follows:
+To clone project data, you must be connected to the hoerbiger VPN
+
+Also, your VPN user must be added to .ddev/config/ssh-config.txt as follows:
 ```sh
 Host hoerbiger
     HostName 172.20.245.101
     User $VPN_USER
+```
+The VPN user must also be added to the magicwand configuration so in the Configuration/Development/Settings.Sitegeist.MagicWand.yaml:
+
+```sh
+Sitegeist:
+    MagicWand:
+        clonePresets:
+            develop:
+                user: $VPN_USER
+        
+            staging:
+                user: $VPN_USER
+        
+            master:
+                user: $VPN_USER
 ```
 
 You can now clone the project data directly with make. This command shows up the list and ask for the preset:
