@@ -1,0 +1,15 @@
+'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  ui:
+    icon: 'newspaper'
+    label: 'Top Success Stories'
+  properties:
+    headline:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
