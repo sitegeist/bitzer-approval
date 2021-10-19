@@ -19,6 +19,7 @@ hooks:
   - exec: ./flow flow:package:rescan
   post-start:
   - exec: sudo echo alias ll=\"ls -lhA\" >> ~/.bashrc
+  - exec: bash -c 'cat /etc/custom-config/ssh-config.txt >> ~/.ssh/config'
 omit_containers: [dba]
 use_dns_when_possible: true
 composer_version: "2"
