@@ -143,6 +143,15 @@ ssh-mariadb::
 clone::
 	@ddev composer clone
 
+clone-develop::
+	@ddev composer clone:develop
+
+clone-staging::
+	@ddev composer clone:staging
+
+clone-master::
+	@ddev composer clone:master
+
 ###############################################################################
 #                                DEPLOYMENT                                   #
 ###############################################################################
