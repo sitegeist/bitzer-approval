@@ -87,7 +87,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
                 return $link->withContent(
                     Collection::fromIterable([
-                        Value::fromString($productDocument->getProperty('headline')),
+                        Value::fromString($productDocument->getProperty('headline') ?: ''),
                         new Icon('shared', 'arrowRight')
                     ], function(SlotInterface $slot) {
                         return $slot;
