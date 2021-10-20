@@ -31,8 +31,8 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $linkFactory = new LinkFactory();
 
         return new Slidable(
-            Collection::fromNodes($targetNodes, function($targetNode) use ($inBackend, $subgraph, $stageFactory, $linkFactory) {
-                $link = $linkFactory->forLinkToDocument($targetNode, $subgraph);
+            Collection::fromNodes($targetNodes, function($targetNode) use ($inBackend, $stageFactory, $linkFactory) {
+                $link = $linkFactory->forLinkToDocument($targetNode);
 
                 /** @var SlotInterface $stage */
                 $stage = $stageFactory->forApplicationWorldSlideStage($targetNode, $inBackend);

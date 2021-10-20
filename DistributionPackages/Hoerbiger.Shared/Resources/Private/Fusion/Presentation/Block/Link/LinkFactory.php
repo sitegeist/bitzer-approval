@@ -9,6 +9,7 @@ use GuzzleHttp\Psr7\Uri;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Psr\Http\Message\UriInterface;
 
@@ -30,7 +31,20 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             : null;
     }
 
-    public function forLinkToDocument(TraversableNodeInterface $document, ContentContext $subgraph): Link
+    public function forLinkToDocument(TraversableNodeInterface $document): Link
+    {
+        $linkTarget = LinkTarget::forNode($document);
+
+        return new Link(
+            LinkVariant::label(),
+            $this->uriService->getNodeUri($document),
+            $linkTarget,
+            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            Value::fromString($document->getLabel())
+        );
+    }
+
+    public function forBreadcrumbItem(TraversableNodeInterface $document): Link
     {
         $linkTarget = LinkTarget::forNode($document);
 

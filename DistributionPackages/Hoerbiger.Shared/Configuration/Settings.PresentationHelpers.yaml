@@ -20,3 +20,4 @@ Neos:
       Shared.Box: Hoerbiger\Shared\Presentation\Layout\Box\BoxFactory
       Shared.Row: Hoerbiger\Shared\Presentation\Layout\Row\RowFactory
       Shared.Slidable: Hoerbiger\Shared\Presentation\Layout\Slidable\SlidableFactory
+      Shared.Breadcrumb: Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory

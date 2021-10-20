@@ -23,7 +23,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ContentContext $subgraph): NavigationCard
     {
-        $link = (new LinkFactory())->forLinkToDocument($document, $subgraph);
+        $link = (new LinkFactory())->forLinkToDocument($document);
 
         /** @var SlotInterface|null $figure */
         $figure = (new FigureFactory())->forPreviewImageMixin($document, $inBackend);

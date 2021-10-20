@@ -1,0 +1,26 @@
+prototype(Hoerbiger.Shared:Block.Breadcrumb) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Breadcrumb\\BreadcrumbInterface'
+
+    @styleguide {
+        title = 'Breadcrumb'
+
+        props {
+            links = '- Add Slot Content -'
+            glue {
+                collectionName = 'Text'
+                iconName = 'Text'
+            }
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>links:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.links} />
+        </dd>
+        <dt>glue:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.glue} />
+        </dd>
+    </dl>`
+}

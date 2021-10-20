@@ -1,7 +1,7 @@
 prototype(Hoerbiger.HoerbigerCom:Document.WebPage) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${Hoerbiger.Page.forWebPage(documentNode, documentNode.context.inBackend)}
+            presentationObject = ${Hoerbiger.Page.forWebPage(documentNode, site, documentNode.context.inBackend)}
         }
     }
 }

@@ -80,9 +80,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         $products = Collection::fromNodes(
             TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),
-            function(TraversableNodeInterface $productDocument) use ($subgraph){
+            function(TraversableNodeInterface $productDocument) {
                 $link = (new LinkFactory())
-                    ->forLinkToDocument($productDocument, $subgraph)
+                    ->forLinkToDocument($productDocument)
                     ->asContainer();
 
                 return $link->withContent(
