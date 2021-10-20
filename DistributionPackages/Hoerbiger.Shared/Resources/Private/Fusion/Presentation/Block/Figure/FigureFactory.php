@@ -39,6 +39,33 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             : null;
     }
 
+    public function forImageProperty(
+        TraversableNodeInterface $node,
+        bool $inBackend,
+        bool $hasFallbackInBackend = true,
+        string $propertyPrefix= 'image'
+    ): ?Figure {
+        $imageSource = null;
+
+        if ($node->getProperty($propertyPrefix)) {
+            $imageSource = new AssetImageSourceHelper($node->getProperty($propertyPrefix));
+            $imageSource->setAlt($node->getProperty($propertyPrefix.'__alt'));
+            $imageSource->setTitle($node->getProperty($propertyPrefix.'__title'));
+        } elseif ($inBackend && $hasFallbackInBackend) {
+            $imageSource = new DummyImageSourceHelper((string)$this->uriService->getDummyImageBaseUri());
+            $imageSource = $this->adjustDummyImageSource($imageSource, $node->getNodeType());
+        }
+
+        return $imageSource
+            ? new Figure(
+                $imageSource,
+                true,
+                null,
+                null
+            )
+            : null;
+    }
+
     public function forPreviewImageMixin(TraversableNodeInterface $targetDocument, bool $inBackend): ?Figure
     {
         $imageSource = null;
