@@ -2,3 +2,4 @@ Neos:
   Fusion:
     defaultContext:
       Catalog.Page: Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page\PageFactory
+      Catalog.ContentSlot: Hoerbiger\HoerbigerCom\Catalog\Integration\ContentSlotFactory

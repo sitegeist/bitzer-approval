@@ -137,6 +137,7 @@ module.exports = {
 
 			gridTemplateColumns: {
 				'2-max-1fr': 'max-content 1fr',
+				'2-1fr-max': '1fr max-content',
 			},
 
 			minWidth: {
