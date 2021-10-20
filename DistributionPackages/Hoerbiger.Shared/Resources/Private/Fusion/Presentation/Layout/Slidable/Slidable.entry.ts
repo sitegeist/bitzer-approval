@@ -30,10 +30,9 @@ export default ($node: Element): void => {
 					window.clearTimeout(timeout);
 				}
 				timeout = window.setTimeout(instance.next, DURATION);
-
 			};
 
-			/* Init slider. */
+			// Init slider.
 			const keenSlider = new KeenSlider($slidable, {
 				loop: true,
 				controls: false,
@@ -43,7 +42,7 @@ export default ($node: Element): void => {
 				slideChanged: onSlideChanged,
 			});
 
-			/* ProgressBar */
+			// ProgressBar
 			if ($progress instanceof HTMLElement) {
 				const tick = () => {
 					window.requestAnimationFrame(() => {
@@ -55,7 +54,7 @@ export default ($node: Element): void => {
 				tick();
 			}
 
-			/* JumperNavigation. */
+			// JumperNavigation.
 			if ($jumper instanceof NodeList) {
 				const onActivate = (index:number) => (e: MouseEvent) => {
 					e.preventDefault();
