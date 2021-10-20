@@ -1,19 +1,17 @@
 <?php declare(strict_types=1);
-namespace Hoerbiger\Shared\Presentation\Block\IntroSection;
+namespace Hoerbiger\Shared\Presentation\Layout\Stage;
 
 /*
  * This file is part of the Hoerbiger.Shared package.
  */
 
-use Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction\IntroSectionVariant as IntroductionIntroSectionVariant;
-use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
 /**
  * @Flow\Proxy(false)
  */
-final class IntroSectionVariant implements PseudoEnumInterface
+final class StageVariant implements PseudoEnumInterface
 {
     const VARIANT_FULLMEDIATEXTLEFT = 'fullMediaTextLeft';
     const VARIANT_FULLMEDIATEXTRIGHT = 'fullMediaTextRight';
@@ -37,7 +35,7 @@ final class IntroSectionVariant implements PseudoEnumInterface
             if ($string !== self::VARIANT_FULLMEDIATEXTLEFT
                 && $string !== self::VARIANT_FULLMEDIATEXTRIGHT
                 && $string !== self::VARIANT_DUO) {
-                throw IntroSectionVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
+                throw StageVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
         }

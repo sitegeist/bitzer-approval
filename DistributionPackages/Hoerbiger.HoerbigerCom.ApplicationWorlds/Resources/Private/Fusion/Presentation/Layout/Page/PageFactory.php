@@ -5,7 +5,7 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.ApplicationWorlds package.
  */
 
-use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Block\IntroSection\IntroSectionFactory;
+use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -23,12 +23,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): PageInterface
     {
-        $introSection = (new IntroSectionFactory())->forApplicationWorld($applicationWorld, $inBackend);
+        $stage = (new StageFactory())->forApplicationWorld($applicationWorld, $inBackend);
 
-        return $this->forDocumentWithIntroduction($applicationWorld, $introSection);
+        return $this->forDocumentWithIntroduction($applicationWorld, $stage);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $stage): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -39,7 +39,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
-                    $introSection
+                    $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),

@@ -5,7 +5,8 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
-use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory;
+use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -15,6 +16,7 @@ use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
@@ -22,21 +24,21 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, ContentContext $subgraph, bool $inBackend): PageInterface
     {
-        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageIntroSectionContent');
+        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageStageContent');
 
-        $introSection = (new IntroSectionFactory())->forSliderIntroSection($homepage, $targetNodeTypeName, $inBackend);
+        $stage = (new SlidableFactory())->forApplicationWorlds($homepage, $targetNodeTypeName, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($homepage, $introSection);
+        return $this->forDocumentWithIntroduction($homepage, $stage);
     }
 
     public function forWebPage(TraversableNodeInterface $webPage, bool $inBackend): PageInterface
     {
-        /** @var SlotInterface $introSection */
-        $introSection = (new IntroSectionFactory())->forFullMediaIntroduction($webPage, $inBackend);
+        /** @var SlotInterface $stage */
+        $stage = (new StageFactory())->forFullMediaIntroduction($webPage, $inBackend);
 
-        return $this->forDocumentWithIntroduction($webPage, $introSection);
+        return $this->forDocumentWithIntroduction($webPage, $stage);
     }
 
     public function forNotFoundPage(TraversableNodeInterface $notFoundPage): PageInterface
@@ -48,7 +50,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $stage): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -59,7 +61,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
-                    $introSection
+                    $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
