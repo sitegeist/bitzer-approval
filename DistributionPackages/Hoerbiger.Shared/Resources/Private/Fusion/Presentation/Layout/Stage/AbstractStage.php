@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Hoerbiger\Shared\Presentation\Block\IntroSection;
+namespace Hoerbiger\Shared\Presentation\Layout\Stage;
 
 /*
  * This file is part of the Hoerbiger.Shared package.
@@ -7,7 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\IntroSection;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Hoerbiger\Shared\Presentation\Block\Text\TextInterface;
@@ -15,38 +15,42 @@ use Hoerbiger\Shared\Presentation\Block\Text\TextInterface;
 /**
  * @Flow\Proxy(false)
  */
-abstract class AbstractIntroSection extends AbstractComponentPresentationObject implements IntroSectionInterface
+abstract class AbstractStage extends AbstractComponentPresentationObject implements StageInterface
 {
-    private IntroSectionVariant $variant;
+    private StageVariant $variant;
 
-    private HeadlineInterface $headline;
+    private ?HeadlineInterface $headline;
 
     private ?SlotInterface $subheadline;
 
-    private TextInterface $text;
+    private ?TextInterface $text;
 
-    private SlotInterface $media;
+    private ?SlotInterface $media;
+
+    private ?SlotInterface $mediaBackground;
 
     public function __construct(
-        IntroSectionVariant $variant,
-        HeadlineInterface $headline,
+        StageVariant $variant,
+        ?HeadlineInterface $headline,
         ?SlotInterface $subheadline,
-        TextInterface $text,
-        SlotInterface $media
+        ?TextInterface $text,
+        ?SlotInterface $media,
+        ?SlotInterface $mediaBackground
     ) {
         $this->variant = $variant;
         $this->headline = $headline;
         $this->subheadline = $subheadline;
         $this->text = $text;
         $this->media = $media;
+        $this->mediaBackground = $mediaBackground;
     }
 
-    public function getVariant(): IntroSectionVariant
+    public function getVariant(): StageVariant
     {
         return $this->variant;
     }
 
-    public function getHeadline(): HeadlineInterface
+    public function getHeadline(): ?HeadlineInterface
     {
         return $this->headline;
     }
@@ -56,13 +60,18 @@ abstract class AbstractIntroSection extends AbstractComponentPresentationObject 
         return $this->subheadline;
     }
 
-    public function getText(): TextInterface
+    public function getText(): ?TextInterface
     {
         return $this->text;
     }
 
-    public function getMedia(): SlotInterface
+    public function getMedia(): ?SlotInterface
     {
         return $this->media;
+    }
+
+    public function getMediaBackground(): ?SlotInterface
+    {
+        return $this->mediaBackground;
     }
 }

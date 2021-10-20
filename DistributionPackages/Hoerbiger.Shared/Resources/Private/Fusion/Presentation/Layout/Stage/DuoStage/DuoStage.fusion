@@ -1,7 +1,7 @@
-prototype(Hoerbiger.Shared:Block.IntroSection.DuoIntroSection) < prototype(Hoerbiger.Shared:Block.AbstractIntroSection) {
+prototype(Hoerbiger.Shared:Layout.Stage.DuoStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
     renderer = afx`
         <div class={[
-            "[Block.DuoIntroSection]",
+            "[Layout.DuoStage]",
             "relative w-full h-0 pt-ratio-2-1 bg-neutral-lighter"
         ]}>
             <div class="absolute inset-0 grid grid-cols-1 md:grid-cols-2 gap-sm">
@@ -13,9 +13,15 @@ prototype(Hoerbiger.Shared:Block.IntroSection.DuoIntroSection) < prototype(Hoerb
                         @if.1={presentationObject.subheadline}
                     />
                     <div class="">
-                        <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} />
+                        <Hoerbiger.Shared:Block.Headline
+                            @if.1={presentationObject.headline}
+                            presentationObject={presentationObject.headline}
+                        />
                     </div>
-                    <Hoerbiger.Shared:Block.Text presentationObject={presentationObject.text} />
+                    <Hoerbiger.Shared:Block.Text
+                        @if.1={presentationObject.text}
+                        presentationObject={presentationObject.text}
+                    />
                 </div>
 
                 <div
