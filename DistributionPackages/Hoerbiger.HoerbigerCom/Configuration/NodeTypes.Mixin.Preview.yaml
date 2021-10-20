@@ -19,6 +19,8 @@
         label: 'Vorschaubild'
         inspector:
           group: 'preview'
+      options:
+        preset: 'image.5_4'
     preview__image__alt:
       type: 'string'
       ui:
