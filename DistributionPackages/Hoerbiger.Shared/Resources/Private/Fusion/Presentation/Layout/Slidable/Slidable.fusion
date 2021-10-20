@@ -1,0 +1,50 @@
+prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\SlidableInterface'
+
+    @styleguide {
+        title = 'Slidable'
+
+        props {
+            slides = '- Add Slot Content -'
+            thumbs = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class="[Layout.Slidable] w-full relative flex flex-col">
+            <div
+                class="w-full flex overflow-hidden relative"
+                data-select="slidable"
+            >
+                <Neos.Fusion:Loop items={presentationObject.slides.items}>
+                    <div class="keen-slider__slide data-keen-slider-pe w-full min-w-full max-h-[70vh]">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                    </div>
+                </Neos.Fusion:Loop>
+            </div>
+            <div class="w-full h-[10px] relative overflow-hidden">
+                <div
+                    data-select="progress"
+                    class="absolute left-0 top-0 bottom-0 bg-brand"
+                ></div>
+            </div>
+
+            <div
+                @if.1={presentationObject.thumbs.items}
+                class="w-full flex overflow-hidden space-x-xs mt-xs"
+            >
+                <Neos.Fusion:Loop items={presentationObject.thumbs.items}>
+                    <div
+                        data-select="jumper"
+                        class={[
+                            "flex flex-1 items-center cursor-pointer overflow-hidden",
+                            "rounded-[10px] h-[70px] bg-neutral-lighter font-semibold px-[10px]"
+                        ]}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                    </div>
+                </Neos.Fusion:Loop>
+            </div>
+        </div>
+    `
+}

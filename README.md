@@ -144,51 +144,16 @@ cd /srv/dockerdata/www-prod
 docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow
 ```
 
-
-> The follwing part is not yet up to date
 ## Installation
 
-Create a project based on the sitegeist base distribution
-
-```sh
-composer create-project sitegeist/neos-base-distribution customer-folder
-```
-
-Migrate database and add Admin user
-```sh
-ddev flow doctrine:migrate
-ddev flow create:user --roles Administrator admin admin Admin User
-```
-
-Copy the included `Vendor.Site` package into the project namespace#
-
-```sh
-ddev flow package:adopt Vendor.Site Customer.Site
-```
-
-Require the Project package and remove the dependencies to `Vendor.Site` and `Sitegeist.Chantalle`
-
-```sh
-ddev composer require customer/site
-ddev composer remove vendor/site
-ddev composer remove sitegeist/chantalle
-```
-
-Initialize the project git repository
-```sh
-git init
-```
-
 Install dependencies via:
-
 ```sh
 make install
 ```
 
-Finally, perform a site import:
-
+Build frontend via 
 ```sh
-ddev flow site:import --package-key Customer.Site
+make build
 ```
 
 ## Running the site locally
@@ -201,7 +166,31 @@ make up
 
 ## Clone project data
 
-You can clone your projectdata directly with make. This command shows up the list and ask for the preset.
+To clone project data, you must be connected to the hoerbiger VPN
+
+Also, your VPN user must be added to .ddev/config/ssh-config.txt as follows:
+```sh
+Host hoerbiger
+    HostName 172.20.245.101
+    User $VPN_USER
+```
+The VPN user must also be added to the magicwand configuration so in the Configuration/Development/Settings.Sitegeist.MagicWand.yaml:
+
+```sh
+Sitegeist:
+    MagicWand:
+        clonePresets:
+            develop:
+                user: $VPN_USER
+        
+            staging:
+                user: $VPN_USER
+        
+            master:
+                user: $VPN_USER
+```
+
+You can now clone the project data directly with make. This command shows up the list and ask for the preset:
 
 ```
 make clone
@@ -210,13 +199,43 @@ make clone
 or type the preset directly:
 
 ```sh
-make clone
+make clone-develop
+
+make clone-staging
+
+make clone-master
 ```
 
 ## Versioning
 
-<!-- @TODO: Versioning -->
+This project follows the trunk-based approach for continuous integration.
+
+All branches are directly derived from master and named after the corresponding ticket's number, regardless of whether they're features, bugfixes or anything else.
+
+Ticket branches are independently merged to develop, then staging, then master. All branches except master can at all times be deleted and recreated from master.
+
+### Branching Model
+
+    12345                        +- Commit -+----+----+
+                                /            \    \    \
+    develop              +------------- Merge -+------------------------> develop
+                        /      /                     \    \
+    staging      +------------------------- Merge -+-----------------> staging
+                /     /      /                              \
+    master ----+-----+------+------------------------ Merge -+----------> master
+
 
 ## Deployment
 
-<!-- @TODO: Deployment -->
+> To deploy the project, you must be connected to the hoerbiger VPN
+
+Deployment can currently only be done manually and locally.
+To do this, connect to the hoerbiger VPN and run the respective commands:
+
+```sh
+make deploy-develop
+
+make deploy-staging
+
+make deploy-master
+```

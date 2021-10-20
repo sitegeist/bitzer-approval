@@ -2,10 +2,10 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
     <file original="EnumProvider.Introduction" product-name="Hoerbiger.HoerbigerCom" source-language="en" target-language="de" datatype="plaintext">
         <body>
-            <trans-unit id="introSectionVariant.fullMediaTextLeft" xml:space="preserve">
+            <trans-unit id="stageVariant.fullMediaTextLeft" xml:space="preserve">
                 <target>Text links ausrichten</target>
             </trans-unit>
-            <trans-unit id="introSectionVariant.fullMediaTextRight" xml:space="preserve">
+            <trans-unit id="stageVariant.fullMediaTextRight" xml:space="preserve">
                 <target>Text rechts ausrichten</target>
             </trans-unit>
         </body>

@@ -13,7 +13,8 @@
     "require": {
         "hoerbiger/hoerbigercom": "*",
         "hoerbiger/hoerbigercom-catalog": "*",
-        "hoerbiger/hoerbigercom-successstories": "*"
+        "hoerbiger/hoerbigercom-successstories": "*",
+        "hoerbiger/hoerbigercom-application-worlds": "*"
     },
     "require-dev": {
         "neos/buildessentials": "^7.1",
@@ -24,7 +25,7 @@
         "deployer/deployer": "^6.2",
         "editorconfig-checker/editorconfig-checker": "^10.0",
         "squizlabs/php_codesniffer": "^3.4",
-        "sitegeist/magicwand": "^4.3",
+        "sitegeist/magicwand": "dev-configurableDumpCommand",
         "phpstan/phpstan": "^0.12.42"
     },
     "suggest": {
@@ -61,6 +62,9 @@
             "./flow clone:list",
             "./flow clone:preset"
         ],
+        "clone:develop": "./flow clone:preset develop",
+        "clone:staging": "./flow clone:preset staging",
+        "clone:master": "./flow clone:preset master",
 
         "deploy:develop": "dep deploy develop -vv",
         "deploy:staging": "dep deploy staging -vv",

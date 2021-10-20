@@ -9,7 +9,7 @@ Neos:
       Shared.Text: Hoerbiger\Shared\Presentation\Block\Text\TextFactory
       Shared.Headline: Hoerbiger\Shared\Presentation\Block\Headline\HeadlineFactory
       Shared.Figure: Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory
-      Shared.IntroSection: Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory
+      Shared.Stage: Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory
       Shared.Icon: Hoerbiger\Shared\Presentation\Block\Icon\IconFactory
       Shared.Link: Hoerbiger\Shared\Presentation\Block\Link\LinkFactory
       Shared.Card: Hoerbiger\Shared\Presentation\Block\Card\CardFactory
@@ -19,3 +19,4 @@ Neos:
       Shared.Button: Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory
       Shared.Box: Hoerbiger\Shared\Presentation\Layout\Box\BoxFactory
       Shared.Row: Hoerbiger\Shared\Presentation\Layout\Row\RowFactory
+      Shared.Slidable: Hoerbiger\Shared\Presentation\Layout\Slidable\SlidableFactory

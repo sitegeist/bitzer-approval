@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "58c078682cabc7dd9a4c3706713112a8",
+    "content-hash": "7aaad5410817156859268e8eeb15e22b",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2184,6 +2184,33 @@
                     "Hoerbiger\\HoerbigerCom\\": "Classes/",
                     "Hoerbiger\\HoerbigerCom\\Presentation\\": "Resources/Private/Fusion/Presentation/",
                     "Hoerbiger\\HoerbigerCom\\Integration\\": "Resources/Private/Fusion/Integration/"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "hoerbiger/hoerbigercom-application-worlds",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "./DistributionPackages/Hoerbiger.HoerbigerCom.ApplicationWorlds",
+                "reference": "cba858563993d3951b80d312b2bb4d6b53e85cae"
+            },
+            "require": {
+                "hoerbiger/hoerbigercom": "*"
+            },
+            "type": "neos-hoerbiger",
+            "extra": {
+                "neos": {
+                    "package-key": "Hoerbiger.HoerbigerCom.ApplicationWorlds"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoerbiger\\HoerbigerCom\\ApplicationWorlds\\": "Classes/",
+                    "Hoerbiger\\HoerbigerCom\\ApplicationWorlds\\Presentation\\": "Resources/Private/Fusion/Presentation/"
                 }
             },
             "transport-options": {
@@ -9159,16 +9186,16 @@
         },
         {
             "name": "phpdocumentor/reflection-docblock",
-            "version": "5.2.2",
+            "version": "5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/ReflectionDocBlock.git",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556"
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/069a785b2141f5bcf49f3e353548dc1cce6df556",
-                "reference": "069a785b2141f5bcf49f3e353548dc1cce6df556",
+                "url": "https://api.github.com/repos/phpDocumentor/ReflectionDocBlock/zipball/622548b623e81ca6d78b721c5e029f4ce664f170",
+                "reference": "622548b623e81ca6d78b721c5e029f4ce664f170",
                 "shasum": ""
             },
             "require": {
@@ -9179,7 +9206,8 @@
                 "webmozart/assert": "^1.9.1"
             },
             "require-dev": {
-                "mockery/mockery": "~1.3.2"
+                "mockery/mockery": "~1.3.2",
+                "psalm/phar": "^4.8"
             },
             "type": "library",
             "extra": {
@@ -9209,9 +9237,9 @@
             "description": "With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.",
             "support": {
                 "issues": "https://github.com/phpDocumentor/ReflectionDocBlock/issues",
-                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/master"
+                "source": "https://github.com/phpDocumentor/ReflectionDocBlock/tree/5.3.0"
             },
-            "time": "2020-09-03T19:13:55+00:00"
+            "time": "2021-10-19T17:43:47+00:00"
         },
         {
             "name": "phpdocumentor/type-resolver",
@@ -10887,20 +10915,20 @@
         },
         {
             "name": "sitegeist/magicwand",
-            "version": "v4.3.0",
+            "version": "dev-configurableDumpCommand",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/Sitegeist.MagicWand.git",
-                "reference": "3feb9c9b06a0fbb3b8d103e7c4a092cce136e7c5"
+                "reference": "1857956b4cbb853c4f11163db3fd5afcc661c9b5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sitegeist/Sitegeist.MagicWand/zipball/3feb9c9b06a0fbb3b8d103e7c4a092cce136e7c5",
-                "reference": "3feb9c9b06a0fbb3b8d103e7c4a092cce136e7c5",
+                "url": "https://api.github.com/repos/sitegeist/Sitegeist.MagicWand/zipball/1857956b4cbb853c4f11163db3fd5afcc661c9b5",
+                "reference": "1857956b4cbb853c4f11163db3fd5afcc661c9b5",
                 "shasum": ""
             },
             "require": {
-                "neos/flow": "^7.0 || dev-master"
+                "neos/flow": "~4.0 || ~5.0 || ~6.0 || ~7.0 || dev-master"
             },
             "type": "neos-package",
             "extra": {
@@ -10998,9 +11026,9 @@
             "description": "Tools that make the Flow/Neos development easier",
             "support": {
                 "issues": "https://github.com/sitegeist/Sitegeist.MagicWand/issues",
-                "source": "https://github.com/sitegeist/Sitegeist.MagicWand/tree/v4.3.0"
+                "source": "https://github.com/sitegeist/Sitegeist.MagicWand/tree/configurableDumpCommand"
             },
-            "time": "2021-02-23T15:46:02+00:00"
+            "time": "2021-10-14T14:15:28+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -11225,7 +11253,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "sitegeist/magicwand": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": [],

@@ -6,7 +6,6 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Application\ArticleOverview\ArticleOverviewFactory;
-use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -14,6 +13,7 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
@@ -36,8 +36,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     public function forMagazine(TraversableNodeInterface $magazine, bool $inBackend): PageInterface
     {
-        /** @var SlotInterface $introSection */
-        $introSection = (new IntroSectionFactory())->forFullMediaIntroduction($magazine, $inBackend);
+        /** @var SlotInterface $stage */
+        $stage = (new StageFactory())->forFullMediaIntroduction($magazine, $inBackend);
 
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -49,7 +49,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
                     Collection::fromIterable([
-                        $introSection,
+                        $stage,
                         new CacheSegment(
                             $this->articleOverviewFactory->forMagazine($magazine),
                             'Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList'
@@ -64,10 +64,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     public function forSuccessStory(TraversableNodeInterface $successStory, bool $inBackend): PageInterface
     {
-        /** @var SlotInterface $introSection */
-        $introSection = (new IntroSectionFactory())->forFullMediaIntroduction($successStory, $inBackend);
+        /** @var SlotInterface $stage */
+        $stage = (new StageFactory())->forFullMediaIntroduction($successStory, $inBackend);
 
-        return $this->forDocumentWithIntroduction($successStory, $introSection);
+        return $this->forDocumentWithIntroduction($successStory, $stage);
     }
 
     public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
