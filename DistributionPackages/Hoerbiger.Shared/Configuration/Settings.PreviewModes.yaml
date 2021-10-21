@@ -2,17 +2,33 @@ Neos:
   Neos:
     userInterface:
       editPreviewModes:
-        mobile:
+        min:
           isEditingMode: false
           isPreviewMode: true
           fusionRenderingPath: ""
-          title: "Mobile"
-          width: "480px"
-          height: "853px"
-        tablet:
+          title: "Minimal"
+          width: "640px"
+        md:
           isEditingMode: false
           isPreviewMode: true
           fusionRenderingPath: ""
-          title: "Tablet"
+          title: "Mittel"
           width: "768px"
-          height: "1024px"
+        lg:
+          isEditingMode: false
+          isPreviewMode: true
+          fusionRenderingPath: ""
+          title: "Groß"
+          width: "1024px"
+        xl:
+          isEditingMode: false
+          isPreviewMode: true
+          fusionRenderingPath: ""
+          title: "XL"
+          width: "1280px"
+        2xl:
+          isEditingMode: false
+          isPreviewMode: true
+          fusionRenderingPath: ""
+          title: "XXL"
+          width: "1536px"
