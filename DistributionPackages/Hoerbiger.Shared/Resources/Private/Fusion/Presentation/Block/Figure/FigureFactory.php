@@ -10,9 +10,35 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\DummyImageSourceHelper;
+use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 
 final class FigureFactory extends AbstractComponentPresentationObjectFactory
 {
+    private SourceSetProvider $sourceSetProvider;
+
+    public function __construct(SourceSetProvider $sourceSetProvider)
+    {
+        $this->sourceSetProvider = $sourceSetProvider;
+    }
+
+    public function forProductCard(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getSourceSetForPresets([
+                PresetIdentifier::sm(),
+                PresetIdentifier::xs()
+            ]),
+            new QualifiedPresetIdentifiers([
+                '(min-width: 768px)' => PresetIdentifier::sm()
+            ]),
+            '100vw',
+            FigureObjectFit::cover(),
+            FigureObjectPosition::center()
+        );
+    }
+
     public function forImageMixin(
         TraversableNodeInterface $node,
         bool $inBackend,
@@ -33,6 +59,9 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             ? new Figure(
                 $imageSource,
                 true,
+                $this->sourceSetProvider->getFullSet(),
+                new QualifiedPresetIdentifiers([]),
+                '100w',
                 null,
                 null
             )
@@ -60,6 +89,9 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             ? new Figure(
                 $imageSource,
                 true,
+                $this->sourceSetProvider->getFullSet(),
+                new QualifiedPresetIdentifiers([]),
+                '100w',
                 null,
                 null
             )
@@ -78,6 +110,9 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             return new Figure(
                 $imageSource,
                 true,
+                $this->sourceSetProvider->getFullSet(),
+                new QualifiedPresetIdentifiers([]),
+                '100w',
                 FigureObjectFit::cover(),
                 FigureObjectPosition::center()
             );

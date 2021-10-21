@@ -21,6 +21,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private FigureFactory $figureFactory;
+
+    public function __construct(FigureFactory $figureFactory)
+    {
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forApplicationWorld(TraversableNodeInterface $documents, bool $inBackend): SlotInterface
     {
         return Value::fromString('to be implemented');
@@ -57,8 +64,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                     false
                 )
                 : null,
-            (new FigureFactory())->forImageProperty($targetNode, $inBackend, true, 'preview__icon'),
-            (new FigureFactory())->forPreviewImageMixin($targetNode, $inBackend)
+            $this->figureFactory->forImageProperty($targetNode, $inBackend, true, 'preview__icon'),
+            $this->figureFactory->forPreviewImageMixin($targetNode, $inBackend)
         );
     }
 }

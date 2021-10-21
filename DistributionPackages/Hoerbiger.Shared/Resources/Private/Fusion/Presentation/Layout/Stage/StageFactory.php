@@ -21,9 +21,16 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private FigureFactory $figureFactory;
+
+    public function __construct(FigureFactory $figureFactory)
+    {
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forFullMediaIntroduction(TraversableNodeInterface $node, bool $inBackend): StageInterface
     {
-        $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
+        $media = $this->figureFactory->forImageMixin($node, $inBackend, true);
 
         if (!$media) {
             throw new \InvalidArgumentException('Introduction requires Layout.Figure for property media.');
@@ -49,7 +56,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
     public function forDuoIntroduction(TraversableNodeInterface $node, bool $inBackend): StageInterface
     {
-        $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
+        $media = $this->figureFactory->forImageMixin($node, $inBackend, true);
 
         if (!$media) {
             throw new \InvalidArgumentException('Introduction requires Layout.Figure for property media.');

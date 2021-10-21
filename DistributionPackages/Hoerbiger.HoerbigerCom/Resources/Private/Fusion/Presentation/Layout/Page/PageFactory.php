@@ -24,11 +24,21 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private SlidableFactory $slidableFactory;
+
+    private StageFactory $stageFactory;
+
+    public function __construct(SlidableFactory $slidableFactory, StageFactory $stageFactory)
+    {
+        $this->slidableFactory = $slidableFactory;
+        $this->stageFactory = $stageFactory;
+    }
+
     public function forHomePage(TraversableNodeInterface $homepage, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageStageContent');
 
-        $stage = (new SlidableFactory())->forApplicationWorlds($homepage, $targetNodeTypeName, $subgraph, $inBackend);
+        $stage = $this->slidableFactory->forApplicationWorlds($homepage, $targetNodeTypeName, $inBackend);
 
         return $this->forDocumentWithIntroduction($homepage, $stage);
     }
@@ -36,7 +46,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forWebPage(TraversableNodeInterface $webPage, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forFullMediaIntroduction($webPage, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $inBackend);
 
         return $this->forDocumentWithIntroduction($webPage, $stage);
     }

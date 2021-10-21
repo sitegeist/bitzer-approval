@@ -14,19 +14,25 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class CardFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ContentContext $subgraph): NavigationCard
+    private FigureFactory $figureFactory;
+
+    public function __construct(FigureFactory $figureFactory)
     {
-        $link = (new LinkFactory())->forLinkToDocument($document, $subgraph);
+        $this->figureFactory = $figureFactory;
+    }
+
+    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend): NavigationCard
+    {
+        $link = (new LinkFactory())->forLinkToDocument($document);
 
         /** @var SlotInterface|null $figure */
-        $figure = (new FigureFactory())->forPreviewImageMixin($document, $inBackend);
+        $figure = $this->figureFactory->forPreviewImageMixin($document, $inBackend);
 
         if ($figure) {
             $figure = $link->asContainer()->withContent($figure);
@@ -69,5 +75,4 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
             )
         );
     }
-
 }

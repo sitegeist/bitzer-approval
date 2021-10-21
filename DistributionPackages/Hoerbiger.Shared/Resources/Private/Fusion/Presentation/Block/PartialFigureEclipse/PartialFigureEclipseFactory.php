@@ -25,9 +25,16 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PartialFigureEclipseFactory extends AbstractComponentPresentationObjectFactory
 {
+    private FigureFactory $figureFactory;
+
+    public function __construct(FigureFactory $figureFactory)
+    {
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): PartialFigureEclipseInterface
     {
-        $figure = (new FigureFactory())->forImageMixin($node, $inBackend);
+        $figure = $this->figureFactory->forImageMixin($node, $inBackend);
         if (!$figure) {
             throw new \InvalidArgumentException('Image must be given for ImageOverLappedByText in frontend.');
         }
