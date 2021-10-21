@@ -21,16 +21,16 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
     ): ?ImageSourceHelperInterface {
         return $this->forImageProperty(
             $node, $inBackend,
-            $hasFallbackInBackend,
-            'image'
+            'image',
+            $hasFallbackInBackend
         );
     }
 
     public function forImageProperty(
         TraversableNodeInterface $node,
         bool $inBackend,
-        bool $hasFallbackInBackend = true,
-        string $propertyPrefix = 'image'
+        string $propertyPrefix,
+        bool $hasFallbackInBackend = true
     ): ?ImageSourceHelperInterface {
         $imageSource = null;
 

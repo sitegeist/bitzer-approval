@@ -7,6 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
 
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -15,15 +16,19 @@ use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class CardFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
     private FigureFactory $figureFactory;
 
-    public function __construct(FigureFactory $figureFactory)
-    {
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        FigureFactory $figureFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
         $this->figureFactory = $figureFactory;
     }
 
@@ -31,12 +36,10 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
     {
         $link = (new LinkFactory())->forLinkToDocument($document);
 
-        /** @var SlotInterface|null $figure */
-        $figure = $this->figureFactory->forPreviewImageMixin($document, $inBackend);
-
-        if ($figure) {
-            $figure = $link->asContainer()->withContent($figure);
-        }
+        $imageSource = $this->imageSourceFactory->forImageProperty($document, $inBackend, 'preview__image');
+        $figure = $imageSource
+            ? $link->asContainer()->withContent($this->figureFactory->forNavigationCard($imageSource))
+            : null;
 
         $headline = null;
         $headlineProperty = $document->getProperty('preview__headline')
