@@ -1,0 +1,45 @@
+prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
+    renderer = afx`
+        <div class={[
+            "[Layout.FullMediaStage (" + presentationObject.variant + ")]",
+            "relative w-full h-0 pt-ratio-2-1"
+        ]}>
+            <div
+                class="absolute inset-0 z-10"
+                @if.1={presentationObject.mediaBackground}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
+            </div>
+            <div class={[
+                "absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
+                "sm:bg-transparent sm:bg-gradient-to-t",
+                presentationObject.variant.isFullMediaTextLeft &&  "lg:bg-gradient-to-r",
+                presentationObject.variant.isFullMediaTextRight &&  "lg:bg-gradient-to-l"
+
+            ]}></div>
+            <div class={[
+                "absolute inset-md p-sm flex flex-col justify-center items-center",
+                "bg-transparent border-2 border-light  space-y-xs z-30 text-light",
+                "sm:top-auto sm:items-start",
+                "lg:-translate-y-1/2 lg:bottom-auto lg:top-1/2 lg:max-w-[35%] lg:w-full",
+                presentationObject.variant.isFullMediaTextLeft &&  "lg:right-auto",
+                presentationObject.variant.isFullMediaTextRight &&  "lg:left-auto"
+            ]}>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.subheadline}
+                    @if.1={presentationObject.subheadline}
+                />
+                <div class="text-center sm:text-left">
+                    <Hoerbiger.Shared:Block.Headline
+                        @if.1={presentationObject.headline}
+                        presentationObject={presentationObject.headline}
+                    />
+                </div>
+                <Hoerbiger.Shared:Block.Text
+                    @if.1={presentationObject.text}
+                    presentationObject={presentationObject.text}
+                />
+            </div>
+        </div>
+    `
+}

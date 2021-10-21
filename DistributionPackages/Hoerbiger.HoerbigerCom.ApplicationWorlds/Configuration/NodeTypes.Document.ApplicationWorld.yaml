@@ -1,0 +1,54 @@
+'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Tag.HomePageStageContent': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.DummyText': true
+          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+  constraints:
+    nodeTypes:
+      '*': false
+  ui:
+    icon: compact-disc
+    label: 'Anwendungswelt'
+
+  properties:
+    headline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      options:
+        preset: 'rte.plain'
+    preview__icon:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      ui:
+        label: 'Anwendungswelt Symbol'
+        inspector:
+          group: 'preview'
+    preview__icon__alt:
+      type: 'string'
+      ui:
+        label: 'Alt-Text'
+        inspector:
+          group: 'preview'
+    preview__icon__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text'
+        inspector:
+          group: 'preview'
+

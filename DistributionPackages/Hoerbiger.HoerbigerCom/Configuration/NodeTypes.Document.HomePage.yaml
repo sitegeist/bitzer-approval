@@ -1,7 +1,6 @@
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
     main:

@@ -5,8 +5,8 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
-use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionFactory;
-use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionInterface;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -24,29 +24,29 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forCatalog(TraversableNodeInterface $catalog, bool $inBackend): PageInterface
     {
-        /** @var SlotInterface $introSection */
-        $introSection = (new IntroSectionFactory())->forFullMediaIntroduction($catalog, $inBackend);
+        /** @var SlotInterface $stage */
+        $stage = (new StageFactory())->forFullMediaIntroduction($catalog, $inBackend);
 
-        return $this->forDocumentWithIntroduction($catalog, $introSection);
+        return $this->forDocumentWithIntroduction($catalog, $stage);
     }
 
     public function forProductCategory(TraversableNodeInterface $productCategory, bool $inBackend): PageInterface
     {
-        /** @var SlotInterface $introSection */
-        $introSection = (new IntroSectionFactory())->forDuoIntroduction($productCategory, $inBackend);
+        /** @var SlotInterface $stage */
+        $stage = (new StageFactory())->forDuoIntroduction($productCategory, $inBackend);
 
-        return $this->forDocumentWithIntroduction($productCategory, $introSection);
+        return $this->forDocumentWithIntroduction($productCategory, $stage);
     }
 
     public function forProduct(TraversableNodeInterface $product, bool $inBackend): PageInterface
     {
-        /** @var SlotInterface $introSection */
-        $introSection = (new IntroSectionFactory())->forDuoIntroduction($product, $inBackend);
+        /** @var SlotInterface $stage */
+        $stage = (new StageFactory())->forDuoIntroduction($product, $inBackend);
 
-        return $this->forDocumentWithIntroduction($product, $introSection);
+        return $this->forDocumentWithIntroduction($product, $stage);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $stage): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -57,7 +57,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
-                    $introSection
+                    $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),

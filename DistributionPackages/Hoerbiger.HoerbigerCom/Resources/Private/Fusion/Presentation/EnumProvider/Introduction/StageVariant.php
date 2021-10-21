@@ -7,12 +7,12 @@ namespace Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
-use Hoerbiger\Shared\Presentation\Block\IntroSection\IntroSectionVariant as Source;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant as Source;
 
 /**
  * @Flow\Proxy(false)
  */
-final class IntroSectionVariant implements PseudoEnumInterface
+final class StageVariant implements PseudoEnumInterface
 {
 
     /**
