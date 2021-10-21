@@ -1,8 +1,8 @@
-prototype(Hoerbiger.Shared:Block.AbstractIntroSection) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\IntroSection\\IntroSectionInterface'
+prototype(Hoerbiger.Shared:Layout.AbstractStage) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\StageInterface'
 
     @styleguide {
-        title = 'IntroSection'
+        title = 'Stage'
 
         props {
             variant = 'fullMedia'
@@ -17,6 +17,7 @@ prototype(Hoerbiger.Shared:Block.AbstractIntroSection) < prototype(PackageFactor
                 content = '- Add Slot Content -'
             }
             media = '- Add Slot Content -'
+            mediaBackground = '- Add Slot Content -'
         }
     }
 }
