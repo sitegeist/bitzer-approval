@@ -34,15 +34,9 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
                 class="w-full flex overflow-hidden space-x-xs mt-xs"
             >
                 <Neos.Fusion:Loop items={presentationObject.thumbs.items}>
-                    <div
-                        data-select="jumper"
-                        class={[
-                            "flex flex-1 items-center cursor-pointer overflow-hidden",
-                            "rounded-[10px] h-[70px] bg-neutral-lighter font-semibold px-[10px]"
-                        ]}
-                    >
-                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
-                    </div>
+                    <Neos.Fusion:Augmenter data-select="jumper">
+                        <Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem presentationObject={item}/>
+                    </Neos.Fusion:Augmenter>
                 </Neos.Fusion:Loop>
             </div>
         </div>
