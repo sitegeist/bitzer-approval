@@ -7,11 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Integration;
 
 use Hoerbiger\Shared\Presentation\Block\Card\ProductCard\ProductCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
-use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -30,13 +26,21 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
+    private FigureFactory $figureFactory;
+
+    public function __construct(
+        FigureFactory $figureFactory
+    ) {
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList':
                 return $this->forProductListNode($contentNode);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts':
-                return $this->forGroupedProductsNode($contentNode, $subgraph, $inBackend);
+                return $this->forGroupedProductsNode($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -71,12 +75,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forGroupedProductsNode(TraversableNodeInterface $groupedProductListNode,ContentContext $subgraph, bool $inBackend): SlotInterface
+    public function forGroupedProductsNode(TraversableNodeInterface $groupedProductListNode, bool $inBackend): SlotInterface
     {
-        $figure = (new FigureFactory())->forImageMixin($groupedProductListNode, $inBackend);
-        if ($figure) {
-            $figure = $figure->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center());
-        }
+        $imageSource = (new ImageSourceFactory())->forImageMixin($groupedProductListNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forProductCard($imageSource)
+            : null;
 
         $products = Collection::fromNodes(
             TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),

@@ -23,10 +23,18 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
+
+    private StageFactory $stageFactory;
+
+    public function __construct(StageFactory $stageFactory)
+    {
+        $this->stageFactory = $stageFactory;
+    }
+
     public function forCatalog(TraversableNodeInterface $catalog, NodeInterface $siteNode, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forFullMediaIntroduction($catalog, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($catalog, $inBackend);
 
         return $this->forDocumentWithIntroduction($catalog, $siteNode, $stage);
     }
@@ -34,7 +42,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forProductCategory(TraversableNodeInterface $productCategory, NodeInterface $siteNode, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forDuoIntroduction($productCategory, $inBackend);
+        $stage = $this->stageFactory->forDuoIntroduction($productCategory, $inBackend);
 
         return $this->forDocumentWithIntroduction($productCategory, $siteNode, $stage);
     }
@@ -42,7 +50,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forProduct(TraversableNodeInterface $product, NodeInterface $siteNode, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forDuoIntroduction($product, $inBackend);
+        $stage = $this->stageFactory->forDuoIntroduction($product, $inBackend);
 
         return $this->forDocumentWithIntroduction($product, $siteNode, $stage);
     }

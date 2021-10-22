@@ -23,6 +23,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private StageFactory $stageFactory;
+
+    public function __construct(StageFactory $stageFactory)
+    {
+        $this->stageFactory = $stageFactory;
+    }
+
     public function forApplicationWorld(TraversableNodeInterface $applicationWorld, NodeInterface $siteNode, bool $inBackend): PageInterface
     {
         $identity = function (SlotInterface $slot) {
@@ -33,7 +40,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($applicationWorld, $siteNode);
 
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forApplicationWorld($applicationWorld, $inBackend);
+        $stage = $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
 
         return new Page(
             new SiteHeader(),

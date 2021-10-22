@@ -7,6 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
 
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -14,23 +15,30 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class CardFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ContentContext $subgraph): NavigationCard
+    private ImageSourceFactory $imageSourceFactory;
+    private FigureFactory $figureFactory;
+
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        FigureFactory $figureFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->figureFactory = $figureFactory;
+    }
+
+    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend): NavigationCard
     {
         $link = (new LinkFactory())->forLinkToDocument($document);
 
-        /** @var SlotInterface|null $figure */
-        $figure = (new FigureFactory())->forPreviewImageMixin($document, $inBackend);
-
-        if ($figure) {
-            $figure = $link->asContainer()->withContent($figure);
-        }
+        $imageSource = $this->imageSourceFactory->forImageProperty($document, $inBackend, 'preview__image');
+        $figure = $imageSource
+            ? $link->asContainer()->withContent($this->figureFactory->forNavigationCard($imageSource))
+            : null;
 
         $headline = null;
         $headlineProperty = $document->getProperty('preview__headline')
@@ -49,6 +57,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
         $abstractProperty = $document->getProperty('preview__description')
             ?: $document->getProperty('abstract')
             ?: null;
+
         if ($abstractProperty) {
             $text = new Text(
                 TextVariant::lightContrast(),
@@ -69,5 +78,4 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
             )
         );
     }
-
 }
