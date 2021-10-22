@@ -21,9 +21,16 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private StageFactory $stageFactory;
+
+    public function __construct(StageFactory $stageFactory)
+    {
+        $this->stageFactory = $stageFactory;
+    }
+
     public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): PageInterface
     {
-        $stage = (new StageFactory())->forApplicationWorld($applicationWorld, $inBackend);
+        $stage = $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
 
         return $this->forDocumentWithIntroduction($applicationWorld, $stage);
     }

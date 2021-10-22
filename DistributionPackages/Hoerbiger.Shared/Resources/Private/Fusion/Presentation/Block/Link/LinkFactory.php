@@ -30,7 +30,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             : null;
     }
 
-    public function forLinkToDocument(TraversableNodeInterface $document, ContentContext $subgraph): Link
+    public function forLinkToDocument(TraversableNodeInterface $document): Link
     {
         $linkTarget = LinkTarget::forNode($document);
 

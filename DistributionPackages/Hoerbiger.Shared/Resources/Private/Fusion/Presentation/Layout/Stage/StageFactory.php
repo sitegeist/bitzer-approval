@@ -6,8 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -21,12 +20,23 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
+    private FigureFactory $figureFactory;
+
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        FigureFactory $figureFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forFullMediaIntroduction(TraversableNodeInterface $node, bool $inBackend): StageInterface
     {
-        $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
-
-        if (!$media) {
-            throw new \InvalidArgumentException('Introduction requires Layout.Figure for property media.');
+        $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Introduction requires image for property media.');
         }
 
         return new FullMediaStage(
@@ -43,16 +53,15 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 false
             ),
             null,
-            $media->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center())
+            $this->figureFactory->forFullMediaStage($imageSource)
         );
     }
 
     public function forDuoIntroduction(TraversableNodeInterface $node, bool $inBackend): StageInterface
     {
-        $media = (new FigureFactory())->forImageMixin($node, $inBackend, true);
-
-        if (!$media) {
-            throw new \InvalidArgumentException('Introduction requires Layout.Figure for property media.');
+        $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Introduction requires image for property media.');
         }
 
         return new DuoStage(
@@ -68,7 +77,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 Editable::fromNodeProperty($node, 'abstract'),
                 false
             ),
-            $media->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center()),
+            $this->figureFactory->forDuoStage($imageSource),
             null
         );
     }
