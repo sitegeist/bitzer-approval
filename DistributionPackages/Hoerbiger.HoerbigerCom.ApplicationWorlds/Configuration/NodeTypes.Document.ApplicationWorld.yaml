@@ -1,0 +1,108 @@
+'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Tag.HomePageStageContent': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.DummyText': true
+          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+  constraints:
+    nodeTypes:
+      '*': false
+  ui:
+    icon: compact-disc
+    label: 'Anwendungswelt'
+    inspector:
+      tabs:
+        sliderPreview:
+          icon: 'arrows-alt-h'
+          position: 'after preview'
+      groups:
+        sliderPreview:
+          label: 'Vorschau Slider Homepage'
+          tab: 'sliderPreview'
+  properties:
+    slider__preview__headline:
+      type: 'string'
+      ui:
+        label: 'Slider: Überschrift'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__description:
+      type: 'string'
+      ui:
+        label: 'Slider: Kurzbeschreibung'
+        inspector:
+          group: 'sliderPreview'
+          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
+          editorOptions:
+            rows: 7
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__image:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      options:
+        preset: 'image.square'
+      ui:
+        label: 'Slider: Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__image__alt:
+      type: 'string'
+      ui:
+        label: 'Alt-Text Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__image__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__background:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      options:
+        preset: 'image.landscape'
+      ui:
+        label: 'Slider: Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__background__alt:
+      type: 'string'
+      ui:
+        label: 'Alt-Text Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__background__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+

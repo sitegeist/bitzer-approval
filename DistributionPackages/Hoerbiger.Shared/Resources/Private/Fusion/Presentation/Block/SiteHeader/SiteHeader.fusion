@@ -9,6 +9,22 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
     }
 
     renderer = afx`
-        <header class="w-full h-full max-h-[48px] bg-neutral text-neutral-contrast">HEADER GRAHAM</header>
+        <header class="w-full bg-light text-light-contrast border-b border-neutral">
+            <div class="max-w-content-full mx-auto px-md py-xs flex items-center">
+                <a
+                    class="contents"
+                    id="logoLink"
+                    href="/"
+                    target="_self"
+                >
+                <img
+                    id="logo"
+                    class="h-full max-h-[75px] max-w-[60vw]"
+                    src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
+                    {...props.logo}
+                />
+                </a>
+            </div>
+        </header>
     `
 }

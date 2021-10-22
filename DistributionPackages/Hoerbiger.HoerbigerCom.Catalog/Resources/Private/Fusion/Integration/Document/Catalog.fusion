@@ -1,7 +1,7 @@
 prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Catalog) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${Catalog.Page.forCatalog(documentNode, documentNode.context.inBackend)}
+            presentationObject = ${Catalog.Page.forCatalog(documentNode, site, documentNode.context.inBackend)}
         }
     }
 }

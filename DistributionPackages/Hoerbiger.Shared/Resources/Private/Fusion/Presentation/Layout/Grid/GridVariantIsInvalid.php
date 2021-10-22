@@ -14,6 +14,6 @@ final class GridVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid GridVariant, must be one of the defined constants. ', 1632754813);
+        return new self('The given value "' . $attemptedValue . '" is no valid GridVariant, must be one of the defined constants. ', 1634562245);
     }
 }

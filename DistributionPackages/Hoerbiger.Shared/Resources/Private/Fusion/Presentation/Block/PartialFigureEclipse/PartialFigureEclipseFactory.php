@@ -6,8 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -25,23 +24,36 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PartialFigureEclipseFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
+    private FigureFactory $figureFactory;
+
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        FigureFactory $figureFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): PartialFigureEclipseInterface
     {
-        $figure = (new FigureFactory())->forImageMixin($node, $inBackend);
-        if (!$figure) {
+        $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend);
+        if (!$imageSource) {
             throw new \InvalidArgumentException('Image must be given for ImageOverLappedByText in frontend.');
         }
+        $figure = $this->figureFactory->forPartialEclipse($imageSource);
 
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
         return new PartialFigureEclipse(
-            PartialFigureEclipseVariant::from($node->getProperty('variant')),
-            $figure->withObjectFitAndPosition(
-                FigureObjectFit::cover(),
-                FigureObjectPosition::center()
+            PartialFigureEclipseVariant::from(
+                $node->getProperty('variant')
+                    ?: PartialFigureEclipseVariant::VARIANT_IMAGELEFT
             ),
+            $figure,
             new Stack(
                 StackVariant::xs(),
                 Collection::fromIterable(array_filter([

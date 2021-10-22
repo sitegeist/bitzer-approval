@@ -1,0 +1,23 @@
+prototype(Hoerbiger.Shared:Layout.AbstractStage) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\StageInterface'
+
+    @styleguide {
+        title = 'Stage'
+
+        props {
+            variant = 'fullMedia'
+            headline {
+                variant = 'regular'
+                type = 'h1'
+                content = '- Add Slot Content -'
+            }
+            subheadline = '- Add Slot Content -'
+            text {
+                variant = 'regular'
+                content = '- Add Slot Content -'
+            }
+            media = '- Add Slot Content -'
+            mediaBackground = '- Add Slot Content -'
+        }
+    }
+}

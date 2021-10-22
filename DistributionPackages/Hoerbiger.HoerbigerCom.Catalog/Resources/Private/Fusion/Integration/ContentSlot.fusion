@@ -1,0 +1,5 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:ContentSlot) < prototype(Neos.Neos:ContentComponent) {
+    renderer = PackageFactory.AtomicFusion.PresentationObjects:Slot {
+        presentationObject = ${Catalog.ContentSlot.forContentNode(node, node.context, node.context.inBackend)}
+    }
+}

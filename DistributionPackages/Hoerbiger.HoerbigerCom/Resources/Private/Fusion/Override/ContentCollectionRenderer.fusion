@@ -1,3 +1,5 @@
 prototype(Neos.Neos:ContentCollectionRenderer) {
-    itemRenderer = Hoerbiger.HoerbigerCom:ContentSlot
+    itemRenderer {
+        default.type = ${String.split(q(node).property('_nodeType.name'), ':')[0] + ':ContentSlot'}
+    }
 }

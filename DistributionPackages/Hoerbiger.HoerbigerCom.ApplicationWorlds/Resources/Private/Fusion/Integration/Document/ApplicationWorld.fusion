@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld) <  prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${ApplicationWorlds.Page.forApplicationWorld(documentNode, site, documentNode.context.inBackend)}
+        }
+    }
+}

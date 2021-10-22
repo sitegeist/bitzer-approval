@@ -1,7 +1,6 @@
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
     main:
@@ -14,6 +13,8 @@
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.DummyText': true
+          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
 
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'

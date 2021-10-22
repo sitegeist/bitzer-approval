@@ -7,6 +7,7 @@ const MIN_TOUCH = '48px';
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
 const SPACES = {
+	ch: '1ch',
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
 	md: `calc(2 * ${SPACE_SM})`,
@@ -36,6 +37,7 @@ module.exports = {
 			neutral: {
 				lighter: '#F9F9F9',
 				DEFAULT: '#B2B5B7',
+				darker: '#8F8F8F',
 				contrast: '#fff',
 			},
 			brand: {
@@ -137,6 +139,7 @@ module.exports = {
 
 			gridTemplateColumns: {
 				'2-max-1fr': 'max-content 1fr',
+				'2-1fr-max': '1fr max-content',
 			},
 
 			minWidth: {
@@ -144,6 +147,10 @@ module.exports = {
 			},
 
 			minHeight: {
+				touch: MIN_TOUCH,
+			},
+
+			maxHeight: {
 				touch: MIN_TOUCH,
 			},
 
