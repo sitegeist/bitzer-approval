@@ -7,8 +7,6 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable;
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -64,7 +62,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                 return new ThumbNavigationItem(
                     $thumbnailImageSource
                         ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
-                    : null,
+                        : null,
                     $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: ''
                 );
             })

@@ -1,0 +1,35 @@
+prototype(Hoerbiger.Shared:Block.Breadcrumb) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Breadcrumb\\BreadcrumbInterface'
+
+    @styleguide {
+        title = 'Breadcrumb'
+
+        props {
+            links = '- Add Slot Content -'
+            currentDocumentItem = 'Current Document'
+            glue {
+                collectionName = 'Text'
+                iconName = 'Text'
+            }
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.BreadCrumb]",
+            "flex items-center space-x-ch h-full max-h-touch font-semibold text-xs"
+        ]}>
+            <Neos.Fusion:Loop items={presentationObject.links.items}>
+                <Neos.Fusion:Augmenter class="text-neutral-darker whitespace-nowrap min-h-touch uppercase flex items-center translate-y-[.1em]">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                </Neos.Fusion:Augmenter>
+                <Neos.Fusion:Augmenter class="h-[.5em] text-neutral-darker">
+                    <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.glue} />
+                </Neos.Fusion:Augmenter>
+            </Neos.Fusion:Loop>
+            <Neos.Fusion:Augmenter class="text-light-contrast whitespace-nowrap min-h-touch uppercase flex items-center translate-y-[.1em]">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.currentDocumentItem} />
+            </Neos.Fusion:Augmenter>
+        </div>
+    `
+}

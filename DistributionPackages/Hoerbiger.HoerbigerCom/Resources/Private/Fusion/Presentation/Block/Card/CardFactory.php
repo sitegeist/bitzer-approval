@@ -21,7 +21,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 final class CardFactory extends AbstractComponentPresentationObjectFactory
 {
     private ImageSourceFactory $imageSourceFactory;
-
     private FigureFactory $figureFactory;
 
     public function __construct(
@@ -58,6 +57,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
         $abstractProperty = $document->getProperty('preview__description')
             ?: $document->getProperty('abstract')
             ?: null;
+
         if ($abstractProperty) {
             $text = new Text(
                 TextVariant::lightContrast(),

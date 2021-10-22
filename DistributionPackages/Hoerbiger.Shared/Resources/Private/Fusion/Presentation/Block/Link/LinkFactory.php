@@ -43,6 +43,17 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
+    public function forBreadcrumbItem(TraversableNodeInterface $document): Link
+    {
+        return new Link(
+            LinkVariant::noStyles(),
+            $this->uriService->getNodeUri($document),
+            LinkTarget::self(),
+            null,
+            Value::fromString($document->getLabel())
+        );
+    }
+
     public function resolveRawLinkTargetUri(?string $rawLinkTarget, ContentContext $subgraph): ?UriInterface
     {
         $rawLinkTarget = $rawLinkTarget ?: '';
