@@ -6,8 +6,7 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -23,6 +22,18 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
+    private FigureFactory $figureFactory;
+
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        FigureFactory $figureFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forApplicationWorld(TraversableNodeInterface $documents, bool $inBackend): SlotInterface
     {
         return Value::fromString('to be implemented');
@@ -32,20 +43,18 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
     {
         $documentHeadlineContent = null;
 
-        if($targetNode->getProperty('slider__preview__headline')) {
-            $documentHeadlineContent = Value::fromString($targetNode->getProperty('slider__preview__headline'));
+        if($targetNode->getProperty('preview__headline')) {
+            $documentHeadlineContent = Value::fromString($targetNode->getProperty('preview__headline'));
         } elseif ($targetNode->getProperty('headline')) {
             $documentHeadlineContent = Value::fromString($targetNode->getProperty('headline'));
         }
 
-        $textContent = $targetNode->getProperty('slider__preview__description')
-            ? Value::fromString($targetNode->getProperty('slider__preview__description'))
+        $textContent = $targetNode->getProperty('preview__description')
+            ? Value::fromString($targetNode->getProperty('preview__description'))
             : null;
 
-        $media = (new FigureFactory())->forImageProperty($targetNode, $inBackend, true, 'slider__preview__image');
-        if ($media) {
-            $media = $media->withObjectFitAndPosition(FigureObjectFit::contain(), FigureObjectPosition::center());
-        }
+        $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'preview__icon');
+        $mediaBackgroundImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'preview__image');
 
         return new SlideStage(
             StageVariant::fullMediaTextRight(),
@@ -64,8 +73,12 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                     false
                 )
                 : null,
-                $media,
-                (new FigureFactory())->forImageProperty($targetNode, $inBackend, true, 'slider__preview__background')
+            $mediaImageSource
+                ? $this->figureFactory->forSlideStageIcon($mediaImageSource)
+                : null,
+            $mediaBackgroundImageSource
+                ? $this->figureFactory->forSlideStageBackground($mediaBackgroundImageSource)
+                : null
         );
     }
 }
