@@ -14,8 +14,10 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class ContentContainerVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
-    const VARIANT_BLANK = 'blank';
     const VARIANT_REGULARSM = 'regularSm';
+    const VARIANT_REGULARX = 'regularX';
+    const VARIANT_BLANK = 'blank';
+    const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
 
     /**
      * @var array<string,self>|self[]
@@ -33,8 +35,10 @@ final class ContentContainerVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_REGULAR
+                && $string !== self::VARIANT_REGULARSM
+                && $string !== self::VARIANT_REGULARX
                 && $string !== self::VARIANT_BLANK
-                && $string !== self::VARIANT_REGULARSM) {
+                && $string !== self::VARIANT_STAGEAFTERBREADCRUMB) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -48,14 +52,24 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_REGULAR);
     }
 
+    public static function regularSm(): self
+    {
+        return self::from(self::VARIANT_REGULARSM);
+    }
+
+    public static function regularX(): self
+    {
+        return self::from(self::VARIANT_REGULARX);
+    }
+
     public static function blank(): self
     {
         return self::from(self::VARIANT_BLANK);
     }
 
-    public static function regularSm(): self
+    public static function stageAfterBreadcrumb(): self
     {
-        return self::from(self::VARIANT_REGULARSM);
+        return self::from(self::VARIANT_STAGEAFTERBREADCRUMB);
     }
 
     public function getIsRegular(): bool
@@ -63,14 +77,24 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_REGULAR;
     }
 
+    public function getIsRegularSm(): bool
+    {
+        return $this->value === self::VARIANT_REGULARSM;
+    }
+
+    public function getIsRegularX(): bool
+    {
+        return $this->value === self::VARIANT_REGULARX;
+    }
+
     public function getIsBlank(): bool
     {
         return $this->value === self::VARIANT_BLANK;
     }
 
-    public function getIsRegularSm(): bool
+    public function getIsStageAfterBreadcrumb(): bool
     {
-        return $this->value === self::VARIANT_REGULARSM;
+        return $this->value === self::VARIANT_STAGEAFTERBREADCRUMB;
     }
 
     /**
@@ -80,8 +104,10 @@ final class ContentContainerVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_REGULAR),
+            self::from(self::VARIANT_REGULARSM),
+            self::from(self::VARIANT_REGULARX),
             self::from(self::VARIANT_BLANK),
-            self::from(self::VARIANT_REGULARSM)
+            self::from(self::VARIANT_STAGEAFTERBREADCRUMB)
         ];
     }
 
