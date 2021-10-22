@@ -9,7 +9,7 @@
       'Hoerbiger.HoerbigerCom:Content.MilestoneImage': true
   ui:
     label: 'Meilenstein'
-    icon: business-time
+    icon: clock
     inspector:
       groups:
         date:

@@ -164,4 +164,17 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             FigureObjectPosition::center()
         );
     }
+
+    public function forMileStoneImage(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100w',
+            FigureObjectFit::contain(),
+            FigureObjectPosition::center()
+        );
+    }
 }

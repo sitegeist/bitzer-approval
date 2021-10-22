@@ -32,6 +32,7 @@ use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
+use Neos\Flow\Tests\Functional\Command\TableNode;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -85,8 +86,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Collection.Milestones':
+                return $this->forMilestonesNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Milestone':
                 return $this->forMilestoneNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.MilestoneImage':
+                return $this->forMilestoneImageNode($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -326,8 +331,51 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
+    public function forMilestonesNode(TraversableNodeInterface $milestonesNode, bool $inBackend): SlotInterface
+    {
+        return Collection::fromNodes(
+            $milestonesNode->findChildNodes(),
+            function(TraversableNodeInterface $milestone) {
+                return Content::fromNode($milestone, 'Hoerbiger.HoerbigerCom:ContentSlot');
+            }
+        );
+    }
+
     public function forMilestoneNode(TraversableNodeInterface $milestoneNode, bool $inBackend): SlotInterface
     {
-        return Value::fromString('milestone element');
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return Collection::fromIterable(
+            array_filter([
+                new Text(
+                    TextVariant::lightContrast(),
+                    Editable::fromNodeProperty($milestoneNode, 'headline'),
+                    true
+                ),
+                new Text(
+                    TextVariant::lightContrast(),
+                    Editable::fromNodeProperty($milestoneNode, 'text'),
+                    true
+                ),
+                Collection::fromNodes(
+                    $milestoneNode->findChildNodes(),
+                    function(TraversableNodeInterface $milestoneImage) {
+                        return Content::fromNode($milestoneImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                    })
+            ]),
+            $identity
+        );
+    }
+
+    public function forMilestoneImageNode(TraversableNodeInterface $milestoneImageNode, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($milestoneImageNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element GalleryImage.');
+        }
+
+        return $this->figureFactory->forMileStoneImage($imageSource);
     }
 }

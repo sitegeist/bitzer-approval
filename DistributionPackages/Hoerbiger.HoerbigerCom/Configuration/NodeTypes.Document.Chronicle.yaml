@@ -4,11 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
   childNodes:
     main:
-      type: 'Neos.Neos:ContentCollection'
-      constraints:
-        nodeTypes:
-          '*': false
-          'Hoerbiger.HoerbigerCom:Content.Milestone': true
+      type: 'Hoerbiger.HoerbigerCom:Collection.Milestones'
   ui:
     icon: history
     label: 'Chronik'

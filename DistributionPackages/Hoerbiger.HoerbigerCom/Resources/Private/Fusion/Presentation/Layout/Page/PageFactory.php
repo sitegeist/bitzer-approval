@@ -66,12 +66,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($webPage, $siteNode, $stage);
     }
 
-    public function forChroniclePage(TraversableNodeInterface $chroniclePage, bool $inBackend): PageInterface
+    public function forChroniclePage(TraversableNodeInterface $chroniclePage, NodeInterface $siteNode, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forFullMediaIntroduction($chroniclePage, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($chroniclePage, $inBackend);
 
-        return $this->forDocumentWithIntroduction($chroniclePage, $stage);
+        return $this->forDocumentWithIntroduction($chroniclePage, $siteNode,$stage);
     }
 
     public function forNotFoundPage(TraversableNodeInterface $notFoundPage): PageInterface
