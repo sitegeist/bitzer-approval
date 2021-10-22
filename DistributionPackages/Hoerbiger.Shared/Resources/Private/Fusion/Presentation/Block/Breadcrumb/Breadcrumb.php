@@ -21,14 +21,18 @@ final class Breadcrumb extends AbstractComponentPresentationObject implements Br
 
     private IconInterface $glue;
 
+    private IconInterface $compactGlue;
+
     public function __construct(
         SlotInterface $links,
         SlotInterface $currentDocumentItem,
-        IconInterface $glue
+        IconInterface $glue,
+        IconInterface $compactGlue
     ) {
         $this->links = $links;
         $this->currentDocumentItem = $currentDocumentItem;
         $this->glue = $glue;
+        $this->compactGlue = $compactGlue;
     }
 
     public function getLinks(): SlotInterface
@@ -44,5 +48,10 @@ final class Breadcrumb extends AbstractComponentPresentationObject implements Br
     public function getGlue(): IconInterface
     {
         return $this->glue;
+    }
+
+    public function getCompactGlue(): IconInterface
+    {
+        return $this->compactGlue;
     }
 }
