@@ -6,6 +6,8 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -30,15 +32,20 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
     {
         $documentHeadlineContent = null;
 
-        if($targetNode->getProperty('preview__headline')) {
-            $documentHeadlineContent = Value::fromString($targetNode->getProperty('preview__headline'));
+        if($targetNode->getProperty('slider__preview__headline')) {
+            $documentHeadlineContent = Value::fromString($targetNode->getProperty('slider__preview__headline'));
         } elseif ($targetNode->getProperty('headline')) {
             $documentHeadlineContent = Value::fromString($targetNode->getProperty('headline'));
         }
 
-        $textContent = $targetNode->getProperty('preview__description')
-            ? Value::fromString($targetNode->getProperty('preview__description'))
+        $textContent = $targetNode->getProperty('slider__preview__description')
+            ? Value::fromString($targetNode->getProperty('slider__preview__description'))
             : null;
+
+        $media = (new FigureFactory())->forImageProperty($targetNode, $inBackend, true, 'slider__preview__image');
+        if ($media) {
+            $media = $media->withObjectFitAndPosition(FigureObjectFit::contain(), FigureObjectPosition::center());
+        }
 
         return new SlideStage(
             StageVariant::fullMediaTextRight(),
@@ -57,8 +64,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                     false
                 )
                 : null,
-            (new FigureFactory())->forImageProperty($targetNode, $inBackend, true, 'preview__icon'),
-            (new FigureFactory())->forPreviewImageMixin($targetNode, $inBackend)
+                $media,
+                (new FigureFactory())->forImageProperty($targetNode, $inBackend, true, 'slider__preview__background')
         );
     }
 }
