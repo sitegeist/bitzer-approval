@@ -5,13 +5,23 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
             "relative w-full h-0 pt-ratio-2-1"
         ]}>
             <div
-                class="absolute inset-0 z-10"
+                class="absolute inset-0 z-10 blur"
                 @if.1={presentationObject.mediaBackground}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
             </div>
+            <div
+                @if.1={presentationObject.media}
+                class={[
+                    "absolute top-0 bottom-0 pt-sm pb-sm pl-md pr-md flex items-center justify-center z-20",
+                    presentationObject.variant.isFullMediaTextLeft &&  "left-1/2 right-0",
+                    presentationObject.variant.isFullMediaTextRight &&  "left-0 right-1/2"
+                ]}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+            </div>
             <div class={[
-                "absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
+                "absolute z-30 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
                 "sm:bg-transparent sm:bg-gradient-to-t",
                 presentationObject.variant.isFullMediaTextLeft &&  "lg:bg-gradient-to-r",
                 presentationObject.variant.isFullMediaTextRight &&  "lg:bg-gradient-to-l"

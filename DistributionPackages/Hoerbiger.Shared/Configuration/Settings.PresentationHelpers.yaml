@@ -21,3 +21,4 @@ Neos:
       Shared.Row: Hoerbiger\Shared\Presentation\Layout\Row\RowFactory
       Shared.Slidable: Hoerbiger\Shared\Presentation\Layout\Slidable\SlidableFactory
       Shared.Breadcrumb: Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory
+      Shared.ThumbNavigationItem: Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemFactory
