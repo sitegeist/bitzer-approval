@@ -6,7 +6,6 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  */
 
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -22,10 +21,17 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private StageFactory $stageFactory;
+
+    public function __construct(StageFactory $stageFactory)
+    {
+        $this->stageFactory = $stageFactory;
+    }
+
     public function forCatalog(TraversableNodeInterface $catalog, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forFullMediaIntroduction($catalog, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($catalog, $inBackend);
 
         return $this->forDocumentWithIntroduction($catalog, $stage);
     }
@@ -33,7 +39,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forProductCategory(TraversableNodeInterface $productCategory, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forDuoIntroduction($productCategory, $inBackend);
+        $stage = $this->stageFactory->forDuoIntroduction($productCategory, $inBackend);
 
         return $this->forDocumentWithIntroduction($productCategory, $stage);
     }
@@ -41,7 +47,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forProduct(TraversableNodeInterface $product, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forDuoIntroduction($product, $inBackend);
+        $stage = $this->stageFactory->forDuoIntroduction($product, $inBackend);
 
         return $this->forDocumentWithIntroduction($product, $stage);
     }
