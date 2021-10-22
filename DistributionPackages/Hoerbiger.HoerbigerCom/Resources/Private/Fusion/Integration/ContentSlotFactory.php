@@ -37,6 +37,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -63,6 +64,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.Milestone':
+                return $this->forMilestoneNode($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -305,5 +308,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     : Collection::fromIterable([$text, $figure], $identity)
             )
         );
+    }
+
+    public function forMilestoneNode(TraversableNodeInterface $milestoneNode, bool $inBackend): SlotInterface
+    {
+        return Value::fromString('milestone element');
     }
 }

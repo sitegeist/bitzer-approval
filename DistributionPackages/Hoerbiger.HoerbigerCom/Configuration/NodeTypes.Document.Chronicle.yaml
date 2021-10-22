@@ -1,0 +1,14 @@
+'Hoerbiger.HoerbigerCom:Document.Chronicle':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Milestone': true
+  ui:
+    icon: history
+    label: 'Chronik'

@@ -1,0 +1,24 @@
+'Hoerbiger.HoerbigerCom:Content.Milestone':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.MilestoneImage': true
+  ui:
+    label: 'Meilenstein'
+    icon: business-time
+    inspector:
+      groups:
+        date:
+          label: 'Datum'
+  properties:
+    year:
+      type: integer
+      ui:
+        label: 'Jahr'
+        inspector:
+          group: date
+
