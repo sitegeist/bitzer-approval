@@ -7,7 +7,6 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
 
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -54,12 +53,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             return $slot;
         };
 
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $siteNode);
+
         return new Page(
             new SiteHeader(),
             Collection::fromIterable(array_filter([
-                (new BreadcrumbFactory())->forPage($document,$siteNode),
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))

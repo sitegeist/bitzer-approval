@@ -25,26 +25,28 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     public function forApplicationWorld(TraversableNodeInterface $applicationWorld, NodeInterface $siteNode, bool $inBackend): PageInterface
     {
-        $stage = (new StageFactory())->forApplicationWorld($applicationWorld, $inBackend);
-
-        return $this->forDocumentWithIntroduction($applicationWorld, $siteNode, $stage);
-    }
-
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document,  NodeInterface $siteNode, SlotInterface $stage): PageInterface
-    {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($applicationWorld, $siteNode);
+
+        /** @var SlotInterface $stage */
+        $stage = (new StageFactory())->forApplicationWorld($applicationWorld, $inBackend);
+
         return new Page(
             new SiteHeader(),
             Collection::fromIterable(array_filter([
-                (new BreadcrumbFactory())->forPage($document,$siteNode),
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
             new SiteFooter()
         );

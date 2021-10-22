@@ -26,13 +26,26 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forHomePage(TraversableNodeInterface $homepage, NodeInterface $siteNode, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, ContentContext $subgraph, bool $inBackend): PageInterface
     {
-        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageStageContent');
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
 
+        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageStageContent');
         $stage = (new SlidableFactory())->forApplicationWorlds($homepage, $targetNodeTypeName, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($homepage, $siteNode, $stage);
+        return new Page(
+            new SiteHeader(),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularSm(),
+                    $stage
+                ),
+                Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
+            ]), $identity),
+            new SiteFooter()
+        );
     }
 
     public function forWebPage(TraversableNodeInterface $webPage, NodeInterface $siteNode, bool $inBackend): PageInterface
@@ -58,12 +71,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             return $slot;
         };
 
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $siteNode);
+
         return new Page(
             new SiteHeader(),
             Collection::fromIterable(array_filter([
-                (new BreadcrumbFactory())->forPage($document,$siteNode),
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))

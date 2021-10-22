@@ -13,5 +13,7 @@ interface BreadcrumbInterface extends ComponentPresentationObjectInterface
 {
     public function getLinks(): SlotInterface;
 
+    public function getCurrentDocumentItem(): SlotInterface;
+
     public function getGlue(): IconInterface;
 }
