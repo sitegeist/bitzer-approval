@@ -24,31 +24,85 @@
   ui:
     icon: compact-disc
     label: 'Anwendungswelt'
-
+    inspector:
+      tabs:
+        sliderPreview:
+          icon: 'arrows-alt-h'
+          position: 'after preview'
+      groups:
+        sliderPreview:
+          label: 'Vorschau Slider Homepage'
+          tab: 'sliderPreview'
   properties:
-    headline:
+    slider__preview__headline:
+      type: 'string'
       ui:
-        inline:
+        label: 'Slider: Überschrift'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__description:
+      type: 'string'
+      ui:
+        label: 'Slider: Kurzbeschreibung'
+        inspector:
+          group: 'sliderPreview'
+          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
-      options:
-        preset: 'rte.plain'
-    preview__icon:
+            rows: 7
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
+      options:
+        preset: 'image.square'
       ui:
-        label: 'Anwendungswelt Symbol'
+        label: 'Slider: Hintergrundbild'
         inspector:
-          group: 'preview'
-    preview__icon__alt:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__image__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text'
+        label: 'Alt-Text Hintergrundbild'
         inspector:
-          group: 'preview'
-    preview__icon__title:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__image__title:
       type: 'string'
       ui:
-        label: 'Title-Text'
+        label: 'Title-Text Hintergrundbild'
         inspector:
-          group: 'preview'
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__background:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      options:
+        preset: 'image.landscape'
+      ui:
+        label: 'Slider: Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__background__alt:
+      type: 'string'
+      ui:
+        label: 'Alt-Text Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    slider__preview__background__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text Hintergrundbild'
+        inspector:
+          group: 'sliderPreview'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
