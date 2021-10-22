@@ -13,8 +13,9 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class LinkVariant implements PseudoEnumInterface
 {
-    const VARIANT_LABEL = 'label';
     const VARIANT_CONTAINER = 'container';
+    const VARIANT_LABEL = 'label';
+    const VARIANT_NOSTYLES = 'noStyles';
 
     /**
      * @var array<string,self>|self[]
@@ -31,8 +32,9 @@ final class LinkVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_LABEL
-                && $string !== self::VARIANT_CONTAINER) {
+            if ($string !== self::VARIANT_CONTAINER
+                && $string !== self::VARIANT_LABEL
+                && $string !== self::VARIANT_NOSTYLES) {
                 throw LinkVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -41,14 +43,24 @@ final class LinkVariant implements PseudoEnumInterface
         return self::$instances[$string];
     }
 
+    public static function container(): self
+    {
+        return self::from(self::VARIANT_CONTAINER);
+    }
+
     public static function label(): self
     {
         return self::from(self::VARIANT_LABEL);
     }
 
-    public static function container(): self
+    public static function noStyles(): self
     {
-        return self::from(self::VARIANT_CONTAINER);
+        return self::from(self::VARIANT_NOSTYLES);
+    }
+
+    public function getIsContainer(): bool
+    {
+        return $this->value === self::VARIANT_CONTAINER;
     }
 
     public function getIsLabel(): bool
@@ -56,9 +68,9 @@ final class LinkVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_LABEL;
     }
 
-    public function getIsContainer(): bool
+    public function getIsNoStyles(): bool
     {
-        return $this->value === self::VARIANT_CONTAINER;
+        return $this->value === self::VARIANT_NOSTYLES;
     }
 
     /**
@@ -67,8 +79,9 @@ final class LinkVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::VARIANT_CONTAINER),
             self::from(self::VARIANT_LABEL),
-            self::from(self::VARIANT_CONTAINER)
+            self::from(self::VARIANT_NOSTYLES)
         ];
     }
 

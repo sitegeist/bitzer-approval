@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
+use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
@@ -13,6 +14,7 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -24,21 +26,44 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forHomePage(TraversableNodeInterface $homepage, ContentContext $subgraph, bool $inBackend): PageInterface
+    private SlidableFactory $slidableFactory;
+
+    private StageFactory $stageFactory;
+
+    public function __construct(SlidableFactory $slidableFactory, StageFactory $stageFactory)
     {
-        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageStageContent');
-
-        $stage = (new SlidableFactory())->forApplicationWorlds($homepage, $targetNodeTypeName, $subgraph, $inBackend);
-
-        return $this->forDocumentWithIntroduction($homepage, $stage);
+        $this->slidableFactory = $slidableFactory;
+        $this->stageFactory = $stageFactory;
     }
 
-    public function forWebPage(TraversableNodeInterface $webPage, bool $inBackend): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageStageContent');
+        $stage = $this->slidableFactory->forApplicationWorlds($homepage, $targetNodeTypeName, $inBackend);
+
+        return new Page(
+            new SiteHeader(),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularSm(),
+                    $stage
+                ),
+                Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
+            ]), $identity),
+            new SiteFooter()
+        );
+    }
+
+    public function forWebPage(TraversableNodeInterface $webPage, NodeInterface $siteNode, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forFullMediaIntroduction($webPage, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $inBackend);
 
-        return $this->forDocumentWithIntroduction($webPage, $stage);
+        return $this->forDocumentWithIntroduction($webPage, $siteNode, $stage);
     }
 
     public function forChroniclePage(TraversableNodeInterface $chroniclePage, bool $inBackend): PageInterface
@@ -58,17 +83,24 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $stage): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $document, NodeInterface $siteNode, SlotInterface $stage): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $siteNode);
+
         return new Page(
             new SiteHeader(),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))

@@ -8,8 +8,6 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 
 /**
  * @Flow\Proxy(false)
@@ -20,6 +18,10 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
 
     private bool $isToBeLoadedLazily;
 
+    private SourceSet $sourceSet;
+
+    private Sizes $sizes;
+
     private ?FigureObjectFit $objectFit;
 
     private ?FigureObjectPosition $objectPosition;
@@ -27,11 +29,21 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
     public function __construct(
         ImageSourceHelperInterface $imageSource,
         bool $isToBeLoadedLazily,
+        SourceSet $sourceSet,
+        QualifiedPresetIdentifiers $sizes,
+        string $finalWidth,
         ?FigureObjectFit $objectFit,
         ?FigureObjectPosition $objectPosition
     ) {
         $this->imageSource = $imageSource;
         $this->isToBeLoadedLazily = $isToBeLoadedLazily;
+        $this->sourceSet = $sourceSet;
+        $this->sizes = new Sizes(
+            array_map(function (PresetIdentifier $presetIdentifier) use($sourceSet): string {
+                return $sourceSet->getWidth($presetIdentifier);
+            },$sizes->getIterator()->getArrayCopy()),
+            $finalWidth
+        );
         $this->objectFit = $objectFit;
         $this->objectPosition = $objectPosition;
     }
@@ -46,6 +58,16 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
         return $this->isToBeLoadedLazily;
     }
 
+    public function getSourceSet(): SourceSet
+    {
+        return $this->sourceSet;
+    }
+
+    public function getSizes(): Sizes
+    {
+        return $this->sizes;
+    }
+
     public function getObjectFit(): ?FigureObjectFit
     {
         return $this->objectFit;
@@ -56,13 +78,12 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
         return $this->objectPosition;
     }
 
-    public function withObjectFitAndPosition(FigureObjectFit $objectFit, FigureObjectPosition $objectPosition):self
+    public function withObjectFitAndPosition(FigureObjectFit $objectFit, FigureObjectPosition $objectPosition): self
     {
-        return new self(
-            $this->imageSource,
-            $this->isToBeLoadedLazily,
-            $objectFit,
-            $objectPosition
-        );
+        $clone = clone $this;
+        $clone->objectFit = $objectFit;
+        $clone->objectPosition = $objectPosition;
+
+        return $clone;
     }
 }
