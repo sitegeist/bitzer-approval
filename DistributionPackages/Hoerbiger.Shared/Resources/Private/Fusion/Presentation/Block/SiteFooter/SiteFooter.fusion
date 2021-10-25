@@ -5,10 +5,19 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
         title = 'SiteFooter'
 
         props {
+            socialLinks = '- Add Slot Content -'
+            navigationLinks = '- Add Slot Content -'
         }
     }
 
-    renderer = afx`
-        <footer class="w-full h-full max-h-[48px] bg-neutral text-neutral-contrast">Footer</footer>
-    `
+    renderer = afx`<dl>
+        <dt>socialLinks:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.socialLinks} />
+        </dd>
+        <dt>navigationLinks:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.navigationLinks} />
+        </dd>
+    </dl>`
 }

@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
+use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -16,6 +17,7 @@ use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
@@ -30,14 +32,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->stageFactory = $stageFactory;
     }
 
-    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, NodeInterface $siteNode, bool $inBackend): PageInterface
+    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subGraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($applicationWorld, $siteNode);
+        $breadcrumb = (new BreadcrumbFactory())->forPage($applicationWorld, $subGraph);
 
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
@@ -55,7 +57,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            new SiteFooter()
+            (new SiteFooterFactory())->forSubGraph($subGraph)
         );
     }
 }

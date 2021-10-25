@@ -10,15 +10,19 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
+use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class BreadcrumbFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forPage(TraversableNodeInterface $currentDocument, NodeInterface $siteNode): BreadcrumbInterface
+    public function forPage(TraversableNodeInterface $currentDocument, ContentContext $subgraph): BreadcrumbInterface
     {
-        $nodesOnPath = $siteNode->getContext()->getNodesOnPath($siteNode, $currentDocument);
+        $nodesOnPath = $subgraph->getNodesOnPath(
+            $subgraph->getCurrentSiteNode(),
+            $currentDocument);
+        //$nodesOnPath = $siteNode->getContext()->getNodesOnPath($siteNode, $currentDocument);
         $current = array_pop($nodesOnPath);
 
         $links = Collection::fromNodes(

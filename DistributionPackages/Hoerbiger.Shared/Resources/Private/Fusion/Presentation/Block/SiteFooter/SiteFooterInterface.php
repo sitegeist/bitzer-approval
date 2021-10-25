@@ -6,7 +6,11 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteFooter;
  */
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 interface SiteFooterInterface extends ComponentPresentationObjectInterface
 {
+    public function getSocialLinks(): ?SlotInterface;
+
+    public function getNavigationLinks(): ?SlotInterface;
 }

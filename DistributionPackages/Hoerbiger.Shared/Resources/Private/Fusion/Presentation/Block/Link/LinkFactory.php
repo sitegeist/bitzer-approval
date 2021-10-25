@@ -6,6 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  */
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -50,6 +51,30 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $this->uriService->getNodeUri($document),
             LinkTarget::self(),
             null,
+            Value::fromString($document->getLabel())
+        );
+    }
+
+    public function forSocialMediaIcon(string $iconName, string $socialMediaLink): Link
+    {
+        return new Link(
+            LinkVariant::container(),
+            new Uri($socialMediaLink),
+            LinkTarget::blank(),
+            null,
+            new Icon('shared', strtolower($iconName))
+        );
+    }
+
+    public function forFooterMenuItem(TraversableNodeInterface $document): Link
+    {
+        $linkTarget = LinkTarget::forNode($document);
+
+        return new Link(
+            LinkVariant::noStyles(),
+            $this->uriService->getNodeUri($document),
+            $linkTarget,
+            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
             Value::fromString($document->getLabel())
         );
     }
