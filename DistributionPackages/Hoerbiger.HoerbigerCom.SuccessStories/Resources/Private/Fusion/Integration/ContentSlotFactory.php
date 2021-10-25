@@ -14,7 +14,6 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
-use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -36,29 +35,23 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $this->figureFactory = $figureFactory;
     }
 
-    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site): SlotInterface
+    public function forContentNode(TraversableNodeInterface $contentNode, bool $inBackend): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories':
-                return $this->forTopSuccessStories($site, $inBackend);
+                return $this->forTopSuccessStories($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
     }
 
-    private function forTopSuccessStories(TraversableNodeInterface $site, bool $inBackend): SlotInterface
+    private function forTopSuccessStories(TraversableNodeInterface $topSuccessStories, bool $inBackend): SlotInterface
     {
-        $magazine = $site->findNamedChildNode(NodeName::fromString('magazine'));
-        $topSuccessStories = $magazine->findChildNodes(
-            $this->nodeTypeConstraintFactory->parseFilterString('Hoerbiger.HoerbigerCom.SuccessStories:Document.SuccessStory'),
-            3
-        );
-
         return new ContentContainer(
             ContentContainerVariant::regularSm(),
             new CacheSegment(
                 Collection::fromIterable(
-                    $topSuccessStories->toArray(),
+                    $topSuccessStories->getProperty('successStories') ?: [],
                     function (TraversableNodeInterface $successStory) use ($inBackend): ArticleCard {
                         $imageSource = $this->imageSourceFactory->forPreviewMixin(
                             $successStory,

@@ -17,13 +17,31 @@
   ui:
     icon: file-invoice
     label: 'Success Story'
+    inspector:
+      groups:
+        story:
+          label: 'Story'
+          icon: 'file-invoice'
+          position: 'before image'
   properties:
     datePublished:
       type: DateTime
       ui:
         label: 'Publikationsdatum'
         inspector:
-          group: document
+          group: story
+    applicationWorld:
+      type: reference
+      ui:
+        label: 'Anwendungswelt'
+        reloadIfChanged: true
+        inspector:
+          group: story
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
     alternativeHeadline:
       ui:
         inline:

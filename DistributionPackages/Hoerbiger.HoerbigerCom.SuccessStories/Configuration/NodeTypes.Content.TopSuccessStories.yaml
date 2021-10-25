@@ -1,10 +1,14 @@
 'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories':
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
-    'Hoerbiger.HoerbigerCom:Mixin.Image': true
   ui:
     icon: 'newspaper'
     label: 'Top Success Stories'
+    inspector:
+      groups:
+        stories:
+          label: 'Stories'
+          icon: 'newspaper'
   properties:
     headline:
       options:
@@ -13,3 +17,13 @@
         inline:
           editorOptions:
             placeholder: 'Bitte Überschrift eingeben'
+    successStories:
+      type: references
+      ui:
+        label: 'Stories'
+        reloadIfChanged: true
+        inspector:
+          group: 'stories'
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.SuccessStories:Document.SuccessStory'

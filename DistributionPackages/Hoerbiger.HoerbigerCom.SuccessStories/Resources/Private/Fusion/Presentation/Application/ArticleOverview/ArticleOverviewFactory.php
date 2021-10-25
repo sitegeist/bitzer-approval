@@ -88,6 +88,9 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
                     'alternativeHeadline' => $successStory->getProperty('alternativeHeadline') ?: '',
                     'headline' => $successStory->getProperty('preview__headline') ?: $successStory->getProperty('headline') ?: '',
                     'abstract' => $successStory->getProperty('preview__description') ?: $successStory->getProperty('abstract') ?: '',
+                    'applicationWorld' => $successStory->getProperty('applicationWorld')
+                        ? $successStory->getProperty('applicationWorld')->getLabel()
+                        : '',
                     'url' => $this->uriService->getNodeUri($successStory)
                 ];
             },
