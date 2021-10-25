@@ -6,10 +6,13 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
+use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -32,12 +35,15 @@ use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
+use Neos\Media\Domain\Model\Document;
 use Neos\Neos\Domain\Service\ContentContext;
+use Neos\Utility\Files;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -49,21 +55,29 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private PartialFigureEclipseFactory $partialFigureEclipseFactory;
 
+    private CsvPOTranslator $csvPOTranslator;
+
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
-        PartialFigureEclipseFactory $partialFigureEclipseFactory
+        PartialFigureEclipseFactory $partialFigureEclipseFactory,
+        CsvPOTranslator $csvPOTranslator
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
         $this->figureFactory = $figureFactory;
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
+        $this->csvPOTranslator = $csvPOTranslator;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
+            case 'Hoerbiger.HoerbigerCom:Collection.Downloads':
+                return $this->forDownloadsNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.Download':
+                return $this->forDownloadNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DummyText':
                 return $this->forDummyTextNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage':
@@ -87,6 +101,54 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
+    }
+
+    private function forDownloadsNode(TraversableNodeInterface $downloadsNode): SlotInterface
+    {
+        return new Grid(
+            GridVariant::threeColumnsGap(),
+            Collection::fromNodes(
+                $downloadsNode->findChildNodes(),
+                function(TraversableNodeInterface $node): Content {
+                    return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                }
+            )
+        );
+    }
+
+    private function forDownloadNode(TraversableNodeInterface $downloadNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+        $asset = $downloadNode->getProperty('asset');
+        $imageSource = ($asset instanceof Document)
+            ? $this->imageSourceFactory->forDocument($asset)
+            : null;
+
+        return new DownloadCard(
+            $imageSource
+                ? $this->figureFactory->forDownloadCard($imageSource)
+                : null,
+            Editable::fromNodeProperty($downloadNode, 'title'),
+            null,
+            Editable::fromNodeProperty($downloadNode, 'description'),
+            $asset instanceof Document
+                ? Collection::fromIterable([
+                    new Link(
+                        LinkVariant::label(),
+                        $this->uriService->getAssetUri($asset),
+                        LinkTarget::blank(),
+                        null,
+                        Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
+                    ),
+                    Value::fromString(
+                        $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getMediaType())
+                            . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
+                    )
+                ], $identity)
+            : null,
+        );
     }
 
     private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): SlotInterface

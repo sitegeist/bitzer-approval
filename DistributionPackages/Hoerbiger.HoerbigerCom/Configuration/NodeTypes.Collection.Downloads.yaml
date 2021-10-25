@@ -1,0 +1,20 @@
+'Hoerbiger.HoerbigerCom:Collection.Downloads':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.Download': true
+  ui:
+    label: 'Downloads'
+    icon: download
+  options:
+    template:
+      childNodes:
+        'download1':
+          type: 'Hoerbiger.HoerbigerCom:Content.Download'
+        'download2':
+          type: 'Hoerbiger.HoerbigerCom:Content.Download'
+        'download3':
+          type: 'Hoerbiger.HoerbigerCom:Content.Download'
