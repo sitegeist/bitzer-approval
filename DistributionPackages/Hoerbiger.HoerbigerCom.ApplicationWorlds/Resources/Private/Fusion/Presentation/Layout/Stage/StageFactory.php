@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -21,6 +22,18 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
+    private FigureFactory $figureFactory;
+
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        FigureFactory $figureFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forApplicationWorld(TraversableNodeInterface $documents, bool $inBackend): SlotInterface
     {
         return Value::fromString('to be implemented');
@@ -40,6 +53,9 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ? Value::fromString($targetNode->getProperty('preview__description'))
             : null;
 
+        $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'preview__icon');
+        $mediaBackgroundImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'preview__image');
+
         return new SlideStage(
             StageVariant::fullMediaTextRight(),
             $documentHeadlineContent
@@ -57,8 +73,12 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                     false
                 )
                 : null,
-            (new FigureFactory())->forImageProperty($targetNode, $inBackend, true, 'preview__icon'),
-            (new FigureFactory())->forPreviewImageMixin($targetNode, $inBackend)
+            $mediaImageSource
+                ? $this->figureFactory->forSlideStageIcon($mediaImageSource)
+                : null,
+            $mediaBackgroundImageSource
+                ? $this->figureFactory->forSlideStageBackground($mediaBackgroundImageSource)
+                : null
         );
     }
 }

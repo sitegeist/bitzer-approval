@@ -1,0 +1,39 @@
+prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\ThumbNavigationItem\\ThumbNavigationItemInterface'
+
+    @styleguide {
+        title = 'ThumbNavigationItem'
+
+        props {
+            figure {
+                imageSource = Sitegeist.Kaleidoscope:DummyImageSource {
+                height = 1920
+                width = 1080
+            }
+                isToBeLoadedLazily = true
+                objectFit = 'cover'
+                objectPosition = 'topLeft'
+            }
+            label = 'Text'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Layout.Slidable.ThumbNavigationItem]",
+            "flex flex-1 items-center cursor-pointer overflow-hidden",
+            "rounded-[10px] h-[70px] bg-neutral-lighter space-x-xs"
+        ]}>
+            <div class="max-w-[25%] w-full h-full relative">
+                <div class="absolute w-[150%] h-[150%] right-0 top-1/2 -translate-y-1/2">
+                    <Hoerbiger.Shared:Block.Figure
+                        @if.1={presentationObject.figure}
+                        presentationObject={presentationObject.figure}
+                    />
+                </div>
+            </div>
+
+            <span class="text-lg font-semibold">{presentationObject.label}</span>
+        </div>
+    `
+}

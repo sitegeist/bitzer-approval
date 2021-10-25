@@ -30,7 +30,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             : null;
     }
 
-    public function forLinkToDocument(TraversableNodeInterface $document, ContentContext $subgraph): Link
+    public function forLinkToDocument(TraversableNodeInterface $document): Link
     {
         $linkTarget = LinkTarget::forNode($document);
 
@@ -39,6 +39,17 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $this->uriService->getNodeUri($document),
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            Value::fromString($document->getLabel())
+        );
+    }
+
+    public function forBreadcrumbItem(TraversableNodeInterface $document): Link
+    {
+        return new Link(
+            LinkVariant::noStyles(),
+            $this->uriService->getNodeUri($document),
+            LinkTarget::self(),
+            null,
             Value::fromString($document->getLabel())
         );
     }

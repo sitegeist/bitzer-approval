@@ -29,15 +29,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     private ArticleOverviewFactory $articleOverviewFactory;
 
-    public function __construct(ArticleOverviewFactory $articleOverviewFactory)
+    private StageFactory $stageFactory;
+
+    public function __construct(ArticleOverviewFactory $articleOverviewFactory, StageFactory $stageFactory)
     {
         $this->articleOverviewFactory = $articleOverviewFactory;
+        $this->stageFactory = $stageFactory;
     }
 
     public function forMagazine(TraversableNodeInterface $magazine, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forFullMediaIntroduction($magazine, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $inBackend);
 
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -65,7 +68,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forSuccessStory(TraversableNodeInterface $successStory, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = (new StageFactory())->forFullMediaIntroduction($successStory, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($successStory, $inBackend);
 
         return $this->forDocumentWithIntroduction($successStory, $stage);
     }

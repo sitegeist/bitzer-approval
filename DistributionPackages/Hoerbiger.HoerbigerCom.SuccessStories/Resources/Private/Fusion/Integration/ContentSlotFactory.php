@@ -6,11 +6,9 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Integration;
  */
 
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
-use Hoerbiger\Shared\Presentation\Block\Button\Button;
-use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
-use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
@@ -26,6 +24,18 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
+    private FigureFactory $figureFactory;
+
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        FigureFactory $figureFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->figureFactory = $figureFactory;
+    }
+
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
@@ -44,17 +54,20 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             3
         );
 
-        $figureFactory = new FigureFactory();
         return new ContentContainer(
             ContentContainerVariant::regularSm(),
             new CacheSegment(
                 Collection::fromIterable(
                     $topSuccessStories->toArray(),
-                    function (TraversableNodeInterface $successStory) use ($figureFactory, $inBackend): ArticleCard {
-                        $previewImage = $successStory->getProperty('preview__image') ?: $successStory->getProperty('image');
+                    function (TraversableNodeInterface $successStory) use ($inBackend): ArticleCard {
+                        $imageSource = $this->imageSourceFactory->forPreviewMixin(
+                            $successStory,
+                            $inBackend,
+                            false
+                        );
                         return new ArticleCard(
-                            $previewImage
-                                ? $figureFactory->forPreviewImageMixin($successStory, $inBackend)
+                            $imageSource
+                                ? $this->figureFactory->forArticleCard($imageSource)
                                 : null,
                             Value::fromString(
                                 $successStory->getProperty('preview__headline')

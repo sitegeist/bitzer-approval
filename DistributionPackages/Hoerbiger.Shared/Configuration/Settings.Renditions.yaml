@@ -1,8 +1,26 @@
 Neos:
   Media:
     thumbnailPresets:
-      'card.square':
-        width: 550px
-        height: 550px
-        allowCropping: true
+      'xl':
+        width: 1820px
         async: true
+      'md':
+        width: 660px
+        async: true
+      'sm':
+        width: 440px
+        async: true
+      'xs':
+        width: 285px
+        async: true
+      'xl2':
+        width: 3640px
+        async: true
+      'md2':
+        width: 1320px
+        async: true
+      'sm2':
+        width: 880px
+        async: true
+      'xs2':
+        width: 570px

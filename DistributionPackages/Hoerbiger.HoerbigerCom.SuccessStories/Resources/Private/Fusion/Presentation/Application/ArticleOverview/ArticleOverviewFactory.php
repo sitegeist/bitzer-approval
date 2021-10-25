@@ -74,7 +74,7 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
                 $rendition = $image
                     ? $this->thumbnailService->getThumbnail(
                         $image,
-                        $this->thumbnailService->getThumbnailConfigurationForPreset('card.square')
+                        $this->thumbnailService->getThumbnailConfigurationForPreset('md')
                     )
                     : null;
 
