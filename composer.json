@@ -14,6 +14,7 @@
         "hoerbiger/hoerbigercom": "*",
         "hoerbiger/hoerbigercom-catalog": "*",
         "hoerbiger/hoerbigercom-successstories": "*",
+        "hoerbiger/hoerbigercom-pressarchive": "*",
         "hoerbiger/hoerbigercom-application-worlds": "*"
     },
     "require-dev": {

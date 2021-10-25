@@ -13,6 +13,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class GridVariant implements PseudoEnumInterface
 {
+    const VARIANT_ONECOLUMN = 'oneColumn';
     const VARIANT_TWOCOLUMNS = 'twoColumns';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
     const VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
@@ -32,7 +33,8 @@ final class GridVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_TWOCOLUMNS
+            if ($string !== self::VARIANT_ONECOLUMN
+                && $string !== self::VARIANT_TWOCOLUMNS
                 && $string !== self::VARIANT_TWOCOLUMNSGAP
                 && $string !== self::VARIANT_THREECOLUMNSGAP) {
                 throw GridVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
@@ -41,6 +43,11 @@ final class GridVariant implements PseudoEnumInterface
         }
 
         return self::$instances[$string];
+    }
+
+    public static function oneColumn(): self
+    {
+        return self::from(self::VARIANT_ONECOLUMN);
     }
 
     public static function twoColumns(): self
@@ -56,6 +63,11 @@ final class GridVariant implements PseudoEnumInterface
     public static function threeColumnsGap(): self
     {
         return self::from(self::VARIANT_THREECOLUMNSGAP);
+    }
+
+    public function isOneColumn(): bool
+    {
+        return $this->value === self::VARIANT_ONECOLUMN;
     }
 
     public function getIsTwoColumns(): bool
@@ -79,6 +91,7 @@ final class GridVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::VARIANT_ONECOLUMN),
             self::from(self::VARIANT_TWOCOLUMNS),
             self::from(self::VARIANT_TWOCOLUMNSGAP),
             self::from(self::VARIANT_THREECOLUMNSGAP)

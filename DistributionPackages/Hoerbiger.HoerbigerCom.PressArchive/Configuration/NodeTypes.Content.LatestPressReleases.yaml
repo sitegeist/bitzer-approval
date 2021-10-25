@@ -1,0 +1,28 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Content.LatestPressReleases':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    icon: 'newspaper'
+    label: 'Neueste Pressemitteilungen'
+  properties:
+    headline:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.LatestPressReleases': true
+
+'Hoerbiger.HoerbigerCom:Document.WebPage':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.LatestPressReleases': true
