@@ -8,6 +8,8 @@ prototype(Hoerbiger.HoerbigerCom:Application.SearchForm) < prototype(PackageFact
             data-sorting-property-options={presentationObject.sortingPropertyOptions}
             data-period-options={presentationObject.periodOptions}
             data-labels={presentationObject.labels}
+            data-language={presentationObject.language}
+            data-most-wanted-endpoint-uri={presentationObject.mostWantedEndpointUri}
         >
         </script>
     </div>`

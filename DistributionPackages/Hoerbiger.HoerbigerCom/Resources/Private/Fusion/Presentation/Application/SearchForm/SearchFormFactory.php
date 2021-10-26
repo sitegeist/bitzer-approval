@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm;
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Domain\Stuff\SearchPeriod;
 use Hoerbiger\HoerbigerCom\Domain\Stuff\SortingProperty;
+use Neos\ContentRepository\Domain\Service\Context as ContentContext;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\Service as LocalizationService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -28,7 +29,7 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
      */
     protected $localizationService;
 
-    public function create(): SearchForm
+    public function create(ContentContext $subgraph): SearchForm
     {
         $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
         $uriBuilder->setFormat('json');
@@ -37,6 +38,15 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
                 'query',
                 [],
                 'Stuff',
+                'Hoerbiger.HoerbigerCom',
+                'Application'
+            )
+        );
+        $mostWantedEndpointUri = new Uri(
+            $uriBuilder->uriFor(
+                'register',
+                [],
+                'WantedNode',
                 'Hoerbiger.HoerbigerCom',
                 'Application'
             )
@@ -51,11 +61,15 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
             ))->getTranslation() ?: $label->getIdentifier();
         }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
 
+        $languageChain = $subgraph->getDimensions()['language'];
+
         return new SearchForm(
             $endpointUri,
             json_encode(SortingProperty::cases()) ?: '[]',
             json_encode(SearchPeriod::cases()) ?: '[]',
-            json_encode($labels) ?: '{}'
+            json_encode($labels) ?: '{}',
+            reset($languageChain),
+            $mostWantedEndpointUri
         );
     }
 }

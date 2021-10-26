@@ -17,4 +17,8 @@ interface SearchFormInterface extends ComponentPresentationObjectInterface
     public function getPeriodOptions(): string;
 
     public function getLabels(): string;
+
+    public function getLanguage(): string;
+
+    public function getMostWantedEndpointUri(): UriInterface;
 }

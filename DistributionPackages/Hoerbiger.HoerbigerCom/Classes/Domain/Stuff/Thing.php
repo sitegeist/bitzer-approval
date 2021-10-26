@@ -12,11 +12,19 @@ use Neos\Flow\Annotations as Flow;
  */
 final class Thing implements \JsonSerializable
 {
+    private string $identifier;
+
     private string $content;
 
-    public function __construct(string $content)
+    public function __construct(string $identifier, string $content)
     {
+        $this->identifier = $identifier;
         $this->content = $content;
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
     }
 
     public function getContent(): string
@@ -30,6 +38,7 @@ final class Thing implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'identifier' => $this->identifier,
             'content' => $this->content
         ];
     }

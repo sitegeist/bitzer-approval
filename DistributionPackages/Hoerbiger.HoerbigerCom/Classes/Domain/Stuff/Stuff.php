@@ -121,11 +121,14 @@ final class Stuff
                 $card = $cardFactory->forThing($node);
         }
 
-        return new Thing($this->fusionRenderer->render(
-            '/<Hoerbiger.Shared:Block.Card.ArticleCard>/renderer',
-            [
-                'presentationObject' => $card
-            ]
-        ));
+        return new Thing(
+            $searchHit['_source']['neos_node_identifier'],
+            $this->fusionRenderer->render(
+                '/<Hoerbiger.Shared:Block.Card.ArticleCard>/renderer',
+                [
+                    'presentationObject' => $card
+                ]
+            )
+        );
     }
 }

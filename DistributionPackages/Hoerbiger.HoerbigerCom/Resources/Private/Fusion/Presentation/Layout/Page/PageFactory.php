@@ -113,7 +113,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
-                    (new SearchFormFactory())->create()
+                    (new SearchFormFactory())->create($siteNode->getContext())
                 ),
             ]), $identity),
             new SiteFooter()

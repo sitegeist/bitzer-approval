@@ -22,16 +22,24 @@ final class SearchForm extends AbstractComponentPresentationObject implements Se
 
     private string $labels;
 
+    private string $language;
+
+    private UriInterface $mostWantedEndpointUri;
+
     public function __construct(
         UriInterface $endpointUri,
         string $sortingPropertyOptions,
         string $periodOptions,
-        string $labels
+        string $labels,
+        string $language,
+        UriInterface $mostWantedEndpointUri
     ) {
         $this->endpointUri = $endpointUri;
         $this->sortingPropertyOptions = $sortingPropertyOptions;
         $this->periodOptions = $periodOptions;
         $this->labels = $labels;
+        $this->language = $language;
+        $this->mostWantedEndpointUri = $mostWantedEndpointUri;
     }
 
     public function getEndpointUri(): UriInterface
@@ -52,5 +60,15 @@ final class SearchForm extends AbstractComponentPresentationObject implements Se
     public function getLabels(): string
     {
         return $this->labels;
+    }
+
+    public function getLanguage(): string
+    {
+        return $this->language;
+    }
+
+    public function getMostWantedEndpointUri(): UriInterface
+    {
+        return $this->mostWantedEndpointUri;
     }
 }
