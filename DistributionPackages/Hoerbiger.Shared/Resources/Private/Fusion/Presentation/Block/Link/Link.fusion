@@ -19,7 +19,7 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
             rel={presentationObject.rel}
             rel.@if.1={presentationObject.rel}
             class={[
-                "[Block.Link]",
+                "[Block.Link (" + presentationObject.variant + ")]",
                 presentationObject.variant.isContainer && "w-full h-full",
                 presentationObject.variant.isLabel && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
             ]}

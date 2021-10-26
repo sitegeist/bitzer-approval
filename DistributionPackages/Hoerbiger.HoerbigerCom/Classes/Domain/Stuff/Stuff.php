@@ -29,16 +29,20 @@ final class Stuff
 
     private FusionRenderer $fusionRenderer;
 
+    private CardFactory $cardFactory;
+
     public function __construct(
         ElasticSearchClient $searchClient,
         StuffContentContextFactory $contentContextFactory,
         DocumentRepository $documentRepository,
-        FusionRenderer $fusionRenderer
+        FusionRenderer $fusionRenderer,
+        CardFactory $cardFactory
     ) {
         $this->searchClient = $searchClient;
         $this->contentContextFactory = $contentContextFactory;
         $this->documentRepository = $documentRepository;
         $this->fusionRenderer = $fusionRenderer;
+        $this->cardFactory = $cardFactory;
     }
 
     public function findThingsByQuery(StuffQuery $query): StuffResponse
@@ -92,14 +96,13 @@ final class Stuff
      */
     private function createThing(array $searchHit, ContentContext $contentContext): ?Thing
     {
-        $documentCardFactory = new CardFactory();
         switch ($searchHit['_source']['neos_type']) {
             case 'Hoerbiger.Shared:Adapter.Asset':
                 $document = $this->documentRepository->findByIdentifier($searchHit['_source']['neos_node_identifier']);
                 if (!$document instanceof Document) {
                     return null;
                 }
-                $card = $documentCardFactory->forDocument($document);
+                $card = $this->cardFactory->forDocument($document);
                 break;
             default:
                 $node = $contentContext->getNodeByIdentifier($searchHit['_source']['neos_node_identifier']);

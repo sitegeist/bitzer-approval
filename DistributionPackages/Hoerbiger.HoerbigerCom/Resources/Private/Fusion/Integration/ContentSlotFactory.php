@@ -9,6 +9,7 @@ use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -40,6 +41,26 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
+    private CardFactory $cardFactory;
+
+    private FigureFactory $figureFactory;
+
+    private PartialFigureEclipseFactory $partialFigureEclipseFactory;
+
+    public function __construct(
+        ImageSourceFactory $imageSourceFactory,
+        CardFactory $cardFactory,
+        FigureFactory $figureFactory,
+        PartialFigureEclipseFactory $partialFigureEclipseFactory
+    ) {
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->cardFactory = $cardFactory;
+        $this->figureFactory = $figureFactory;
+        $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
+    }
+
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
@@ -50,7 +71,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
                 return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
-                return $this->forTileNavigation($contentNode, $subgraph, $inBackend);
+                return $this->forTileNavigation($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
                 return $this->forTextNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
@@ -71,7 +92,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         /** @var SlotInterface $partialFigureEclipse */
-        $partialFigureEclipse = (new PartialFigureEclipseFactory())->forImageOverLappedByTextNode($node, $subgraph, $inBackend);
+        $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend);
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
@@ -79,18 +100,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forTileNavigation(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): SlotInterface
+    private function forTileNavigation(TraversableNodeInterface $node, bool $inBackend): SlotInterface
     {
-        $cardFactory = new CardFactory();
-
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Grid(
                 GridVariant::twoColumnsGap(),
                 Collection::fromNodes(
                     TraversableNodes::fromArray($node->getProperty('documents') ?: []),
-                    function (TraversableNodeInterface $document) use ($subgraph, $inBackend, $cardFactory)  {
-                        return $cardFactory->forNavigationTile($document, $inBackend, $subgraph);
+                    function (TraversableNodeInterface $document) use ($inBackend)  {
+                        return $this->cardFactory->forNavigationTile($document, $inBackend);
                     }
                 )
             )
@@ -129,10 +148,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             return $slot;
         };
 
-        $figure = (new FigureFactory())->forImageMixin($textWithImageNode, $inBackend);
-        if ($figure) {
-            $figure = $figure->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center());
-        }
+        $imageSource = $this->imageSourceFactory->forImageMixin($textWithImageNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forTwoColumnGrid($imageSource)
+            : null;
 
         $text = new Box(
             BoxVariant::textCenter(),
@@ -173,15 +192,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forImageNode(TraversableNodeInterface $imageNode, bool $inBackend): SlotInterface
     {
-        $figure = (new FigureFactory())->forImageMixin($imageNode, $inBackend);
-
-        if (!$figure) {
-            throw new \InvalidArgumentException('Property "image" is required for Content-Element Image.');
+        $imageSource = $this->imageSourceFactory->forImageMixin($imageNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element image.');
         }
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            $figure
+            $this->figureFactory->forFullWidthImage($imageSource)
         );
     }
 
@@ -214,13 +232,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forGalleryImageNode(TraversableNodeInterface $galleryImageNode, bool $inBackend): SlotInterface
     {
-        $figure = (new FigureFactory())->forImageMixin($galleryImageNode, $inBackend);
-
-        if(!$figure) {
-            throw new \InvalidArgumentException('Property "image" is required for Content-Element Image.');
+        $imageSource = $this->imageSourceFactory->forImageMixin($galleryImageNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element GalleryImage.');
         }
 
-        return $figure->withObjectFitAndPosition(FigureObjectFit::contain(), FigureObjectPosition::center());
+        return $this->figureFactory->forGalleryImage($imageSource);
     }
 
     public function forDummyTextNode(TraversableNodeInterface $dummyTextNode): SlotInterface
@@ -257,15 +274,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         bool $inBackend,
         ContentContext $subgraph
     ): SlotInterface {
-
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
-        $figure = (new FigureFactory())->forImageMixin($dummyTextWithImageNode, $inBackend);
-        if ($figure) {
-            $figure = $figure->withObjectFitAndPosition(FigureObjectFit::cover(), FigureObjectPosition::center());
-        }
+        $imageSource = $this->imageSourceFactory->forImageMixin($dummyTextWithImageNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forTwoColumnGrid($imageSource)
+            : null;
 
         $text = new DummyContainer(
                 $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/sample.png'),

@@ -9,6 +9,9 @@
           label: 'Key Visual'
           position: 'after document'
   properties:
+    image:
+      options:
+        preset: 'image.square'
     headline:
       ui:
         inline:
@@ -40,7 +43,10 @@
         adjust:
           position: after image
   properties:
-    introsection__variant:
+    image:
+      options:
+        preset: 'image.landscape'
+    stage__variant:
       type: 'string'
       defaultValue: 'fullMediaTextLeft'
       ui:
@@ -51,9 +57,9 @@
           group: adjust
           editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
   postprocessors:
-    introsection__variants:
+    stage__variants:
       postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
       postprocessorOptions:
-        enumName: Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction\IntroSectionVariant
+        enumName: Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction\StageVariant
         propertyNames:
-          - introsection__variant
+          - stage__variant
