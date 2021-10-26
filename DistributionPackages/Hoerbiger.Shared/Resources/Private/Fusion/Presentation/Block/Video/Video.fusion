@@ -1,0 +1,21 @@
+prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Video\\VideoInterface'
+
+    @styleguide {
+        title = 'Video'
+
+        props {
+            source = 'Text'
+            coverImage = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>source:</dt>
+        <dd>{presentationObject.source}</dd>
+        <dt>coverImage:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.coverImage} />
+        </dd>
+    </dl>`
+}
