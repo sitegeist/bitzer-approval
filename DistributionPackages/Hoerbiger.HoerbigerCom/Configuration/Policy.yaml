@@ -6,10 +6,15 @@ privilegeTargets:
   'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
     'Hoerbiger.HoerbigerCom:Stuff':
       matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\StuffController->queryAction())'
+    'Hoerbiger.HoerbigerCom:MostWanted':
+      matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\WantedNodeController->(register)Action())'
 
 roles:
   'Neos.Flow:Everybody':
     privileges:
       -
         privilegeTarget: 'Hoerbiger.HoerbigerCom:Stuff'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:MostWanted'
         permission: GRANT

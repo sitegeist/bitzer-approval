@@ -5,12 +5,16 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -32,13 +36,18 @@ use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
+use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
+/**
+ * @Flow\Scope("singleton")
+ */
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
     private ImageSourceFactory $imageSourceFactory;
@@ -49,19 +58,23 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private PartialFigureEclipseFactory $partialFigureEclipseFactory;
 
+    private WantedNodeRepository $wantedNodeRepository;
+
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
-        PartialFigureEclipseFactory $partialFigureEclipseFactory
+        PartialFigureEclipseFactory $partialFigureEclipseFactory,
+        WantedNodeRepository $wantedNodeRepository
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
         $this->figureFactory = $figureFactory;
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
+        $this->wantedNodeRepository = $wantedNodeRepository;
     }
 
-    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom:Content.DummyText':
@@ -78,6 +91,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
                 return $this->forImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.MostWanted':
+                return $this->forMostWantedNode($contentNode, $inBackend, $subgraph, $site);
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
                 return $this->forQuotationNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
@@ -200,6 +215,65 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             $this->figureFactory->forFullWidthImage($imageSource)
+        );
+    }
+
+    public function forMostWantedNode(TraversableNodeInterface $mostWantedNode, bool $inBackend, ContentContext $subgraph, TraversableNodeInterface $site): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        $imageSource = $this->imageSourceFactory->forImageMixin($mostWantedNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forTwoColumnGrid($imageSource)
+            : null;
+        $languages = $subgraph->getDimensions()['language'];
+        $language = reset($languages);
+
+        $text = new Box(
+            BoxVariant::textCenter(),
+            new Stack(
+                StackVariant::xs(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $mostWantedNode->getProperty('headline')
+                        ? new Headline(
+                        HeadlineVariant::important(),
+                        HeadlineType::h2(),
+                        Editable::fromNodeProperty($mostWantedNode, 'headline')
+                    )
+                        : null,
+                    new Text(
+                        TextVariant::lightContrast(),
+                        Editable::fromNodeProperty($mostWantedNode, 'text'),
+                        false
+                    ),
+                    new CacheSegment(
+                        Collection::fromIterable(
+                            $this->wantedNodeRepository->findMostWanted($language, $site),
+                            function (TraversableNodeInterface $node): LinkInterface {
+                                return new Link(
+                                    LinkVariant::label(),
+                                    $this->uriService->getNodeUri($node),
+                                    LinkTarget::self(),
+                                    null,
+                                    Value::fromString($node->getLabel())
+                                );
+                            }
+                        ),
+                        'Hoerbiger.HoerbigerCom:CacheSegment.MostWanted'
+                    )
+
+                ]), $identity)
+            )
+        );
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Grid(
+                GridVariant::twoColumns(),
+                Collection::fromIterable(array_filter([$figure, $text]), $identity)
+            )
         );
     }
 

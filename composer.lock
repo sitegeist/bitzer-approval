@@ -2466,7 +2466,7 @@
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.Shared",
-                "reference": "b9621077d0385b918ee32e970d55cc39fa09f883"
+                "reference": "dd9a1ede4d245009021c773f53e688b5d0618672"
             },
             "require": {
                 "flowpack/elasticsearch-contentrepositoryadaptor": "~8.1",
@@ -2498,7 +2498,8 @@
             "autoload": {
                 "psr-4": {
                     "Hoerbiger\\Shared\\": "Classes/",
-                    "Hoerbiger\\Shared\\Presentation\\": "Resources/Private/Fusion/Presentation/"
+                    "Hoerbiger\\Shared\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+                    "Hoerbiger\\Shared\\Integration\\": "Resources/Private/Fusion/Integration/"
                 }
             },
             "description": "Shared kernel for the Hoerbiger distribution",
