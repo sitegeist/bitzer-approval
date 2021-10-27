@@ -6,9 +6,13 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionList;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListVariant;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItem;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
@@ -30,6 +34,9 @@ use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
+use Hoerbiger\Shared\Presentation\Layout\Tabs\Tabs;
+use Hoerbiger\Shared\Presentation\Layout\Tabs\TabsFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -84,6 +91,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Collection.DefinitionList':
+                return $this->forDefinitionListNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
+                return $this->forDefinitionItemNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
+                return $this->forTabBox($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.TextTab':
+                return $this->forTextTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
+                return $this->forDefinitionListTabNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -321,5 +338,60 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     : Collection::fromIterable([$text, $figure], $identity)
             )
         );
+    }
+
+    public function forDefinitionListNode(TraversableNodeInterface $definitionListNode): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Box(
+                BoxVariant::decorative(),
+                (new DefinitionListFactory())->forDefinitionList($definitionListNode)
+            )
+        );
+    }
+
+    public function forDefinitionItemNode(TraversableNodeInterface $definitionNode): SlotInterface
+    {
+        return (new ListItemFactory())->forDefinition($definitionNode);
+    }
+
+    public function forTabBox(TraversableNodeInterface $tabBox): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Box(
+                BoxVariant::decorative(),
+                (new TabBoxFactory())->forTabBox($tabBox)
+            )
+        );
+    }
+
+    public function forTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new Stack(
+            StackVariant::xs(),
+            Collection::fromIterable(array_filter([
+                new Headline(
+                    HeadlineVariant::regular(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($textTabNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($textTabNode, 'text'),
+                    true
+                )
+            ]), $identity)
+        );
+    }
+
+    public function forDefinitionListTabNode(TraversableNodeInterface $definitionListTabNode): SlotInterface
+    {
+        return (new DefinitionListFactory())->forDefinitionList($definitionListTabNode);
     }
 }

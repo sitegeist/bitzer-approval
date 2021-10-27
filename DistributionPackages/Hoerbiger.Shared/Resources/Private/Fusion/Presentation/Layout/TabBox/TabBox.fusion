@@ -1,0 +1,47 @@
+prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\TabBox\\TabBoxInterface'
+
+    @styleguide {
+        title = 'TabBox'
+
+        props {
+            variant = 'regular'
+            tabs = 'Text'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Layout.TabBox]",
+            "grid grid-cols-tabs gap-xl"
+        ]}>
+            <nav class="flex flex-col relative">
+                <Neos.Fusion:Loop items={presentationObject.tabs.items}>
+                    <label
+                        class={[
+                            "cursor-pointer py-xs flex items-center justify-between text-lg font-semibold whitespace-nowrap",
+                            "border-b text-light-contrast border-light-contrast",
+                            iterator.isFirst ? "opacity-100" : "opacity-30"
+                        ]}
+                        data-select="tab"
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
+                        <Neos.Fusion:Augmenter class="h-[.86em]">
+                            <Hoerbiger.Shared:Block.Icon presentationObject={item.labelIcon} />
+                        </Neos.Fusion:Augmenter>
+                    </label>
+                </Neos.Fusion:Loop>
+            </nav>
+            <div class="relative">
+                <Neos.Fusion:Loop items={presentationObject.tabs.items}>
+                    <div
+                        class={iterator.isFirst ? "flex" : "hidden"}
+                        data-select="tab-content"
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.content} />
+                    </div>
+                </Neos.Fusion:Loop>
+            </div>
+        </div>
+    `
+}
