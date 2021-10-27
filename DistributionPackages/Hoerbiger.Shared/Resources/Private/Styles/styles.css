@@ -19,4 +19,8 @@
 		url(../../Fonts/PTSerif/pt-serif-v12-latin-italic.woff2) format('woff2');
 }
 
+.NEOS_BE_HELPER_Block_DefinitionList > div {
+	@apply w-full grid grid-cols-2 col-span-2
+}
+
 @tailwind utilities;
