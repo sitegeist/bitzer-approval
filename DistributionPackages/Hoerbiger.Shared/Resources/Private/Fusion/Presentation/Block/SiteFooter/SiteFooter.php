@@ -7,32 +7,42 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteFooter;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 /**
  * @Flow\Proxy(false)
  */
 final class SiteFooter extends AbstractComponentPresentationObject implements SiteFooterInterface
 {
-    private ?SlotInterface $socialLinks;
+    private ?Collection $socialLinks;
 
-    private ?SlotInterface $navigationLinks;
+    private ?Collection $navigationLinks;
+
+    private ?ContactFormLinkInterface $contactFormLink;
 
     public function __construct(
-        ?SlotInterface $socialLinks,
-        ?SlotInterface $navigationLinks
+        ?Collection $socialLinks,
+        ?Collection $navigationLinks,
+        ?ContactFormLinkInterface $contactFormLink
     ) {
         $this->socialLinks = $socialLinks;
         $this->navigationLinks = $navigationLinks;
+        $this->contactFormLink = $contactFormLink;
     }
 
-    public function getSocialLinks(): ?SlotInterface
+    public function getSocialLinks(): ?Collection
     {
         return $this->socialLinks;
     }
 
-    public function getNavigationLinks(): ?SlotInterface
+    public function getNavigationLinks(): ?Collection
     {
         return $this->navigationLinks;
+    }
+
+    public function getContactFormLink(): ?ContactFormLinkInterface
+    {
+        return $this->contactFormLink;
     }
 }

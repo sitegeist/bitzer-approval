@@ -5,10 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteFooter;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkFactory;
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
@@ -21,10 +21,10 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
      */
     protected $socialMediaSettings;
 
-    public function forSubGraph(ContentContext $subGraph): SiteFooterInterface
+    public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): SiteFooterInterface
     {
-        $siteNode = $subGraph->getCurrentSiteNode();
         $linkFactory = new LinkFactory();
+
         return new SiteFooter(
             Collection::fromIterable($this->socialMediaSettings,
                 function($socialMediaItem) use($linkFactory) {
@@ -35,11 +35,12 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
                 }
             ),
             Collection::fromIterable(
-                $siteNode->getProperty('footerMenu') ?: [],
+                $site->getProperty('footerMenu') ?: [],
                 function(TraversableNodeInterface $footerLinkNode) use ($linkFactory) {
                     return $linkFactory->forFooterMenuItem($footerLinkNode);
                 }
-            )
+            ),
+            (new ContactFormLinkFactory())->forDocument($document, $site)
         );
     }
 }

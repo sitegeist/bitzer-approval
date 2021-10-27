@@ -58,7 +58,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     public function forSocialMediaIcon(string $iconName, string $socialMediaLink): Link
     {
         return new Link(
-            LinkVariant::container(),
+            LinkVariant::touchIcon(),
             new Uri($socialMediaLink),
             LinkTarget::blank(),
             null,

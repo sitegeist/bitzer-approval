@@ -9,13 +9,11 @@ use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\Slidab
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -24,7 +22,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -38,7 +35,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->stageFactory = $stageFactory;
     }
 
-    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -56,28 +53,28 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forSubGraph($subgraph)
+            (new SiteFooterFactory())->forDocument($homepage, $homepage)
         );
     }
 
-    public function forWebPage(TraversableNodeInterface $webPage, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forWebPage(TraversableNodeInterface $site, TraversableNodeInterface $webPage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $inBackend);
 
-        return $this->forDocumentWithIntroduction($webPage, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
     }
 
-    public function forNotFoundPage(TraversableNodeInterface $notFoundPage, ContentContext $subgraph): PageInterface
+    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage): PageInterface
     {
         return new Page(
             new SiteHeader(),
             Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main'))),
-            (new SiteFooterFactory())->forSubGraph($subgraph)
+            (new SiteFooterFactory())->forDocument($notFoundPage, $site)
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -99,7 +96,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forSubGraph($subgraph)
+            (new SiteFooterFactory())->forDocument($document, $site)
         );
     }
 }

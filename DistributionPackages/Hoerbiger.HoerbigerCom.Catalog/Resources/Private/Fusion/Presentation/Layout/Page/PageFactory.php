@@ -8,13 +8,11 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -33,31 +31,31 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->stageFactory = $stageFactory;
     }
 
-    public function forCatalog(TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($catalog, $inBackend);
 
-        return $this->forDocumentWithIntroduction($catalog,$stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $catalog, $stage, $subgraph);
     }
 
-    public function forProductCategory(TraversableNodeInterface $productCategory,  bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forProductCategory(TraversableNodeInterface $site, TraversableNodeInterface $productCategory,  bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forDuoIntroduction($productCategory, $inBackend);
 
-        return $this->forDocumentWithIntroduction($productCategory,$stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $productCategory,$stage, $subgraph);
     }
 
-    public function forProduct(TraversableNodeInterface $product, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forProduct(TraversableNodeInterface $site, TraversableNodeInterface $product, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forDuoIntroduction($product, $inBackend);
 
-        return $this->forDocumentWithIntroduction($product, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $product, $stage, $subgraph);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -79,7 +77,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forSubGraph($subgraph)
+            (new SiteFooterFactory())->forDocument($document, $site)
         );
     }
 }

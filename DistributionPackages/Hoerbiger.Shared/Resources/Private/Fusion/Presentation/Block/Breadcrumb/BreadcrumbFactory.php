@@ -7,7 +7,6 @@ namespace Hoerbiger\Shared\Presentation\Block\Breadcrumb;
 
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;

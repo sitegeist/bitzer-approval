@@ -7,14 +7,12 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -32,7 +30,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->stageFactory = $stageFactory;
     }
 
-    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subGraph): PageInterface
+    public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subGraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -57,7 +55,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forSubGraph($subGraph)
+            (new SiteFooterFactory())->forDocument($applicationWorld, $site)
         );
     }
 }

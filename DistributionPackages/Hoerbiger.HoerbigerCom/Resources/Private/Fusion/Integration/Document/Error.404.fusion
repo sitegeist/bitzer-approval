@@ -1,7 +1,7 @@
 prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${Hoerbiger.Page.forNotFoundPage(documentNode, site.context)}
+            presentationObject = ${Hoerbiger.Page.forNotFoundPage(site, documentNode)}
         }
     }
     prototype(Neos.Neos:Page) {
