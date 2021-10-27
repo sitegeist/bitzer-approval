@@ -19,6 +19,10 @@ Neos:
       Shared.Button: Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory
       Shared.Box: Hoerbiger\Shared\Presentation\Layout\Box\BoxFactory
       Shared.Row: Hoerbiger\Shared\Presentation\Layout\Row\RowFactory
+      Shared.DefinitionList: Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory
       Shared.Slidable: Hoerbiger\Shared\Presentation\Layout\Slidable\SlidableFactory
       Shared.Breadcrumb: Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory
       Shared.ThumbNavigationItem: Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemFactory
+      Shared.Tag: Hoerbiger\Shared\Presentation\Layout\Tag\TagFactory
+      Shared.TabBox: Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory
+      Shared.ListItem: Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory

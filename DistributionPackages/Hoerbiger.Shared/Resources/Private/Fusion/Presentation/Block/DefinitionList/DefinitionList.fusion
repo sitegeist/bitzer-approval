@@ -1,0 +1,23 @@
+prototype(Hoerbiger.Shared:Block.DefinitionList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\DefinitionList\\DefinitionListInterface'
+
+    @styleguide {
+        title = 'DefinitionList'
+
+        props {
+            variant = 'regular'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <dl class={[
+            "[Block.DefinitionList]",
+            "w-full grid grid-cols-2 text-sm",
+            "NEOS_BE_HELPER_Block_DefinitionList"
+        ]}>
+
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.definitions}/>
+        </dl>
+    `
+}

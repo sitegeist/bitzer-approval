@@ -1,0 +1,43 @@
+'Hoerbiger.HoerbigerCom:Mixin.DefinitionList':
+  abstract: true
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.DefinitionItem': true
+  ui:
+    label: 'Beschreibungsliste'
+    icon: list
+  options:
+    template:
+      childNodes:
+        'listItem1':
+          type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+        'listItem2':
+          type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+        'listItem3':
+          type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+
+'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    label: 'Listeneintrag'
+    icon: minus
+  properties:
+    term:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Titel'
+    definition:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Beschreibung'
