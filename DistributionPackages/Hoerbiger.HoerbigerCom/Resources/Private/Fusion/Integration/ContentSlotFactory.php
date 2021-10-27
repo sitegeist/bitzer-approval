@@ -35,8 +35,6 @@ use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
-use Hoerbiger\Shared\Presentation\Layout\Tabs\Tabs;
-use Hoerbiger\Shared\Presentation\Layout\Tabs\TabsFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
