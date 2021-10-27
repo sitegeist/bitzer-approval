@@ -11,6 +11,7 @@
     label: 'Tab-Box'
     icon: th-list
   options:
+    reloadIfChildChanged: true
     template:
       childNodes:
         'tab1':

@@ -5,22 +5,17 @@ prototype(Hoerbiger.Shared:Block.DefinitionList.ListItem) < prototype(PackageFac
         title = 'ListItem'
 
         props {
-            variant = 'regular'
             term = '- Add Slot Content -'
             definition = '- Add Slot Content -'
         }
     }
 
-    renderer = afx`<dl>
-        <dt>variant:</dt>
-        <dd>{presentationObject.variant}</dd>
-        <dt>term:</dt>
-        <dd>
+    renderer = afx`
+        <dt class="nth-child-4n+1:bg-light min-h-touch flex items-center px-xs">
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.term} />
-        </dd>
-        <dt>definition:</dt>
-        <dd>
+        </dt>
+        <dd class="nth-child-4n+2:bg-light min-h-touch flex items-center px-xs">
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.definition} />
         </dd>
-    </dl>`
+    `
 }

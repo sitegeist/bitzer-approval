@@ -7,7 +7,6 @@ namespace Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
@@ -15,25 +14,16 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
  */
 final class ListItem extends AbstractComponentPresentationObject implements ListItemInterface
 {
-    private ListItemVariant $variant;
-
     private SlotInterface $term;
 
     private SlotInterface $definition;
 
     public function __construct(
-        ListItemVariant $variant,
         SlotInterface $term,
         SlotInterface $definition
     ) {
-        $this->variant = $variant;
         $this->term = $term;
         $this->definition = $definition;
-    }
-
-    public function getVariant(): ListItemVariant
-    {
-        return $this->variant;
     }
 
     public function getTerm(): SlotInterface

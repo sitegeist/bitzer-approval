@@ -1,0 +1,31 @@
+prototype(Hoerbiger.Shared:Layout.TabBox.Tab) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\TabBox\\Tab\\TabInterface'
+
+    @styleguide {
+        title = 'Tab'
+
+        props {
+            label = '- Add Slot Content -'
+            labelIcon {
+                collectionName = 'Text'
+                iconName = 'Text'
+            }
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>label:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
+        </dd>
+        <dt>labelIcon:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.labelIcon} />
+        </dd>
+        <dt>content:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+        </dd>
+    </dl>`
+}

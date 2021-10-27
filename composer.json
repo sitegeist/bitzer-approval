@@ -13,7 +13,8 @@
     "require": {
         "hoerbiger/hoerbigercom": "*",
         "hoerbiger/hoerbigercom-catalog": "*",
-        "hoerbiger/hoerbigercom-application-worlds": "*"
+        "hoerbiger/hoerbigercom-application-worlds": "*",
+        "internezzo/childreload": "^1.0"
     },
     "require-dev": {
         "neos/buildessentials": "^7.1",

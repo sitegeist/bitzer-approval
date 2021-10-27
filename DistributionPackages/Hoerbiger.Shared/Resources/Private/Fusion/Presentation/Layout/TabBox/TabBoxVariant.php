@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem;
+namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
 
 /*
  * This file is part of the Hoerbiger.Shared package.
@@ -11,7 +11,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 /**
  * @Flow\Proxy(false)
  */
-final class ListItemVariant implements PseudoEnumInterface
+final class TabBoxVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
 
@@ -31,7 +31,7 @@ final class ListItemVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_REGULAR) {
-                throw ListItemVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
+                throw TabBoxVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
         }

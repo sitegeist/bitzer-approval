@@ -6,12 +6,11 @@ namespace Hoerbiger\Shared\Presentation\Block\DefinitionList;
  */
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListVariant;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 interface DefinitionListInterface extends ComponentPresentationObjectInterface
 {
     public function getVariant(): DefinitionListVariant;
 
-    public function getContent(): SlotInterface;
+    public function getDefinitions(): Collection;
 }

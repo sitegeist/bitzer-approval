@@ -7,12 +7,12 @@ namespace Hoerbiger\HoerbigerCom\Integration;
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionList;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListVariant;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItem;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
@@ -34,6 +34,9 @@ use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
+use Hoerbiger\Shared\Presentation\Layout\Tabs\Tabs;
+use Hoerbiger\Shared\Presentation\Layout\Tabs\TabsFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -339,82 +342,56 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forDefinitionListNode(TraversableNodeInterface $definitionListNode): SlotInterface
     {
-        return new DefinitionList(
-            DefinitionListVariant::regular(),
-            Collection::fromNodes(
-                $definitionListNode->findChildNodes(),
-                function(TraversableNodeInterface $listItem) {
-                    return Content::fromNode($listItem, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                }
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Box(
+                BoxVariant::decorative(),
+                (new DefinitionListFactory())->forDefinitionList($definitionListNode)
             )
         );
     }
 
-    public function forDefinitionItemNode(TraversableNodeInterface $definitionItemNode): SlotInterface
+    public function forDefinitionItemNode(TraversableNodeInterface $definitionNode): SlotInterface
     {
-        return new ListItem(
-            ListItemVariant::regular(),
-            Editable::fromNodeProperty($definitionItemNode, 'term'),
-            Editable::fromNodeProperty($definitionItemNode, 'definition')
-        );
+        return (new ListItemFactory())->forDefinition($definitionNode);
     }
 
     public function forTabBox(TraversableNodeInterface $tabBox): SlotInterface
     {
-        return Collection::fromNodes(
-            $tabBox->findChildNodes(),
-            function(TraversableNodeInterface $technicalSpecsTab) {
-                return Content::fromNode($technicalSpecsTab, 'Hoerbiger.HoerbigerCom:ContentSlot');
-            }
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Box(
+                BoxVariant::decorative(),
+                (new TabBoxFactory())->forTabBox($tabBox)
+            )
         );
     }
 
-    public function forTextTabNode(TraversableNodeInterface $textTabNode) :SlotInterface
+    public function forTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
-        return Collection::fromIterable(array_filter([
-            new Text(
-                TextVariant::lightContrast(),
-                Editable::fromNodeProperty($textTabNode, 'label'),
-                false
-            ),
-            new Headline(
-                HeadlineVariant::important(),
-                HeadlineType::h2(),
-                Editable::fromNodeProperty($textTabNode, 'headline')
-            ),
-            new Text(
-                TextVariant::lightContrast(),
-                Editable::fromNodeProperty($textTabNode, 'text'),
-                true
-            )
-        ]), $identity);
+        return new Stack(
+            StackVariant::xs(),
+            Collection::fromIterable(array_filter([
+                new Headline(
+                    HeadlineVariant::regular(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($textTabNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($textTabNode, 'text'),
+                    true
+                )
+            ]), $identity)
+        );
     }
 
-    public function forDefinitionListTabNode(TraversableNodeInterface $definitionListTabNode) :SlotInterface
+    public function forDefinitionListTabNode(TraversableNodeInterface $definitionListTabNode): SlotInterface
     {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
-
-        return Collection::fromIterable(array_filter([
-            new Text(
-                TextVariant::lightContrast(),
-                Editable::fromNodeProperty($definitionListTabNode, 'label'),
-                false
-            ),
-            new DefinitionList(
-                DefinitionListVariant::regular(),
-                Collection::fromNodes(
-                    $definitionListTabNode->findChildNodes(),
-                    function(TraversableNodeInterface $listItem) {
-                        return Content::fromNode($listItem, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                    }
-                )
-            )
-        ]), $identity);
+        return (new DefinitionListFactory())->forDefinitionList($definitionListTabNode);
     }
 }

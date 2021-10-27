@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6ed5cb645e6ba3eacdbe86d3baa48ab",
+    "content-hash": "4c58683149a85776886fb33aecd72b4a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2351,6 +2351,44 @@
                 "source": "https://github.com/php-imagine/Imagine/tree/1.2.4"
             },
             "time": "2020-11-03T22:35:03+00:00"
+        },
+        {
+            "name": "internezzo/childreload",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/internezzo/neos-childreload.git",
+                "reference": "cdc6bd7cc768aa3d7a3d04a371fe34d7118ffc8a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/internezzo/neos-childreload/zipball/cdc6bd7cc768aa3d7a3d04a371fe34d7118ffc8a",
+                "reference": "cdc6bd7cc768aa3d7a3d04a371fe34d7118ffc8a",
+                "shasum": ""
+            },
+            "require": {
+                "neos/neos": ">=3.3"
+            },
+            "type": "neos-package",
+            "extra": {
+                "neos": {
+                    "package-key": "Internezzo.ChildReload"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Internezzo\\ChildReload\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Neos CMS package that helps to reload the page on change of any of the child nodes of the specific nodetype",
+            "support": {
+                "source": "https://github.com/internezzo/neos-childreload/tree/1.0.2"
+            },
+            "time": "2019-07-26T09:47:31+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -11234,5 +11272,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }

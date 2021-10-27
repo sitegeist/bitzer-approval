@@ -7,8 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\DefinitionList;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListVariant;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 /**
  * @Flow\Proxy(false)
@@ -17,14 +16,14 @@ final class DefinitionList extends AbstractComponentPresentationObject implement
 {
     private DefinitionListVariant $variant;
 
-    private SlotInterface $content;
+    private Collection $definitions;
 
     public function __construct(
         DefinitionListVariant $variant,
-        SlotInterface $content
+        Collection $definitions
     ) {
         $this->variant = $variant;
-        $this->content = $content;
+        $this->definitions = $definitions;
     }
 
     public function getVariant(): DefinitionListVariant
@@ -32,8 +31,8 @@ final class DefinitionList extends AbstractComponentPresentationObject implement
         return $this->variant;
     }
 
-    public function getContent(): SlotInterface
+    public function getDefinitions(): Collection
     {
-        return $this->content;
+        return $this->definitions;
     }
 }

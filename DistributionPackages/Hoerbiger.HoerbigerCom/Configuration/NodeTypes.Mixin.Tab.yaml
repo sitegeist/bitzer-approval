@@ -1,12 +1,16 @@
 'Hoerbiger.HoerbigerCom:Mixin.Tab':
   abstract: true
   ui:
-    icon: indent
+    inspector:
+      groups:
+        tab:
+          label: 'Tab'
+          icon: 'indent'
   properties:
-    label:
-      options:
-        preset: 'rte.plain'
+    tab__label:
+      type: string
       ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte Label eingeben'
+        label: 'Tab-Label'
+        reloadIfChanged: true
+        inspector:
+          group: 'tab'

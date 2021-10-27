@@ -6,13 +6,10 @@ namespace Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem;
  */
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 interface ListItemInterface extends ComponentPresentationObjectInterface
 {
-    public function getVariant(): ListItemVariant;
-
     public function getTerm(): SlotInterface;
 
     public function getDefinition(): SlotInterface;
