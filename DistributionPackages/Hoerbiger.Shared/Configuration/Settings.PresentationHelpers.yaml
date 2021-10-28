@@ -23,6 +23,6 @@ Neos:
       Shared.Slidable: Hoerbiger\Shared\Presentation\Layout\Slidable\SlidableFactory
       Shared.Breadcrumb: Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory
       Shared.ThumbNavigationItem: Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemFactory
-      Shared.Tag: Hoerbiger\Shared\Presentation\Layout\Tag\TagFactory
+      Shared.Tag: Hoerbiger\Shared\Presentation\Block\Tag\TagFactory
       Shared.TabBox: Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory
       Shared.ListItem: Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory
