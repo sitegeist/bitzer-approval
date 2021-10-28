@@ -26,3 +26,4 @@ Neos:
       Shared.Tag: Hoerbiger\Shared\Presentation\Block\Tag\TagFactory
       Shared.TabBox: Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory
       Shared.ListItem: Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory
+      Shared.ContactFormLink: Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkFactory
