@@ -6,12 +6,8 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionList;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListVariant;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItem;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
-use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
@@ -363,6 +359,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 (new TabBoxFactory())->forTabBox($tabBox)
             )
         );
+    }
+
+    public function forTabLabel(TraversableNodeInterface $tabNode): SlotInterface
+    {
+        return Editable::fromNodeProperty($tabNode, 'tab__label');
     }
 
     public function forTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface

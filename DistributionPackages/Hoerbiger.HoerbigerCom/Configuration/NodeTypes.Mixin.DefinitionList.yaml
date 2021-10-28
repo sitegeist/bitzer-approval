@@ -21,6 +21,7 @@
           type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
 
 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
+  label: '${q(node).property("term") ? q(node).property("term") : node.nodeType.label}'
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
   ui:
