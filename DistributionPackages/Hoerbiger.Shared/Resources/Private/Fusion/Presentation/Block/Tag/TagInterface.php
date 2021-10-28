@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Hoerbiger\Shared\Presentation\Layout\Tag;
+namespace Hoerbiger\Shared\Presentation\Block\Tag;
 
 /*
  * This file is part of the Hoerbiger.Shared package.
