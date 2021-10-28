@@ -9,14 +9,12 @@ use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFact
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
-use Neos\ContentRepository\Domain\NodeType\NodeTypeConstraints;
-use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
-use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -37,27 +35,22 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $this->figureFactory = $figureFactory;
     }
 
-    public function forApplicationWorlds(TraversableNodeInterface $node, NodeTypeName $targetNodeTypeName, bool $inBackend): Slidable
+    /**
+     * @param TraversableNodes<int,TraversableNodeInterface> $nodes
+     */
+    public function forSliderPreviewMixins(TraversableNodes $nodes, bool $inBackend): Slidable
     {
-        $targetNodes = $node->findChildNodes(
-            new NodeTypeConstraints(
-                false,
-                [$targetNodeTypeName]
-            ));
-
         $linkFactory = new LinkFactory();
 
         return new Slidable(
-            Collection::fromNodes($targetNodes, function($targetNode) use ($inBackend, $linkFactory) {
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $link = $linkFactory->forLinkToDocument($targetNode);
-
-                /** @var SlotInterface $stage */
-                $stage = $this->stageFactory->forApplicationWorldSlideStage($targetNode, $inBackend);
+                $stage = $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
 
                 return $link->asContainer()->withContent($stage);
             }),
-            Collection::fromNodes($targetNodes, function($targetNode) use ($inBackend) {
-                $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'preview__icon');
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
+                $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
 
                 return new ThumbNavigationItem(
                     $thumbnailImageSource
