@@ -1,5 +1,5 @@
-prototype(Hoerbiger.Shared:Layout.Tag) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Tag\\TagInterface'
+prototype(Hoerbiger.Shared:Block.Tag) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Tag\\TagInterface'
 
     @styleguide {
         title = 'Tag'
