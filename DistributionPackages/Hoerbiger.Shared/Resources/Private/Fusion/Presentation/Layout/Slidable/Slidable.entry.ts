@@ -21,7 +21,7 @@ export default ($node: Element): void => {
 						if ($node instanceof HTMLElement) {
 							$node.classList.toggle("!bg-brand", currentSlide === index);
 							$node.classList.toggle("!text-brand-contrast", currentSlide === index);
-							$node.classList.toggle("bg-neutral-contrast", currentSlide !== index);
+							$node.classList.toggle("bg-neutral-lighter", currentSlide !== index);
 						}
 					});
 				}
