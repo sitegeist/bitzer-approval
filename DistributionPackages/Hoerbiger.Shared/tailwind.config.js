@@ -164,6 +164,10 @@ module.exports = {
 				'quotation': '1152px',
 			},
 
+			height: {
+				...SPACES,
+			},
+
 			space: {
 				...SPACES,
 			},

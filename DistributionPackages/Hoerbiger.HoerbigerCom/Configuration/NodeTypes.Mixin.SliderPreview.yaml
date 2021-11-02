@@ -25,7 +25,7 @@
       options:
         preset: 'image.square'
       ui:
-        label: 'Slider: Hintergrundbild'
+        label: 'Slider: Grafik'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -33,7 +33,7 @@
     slider__preview__image__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text Hintergrundbild'
+        label: 'Alt-Text Grafik'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -41,7 +41,7 @@
     slider__preview__image__title:
       type: 'string'
       ui:
-        label: 'Title-Text Hintergrundbild'
+        label: 'Title-Text Grafik'
         inspector:
           group: 'sliderPreview'
       validation:

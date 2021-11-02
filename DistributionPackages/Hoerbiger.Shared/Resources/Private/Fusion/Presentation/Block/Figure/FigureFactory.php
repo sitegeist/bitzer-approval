@@ -134,8 +134,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            null,
-            null
+            FigureObjectFit::contain(),
+            FigureObjectPosition::center()
         );
     }
 
