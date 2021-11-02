@@ -2,7 +2,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={[
             "[Layout.SlideStage (" + presentationObject.variant + ")]",
-            "relative w-full h-0 pt-ratio-2-1"
+            "relative w-full h-full lg:h-0 lg:pt-ratio-2-1"
         ]}>
             <div
                 class="absolute inset-0 z-10 blur"
@@ -13,24 +13,27 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
             <div
                 @if.1={presentationObject.media}
                 class={[
-                    "absolute top-0 bottom-0 pt-sm pb-sm pl-md pr-md flex items-center justify-center z-20",
-                    presentationObject.variant.isFullMediaTextLeft &&  "left-1/2 right-0",
-                    presentationObject.variant.isFullMediaTextRight &&  "left-0 right-1/2"
+                    "absolute flex items-center justify-center z-20 p-xl w-full h-full",
+                    "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+                    "md:top-0 md:bottom-0 md:pt-md md:pb-md md:pl-md md:pr-md md:transform-none lg:w-1/2",
+                    presentationObject.variant.isFullMediaTextLeft &&  "md:left-1/2 md:right-0",
+                    presentationObject.variant.isFullMediaTextRight &&  "md:left-0 md:right-1/2"
                 ]}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
             </div>
             <div class={[
-                "absolute z-30 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
-                "sm:bg-transparent sm:bg-gradient-to-t",
+                "absolute z-30  from-light-contrast/70 to-transparent top-1/3",
+                "bg-gradient-to-t",
+                "inset-0 sm:bg-transparent sm:bg-gradient-to-t sm:top-0",
                 presentationObject.variant.isFullMediaTextLeft &&  "lg:bg-gradient-to-r",
                 presentationObject.variant.isFullMediaTextRight &&  "lg:bg-gradient-to-l"
 
             ]}></div>
             <div class={[
-                "absolute inset-md p-sm flex flex-col justify-center items-center",
-                "bg-transparent border-2 border-light  space-y-xs z-30 text-light",
-                "sm:top-auto sm:items-start",
+                "relative px-md pb-md pt-[80vmin] flex flex-col justify-center bg-transparent space-y-xs z-30 text-light",
+                "md:border-2 md:border-light",
+                "lg:absolute lg:inset-md lg:p-sm",
                 "lg:-translate-y-1/2 lg:bottom-auto lg:top-1/2 lg:max-w-[35%] lg:w-full",
                 presentationObject.variant.isFullMediaTextLeft &&  "lg:right-auto",
                 presentationObject.variant.isFullMediaTextRight &&  "lg:left-auto"
@@ -39,12 +42,10 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
                     presentationObject={presentationObject.subheadline}
                     @if.1={presentationObject.subheadline}
                 />
-                <div class="text-center sm:text-left">
-                    <Hoerbiger.Shared:Block.Headline
-                        @if.1={presentationObject.headline}
-                        presentationObject={presentationObject.headline}
-                    />
-                </div>
+                <Hoerbiger.Shared:Block.Headline
+                    @if.1={presentationObject.headline}
+                    presentationObject={presentationObject.headline}
+                />
                 <Hoerbiger.Shared:Block.Text
                     @if.1={presentationObject.text}
                     presentationObject={presentationObject.text}

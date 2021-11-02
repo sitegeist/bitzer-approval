@@ -31,7 +31,10 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
 
             <div
                 @if.1={presentationObject.thumbs.items}
-                class="w-full flex overflow-hidden space-x-xs mt-xs"
+                class={[
+                    "absolute top-0 left-0 right-0 flex overflow-hidden space-x-xs mt-xs mx-xs",
+                    "md:relative md:mx-0 md:w-full"
+                ]}
             >
                 <Neos.Fusion:Loop items={presentationObject.thumbs.items}>
                     <Neos.Fusion:Augmenter data-select="jumper">
