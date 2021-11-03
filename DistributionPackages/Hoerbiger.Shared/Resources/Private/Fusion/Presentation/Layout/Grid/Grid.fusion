@@ -15,7 +15,7 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
             '[Layout.Grid (' + presentationObject.variant + ')]',
             'grid grid-col',
             presentationObject.variant.isTwoColumns && "lg:grid-cols-2",
-            presentationObject.variant.isTwoColumnsGap && "gap-xl md:grid-cols-2 md:gap-md",
+            presentationObject.variant.isTwoColumnsGap && "gap-xl md:grid-cols-2 md:gap-sm",
             presentationObject.variant.isThreeColumnsGap && "gap-xl md:grid-cols-2 md:gap-sm lg:grid-cols-3"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />

@@ -7,6 +7,7 @@
       '*': false
       'Hoerbiger.HoerbigerCom:Content.TextTab': true
       'Hoerbiger.HoerbigerCom:Content.DefinitionListTab': true
+      'Hoerbiger.HoerbigerCom:Content.DownloadsTab': true
   ui:
     label: 'Tab-Box'
     icon: th-list
@@ -43,3 +44,11 @@
     'Hoerbiger.HoerbigerCom:Mixin.DefinitionList': true
   ui:
     label: 'Beschreibungsliste-Tab'
+
+'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Tab': true
+    'Hoerbiger.HoerbigerCom:Mixin.Downloads': true
+  ui:
+    label: 'Downloads-Tab'

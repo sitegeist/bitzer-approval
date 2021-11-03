@@ -22,7 +22,6 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
-use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
@@ -112,6 +111,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forTextTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
                 return $this->forDefinitionListTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
+                return $this->forDownloadsTabNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -452,4 +453,19 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         return (new DefinitionListFactory())->forDefinitionList($definitionListTabNode);
     }
+
+    public function forDownloadsTabNode(TraversableNodeInterface $downloadsNode): SlotInterface
+    {
+        return new Grid(
+            GridVariant::twoColumnsGap(),
+            Collection::fromNodes(
+                $downloadsNode->findChildNodes(),
+                function(TraversableNodeInterface $node): Content {
+                    return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                }
+            )
+        );
+    }
+
+
 }
