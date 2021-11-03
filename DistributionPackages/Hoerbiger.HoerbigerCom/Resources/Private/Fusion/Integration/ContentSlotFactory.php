@@ -22,6 +22,7 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
@@ -118,22 +119,22 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private function forDownloadsNode(TraversableNodeInterface $downloadsNode): SlotInterface
     {
-        return new Grid(
-            GridVariant::threeColumnsGap(),
-            Collection::fromNodes(
-                $downloadsNode->findChildNodes(),
-                function(TraversableNodeInterface $node): Content {
-                    return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                }
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Grid(
+                GridVariant::threeColumnsGap(),
+                Collection::fromNodes(
+                    $downloadsNode->findChildNodes(),
+                    function(TraversableNodeInterface $node): Content {
+                        return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                    }
+                )
             )
         );
     }
 
     private function forDownloadNode(TraversableNodeInterface $downloadNode): SlotInterface
     {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
         $asset = $downloadNode->getProperty('asset');
         $imageSource = ($asset instanceof Document)
             ? $this->imageSourceFactory->forDocument($asset)
@@ -144,23 +145,22 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 ? $this->figureFactory->forDownloadCard($imageSource)
                 : null,
             Editable::fromNodeProperty($downloadNode, 'title'),
-            null,
+            $asset instanceof Document
+                ? Value::fromString(
+                    $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getMediaType())
+                        . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
+                )
+                : null,
             Editable::fromNodeProperty($downloadNode, 'description'),
             $asset instanceof Document
-                ? Collection::fromIterable([
-                    new Link(
-                        LinkVariant::label(),
-                        $this->uriService->getAssetUri($asset),
-                        LinkTarget::blank(),
-                        null,
-                        Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
-                    ),
-                    Value::fromString(
-                        $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getMediaType())
-                            . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
-                    )
-                ], $identity)
-            : null,
+                ? new Link(
+                    LinkVariant::label(),
+                    $this->uriService->getAssetUri($asset),
+                    LinkTarget::blank(),
+                    null,
+                    Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
+                )
+                : null
         );
     }
 

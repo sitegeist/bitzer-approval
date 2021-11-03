@@ -52,16 +52,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forProductListNode(TraversableNodeInterface $productListNode): SlotInterface
     {
-        /*\Neos\Flow\var_dump(Collection::fromNodes(
-            $productListNode->findChildNodes(),
-            function(TraversableNodeInterface $groupedProduct){
-                return Content::fromNode(
-                    $groupedProduct,
-                    'Hoerbiger.HoerbigerCom.Catalog:ContentSlot'
-                );
-            }
-        ));die;*/
-
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Grid(
