@@ -1,16 +1,11 @@
 'Hoerbiger.HoerbigerCom:Mixin.Tab':
+  label: '${q(node).property("tab__label") ? q(node).property("tab__label") : node.nodeType.label}'
   abstract: true
-  ui:
-    inspector:
-      groups:
-        tab:
-          label: 'Tab'
-          icon: 'indent'
   properties:
     tab__label:
-      type: string
+      options:
+        preset: 'rte.plain'
       ui:
-        label: 'Tab-Label'
-        reloadIfChanged: true
-        inspector:
-          group: 'tab'
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Label eingeben'

@@ -1,0 +1,37 @@
+'Hoerbiger.HoerbigerCom:Content.Download':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    label: 'Download'
+    icon: file-download
+    inspector:
+      groups:
+        asset:
+          label: 'Datei'
+          icon: file
+  properties:
+    title:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Titel eingeben'
+    description:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Beschreibung eingeben'
+    asset:
+      type: 'Neos\Media\Domain\Model\Asset'
+      ui:
+        label: 'Datei'
+        reloadIfChanged: true
+        inspector:
+          group: asset
+          editorOptions:
+            constraints:
+              mediaTypes:
+                - 'application/pdf'
