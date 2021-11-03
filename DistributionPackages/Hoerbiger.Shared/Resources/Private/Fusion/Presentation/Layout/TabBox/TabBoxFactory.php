@@ -11,7 +11,6 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -23,7 +22,7 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
                 $tabBox->findChildNodes(),
                 function(TraversableNodeInterface $tabNode) {
                     return new Tab(
-                        Value::fromString($tabNode->getProperty('tab__label') ?: ''),
+                        Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:TabLabel'),
                         new Icon('shared', 'arrowRight'),
                         Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:ContentSlot')
                     );

@@ -207,6 +207,9 @@ module.exports = {
 				}],
 			},
 
+			boxShadow: {
+				card: '0 0 14px rgba(0, 0, 0, 0.1)',
+			},
 		},
 	},
 	variants: {

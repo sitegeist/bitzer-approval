@@ -1,0 +1,5 @@
+prototype(Hoerbiger.HoerbigerCom:TabLabel) < prototype(Neos.Neos:ContentComponent) {
+    renderer = PackageFactory.AtomicFusion.PresentationObjects:Slot {
+        presentationObject = ${Hoerbiger.ContentSlot.forTabLabel(node)}
+    }
+}
