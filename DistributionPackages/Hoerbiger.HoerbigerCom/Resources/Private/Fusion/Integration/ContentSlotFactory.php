@@ -426,6 +426,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
+    public function forTabLabel(TraversableNodeInterface $tabNode): SlotInterface
+    {
+        return Editable::fromNodeProperty($tabNode, 'tab__label');
+    }
+
     public function forTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
