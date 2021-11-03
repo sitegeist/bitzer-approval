@@ -62,28 +62,12 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
             new Button(
                 ButtonType::link(),
                 ButtonVariant::cta(),
-                Value::fromString($this->getLabelFor('ContactFormLinkButton')),
+                $translate('contact_form_link_button',  $translationFile),
                 $this->uriService->getNodeUri($site), // TODO => Traverse Document.ContactPage.
                 "_self",
                 null
             )
         );
-    }
-
-    private function getLabelFor(string $identifier): string
-    {
-        switch ($identifier) {
-            case 'ContactFormLinkSubline':
-                return 'KONTAKT';
-            case 'ContactFormLinkHeadline':
-                return 'Haben Sie noch Fragen?';
-            case 'ContactFormLinkText':
-                return 'Falls Sie noch Fragen oder Anmerkungen zu unseren Produkten haben, füllen Sie gerne unser Kontakformular aus und wir werden uns schnellstmöglich mit Ihnen in Verbindung setzten.';
-            case 'ContactFormLinkButton':
-                return 'Zum Kontaktformular';
-            default:
-                return '';
-        }
     }
 
     public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): ?ContactFormLinkInterface
