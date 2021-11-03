@@ -14,6 +14,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Block\Translation\TranslationFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -30,6 +31,9 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
             return $slot;
         };
 
+        $translationFile = 'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/ContactFormLink/ContactFormLink.translation.csv';
+        $translate = new TranslationFactory();
+
         return new ContactFormLink(
             new Stack(
                 StackVariant::xs(),
@@ -39,18 +43,18 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                         Collection::fromIterable([
                             new Tag(
                                 'strong',
-                                Value::fromString($this->getLabelFor('ContactFormLinkSubline'))
+                                $translate('contact_form_link_subline', $translationFile)
                             ),
                             new Headline(
                                 HeadlineVariant::regular(),
                                 HeadlineType::h2(),
-                                Value::fromString($this->getLabelFor('ContactFormLinkHeadline'))
+                                $translate('contact_form_link_headline', $translationFile)
                             )
                         ], $identity),
                     ),
                     new Text(
                         TextVariant::neutralContrast(),
-                        Value::fromString($this->getLabelFor('ContactFormLinkText')),
+                        $translate('contact_form_link_text',  $translationFile),
                         false
                     )
                 ], $identity)

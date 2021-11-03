@@ -3,3 +3,4 @@ Sitegeist:
     management:
       packageKeys:
         - 'Hoerbiger.HoerbigerCom'
+        - 'Hoerbiger.Shared'
