@@ -39,22 +39,18 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         return Value::fromString('to be implemented');
     }
 
-    public function forApplicationWorldSlideStage(TraversableNodeInterface $targetNode, bool $inBackend): StageInterface
+    public function forSliderPreviewMixin(TraversableNodeInterface $targetNode, bool $inBackend): SlideStage
     {
-        $documentHeadlineContent = null;
+        $documentHeadlineContent = $targetNode->getProperty('slider__preview__headline')
+            ?: $targetNode->getProperty('headline')
+            ?: null;
 
-        if($targetNode->getProperty('preview__headline')) {
-            $documentHeadlineContent = Value::fromString($targetNode->getProperty('preview__headline'));
-        } elseif ($targetNode->getProperty('headline')) {
-            $documentHeadlineContent = Value::fromString($targetNode->getProperty('headline'));
-        }
-
-        $textContent = $targetNode->getProperty('preview__description')
-            ? Value::fromString($targetNode->getProperty('preview__description'))
+        $textContent = $targetNode->getProperty('slider__preview__description')
+            ? Value::fromString($targetNode->getProperty('slider__preview__description'))
             : null;
 
-        $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'preview__icon');
-        $mediaBackgroundImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'preview__image');
+        $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+        $mediaBackgroundImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__background');
 
         return new SlideStage(
             StageVariant::fullMediaTextRight(),
@@ -62,7 +58,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 ? new Headline(
                     HeadlineVariant::noBrand(),
                     HeadlineType::h2(),
-                    $documentHeadlineContent
+                    Value::fromString($documentHeadlineContent)
                 )
                 : null,
             null,

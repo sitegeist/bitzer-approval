@@ -1,0 +1,16 @@
+'Hoerbiger.HoerbigerCom:Mixin.Tab':
+  abstract: true
+  ui:
+    inspector:
+      groups:
+        tab:
+          label: 'Tab'
+          icon: 'indent'
+  properties:
+    tab__label:
+      type: string
+      ui:
+        label: 'Tab-Label'
+        reloadIfChanged: true
+        inspector:
+          group: 'tab'
