@@ -22,25 +22,25 @@ prototype(Hoerbiger.Shared:Block.Breadcrumb) < prototype(PackageFactory.AtomicFu
             "flex items-center space-x-ch h-full max-h-touch font-semibold text-xs"
         ]}>
             <Neos.Fusion:Loop items={presentationObject.links.items}>
-                    <span
-                        @if.1={iterator.isLast}
-                        class={"flex sm:hidden h-[.5rem] flex-shrink-0 text-neutral-darker"}
-                    >
-                        <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.compactGlue} />
-                    </span>
-                    <span class={[
-                        "text-neutral-darker translate-y-[.1em]",
-                        props.itemStyles,
-                        !iterator.isLast && "hidden sm:flex"
-                    ]}>
-                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
-                    </span>
-                    <span class="hidden sm:flex h-[.5rem] flex-shrink-0 text-neutral-darker">
-                        <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.glue} />
-                    </span>
+                <span
+                    @if.1={iterator.isLast}
+                    class={"flex sm:hidden h-[.5rem] flex-shrink-0 text-neutral-darker"}
+                >
+                    <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.compactGlue} />
+                </span>
+                <span class={[
+                    "text-neutral-darker",
+                    props.itemStyles,
+                    !iterator.isLast && "hidden sm:flex"
+                ]}>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                </span>
+                <span class="hidden sm:flex h-[8px] w-[6px] flex justify-center items-center flex-shrink-0 text-neutral-darker translate-y-[-1px]">
+                    <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.glue} />
+                </span>
             </Neos.Fusion:Loop>
             <span class={[
-                "text-light-contrast hidden sm:flex translate-y-[.1em]",
+                "text-light-contrast hidden sm:flex",
                 props.itemStyles
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.currentDocumentItem} />
