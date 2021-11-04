@@ -13,11 +13,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class RowVariant implements PseudoEnumInterface
 {
+    const VARIANT_CH = 'ch';
     const VARIANT_XS = 'xs';
     const VARIANT_SM = 'sm';
     const VARIANT_MD = 'md';
     const VARIANT_LG = 'lg';
     const VARIANT_GALLERY = 'gallery';
+    const VARIANT_ALTERNATEMETALINE = 'alternateMetaline';
 
     /**
      * @var array<string,self>|self[]
@@ -34,17 +36,24 @@ final class RowVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_XS
+            if ($string !== self::VARIANT_CH
+                && $string !== self::VARIANT_XS
                 && $string !== self::VARIANT_SM
                 && $string !== self::VARIANT_MD
                 && $string !== self::VARIANT_LG
-                && $string !== self::VARIANT_GALLERY) {
+                && $string !== self::VARIANT_GALLERY
+                && $string !== self::VARIANT_ALTERNATEMETALINE) {
                 throw RowVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
         }
 
         return self::$instances[$string];
+    }
+
+    public static function ch(): self
+    {
+        return self::from(self::VARIANT_CH);
     }
 
     public static function xs(): self
@@ -72,6 +81,16 @@ final class RowVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_GALLERY);
     }
 
+    public static function alternateMetaline(): self
+    {
+        return self::from(self::VARIANT_ALTERNATEMETALINE);
+    }
+
+    public function getIsCh(): bool
+    {
+        return $this->value === self::VARIANT_CH;
+    }
+
     public function getIsXs(): bool
     {
         return $this->value === self::VARIANT_XS;
@@ -97,17 +116,24 @@ final class RowVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_GALLERY;
     }
 
+    public function getIsAlternateMetaline(): bool
+    {
+        return $this->value === self::VARIANT_ALTERNATEMETALINE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
     public static function cases(): array
     {
         return [
+            self::from(self::VARIANT_CH),
             self::from(self::VARIANT_XS),
             self::from(self::VARIANT_SM),
             self::from(self::VARIANT_MD),
             self::from(self::VARIANT_LG),
-            self::from(self::VARIANT_GALLERY)
+            self::from(self::VARIANT_GALLERY),
+            self::from(self::VARIANT_ALTERNATEMETALINE)
         ];
     }
 

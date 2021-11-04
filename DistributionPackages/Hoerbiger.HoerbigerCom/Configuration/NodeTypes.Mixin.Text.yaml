@@ -1,13 +1,8 @@
 'Hoerbiger.HoerbigerCom:Mixin.Text':
   abstract: true
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   properties:
-    headline:
-      options:
-        preset: 'rte.plain'
-      ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
     text:
       options:
         preset: 'rte.text'

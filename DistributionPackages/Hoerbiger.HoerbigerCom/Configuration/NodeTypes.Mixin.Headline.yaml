@@ -1,0 +1,10 @@
+'Hoerbiger.HoerbigerCom:Mixin.Headline':
+  abstract: true
+  properties:
+    headline:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'

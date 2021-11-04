@@ -41,10 +41,21 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
         bool $hasFallbackInBackend = true
     ): ?ImageSourceHelperInterface {
         return $this->forImageProperty(
-            $node, $inBackend,
+            $node,
+            $inBackend,
             'image',
             $hasFallbackInBackend
         );
+    }
+
+    public function forPreviewMixin(
+        TraversableNodeInterface $node,
+        bool $inBackend,
+        bool $hasFallbackInBackend = true
+    ): ?ImageSourceHelperInterface
+    {
+        return $this->forImageMixin($node, $inBackend, false)
+            ?: $this->forImageProperty($node, $inBackend, 'preview__image', $hasFallbackInBackend);
     }
 
     public function forImageProperty(
