@@ -5,6 +5,8 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.
  */
 
+use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\PressReleaseCard\PressReleaseCard;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -23,7 +25,6 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -42,11 +43,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     private StageFactory $stageFactory;
 
+    private PressArchiveStageFactory $pressArchivestageFactory;
+
     private FormattedDateFactory $formattedDateFactory;
 
-    public function __construct(StageFactory $stageFactory, FormattedDateFactory $formattedDateFactory)
-    {
+    public function __construct(
+        StageFactory $stageFactory,
+        PressArchiveStageFactory $pressArchivestageFactory,
+        FormattedDateFactory $formattedDateFactory
+    ) {
         $this->stageFactory = $stageFactory;
+        $this->pressArchivestageFactory = $pressArchivestageFactory;
         $this->formattedDateFactory = $formattedDateFactory;
     }
 
@@ -149,7 +156,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forPressRelease(TraversableNodeInterface $site, TraversableNodeInterface $pressRelease, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
+        $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage);
     }

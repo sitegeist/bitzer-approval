@@ -19,6 +19,7 @@ final class RowVariant implements PseudoEnumInterface
     const VARIANT_MD = 'md';
     const VARIANT_LG = 'lg';
     const VARIANT_GALLERY = 'gallery';
+    const VARIANT_ALTERNATEMETALINE = 'alternateMetaline';
 
     /**
      * @var array<string,self>|self[]
@@ -40,7 +41,8 @@ final class RowVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_SM
                 && $string !== self::VARIANT_MD
                 && $string !== self::VARIANT_LG
-                && $string !== self::VARIANT_GALLERY) {
+                && $string !== self::VARIANT_GALLERY
+                && $string !== self::VARIANT_ALTERNATEMETALINE) {
                 throw RowVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -79,6 +81,11 @@ final class RowVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_GALLERY);
     }
 
+    public static function alternateMetaline(): self
+    {
+        return self::from(self::VARIANT_ALTERNATEMETALINE);
+    }
+
     public function getIsCh(): bool
     {
         return $this->value === self::VARIANT_CH;
@@ -109,6 +116,11 @@ final class RowVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_GALLERY;
     }
 
+    public function getIsAlternateMetaline(): bool
+    {
+        return $this->value === self::VARIANT_ALTERNATEMETALINE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -120,7 +132,8 @@ final class RowVariant implements PseudoEnumInterface
             self::from(self::VARIANT_SM),
             self::from(self::VARIANT_MD),
             self::from(self::VARIANT_LG),
-            self::from(self::VARIANT_GALLERY)
+            self::from(self::VARIANT_GALLERY),
+            self::from(self::VARIANT_ALTERNATEMETALINE)
         ];
     }
 

@@ -19,16 +19,24 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.isSm && "mt-minus-sm ml-minus-sm",
                 presentationObject.variant.isMd && "mt-minus-md ml-minus-md",
                 presentationObject.variant.isLg && "mt-minus-lg ml-minus-lg",
-                presentationObject.variant.isGallery && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center"
+                presentationObject.variant.isGallery && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center",
+                presentationObject.variant.isAlternateMetaline && "mt-minus-ch ml-minus-ch items-center"
             ]}>
                 <Neos.Fusion:Loop items={presentationObject.content.items}>
+                    <div
+                        class="mt-ch ml-ch text-light-brand"
+                        @if.1={presentationObject.variant.isAlternateMetaline && !iterator.isFirst}
+                    >ꞏ</div>
                     <div class={[
                         presentationObject.variant.isCh && "mt-ch ml-ch",
                         presentationObject.variant.isXs && "mt-xs ml-xs",
                         presentationObject.variant.isSm && "mt-sm ml-sm",
                         presentationObject.variant.isMd && "mt-md ml-md",
                         presentationObject.variant.isLg && "mt-lg ml-lg",
-                        presentationObject.variant.isGallery && "mt-xs ml-xs max-w-[350px] max-h-[350px]"
+                        presentationObject.variant.isGallery && "mt-xs ml-xs max-w-[350px] max-h-[350px]",
+                        presentationObject.variant.isAlternateMetaline && "mt-ch ml-ch",
+                        presentationObject.variant.isAlternateMetaline && iterator.isOdd && "text-light-contrast",
+                        presentationObject.variant.isAlternateMetaline && iterator.isEven && "text-brand"
                     ]}>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                     </div>

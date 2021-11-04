@@ -1,6 +1,7 @@
 'Hoerbiger.HoerbigerCom.PressArchive:Content.LatestPressReleases':
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   ui:
     icon: 'newspaper'
     label: 'Neueste Pressemitteilungen'

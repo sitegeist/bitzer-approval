@@ -9,6 +9,7 @@ const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
 const SPACES = {
 	'ch-xs': '.62ch',
 	ch: '1ch',
+	'2xs': `calc(.4 * ${SPACE_SM})`,
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
 	md: `calc(2 * ${SPACE_SM})`,
