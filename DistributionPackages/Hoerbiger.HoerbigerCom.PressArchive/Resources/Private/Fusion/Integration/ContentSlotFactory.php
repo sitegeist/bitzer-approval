@@ -12,8 +12,12 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
+use Hoerbiger\Shared\Presentation\Layout\Box\Box;
+use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -49,39 +53,46 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         $pressArchive = $site->findNamedChildNode(NodeName::fromString('pressarchive'));
         $latestPressReleases = $pressArchive->findChildNodes(null, 3);
+
         return new ContentContainer(
-            ContentContainerVariant::regularSm(),
+            ContentContainerVariant::regular(),
             new CacheSegment(
-                Collection::fromIterable(
-                    $latestPressReleases,
-                    function (TraversableNodeInterface $pressRelease) use ($inBackend): ArticleCard {
-                        $imageSource = $this->imageSourceFactory->forPreviewMixin(
-                            $pressRelease,
-                            $inBackend,
-                            false
-                        );
-                        return new ArticleCard(
-                            $imageSource
-                                ? $this->figureFactory->forArticleCard($imageSource)
-                                : null,
-                            Value::fromString(
-                                $pressRelease->getProperty('preview__headline')
-                                    ?: $pressRelease->getProperty('headline') ?: ''
-                            ),
-                            Value::fromString($pressRelease->getProperty('alternativeHeadline') ?: ''),
-                            Value::fromString(
-                                $pressRelease->getProperty('preview__description')
-                                    ?: $pressRelease->getProperty('abstract') ?: ''
-                            ),
-                            new Link(
-                                LinkVariant::label(),
-                                $this->uriService->getNodeUri($pressRelease),
-                                LinkTarget::self(),
-                                null,
-                                Value::fromString($this->getLabel('list.learnMore'))
-                            ),
-                        );
-                    }
+                new Box(
+                    BoxVariant::decorative(),
+                    new Grid(
+                        GridVariant::threeColumnsGap(),
+                        Collection::fromIterable(
+                            $latestPressReleases,
+                            function (TraversableNodeInterface $pressRelease) use ($inBackend): ArticleCard {
+                                $imageSource = $this->imageSourceFactory->forPreviewMixin(
+                                    $pressRelease,
+                                    $inBackend,
+                                    false
+                                );
+                                return new ArticleCard(
+                                    $imageSource
+                                        ? $this->figureFactory->forArticleCard($imageSource)
+                                        : null,
+                                    Value::fromString(
+                                        $pressRelease->getProperty('preview__headline')
+                                            ?: $pressRelease->getProperty('headline') ?: ''
+                                    ),
+                                    Value::fromString($pressRelease->getProperty('alternativeHeadline') ?: ''),
+                                    Value::fromString(
+                                        $pressRelease->getProperty('preview__description')
+                                            ?: $pressRelease->getProperty('abstract') ?: ''
+                                    ),
+                                    new Link(
+                                        LinkVariant::label(),
+                                        $this->uriService->getNodeUri($pressRelease),
+                                        LinkTarget::self(),
+                                        null,
+                                        Value::fromString($this->getLabel('list.learnMore'))
+                                    ),
+                                );
+                            }
+                        )
+                    ),
                 ),
                 'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
             )

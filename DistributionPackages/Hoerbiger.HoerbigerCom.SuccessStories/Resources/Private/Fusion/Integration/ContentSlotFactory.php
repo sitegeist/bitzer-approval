@@ -15,7 +15,6 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
@@ -58,7 +57,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             $inBackend,
                             false
                         );
-                        return new ArticleCard(
+                            return new ArticleCard(
                             $imageSource
                                 ? $this->figureFactory->forArticleCard($imageSource)
                                 : null,
