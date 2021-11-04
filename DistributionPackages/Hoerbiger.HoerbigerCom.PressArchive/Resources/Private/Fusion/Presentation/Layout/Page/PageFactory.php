@@ -14,7 +14,6 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -23,6 +22,7 @@ use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
+use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
@@ -49,7 +49,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->formattedDateFactory = $formattedDateFactory;
     }
 
-    public function forPressArchive(TraversableNodeInterface $magazine, bool $inBackend): PageInterface
+    public function forPressArchive(TraversableNodeInterface $site, TraversableNodeInterface $magazine, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $inBackend);
@@ -132,19 +132,19 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ], $identity)
                 ),
             ]), $identity),
-            new SiteFooter()
+            (new SiteFooterFactory())->forDocument($magazine, $site)
         );
     }
 
-    public function forPressRelease(TraversableNodeInterface $pressRelease, bool $inBackend): PageInterface
+    public function forPressRelease(TraversableNodeInterface $site, TraversableNodeInterface $pressRelease, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($pressRelease, $inBackend);
 
-        return $this->forDocumentWithIntroduction($pressRelease, $stage);
+        return $this->forDocumentWithIntroduction($site, $pressRelease, $stage);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -159,7 +159,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            new SiteFooter()
+            (new SiteFooterFactory())->forDocument($document, $site)
         );
     }
 

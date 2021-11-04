@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class BoxVariant implements PseudoEnumInterface
 {
     const VARIANT_TEXTCENTER = 'textCenter';
+    const VARIANT_DECORATIVE = 'decorative';
 
     /**
      * @var array<string,self>|self[]
@@ -30,7 +31,8 @@ final class BoxVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_TEXTCENTER) {
+            if ($string !== self::VARIANT_TEXTCENTER
+                && $string !== self::VARIANT_DECORATIVE) {
                 throw BoxVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -44,9 +46,19 @@ final class BoxVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_TEXTCENTER);
     }
 
+    public static function decorative(): self
+    {
+        return self::from(self::VARIANT_DECORATIVE);
+    }
+
     public function getIsTextCenter(): bool
     {
         return $this->value === self::VARIANT_TEXTCENTER;
+    }
+
+    public function getIsDecorative(): bool
+    {
+        return $this->value === self::VARIANT_DECORATIVE;
     }
 
     /**
@@ -55,7 +67,8 @@ final class BoxVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::VARIANT_TEXTCENTER)
+            self::from(self::VARIANT_TEXTCENTER),
+            self::from(self::VARIANT_DECORATIVE)
         ];
     }
 

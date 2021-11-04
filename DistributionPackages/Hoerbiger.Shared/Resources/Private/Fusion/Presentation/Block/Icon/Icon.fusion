@@ -21,6 +21,4 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
         style = null
         inline = true
     }
-
-
 }

@@ -1,7 +1,7 @@
 prototype(Hoerbiger.HoerbigerCom.PressArchive:Document.PressArchive) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${PressArchive.Page.forPressArchive(documentNode, documentNode.context.inBackend)}
+            presentationObject = ${PressArchive.Page.forPressArchive(site, documentNode, documentNode.context.inBackend)}
         }
     }
 }

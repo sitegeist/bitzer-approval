@@ -13,6 +13,7 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
+use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -37,7 +38,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->stageFactory = $stageFactory;
     }
 
-    public function forMagazine(TraversableNodeInterface $magazine, bool $inBackend): PageInterface
+    public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $inBackend);
@@ -60,20 +61,20 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ], $identity)
                 ),
             ]), $identity),
-            new SiteFooter()
+            (new SiteFooterFactory())->forDocument($magazine, $site)
         );
 
     }
 
-    public function forSuccessStory(TraversableNodeInterface $successStory, bool $inBackend): PageInterface
+    public function forSuccessStory(TraversableNodeInterface $site, TraversableNodeInterface $successStory, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($successStory, $inBackend);
 
-        return $this->forDocumentWithIntroduction($successStory, $stage);
+        return $this->forDocumentWithIntroduction($site, $successStory, $stage);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $introSection): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -88,7 +89,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            new SiteFooter()
+            (new SiteFooterFactory())->forDocument($document, $site)
         );
     }
 }

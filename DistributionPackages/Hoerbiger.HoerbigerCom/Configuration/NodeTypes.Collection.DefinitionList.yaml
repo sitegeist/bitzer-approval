@@ -1,0 +1,3 @@
+'Hoerbiger.HoerbigerCom:Collection.DefinitionList':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.DefinitionList': true

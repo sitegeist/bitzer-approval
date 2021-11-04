@@ -24,3 +24,8 @@ Neos:
         async: true
       'xs2':
         width: 570px
+        async: true
+      'pdf':
+        width: 660px
+        height: 880px
+        allowCropping: true

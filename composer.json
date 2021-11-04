@@ -15,7 +15,8 @@
         "hoerbiger/hoerbigercom-catalog": "*",
         "hoerbiger/hoerbigercom-successstories": "*",
         "hoerbiger/hoerbigercom-pressarchive": "*",
-        "hoerbiger/hoerbigercom-application-worlds": "*"
+        "hoerbiger/hoerbigercom-application-worlds": "*",
+        "internezzo/childreload": "^1.0"
     },
     "require-dev": {
         "neos/buildessentials": "^7.1",
