@@ -1,20 +1,27 @@
 prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
-    renderer = afx`<dl>
-        <dt>header:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} @if.1={presentationObject.header} />
-        </dd>
-        <dt>subheader:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheader} @if.1={presentationObject.subheader} />
-        </dd>
-        <dt>supportingText:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
-        </dd>
-        <dt>buttons:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <div class={[
+            "[Block.Card.PressReleaseCard]",
+            "flex flex-col space-y-ch-xs"
+        ]}>
+            <div class="uppercase text-xs font-sans-bold">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    @if.1={presentationObject.subheader}
+                    presentationObject={presentationObject.subheader}
+                />
+            </div>
+            <div class="text-2xl md:text-4xl font-sans-bold">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    @if.1={presentationObject.header}
+                    presentationObject={presentationObject.header}
+                />
+            </div>
+            <div class="">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
+            </div>
+            <div class="">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
+            </div>
+        </div>
+    `
 }

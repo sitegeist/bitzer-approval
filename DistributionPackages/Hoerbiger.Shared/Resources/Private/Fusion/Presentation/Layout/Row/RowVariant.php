@@ -13,6 +13,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class RowVariant implements PseudoEnumInterface
 {
+    const VARIANT_CH = 'ch';
     const VARIANT_XS = 'xs';
     const VARIANT_SM = 'sm';
     const VARIANT_MD = 'md';
@@ -34,7 +35,8 @@ final class RowVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_XS
+            if ($string !== self::VARIANT_CH
+                && $string !== self::VARIANT_XS
                 && $string !== self::VARIANT_SM
                 && $string !== self::VARIANT_MD
                 && $string !== self::VARIANT_LG
@@ -45,6 +47,11 @@ final class RowVariant implements PseudoEnumInterface
         }
 
         return self::$instances[$string];
+    }
+
+    public static function ch(): self
+    {
+        return self::from(self::VARIANT_CH);
     }
 
     public static function xs(): self
@@ -70,6 +77,11 @@ final class RowVariant implements PseudoEnumInterface
     public static function gallery(): self
     {
         return self::from(self::VARIANT_GALLERY);
+    }
+
+    public function getIsCh(): bool
+    {
+        return $this->value === self::VARIANT_CH;
     }
 
     public function getIsXs(): bool
@@ -103,6 +115,7 @@ final class RowVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::VARIANT_CH),
             self::from(self::VARIANT_XS),
             self::from(self::VARIANT_SM),
             self::from(self::VARIANT_MD),

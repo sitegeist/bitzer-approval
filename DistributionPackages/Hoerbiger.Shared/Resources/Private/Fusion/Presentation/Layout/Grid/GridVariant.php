@@ -65,7 +65,7 @@ final class GridVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_THREECOLUMNSGAP);
     }
 
-    public function isOneColumn(): bool
+    public function getIsOneColumn(): bool
     {
         return $this->value === self::VARIANT_ONECOLUMN;
     }

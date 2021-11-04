@@ -14,7 +14,8 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
         <div class={[
             '[Layout.Grid (' + presentationObject.variant + ')]',
             'grid grid-col',
-            presentationObject.variant.isTwoColumns && "lg:grid-cols-2",
+            presentationObject.variant.isOneColumn && "w-full gap-xl md:gap-md",
+            presentationObject.variant.isTwoColumns && "gap-xl lg:grid-cols-2 md:gap-sm",
             presentationObject.variant.isTwoColumnsGap && "gap-xl md:grid-cols-2 md:gap-sm",
             presentationObject.variant.isThreeColumnsGap && "gap-xl md:grid-cols-2 md:gap-sm lg:grid-cols-3"
         ]}>

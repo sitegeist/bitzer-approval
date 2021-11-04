@@ -14,6 +14,6 @@ final class RowVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid RowVariant, must be one of the defined constants. ', 1632812554);
+        return new self('The given value "' . $attemptedValue . '" is no valid RowVariant, must be one of the defined constants. ', 1636024648);
     }
 }

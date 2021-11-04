@@ -7,6 +7,7 @@ const MIN_TOUCH = '48px';
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
 const SPACES = {
+	'ch-xs': '.62ch',
 	ch: '1ch',
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
@@ -14,6 +15,8 @@ const SPACES = {
 	lg: `calc(3 * ${SPACE_SM})`,
 	xl: `calc(4 * ${SPACE_SM})`,
 	'2xl': `calc(6 * ${SPACE_SM})`,
+	'minus-ch-xs': `-.62ch`,
+	'minus-ch': `-1ch`,
 	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
 	'minus-sm': `calc(-1 * ${SPACE_SM})`,
 	'minus-md': `calc(-2 * ${SPACE_SM})`,

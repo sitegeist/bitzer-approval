@@ -190,4 +190,17 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             FigureObjectPosition::center()
         );
     }
+
+    public function forStackStage(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            false,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100w',
+            null,
+            null
+        );
+    }
 }

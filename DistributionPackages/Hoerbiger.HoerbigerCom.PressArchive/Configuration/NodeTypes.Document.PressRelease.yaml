@@ -1,7 +1,7 @@
 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
     main:
@@ -30,13 +30,6 @@
         label: 'Publikationsdatum'
         inspector:
           group: release
-    alternativeHeadline:
-      ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
-      options:
-        preset: 'rte.plain'
     image:
       validation: ~
     image__alt:
