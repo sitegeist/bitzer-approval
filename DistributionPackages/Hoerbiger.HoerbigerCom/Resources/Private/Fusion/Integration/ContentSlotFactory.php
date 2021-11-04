@@ -58,20 +58,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private PartialFigureEclipseFactory $partialFigureEclipseFactory;
 
-    private CsvPOTranslator $csvPOTranslator;
+
 
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
-        PartialFigureEclipseFactory $partialFigureEclipseFactory,
-        CsvPOTranslator $csvPOTranslator
+        PartialFigureEclipseFactory $partialFigureEclipseFactory
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
         $this->figureFactory = $figureFactory;
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
-        $this->csvPOTranslator = $csvPOTranslator;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
@@ -80,7 +78,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Collection.Downloads':
                 return $this->forDownloadsNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Download':
-                return $this->forDownloadNode($contentNode);
+                return $this->cardFactory->forDownloadNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DummyText':
                 return $this->forDummyTextNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage':
@@ -131,37 +129,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     }
                 )
             )
-        );
-    }
-
-    private function forDownloadNode(TraversableNodeInterface $downloadNode): SlotInterface
-    {
-        $asset = $downloadNode->getProperty('asset');
-        $imageSource = ($asset instanceof Document)
-            ? $this->imageSourceFactory->forDocument($asset)
-            : null;
-
-        return new DownloadCard(
-            $imageSource
-                ? $this->figureFactory->forDownloadCard($imageSource)
-                : null,
-            Editable::fromNodeProperty($downloadNode, 'title'),
-            $asset instanceof Document
-                ? Value::fromString(
-                    $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getMediaType())
-                        . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
-                )
-                : null,
-            Editable::fromNodeProperty($downloadNode, 'description'),
-            $asset instanceof Document
-                ? new Link(
-                    LinkVariant::label(),
-                    $this->uriService->getAssetUri($asset),
-                    LinkTarget::blank(),
-                    null,
-                    Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
-                )
-                : null
         );
     }
 
