@@ -18,6 +18,7 @@ final class PresetIdentifier implements PseudoEnumInterface
     const IDENTIFIER_MD = 'md';
     const IDENTIFIER_LG = 'lg';
     const IDENTIFIER_XL = 'xl';
+    const IDENTIFIER_PDF = 'pdf';
 
     /**
      * @var array<string,self>|self[]
@@ -38,7 +39,8 @@ final class PresetIdentifier implements PseudoEnumInterface
                 && $string !== self::IDENTIFIER_SM
                 && $string !== self::IDENTIFIER_MD
                 && $string !== self::IDENTIFIER_LG
-                && $string !== self::IDENTIFIER_XL) {
+                && $string !== self::IDENTIFIER_XL
+                && $string !== self::IDENTIFIER_PDF) {
                 throw PresetIdentifierIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -72,6 +74,11 @@ final class PresetIdentifier implements PseudoEnumInterface
         return self::from(self::IDENTIFIER_XL);
     }
 
+    public static function pdf(): self
+    {
+        return self::from(self::IDENTIFIER_PDF);
+    }
+
     public function getIsXs(): bool
     {
         return $this->value === self::IDENTIFIER_XS;
@@ -97,6 +104,11 @@ final class PresetIdentifier implements PseudoEnumInterface
         return $this->value === self::IDENTIFIER_XL;
     }
 
+    public function getIsPdf(): bool
+    {
+        return $this->value === self::IDENTIFIER_PDF;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -107,7 +119,8 @@ final class PresetIdentifier implements PseudoEnumInterface
             self::from(self::IDENTIFIER_SM),
             self::from(self::IDENTIFIER_MD),
             self::from(self::IDENTIFIER_LG),
-            self::from(self::IDENTIFIER_XL)
+            self::from(self::IDENTIFIER_XL),
+            self::from(self::IDENTIFIER_PDF)
         ];
     }
 

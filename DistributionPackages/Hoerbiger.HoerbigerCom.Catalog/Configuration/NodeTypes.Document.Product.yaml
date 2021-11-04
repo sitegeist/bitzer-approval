@@ -18,6 +18,7 @@
           'Hoerbiger.HoerbigerCom:Collection.TabBox': true
           'Hoerbiger.HoerbigerCom:Content.DummyText': true
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
   ui:
     icon: barcode
     label: 'Produkt'

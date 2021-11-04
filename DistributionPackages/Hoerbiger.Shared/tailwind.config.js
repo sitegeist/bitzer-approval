@@ -164,6 +164,10 @@ module.exports = {
 				'quotation': '1152px',
 			},
 
+			height: {
+				...SPACES,
+			},
+
 			space: {
 				...SPACES,
 			},
@@ -203,6 +207,9 @@ module.exports = {
 				}],
 			},
 
+			boxShadow: {
+				card: '0 0 14px rgba(0, 0, 0, 0.1)',
+			},
 		},
 	},
 	variants: {

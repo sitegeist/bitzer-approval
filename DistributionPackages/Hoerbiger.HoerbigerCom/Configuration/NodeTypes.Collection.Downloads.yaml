@@ -1,0 +1,3 @@
+'Hoerbiger.HoerbigerCom:Collection.Downloads':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Downloads': true
