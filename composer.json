@@ -13,6 +13,8 @@
     "require": {
         "hoerbiger/hoerbigercom": "*",
         "hoerbiger/hoerbigercom-catalog": "*",
+        "hoerbiger/hoerbigercom-successstories": "*",
+        "hoerbiger/hoerbigercom-pressarchive": "*",
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "internezzo/childreload": "^1.0"
     },

@@ -17,6 +17,19 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         $this->sourceSetProvider = $sourceSetProvider;
     }
 
+    public function forArticleCard(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100vw',
+            FigureObjectFit::cover(),
+            FigureObjectPosition::center()
+        );
+    }
+
     public function forDownloadCard(ImageSourceHelperInterface $imageSource): Figure
     {
         return new Figure(
@@ -175,6 +188,19 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             '100w',
             FigureObjectFit::contain(),
             FigureObjectPosition::center()
+        );
+    }
+
+    public function forStackStage(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            false,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100w',
+            null,
+            null
         );
     }
 }

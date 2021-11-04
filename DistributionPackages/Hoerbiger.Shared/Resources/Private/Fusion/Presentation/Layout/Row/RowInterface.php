@@ -7,11 +7,11 @@ namespace Hoerbiger\Shared\Presentation\Layout\Row;
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 interface RowInterface extends ComponentPresentationObjectInterface
 {
     public function getVariant(): RowVariant;
 
-    public function getContent(): SlotInterface;
+    public function getContent(): Collection;
 }

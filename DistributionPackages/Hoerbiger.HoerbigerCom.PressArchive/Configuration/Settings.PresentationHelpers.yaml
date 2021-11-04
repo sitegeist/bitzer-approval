@@ -1,0 +1,5 @@
+Neos:
+  Fusion:
+    defaultContext:
+      PressArchive.Page: Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page\PageFactory
+      PressArchive.ContentSlot: Hoerbiger\HoerbigerCom\PressArchive\Integration\ContentSlotFactory
