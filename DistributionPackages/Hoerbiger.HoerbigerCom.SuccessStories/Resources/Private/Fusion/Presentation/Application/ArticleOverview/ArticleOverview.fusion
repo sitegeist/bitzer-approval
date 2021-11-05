@@ -1,0 +1,9 @@
+prototype(Hoerbiger.HoerbigerCom.SuccessStories:Application.ArticleOverview) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\SuccessStories\\Presentation\\Application\\ArticleOverview\\ArticleOverviewInterface'
+
+    renderer = afx`
+        <div>
+            Coming Soon...
+            <script type="application/json" data-labels={presentationObject.labels}>{presentationObject.articles}</script>
+        </div>`
+}

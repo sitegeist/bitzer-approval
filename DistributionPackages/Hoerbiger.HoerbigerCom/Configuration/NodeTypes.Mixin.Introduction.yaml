@@ -58,3 +58,23 @@
         enumName: Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction\StageVariant
         propertyNames:
           - stage__variant
+
+'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+  ui:
+    inspector:
+      groups:
+        adjust:
+          position: after image
+  properties:
+    image:
+      options:
+        preset: 'image.landscape'
+    alternativeHeadline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      options:
+        preset: 'rte.plain'

@@ -8,7 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Row;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 /**
  * @Flow\Proxy(false)
@@ -17,11 +17,11 @@ final class Row extends AbstractComponentPresentationObject implements RowInterf
 {
     private RowVariant $variant;
 
-    private SlotInterface $content;
+    private Collection $content;
 
     public function __construct(
         RowVariant $variant,
-        SlotInterface $content
+        Collection $content
     ) {
         $this->variant = $variant;
         $this->content = $content;
@@ -32,7 +32,7 @@ final class Row extends AbstractComponentPresentationObject implements RowInterf
         return $this->variant;
     }
 
-    public function getContent(): SlotInterface
+    public function getContent(): Collection
     {
         return $this->content;
     }

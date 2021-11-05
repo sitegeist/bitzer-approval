@@ -20,6 +20,9 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             h1 = "font-sans-bold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl"
             h1.@if.1 = ${presentationObject.type.isH1}
 
+            h1Brand = "text-brand"
+            h1Brand.@if.1 = ${presentationObject.type.isH1 && presentationObject.variant.isBrand}
+
             h2 = "text-3xl lg:text-4xl text-brand font-sans-bold"
             h2.@if.1 = ${presentationObject.type.isH2}
 

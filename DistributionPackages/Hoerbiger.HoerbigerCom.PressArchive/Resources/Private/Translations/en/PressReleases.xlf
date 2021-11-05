@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="PressReleases" product-name="Hoerbiger.HoerbigerCom.PressArchive" source-language="en" datatype="plaintext">
+        <body>
+            <trans-unit id="list.learnMore" xml:space="preserve">
+                <source>learn more</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

@@ -1,0 +1,21 @@
+{
+    "name": "hoerbiger/hoerbigercom-successstories",
+    "type": "neos-hoerbiger",
+    "version": "1.0.0",
+    "require": {
+        "hoerbiger/hoerbigercom": "*",
+        "hoerbiger/hoerbigercom-application-worlds": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hoerbiger\\HoerbigerCom\\SuccessStories\\": "Classes/",
+            "Hoerbiger\\HoerbigerCom\\SuccessStories\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+            "Hoerbiger\\HoerbigerCom\\SuccessStories\\Integration\\": "Resources/Private/Fusion/Integration/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Hoerbiger.HoerbigerCom.SuccessStories"
+        }
+    }
+}

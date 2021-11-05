@@ -1,0 +1,6 @@
+'Hoerbiger.HoerbigerCom:Document.WebPage':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories': true
