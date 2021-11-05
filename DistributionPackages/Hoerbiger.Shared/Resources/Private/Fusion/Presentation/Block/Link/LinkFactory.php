@@ -71,7 +71,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         $linkTarget = LinkTarget::forNode($document);
 
         return new Link(
-            LinkVariant::noStyles(),
+            LinkVariant::siteFooter(),
             $this->uriService->getNodeUri($document),
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,

@@ -28,10 +28,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private StageFactory $stageFactory;
 
-    public function __construct(SlidableFactory $slidableFactory, StageFactory $stageFactory)
-    {
+    private SiteFooterFactory $siteFooterFactory;
+
+    public function __construct(
+        SlidableFactory $slidableFactory,
+        StageFactory $stageFactory,
+        SiteFooterFactory $siteFooterFactory
+    ) {
         $this->slidableFactory = $slidableFactory;
         $this->stageFactory = $stageFactory;
+        $this->siteFooterFactory = $siteFooterFactory;
     }
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
@@ -54,7 +60,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forDocument($homepage, $homepage)
+            $this->siteFooterFactory->forDocument($homepage, $homepage)
         );
     }
 
@@ -71,7 +77,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             new SiteHeader(),
             Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main'))),
-            (new SiteFooterFactory())->forDocument($notFoundPage, $site)
+            $this->siteFooterFactory->forDocument($notFoundPage, $site)
         );
     }
 
@@ -97,7 +103,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forDocument($document, $site)
+            $this->siteFooterFactory->forDocument($document, $site)
         );
     }
 }

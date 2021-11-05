@@ -32,10 +32,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private StageFactory $stageFactory;
 
-    public function __construct(ArticleOverviewFactory $articleOverviewFactory, StageFactory $stageFactory)
-    {
+    private SiteFooterFactory $siteFooterFactory;
+
+    public function __construct(
+        ArticleOverviewFactory $articleOverviewFactory,
+        StageFactory $stageFactory,
+        SiteFooterFactory $siteFooterFactory
+    ) {
         $this->articleOverviewFactory = $articleOverviewFactory;
         $this->stageFactory = $stageFactory;
+        $this->siteFooterFactory = $siteFooterFactory;
     }
 
     public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, bool $inBackend): PageInterface
@@ -61,7 +67,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ], $identity)
                 ),
             ]), $identity),
-            (new SiteFooterFactory())->forDocument($magazine, $site)
+            $this->siteFooterFactory->forDocument($magazine, $site)
         );
 
     }
@@ -89,7 +95,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forDocument($document, $site)
+            $this->siteFooterFactory->forDocument($document, $site)
         );
     }
 }

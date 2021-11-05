@@ -1,0 +1,11 @@
+prototype(Hoerbiger.HoerbigerCom:CacheSegment.SiteReactive) < prototype(Hoerbiger.HoerbigerCom:CacheSegment) {
+    @cache {
+        entryIdentifier {
+            node = ${documentNode}
+        }
+        entryTags {
+            // whenever homepage changes, the cache segment will flush
+            1 = ${Neos.Caching.nodeTag(site)}
+        }
+    }
+}

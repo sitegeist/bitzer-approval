@@ -41,11 +41,12 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
                             @if.1={presentationObject.navigationLinks}
                             class="flex space-x-xs"
                         >
-                            <Neos.Fusion:Loop items={presentationObject.navigationLinks.items}>
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.navigationLinks} />
+                            <!--<Neos.Fusion:Loop items={presentationObject.navigationLinks.content.items}>
                                 <Neos.Fusion:Augmenter class="text-light uppercase font-semibold min-h-touch flex items-center whitespace-nowrap">
                                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                                 </Neos.Fusion:Augmenter>
-                            </Neos.Fusion:Loop>
+                            </Neos.Fusion:Loop>-->
                         </div>
                     </div>
                 </div>
