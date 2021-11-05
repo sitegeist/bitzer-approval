@@ -1,6 +1,7 @@
 'Hoerbiger.HoerbigerCom:Content.Milestone':
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
     'Neos.Neos:ContentCollection': true
   constraints:
@@ -10,15 +11,15 @@
   ui:
     label: 'Meilenstein'
     icon: clock
-    inspector:
-      groups:
-        date:
-          label: 'Datum'
   properties:
     year:
-      type: integer
+      type: string
       ui:
-        label: 'Jahr'
-        inspector:
-          group: date
+        inlineEditable: true
+        inline:
+          editorOptions:
+            autoparagraph: false
+            placeholder: 'Jahr'
+            formatting:
+              removeFormat: true
 

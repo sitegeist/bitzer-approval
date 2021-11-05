@@ -1,0 +1,36 @@
+prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Timeline\\MileStone\\MileStoneInterface'
+
+    @styleguide {
+        title = 'MileStone'
+
+        props {
+            year = '- Add Slot Content -'
+            label = '- Add Slot Content -'
+            description = '- Add Slot Content -'
+            figures = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>year:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.year} />
+        </dd>
+        <dt>label:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
+        </dd>
+        <dt>description:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.description} />
+        </dd>
+        <dt>figures:</dt>
+        <dd>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                @if.1={presentationObject.figures}
+                presentationObject={presentationObject.figures}
+            />
+        </dd>
+    </dl>`
+}

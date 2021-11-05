@@ -1,0 +1,25 @@
+prototype(Hoerbiger.Shared:Block.Timeline) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Timeline\\TimelineInterface'
+
+    @styleguide {
+        title = 'Timeline'
+
+        props {
+            milestones = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.Timeline]",
+            "flex flex-col"
+        ]}>
+
+            <Neos.Fusion:Loop items={presentationObject.milestones.items}>
+                <div class="border border-brand p-10">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                </div>
+            </Neos.Fusion:Loop>
+        </div>
+    `
+}
