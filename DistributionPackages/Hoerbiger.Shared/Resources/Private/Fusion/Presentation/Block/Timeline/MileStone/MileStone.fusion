@@ -12,25 +12,27 @@ prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.
         }
     }
 
-    renderer = afx`<dl>
-        <dt>year:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.year} />
-        </dd>
-        <dt>label:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
-        </dd>
-        <dt>description:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.description} />
-        </dd>
-        <dt>figures:</dt>
-        <dd>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                @if.1={presentationObject.figures}
-                presentationObject={presentationObject.figures}
-            />
-        </dd>
-    </dl>`
+    renderer = afx`
+        <details class={[
+            "[Block.Timeline.MileStone]",
+            "shadow-card p-xs"
+
+        ]}>
+            <summary class="grid grid-cols-2-max-1fr gap-xs ">
+                <span class="text-brand font-sans-bold text-2xl">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.year} />
+                </span>
+                <span class="text-lg leading-snug">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
+                </span>
+            </summary>
+            <div class="flex flex-col space-y-xs pt-xs">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.description} />
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    @if.1={presentationObject.figures}
+                    presentationObject={presentationObject.figures}
+                />
+            </div>
+        </details>
+    `
 }

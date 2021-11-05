@@ -12,14 +12,19 @@ prototype(Hoerbiger.Shared:Block.Timeline) < prototype(PackageFactory.AtomicFusi
     renderer = afx`
         <div class={[
             "[Block.Timeline]",
-            "flex flex-col"
+            "relative"
         ]}>
-
-            <Neos.Fusion:Loop items={presentationObject.milestones.items}>
-                <div class="border border-brand p-10">
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
-                </div>
-            </Neos.Fusion:Loop>
+            <div class="absolute left-1/2 top-[2.3em] bottom-0 border-r-2 translate-x-[-1px] border-brand border-dotted"></div>
+            <div class="flex flex-col space-y-xs">
+                <Neos.Fusion:Loop items={presentationObject.milestones.items}>
+                    <div class="relative max-w-[50%] w-full odd:self-end flex odd:justify-end">
+                        <div class="z-20 bg-light w-full max-w-[85%] relative">
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                        </div>
+                        <div class="h-0.5 bg-brand w-full z-10 absolute top-[2.3em]"></div>
+                    </div>
+                </Neos.Fusion:Loop>
+            </div>
         </div>
     `
 }

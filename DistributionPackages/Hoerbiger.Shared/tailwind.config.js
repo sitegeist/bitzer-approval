@@ -41,7 +41,7 @@ module.exports = {
 				contrast: 'rgba(0, 0, 0, .85)'
 			},
 			neutral: {
-				lighter: '#F9F9F9',
+				lighter: '#F0F0F0',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
 				contrast: 'rgba(0, 0, 0, .85)',
@@ -64,12 +64,6 @@ module.exports = {
 			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
 			'serif-regular': ['PT Serif', 'serif'],
-		},
-
-		boxShadow: {
-			/* Will match to py-3. */
-			'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
-			'textbox': '0 0 14px rgba(0, 0, 0, .08)',
 		},
 
 		extend: {
@@ -212,6 +206,9 @@ module.exports = {
 			},
 
 			boxShadow: {
+				/* Will match to py-3. */
+				'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
+				'textbox': '0 0 14px rgba(0, 0, 0, .08)',
 				card: '0 0 14px rgba(0, 0, 0, 0.1)',
 			},
 		},
