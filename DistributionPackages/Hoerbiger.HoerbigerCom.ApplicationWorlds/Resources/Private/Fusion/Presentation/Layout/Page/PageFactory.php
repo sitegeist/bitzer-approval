@@ -25,9 +25,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     private StageFactory $stageFactory;
 
-    public function __construct(StageFactory $stageFactory)
+    private SiteFooterFactory $siteFooterFactory;
+
+    public function __construct(StageFactory $stageFactory, SiteFooterFactory $siteFooterFactory)
     {
         $this->stageFactory = $stageFactory;
+        $this->siteFooterFactory = $siteFooterFactory;
     }
 
     public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subGraph): PageInterface
@@ -55,7 +58,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            (new SiteFooterFactory())->forDocument($applicationWorld, $site)
+            $this->siteFooterFactory->forDocument($applicationWorld, $site)
         );
     }
 }

@@ -1,7 +1,0 @@
-prototype(Hoerbiger.Shared:Block.Translation) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Translation\\TranslationInterface'
-
-    i18n = ${CsvPO.create(presentationObject.translationFile)}
-
-    renderer = afx`{props.i18n[presentationObject.translationID]}`
-}

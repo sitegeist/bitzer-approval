@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\ContactFormLink;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
@@ -14,7 +15,6 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
-use Hoerbiger\Shared\Presentation\Block\Translation\TranslationFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -25,14 +25,19 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFactory
 {
+    private CsvPOTranslator $csvPOTranslator;
+
+    public function __construct(
+        CsvPOTranslator $csvPOTranslator
+    ) {
+        $this->csvPOTranslator = $csvPOTranslator;
+    }
+
     public function forSiteFooter(TraversableNodeInterface $site): ContactFormLinkInterface
     {
         $identity = function(SlotInterface $slot) {
             return $slot;
         };
-
-        $translationFile = 'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/ContactFormLink/ContactFormLink.translation.csv';
-        $translate = new TranslationFactory();
 
         return new ContactFormLink(
             new Stack(
@@ -43,18 +48,18 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                         Collection::fromIterable([
                             new Tag(
                                 'strong',
-                                $translate('contact_form_link_subline', $translationFile)
+                                Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_subline'))
                             ),
                             new Headline(
                                 HeadlineVariant::regular(),
                                 HeadlineType::h2(),
-                                $translate('contact_form_link_headline', $translationFile)
+                                Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_headline'))
                             )
                         ], $identity),
                     ),
                     new Text(
                         TextVariant::neutralContrast(),
-                        $translate('contact_form_link_text',  $translationFile),
+                        Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_text')),
                         false
                     )
                 ], $identity)
@@ -62,7 +67,7 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
             new Button(
                 ButtonType::link(),
                 ButtonVariant::cta(),
-                $translate('contact_form_link_button',  $translationFile),
+                Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_button')),
                 $this->uriService->getNodeUri($site), // TODO => Traverse Document.ContactPage.
                 "_self",
                 null

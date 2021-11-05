@@ -22,6 +22,13 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
      */
     protected $socialMediaSettings;
 
+    private ContactFormLinkFactory $contactFormLinkFactory;
+
+    public function __construct(ContactFormLinkFactory $contactFormLinkFactory)
+    {
+        $this->contactFormLinkFactory = $contactFormLinkFactory;
+    }
+
     public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): SiteFooterInterface
     {
         $linkFactory = new LinkFactory();
@@ -44,7 +51,7 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
                 ),
             'Hoerbiger.HoerbigerCom:CacheSegment.SiteReactive'
             ),
-            (new ContactFormLinkFactory())->forDocument($document, $site)
+            $this->contactFormLinkFactory->forDocument($document, $site)
         );
     }
 }
