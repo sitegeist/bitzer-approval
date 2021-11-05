@@ -14,6 +14,6 @@ final class BoxVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid BoxVariant, must be one of the defined constants. ', 1632810759);
+        return new self('The given value "' . $attemptedValue . '" is no valid BoxVariant, must be one of the defined constants. ', 1634912878);
     }
 }

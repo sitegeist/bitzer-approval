@@ -17,6 +17,7 @@ final class HeadlineVariant implements PseudoEnumInterface
     const VARIANT_IMPORTANT = 'important';
     const VARIANT_DECORATIVE = 'decorative';
     const VARIANT_NOBRAND = 'noBrand';
+    const VARIANT_BRAND = 'brand';
 
     /**
      * @var array<string,self>|self[]
@@ -36,7 +37,8 @@ final class HeadlineVariant implements PseudoEnumInterface
             if ($string !== self::VARIANT_REGULAR
                 && $string !== self::VARIANT_IMPORTANT
                 && $string !== self::VARIANT_DECORATIVE
-                && $string !== self::VARIANT_NOBRAND) {
+                && $string !== self::VARIANT_NOBRAND
+                && $string !== self::VARIANT_BRAND) {
                 throw HeadlineVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -65,6 +67,11 @@ final class HeadlineVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_NOBRAND);
     }
 
+    public static function brand(): self
+    {
+        return self::from(self::VARIANT_BRAND);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -85,6 +92,11 @@ final class HeadlineVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_NOBRAND;
     }
 
+    public function getIsBrand(): bool
+    {
+        return $this->value === self::VARIANT_BRAND;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -94,7 +106,8 @@ final class HeadlineVariant implements PseudoEnumInterface
             self::from(self::VARIANT_REGULAR),
             self::from(self::VARIANT_IMPORTANT),
             self::from(self::VARIANT_DECORATIVE),
-            self::from(self::VARIANT_NOBRAND)
+            self::from(self::VARIANT_NOBRAND),
+            self::from(self::VARIANT_BRAND)
         ];
     }
 

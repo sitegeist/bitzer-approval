@@ -7,13 +7,17 @@ const MIN_TOUCH = '48px';
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
 const SPACES = {
+	'ch-xs': '.62ch',
 	ch: '1ch',
+	'2xs': `calc(.4 * ${SPACE_SM})`,
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
 	md: `calc(2 * ${SPACE_SM})`,
 	lg: `calc(3 * ${SPACE_SM})`,
 	xl: `calc(4 * ${SPACE_SM})`,
 	'2xl': `calc(6 * ${SPACE_SM})`,
+	'minus-ch-xs': `-.62ch`,
+	'minus-ch': `-1ch`,
 	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
 	'minus-sm': `calc(-1 * ${SPACE_SM})`,
 	'minus-md': `calc(-2 * ${SPACE_SM})`,
@@ -21,6 +25,8 @@ const SPACES = {
 	'minus-xl': `calc(-4 * ${SPACE_SM})`,
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
+
+const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2']
 
 module.exports = {
 	mode: 'jit',
@@ -38,7 +44,7 @@ module.exports = {
 				lighter: '#F9F9F9',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
-				contrast: '#fff',
+				contrast: 'rgba(0, 0, 0, .85)',
 			},
 			brand: {
 				DEFAULT: '#8D172E',
@@ -140,6 +146,7 @@ module.exports = {
 			gridTemplateColumns: {
 				'2-max-1fr': 'max-content 1fr',
 				'2-1fr-max': '1fr max-content',
+				tabs: '35% 1fr',
 			},
 
 			minWidth: {
@@ -155,9 +162,14 @@ module.exports = {
 			},
 
 			maxWidth: {
+				...SPACES,
 				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
+			},
+
+			height: {
+				...SPACES,
 			},
 
 			space: {
@@ -199,12 +211,16 @@ module.exports = {
 				}],
 			},
 
+			boxShadow: {
+				card: '0 0 14px rgba(0, 0, 0, 0.1)',
+			},
 		},
 	},
 	variants: {
 		extend: {
 			transform: ['group-hover'],
 		},
+		backgroundColor: ({after}) => after(NTH_CHILD_SELECTORS),
 	},
 	plugins: [
 		plugin(({addUtilities}) => {
@@ -216,6 +232,17 @@ module.exports = {
 					'column-gap': SPACES.md,
 				},
 			}, ['responsive']);
+		}),
+		plugin(({addVariant, e}) => {
+			NTH_CHILD_SELECTORS
+				.map(item => item.replace('nth-child-', ''))
+				.forEach((item) =>
+					addVariant(`nth-child-${item}`, ({modifySelectors, separator}) =>
+						modifySelectors(({className}) =>
+							`.${e(`nth-child-${item}${separator}${className}`)}:nth-child(${item})`
+						)
+					)
+				)
 		}),
 		require('@tailwindcss/typography'),
 	],

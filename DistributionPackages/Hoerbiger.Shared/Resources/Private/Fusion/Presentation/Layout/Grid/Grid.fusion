@@ -13,10 +13,12 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
     renderer = afx`
         <div class={[
             '[Layout.Grid (' + presentationObject.variant + ')]',
-            'grid grid-col',
-            presentationObject.variant.isTwoColumns && "lg:grid-cols-2",
-            presentationObject.variant.isTwoColumnsGap && "gap-xl md:grid-cols-2 md:gap-md",
-            presentationObject.variant.isThreeColumnsGap && "gap-xl md:grid-cols-2 md:gap-md lg:grid-cols-3"
+            'grid grid-col w-full',
+            presentationObject.variant.isOneColumn && "gap-xl md:gap-md",
+            presentationObject.variant.isTwoColumns && "gap-xl lg:grid-cols-2 md:gap-sm",
+            presentationObject.variant.isTwoColumnsGap && "gap-xl md:grid-cols-2 md:gap-sm",
+            presentationObject.variant.isThreeColumnsGap && "gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md lg:grid-cols-3",
+            presentationObject.variant.isTwoColumnsFrMaxGap && "gap-xs md:grid-cols-2-1fr-max"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

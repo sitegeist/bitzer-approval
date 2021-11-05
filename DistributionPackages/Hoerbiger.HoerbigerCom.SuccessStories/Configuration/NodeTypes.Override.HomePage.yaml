@@ -1,0 +1,9 @@
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    magazine:
+      type: 'Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine'
+      position: before notfound
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories': true

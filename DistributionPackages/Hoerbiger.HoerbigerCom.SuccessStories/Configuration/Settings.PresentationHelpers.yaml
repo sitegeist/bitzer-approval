@@ -1,0 +1,5 @@
+Neos:
+  Fusion:
+    defaultContext:
+      SuccessStories.Page: Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Page\PageFactory
+      SuccessStories.ContentSlot: Hoerbiger\HoerbigerCom\SuccessStories\Integration\ContentSlotFactory

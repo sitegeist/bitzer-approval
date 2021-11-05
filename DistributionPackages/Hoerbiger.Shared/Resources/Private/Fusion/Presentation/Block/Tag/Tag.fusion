@@ -1,0 +1,19 @@
+prototype(Hoerbiger.Shared:Block.Tag) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Tag\\TagInterface'
+
+    @styleguide {
+        title = 'Tag'
+
+        props {
+            tagName = 'Text'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = Neos.Fusion:Tag {
+        tagName = ${presentationObject.tagName}
+        content = PackageFactory.AtomicFusion.PresentationObjects:Slot {
+            presentationObject = ${presentationObject.content}
+        }
+    }
+}
