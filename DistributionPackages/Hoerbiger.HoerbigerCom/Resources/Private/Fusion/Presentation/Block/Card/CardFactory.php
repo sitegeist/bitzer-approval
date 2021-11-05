@@ -102,8 +102,6 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
 
         $asset = $downloadNode->getProperty('asset');
 
-
-
         return new DownloadCard(
             ($asset instanceof Document) ? $this->getMediaForDocument($asset) : null,
             Editable::fromNodeProperty($downloadNode, 'title'),
@@ -119,7 +117,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
                     Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
                 ),
                 Value::fromString(
-                    $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getMediaType())
+                    $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension())
                     . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
                 )
             ], $identity)
@@ -127,18 +125,21 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    private function getMediaForDocument(Document $asset) : ?SlotInterface
+    private function getMediaForDocument(Document $asset) : SlotInterface
     {
-        switch ( $asset->getFileExtension()) {
-            case PresetIdentifier::IDENTIFIER_PDF:
+        switch ($asset->getFileExtension()) {
+            case 'pdf':
                 $imageSource = $this->imageSourceFactory->forDocument($asset);
-                return $imageSource ? $this->figureFactory->forDownloadCard(
+                return $imageSource
+                    ? $this->figureFactory->forDownloadCard(
                     $imageSource
-                ) : null;
-            case PresetIdentifier::IDENTIFIER_PPT:
+                    )
+                    : new Icon('shared', 'pdf');
+            case 'ppt':
+            case 'pptx':
                 return new Icon('shared', 'powerpoint');
             default:
-                return new Icon('shared', 'chevronRight');
+                return new Icon('shared', 'downloadFile');
         }
     }
 }
