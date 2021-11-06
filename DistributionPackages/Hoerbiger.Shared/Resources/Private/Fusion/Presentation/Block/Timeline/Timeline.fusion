@@ -17,11 +17,30 @@ prototype(Hoerbiger.Shared:Block.Timeline) < prototype(PackageFactory.AtomicFusi
             <div class="absolute left-1/2 top-[2.3em] bottom-0 border-r-2 translate-x-[-1px] border-brand border-dotted"></div>
             <div class="flex flex-col space-y-xs">
                 <Neos.Fusion:Loop items={presentationObject.milestones.items}>
-                    <div class="relative max-w-[50%] w-full odd:self-end flex odd:justify-end">
+                    <div class="relative max-w-[50%] w-full odd:self-end flex odd:justify-end relative group">
                         <div class="z-20 bg-light w-full max-w-[85%] relative">
                             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                         </div>
-                        <div class="h-0.5 bg-brand w-full z-10 absolute top-[2.3em]"></div>
+                        <div class="h-0.5 bg-brand w-full z-10 absolute top-[2.3em]">
+                            <div
+                            class="
+                            absolute
+                            group-odd:right-full
+                            group-even:left-full
+                            rounded-full
+                            bg-brand
+                            h-8
+                            w-8
+                            -translate-y-4
+                            group-odd:translate-x-[50%]
+                            group-even:-translate-x-4
+                            group-first:h-12
+                            group-first:w-12
+                            group-first:-translate-y-6
+                            ">
+                                <div class="h-6 w-6 border-2 border-light m-auto rounded-full translate-y-1 group-first:h-8 group-first:w-8 group-first:translate-y-2"></div>
+                            </div>
+                        </div>
                     </div>
                 </Neos.Fusion:Loop>
             </div>
