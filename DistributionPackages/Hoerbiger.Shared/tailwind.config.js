@@ -1,5 +1,6 @@
 // const theme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
+const selectorParser = require('postcss-selector-parser');
 
 const MAX_CONTENT_WIDTH = '1920px';
 const MIN_TOUCH = '48px';
@@ -241,9 +242,15 @@ module.exports = {
 		}),
 		plugin(({addVariant}) =>
 			addVariant('open', ({modifySelectors, separator}) =>
-				modifySelectors(({className}) =>
-					`[open].open${separator}${className}[open], details[open] .open${separator}${className}`
-				)
+				modifySelectors(({selector}) => {
+					return selectorParser((selectors) => {
+						selectors.walkClasses((sel) => {
+							sel.value = `open${separator}${sel.value}`;
+							sel.parent.insertBefore(sel, selectorParser().astSync('details[open] '));
+						});
+					}).processSync(selector)
+
+				})
 			)
 		),
 		require('@tailwindcss/typography'),

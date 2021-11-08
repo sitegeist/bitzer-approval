@@ -25,9 +25,9 @@ prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.
                     <span class="text-lg leading-snug">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
                     </span>
-                    <span class="open:rotate-180">
+                    <span class="w-8 h-8 flex justify-center items-center origin-center open:rotate-180 transition">
                         <img
-                            class="w-8"
+                            class="w-full h-full object-contain"
                             src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownBrand.svg')}
                         />
                     </span>
