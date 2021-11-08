@@ -14,14 +14,14 @@ prototype(Hoerbiger.Shared:Block.Timeline) < prototype(PackageFactory.AtomicFusi
             "[Block.Timeline]",
             "relative"
         ]}>
-            <div class="absolute left-1/2 top-[3.3rem] bottom-0 border-r-2 translate-x-[-1px] border-brand border-dotted"></div>
-            <div class="flex flex-col space-y-xs">
+            <div class="absolute left-1/2 top-[3.3rem] bottom-0 border-r-2 translate-x-[-1px] border-brand border-dotted z-10"></div>
+            <div class="flex flex-col space-y-xs relative z-20">
                 <Neos.Fusion:Loop items={presentationObject.milestones.items}>
                     <div class="relative max-w-[50%] w-full odd:self-end flex odd:justify-end relative group">
-                        <div class="z-20 bg-light w-full max-w-[85%] relative">
+                        <div class="z-30 bg-light w-full max-w-[85%] relative">
                             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                         </div>
-                        <div class="h-0.5 bg-brand w-full z-10 absolute top-[3.3rem]">
+                        <div class="h-0.5 bg-brand w-full z-20 absolute top-[3.3rem]">
                             <div class={[
                                 "absolute rounded-full bg-brand h-8 w-8 -translate-y-4",
                                 "group-even:left-full group-even:-translate-x-4 group-odd:translate-x-[50%] group-odd:right-full",
@@ -33,6 +33,10 @@ prototype(Hoerbiger.Shared:Block.Timeline) < prototype(PackageFactory.AtomicFusi
                                 ]}></div>
                             </div>
                         </div>
+                        <div
+                            @if.1={iterator.isLast}
+                            class="bg-light absolute w-[4px] top-[3.4rem] bottom-0 z-10 group-even:right-0 group-odd:right-full translate-x-1/2"
+                        ></div>
                     </div>
                 </Neos.Fusion:Loop>
             </div>

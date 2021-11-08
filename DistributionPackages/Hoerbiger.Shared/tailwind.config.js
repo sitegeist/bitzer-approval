@@ -214,9 +214,7 @@ module.exports = {
 		},
 	},
 	variants: {
-		extend: {
-			transform: ['group-hover'],
-		},
+		transform: ({after}) => after(['group-hover', 'open']),
 		backgroundColor: ({after}) => after(NTH_CHILD_SELECTORS),
 	},
 	plugins: [
@@ -241,6 +239,13 @@ module.exports = {
 					)
 				)
 		}),
+		plugin(({addVariant}) =>
+			addVariant('open', ({modifySelectors, separator}) =>
+				modifySelectors(({className}) =>
+					`[open].open${separator}${className}[open], details[open] .open${separator}${className}`
+				)
+			)
+		),
 		require('@tailwindcss/typography'),
 	],
 };

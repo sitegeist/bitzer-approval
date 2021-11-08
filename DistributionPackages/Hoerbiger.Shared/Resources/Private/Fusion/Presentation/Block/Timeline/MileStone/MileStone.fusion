@@ -21,9 +21,17 @@ prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.
                 <span class="text-brand font-sans-bold text-3xl">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.year} />
                 </span>
-                <span class="text-lg leading-snug">
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
-                </span>
+                <div class="grid grid-cols-2-1fr-max gap-xs">
+                    <span class="text-lg leading-snug">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
+                    </span>
+                    <span class="open:rotate-180">
+                        <img
+                            class="w-8"
+                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownBrand.svg')}
+                        />
+                    </span>
+                </div>
             </summary>
             <div class="flex flex-col space-y-xs pt-xs">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.description} />
