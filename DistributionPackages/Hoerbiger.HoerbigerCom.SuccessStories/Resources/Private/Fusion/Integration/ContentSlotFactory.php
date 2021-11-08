@@ -6,17 +6,33 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Integration;
  */
 
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
+use Hoerbiger\Shared\Presentation\Block\Button\Button;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
+use Hoerbiger\Shared\Presentation\Layout\Box\Box;
+use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
+use Hoerbiger\Shared\Presentation\Layout\Row\Row;
+use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
@@ -34,51 +50,92 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $this->figureFactory = $figureFactory;
     }
 
-    public function forContentNode(TraversableNodeInterface $contentNode, bool $inBackend): SlotInterface
+    public function forContentNode(TraversableNodeInterface $contentNode, bool $inBackend, TraversableNodeInterface $site): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories':
-                return $this->forTopSuccessStories($contentNode, $inBackend);
+                return $this->forTopSuccessStories($site, $contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
     }
 
-    private function forTopSuccessStories(TraversableNodeInterface $topSuccessStories, bool $inBackend): SlotInterface
+    private function forTopSuccessStories(TraversableNodeInterface $site, TraversableNodeInterface $topSuccessStories, bool $inBackend): SlotInterface
     {
+        $identity = function(SlotInterface $slot) {
+            return $slot;
+        };
+
+        $successStories = $site->findNamedChildNode(NodeName::fromString('magazine'));
+
         return new ContentContainer(
-            ContentContainerVariant::regularSm(),
+            ContentContainerVariant::regular(),
             new CacheSegment(
-                Collection::fromIterable(
-                    $topSuccessStories->getProperty('successStories') ?: [],
-                    function (TraversableNodeInterface $successStory) use ($inBackend): ArticleCard {
-                        $imageSource = $this->imageSourceFactory->forPreviewMixin(
-                            $successStory,
-                            $inBackend,
-                            false
-                        );
-                            return new ArticleCard(
-                            $imageSource
-                                ? $this->figureFactory->forArticleCard($imageSource)
-                                : null,
-                            Value::fromString(
-                                $successStory->getProperty('preview__headline')
-                                    ?: $successStory->getProperty('headline') ?: ''
+                new Box(
+                    BoxVariant::decorative(),
+                    new Stack(
+                        StackVariant::sm(),
+                        Collection::fromIterable([
+                            new Grid(
+                                GridVariant::twoColumnsFrMaxGap(),
+                                Collection::fromIterable([
+                                    new Headline(
+                                        HeadlineVariant::regular(),
+                                        HeadlineType::h2(),
+                                        Editable::fromNodeProperty($topSuccessStories, 'headline')
+                                    ),
+                                    new Link(
+                                        LinkVariant::label(),
+                                        $this->uriService->getNodeUri($successStories),
+                                        LinkTarget::self(),
+                                        null,
+                                        Value::fromString($this->getLabel('list.seeAll'))
+                                    )
+                                ], $identity)
                             ),
-                            Value::fromString($successStory->getProperty('alternativeHeadline') ?: ''),
-                            Value::fromString(
-                                $successStory->getProperty('preview__description')
-                                    ?: $successStory->getProperty('abstract') ?: ''
-                            ),
-                            new Link(
-                                LinkVariant::label(),
-                                $this->uriService->getNodeUri($successStory),
-                                LinkTarget::self(),
-                                null,
-                                Value::fromString($this->getLabel('list.learnMore'))
-                            ),
-                        );
-                    }
+                            new Grid(
+                                GridVariant::threeColumnsGap(),
+                                Collection::fromIterable(
+                                    $topSuccessStories->getProperty('successStories') ?: [],
+                                    function (TraversableNodeInterface $successStory) use ($inBackend, $identity): ArticleCard {
+                                        $imageSource = $this->imageSourceFactory->forPreviewMixin(
+                                            $successStory,
+                                            $inBackend,
+                                            false
+                                        );
+
+                                        return new ArticleCard(
+                                            $imageSource
+                                                ? $this->figureFactory->forArticleCard($imageSource)
+                                                : null,
+                                            Value::fromString(
+                                                $successStory->getProperty('preview__headline')
+                                                    ?: $successStory->getProperty('headline') ?: ''
+                                            ),
+                                            new Row(
+                                                RowVariant::alternateMetalineEllipsis(),
+                                                Collection::fromIterable([
+                                                    Value::fromString($successStory->getProperty('alternativeHeadline') ?: '')
+                                                ], $identity)
+                                            ),
+                                            Value::fromString(
+                                                $successStory->getProperty('preview__description')
+                                                    ?: $successStory->getProperty('abstract') ?: ''
+                                            ),
+                                            new Button(
+                                                ButtonType::link(),
+                                                ButtonVariant::cta(),
+                                                Value::fromString($this->getLabel('list.learnMore')),
+                                                $this->uriService->getNodeUri($successStory),
+                                                '_self',
+                                                null
+                                            )
+                                        );
+                                    }
+                                )
+                            )
+                        ], $identity)
+                    )
                 ),
                 'Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList'
             )

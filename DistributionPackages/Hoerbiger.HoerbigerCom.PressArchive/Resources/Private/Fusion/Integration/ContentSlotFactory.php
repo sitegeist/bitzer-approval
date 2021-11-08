@@ -127,7 +127,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                     ?: $pressRelease->getProperty('headline') ?: ''
                                             ),
                                             new Row(
-                                                RowVariant::alternateMetaline(),
+                                                RowVariant::alternateMetalineEllipsis(),
                                                 Collection::fromIterable(array_filter([
                                                     Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                                                     ($inBackend || $pressRelease->getProperty('alternativeHeadline'))
