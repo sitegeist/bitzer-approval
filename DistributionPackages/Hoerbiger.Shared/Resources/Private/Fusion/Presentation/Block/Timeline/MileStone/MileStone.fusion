@@ -17,8 +17,8 @@ prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.
             "[Block.Timeline.MileStone]",
             "shadow-card p-xs"
         ]}>
-            <summary class="grid grid-cols-2-max-1fr gap-xs relative ">
-                <span class="text-brand font-sans-bold text-2xl">
+            <summary class="grid grid-cols-2-max-1fr gap-xs">
+                <span class="text-brand font-sans-bold text-3xl">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.year} />
                 </span>
                 <span class="text-lg leading-snug">
