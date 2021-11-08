@@ -1,0 +1,44 @@
+prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Timeline\\MileStone\\MileStoneInterface'
+
+    @styleguide {
+        title = 'MileStone'
+
+        props {
+            year = '- Add Slot Content -'
+            label = '- Add Slot Content -'
+            description = '- Add Slot Content -'
+            figures = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <details class={[
+            "[Block.Timeline.MileStone]",
+            "shadow-card p-xs"
+        ]}>
+            <summary class="grid grid-cols-1 sm:grid-cols-2-max-1fr gap-xs">
+                <span class="text-brand font-sans-bold text-3xl">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.year} />
+                </span>
+                <div class="grid grid-cols-2-1fr-max gap-xs">
+                    <span class="text-lg leading-snug">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.label} />
+                    </span>
+                    <span class="w-8 h-8 flex justify-center items-center origin-center open:rotate-180 transition">
+                        <img
+                            class="w-full h-full object-contain"
+                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownBrand.svg')}
+                        />
+                    </span>
+                </div>
+            </summary>
+            <div class="flex flex-col space-y-xs pt-xs">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.description} />
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.figures}
+                />
+            </div>
+        </details>
+    `
+}

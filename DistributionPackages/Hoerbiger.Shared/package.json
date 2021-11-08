@@ -27,6 +27,7 @@
     "@types/final-form-focus": "^1.1.1",
     "autoprefixer": "^10.3.4",
     "cssnano": "^5.0.8",
-    "postcss-discard-duplicates": "^5.0.1"
+    "postcss-discard-duplicates": "^5.0.1",
+    "postcss-selector-parser": "^6.0.6"
   }
 }
