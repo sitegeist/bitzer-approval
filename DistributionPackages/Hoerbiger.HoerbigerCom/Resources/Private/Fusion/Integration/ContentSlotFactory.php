@@ -6,15 +6,10 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
-use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
-use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
-use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -27,6 +22,8 @@ use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclips
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
+use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -38,15 +35,12 @@ use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
-use Neos\Media\Domain\Model\Document;
 use Neos\Neos\Domain\Service\ContentContext;
-use Neos\Utility\Files;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -58,18 +52,24 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private PartialFigureEclipseFactory $partialFigureEclipseFactory;
 
+    private TimelineFactory $timelineFactory;
 
+    private MileStoneFactory $milestoneFactory;
 
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
-        PartialFigureEclipseFactory $partialFigureEclipseFactory
+        PartialFigureEclipseFactory $partialFigureEclipseFactory,
+        TimelineFactory $timelineFactory,
+        MileStoneFactory $milestoneFactory
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
         $this->figureFactory = $figureFactory;
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
+        $this->timelineFactory = $timelineFactory;
+        $this->milestoneFactory = $milestoneFactory;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
@@ -99,6 +99,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Collection.Milestones':
+                return $this->forMilestonesNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.Milestone':
+                return $this->milestoneFactory->forMilestone($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.MilestoneImage':
+                return $this->forMilestoneImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Collection.DefinitionList':
                 return $this->forDefinitionListNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
@@ -366,6 +372,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
+    public function forMilestoneImageNode(TraversableNodeInterface $milestoneImageNode, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($milestoneImageNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element GalleryImage.');
+        }
+
+        return $this->figureFactory->forMileStoneImage($imageSource);
+    }
+
     public function forDefinitionListNode(TraversableNodeInterface $definitionListNode): SlotInterface
     {
         return new ContentContainer(
@@ -439,5 +455,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-
+    public function forMilestonesNode(TraversableNodeInterface $milestones): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            $this->timelineFactory->forMilestones($milestones)
+        );
+    }
 }
