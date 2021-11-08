@@ -11,6 +11,7 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use Hoerbiger\Shared\Presentation\Block\CacheSegment\CacheSegment;
 
 
 final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
@@ -20,6 +21,13 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
      * @var array<string,string>
      */
     protected $socialMediaSettings;
+
+    private ContactFormLinkFactory $contactFormLinkFactory;
+
+    public function __construct(ContactFormLinkFactory $contactFormLinkFactory)
+    {
+        $this->contactFormLinkFactory = $contactFormLinkFactory;
+    }
 
     public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): SiteFooterInterface
     {
@@ -34,13 +42,16 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
                     );
                 }
             ),
+            new CacheSegment(
             Collection::fromIterable(
                 $site->getProperty('footerMenu') ?: [],
                 function(TraversableNodeInterface $footerLinkNode) use ($linkFactory) {
                     return $linkFactory->forFooterMenuItem($footerLinkNode);
                 }
+                ),
+            'Hoerbiger.HoerbigerCom:CacheSegment.SiteReactive'
             ),
-            (new ContactFormLinkFactory())->forDocument($document, $site)
+            $this->contactFormLinkFactory->forDocument($document, $site)
         );
     }
 }

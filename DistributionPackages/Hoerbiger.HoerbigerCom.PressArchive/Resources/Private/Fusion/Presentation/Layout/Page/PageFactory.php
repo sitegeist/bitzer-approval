@@ -47,14 +47,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private FormattedDateFactory $formattedDateFactory;
 
+    private SiteFooterFactory $siteFooterFactory;
+
     public function __construct(
         StageFactory $stageFactory,
         PressArchiveStageFactory $pressArchivestageFactory,
-        FormattedDateFactory $formattedDateFactory
+        FormattedDateFactory $formattedDateFactory,
+        SiteFooterFactory $siteFooterFactory
     ) {
         $this->stageFactory = $stageFactory;
         $this->pressArchivestageFactory = $pressArchivestageFactory;
         $this->formattedDateFactory = $formattedDateFactory;
+        $this->siteFooterFactory = $siteFooterFactory;
     }
 
     public function forPressArchive(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): PageInterface
@@ -149,7 +153,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ]),
                 $identity
             ),
-            (new SiteFooterFactory())->forDocument($magazine, $site)
+            $this->siteFooterFactory->forDocument($magazine, $site)
         );
     }
 
@@ -186,7 +190,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ]),
                 $identity
             ),
-            (new SiteFooterFactory())->forDocument($document, $site)
+            $this->siteFooterFactory->forDocument($document, $site)
         );
     }
 

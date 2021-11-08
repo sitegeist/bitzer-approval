@@ -1,0 +1,10 @@
+prototype(Hoerbiger.HoerbigerCom:CacheSegment) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\CacheSegment\\CacheSegmentInterface'
+    renderer = PackageFactory.AtomicFusion.PresentationObjects:Slot {
+        presentationObject = ${presentationObject.content}
+    }
+
+    @cache {
+        mode = 'cached'
+    }
+}

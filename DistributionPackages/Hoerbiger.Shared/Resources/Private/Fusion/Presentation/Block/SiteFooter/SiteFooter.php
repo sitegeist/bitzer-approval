@@ -9,6 +9,7 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
  * @Flow\Proxy(false)
@@ -17,13 +18,13 @@ final class SiteFooter extends AbstractComponentPresentationObject implements Si
 {
     private ?Collection $socialLinks;
 
-    private ?Collection $navigationLinks;
+    private ?SlotInterface $navigationLinks;
 
     private ?ContactFormLinkInterface $contactFormLink;
 
     public function __construct(
         ?Collection $socialLinks,
-        ?Collection $navigationLinks,
+        ?SlotInterface $navigationLinks,
         ?ContactFormLinkInterface $contactFormLink
     ) {
         $this->socialLinks = $socialLinks;
@@ -36,7 +37,7 @@ final class SiteFooter extends AbstractComponentPresentationObject implements Si
         return $this->socialLinks;
     }
 
-    public function getNavigationLinks(): ?Collection
+    public function getNavigationLinks(): ?SlotInterface
     {
         return $this->navigationLinks;
     }
