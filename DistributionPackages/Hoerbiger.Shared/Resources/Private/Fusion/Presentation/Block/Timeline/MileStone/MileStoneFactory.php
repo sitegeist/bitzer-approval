@@ -8,6 +8,8 @@ namespace Hoerbiger\Shared\Presentation\Block\Timeline\MileStone;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 
 final class MileStoneFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -17,7 +19,12 @@ final class MileStoneFactory extends AbstractComponentPresentationObjectFactory
             Editable::fromNodeProperty($milestone, 'year'),
             Editable::fromNodeProperty($milestone, 'headline'),
             Editable::fromNodeProperty($milestone, 'text'),
-            null
+            Collection::fromNodes(
+                $milestone->findChildNodes(),
+                function(TraversableNodeInterface $node): Content {
+                    return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                }
+            )
         );
     }
 }

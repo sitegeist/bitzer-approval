@@ -36,7 +36,6 @@ prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.
             <div class="flex flex-col space-y-xs pt-xs">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.description} />
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                    @if.1={presentationObject.figures}
                     presentationObject={presentationObject.figures}
                 />
             </div>
