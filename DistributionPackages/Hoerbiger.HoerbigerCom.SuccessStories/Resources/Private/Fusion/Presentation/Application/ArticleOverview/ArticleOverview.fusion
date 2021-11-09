@@ -1,0 +1,13 @@
+prototype(Hoerbiger.HoerbigerCom.SuccessStories:Application.ArticleOverview) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\SuccessStories\\Presentation\\Application\\ArticleOverview\\ArticleOverviewInterface'
+
+    renderer = afx`
+        <div class="[Application.ArticleOverview]">
+            <script
+                @if.1={!String.isBlank(presentationObject.applicationData)}
+                type="application/json"
+            >
+                {presentationObject.applicationData}
+            </script>
+        </div>`
+}

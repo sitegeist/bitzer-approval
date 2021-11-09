@@ -2,7 +2,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
-    'Hoerbiger.HoerbigerCom:Tag.HomePageStageContent': true
+    'Hoerbiger.HoerbigerCom:Mixin.SliderPreview': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -34,76 +34,4 @@
         sliderPreview:
           label: 'Vorschau Slider Homepage'
           tab: 'sliderPreview'
-  properties:
-    slider__preview__headline:
-      type: 'string'
-      ui:
-        label: 'Slider: Überschrift'
-        inspector:
-          group: 'sliderPreview'
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-    slider__preview__description:
-      type: 'string'
-      ui:
-        label: 'Slider: Kurzbeschreibung'
-        inspector:
-          group: 'sliderPreview'
-          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
-          editorOptions:
-            rows: 7
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-    slider__preview__image:
-      type: 'Neos\Media\Domain\Model\ImageInterface'
-      options:
-        preset: 'image.square'
-      ui:
-        label: 'Slider: Hintergrundbild'
-        inspector:
-          group: 'sliderPreview'
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-    slider__preview__image__alt:
-      type: 'string'
-      ui:
-        label: 'Alt-Text Hintergrundbild'
-        inspector:
-          group: 'sliderPreview'
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-    slider__preview__image__title:
-      type: 'string'
-      ui:
-        label: 'Title-Text Hintergrundbild'
-        inspector:
-          group: 'sliderPreview'
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-    slider__preview__background:
-      type: 'Neos\Media\Domain\Model\ImageInterface'
-      options:
-        preset: 'image.landscape'
-      ui:
-        label: 'Slider: Hintergrundbild'
-        inspector:
-          group: 'sliderPreview'
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-    slider__preview__background__alt:
-      type: 'string'
-      ui:
-        label: 'Alt-Text Hintergrundbild'
-        inspector:
-          group: 'sliderPreview'
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-    slider__preview__background__title:
-      type: 'string'
-      ui:
-        label: 'Title-Text Hintergrundbild'
-        inspector:
-          group: 'sliderPreview'
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
 

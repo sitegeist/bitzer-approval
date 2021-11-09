@@ -7,16 +7,14 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooter;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
-use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
-use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -30,10 +28,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private StageFactory $stageFactory;
 
-    public function __construct(SlidableFactory $slidableFactory, StageFactory $stageFactory)
-    {
+    private SiteFooterFactory $siteFooterFactory;
+
+    public function __construct(
+        SlidableFactory $slidableFactory,
+        StageFactory $stageFactory,
+        SiteFooterFactory $siteFooterFactory
+    ) {
         $this->slidableFactory = $slidableFactory;
         $this->stageFactory = $stageFactory;
+        $this->siteFooterFactory = $siteFooterFactory;
     }
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
@@ -42,8 +46,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             return $slot;
         };
 
-        $targetNodeTypeName = NodeTypeName::fromString('Hoerbiger.HoerbigerCom:Tag.HomePageStageContent');
-        $stage = $this->slidableFactory->forApplicationWorlds($homepage, $targetNodeTypeName, $inBackend);
+        $stage = $this->slidableFactory->forSliderPreviewMixins(
+            $this->findChildNodesByNodeTypeFilterString($homepage, 'Hoerbiger.HoerbigerCom:Mixin.SliderPreview'),
+            $inBackend
+        );
 
         return new Page(
             new SiteHeader(),
@@ -54,35 +60,43 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            new SiteFooter()
+            $this->siteFooterFactory->forDocument($homepage, $homepage)
         );
     }
 
-    public function forWebPage(TraversableNodeInterface $webPage, NodeInterface $siteNode, bool $inBackend): PageInterface
+    public function forWebPage(TraversableNodeInterface $site, TraversableNodeInterface $webPage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $inBackend);
 
-        return $this->forDocumentWithIntroduction($webPage, $siteNode, $stage);
+        return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
     }
 
-    public function forNotFoundPage(TraversableNodeInterface $notFoundPage): PageInterface
+    public function forChroniclePage(TraversableNodeInterface $site, TraversableNodeInterface $chroniclePage, ContentContext $subgraph, bool $inBackend): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($chroniclePage, $inBackend);
+
+        return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph);
+    }
+
+    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage): PageInterface
     {
         return new Page(
             new SiteHeader(),
             Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main'))),
-            new SiteFooter()
+            $this->siteFooterFactory->forDocument($notFoundPage, $site)
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $document, NodeInterface $siteNode, SlotInterface $stage): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $siteNode);
+        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
         return new Page(
             new SiteHeader(),
@@ -97,7 +111,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
-            new SiteFooter()
+            $this->siteFooterFactory->forDocument($document, $site)
         );
     }
 }

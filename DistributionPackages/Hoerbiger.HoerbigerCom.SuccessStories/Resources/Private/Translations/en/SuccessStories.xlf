@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="SuccessStories" product-name="Hoerbiger.HoerbigerCom.SuccessStories" source-language="en" datatype="plaintext">
+        <body>
+            <trans-unit id="list.seeAll" xml:space="preserve">
+                <source>See all</source>
+            </trans-unit>
+            <trans-unit id="list.learnMore" xml:space="preserve">
+                <source>Learn more</source>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

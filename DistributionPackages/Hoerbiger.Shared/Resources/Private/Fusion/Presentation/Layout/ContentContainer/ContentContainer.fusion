@@ -17,9 +17,10 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
         ]}>
             <div class={[
                 presentationObject.variant.isRegular && "max-w-content-full mx-auto p-md bg-light",
-                presentationObject.variant.isRegularSm && "max-w-content-full mx-auto p-sm bg-light",
+                presentationObject.variant.isRegularSm && "max-w-content-full mx-auto pb-sm sm:p-sm bg-light",
                 presentationObject.variant.isRegularX && "max-w-content-full mx-auto px-md bg-light",
                 presentationObject.variant.isStageAfterBreadcrumb && "max-w-content-full mx-auto p-sm pt-0 bg-light",
+                presentationObject.variant.isRegularStageAfterBreadcrumb && "max-w-content-full mx-auto p-md pt-0 bg-light",
                 presentationObject.variant.isBlank && "w-full"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />

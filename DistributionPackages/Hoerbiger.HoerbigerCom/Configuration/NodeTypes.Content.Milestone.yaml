@@ -1,0 +1,25 @@
+'Hoerbiger.HoerbigerCom:Content.Milestone':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.MilestoneImage': true
+  ui:
+    label: 'Meilenstein'
+    icon: clock
+  properties:
+    year:
+      type: string
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            autoparagraph: false
+            placeholder: 'Jahr'
+            formatting:
+              removeFormat: true
+

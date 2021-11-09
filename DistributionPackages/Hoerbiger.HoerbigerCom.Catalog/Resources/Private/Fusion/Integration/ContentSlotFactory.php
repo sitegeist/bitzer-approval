@@ -26,11 +26,15 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
     private FigureFactory $figureFactory;
 
     public function __construct(
+        ImageSourceFactory $imageSourceFactory,
         FigureFactory $figureFactory
     ) {
+        $this->imageSourceFactory = $imageSourceFactory;
         $this->figureFactory = $figureFactory;
     }
 
@@ -48,16 +52,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forProductListNode(TraversableNodeInterface $productListNode): SlotInterface
     {
-        /*\Neos\Flow\var_dump(Collection::fromNodes(
-            $productListNode->findChildNodes(),
-            function(TraversableNodeInterface $groupedProduct){
-                return Content::fromNode(
-                    $groupedProduct,
-                    'Hoerbiger.HoerbigerCom.Catalog:ContentSlot'
-                );
-            }
-        ));die;*/
-
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Grid(
@@ -77,7 +71,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forGroupedProductsNode(TraversableNodeInterface $groupedProductListNode, bool $inBackend): SlotInterface
     {
-        $imageSource = (new ImageSourceFactory())->forImageMixin($groupedProductListNode, $inBackend);
+        $imageSource = $this->imageSourceFactory->forImageMixin($groupedProductListNode, $inBackend);
         $figure = $imageSource
             ? $this->figureFactory->forProductCard($imageSource)
             : null;

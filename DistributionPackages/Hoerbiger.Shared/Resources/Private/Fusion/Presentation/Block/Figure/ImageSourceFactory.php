@@ -7,6 +7,9 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Media\Domain\Model\Document;
+use Neos\Media\Domain\Model\Image;
+use Neos\Media\Domain\Service\ThumbnailService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\DummyImageSourceHelper;
@@ -14,16 +17,45 @@ use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 
 final class ImageSourceFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ThumbnailService $thumbnailService;
+
+    public function __construct(ThumbnailService $thumbnailService)
+    {
+        $this->thumbnailService = $thumbnailService;
+    }
+
+    public function forDocument(
+        Document $document
+    ): ?ImageSourceHelperInterface {
+        $thumbnail = $this->thumbnailService->getThumbnail(
+            $document,
+            $this->thumbnailService->getThumbnailConfigurationForPreset(PresetIdentifier::IDENTIFIER_PDF)
+        );
+
+        return $thumbnail ? new AssetImageSourceHelper(new Image($thumbnail->getResource())) : null;
+    }
+
     public function forImageMixin(
         TraversableNodeInterface $node,
         bool $inBackend,
         bool $hasFallbackInBackend = true
     ): ?ImageSourceHelperInterface {
         return $this->forImageProperty(
-            $node, $inBackend,
+            $node,
+            $inBackend,
             'image',
             $hasFallbackInBackend
         );
+    }
+
+    public function forPreviewMixin(
+        TraversableNodeInterface $node,
+        bool $inBackend,
+        bool $hasFallbackInBackend = true
+    ): ?ImageSourceHelperInterface
+    {
+        return $this->forImageMixin($node, $inBackend, false)
+            ?: $this->forImageProperty($node, $inBackend, 'preview__image', $hasFallbackInBackend);
     }
 
     public function forImageProperty(

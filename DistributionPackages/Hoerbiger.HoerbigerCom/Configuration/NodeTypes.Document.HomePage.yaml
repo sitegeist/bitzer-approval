@@ -8,7 +8,9 @@
       constraints:
         nodeTypes:
           '*': false
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.TabBox': true
           'Hoerbiger.HoerbigerCom:Content.Image': true
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
@@ -16,7 +18,8 @@
           'Hoerbiger.HoerbigerCom:Content.DummyText': true
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
-
+    chronicle:
+      type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:
@@ -26,3 +29,22 @@
   ui:
     icon: globe
     label: 'Homepage'
+    inspector:
+      groups:
+        menu:
+          label: 'Footer'
+          icon: 'shoe-prints'
+          position: 10
+
+  properties:
+    footerMenu:
+      type: references
+      ui:
+        label: 'Menüpunkte Footer'
+        reloadIfChanged: true
+        inspector:
+          group: menu
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom:Document.WebPage'
+              - 'Neos.Neos:Shortcut'

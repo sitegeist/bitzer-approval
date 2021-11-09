@@ -18,6 +18,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULARX = 'regularX';
     const VARIANT_BLANK = 'blank';
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
+    const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
 
     /**
      * @var array<string,self>|self[]
@@ -38,6 +39,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULARSM
                 && $string !== self::VARIANT_REGULARX
                 && $string !== self::VARIANT_BLANK
+                && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -72,6 +74,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_STAGEAFTERBREADCRUMB);
     }
 
+    public static function regularStageAfterBreadcrumb(): self
+    {
+        return self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -97,6 +104,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_STAGEAFTERBREADCRUMB;
     }
 
+    public function getIsRegularStageAfterBreadcrumb(): bool
+    {
+        return $this->value === self::VARIANT_REGULARSTAGEAFTERBREADCRUMB;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -107,7 +119,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_REGULARSM),
             self::from(self::VARIANT_REGULARX),
             self::from(self::VARIANT_BLANK),
-            self::from(self::VARIANT_STAGEAFTERBREADCRUMB)
+            self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
+            self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB)
         ];
     }
 

@@ -6,9 +6,9 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
+use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectFit;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureObjectPosition;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
@@ -23,6 +23,8 @@ use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclips
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
+use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -31,6 +33,7 @@ use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -51,21 +54,33 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private PartialFigureEclipseFactory $partialFigureEclipseFactory;
 
+    private TimelineFactory $timelineFactory;
+
+    private MileStoneFactory $milestoneFactory;
+
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
-        PartialFigureEclipseFactory $partialFigureEclipseFactory
+        PartialFigureEclipseFactory $partialFigureEclipseFactory,
+        TimelineFactory $timelineFactory,
+        MileStoneFactory $milestoneFactory
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
         $this->figureFactory = $figureFactory;
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
+        $this->timelineFactory = $timelineFactory;
+        $this->milestoneFactory = $milestoneFactory;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
+            case 'Hoerbiger.HoerbigerCom:Collection.Downloads':
+                return $this->forDownloadsNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.Download':
+                return $this->cardFactory->forDownloadNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DummyText':
                 return $this->forDummyTextNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage':
@@ -88,9 +103,43 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forGalleryImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Video':
                 return $this->forVideoNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Collection.Milestones':
+                return $this->forMilestonesNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.Milestone':
+                return $this->milestoneFactory->forMilestone($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.MilestoneImage':
+                return $this->forMilestoneImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Collection.DefinitionList':
+                return $this->forDefinitionListNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
+                return $this->forDefinitionItemNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
+                return $this->forTabBox($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.TextTab':
+                return $this->forTextTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
+                return $this->forDefinitionListTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
+                return $this->forDownloadsTabNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
+    }
+
+    private function forDownloadsNode(TraversableNodeInterface $downloadsNode): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Grid(
+                GridVariant::threeColumnsGap(),
+                Collection::fromNodes(
+                    $downloadsNode->findChildNodes(),
+                    function(TraversableNodeInterface $node): Content {
+                        return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                    }
+                )
+            )
+        );
     }
 
     private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): SlotInterface
@@ -334,5 +383,96 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ? $this->figureFactory->forTwoColumnGrid($imageSource)
             : null;
         return (new VideoFactory())->forVideoWithCoverImage($videoNode, 'video', $figure);
+    }
+
+    public function forMilestoneImageNode(TraversableNodeInterface $milestoneImageNode, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($milestoneImageNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element GalleryImage.');
+        }
+
+        return $this->figureFactory->forMileStoneImage($imageSource);
+    }
+
+    public function forDefinitionListNode(TraversableNodeInterface $definitionListNode): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Box(
+                BoxVariant::decorative(),
+                (new DefinitionListFactory())->forDefinitionList($definitionListNode)
+            )
+        );
+    }
+
+    public function forDefinitionItemNode(TraversableNodeInterface $definitionNode): SlotInterface
+    {
+        return (new ListItemFactory())->forDefinition($definitionNode);
+    }
+
+    public function forTabBox(TraversableNodeInterface $tabBox): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Box(
+                BoxVariant::decorative(),
+                (new TabBoxFactory())->forTabBox($tabBox)
+            )
+        );
+    }
+
+    public function forTabLabel(TraversableNodeInterface $tabNode): SlotInterface
+    {
+        return Editable::fromNodeProperty($tabNode, 'tab__label');
+    }
+
+    public function forTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new Stack(
+            StackVariant::xs(),
+            Collection::fromIterable(array_filter([
+                new Headline(
+                    HeadlineVariant::regular(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($textTabNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($textTabNode, 'text'),
+                    true
+                )
+            ]), $identity)
+        );
+    }
+
+    public function forDefinitionListTabNode(TraversableNodeInterface $definitionListTabNode): SlotInterface
+    {
+        return (new DefinitionListFactory())->forDefinitionList($definitionListTabNode);
+    }
+
+    public function forDownloadsTabNode(TraversableNodeInterface $downloadsNode): SlotInterface
+    {
+        return new Grid(
+            GridVariant::twoColumnsGap(),
+            Collection::fromNodes(
+                $downloadsNode->findChildNodes(),
+                function(TraversableNodeInterface $node): Content {
+                    return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                }
+            )
+        );
+    }
+
+    public function forMilestonesNode(TraversableNodeInterface $milestones): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            $this->timelineFactory->forMilestones($milestones)
+        );
     }
 }

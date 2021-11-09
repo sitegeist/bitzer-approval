@@ -1,0 +1,10 @@
+'Hoerbiger.HoerbigerCom:Document.Chronicle':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+  childNodes:
+    main:
+      type: 'Hoerbiger.HoerbigerCom:Collection.Milestones'
+  ui:
+    icon: history
+    label: 'Chronik'
