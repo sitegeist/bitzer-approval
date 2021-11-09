@@ -1,0 +1,30 @@
+'Hoerbiger.HoerbigerCom:Content.Video':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  ui:
+    label: 'video'
+    icon: video
+    inspector:
+      groups:
+        video:
+          label: 'Video'
+          position: start
+  properties:
+    video:
+      type: 'Neos\Media\Domain\Model\Asset'
+      ui:
+        label: 'Videodatei'
+        reloadIfChanged: true
+        inspector:
+          group: video
+      constraints:
+        mediaTypes: [ 'video/mp4' ]
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    image:
+      validation: ~
+    image__alt:
+      validation: ~
+    image__title:
+      validation: ~

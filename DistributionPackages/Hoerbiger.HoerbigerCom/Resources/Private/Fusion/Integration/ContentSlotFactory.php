@@ -10,6 +10,7 @@ use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -56,13 +57,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private MileStoneFactory $milestoneFactory;
 
+    private VideoFactory $videoFactory;
+
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
         PartialFigureEclipseFactory $partialFigureEclipseFactory,
         TimelineFactory $timelineFactory,
-        MileStoneFactory $milestoneFactory
+        MileStoneFactory $milestoneFactory,
+        VideoFactory $videoFactory
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
@@ -70,6 +74,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
         $this->timelineFactory = $timelineFactory;
         $this->milestoneFactory = $milestoneFactory;
+        $this->videoFactory = $videoFactory;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
@@ -99,6 +104,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.Video':
+                return $this->forVideoNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Collection.Milestones':
                 return $this->forMilestonesNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Milestone':
@@ -369,6 +376,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ? Collection::fromIterable([$figure, $text], $identity)
                     : Collection::fromIterable([$text, $figure], $identity)
             )
+        );
+    }
+
+    public function forVideoNode(TraversableNodeInterface $videoNode, bool $inBackend): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            $this->videoFactory->forVideo($videoNode, $inBackend)
         );
     }
 

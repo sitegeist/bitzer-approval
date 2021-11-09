@@ -1,0 +1,39 @@
+prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Video\\VideoInterface'
+
+    @styleguide {
+        title = 'Video'
+
+        props {
+            source = 'Text'
+            figure = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.Video]",
+            "flex justify-center items-center relative"
+        ]}>
+            <div class="relative mx-auto">
+                <video class="max-h-[70vh] mx-auto relative" controls>
+                    <source src={presentationObject.source}/>
+                </video>
+                <div
+                    @if.1={presentationObject.figure}
+                    data-select="poster"
+                    class="absolute inset-0 cursor-pointer"
+                >
+                    <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure}/>
+                    <div class="absolute inset-0 bg-light/30"></div>
+                    <div class="w-32 h-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                        <img
+                            class="w-full h-full object-contain rounded-full hover:shadow-play"
+                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircle.svg')}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+}

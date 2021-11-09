@@ -216,4 +216,17 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             null
         );
     }
+
+    public function forVideoPoster(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100w',
+            FigureObjectFit::cover(),
+            FigureObjectPosition::center()
+        );
+    }
 }
