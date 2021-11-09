@@ -15,6 +15,8 @@ interface StageInterface extends ComponentPresentationObjectInterface
 {
     public function getVariant(): StageVariant;
 
+    public function getMetaline(): ?SlotInterface;
+
     public function getHeadline(): ?HeadlineInterface;
 
     public function getSubheadline(): ?SlotInterface;

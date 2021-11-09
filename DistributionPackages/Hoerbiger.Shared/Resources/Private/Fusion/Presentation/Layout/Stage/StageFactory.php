@@ -41,6 +41,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
         return new FullMediaStage(
             StageVariant::from($node->getProperty('stage__variant') ?: StageVariant::VARIANT_FULLMEDIATEXTLEFT),
+            null,
             new Headline(
                 HeadlineVariant::regular(),
                 HeadlineType::h1(),
@@ -66,6 +67,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
         return new DuoStage(
             StageVariant::duo(),
+            null,
             new Headline(
                 HeadlineVariant::decorative(),
                 HeadlineType::h1(),

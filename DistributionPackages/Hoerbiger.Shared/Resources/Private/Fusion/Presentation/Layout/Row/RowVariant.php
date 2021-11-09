@@ -20,6 +20,7 @@ final class RowVariant implements PseudoEnumInterface
     const VARIANT_LG = 'lg';
     const VARIANT_GALLERY = 'gallery';
     const VARIANT_ALTERNATEMETALINE = 'alternateMetaline';
+    const VARIANT_ALTERNATEMETALINE_ELLIPSIS = 'alternateMetalineEllipsis';
 
     /**
      * @var array<string,self>|self[]
@@ -42,7 +43,8 @@ final class RowVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_MD
                 && $string !== self::VARIANT_LG
                 && $string !== self::VARIANT_GALLERY
-                && $string !== self::VARIANT_ALTERNATEMETALINE) {
+                && $string !== self::VARIANT_ALTERNATEMETALINE
+                && $string !== self::VARIANT_ALTERNATEMETALINE_ELLIPSIS) {
                 throw RowVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -86,6 +88,11 @@ final class RowVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_ALTERNATEMETALINE);
     }
 
+    public static function alternateMetalineEllipsis(): self
+    {
+        return self::from(self::VARIANT_ALTERNATEMETALINE_ELLIPSIS);
+    }
+
     public function getIsCh(): bool
     {
         return $this->value === self::VARIANT_CH;
@@ -121,6 +128,11 @@ final class RowVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_ALTERNATEMETALINE;
     }
 
+    public function getIsAlternateMetalineEllipsis(): bool
+    {
+        return $this->value === self::VARIANT_ALTERNATEMETALINE_ELLIPSIS;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -133,7 +145,8 @@ final class RowVariant implements PseudoEnumInterface
             self::from(self::VARIANT_MD),
             self::from(self::VARIANT_LG),
             self::from(self::VARIANT_GALLERY),
-            self::from(self::VARIANT_ALTERNATEMETALINE)
+            self::from(self::VARIANT_ALTERNATEMETALINE),
+            self::from(self::VARIANT_ALTERNATEMETALINE_ELLIPSIS)
         ];
     }
 

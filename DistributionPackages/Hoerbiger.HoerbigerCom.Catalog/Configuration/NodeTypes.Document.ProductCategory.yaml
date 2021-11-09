@@ -10,6 +10,7 @@
         nodeTypes:
           '*': false
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery': true
           'Hoerbiger.HoerbigerCom:Content.Image': true
           'Hoerbiger.HoerbigerCom:Content.Quotation': true

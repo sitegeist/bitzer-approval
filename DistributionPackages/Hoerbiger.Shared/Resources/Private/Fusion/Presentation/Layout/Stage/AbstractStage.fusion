@@ -6,6 +6,7 @@ prototype(Hoerbiger.Shared:Layout.AbstractStage) < prototype(PackageFactory.Atom
 
         props {
             variant = 'fullMedia'
+            metaline = '- Add Slot Content -'
             headline {
                 variant = 'regular'
                 type = 'h1'

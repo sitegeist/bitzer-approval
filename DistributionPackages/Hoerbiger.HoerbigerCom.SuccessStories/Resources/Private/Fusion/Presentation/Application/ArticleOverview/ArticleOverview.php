@@ -13,25 +13,16 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
  */
 final class ArticleOverview extends AbstractComponentPresentationObject implements ArticleOverviewInterface
 {
-    private string $labels;
-
-    private string $articles;
+    private string $applicationData;
 
     public function __construct(
-        string $labels,
-        string $articles
+        string $applicationData
     ) {
-        $this->labels = $labels;
-        $this->articles = $articles;
+        $this->applicationData = $applicationData;
     }
 
-    public function getLabels(): string
+    public function getApplicationData(): string
     {
-        return $this->labels;
-    }
-
-    public function getArticles(): string
-    {
-        return $this->articles;
+        return $this->applicationData;
     }
 }

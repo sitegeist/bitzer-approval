@@ -9,7 +9,5 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentation
 
 interface ArticleOverviewInterface extends ComponentPresentationObjectInterface
 {
-    public function getLabels(): string;
-
-    public function getArticles(): string;
+    public function getApplicationData(): string;
 }

@@ -121,18 +121,21 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         /** @var TraversableNodeInterface $pressRelease */
 
                                         return new ArticleCard(
-                                            $this->figureFactory->forArticleCard($imageSource),
+                                            new Link(
+                                                LinkVariant::container(),
+                                                $this->uriService->getNodeUri($pressRelease),
+                                                LinkTarget::self(),
+                                                null,
+                                                $this->figureFactory->forArticleCard($imageSource)
+                                            ),
                                             Value::fromString(
                                                 $pressRelease->getProperty('preview__headline')
                                                     ?: $pressRelease->getProperty('headline') ?: ''
                                             ),
                                             new Row(
-                                                RowVariant::alternateMetaline(),
+                                                RowVariant::alternateMetalineEllipsis(),
                                                 Collection::fromIterable(array_filter([
-                                                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
-                                                    ($inBackend || $pressRelease->getProperty('alternativeHeadline'))
-                                                        ? Value::fromString($pressRelease->getProperty('alternativeHeadline') ?: '')
-                                                        : null
+                                                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished))
                                                 ]), $identity)
                                             ),
                                             new Text(

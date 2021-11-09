@@ -19,6 +19,8 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
 {
     private StageVariant $variant;
 
+    private ?SlotInterface $metaline;
+
     private ?HeadlineInterface $headline;
 
     private ?SlotInterface $subheadline;
@@ -31,6 +33,7 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
 
     public function __construct(
         StageVariant $variant,
+        ?SlotInterface $metaline,
         ?HeadlineInterface $headline,
         ?SlotInterface $subheadline,
         ?TextInterface $text,
@@ -38,6 +41,7 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
         ?SlotInterface $mediaBackground
     ) {
         $this->variant = $variant;
+        $this->metaline = $metaline;
         $this->headline = $headline;
         $this->subheadline = $subheadline;
         $this->text = $text;
@@ -48,6 +52,11 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
     public function getVariant(): StageVariant
     {
         return $this->variant;
+    }
+
+    public function getMetaline(): ?SlotInterface
+    {
+        return $this->metaline;
     }
 
     public function getHeadline(): ?HeadlineInterface
