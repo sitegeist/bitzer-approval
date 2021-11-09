@@ -17,6 +17,7 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.DummyText': true
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
     chronicle:
       type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
     notfound:

@@ -211,6 +211,7 @@ module.exports = {
 				'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
 				'textbox': '0 0 14px rgba(0, 0, 0, .08)',
 				card: '0 0 14px rgba(0, 0, 0, 0.1)',
+				play: '0 0 48px #8D172E80',
 			},
 		},
 	},

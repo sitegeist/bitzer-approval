@@ -20,6 +20,7 @@
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
