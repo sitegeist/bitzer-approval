@@ -16,14 +16,14 @@ final class Video extends AbstractComponentPresentationObject implements VideoIn
 {
     private string $source;
 
-    private ?FigureInterface $coverImage;
+    private ?FigureInterface $figure;
 
     public function __construct(
         string $source,
-        ?FigureInterface $coverImage
+        ?FigureInterface $figure
     ) {
         $this->source = $source;
-        $this->coverImage = $coverImage;
+        $this->figure = $figure;
     }
 
     public function getSource(): string
@@ -31,8 +31,8 @@ final class Video extends AbstractComponentPresentationObject implements VideoIn
         return $this->source;
     }
 
-    public function getCoverImage(): ?FigureInterface
+    public function getFigure(): ?FigureInterface
     {
-        return $this->coverImage;
+        return $this->figure;
     }
 }

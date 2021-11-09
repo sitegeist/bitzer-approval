@@ -12,5 +12,5 @@ interface VideoInterface extends ComponentPresentationObjectInterface
 {
     public function getSource(): string;
 
-    public function getCoverImage(): ?FigureInterface;
+    public function getFigure(): ?FigureInterface;
 }

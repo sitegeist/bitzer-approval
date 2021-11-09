@@ -42,7 +42,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -58,13 +57,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private MileStoneFactory $milestoneFactory;
 
+    private VideoFactory $videoFactory;
+
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
         PartialFigureEclipseFactory $partialFigureEclipseFactory,
         TimelineFactory $timelineFactory,
-        MileStoneFactory $milestoneFactory
+        MileStoneFactory $milestoneFactory,
+        VideoFactory $videoFactory
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
@@ -72,6 +74,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
         $this->timelineFactory = $timelineFactory;
         $this->milestoneFactory = $milestoneFactory;
+        $this->videoFactory = $videoFactory;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
@@ -378,11 +381,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forVideoNode(TraversableNodeInterface $videoNode, bool $inBackend): SlotInterface
     {
-        $imageSource = $this->imageSourceFactory->forImageMixin($videoNode, $inBackend);
-        $figure = $imageSource
-            ? $this->figureFactory->forTwoColumnGrid($imageSource)
-            : null;
-        return (new VideoFactory())->forVideoWithCoverImage($videoNode, 'video', $figure);
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            $this->videoFactory->forVideo($videoNode, $inBackend)
+        );
     }
 
     public function forMilestoneImageNode(TraversableNodeInterface $milestoneImageNode, bool $inBackend): SlotInterface
