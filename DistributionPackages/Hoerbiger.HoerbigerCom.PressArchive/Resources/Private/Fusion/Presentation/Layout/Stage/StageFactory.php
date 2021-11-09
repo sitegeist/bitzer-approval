@@ -54,22 +54,22 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
         return new StackStage(
             StageVariant::stack(),
+            new Row(
+                RowVariant::alternateMetaline(),
+                Collection::fromIterable(array_filter([
+                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished))
+                ]), function(SlotInterface $slot) {
+                    return $slot;
+                })
+            ),
             new Headline(
                 HeadlineVariant::brand(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
             ),
-            new Row(
-                RowVariant::alternateMetaline(),
-                Collection::fromIterable(array_filter([
-                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
-                    ($inBackend || $pressRelease->getProperty('alternativeHeadline'))
-                        ? Editable::fromNodeProperty($pressRelease, 'alternativeHeadline')
-                        : null
-                ]), function(SlotInterface $slot) {
-                    return $slot;
-                })
-            ),
+            $inBackend || $pressRelease->getProperty('alternativeHeadline')
+                ? Editable::fromNodeProperty($pressRelease, 'alternativeHeadline')
+                : null,
             new Text(
                 TextVariant::lightContrast(),
                 Editable::fromNodeProperty($pressRelease, 'abstract'),

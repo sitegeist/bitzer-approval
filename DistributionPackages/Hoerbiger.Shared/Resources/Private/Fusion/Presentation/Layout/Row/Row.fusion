@@ -11,21 +11,25 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
     }
 
     renderer = afx`
-        <div class={"[Layout.Row (" + presentationObject.variant + ")] flex"}>
+        <div class={[
+            "[Layout.Row (" + presentationObject.variant + ")] flex",
+            presentationObject.variant.isAlternateMetalineEllipsis && "w-full"
+        ]}>
             <div class={[
-                "flex flex-wrap",
-                presentationObject.variant.isCh && "mt-minus-ch ml-minus-ch",
-                presentationObject.variant.isXs && "mt-minus-xs ml-minus-xs",
-                presentationObject.variant.isSm && "mt-minus-sm ml-minus-sm",
-                presentationObject.variant.isMd && "mt-minus-md ml-minus-md",
-                presentationObject.variant.isLg && "mt-minus-lg ml-minus-lg",
-                presentationObject.variant.isGallery && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center",
-                presentationObject.variant.isAlternateMetaline && "mt-minus-ch ml-minus-ch items-center"
+                "flex",
+                presentationObject.variant.isCh && "mt-minus-ch ml-minus-ch flex-wrap",
+                presentationObject.variant.isXs && "mt-minus-xs ml-minus-xs flex-wrap",
+                presentationObject.variant.isSm && "mt-minus-sm ml-minus-sm flex-wrap",
+                presentationObject.variant.isMd && "mt-minus-md ml-minus-md flex-wrap",
+                presentationObject.variant.isLg && "mt-minus-lg ml-minus-lg flex-wrap",
+                presentationObject.variant.isGallery && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center flex-wrap",
+                presentationObject.variant.isAlternateMetaline && "mt-minus-ch ml-minus-ch items-center flex-wrap",
+                presentationObject.variant.isAlternateMetalineEllipsis && "mt-minus-ch ml-minus-ch items-center flex-nowrap max-w-full min-w-0"
             ]}>
                 <Neos.Fusion:Loop items={presentationObject.content.items}>
                     <div
-                        class="mt-ch ml-ch text-light-brand"
-                        @if.1={presentationObject.variant.isAlternateMetaline && !iterator.isFirst}
+                        class="mt-ch ml-ch text-light-contrast flex-shrink-0"
+                        @if.1={(presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && !iterator.isFirst}
                     >ꞏ</div>
                     <div class={[
                         presentationObject.variant.isCh && "mt-ch ml-ch",
@@ -34,9 +38,11 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                         presentationObject.variant.isMd && "mt-md ml-md",
                         presentationObject.variant.isLg && "mt-lg ml-lg",
                         presentationObject.variant.isGallery && "mt-xs ml-xs max-w-[350px] max-h-[350px]",
-                        presentationObject.variant.isAlternateMetaline && "mt-ch ml-ch",
-                        presentationObject.variant.isAlternateMetaline && iterator.isOdd && "text-light-contrast",
-                        presentationObject.variant.isAlternateMetaline && iterator.isEven && "text-brand"
+                        (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && "mt-ch ml-ch",
+                        (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isOdd && "text-light-contrast",
+                        (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isEven && "text-brand",
+                        presentationObject.variant.isAlternateMetalineEllipsis && "whitespace-nowrap overflow-hidden overflow-ellipsis",
+                        presentationObject.variant.isAlternateMetalineEllipsis && iterator.isFirst && "flex-shrink-0"
                     ]}>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                     </div>

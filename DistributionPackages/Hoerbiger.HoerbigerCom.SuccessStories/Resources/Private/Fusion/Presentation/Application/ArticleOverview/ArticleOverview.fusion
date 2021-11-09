@@ -2,8 +2,12 @@ prototype(Hoerbiger.HoerbigerCom.SuccessStories:Application.ArticleOverview) < p
     @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\SuccessStories\\Presentation\\Application\\ArticleOverview\\ArticleOverviewInterface'
 
     renderer = afx`
-        <div>
-            Coming Soon...
-            <script type="application/json" data-labels={presentationObject.labels}>{presentationObject.articles}</script>
+        <div class="[Application.ArticleOverview]">
+            <script
+                @if.1={!String.isBlank(presentationObject.applicationData)}
+                type="application/json"
+            >
+                {presentationObject.applicationData}
+            </script>
         </div>`
 }

@@ -1,7 +1,8 @@
 prototype(Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        stylesheets = Hoerbiger.HoerbigerCom.SuccessStories:Resource.StyleSheets
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${SuccessStories.Page.forMagazine(site, documentNode, documentNode.context.inBackend)}
+            presentationObject = ${SuccessStories.Page.forMagazine(site, documentNode, documentNode.context, documentNode.context.inBackend)}
         }
     }
 }
