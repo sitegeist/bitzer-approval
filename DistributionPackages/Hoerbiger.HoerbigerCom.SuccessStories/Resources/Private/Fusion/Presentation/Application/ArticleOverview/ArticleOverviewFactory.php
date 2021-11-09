@@ -14,6 +14,9 @@ use Sitegeist\CsvPO\Domain\TranslationLabel;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\Service as LocalizationService;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
+use Hoerbiger\Shared\Domain\FormattedDateFactory;
+use Neos\ContentRepository\Domain\Model\Node;
 
 /**
  * @Flow\Scope("singleton")
@@ -28,23 +31,29 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
 
     private ResourceManager $resourceManager;
 
+    private FormattedDateFactory $formattedDateFactory;
+
     public function __construct(
         TranslationLabelSourceRepository $translationLabelSourceRepository,
         LocalizationService $localizationService,
         ThumbnailService $thumbnailService,
-        ResourceManager $resourceManager
+        ResourceManager $resourceManager,
+        FormattedDateFactory $formattedDateFactory
     ) {
         $this->translationLabelSourceRepository = $translationLabelSourceRepository;
         $this->localizationService = $localizationService;
         $this->thumbnailService = $thumbnailService;
         $this->resourceManager = $resourceManager;
+        $this->formattedDateFactory = $formattedDateFactory;
     }
 
     public function forMagazine(TraversableNodeInterface $magazine): ArticleOverview
     {
         return new ArticleOverview(
-            json_encode($this->getLabels()) ?: '{}',
-            json_encode($this->getArticleData($magazine)) ?: '{}'
+            json_encode([
+                'labels' => $this->getLabels() ?: [],
+                'articles' => $this->getArticleData($magazine) ?: []
+            ]) ?: ''
         );
     }
 
@@ -78,20 +87,23 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
                     )
                     : null;
 
+                /** @var Node $successStory */
+                $datePublished = $successStory->getProperty('datePublished') ?: $successStory->getCreationDateTime();
+                /** @var TraversableNodeInterface $successStory */
+
                 return [
-                    'datePublished' => $successStory->getProperty('datePublished'),
+                    'datePublished' => (string)Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                     'image' => [
                         'src' => $rendition instanceof Thumbnail ? $this->resourceManager->getPublicPersistentResourceUri($rendition->getResource()) : '',
                         'alt' => $successStory->getProperty('preview__image__alt') ?: $successStory->getProperty('image__alt') ?: '',
                         'title' => $successStory->getProperty('preview__image__title') ?: $successStory->getProperty('image__title') ?: ''
                     ],
-                    'alternativeHeadline' => $successStory->getProperty('alternativeHeadline') ?: '',
                     'headline' => $successStory->getProperty('preview__headline') ?: $successStory->getProperty('headline') ?: '',
                     'abstract' => $successStory->getProperty('preview__description') ?: $successStory->getProperty('abstract') ?: '',
                     'applicationWorld' => $successStory->getProperty('applicationWorld')
                         ? $successStory->getProperty('applicationWorld')->getLabel()
                         : '',
-                    'url' => $this->uriService->getNodeUri($successStory)
+                    'url' => (string)$this->uriService->getNodeUri($successStory)
                 ];
             },
             $this->findChildNodesByNodeTypeFilterString(

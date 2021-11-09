@@ -5,6 +5,7 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.SuccessStories package.
  */
 
+use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
@@ -28,6 +29,7 @@ use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -42,12 +44,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     private FigureFactory $figureFactory;
 
+    private FormattedDateFactory $formattedDateFactory;
+
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory
+        FigureFactory $figureFactory,
+        FormattedDateFactory $formattedDateFactory
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->figureFactory = $figureFactory;
+        $this->formattedDateFactory = $formattedDateFactory;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, bool $inBackend, TraversableNodeInterface $site): SlotInterface
@@ -104,9 +110,22 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                             false
                                         );
 
+                                        $applicationWorld = $successStory->getProperty('applicationWorld');
+
+                                        /** @var Node $successStory */
+                                        $datePublished = $successStory->getProperty('datePublished') ?: $successStory->getCreationDateTime();
+                                        /** @var TraversableNodeInterface $successStory */
+
+
                                         return new ArticleCard(
                                             $imageSource
-                                                ? $this->figureFactory->forArticleCard($imageSource)
+                                                ? new Link(
+                                                    LinkVariant::container(),
+                                                    $this->uriService->getNodeUri($successStory),
+                                                    LinkTarget::self(),
+                                                    null,
+                                                    $this->figureFactory->forArticleCard($imageSource)
+                                                )
                                                 : null,
                                             Value::fromString(
                                                 $successStory->getProperty('preview__headline')
@@ -115,7 +134,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                             new Row(
                                                 RowVariant::alternateMetalineEllipsis(),
                                                 Collection::fromIterable([
-                                                    Value::fromString($successStory->getProperty('alternativeHeadline') ?: '')
+                                                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
+                                                    Value::fromString($applicationWorld->getProperty('previewHeadline')
+                                                        ? $applicationWorld->getProperty('previewHeadline')
+                                                        : $applicationWorld->getProperty('title')
+                                                    )
                                                 ], $identity)
                                             ),
                                             Value::fromString(

@@ -28,7 +28,7 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
             ]}>
                 <Neos.Fusion:Loop items={presentationObject.content.items}>
                     <div
-                        class="mt-ch ml-ch text-light-brand flex-shrink-0"
+                        class="mt-ch ml-ch text-light-contrast flex-shrink-0"
                         @if.1={(presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && !iterator.isFirst}
                     >ꞏ</div>
                     <div class={[

@@ -54,6 +54,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
         return new SlideStage(
             StageVariant::fullMediaTextRight(),
+            null,
             $documentHeadlineContent
                 ? new Headline(
                     HeadlineVariant::noBrand(),
