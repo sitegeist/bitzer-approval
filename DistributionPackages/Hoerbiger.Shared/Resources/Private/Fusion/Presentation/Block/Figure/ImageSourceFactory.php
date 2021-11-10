@@ -27,10 +27,14 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
     public function forDocument(
         Document $document
     ): ?ImageSourceHelperInterface {
-        $thumbnail = $this->thumbnailService->getThumbnail(
-            $document,
-            $this->thumbnailService->getThumbnailConfigurationForPreset(PresetIdentifier::IDENTIFIER_PDF)
-        );
+        try {
+            $thumbnail = $this->thumbnailService->getThumbnail(
+                $document,
+                $this->thumbnailService->getThumbnailConfigurationForPreset(PresetIdentifier::IDENTIFIER_PDF)
+            );
+        } catch (\Exception $exception) {
+            $thumbnail = null;
+        }
 
         return $thumbnail ? new AssetImageSourceHelper(new Image($thumbnail->getResource())) : null;
     }
