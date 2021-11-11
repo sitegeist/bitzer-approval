@@ -11,7 +11,7 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
-use Hoerbiger\Shared\Presentation\Block\CacheSegment\CacheSegment;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 
 
 final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
@@ -49,7 +49,7 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
                     return $linkFactory->forFooterMenuItem($footerLinkNode);
                 }
                 ),
-            'Hoerbiger.HoerbigerCom:CacheSegment.SiteReactive'
+            'Hoerbiger.Shared:CacheSegment.SiteReactive'
             ),
             $this->contactFormLinkFactory->forDocument($document, $site)
         );

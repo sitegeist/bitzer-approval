@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Stage;
  */
 
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -59,7 +60,14 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 RowVariant::alternateMetaline(),
                 Collection::fromIterable(array_filter([
                     Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
-                    Value::fromString($successStory->getProperty('applicationWorld')->getLabel())
+                    new CacheSegment(
+                        Value::fromString(
+                            $successStory->getProperty('applicationWorld')
+                                ? $successStory->getProperty('applicationWorld')->getLabel()
+                                : ''),
+                        'Hoerbiger.HoerbigerCom.ApplicationWorlds:CacheSegment.ApplicationWorld'
+                    ),
+
                 ]), function(SlotInterface $slot) {
                     return $slot;
                 })
