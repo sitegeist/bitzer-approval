@@ -1,0 +1,10 @@
+prototype(Hoerbiger.HoerbigerCom.ApplicationWorlds:CacheSegment.ApplicationWorld) < prototype(Hoerbiger.Shared:CacheSegment) {
+    @cache {
+        entryIdentifier {
+            documentNode = ${documentNode}
+        }
+        entryTags {
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld')}
+        }
+    }
+}
