@@ -43,6 +43,7 @@ final class ContactFormFactory extends AbstractComponentPresentationObjectFactor
     public function create(TraversableNodeInterface $site, string $language): ContactForm
     {
         return new ContactForm(
+            $language,
             $this->createTargetUri(),
             $this->createOptions($site, $language),
             $this->createLabels($site, $language)

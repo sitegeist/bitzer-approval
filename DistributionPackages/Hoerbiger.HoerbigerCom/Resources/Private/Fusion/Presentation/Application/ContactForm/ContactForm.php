@@ -16,6 +16,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
  */
 final class ContactForm extends AbstractComponentPresentationObject implements ContactFormInterface
 {
+    private string $language;
+
     private Uri $targetUri;
 
     /**
@@ -33,10 +35,12 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
      * @param array<string,string> $labels
      */
     public function __construct(
+        string $language,
         Uri $targetUri,
         array $options,
         array $labels
     ) {
+        $this->language = $language;
         $this->targetUri = $targetUri;
         $this->options = $options;
         $this->labels = $labels;
@@ -45,6 +49,7 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
     public function getApplicationData(): string
     {
         return json_encode([
+            'language' => $this->language,
             'targetUri' => (string)$this->targetUri,
             'options' => $this->options,
             'labels' => $this->labels
