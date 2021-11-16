@@ -6,29 +6,30 @@ Neos:
           isEditingMode: false
           isPreviewMode: true
           fusionRenderingPath: ""
-          title: "Minimal"
+          title: "Smartphone"
           width: "640px"
-        md:
-          isEditingMode: false
-          isPreviewMode: true
-          fusionRenderingPath: ""
-          title: "Mittel"
-          width: "768px"
+        #md:
+        #  isEditingMode: false
+        #  isPreviewMode: true
+        #  fusionRenderingPath: ""
+        #  title: "Mittel"
+        #  width: "768px"
         lg:
           isEditingMode: false
           isPreviewMode: true
           fusionRenderingPath: ""
-          title: "Groß"
+          title: "Tablet"
           width: "1024px"
-        xl:
-          isEditingMode: false
-          isPreviewMode: true
-          fusionRenderingPath: ""
-          title: "XL"
-          width: "1280px"
+        #xl:
+        #  isEditingMode: false
+        #  isPreviewMode: true
+        #  fusionRenderingPath: ""
+        #  title: "XL"
+        #  width: "1280px"
         2xl:
           isEditingMode: false
           isPreviewMode: true
           fusionRenderingPath: ""
-          title: "XXL"
+          title: "Desktop"
           width: "1536px"
+        desktop: ~
