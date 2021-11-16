@@ -10,6 +10,7 @@ use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -84,12 +85,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ->asContainer();
 
                 return $link->withContent(
-                    Collection::fromIterable([
-                        Value::fromString($productDocument->getProperty('headline') ?: ''),
-                        new Icon('shared', 'arrowRight')
-                    ], function(SlotInterface $slot) {
-                        return $slot;
-                    })
+                    new Grid(
+                        GridVariant::iconRight(),
+                        Collection::fromIterable([
+                            new Tag(
+                                'span',
+                                Value::fromString($productDocument->getProperty('headline') ?: '')
+                            ),
+                            new Icon('shared', 'arrowRight')
+                        ], function(SlotInterface $slot) {
+                            return $slot;
+                        })
+                    )
                 );
             }
         );
