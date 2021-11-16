@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="EnumProvider.TextWithImage" product-name="Hoerbiger.Shared" source-language="en" target-language="de" datatype="plaintext">
+        <body>
+            <trans-unit id="layout.imageFirst" xml:space="preserve">
+                <source>Image left, text right</source>
+                <target>Bild links, Text rechts</target>
+            </trans-unit>
+            <trans-unit id="layout.imageLast" xml:space="preserve">
+                <source>Text left, image right</source>
+                <target>Text links, Bild rechts</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

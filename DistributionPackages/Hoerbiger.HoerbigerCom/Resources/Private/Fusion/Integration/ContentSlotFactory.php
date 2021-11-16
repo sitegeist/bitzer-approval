@@ -25,6 +25,7 @@ use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
 use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
+use Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -178,6 +179,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             return $slot;
         };
 
+        $columns = Columns::from($textNode->getProperty('columns') ?: Columns::VALUE_MAX_TWO);
+
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Stack(
@@ -191,7 +194,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     new Text(
                         TextVariant::lightContrast(),
                         Editable::fromNodeProperty($textNode, 'text'),
-                        true
+                        $columns->getIsMaxTwo()
                     )
                 ]), $identity)
             )
@@ -446,7 +449,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 new Text(
                     TextVariant::neutralContrast(),
                     Editable::fromNodeProperty($textTabNode, 'text'),
-                    true
+                    false
                 )
             ]), $identity)
         );
