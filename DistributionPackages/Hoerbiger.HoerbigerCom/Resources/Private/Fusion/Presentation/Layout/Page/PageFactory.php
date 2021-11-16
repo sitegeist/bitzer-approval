@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
+use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
@@ -70,6 +71,36 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
+    }
+
+    public function forContactPage(TraversableNodeInterface $site, TraversableNodeInterface $contactPage, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        $languages = $subgraph->getDimensions()['language'];
+        $language = reset($languages);
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($contactPage, $inBackend);
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($contactPage, $subgraph);
+
+        return new Page(
+            new SiteHeader(),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    $stage
+                ),
+                (new ContactFormFactory())->create($site, $language)
+            ]), $identity),
+            $this->siteFooterFactory->forDocument($contactPage, $site)
+        );
     }
 
     public function forChroniclePage(TraversableNodeInterface $site, TraversableNodeInterface $chroniclePage, ContentContext $subgraph, bool $inBackend): PageInterface

@@ -1,0 +1,33 @@
+prototype(Hoerbiger.HoerbigerCom:Email.ContactRequest.ProviderNotification) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <p>Eine neue Kontaktanfrage ist eingegangen</p>
+        <dl>
+            <dt>Sprache</dt>
+            <dd>{language}</dd>
+            <dt @if.1={customerGroup}>Kontaktart</dt>
+            <dd @if.1={customerGroup}>{customerGroup}</dd>
+            <dt @if.1={applicationWorld}>Anwendungswelt</dt>
+            <dd @if.1={applicationWorld}>{applicationWorld}</dd>
+            <dt>Vorname</dt>
+            <dd>{givenName}</dd>
+            <dt>Nachname</dt>
+            <dd>{familyName}</dd>
+            <dt>Email</dt>
+            <dd>{email}</dd>
+            <dt @if.1={worksFor}>Firma</dt>
+            <dd @if.1={worksFor}>{worksFor}</dd>
+            <dt @if.1={telephone}>Telefon</dt>
+            <dd @if.1={telephone}>{telephone}</dd>
+            <dt @if.1={streetAddress}>Straße/Hausnr.</dt>
+            <dd @if.1={streetAddress}>{streetAddress}</dd>
+            <dt @if.1={postalCode}>PLZ</dt>
+            <dd @if.1={postalCode}>{postalCode}</dd>
+            <dt @if.1={addressLocality}>Ort</dt>
+            <dd @if.1={addressLocality}>{addressLocality}</dd>
+            <dt @if.1={addressCountry}>Land</dt>
+            <dd @if.1={addressCountry}>{addressCountry}</dd>
+            <dt>Anliegen</dt>
+            <dd>{message}</dd>
+        </dl>
+    `
+}

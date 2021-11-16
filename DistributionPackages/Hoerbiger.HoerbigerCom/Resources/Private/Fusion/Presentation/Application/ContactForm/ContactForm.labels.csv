@@ -1,0 +1,10 @@
+id,description,en,de
+customerGroup.existingCustomer,existing customer,Existing customer,Bestandskunde
+customerGroup.newCustomer,new customer,New customer,Neukunde
+customerGroup.supplier,supplier,Supplier,Lieferant
+customerGroup.jobCandidate,job candidate,Job candidate,Bewerber
+customerGroup.mediaRepresentative,media representative,Media representative,Medienvertreter
+customerConfirmation.subject,Subject,Your contact request,Ihre Kontaktanfrage
+customerConfirmation.salutation,Salutation,Dear {givenName} {familyName},Sehr geehrte/r {givenName} {familyName}
+customerConfirmation.message,Message,Your contact request has been received and will be processed shortly.,Ihre Kontaktanfrage wurde erhalten und wird in Kürze bearbeitet.
+customerConfirmation.closing,Closing,"Yours sincerely,",Mit freundlichen Grüßen
