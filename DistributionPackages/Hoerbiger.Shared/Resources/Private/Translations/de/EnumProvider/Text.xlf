@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="EnumProvider.Text" product-name="Hoerbiger.Shared" source-language="en" target-language="de" datatype="plaintext">
+        <body>
+            <trans-unit id="columns.maxOne" xml:space="preserve">
+                <source>One column, tighter</source>
+                <target>Einspaltig, schmaler</target>
+            </trans-unit>
+            <trans-unit id="columns.maxTwo" xml:space="preserve">
+                <source>Two columns</source>
+                <target>Zweispaltig</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
