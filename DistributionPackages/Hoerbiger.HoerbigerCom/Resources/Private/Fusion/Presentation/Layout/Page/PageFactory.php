@@ -26,24 +26,24 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
+    private ImageSourceFactory $imageSourceFactory;
+
+    private SiteFooterFactory $siteFooterFactory;
+
     private SlidableFactory $slidableFactory;
 
     private StageFactory $stageFactory;
 
-    private SiteFooterFactory $siteFooterFactory;
-
-    private ImageSourceFactory $imageSourceFactory;
-
     public function __construct(
-        SlidableFactory $slidableFactory,
-        StageFactory $stageFactory,
+        ImageSourceFactory $imageSourceFactory,
         SiteFooterFactory $siteFooterFactory,
-        ImageSourceFactory $imageSourceFactory
+        SlidableFactory $slidableFactory,
+        StageFactory $stageFactory
     ) {
-        $this->slidableFactory = $slidableFactory;
-        $this->siteFooterFactory = $siteFooterFactory;
-        $this->stageFactory = $stageFactory;
         $this->imageSourceFactory = $imageSourceFactory;
+        $this->siteFooterFactory = $siteFooterFactory;
+        $this->slidableFactory = $slidableFactory;
+        $this->stageFactory = $stageFactory;
     }
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface

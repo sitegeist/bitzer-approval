@@ -4,14 +4,8 @@
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   properties:
     headline:
-      options:
-        preset: 'rte.plain'
-      ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
       search:
-        fulltextExtractor: ${Indexing.extractInto('h1', value)}
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
         elasticSearchMapping:
           type: text
     text:

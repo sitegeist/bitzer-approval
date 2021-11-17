@@ -57,38 +57,38 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
  */
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ImageSourceFactory $imageSourceFactory;
-
     private CardFactory $cardFactory;
 
     private FigureFactory $figureFactory;
 
+    private ImageSourceFactory $imageSourceFactory;
+
+    private MileStoneFactory $milestoneFactory;
+
     private PartialFigureEclipseFactory $partialFigureEclipseFactory;
 
     private TimelineFactory $timelineFactory;
-
-    private MileStoneFactory $milestoneFactory;
 
     private VideoFactory $videoFactory;
 
     private WantedNodeRepository $wantedNodeRepository;
 
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
+        ImageSourceFactory $imageSourceFactory,
+        MileStoneFactory $milestoneFactory,
         PartialFigureEclipseFactory $partialFigureEclipseFactory,
         TimelineFactory $timelineFactory,
-        MileStoneFactory $milestoneFactory,
         VideoFactory $videoFactory,
         WantedNodeRepository $wantedNodeRepository
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
         $this->figureFactory = $figureFactory;
+        $this->imageSourceFactory = $imageSourceFactory;
+        $this->milestoneFactory = $milestoneFactory;
         $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
         $this->timelineFactory = $timelineFactory;
-        $this->milestoneFactory = $milestoneFactory;
         $this->videoFactory = $videoFactory;
         $this->wantedNodeRepository = $wantedNodeRepository;
     }

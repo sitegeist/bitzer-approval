@@ -36,6 +36,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     private ImageSourceFactory $imageSourceFactory;
 
     private FigureFactory $figureFactory;
+
     private CsvPOTranslator $csvPOTranslator;
 
     public function __construct(
