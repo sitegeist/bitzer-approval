@@ -5,6 +5,8 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchFormFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
@@ -30,14 +32,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteFooterFactory $siteFooterFactory;
 
+    private ImageSourceFactory $imageSourceFactory;
+
     public function __construct(
         SlidableFactory $slidableFactory,
         StageFactory $stageFactory,
-        SiteFooterFactory $siteFooterFactory
+        SiteFooterFactory $siteFooterFactory,
+        ImageSourceFactory $imageSourceFactory
     ) {
         $this->slidableFactory = $slidableFactory;
-        $this->stageFactory = $stageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
+        $this->stageFactory = $stageFactory;
+        $this->imageSourceFactory = $imageSourceFactory;
     }
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
@@ -61,6 +67,41 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
             $this->siteFooterFactory->forDocument($homepage, $homepage)
+        );
+    }
+
+    public function forSearchResultsPage(TraversableNodeInterface $searchResultsPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+        $imageSource = $this->imageSourceFactory->forImageMixin($searchResultsPage, $inBackend, true);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Introduction requires image for property media.');
+        }
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($searchResultsPage, $inBackend);
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($searchResultsPage, $subgraph);
+
+        return new Page(
+            new SiteHeader(),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    $stage
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regularSm(),
+                    (new SearchFormFactory())->create($subgraph)
+                ),
+            ]), $identity),
+            $this->siteFooterFactory->forDocument($searchResultsPage, $siteNode)
         );
     }
 

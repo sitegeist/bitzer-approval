@@ -18,8 +18,13 @@
           'Hoerbiger.HoerbigerCom:Content.DummyText': true
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.MostWanted': true
     chronicle:
       type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
+    assetdirectory:
+      type: 'Hoerbiger.Shared:Document.AssetDirectory'
+    searchresults:
+      type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:

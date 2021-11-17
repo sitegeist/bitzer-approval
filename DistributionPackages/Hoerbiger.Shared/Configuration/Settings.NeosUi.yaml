@@ -1,0 +1,12 @@
+Neos:
+  Neos:
+    userInterface:
+      defaultLanguage: de
+      navigateComponent:
+        nodeTree:
+          loadingDepth: 1
+          presets:
+            default:
+              baseNodeType: 'Neos.Neos:Document,!Hoerbiger.Shared:Tag.ExcludeFromNodeTree'
+        structureTree:
+          loadingDepth: 2

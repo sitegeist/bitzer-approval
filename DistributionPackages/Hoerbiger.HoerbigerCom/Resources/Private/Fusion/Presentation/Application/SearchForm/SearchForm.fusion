@@ -1,0 +1,16 @@
+prototype(Hoerbiger.HoerbigerCom:Application.SearchForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\SearchForm\\SearchFormInterface'
+
+    renderer = afx`<div>
+        Coming Soon...
+        <script type="application/json"
+            data-endpoint-uri={presentationObject.endpointUri}
+            data-sorting-property-options={presentationObject.sortingPropertyOptions}
+            data-period-options={presentationObject.periodOptions}
+            data-labels={presentationObject.labels}
+            data-language={presentationObject.language}
+            data-most-wanted-endpoint-uri={presentationObject.mostWantedEndpointUri}
+        >
+        </script>
+    </div>`
+}

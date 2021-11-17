@@ -3,6 +3,17 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   properties:
+    headline:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h1', value)}
+        elasticSearchMapping:
+          type: text
     text:
       options:
         preset: 'rte.text'
@@ -10,3 +21,7 @@
         inline:
           editorOptions:
             placeholder: 'Bitte Text eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text

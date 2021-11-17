@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -50,3 +51,6 @@
           editorOptions:
             nodeTypes:
               - 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
+    searchType:
+      search:
+        indexing: '${"Product"}'

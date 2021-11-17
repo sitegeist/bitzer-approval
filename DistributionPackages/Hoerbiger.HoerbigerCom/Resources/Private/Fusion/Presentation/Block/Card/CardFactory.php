@@ -2,15 +2,16 @@
 namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
 
 /*
- * This file is part of the Hoerbiger.Shared package.
+ * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
+use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
+use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
-use Hoerbiger\Shared\Presentation\Block\Figure\PresetIdentifier;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
@@ -30,9 +31,10 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
-final class CardFactory extends AbstractComponentPresentationObjectFactory
+final class CardFactory extends AbstractComponentPresentationObjectFactory implements CardFactoryInterface
 {
     private ImageSourceFactory $imageSourceFactory;
+
     private FigureFactory $figureFactory;
     private CsvPOTranslator $csvPOTranslator;
 
@@ -141,5 +143,27 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
             default:
                 return new Icon('shared', 'downloadFile');
         }
+    }
+
+    public function forDocument(Document $document): CardInterface
+    {
+        return new ArticleCard(
+            null,
+            Value::fromString($document->getLabel()),
+            null,
+            null,
+            null
+        );
+    }
+
+    public function forThing(TraversableNodeInterface $thing): CardInterface
+    {
+        return new ArticleCard(
+            null,
+            Value::fromString($thing->getLabel()),
+            null,
+            null,
+            null
+        );
     }
 }
