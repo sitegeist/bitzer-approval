@@ -1,0 +1,44 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.DummyText': true
+          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
+  ui:
+    icon: file-invoice
+    label: 'Pressemitteilung'
+    inspector:
+      groups:
+        release:
+          label: 'Pressemitteilung'
+          icon: 'file-invoice'
+          position: 'before image'
+  properties:
+    datePublished:
+      type: DateTime
+      ui:
+        label: 'Publikationsdatum'
+        inspector:
+          group: release
+    image:
+      validation: ~
+    image__alt:
+      validation: ~
+    image__title:
+      validation: ~

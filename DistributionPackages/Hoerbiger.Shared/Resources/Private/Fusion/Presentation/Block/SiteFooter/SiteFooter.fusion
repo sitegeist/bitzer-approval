@@ -5,10 +5,52 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
         title = 'SiteFooter'
 
         props {
+            socialLinks = '- Add Slot Content -'
+            navigationLinks = '- Add Slot Content -'
         }
     }
 
     renderer = afx`
-        <footer class="w-full h-full max-h-[48px] bg-neutral text-neutral-contrast">Footer</footer>
+        <footer class={[
+            "[Block.SiteFooter]",
+            "w-full flex-flex-col items-stretch"
+        ]}>
+            <div
+                @if.1={presentationObject.contactFormLink}
+                class="bg-neutral-lighter"
+            >
+                <div class="mx-auto max-w-content-full px-md py-sm">
+                    <Hoerbiger.Shared:Block.ContactFormLink presentationObject={presentationObject.contactFormLink} />
+                </div>
+            </div>
+            <div class="bg-neutral-darker border border-t-4 border-t-brand">
+                <div class="mx-auto max-w-content-full px-md py-xs flex items-center justify-between">
+                    <img
+                        class="h-full max-h-[50px]"
+                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_white.png')}
+                    />
+                    <div class="flex items-center space-x-xs">
+                        <div
+                            @if.1={presentationObject.socialLinks}
+                            class="flex text-light space-x-xs"
+                        >
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.socialLinks} />
+                        </div>
+
+                        <div
+                            @if.1={presentationObject.navigationLinks}
+                            class="flex space-x-xs"
+                        >
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.navigationLinks} />
+                            <!--<Neos.Fusion:Loop items={presentationObject.navigationLinks.content.items}>
+                                <Neos.Fusion:Augmenter class="text-light uppercase font-semibold min-h-touch flex items-center whitespace-nowrap">
+                                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                                </Neos.Fusion:Augmenter>
+                            </Neos.Fusion:Loop>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     `
 }

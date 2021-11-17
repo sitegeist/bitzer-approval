@@ -1,5 +1,6 @@
 // const theme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
+const selectorParser = require('postcss-selector-parser');
 
 const MAX_CONTENT_WIDTH = '1920px';
 const MIN_TOUCH = '48px';
@@ -7,13 +8,17 @@ const MIN_TOUCH = '48px';
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
 const SPACES = {
+	'ch-xs': '.62ch',
 	ch: '1ch',
+	'2xs': `calc(.4 * ${SPACE_SM})`,
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
 	md: `calc(2 * ${SPACE_SM})`,
 	lg: `calc(3 * ${SPACE_SM})`,
 	xl: `calc(4 * ${SPACE_SM})`,
 	'2xl': `calc(6 * ${SPACE_SM})`,
+	'minus-ch-xs': `-.62ch`,
+	'minus-ch': `-1ch`,
 	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
 	'minus-sm': `calc(-1 * ${SPACE_SM})`,
 	'minus-md': `calc(-2 * ${SPACE_SM})`,
@@ -21,6 +26,8 @@ const SPACES = {
 	'minus-xl': `calc(-4 * ${SPACE_SM})`,
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
+
+const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2']
 
 module.exports = {
 	mode: 'jit',
@@ -35,10 +42,10 @@ module.exports = {
 				contrast: 'rgba(0, 0, 0, .85)'
 			},
 			neutral: {
-				lighter: '#F9F9F9',
+				lighter: '#F0F0F0',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
-				contrast: '#fff',
+				contrast: 'rgba(0, 0, 0, .85)',
 			},
 			brand: {
 				DEFAULT: '#8D172E',
@@ -58,12 +65,6 @@ module.exports = {
 			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
 			'serif-regular': ['PT Serif', 'serif'],
-		},
-
-		boxShadow: {
-			/* Will match to py-3. */
-			'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
-			'textbox': '0 0 14px rgba(0, 0, 0, .08)',
 		},
 
 		extend: {
@@ -140,6 +141,9 @@ module.exports = {
 			gridTemplateColumns: {
 				'2-max-1fr': 'max-content 1fr',
 				'2-1fr-max': '1fr max-content',
+				tabs: '35% 1fr',
+				'2-1fr-icon': '1fr 1.2em',
+				'2-icon-1fr': '1.2em 1fr',
 			},
 
 			minWidth: {
@@ -155,9 +159,14 @@ module.exports = {
 			},
 
 			maxWidth: {
+				...SPACES,
 				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
+			},
+
+			height: {
+				...SPACES,
 			},
 
 			space: {
@@ -199,12 +208,18 @@ module.exports = {
 				}],
 			},
 
+			boxShadow: {
+				/* Will match to py-3. */
+				'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
+				'textbox': '0 0 14px rgba(0, 0, 0, .08)',
+				card: '0 0 14px rgba(0, 0, 0, 0.1)',
+				play: '0 0 48px #8D172E80',
+			},
 		},
 	},
 	variants: {
-		extend: {
-			transform: ['group-hover'],
-		},
+		transform: ({after}) => after(['group-hover', 'open']),
+		backgroundColor: ({after}) => after(NTH_CHILD_SELECTORS),
 	},
 	plugins: [
 		plugin(({addUtilities}) => {
@@ -217,6 +232,30 @@ module.exports = {
 				},
 			}, ['responsive']);
 		}),
+		plugin(({addVariant, e}) => {
+			NTH_CHILD_SELECTORS
+				.map(item => item.replace('nth-child-', ''))
+				.forEach((item) =>
+					addVariant(`nth-child-${item}`, ({modifySelectors, separator}) =>
+						modifySelectors(({className}) =>
+							`.${e(`nth-child-${item}${separator}${className}`)}:nth-child(${item})`
+						)
+					)
+				)
+		}),
+		plugin(({addVariant}) =>
+			addVariant('open', ({modifySelectors, separator}) =>
+				modifySelectors(({selector}) => {
+					return selectorParser((selectors) => {
+						selectors.walkClasses((sel) => {
+							sel.value = `open${separator}${sel.value}`;
+							sel.parent.insertBefore(sel, selectorParser().astSync('details[open] '));
+						});
+					}).processSync(selector)
+
+				})
+			)
+		),
 		require('@tailwindcss/typography'),
 	],
 };

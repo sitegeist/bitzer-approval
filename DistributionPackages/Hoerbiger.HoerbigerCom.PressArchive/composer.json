@@ -1,0 +1,20 @@
+{
+    "name": "hoerbiger/hoerbigercom-pressarchive",
+    "type": "neos-hoerbiger",
+    "version": "1.0.0",
+    "require": {
+        "hoerbiger/hoerbigercom": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hoerbiger\\HoerbigerCom\\PressArchive\\": "Classes/",
+            "Hoerbiger\\HoerbigerCom\\PressArchive\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+            "Hoerbiger\\HoerbigerCom\\PressArchive\\Integration\\": "Resources/Private/Fusion/Integration/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Hoerbiger.HoerbigerCom.PressArchive"
+        }
+    }
+}

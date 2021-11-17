@@ -1,0 +1,28 @@
+prototype(Hoerbiger.Shared:Block.ContactFormLink) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ContactFormLink\\ContactFormLinkInterface'
+
+    @styleguide {
+        title = 'ContactFormLink'
+
+        props {
+            labels = 'Text'
+            button {
+                type = 'link'
+                variant = 'cta'
+                content = '- Add Slot Content -'
+                href = 'https://www.neos.io'
+                target = 'Text'
+                rel = 'Text'
+            }
+        }
+    }
+
+    renderer = afx`
+        <div class="w-full bg-neutral-lighter">
+            <div class="mx-auto max-w-content-full grid grid-cols-2-1fr-max gap-xl items-center">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+                <Hoerbiger.Shared:Block.Button presentationObject={presentationObject.button} />
+            </div>
+        </div>
+    `
+}

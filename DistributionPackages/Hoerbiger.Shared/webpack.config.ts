@@ -21,13 +21,7 @@ const shared = [
 				singleton: true
 			}
 		})
-	),
-	{
-		'@servicebund/shared/Resources/Private/Fusion/Presentation/Application/Common/Utils': {
-			requiredVersion: '*',
-			singleton: true
-		}
-	}
+	)
 ];
 
 export function buildCommonConfig(): webpack.Configuration {

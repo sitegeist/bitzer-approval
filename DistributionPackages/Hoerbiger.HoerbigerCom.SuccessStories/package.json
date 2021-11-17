@@ -1,0 +1,17 @@
+{
+  "name": "@hoerbiger/hoerbigercom-successstories",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "concurrently 'yarn build:js' 'yarn build:css'",
+    "build:js": "webpack --mode production",
+    "build:css": "TAILWIND_MODE=build NODE_ENV=production postcss Resources/Private/Styles/styles.css -o Resources/Public/Build/Styles/main.min.css",
+    "watch": "concurrently 'yarn watch:js' 'yarn watch:css'",
+    "watch:js": "webpack -w --mode development",
+    "watch:css": "TAILWIND_MODE=watch NODE_ENV=development postcss -w Resources/Private/Styles/styles.css -o Resources/Public/Build/Styles/main.min.css",
+    "lint-ts": "eslint Resources/Private/**/*.ts"
+  },
+  "dependencies": {
+    "@hoerbiger/shared": "^1.0.0"
+  }
+}

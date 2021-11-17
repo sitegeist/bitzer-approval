@@ -6,10 +6,9 @@
     "build": "concurrently 'yarn build:js' 'yarn build:css'",
     "build:js": "webpack --mode production",
     "build:css": "TAILWIND_MODE=build NODE_ENV=production postcss Resources/Private/Styles/styles.css -o Resources/Public/Build/Styles/main.min.css",
-    "watch": "concurrently 'yarn watch:css' 'yarn watch:js'",
+    "watch": "concurrently 'yarn watch:js' 'yarn watch:css'",
     "watch:js": "webpack -w --mode development",
     "watch:css": "TAILWIND_MODE=watch NODE_ENV=development postcss -w Resources/Private/Styles/styles.css -o Resources/Public/Build/Styles/main.min.css",
-    "test": "SITE_PACKAGE_KEY=Hoerbiger.Shared jest --runInBand",
     "lint-ts": "eslint Resources/Private/**/*.ts"
   },
   "dependencies": {
@@ -25,8 +24,11 @@
   "devDependencies": {
     "@types/classnames": "^2.3.1",
     "@types/final-form-focus": "^1.1.1",
+    "@types/react": "^17.0.34",
+    "@types/react-dom": "^17.0.11",
     "autoprefixer": "^10.3.4",
     "cssnano": "^5.0.8",
-    "postcss-discard-duplicates": "^5.0.1"
+    "postcss-discard-duplicates": "^5.0.1",
+    "postcss-selector-parser": "^6.0.6"
   }
 }

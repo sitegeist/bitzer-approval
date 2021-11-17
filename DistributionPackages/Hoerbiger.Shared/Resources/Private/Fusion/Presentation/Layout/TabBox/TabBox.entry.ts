@@ -1,0 +1,42 @@
+import {filter} from "rxjs/operators";
+
+import {NeosEvent} from "../../Application/Defintions";
+import {getStreamOfNeosEvents, NEOS_NODE_SELECTED} from "../../Application/Utils/getStreamOfNeosEvents";
+
+export default ($node: Element): void => {
+	if ($node instanceof HTMLElement) {
+		const $tabs: Element[] = Array.from($node.querySelectorAll("[data-select='tab']"));
+		const $tabContents: Element[] = Array.from($node.querySelectorAll("[data-select='tab-content']"));
+
+		if ($tabs.length === $tabContents.length) {
+			const onUpdateIndex = (index: number) => {
+				if (index >= 0) {
+					for (let i = 0; i < $tabs.length; i+=1) {
+						$tabs[i].classList.toggle("opacity-100", i === index);
+						$tabs[i].classList.toggle("opacity-30", i !== index);
+						$tabContents[i].classList.toggle("flex", i === index);
+						$tabContents[i].classList.toggle("hidden", i !== index);
+					}
+				}
+			};
+
+			const onNeosEvent = (e: NeosEvent) => {
+				switch (e.type) {
+				case NEOS_NODE_SELECTED:
+					onUpdateIndex($tabContents.findIndex($tabContent => $tabContent.contains(e.detail.element)));
+					break;
+				default:
+					break;
+				}
+			};
+
+			getStreamOfNeosEvents()
+				.pipe(
+					filter(({detail: {element}}: NeosEvent) => $node.contains(element))
+				)
+				.subscribe(onNeosEvent);
+
+			$tabs.forEach(($tab, index) => $tab.addEventListener("click", () => onUpdateIndex(index)));
+		}
+	}
+};

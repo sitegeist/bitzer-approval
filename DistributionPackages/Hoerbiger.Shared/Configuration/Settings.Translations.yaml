@@ -13,3 +13,4 @@ Sitegeist:
     management:
       packageKeys:
         - 'Hoerbiger.Shared'
+      fileExtension: '.labels.csv'

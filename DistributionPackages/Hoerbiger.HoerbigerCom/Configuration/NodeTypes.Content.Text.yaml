@@ -2,6 +2,24 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
   ui:
     label: 'Text'
     icon: align-left
+  properties:
+    columns:
+      type: string
+      defaultValue: maxTwo
+      ui:
+        label: 'Spaltigkeit & Breite'
+        reloadIfChanged: true
+        inspector:
+          group: 'adjust'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+  postprocessors:
+    columns:
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
+      postprocessorOptions:
+        enumName: Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns
+        propertyNames:
+          - columns

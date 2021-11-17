@@ -21,13 +21,20 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
             class={[
                 "[Block.Link (" + presentationObject.variant + ")]",
                 presentationObject.variant.isContainer && "w-full h-full",
-                presentationObject.variant.isLabel && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
+                presentationObject.variant.isLabel && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl",
+                presentationObject.variant.isTouchIcon && "flex items-center h-full max-h-touch",
+                presentationObject.variant.isSiteFooter && "text-light uppercase font-semibold min-h-touch flex items-center whitespace-nowrap"
             ]}
         >
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                @if.1={presentationObject.content}
-                presentationObject={presentationObject.content}
-            />
+            <Neos.Fusion:Augmenter
+                class.@if.1={presentationObject.variant.isTouchIcon}
+                class="max-h-touch"
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    @if.1={presentationObject.content}
+                    presentationObject={presentationObject.content}
+                />
+            </Neos.Fusion:Augmenter>
         </a>
     `
 }

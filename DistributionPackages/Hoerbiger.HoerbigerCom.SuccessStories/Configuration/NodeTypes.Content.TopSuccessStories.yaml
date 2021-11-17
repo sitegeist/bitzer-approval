@@ -1,0 +1,23 @@
+'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+  ui:
+    icon: 'newspaper'
+    label: 'Top Success Stories'
+    inspector:
+      groups:
+        stories:
+          label: 'Stories'
+          icon: 'newspaper'
+  properties:
+    successStories:
+      type: references
+      ui:
+        label: 'Stories'
+        reloadIfChanged: true
+        inspector:
+          group: 'stories'
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.SuccessStories:Document.SuccessStory'
