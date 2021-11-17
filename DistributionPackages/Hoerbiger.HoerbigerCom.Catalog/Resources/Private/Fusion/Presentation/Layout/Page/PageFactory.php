@@ -5,6 +5,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
+use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
@@ -56,6 +57,64 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forDuoIntroduction($product, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $product, $stage, $subgraph);
+    }
+
+    public function forIndustrySolutions(TraversableNodeInterface $site, TraversableNodeInterface $industrySolutions, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolutions, $inBackend);
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolutions, $subgraph);
+
+        return new Page(
+            new SiteHeader(),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    $stage
+                )
+            ]), $identity),
+            $this->siteFooterFactory->forDocument($industrySolutions, $site)
+        );
+    }
+
+    public function forIndustrySolution(TraversableNodeInterface $site, TraversableNodeInterface $industrySolution, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolution, $inBackend);
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolution, $subgraph);
+
+        return new Page(
+            new SiteHeader(),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    $stage
+                ),
+                Content::fromNode($industrySolution->findNamedChildNode(NodeName::fromString('main'))),
+                (new CardFactory())->forIndustrySolutionProducts($industrySolution)
+            ]), $identity),
+            $this->siteFooterFactory->forDocument($industrySolution, $site)
+        );
     }
 
     public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface

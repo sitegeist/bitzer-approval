@@ -24,3 +24,29 @@
   ui:
     icon: barcode
     label: 'Produkt'
+    inspector:
+      groups:
+        product:
+          label: Produkt
+          icon: barcode
+  properties:
+    applicationWorlds:
+      type: references
+      ui:
+        label: 'Anwendungswelten'
+        reloadIfChanged: true
+        inspector:
+          group: product
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+    industrySolutions:
+      type: references
+      ui:
+        label: 'Branchenlösungen'
+        reloadIfChanged: true
+        inspector:
+          group: product
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
