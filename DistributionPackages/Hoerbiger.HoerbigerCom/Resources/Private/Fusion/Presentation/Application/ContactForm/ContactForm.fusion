@@ -1,7 +1,7 @@
 prototype(Hoerbiger.HoerbigerCom:Application.ContactForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
     @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\ContactForm\\ContactFormInterface'
 
-    renderer = afx`<div>
+    renderer = afx`<div class="border border-brand h-[333px]">
         <script type="application/json">{presentationObject.applicationData}</script>
         Coming soon...
     </div>`

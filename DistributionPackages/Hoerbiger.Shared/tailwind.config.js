@@ -32,7 +32,9 @@ const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2']
 module.exports = {
 	mode: 'jit',
 	purge: [
-		'./Resources/Private/Fusion/**/*'
+		'./Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 	],
 	darkMode: false,
 	theme: {
