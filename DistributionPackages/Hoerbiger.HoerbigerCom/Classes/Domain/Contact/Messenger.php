@@ -23,6 +23,7 @@ use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 final class Messenger
 {
     const FORM_BASEPATH = 'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/ContactForm';
+
     /**
      * @Flow\Inject
      * @var UriServiceInterface
@@ -64,6 +65,7 @@ final class Messenger
         $addressCountry = $command->getAddressCountry();
 
         $view->assignMultiple([
+            'requestDate' => (new \DateTimeImmutable())->format('d.m.Y'),
             'language' => $command->getLanguage(),
             'customerGroup' => $customerGroupIdentifier
                 ? $this->findCustomerGroupLabel($customerGroupIdentifier)
@@ -71,6 +73,7 @@ final class Messenger
             'applicationWorld' => $applicationWorldIdentifier
                 ? $this->findApplicationWorldLabel($applicationWorldIdentifier)
                 : null,
+            'salutation' => $this->findLabel('salutation.' . $command->getSalutation(), $command->getLanguage()),
             'givenName' => $command->getGivenName(),
             'familyName' => $command->getFamilyName(),
             'email' => $command->getEmailAddress(),
@@ -164,7 +167,10 @@ final class Messenger
             'salutation' => \str_replace(
                 ['{givenName}', '{familyName}'],
                 [$command->getGivenName(), $command->getFamilyName()],
-                $this->findLabel('customerConfirmation.salutation', $command->getLanguage())
+                $this->findLabel(
+                    'customerConfirmation.salutation.' . $command->getSalutation(),
+                    $command->getLanguage()
+                )
             ),
             'message' => $this->findLabel('customerConfirmation.message', $command->getLanguage()),
             'closing' => $this->findLabel('customerConfirmation.closing', $command->getLanguage())

@@ -3,6 +3,5 @@ prototype(Hoerbiger.HoerbigerCom:Email.ContactRequest.CustomerConfirmation) < pr
         <p>{salutation}</p>
         <p>{message}</p>
         <p>{closing}</p>
-        <p>Hoerbiger</p>
     `
 }

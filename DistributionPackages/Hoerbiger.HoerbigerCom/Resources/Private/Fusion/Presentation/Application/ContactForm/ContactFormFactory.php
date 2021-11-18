@@ -7,6 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm;
 
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Domain\Contact\CustomerGroupIdentifier;
+use Hoerbiger\HoerbigerCom\Domain\Contact\Salutation;
 use Hoerbiger\Shared\Application\Country;
 use Hoerbiger\Shared\Application\CountryDirectory;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeAggregateIdentifier;
@@ -65,7 +66,7 @@ final class ContactFormFactory extends AbstractComponentPresentationObjectFactor
     }
 
     /**
-     * @return array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|string>>
+     * @return array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|Salutation|string>>
      */
     private function createOptions(TraversableNodeInterface $site, string $language): array
     {
@@ -81,6 +82,7 @@ final class ContactFormFactory extends AbstractComponentPresentationObjectFactor
         return [
             'customerGroups' => CustomerGroupIdentifier::cases(),
             'applicationWorlds' => $applicationWorlds,
+            'salutations' => Salutation::cases(),
             'addressCountries' => array_map(function (Country $country): string {
                 return $country->getCode();
             }, $countries->getCountries())

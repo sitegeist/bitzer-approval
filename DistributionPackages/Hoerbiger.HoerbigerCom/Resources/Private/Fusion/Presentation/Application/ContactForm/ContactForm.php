@@ -7,6 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm;
 
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Domain\Contact\CustomerGroupIdentifier;
+use Hoerbiger\HoerbigerCom\Domain\Contact\Salutation;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeAggregateIdentifier;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
@@ -21,7 +22,7 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
     private Uri $targetUri;
 
     /**
-     * @var array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|string>>
+     * @var array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|Salutation|string>>
      */
     private array $options;
 
@@ -31,7 +32,7 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
     private array $labels;
 
     /**
-     * @param array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|string>> $options
+     * @param array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|Salutation|string>> $options
      * @param array<string,string> $labels
      */
     public function __construct(

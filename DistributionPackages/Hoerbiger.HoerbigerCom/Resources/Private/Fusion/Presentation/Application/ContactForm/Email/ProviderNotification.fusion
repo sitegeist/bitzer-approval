@@ -1,6 +1,6 @@
 prototype(Hoerbiger.HoerbigerCom:Email.ContactRequest.ProviderNotification) < prototype(Neos.Fusion:Component) {
     renderer = afx`
-        <p>Eine neue Kontaktanfrage ist eingegangen</p>
+        <p>Anfrage vom {requestDate} von der HOERBIGER Website</p>
         <dl>
             <dt>Sprache</dt>
             <dd>{language}</dd>
@@ -8,6 +8,8 @@ prototype(Hoerbiger.HoerbigerCom:Email.ContactRequest.ProviderNotification) < pr
             <dd @if.1={customerGroup}>{customerGroup}</dd>
             <dt @if.1={applicationWorld}>Anwendungswelt</dt>
             <dd @if.1={applicationWorld}>{applicationWorld}</dd>
+            <dt>Anrede</dt>
+            <dd>{salutation}</dd>
             <dt>Vorname</dt>
             <dd>{givenName}</dd>
             <dt>Nachname</dt>

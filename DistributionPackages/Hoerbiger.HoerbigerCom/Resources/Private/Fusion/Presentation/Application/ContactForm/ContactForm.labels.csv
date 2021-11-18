@@ -4,7 +4,12 @@ customerGroup.newCustomer,new customer,New customer,Neukunde
 customerGroup.supplier,supplier,Supplier,Lieferant
 customerGroup.jobCandidate,job candidate,Job candidate,Bewerber
 customerGroup.mediaRepresentative,media representative,Media representative,Medienvertreter
+salutation.Mr.,Mr.,Mr.,Herr
+salutation.Ms.,Ms.,Ms.,Frau
+salutation.,none,none,keine
 customerConfirmation.subject,Subject,Your contact request,Ihre Kontaktanfrage
-customerConfirmation.salutation,Salutation,Dear {givenName} {familyName},Sehr geehrte/r {givenName} {familyName}
-customerConfirmation.message,Message,Your contact request has been received and will be processed shortly.,Ihre Kontaktanfrage wurde erhalten und wird in Kürze bearbeitet.
-customerConfirmation.closing,Closing,"Yours sincerely,",Mit freundlichen Grüßen
+customerConfirmation.salutation.Mr.,Salutation (Mr.),Dear Mr. {givenName} {familyName},Sehr geehrter Herr {familyName}
+customerConfirmation.salutation.Ms.,Salutation (Ms.),Dear Ms. {givenName} {familyName},Sehr geehrte Frau {familyName}
+customerConfirmation.salutation.,Salutation (None),Dear {givenName} {familyName},Sehr geehrte/r {givenName} {familyName}
+customerConfirmation.message,Message,Your contact request has been received and will be processed shortly.,vielen Dank für Ihre Anfrage an HOERBIGER.<br /><br />Wir kümmern uns um Ihr Anliegen und melden uns so bald wie möglich.
+customerConfirmation.closing,Closing,"Yours sincerely,<br />HOERBIGER",Viele Grüße<br />Ihr HOERBIGER-Team
