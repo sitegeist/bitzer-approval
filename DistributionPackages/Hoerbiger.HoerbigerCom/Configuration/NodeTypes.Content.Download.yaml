@@ -24,6 +24,10 @@
         inline:
           editorOptions:
             placeholder: 'Bitte Beschreibung eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
     asset:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:
