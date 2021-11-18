@@ -5,7 +5,7 @@ import {Form} from "react-final-form";
 import createDecorator from "final-form-focus";
 import cx from "classnames";
 
-import {ApplicationData} from "./Definitions";
+import {ApplicationData, RequestData} from "./Definitions";
 import {initFormFields} from "./Config/FormFields";
 import {Selectbox, TextInput, TextArea} from "@hoerbiger/shared/Resources/Private/Fusion/Presentation/Application/Components/Forms";
 
@@ -14,10 +14,22 @@ const focusOnErrors = createDecorator();
 export const Client = (props: ApplicationData): JSX.Element => {
 	const getFieldConfigFor = initFormFields(props.labels, props.options);
 
+	const onSubmit = (requestData: any) => {
+		console.log("submit", requestData);
+
+		if (requestData.salutation === "_") {
+			const {salutation: _, ...rest} = requestData;
+			requestData = rest;
+		}
+
+		console.log("submit cleaned", requestData);
+	};
+
+
 	return (
 		<Form
-			onSubmit={console.log}
 			decorators={[focusOnErrors]}
+			onSubmit={onSubmit}
 		>
 			{({handleSubmit}) => (
 				<form
@@ -30,6 +42,7 @@ export const Client = (props: ApplicationData): JSX.Element => {
 					<div className={cx("w-full grid grid-cols-1 md:grid-cols-2 gap-lg sm:gap-md md:gap-sm")}>
 						<Selectbox {...getFieldConfigFor("customerGroup")} />
 						<Selectbox {...getFieldConfigFor("applicationWorld")} />
+						<Selectbox {...getFieldConfigFor("salutation")} />
 						<TextInput {...getFieldConfigFor("givenName")} />
 						<TextInput {...getFieldConfigFor("familyName")} />
 						<TextInput {...getFieldConfigFor("emailAddress")} />
@@ -64,6 +77,3 @@ export const Client = (props: ApplicationData): JSX.Element => {
 		</Form>
 	);
 };
-
-
-/* decorators={[focusOnErrors]} */

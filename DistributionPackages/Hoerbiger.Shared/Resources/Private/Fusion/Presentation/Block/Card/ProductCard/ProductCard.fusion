@@ -24,9 +24,7 @@ prototype(Hoerbiger.Shared:Block.Card.ProductCard) < prototype(Hoerbiger.Shared:
                     class="flex flex-col divide-y"
                 >
                     <Neos.Fusion:Loop items={presentationObject.buttons.items}>
-                        <Neos.Fusion:Augmenter class="grid grid-cols-2-1fr-max gap-xs min-h-touch items-center">
-                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item}/>
-                        </Neos.Fusion:Augmenter>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item}/>
                     </Neos.Fusion:Loop>
                 </div>
             </div>

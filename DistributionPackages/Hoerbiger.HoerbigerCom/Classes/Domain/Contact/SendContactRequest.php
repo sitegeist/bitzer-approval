@@ -19,6 +19,8 @@ final class SendContactRequest
 
     private ?NodeAggregateIdentifier $applicationWorld;
 
+    private ?Salutation $salutation;
+
     private string $givenName;
 
     private string $familyName;
@@ -43,6 +45,7 @@ final class SendContactRequest
         string $language,
         ?CustomerGroupIdentifier $customerGroup,
         ?NodeAggregateIdentifier $applicationWorld,
+        ?Salutation $salutation,
         string $givenName,
         string $familyName,
         string $emailAddress,
@@ -57,6 +60,7 @@ final class SendContactRequest
         $this->language = $language;
         $this->customerGroup = $customerGroup;
         $this->applicationWorld = $applicationWorld;
+        $this->salutation = $salutation;
         $this->givenName = $givenName;
         $this->familyName = $familyName;
         $this->emailAddress = $emailAddress;
@@ -77,6 +81,7 @@ final class SendContactRequest
             $array['language'],
             isset($array['customerGroup']) ? CustomerGroupIdentifier::from($array['customerGroup']) : null,
             isset($array['applicationWorld']) ? NodeAggregateIdentifier::fromString($array['applicationWorld']) : null,
+            isset($array['salutation']) ? Salutation::from($array['salutation']) : null,
             $array['givenName'],
             $array['familyName'],
             $array['emailAddress'],
@@ -103,6 +108,11 @@ final class SendContactRequest
     public function getApplicationWorld(): ?NodeAggregateIdentifier
     {
         return $this->applicationWorld;
+    }
+
+    public function getSalutation(): ?Salutation
+    {
+        return $this->salutation;
     }
 
     public function getGivenName(): string

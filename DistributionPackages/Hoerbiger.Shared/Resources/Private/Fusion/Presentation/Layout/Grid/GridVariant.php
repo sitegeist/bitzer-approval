@@ -18,6 +18,8 @@ final class GridVariant implements PseudoEnumInterface
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
     const VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
     const VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
+    const VARIANT_ICONLEFT = 'iconLeft';
+    const VARIANT_ICONRIGHT = 'iconRight';
 
     /**
      * @var array<string,self>|self[]
@@ -38,7 +40,9 @@ final class GridVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_TWOCOLUMNS
                 && $string !== self::VARIANT_TWOCOLUMNSGAP
                 && $string !== self::VARIANT_THREECOLUMNSGAP
-                && $string !== self::VARIANT_TWOCOLUMNSFRMAXGAP) {
+                && $string !== self::VARIANT_TWOCOLUMNSFRMAXGAP
+                && $string !== self::VARIANT_ICONLEFT
+                && $string !== self::VARIANT_ICONRIGHT) {
                 throw GridVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -72,6 +76,16 @@ final class GridVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP);
     }
 
+    public static function iconLeft(): self
+    {
+        return self::from(self::VARIANT_ICONLEFT);
+    }
+
+    public static function iconRight(): self
+    {
+        return self::from(self::VARIANT_ICONRIGHT);
+    }
+
     public function getIsOneColumn(): bool
     {
         return $this->value === self::VARIANT_ONECOLUMN;
@@ -97,6 +111,16 @@ final class GridVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TWOCOLUMNSFRMAXGAP;
     }
 
+    public function getIsIconLeft(): bool
+    {
+        return $this->value === self::VARIANT_ICONLEFT;
+    }
+
+    public function getIsIconRight(): bool
+    {
+        return $this->value === self::VARIANT_ICONRIGHT;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -107,7 +131,9 @@ final class GridVariant implements PseudoEnumInterface
             self::from(self::VARIANT_TWOCOLUMNS),
             self::from(self::VARIANT_TWOCOLUMNSGAP),
             self::from(self::VARIANT_THREECOLUMNSGAP),
-            self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP)
+            self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP),
+            self::from(self::VARIANT_ICONLEFT),
+            self::from(self::VARIANT_ICONRIGHT)
         ];
     }
 

@@ -82,6 +82,21 @@ export const initFormFields = (labels: Labels, formOptions: FormOptions): (field
 					label: labelFor(fieldName),
 					placeholder: placeholderFor(fieldName)
 				},
+				salutation: {
+					name: fieldName,
+					label: labelFor(fieldName),
+					options: [
+						...formOptions.salutations.map(key => ({
+							key,
+							value: getLabelFor(`${fieldName}.${key}`),
+						})),
+						{
+							key: "_",
+							value: getLabelFor(`${fieldName}.none`),
+						},
+					],
+					initialValue: formOptions.salutations[0],
+				},
 				customerGroup: {
 					name: fieldName,
 					label: labelFor(fieldName),

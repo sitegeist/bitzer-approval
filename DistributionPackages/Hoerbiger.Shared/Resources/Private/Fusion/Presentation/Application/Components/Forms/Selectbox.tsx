@@ -15,7 +15,6 @@ type SelectboxProps = {
 	validate?: (value: any) => string|undefined;
 };
 export const Selectbox = (props: SelectboxProps): JSX.Element => {
-	console.log(props);
 	const [isOpen, setIsOpen] = React.useState(false);
 
 	const toggle = () => setIsOpen(state => !state);

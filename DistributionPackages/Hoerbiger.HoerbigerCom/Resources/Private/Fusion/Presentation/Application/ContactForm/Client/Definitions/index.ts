@@ -3,6 +3,7 @@ export interface Labels {
 }
 
 export interface FormOptions {
+	salutations: string[];
 	addressCountries: string[];
 	applicationWorlds: string[];
 	customerGroups: string[];
@@ -17,6 +18,7 @@ export interface ApplicationData {
 
 export interface RequestData {
 	language: string;
+	salutation?: string;
 	customerGroup?: string;
 	applicationWorld?: string;
 	givenName: string;
