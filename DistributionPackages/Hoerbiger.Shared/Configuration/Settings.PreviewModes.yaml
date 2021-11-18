@@ -26,10 +26,10 @@ Neos:
         #  fusionRenderingPath: ""
         #  title: "XL"
         #  width: "1280px"
-        2xl:
+        #2xl:
+        desktop:
           isEditingMode: false
           isPreviewMode: true
           fusionRenderingPath: ""
           title: "Desktop"
           width: "1536px"
-        desktop: ~
