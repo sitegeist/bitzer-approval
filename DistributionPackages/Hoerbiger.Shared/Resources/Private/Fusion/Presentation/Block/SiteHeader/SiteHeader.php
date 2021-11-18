@@ -7,32 +7,31 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
-use Hoerbiger\Shared\Presentation\Block\Navigation\NavigationInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 
 /**
  * @Flow\Proxy(false)
  */
 final class SiteHeader extends AbstractComponentPresentationObject implements SiteHeaderInterface
 {
-    private NavigationInterface $mainNavigation;
+    private NavigationItems $mainNavigation;
 
     private SlotInterface $search;
 
-    private SlotInterface $languageNavigation;
+    private NavigationItems $languageNavigation;
 
     public function __construct(
-        NavigationInterface $mainNavigation,
+        NavigationItems $mainNavigation,
         SlotInterface $search,
-        SlotInterface $languageNavigation
+        NavigationItems $languageNavigation
     ) {
         $this->mainNavigation = $mainNavigation;
         $this->search = $search;
         $this->languageNavigation = $languageNavigation;
     }
 
-    public function getMainNavigation(): NavigationInterface
+    public function getMainNavigation(): NavigationItems
     {
         return $this->mainNavigation;
     }
@@ -42,7 +41,7 @@ final class SiteHeader extends AbstractComponentPresentationObject implements Si
         return $this->search;
     }
 
-    public function getLanguageNavigation(): SlotInterface
+    public function getLanguageNavigation(): NavigationItems
     {
         return $this->languageNavigation;
     }

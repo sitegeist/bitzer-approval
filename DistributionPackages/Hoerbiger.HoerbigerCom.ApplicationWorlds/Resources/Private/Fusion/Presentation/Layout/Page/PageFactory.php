@@ -55,7 +55,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $applicationWorld,
-                $site
+                $site,
+                $subGraph
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(

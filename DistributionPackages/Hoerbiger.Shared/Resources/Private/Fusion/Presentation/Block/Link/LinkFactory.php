@@ -80,6 +80,17 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
+    public function forLanguageMenuItem(Uri $documentUri, string $localeIdentifier): Link
+    {
+        return new Link(
+            LinkVariant::touchIcon(),
+            $documentUri,
+            LinkTarget::self(),
+            null,
+            Value::fromString($localeIdentifier)
+        );
+    }
+
     public function resolveRawLinkTargetUri(?string $rawLinkTarget, ContentContext $subgraph): ?UriInterface
     {
         $rawLinkTarget = $rawLinkTarget ?: '';

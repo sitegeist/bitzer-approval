@@ -30,5 +30,4 @@ Neos:
       Shared.ContactFormLink: Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkFactory
       Shared.MileStone: Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory
       Shared.Timeline: Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory
-      Shared.Navigation: Hoerbiger\Shared\Presentation\Block\Navigation\NavigationFactory
       Shared.NavigationItem: Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItemFactory

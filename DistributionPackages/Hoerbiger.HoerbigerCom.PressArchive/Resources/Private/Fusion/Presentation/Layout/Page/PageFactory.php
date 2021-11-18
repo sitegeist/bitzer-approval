@@ -12,7 +12,6 @@ use Hoerbiger\Shared\Presentation\Block\Card\PressReleaseCard\PressReleaseCard;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -142,7 +141,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $magazine,
-                $site
+                $site,
+                $subgraph
             ),
             Collection::fromIterable(
                 array_filter([
@@ -185,7 +185,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
-                $site
+                $site,
+                $subgraph
             ),
             Collection::fromIterable(
                 array_filter([

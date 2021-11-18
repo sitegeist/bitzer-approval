@@ -45,7 +45,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
-    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -59,7 +59,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $homepage,
-                $homepage
+                $homepage,
+                $subgraph
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
@@ -88,12 +89,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph);
     }
 
-    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage): PageInterface
+    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage, ContentContext $subgraph): PageInterface
     {
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $notFoundPage,
-                $site
+                $site,
+                $subgraph
             ),
             Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main'))),
             $this->siteFooterFactory->forDocument($notFoundPage, $site)
@@ -112,7 +114,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
-                $site
+                $site,
+                $subgraph
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(

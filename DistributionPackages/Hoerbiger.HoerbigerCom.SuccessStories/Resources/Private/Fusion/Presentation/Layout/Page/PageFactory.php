@@ -70,7 +70,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $magazine,
-                $site
+                $site,
+                $subgraph
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
@@ -114,7 +115,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
-                $site
+                $site,
+                $subgraph
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(

@@ -34,18 +34,29 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                     />
                 </a>
 
-                <dt>mainNavigation:</dt>
-                <dd>
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mainNavigation} />
-                </dd>
-                <dt>search:</dt>
-                <dd>
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.search} />
-                </dd>
-                <dt>languageNavigation:</dt>
-                <dd>
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.languageNavigation} />
-                </dd>
+                <dl>
+                    <dt>mainNavigation:</dt>
+                    <dd>
+                        <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
+                            <Hoerbiger.Shared:Block.NavigationItem presentationObject={item} />
+                        </Neos.Fusion:Loop>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>search:</dt>
+                    <dd>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.search} />
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>languageNavigation:</dt>
+                    <dd>
+                        <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
+                            <Hoerbiger.Shared:Block.NavigationItem presentationObject={item} />
+                        </Neos.Fusion:Loop>
+                    </dd>
+                </dl>
             </div>
         </header>
     `
