@@ -144,6 +144,8 @@ module.exports = {
 				'2-max-1fr': 'max-content 1fr',
 				'2-1fr-max': '1fr max-content',
 				tabs: '35% 1fr',
+				'2-1fr-icon': '1fr 1.2em',
+				'2-icon-1fr': '1.2em 1fr',
 			},
 
 			minWidth: {
