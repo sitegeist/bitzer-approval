@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
@@ -81,6 +82,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
+                ),
+                new CacheSegment(
+                    Collection::fromIterable((new CardFactory())->forIndustrySolutions($industrySolutions), $identity),
+                    'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList'
                 )
             ]), $identity),
             $this->siteFooterFactory->forDocument($industrySolutions, $site)
@@ -111,7 +116,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 Content::fromNode($industrySolution->findNamedChildNode(NodeName::fromString('main'))),
-                (new CardFactory())->forIndustrySolutionProducts($industrySolution)
+                new CacheSegment(
+                    Collection::fromIterable((new CardFactory())->forIndustrySolutionProducts($subgraph, $industrySolution), $identity),
+                    'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList'
+                )
             ]), $identity),
             $this->siteFooterFactory->forDocument($industrySolution, $site)
         );
