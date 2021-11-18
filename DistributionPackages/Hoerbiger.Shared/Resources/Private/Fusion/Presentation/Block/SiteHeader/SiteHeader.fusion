@@ -5,9 +5,18 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
         title = 'SiteHeader'
 
         props {
+            siteLogo {
+                variant = 'container'
+                href = 'https://www.neos.io'
+                target = '_self'
+                rel = 'Text'
+                content = '- Add Slot Content -'
+            }
+            mainNavigation = '- Add Slot Content -'
+            search = '- Add Slot Content -'
+            languageNavigation = '- Add Slot Content -'
         }
     }
-
     renderer = afx`
         <header class="w-full bg-light text-light-contrast border-b border-neutral">
             <div class="max-w-content-full mx-auto px-md py-xs flex items-center">
@@ -17,13 +26,26 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                     href="/"
                     target="_self"
                 >
-                <img
-                    id="logo"
-                    class="h-full max-h-[75px] max-w-[60vw]"
-                    src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
+                    <img
+                        id="logo"
+                        class="h-full max-h-[75px] max-w-[60vw]"
+                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
                     {...props.logo}
-                />
+                    />
                 </a>
+
+                <dt>mainNavigation:</dt>
+                <dd>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mainNavigation} />
+                </dd>
+                <dt>search:</dt>
+                <dd>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.search} />
+                </dd>
+                <dt>languageNavigation:</dt>
+                <dd>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.languageNavigation} />
+                </dd>
             </div>
         </header>
     `

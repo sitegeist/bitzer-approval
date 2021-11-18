@@ -23,6 +23,7 @@ use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Model\Node;
@@ -49,16 +50,20 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteFooterFactory $siteFooterFactory;
 
+    private SiteHeaderFactory $siteHeaderFactory;
+
     public function __construct(
         StageFactory $stageFactory,
         PressArchiveStageFactory $pressArchivestageFactory,
         FormattedDateFactory $formattedDateFactory,
-        SiteFooterFactory $siteFooterFactory
+        SiteFooterFactory $siteFooterFactory,
+        SiteHeaderFactory $siteHeaderFactory
     ) {
         $this->stageFactory = $stageFactory;
         $this->pressArchivestageFactory = $pressArchivestageFactory;
         $this->formattedDateFactory = $formattedDateFactory;
         $this->siteFooterFactory = $siteFooterFactory;
+        $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
     public function forPressArchive(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): PageInterface
@@ -135,7 +140,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         }
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $magazine,
+                $site
+            ),
             Collection::fromIterable(
                 array_filter([
                     new ContentContainer(
@@ -175,7 +183,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $document,
+                $site
+            ),
             Collection::fromIterable(
                 array_filter([
                     new ContentContainer(

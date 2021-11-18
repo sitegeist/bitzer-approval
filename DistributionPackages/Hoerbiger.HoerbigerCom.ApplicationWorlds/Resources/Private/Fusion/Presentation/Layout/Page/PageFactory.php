@@ -9,6 +9,7 @@ use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFact
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -27,10 +28,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteFooterFactory $siteFooterFactory;
 
-    public function __construct(StageFactory $stageFactory, SiteFooterFactory $siteFooterFactory)
-    {
+    private SiteHeaderFactory $siteHeaderFactory;
+
+    public function __construct(
+        StageFactory $stageFactory,
+        SiteFooterFactory $siteFooterFactory,
+        SiteHeaderFactory $siteHeaderFactory
+    ) {
         $this->stageFactory = $stageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
+        $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
     public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subGraph): PageInterface
@@ -46,7 +53,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $applicationWorld,
+                $site
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularX(),

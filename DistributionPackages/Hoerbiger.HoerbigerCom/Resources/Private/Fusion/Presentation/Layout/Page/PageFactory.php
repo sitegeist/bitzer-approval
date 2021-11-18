@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -30,14 +31,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteFooterFactory $siteFooterFactory;
 
+    private SiteHeaderFactory $siteHeaderFactory;
+
     public function __construct(
         SlidableFactory $slidableFactory,
         StageFactory $stageFactory,
-        SiteFooterFactory $siteFooterFactory
+        SiteFooterFactory $siteFooterFactory,
+        SiteHeaderFactory $siteHeaderFactory
     ) {
         $this->slidableFactory = $slidableFactory;
         $this->stageFactory = $stageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
+        $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
@@ -52,7 +57,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $homepage,
+                $homepage
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
@@ -83,7 +91,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage): PageInterface
     {
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $notFoundPage,
+                $site
+            ),
             Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main'))),
             $this->siteFooterFactory->forDocument($notFoundPage, $site)
         );
@@ -99,7 +110,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $document,
+                $site
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularX(),

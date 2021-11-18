@@ -1,0 +1,35 @@
+prototype(Hoerbiger.Shared:Block.NavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\NavigationItem\\NavigationItemInterface'
+
+    @styleguide {
+        title = 'NavigationItem'
+
+        props {
+            link {
+                variant = 'container'
+                href = 'https://www.neos.io'
+                target = '_self'
+                rel = 'Text'
+                content = '- Add Slot Content -'
+            }
+            subItems = '- Add Slot Content -'
+            isActive = true
+        }
+    }
+
+    renderer = afx`
+    <dl>
+        <dt>link:</dt>
+        <dd>
+            <Hoerbiger.Shared:Block.Link presentationObject={presentationObject.link} />
+        </dd>
+        <dt>isActive:</dt>
+        <dd>{presentationObject.isActive}</dd>
+        <dt @if.hasSublevel={presentationObject.subItems} >subItems:</dt>
+        <dd @if.hasSublevel={presentationObject.subItems}>
+            <Neos.Fusion:Loop items={presentationObject.subItems}>
+                <Hoerbiger.Shared:Block.NavigationItem presentationObject={item} />
+            </Neos.Fusion:Loop>
+        </dd>
+    </dl>`
+}

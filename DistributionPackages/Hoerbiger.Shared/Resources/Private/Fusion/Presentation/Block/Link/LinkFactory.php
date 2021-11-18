@@ -6,6 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  */
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -60,7 +61,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         return new Link(
             LinkVariant::touchIcon(),
             new Uri($socialMediaLink),
-            LinkTarget::blank(),
+            LinkTarget::self(),
             null,
             new Icon('shared', strtolower($iconName))
         );

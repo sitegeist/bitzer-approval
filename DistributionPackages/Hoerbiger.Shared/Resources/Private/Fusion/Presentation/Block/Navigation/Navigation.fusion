@@ -1,0 +1,20 @@
+prototype(Hoerbiger.Shared:Block.Navigation) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Navigation\\NavigationInterface'
+
+    @styleguide {
+        title = 'Navigation'
+
+        props {
+            navigationItems = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>navigationItems:</dt>
+        <dd>
+            <Neos.Fusion:Loop items={presentationObject.navigationItems}>
+                <Hoerbiger.Shared:Block.NavigationItem presentationObject={item} />
+            </Neos.Fusion:Loop>
+        </dd>
+    </dl>`
+}
