@@ -81,9 +81,9 @@ final class ContactFormFactory extends AbstractComponentPresentationObjectFactor
         return [
             'customerGroups' => CustomerGroupIdentifier::cases(),
             'applicationWorlds' => $applicationWorlds,
-            'addressCountries' => array_map(function (Country $country): string {
+            'addressCountries' => array_keys(array_map(function (Country $country): string {
                 return $country->getCode();
-            }, $countries->getCountries())
+            }, $countries->getCountries()))
         ];
     }
 
@@ -103,7 +103,7 @@ final class ContactFormFactory extends AbstractComponentPresentationObjectFactor
             ) ?: $label->getIdentifier();
         }
         foreach ($this->countryDirectory->findAll($locale) as $country) {
-            $labels['country.' . $country->getCode()] = $country->getName();
+            $labels['addressCountry.' . $country->getCode()] = $country->getName();
         }
         foreach ($this->findApplicationWorlds($site) as $applicationWorld) {
             $labels['applicationWorld.' . $applicationWorld->getNodeAggregateIdentifier()] = $applicationWorld->getLabel();

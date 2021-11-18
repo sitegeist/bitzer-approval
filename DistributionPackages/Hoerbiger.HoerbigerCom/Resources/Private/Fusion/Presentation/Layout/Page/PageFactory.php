@@ -97,7 +97,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                (new ContactFormFactory())->create($site, $language)
+                new ContentContainer(
+                    ContentContainerVariant::regular(),
+                    (new ContactFormFactory())->create($site, $language)
+                )
             ]), $identity),
             $this->siteFooterFactory->forDocument($contactPage, $site)
         );

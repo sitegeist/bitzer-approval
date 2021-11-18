@@ -1,0 +1,32 @@
+export interface Labels {
+	[key: string]: string;
+}
+
+export interface FormOptions {
+	addressCountries: string[];
+	applicationWorlds: string[];
+	customerGroups: string[];
+}
+
+export interface ApplicationData {
+	language: string;
+	targetUri: string;
+	labels: Labels;
+	options: FormOptions;
+}
+
+export interface RequestData {
+	language: string;
+	customerGroup?: string;
+	applicationWorld?: string;
+	givenName: string;
+	familyName: string;
+	emailAddress: string;
+	worksFor?: string;
+	telephone?: string;
+	streetAddress?: string;
+	postalCode?: string;
+	addressLocality?: string;
+	addressCountry?: string;
+	message: string;
+}

@@ -146,6 +146,10 @@ module.exports = {
 				tabs: '35% 1fr',
 			},
 
+			gridTemplateRows: {
+				'form-field': '2.5em max-content',
+			},
+
 			minWidth: {
 				touch: MIN_TOUCH,
 			},
@@ -214,6 +218,15 @@ module.exports = {
 				'textbox': '0 0 14px rgba(0, 0, 0, .08)',
 				card: '0 0 14px rgba(0, 0, 0, 0.1)',
 				play: '0 0 48px #8D172E80',
+			},
+
+			outline: theme => ({
+				brand: `1px solid ${theme('colors.brand.DEFAULT')}`,
+			}),
+
+			zIndex: {
+				'form-field': '30',
+				'form-field-elevated': '50',
 			},
 		},
 	},
