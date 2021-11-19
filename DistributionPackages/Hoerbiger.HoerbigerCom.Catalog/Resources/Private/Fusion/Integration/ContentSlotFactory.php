@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\HoerbigerCom\Catalog\Integration;
 
 /*
@@ -59,7 +62,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     $productListNode->findChildNodes(),
-                    function(TraversableNodeInterface $groupedProduct){
+                    function (TraversableNodeInterface $groupedProduct) {
                         return Content::fromNode(
                             $groupedProduct,
                             'Hoerbiger.HoerbigerCom.Catalog:ContentSlot'
@@ -79,10 +82,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         $products = Collection::fromNodes(
             TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),
-            function(TraversableNodeInterface $productDocument) {
+            function (TraversableNodeInterface $productDocument) {
                 $link = (new LinkFactory())
                     ->forLinkToDocument($productDocument)
-                    ->asContainer();
+                    ->asPlainLabel();
 
                 return $link->withContent(
                     new Grid(
@@ -93,7 +96,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 Value::fromString($productDocument->getProperty('headline') ?: '')
                             ),
                             new Icon('shared', 'arrowRight')
-                        ], function(SlotInterface $slot) {
+                        ], function (SlotInterface $slot) {
                             return $slot;
                         })
                     )
