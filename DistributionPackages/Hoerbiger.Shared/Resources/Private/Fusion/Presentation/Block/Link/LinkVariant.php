@@ -18,6 +18,7 @@ final class LinkVariant implements PseudoEnumInterface
     const VARIANT_TOUCHICON = 'touchIcon';
     const VARIANT_NOSTYLES = 'noStyles';
     const VARIANT_SITEFOOTER = 'siteFooter';
+    const VARIANT_PLAINLABEL = 'plainLabel';
 
     /**
      * @var array<string,self>|self[]
@@ -38,7 +39,8 @@ final class LinkVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_LABEL
                 && $string !== self::VARIANT_TOUCHICON
                 && $string !== self::VARIANT_NOSTYLES
-                && $string !== self::VARIANT_SITEFOOTER) {
+                && $string !== self::VARIANT_SITEFOOTER
+                && $string !== self::VARIANT_PLAINLABEL) {
                 throw LinkVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -66,9 +68,15 @@ final class LinkVariant implements PseudoEnumInterface
     {
         return self::from(self::VARIANT_NOSTYLES);
     }
+
     public static function siteFooter(): self
     {
         return self::from(self::VARIANT_SITEFOOTER);
+    }
+
+    public static function plainLabel(): self
+    {
+        return self::from(self::VARIANT_PLAINLABEL);
     }
 
     public function getIsContainer(): bool
@@ -96,6 +104,11 @@ final class LinkVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_SITEFOOTER;
     }
 
+    public function getIsPlainLabel(): bool
+    {
+        return $this->value === self::VARIANT_PLAINLABEL;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -106,7 +119,8 @@ final class LinkVariant implements PseudoEnumInterface
             self::from(self::VARIANT_LABEL),
             self::from(self::VARIANT_TOUCHICON),
             self::from(self::VARIANT_NOSTYLES),
-            self::from(self::VARIANT_SITEFOOTER)
+            self::from(self::VARIANT_SITEFOOTER),
+            self::from(self::VARIANT_PLAINLABEL)
         ];
     }
 
