@@ -17,6 +17,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
  */
 final class ContactForm extends AbstractComponentPresentationObject implements ContactFormInterface
 {
+    private string $csrfProtectionToken;
+
     private string $language;
 
     private Uri $targetUri;
@@ -36,11 +38,13 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
      * @param array<string,string> $labels
      */
     public function __construct(
+        string $csrfProtectionToken,
         string $language,
         Uri $targetUri,
         array $options,
         array $labels
     ) {
+        $this->csrfProtectionToken = $csrfProtectionToken;
         $this->language = $language;
         $this->targetUri = $targetUri;
         $this->options = $options;
@@ -50,6 +54,7 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
     public function getApplicationData(): string
     {
         return json_encode([
+            'csrfProtectionToken' => $this->csrfProtectionToken,
             'language' => $this->language,
             'targetUri' => (string)$this->targetUri,
             'options' => $this->options,

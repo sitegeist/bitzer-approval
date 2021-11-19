@@ -18,6 +18,7 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\Locale;
 use Neos\Flow\I18n\Service as LocalizationService;
+use Neos\Flow\Security\Context as SecurityContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 
@@ -41,9 +42,16 @@ final class ContactFormFactory extends AbstractComponentPresentationObjectFactor
      */
     protected $countryDirectory;
 
+    /**
+     * @Flow\Inject
+     * @var SecurityContext
+     */
+    protected $securityContext;
+
     public function create(TraversableNodeInterface $site, string $language): ContactForm
     {
         return new ContactForm(
+            $this->securityContext->getCsrfProtectionToken(),
             $language,
             $this->createTargetUri(),
             $this->createOptions($site, $language),
