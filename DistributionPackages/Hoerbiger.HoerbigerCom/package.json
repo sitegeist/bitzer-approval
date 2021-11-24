@@ -1,0 +1,13 @@
+{
+  "name": "@hoerbiger/hoerbigercom",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack -w --mode development",
+    "lint-ts": "eslint Resources/Private/**/*.ts"
+  },
+  "dependencies": {
+    "@hoerbiger/shared": "^1.0.0"
+  }
+}

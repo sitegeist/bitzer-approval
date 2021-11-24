@@ -50,7 +50,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory
     {
         $link = (new LinkFactory())->forLinkToDocument($document);
 
-        $imageSource = $this->imageSourceFactory->forImageProperty($document, $inBackend, 'preview__image');
+        $imageSource = $this->imageSourceFactory->forPreviewMixin($document, $inBackend);
         $figure = $imageSource
             ? $link->asContainer()->withContent($this->figureFactory->forNavigationCard($imageSource))
             : null;
