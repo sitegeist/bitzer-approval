@@ -73,7 +73,10 @@ final class Messenger
             'applicationWorld' => $applicationWorldIdentifier
                 ? $this->findApplicationWorldLabel($applicationWorldIdentifier)
                 : null,
-            'salutation' => $this->findLabel('salutation.' . $command->getSalutation(), $command->getLanguage()),
+            'salutation' => $this->findLabel(
+                'salutation.' . ($command->getSalutation() ?: 'none'),
+                $command->getLanguage()
+            ),
             'givenName' => $command->getGivenName(),
             'familyName' => $command->getFamilyName(),
             'email' => $command->getEmailAddress(),

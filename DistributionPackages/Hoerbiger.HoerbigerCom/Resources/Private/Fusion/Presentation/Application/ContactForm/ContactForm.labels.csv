@@ -10,7 +10,7 @@ salutation.none,none,none,divers
 customerConfirmation.subject,Subject,Your contact request,Ihre Kontaktanfrage
 customerConfirmation.salutation.Mr.,Salutation (Mr.),Dear Mr. {givenName} {familyName},Sehr geehrter Herr {familyName}
 customerConfirmation.salutation.Ms.,Salutation (Ms.),Dear Ms. {givenName} {familyName},Sehr geehrte Frau {familyName}
-customerConfirmation.salutation.,Salutation (None),Dear {givenName} {familyName},Sehr geehrte/r {givenName} {familyName}
+customerConfirmation.salutation.none,Salutation (None),Dear {givenName} {familyName},Hallo {givenName} {familyName}
 customerConfirmation.message,Message,Your contact request has been received and will be processed shortly.,vielen Dank für Ihre Anfrage an HOERBIGER.<br /><br />Wir kümmern uns um Ihr Anliegen und melden uns so bald wie möglich.
 customerConfirmation.closing,Closing,"Yours sincerely,<br />HOERBIGER",Viele Grüße<br />Ihr HOERBIGER-Team
 form.label.salutation,salutation,salutation,Anrede
@@ -43,3 +43,4 @@ form.placeholder.customerGroup,select customer group,select customer group,Anwen
 form.label.applicationWorld,applicationWorld,Which area is your company most likely to be assigned to?,Welchem Gebiet ist Ihr Unternehmen am ehesten zuzuordnen?
 form.placeholder.applicationWorld,select applicationWorld,select applicationWorld,Gebiet auswählen
 form.content.fillRequiredFields,Fill required fields,* Fill these fields,* Felder müssen ausgefüllt sein
+form.submit,Submit label,submit request,Anfrage absenden

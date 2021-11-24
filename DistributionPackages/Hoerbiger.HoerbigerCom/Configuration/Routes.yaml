@@ -10,3 +10,4 @@
     '@action':     'send'
     '@format':     'json'
   httpMethods: ['POST']
+  appendExceedingArguments: true

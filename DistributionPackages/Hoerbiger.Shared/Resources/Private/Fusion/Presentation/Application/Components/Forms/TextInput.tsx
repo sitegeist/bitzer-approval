@@ -8,7 +8,7 @@ type TextInputProps = {
 	placeholder?: string;
 	name: string;
 	initialValue?: string;
-	validate?: () => string|undefined;
+	validate?: (val: string) => string|undefined;
 };
 export const TextInput = (props: TextInputProps): JSX.Element => (
 	<Field

@@ -10,10 +10,13 @@ export interface FormOptions {
 }
 
 export interface ApplicationData {
+	csrfProtectionToken: string;
 	language: string;
 	targetUri: string;
 	labels: Labels;
 	options: FormOptions;
+	onSuccess: () => void;
+	onFail: () => void;
 }
 
 export interface RequestData {

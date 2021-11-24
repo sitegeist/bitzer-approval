@@ -31,10 +31,10 @@ final class ContactRequestController extends RestController
      */
     protected $viewFormatToObjectNameMap = ['json' => 'Neos\Flow\Mvc\View\JsonView'];
 
-    public function sendAction(string $command): void
+    public function sendAction(): void
     {
         $this->contactRequestCommandHandler->handleSendContactRequest(
-            SendContactRequest::fromJsonString($command)
+            SendContactRequest::fromJsonString((string)$this->request->getHttpRequest()->getBody())
         );
     }
 }

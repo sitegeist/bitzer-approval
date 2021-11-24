@@ -3,6 +3,7 @@ import cx from "classnames";
 import {Field, FieldInputProps, FieldRenderProps} from "react-final-form";
 
 import {Error, Label} from "./";
+import {StampedeIcon} from "../";
 import {SelectboxOption} from "../../Definitions";
 import {Hooks} from "../../Utils";
 
@@ -67,16 +68,17 @@ export const Selectbox = (props: SelectboxProps): JSX.Element => {
 								}
 							</span>
 						</div>
-						{/*
-							<Icon name="ChevronDown" spin={isOpen}/>
-						*/}
+						<StampedeIcon
+							iconName="chevronDown"
+							spin={isOpen}
+						/>
 					</div>
 					<Error {...meta}/>
 					{
 						isOpen && (
 							<div className={cx(
 								"bg-light absolute top-full left-0 right-0 border border-brand rounded-b-ch-xs border-t-0 pt-2 -translate-y-2",
-								"overflow-y-auto max-h-[240px]"
+								"overflow-y-auto max-h-[250px]"
 							)}>
 								{
 									options.map(({key, value}) => (

@@ -22,6 +22,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -97,9 +98,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
+                Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
-                    ContentContainerVariant::regular(),
-                    (new ContactFormFactory())->create($site, $language)
+                    ContentContainerVariant::blank(),
+                    (new ContactFormFactory())->create(
+                        $site,
+                        $language,
+                        $inBackend,
+                        Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonsuccess')), 'Hoerbiger.HoerbigerCom:ContentSlot'),
+                        Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonfail')), 'Hoerbiger.HoerbigerCom:ContentSlot')
+                    )
                 )
             ]), $identity),
             $this->siteFooterFactory->forDocument($contactPage, $site)

@@ -25,11 +25,6 @@ export const TextArea = (props: TextAreaProps): JSX.Element => (
 					placeholder={props.placeholder}
 				/>
 				<Error {...meta}/>
-				{(meta.error || meta.submitError) && meta.touched && (
-					<span className="absolute top-full left-0 text-brand uppercase px-ch font-sans-bold">
-						{meta.error || meta.submitError}
-					</span>
-				)}
 			</div>
 		)}
 	</Field>

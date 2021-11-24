@@ -11,6 +11,8 @@ use Hoerbiger\HoerbigerCom\Domain\Contact\Salutation;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeAggregateIdentifier;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PhpParser\Node\Expr\Cast\Bool_;
 
 /**
  * @Flow\Proxy(false)
@@ -33,6 +35,12 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
      */
     private array $labels;
 
+    private SlotInterface $successContent;
+
+    private SlotInterface $failContent;
+
+    private bool $isInBackend;
+
     /**
      * @param array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|Salutation|string>> $options
      * @param array<string,string> $labels
@@ -42,13 +50,19 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
         string $language,
         Uri $targetUri,
         array $options,
-        array $labels
+        array $labels,
+        SlotInterface $successContent,
+        SlotInterface $failContent,
+        bool $isInBackend
     ) {
         $this->csrfProtectionToken = $csrfProtectionToken;
         $this->language = $language;
         $this->targetUri = $targetUri;
         $this->options = $options;
         $this->labels = $labels;
+        $this->successContent = $successContent;
+        $this->failContent = $failContent;
+        $this->isInBackend = $isInBackend;
     }
 
     public function getApplicationData(): string
@@ -60,5 +74,20 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
             'options' => $this->options,
             'labels' => $this->labels
         ]) ?: '{}';
+    }
+
+    public function getSuccessContent(): SlotInterface
+    {
+        return $this->successContent;
+    }
+
+    public function getFailContent(): SlotInterface
+    {
+        return $this->failContent;
+    }
+
+    public function getIsInBackend(): bool
+    {
+        return $this->isInBackend;
     }
 }

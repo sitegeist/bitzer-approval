@@ -20,6 +20,8 @@ use Neos\Flow\I18n\Locale;
 use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Flow\Security\Context as SecurityContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 
 final class ContactFormFactory extends AbstractComponentPresentationObjectFactory
@@ -48,14 +50,23 @@ final class ContactFormFactory extends AbstractComponentPresentationObjectFactor
      */
     protected $securityContext;
 
-    public function create(TraversableNodeInterface $site, string $language): ContactForm
+    public function create(
+        TraversableNodeInterface $site,
+        string $language,
+        bool $inBackend,
+        SlotInterface $contentOnSuccess,
+        SlotInterface $contentOnFail
+    ): ContactForm
     {
         return new ContactForm(
             $this->securityContext->getCsrfProtectionToken(),
             $language,
             $this->createTargetUri(),
             $this->createOptions($site, $language),
-            $this->createLabels($site, $language)
+            $this->createLabels($site, $language),
+            $contentOnSuccess,
+            $contentOnFail,
+            $inBackend
         );
     }
 

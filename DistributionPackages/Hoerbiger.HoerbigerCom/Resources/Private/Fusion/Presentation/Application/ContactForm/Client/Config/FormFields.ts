@@ -1,12 +1,13 @@
 import {SelectboxOption} from "@hoerbiger/shared/Resources/Private/Fusion/Presentation/Application/Definitions";
 import {Labels, FormOptions} from "../Definitions";
 
-type FormFieldConfig = {
+export type FormFieldConfig = {
 	name: string;
 	label: string;
 	placeholder?: string;
 	options?: SelectboxOption[];
 	initialValue?: string;
+	validate?: (val: string) => string|undefined;
 };
 
 const REGEXP_EMAIL = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
@@ -32,102 +33,105 @@ export const initFormFields = (labels: Labels, formOptions: FormOptions): (field
 	const errorFor = (key: string) => getLabelFor(`form.error.${key}`);
 
 	return (fieldName: string) => {
+		const FIELDS: {[fieldName: string]: () => FormFieldConfig} = {
+			givenName: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+				validate: required(errorFor(fieldName)),
+			}),
+			familyName: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+				validate: required(errorFor(fieldName)),
+			}),
+			emailAddress: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+				validate: required(errorFor(fieldName), REGEXP_EMAIL),
+			}),
+			worksFor: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+			}),
+			telephone: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+			}),
+			streetAddress: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+			}),
+			postalCode: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+			}),
+			addressLocality: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+			}),
+			message: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+				validate: required(errorFor(fieldName)),
+			}),
+			salutation: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				options: [
+					...formOptions.salutations.map(key => ({
+						key,
+						value: getLabelFor(`${fieldName}.${key}`),
+					})),
+					{
+						key: "_",
+						value: getLabelFor(`${fieldName}.none`),
+					},
+				],
+				initialValue: formOptions.salutations[0],
+			}),
+			customerGroup: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+				options: formOptions.customerGroups.map(key => ({
+					key,
+					value: getLabelFor(`${fieldName}.${key}`),
+				})),
+				initialValue: "",
+			}),
+			applicationWorld: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				placeholder: placeholderFor(fieldName),
+				options: formOptions.applicationWorlds.map(key => ({
+					key,
+					value: getLabelFor(`${fieldName}.${key}`),
+				})),
+				initialValue: "",
+			}),
+			addressCountry: () => ({
+				name: fieldName,
+				label: labelFor(fieldName),
+				options: formOptions.addressCountries.map(key => ({
+					key,
+					value: getLabelFor(`${fieldName}.${key}`),
+				})),
+				initialValue: formOptions.addressCountries[0] ?? "",
+				validate: required(errorFor(fieldName)),
+			}),
+		};
+
 		try {
-			return {
-				givenName: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName),
-					validate: required(errorFor(fieldName)),
-				},
-				familyName: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName),
-					validate: required(errorFor(fieldName)),
-				},
-				emailAddress: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName),
-					validate: required(errorFor(fieldName), REGEXP_EMAIL),
-				},
-				worksFor: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName)
-				},
-				telephone: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName)
-				},
-				streetAddress: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName)
-				},
-				postalCode: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName)
-				},
-				addressLocality: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName)
-				},
-				message: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName)
-				},
-				salutation: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					options: [
-						...formOptions.salutations.map(key => ({
-							key,
-							value: getLabelFor(`${fieldName}.${key}`),
-						})),
-						{
-							key: "_",
-							value: getLabelFor(`${fieldName}.none`),
-						},
-					],
-					initialValue: formOptions.salutations[0],
-				},
-				customerGroup: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName),
-					options: formOptions.customerGroups.map(key => ({
-						key,
-						value: getLabelFor(`${fieldName}.${key}`),
-					})),
-					initialValue: "",
-				},
-				applicationWorld: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					placeholder: placeholderFor(fieldName),
-					options: formOptions.applicationWorlds.map(key => ({
-						key,
-						value: getLabelFor(`${fieldName}.${key}`),
-					})),
-					initialValue: "",
-				},
-				addressCountry: {
-					name: fieldName,
-					label: labelFor(fieldName),
-					options: formOptions.addressCountries.map(key => ({
-						key,
-						value: getLabelFor(`${fieldName}.${key}`),
-					})),
-					initialValue: formOptions.addressCountries[0] ?? "",
-					validate: required(errorFor(fieldName))
-				},
-			}[fieldName] as FormFieldConfig;
+			return FIELDS[fieldName]() as FormFieldConfig;
 		} catch (e) {
 			console.error(e);
 			throw new Error(`Didn't find a form field config for ${fieldName}.`);
