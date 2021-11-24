@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom:Email.ContactRequest.CustomerConfirmation) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <p>{salutation}</p>
+        <p>{message}</p>
+        <p>{closing}</p>
+    `
+}
