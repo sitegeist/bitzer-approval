@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Link;
 
 /*
@@ -91,6 +94,17 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
     {
         return new self(
             LinkVariant::label(),
+            $this->href,
+            $this->target,
+            $this->rel,
+            $this->content
+        );
+    }
+
+    public function asPlainLabel(): self
+    {
+        return new self(
+            LinkVariant::plainLabel(),
             $this->href,
             $this->target,
             $this->rel,

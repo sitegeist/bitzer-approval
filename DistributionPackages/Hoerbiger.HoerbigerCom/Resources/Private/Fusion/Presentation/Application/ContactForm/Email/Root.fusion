@@ -1,0 +1,5 @@
+include: resource://Neos.Fusion/Private/Fusion/Root.fusion
+include: '*.fusion'
+
+customerConfirmation = Hoerbiger.HoerbigerCom:Email.ContactRequest.CustomerConfirmation
+providerNotification = Hoerbiger.HoerbigerCom:Email.ContactRequest.ProviderNotification
