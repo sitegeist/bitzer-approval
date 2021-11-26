@@ -15,11 +15,16 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
             mainNavigation = '- Add Slot Content -'
             search = '- Add Slot Content -'
             languageNavigation = '- Add Slot Content -'
+            rootLevelIcon {
+                collectionName = 'shared'
+                iconName = 'chevronDown'
+            }
         }
     }
     renderer = afx`
-        <header class="w-full bg-light text-light-contrast border-b border-neutral">
-            <div class="max-w-content-full mx-auto px-md py-xs flex items-center">
+        <header class="w-full bg-light text-light-contrast border-b border-neutral z-header">
+            <div class="max-w-content-full mx-auto px-md flex items-center justify-between">
+                <!-- HOMELINK + LOGO -->
                 <a
                     class="contents"
                     id="logoLink"
@@ -30,19 +35,102 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         id="logo"
                         class="h-full max-h-[75px] max-w-[60vw]"
                         src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
-                    {...props.logo}
+                        {...props.logo}
                     />
                 </a>
 
-                <dl>
-                    <dt>mainNavigation:</dt>
-                    <dd>
+                <div class="flex items-center space-x-xs">
+                    <!-- MAINNAVIGATION -->
+                    <div class="hidden menuToggle:flex self-end translate-y-[-26px] space-x-xs uppercase font-sans-bold z-50">
                         <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
-                            <Hoerbiger.Shared:Block.NavigationItem presentationObject={item} />
+                            <div class="relative group z-10 hover:z-20">
+                                <div class="px-2 grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
+                                    <Neos.Fusion:Augmenter
+                                        data-touch-hover="1"
+                                        class="relative after:absolute after:bottom-0 after:w-full after:h-1 after:bg-brand after:translate-y-[26px]"
+                                        class.@if.1={item.isActive}
+                                    >
+                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                    </Neos.Fusion:Augmenter>
+                                    <div class="text-brand group-hover:-rotate-180 origin-center duration-500 w-max">
+                                        <Hoerbiger.Shared:Block.Icon
+                                            @if.1={item.subItems}
+                                            presentationObject={presentationObject.rootLevelIcon}
+                                        />
+                                    </div>
+                                </div>
+                                <div
+                                    @if.1={item.subItems}
+                                    class={[
+                                        "absolute top-full left-minus-xs w-[350px] py-ch px-xs",
+                                        "opacity-0 pointer-events-none translate-y-5 duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0",
+                                        "bg-light text-light-contrast shadow-submenu divide-y divide-light-contrast leading-tight"
+                                    ]}
+                                >
+                                    <Neos.Fusion:Loop items={item.subItems}>
+                                        <div class="py-ch px-2 hover:bg-neutral-lighter grid gap-x-ch-xs grid-cols-2-1fr-icon items-center">
+                                            <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                            <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.subLevelIcon}/>
+                                        </div>
+                                    </Neos.Fusion:Loop>
+                                </div>
+                            </div>
                         </Neos.Fusion:Loop>
-                    </dd>
-                </dl>
+                    </div>
 
+                    <div class="flex items-center space-x-2 z-30">
+                        <!-- SEARCH -->
+                        <div class="bg-neutral-lighter w-[100px] h-[100px] relative">
+                            <div class="absolute inset-0 grid place-items-center">Search</div>
+                        </div>
+
+                        <!-- LANGUAGES -->
+                        <div class="hidden menuToggle:flex bg-neutral-lighter w-[100px] h-[100px] relative">
+                            <div class="absolute inset-0 grid place-items-center">Lang</div>
+                        </div>
+
+                        <!-- OFFCANVAS -->
+                        <div
+                            id="offcanvas"
+                            class="flex menuToggle:hidden bg-neutral-lighter w-[100px] h-[100px] relative group"
+                        >
+                            <a
+                                href="#offcanvas"
+                                class="absolute inset-0 grid place-items-center"
+                            >
+                                <div class="w-[1.5em] h-[1.5em]">
+                                    <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"></path></svg>
+                                </div>
+                            </a>
+
+                            <div class={["
+                                fixed top-0 h-[100vh] overflow-y-auto w-full -right-full overflow-y-auto",
+                                "offcanvas:w-offcanvas offcanvas:right-offcanvas",
+                                "group-target:right-0 transition-right duration-500",
+                                "bg-neutral-darker border-l-4 border-brand text-light flex flex-col p-sm space-y-xs uppercase"
+                            ]}>
+                                <a href="#" class="w-touch h-touch text-light flex justify-stretch items-stretch">
+                                    <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
+                                </a>
+
+                                <nav class="flex flex-col font-sans-bold">
+                                    <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
+                                        <div class="min-h-touch">
+                                            <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                        </div>
+                                        <Neos.Fusion:Loop @if.1={item.subItems} items={item.subItems}>
+                                            <div class="min-h-touch ml-xs">
+                                                <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                            </div>
+                                        </Neos.Fusion:Loop>
+                                    </Neos.Fusion:Loop>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+<!--
                 <dl>
                     <dt>search:</dt>
                     <dd>
@@ -57,6 +145,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </Neos.Fusion:Loop>
                     </dd>
                 </dl>
+        -->
             </div>
         </header>
     `

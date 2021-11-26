@@ -5,6 +5,8 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItem;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
@@ -41,9 +43,11 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         ContentContext $subgraph
     ): SiteHeaderInterface {
         return new SiteHeader(
-            $this->getChildNavigationNodes($site, $document,1),
+            $this->getChildNavigationNodes($site, $document, 1),
             Value::fromString('Search'),
-            $this->getLanguageNavigationItems($document, $subgraph)
+            $this->getLanguageNavigationItems($document, $subgraph),
+            new Icon("shared", "chevronDown", IconSize::size_1_5()),
+            new Icon("shared", "arrowRight", IconSize::size_1())
         );
     }
 
@@ -64,36 +68,35 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $currentDocumentNode,
         int $currentLevel,
         int $maxDepth = 2
-    ) {
-        $menuItems = [];
-
+    ): ?NavigationItems {
         if ($currentLevel <= $maxDepth) {
+            $menuItems = [];
             $childNodes = $this->findChildNodesByNodeTypeFilterString($node, 'Neos.Neos:Document');
 
-            $currentLevel++;
-
             foreach ($childNodes as $childNode) {
-
-                /** @var Node  $childNode*/
+                /** @var Node $childNode*/
                 if (!$childNode->isHiddenInIndex()) {
                     try {
                         $menuItems[] = new NavigationItem(
-                            $this->linkFactory->forLinkToDocument($childNode),
+                            $this->linkFactory->forLinkToDocument($childNode)->asPlainLabel(),
                             $this->getChildNavigationNodes(
                                 $childNode,
                                 $currentDocumentNode,
-                                $currentLevel
+                                $currentLevel + 1
                             ),
                             $this->isParentNodeOfCurrentDocument($childNode, $currentDocumentNode)
                         );
 
-                    } catch (Exception $e) {
-                    }
+                    } catch (Exception $e) {}
                 }
+            }
+
+            if (count($menuItems)) {
+                return new NavigationItems($menuItems);
             }
         }
 
-        return new NavigationItems($menuItems);
+        return null;
     }
 
     protected function isParentNodeOfCurrentDocument(TraversableNodeInterface $childDocument, TraversableNodeInterface $currentDocument): bool
