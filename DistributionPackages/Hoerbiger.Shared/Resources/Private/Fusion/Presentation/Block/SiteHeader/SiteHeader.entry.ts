@@ -1,5 +1,6 @@
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
+		/* Handle hover-flyouts on touch-devices. */
 		Array.from($node.querySelectorAll("[data-touch-hover]")).forEach($link => {
 			$link
 				.addEventListener("touchstart", (e: Event) => {

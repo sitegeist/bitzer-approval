@@ -85,8 +85,27 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </div>
 
                         <!-- LANGUAGES -->
-                        <div class="hidden menuToggle:flex bg-neutral-lighter w-[100px] h-[100px] relative">
-                            <div class="absolute inset-0 grid place-items-center">Lang</div>
+                        <div class="hidden menuToggle:flex w-[100px] h-[100px] relative text-neutral-contrast">
+                            <div class="absolute inset-0 grid grid-col-1 gap-2">
+                                <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
+                                    <div class={[
+                                        "flex items-center justify-center font-sans-bold text-center",
+                                        item.isActive ? "bg-neutral" : "bg-neutral-lighter hover:bg-neutral"
+                                    ]}>
+                                        <Neos.Fusion:Augmenter
+                                            @if.1={!item.isActive}
+                                            class="w-full h-full flex items-center justify-center"
+                                        >
+                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
+                                        </Neos.Fusion:Augmenter>
+                                        <span @if.1={item.isActive}>
+                                            <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                                                presentationObject={item.link.content}
+                                            />
+                                        </span>
+                                    </div>
+                                </Neos.Fusion:Loop>
+                            </div>
                         </div>
 
                         <!-- OFFCANVAS -->

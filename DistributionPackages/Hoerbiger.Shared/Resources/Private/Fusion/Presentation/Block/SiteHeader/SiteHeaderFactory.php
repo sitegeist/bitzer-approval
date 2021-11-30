@@ -112,7 +112,6 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         $languages = [];
 
         foreach ($this->contentDimensionPresetSource->getAllPresets()['language']['presets'] as $localeIdentifier => $preset) {
-
             $contextProperties = $subgraph->getProperties();
 
             $contextProperties['dimensions'] = [
@@ -131,16 +130,8 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             $identifier = strtoupper($localeIdentifier);
 
             $language = [$this->uriService->getNodeUri($variant), $identifier];
-
-            $currentLanguageIdentifier === $identifier ?
-                array_unshift($languages, $language) :
-                $languages[] = $language;
-
+            $languages[] = $language;
         }
-        $current = $languages[0];
-
-        array_shift($languages);
-
         $children = [];
 
         foreach ($languages as $language) {
@@ -150,19 +141,10 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
                     $language[1]
                 ),
                 null,
-                false
+                $currentLanguageIdentifier === $language[1]
             );
         }
 
-        return new NavigationItems([
-            new NavigationItem(
-                $this->linkFactory->forLanguageMenuItem(
-                    $current[0],
-                    $current[1]
-                ),
-                new NavigationItems($children),
-                true
-            )
-        ]);
+        return new NavigationItems($children);
     }
 }
