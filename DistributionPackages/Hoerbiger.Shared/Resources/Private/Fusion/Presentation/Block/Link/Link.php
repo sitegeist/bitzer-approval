@@ -81,30 +81,28 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
 
     public function asContainer(): self
     {
-        return new self(
-            LinkVariant::container(),
-            $this->href,
-            $this->target,
-            $this->rel,
-            $this->content
-        );
+        return $this->withLinkVariant(LinkVariant::container());
     }
 
     public function forLabel(): self
     {
-        return new self(
-            LinkVariant::label(),
-            $this->href,
-            $this->target,
-            $this->rel,
-            $this->content
-        );
+        return $this->withLinkVariant(LinkVariant::label());
     }
 
     public function asPlainLabel(): self
     {
+        return $this->withLinkVariant(LinkVariant::plainLabel());
+    }
+
+    public function asIconLabel(): self
+    {
+        return $this->withLinkVariant(LinkVariant::iconLabel());
+    }
+
+    public function withLinkVariant(LinkVariant $variant): self
+    {
         return new self(
-            LinkVariant::plainLabel(),
+            $variant,
             $this->href,
             $this->target,
             $this->rel,
