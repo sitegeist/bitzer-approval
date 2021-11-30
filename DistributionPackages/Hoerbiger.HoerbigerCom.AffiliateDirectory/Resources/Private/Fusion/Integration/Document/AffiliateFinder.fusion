@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder) <  prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${AffiliateDirectory.Page.forAffiliateFinder(site, documentNode, documentNode.context.inBackend, site.context)}
+        }
+    }
+}

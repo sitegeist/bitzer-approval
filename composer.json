@@ -16,6 +16,7 @@
         "hoerbiger/hoerbigercom-successstories": "*",
         "hoerbiger/hoerbigercom-pressarchive": "*",
         "hoerbiger/hoerbigercom-application-worlds": "*",
+        "hoerbiger/hoerbigercom-affiliatedirectory": "*",
         "internezzo/childreload": "^1.0"
     },
     "require-dev": {

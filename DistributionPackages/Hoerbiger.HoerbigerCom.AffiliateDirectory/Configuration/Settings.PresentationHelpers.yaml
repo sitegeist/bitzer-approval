@@ -1,0 +1,5 @@
+Neos:
+  Fusion:
+    defaultContext:
+      AffiliateDirectory.Page: Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Layout\Page\PageFactory
+      AffiliateDirectory.AffiliateFinder: Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\AffiliateFinderFactory

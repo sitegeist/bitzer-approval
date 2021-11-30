@@ -1,0 +1,8 @@
+prototype(Hoerbiger.HoerbigerCom.AffiliateDirectory:Application.AffiliateFinder) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\AffiliateDirectory\\Presentation\\Application\\AffiliateFinder\\AffiliateFinderInterface'
+
+    renderer = afx`
+        <div>Coming Soon...</div>
+        <script type="application/json">{presentationObject.applicationData}</script>
+    `
+}
