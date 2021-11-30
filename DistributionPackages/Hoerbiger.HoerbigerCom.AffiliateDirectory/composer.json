@@ -3,7 +3,9 @@
     "type": "neos-hoerbiger",
     "version": "1.0.0",
     "require": {
-        "hoerbiger/hoerbigercom": "*"
+        "hoerbiger/hoerbigercom": "*",
+        "phpoffice/phpspreadsheet": "~1.18.0",
+        "nezaniel/geographiclibrary-googlemapsadapter": "4.0.x-dev"
     },
     "autoload": {
         "psr-4": {

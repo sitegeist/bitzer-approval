@@ -57,7 +57,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                (new AffiliateFinderFactory())->create()
+                (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0])
             ]), $identity),
             $this->siteFooterFactory->forDocument($affiliateFinder, $site)
         );

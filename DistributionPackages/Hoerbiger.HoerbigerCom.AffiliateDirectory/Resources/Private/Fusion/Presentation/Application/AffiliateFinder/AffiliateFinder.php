@@ -16,12 +16,12 @@ final class AffiliateFinder extends AbstractComponentPresentationObject implemen
     private Affiliates $affiliates;
     private string $googleMapsApiKey;
     /**
-     * @var array<int,string>
+     * @var array<string,string>
      */
     private array $labels;
 
     /**
-     * @param array<int,string> $labels
+     * @param array<string,string> $labels
      */
     public function __construct(
         Affiliates $affiliates,
