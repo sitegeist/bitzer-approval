@@ -17,13 +17,13 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
         <div
             class={[
                 "[Layout.Page]",
-                "flex flex-col min-h-screen",
+                "flex flex-col min-h-screen w-full max-w-[100vw] overflow-hidden",
                 "text-light-contrast bg-light font-sans-regular"
             ]}
             style="hyphens:auto;word-break:normal;"
         >
             <Hoerbiger.Shared:Block.SiteHeader presentationObject={presentationObject.siteHeader} />
-            <main class="flex-grow flex flex-col items-stretch">
+            <main class="flex-grow flex flex-col items-stretch z-content">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </main>
             <Hoerbiger.Shared:Block.SiteFooter presentationObject={presentationObject.siteFooter} />

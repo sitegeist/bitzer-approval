@@ -40,7 +40,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $this->uriService->getNodeUri($document),
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
-            Value::fromString($document->getLabel())
+            Value::fromString($document->getProperty("titleOverride") ?? $document->getLabel())
         );
     }
 
@@ -60,9 +60,9 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         return new Link(
             LinkVariant::touchIcon(),
             new Uri($socialMediaLink),
-            LinkTarget::blank(),
+            LinkTarget::self(),
             null,
-            new Icon('shared', strtolower($iconName))
+            new Icon('shared', strtolower($iconName), null)
         );
     }
 
@@ -76,6 +76,17 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
             Value::fromString($document->getLabel())
+        );
+    }
+
+    public function forLanguageMenuItem(Uri $documentUri, string $localeIdentifier): Link
+    {
+        return new Link(
+            LinkVariant::touchIcon(),
+            $documentUri,
+            LinkTarget::self(),
+            null,
+            Value::fromString($localeIdentifier)
         );
     }
 
