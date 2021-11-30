@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\DummyImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
+use Sitegeist\Kaleidoscope\EelHelpers\ResourceImageSourceHelper;
 
 final class ImageSourceFactory extends AbstractComponentPresentationObjectFactory
 {

@@ -24,7 +24,8 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.isLabel && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl",
                 presentationObject.variant.isTouchIcon && "flex items-center h-full max-h-touch",
                 presentationObject.variant.isSiteFooter && "text-light uppercase font-semibold min-h-touch flex items-center whitespace-nowrap",
-                presentationObject.variant.isPlainLabel && "min-h-touch flex items-center"
+                presentationObject.variant.isPlainLabel && "min-h-touch flex items-center",
+                presentationObject.variant.isIconLabel && "min-h-touch flex items-center justify-between"
             ]}
         >
             <Neos.Fusion:Augmenter

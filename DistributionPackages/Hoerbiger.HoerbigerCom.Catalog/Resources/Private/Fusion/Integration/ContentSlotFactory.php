@@ -12,6 +12,7 @@ use Hoerbiger\Shared\Presentation\Block\Card\ProductCard\ProductCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -95,7 +96,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 'span',
                                 Value::fromString($productDocument->getProperty('headline') ?: '')
                             ),
-                            new Icon('shared', 'arrowRight')
+                            new Icon('shared', 'arrowRight', IconSize::size_1_5())
                         ], function (SlotInterface $slot) {
                             return $slot;
                         })

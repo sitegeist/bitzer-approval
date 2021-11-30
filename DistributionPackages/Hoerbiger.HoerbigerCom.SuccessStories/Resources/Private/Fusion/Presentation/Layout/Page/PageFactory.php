@@ -7,6 +7,7 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Page;
 
 use Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Application\ArticleOverview\ArticleOverviewFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -38,16 +39,20 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteFooterFactory $siteFooterFactory;
 
+    private SiteHeaderFactory $siteHeaderFactory;
+
     public function __construct(
         ArticleOverviewFactory $articleOverviewFactory,
         StageFactory $stageFactory,
         SuccessStoriesStageFactory $successStoriesStageFactory,
-        SiteFooterFactory $siteFooterFactory
+        SiteFooterFactory $siteFooterFactory,
+        SiteHeaderFactory $siteHeaderFactory
     ) {
         $this->articleOverviewFactory = $articleOverviewFactory;
         $this->stageFactory = $stageFactory;
         $this->successStoriesStageFactory = $successStoriesStageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
+        $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
     public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): PageInterface
@@ -63,7 +68,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($magazine, $subgraph);
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $magazine,
+                $site,
+                $subgraph
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
@@ -104,7 +113,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $document,
+                $site,
+                $subgraph
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
