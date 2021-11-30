@@ -82,6 +82,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         <!-- SEARCH -->
                         <div class="bg-neutral-lighter w-[100px] h-[100px] relative">
                             <div class="absolute inset-0 grid place-items-center">Search</div>
+                            <!-- <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.search} /> -->
                         </div>
 
                         <!-- LANGUAGES -->
@@ -148,23 +149,6 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </div>
                     </div>
                 </div>
-
-<!--
-                <dl>
-                    <dt>search:</dt>
-                    <dd>
-                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.search} />
-                    </dd>
-                </dl>
-                <dl>
-                    <dt>languageNavigation:</dt>
-                    <dd>
-                        <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
-                            <Hoerbiger.Shared:Block.NavigationItem presentationObject={item} />
-                        </Neos.Fusion:Loop>
-                    </dd>
-                </dl>
-        -->
             </div>
         </header>
     `
