@@ -1,6 +1,6 @@
 import {filter} from "rxjs/operators";
 
-import {NeosEvent} from "../../Application/Defintions";
+import {NeosEvent} from "../../Application/Definitions";
 import {getStreamOfNeosEvents, NEOS_NODE_SELECTED} from "../../Application/Utils/getStreamOfNeosEvents";
 
 export default ($node: Element): void => {

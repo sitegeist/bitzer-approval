@@ -27,7 +27,7 @@ export const Client = ({articles, labels}: ApplicationData): JSX.Element => {
 								"whitespace-nowrap border border-brand uppercase font-sans-bold",
 								filter === currentFilter
 									? "bg-brand text-brand-contrast"
-									: "bg-light bg-light-contrast cursor-pointer"
+									: "bg-light text-light-contrast cursor-pointer"
 							)}
 							onClick={() => setCurrentFilter(filter)}
 						>

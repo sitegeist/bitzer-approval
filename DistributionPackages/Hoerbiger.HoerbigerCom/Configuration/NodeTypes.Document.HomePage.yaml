@@ -20,6 +20,8 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
     chronicle:
       type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
+    contact:
+      type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:

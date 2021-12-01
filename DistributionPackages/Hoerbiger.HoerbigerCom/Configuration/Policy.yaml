@@ -1,0 +1,16 @@
+#                                                        #
+# Security policy for the Hoerbiger.HoerbigerCom package #
+#                                                        #
+
+privilegeTargets:
+
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'Hoerbiger.HoerbigerCom:ContactRequest':
+      matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\ContactRequestController->sendAction())'
+
+roles:
+  'Neos.Flow:Everybody':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:ContactRequest'
+        permission: GRANT
