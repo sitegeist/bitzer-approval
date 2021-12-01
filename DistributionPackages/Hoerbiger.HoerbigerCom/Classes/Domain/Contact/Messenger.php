@@ -185,7 +185,8 @@ final class Messenger
             'text/html'
         );
         $message->setFrom('noreply@hoerbiger.com');
-        $message->setTo($this->resolveProviderRecipient($command));
+        $fullName = $command->getGivenName() . ' ' . $command->getFamilyName();
+        $message->setTo([$command->getEmailAddress() => $fullName]);
 
         $message->send();
     }
