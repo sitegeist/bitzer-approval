@@ -162,7 +162,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Grid(
-                GridVariant::twoColumnsGap(),
+                GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     TraversableNodes::fromArray($node->getProperty('documents') ?: []),
                     function (TraversableNodeInterface $document) use ($inBackend)  {
@@ -182,7 +182,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $columns = Columns::from($textNode->getProperty('columns') ?: Columns::VALUE_MAX_TWO);
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            $columns->getIsMaxOne()
+                ? ContentContainerVariant::tight()
+                : ContentContainerVariant::regular(),
             new Stack(
                 StackVariant::xs(),
                 Collection::fromIterable(array_filter([
