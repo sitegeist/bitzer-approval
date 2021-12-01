@@ -103,7 +103,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         new Headline(
                             HeadlineVariant::regular(),
                             HeadlineType::h2(),
-                            Value::fromString((string)$year)
+                            Value::fromString((string)$year ?: '')
                         ),
                         new Grid(
                             GridVariant::oneColumn(),
