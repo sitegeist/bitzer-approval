@@ -122,10 +122,14 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
                 'language' => reset($preset['values'])
             ];
 
+            /** @var ContentContext $contentContext */
             $contentContext = $this->contentContextFactory->create($contextProperties);
 
             /** @var TraversableNodeInterface $variant */
-            $variant = $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier());
+            /** @phpstan-ignore-next-line */
+            $variant = $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier())
+                ? $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier())
+                : $contentContext->getCurrentSiteNode();
 
             $identifier = strtoupper($localeIdentifier);
 
