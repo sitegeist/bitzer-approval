@@ -46,7 +46,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ?: null;
 
         $textContent = $targetNode->getProperty('slider__preview__description')
-            ? Value::fromString($targetNode->getProperty('slider__preview__description'))
+            ? Value::fromString($targetNode->getProperty('slider__preview__description') ?: '')
             : null;
 
         $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');

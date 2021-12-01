@@ -95,7 +95,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         $this->uriService->getNodeUri($successStories),
                                         LinkTarget::self(),
                                         null,
-                                        Value::fromString($this->getLabel('list.seeAll'))
+                                        Value::fromString($this->getLabel('list.seeAll') ?: '')
                                     )
                                 ], $identity)
                             ),
@@ -137,7 +137,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                     Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                                                     Value::fromString($applicationWorld->getProperty('previewHeadline')
                                                         ? $applicationWorld->getProperty('previewHeadline')
-                                                        : $applicationWorld->getProperty('title')
+                                                        : $applicationWorld->getProperty('title') ?? ''
                                                     )
                                                 ], $identity)
                                             ),
@@ -148,7 +148,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                             new Button(
                                                 ButtonType::link(),
                                                 ButtonVariant::cta(),
-                                                Value::fromString($this->getLabel('list.learnMore')),
+                                                Value::fromString($this->getLabel('list.learnMore') ?: ''),
                                                 $this->uriService->getNodeUri($successStory),
                                                 '_self',
                                                 null
