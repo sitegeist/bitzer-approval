@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class ContentContainerVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
+    const VARIANT_TIGHT = 'tight';
     const VARIANT_REGULARSM = 'regularSm';
     const VARIANT_REGULARX = 'regularX';
     const VARIANT_BLANK = 'blank';
@@ -36,6 +37,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_REGULAR
+                && $string !== self::VARIANT_TIGHT
                 && $string !== self::VARIANT_REGULARSM
                 && $string !== self::VARIANT_REGULARX
                 && $string !== self::VARIANT_BLANK
@@ -52,6 +54,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function regular(): self
     {
         return self::from(self::VARIANT_REGULAR);
+    }
+
+    public static function tight(): self
+    {
+        return self::from(self::VARIANT_TIGHT);
     }
 
     public static function regularSm(): self
@@ -82,6 +89,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
+    }
+
+    public function getIsTight(): bool
+    {
+        return $this->value === self::VARIANT_TIGHT;
     }
 
     public function getIsRegularSm(): bool
@@ -116,6 +128,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_REGULAR),
+            self::from(self::VARIANT_TIGHT),
             self::from(self::VARIANT_REGULARSM),
             self::from(self::VARIANT_REGULARX),
             self::from(self::VARIANT_BLANK),
