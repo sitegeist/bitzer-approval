@@ -37,6 +37,14 @@ final class Affiliates implements \IteratorAggregate, \Countable, \JsonSerializa
         return new \ArrayIterator($this->affiliates);
     }
 
+    /**
+     * @return array<int,Affiliate>
+     */
+    public function toArray(): array
+    {
+        return $this->affiliates;
+    }
+
     public function count(): int
     {
         return count($this->affiliates);

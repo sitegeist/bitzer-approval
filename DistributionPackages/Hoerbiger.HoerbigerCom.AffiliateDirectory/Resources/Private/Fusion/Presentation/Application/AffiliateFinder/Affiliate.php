@@ -69,6 +69,59 @@ final class Affiliate implements \JsonSerializable
         );
     }
 
+    public function getLegalName(): string
+    {
+        return $this->legalName;
+    }
+
+    public function getStreetAddress(): string
+    {
+        return $this->streetAddress;
+    }
+
+    public function getPostalCode(): string
+    {
+        return $this->postalCode;
+    }
+
+    public function getAddressLocality(): string
+    {
+        return $this->addressLocality;
+    }
+
+    public function getAddressCountry(): string
+    {
+        return $this->addressCountry;
+    }
+
+    public function getEmail(): string
+    {
+        return $this->email;
+    }
+
+    public function getTelephone(): ?string
+    {
+        return $this->telephone;
+    }
+
+    public function getLatitude(): float
+    {
+        return $this->latitude;
+    }
+
+    public function getLongitude(): float
+    {
+        return $this->longitude;
+    }
+
+    /**
+     * @return array<int,string>
+     */
+    public function getTags(): array
+    {
+        return $this->tags;
+    }
+
     /**
      * @return array<string,mixed>
      */

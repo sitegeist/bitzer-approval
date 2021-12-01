@@ -3,3 +3,5 @@ Neos:
     defaultContext:
       AffiliateDirectory.Page: Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Layout\Page\PageFactory
       AffiliateDirectory.AffiliateFinder: Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\AffiliateFinderFactory
+      AffiliateDirectory.JsonLD: Hoerbiger\HoerbigerCom\AffiliateDirectory\Application\JsonLDFactory
+
