@@ -27,7 +27,7 @@ export const Client = (props: ApplicationData): JSX.Element => {
 						"Content-Type": "application/json",
 						"X-CSRF-TOKEN": props.csrfProtectionToken,
 					},
-					body: JSON.stringify(cleanupRequestData(getFieldConfigFor, requestData, props.language)),
+					body: JSON.stringify(cleanupRequestData(requestData, props.language)),
 				});
 
 				if (status === 200) {

@@ -16,6 +16,9 @@ const required = (error: string, pattern?: RegExp) => (val: string) =>
 		? undefined
 		: error;
 
+const NULLABLE_SELECT_OPTION = "_nullable_";
+export const NULLABLE_VALUES = [NULLABLE_SELECT_OPTION];
+
 export const initFormFields = (labels: Labels, formOptions: FormOptions): (fieldName: string) => FormFieldConfig => {
 	const getLabelFor = (key: string) => {
 		let label = labels[key];
@@ -92,7 +95,7 @@ export const initFormFields = (labels: Labels, formOptions: FormOptions): (field
 						value: getLabelFor(`${fieldName}.${key}`),
 					})),
 					{
-						key: "_",
+						key: NULLABLE_SELECT_OPTION,
 						value: getLabelFor(`${fieldName}.none`),
 					},
 				],
@@ -105,7 +108,11 @@ export const initFormFields = (labels: Labels, formOptions: FormOptions): (field
 				options: formOptions.customerGroups.map(key => ({
 					key,
 					value: getLabelFor(`${fieldName}.${key}`),
-				})),
+				})).concat({
+					key: NULLABLE_SELECT_OPTION,
+					value: getLabelFor(`form.dontknowoption.${fieldName}`)
+				}),
+				validate: required(errorFor(fieldName)),
 				initialValue: "",
 			}),
 			applicationWorld: () => ({
@@ -115,7 +122,11 @@ export const initFormFields = (labels: Labels, formOptions: FormOptions): (field
 				options: formOptions.applicationWorlds.map(key => ({
 					key,
 					value: getLabelFor(`${fieldName}.${key}`),
-				})),
+				})).concat({
+					key: NULLABLE_SELECT_OPTION,
+					value: getLabelFor(`form.dontknowoption.${fieldName}`)
+				}),
+				validate: required(errorFor(fieldName)),
 				initialValue: "",
 			}),
 			addressCountry: () => ({
