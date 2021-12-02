@@ -17,6 +17,7 @@ use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -68,7 +69,7 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                 ButtonType::link(),
                 ButtonVariant::cta(),
                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_button')),
-                $this->uriService->getNodeUri($site), // TODO => Traverse Document.ContactPage.
+                $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('contact'))),
                 "_self",
                 null
             )

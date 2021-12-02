@@ -53,7 +53,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     {
         $link = (new LinkFactory())->forLinkToDocument($document);
 
-        $imageSource = $this->imageSourceFactory->forImageProperty($document, $inBackend, 'preview__image');
+        $imageSource = $this->imageSourceFactory->forPreviewMixin($document, $inBackend);
         $figure = $imageSource
             ? $link->asContainer()->withContent($this->figureFactory->forNavigationCard($imageSource))
             : null;
@@ -159,12 +159,12 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     ? $this->figureFactory->forDownloadCard(
                     $imageSource
                     )
-                    : new Icon('shared', 'pdf');
+                    : new Icon('shared', 'pdf', null);
             case 'ppt':
             case 'pptx':
-                return new Icon('shared', 'powerpoint');
+                return new Icon('shared', 'powerpoint', null);
             default:
-                return new Icon('shared', 'downloadFile');
+                return new Icon('shared', 'downloadFile', null);
         }
     }
 }

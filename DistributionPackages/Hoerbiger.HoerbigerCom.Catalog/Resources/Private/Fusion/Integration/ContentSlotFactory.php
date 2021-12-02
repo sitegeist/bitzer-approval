@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\HoerbigerCom\Catalog\Integration;
 
 /*
@@ -9,6 +12,7 @@ use Hoerbiger\Shared\Presentation\Block\Card\ProductCard\ProductCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -59,7 +63,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     $productListNode->findChildNodes(),
-                    function(TraversableNodeInterface $groupedProduct){
+                    function (TraversableNodeInterface $groupedProduct) {
                         return Content::fromNode(
                             $groupedProduct,
                             'Hoerbiger.HoerbigerCom.Catalog:ContentSlot'
@@ -79,10 +83,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         $products = Collection::fromNodes(
             TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),
-            function(TraversableNodeInterface $productDocument) {
+            function (TraversableNodeInterface $productDocument) {
                 $link = (new LinkFactory())
                     ->forLinkToDocument($productDocument)
-                    ->asContainer();
+                    ->asPlainLabel();
 
                 return $link->withContent(
                     new Grid(
@@ -92,8 +96,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 'span',
                                 Value::fromString($productDocument->getProperty('headline') ?: '')
                             ),
-                            new Icon('shared', 'arrowRight')
-                        ], function(SlotInterface $slot) {
+                            new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                        ], function (SlotInterface $slot) {
                             return $slot;
                         })
                     )

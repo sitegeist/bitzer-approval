@@ -1,7 +1,7 @@
 import {fromEvent, Observable} from "rxjs";
 import {map, mergeWith} from "rxjs/operators";
 
-import {NeosEvent} from "../Defintions";
+import {NeosEvent} from "../Definitions";
 
 export const NEOS_NODE_SELECTED = "Neos.NodeSelected";
 export const NEOS_NODE_CREATED = "Neos.NodeCreated";

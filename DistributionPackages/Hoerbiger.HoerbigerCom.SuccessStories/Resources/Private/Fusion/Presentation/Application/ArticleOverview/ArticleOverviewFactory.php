@@ -66,9 +66,9 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
             'resource://Hoerbiger.HoerbigerCom.SuccessStories/Private/Fusion/Presentation/Application/ArticleOverview/ArticleOverview.translation.csv'
         );
         return array_map(function (TranslationLabel $label): string {
-            return $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+            return (string)$label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
-            ))->getTranslation() ?: $label->getIdentifier();
+            )) ?: $label->getIdentifier();
         }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
     }
 

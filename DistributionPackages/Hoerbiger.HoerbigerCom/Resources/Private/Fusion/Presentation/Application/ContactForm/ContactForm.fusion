@@ -1,0 +1,43 @@
+prototype(Hoerbiger.HoerbigerCom:Application.ContactForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\ContactForm\\ContactFormInterface'
+
+    renderer = afx`
+        <div class="[Application.ContactForm] w-full">
+            <div
+                class={[!presentationObject.isInBackend && "hidden"]}
+                data-select="successContent"
+            >
+                <div
+                    @if.1={presentationObject.isInBackend}
+                    class="w-full bg-neutral-lighter p-2 border-2 border-dashed border-brand/50"
+                >
+                    Danke-Meldung nach erfolgreichem Formular-Versand
+                </div>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.successContent} />
+            </div>
+            <div
+                class={[!presentationObject.isInBackend && "hidden"]}
+                data-select="failContent"
+            >
+                <div
+                    @if.1={presentationObject.isInBackend}
+                    class="w-full bg-neutral-lighter p-2 border-2 border-dashed border-brand/50"
+                >
+                    Hinweis, wenn etwas schiefgelaufen ist
+                </div>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.failContent} />
+            </div>
+            <div
+                data-select="applicationRoot"
+                class="max-w-content-full mx-auto p-md bg-light"
+            >
+                <script
+                    type="application/json"
+                    data-select="applicationData"
+                >
+                    {presentationObject.applicationData}
+                </script>
+            </div>
+        </div>
+    `
+}

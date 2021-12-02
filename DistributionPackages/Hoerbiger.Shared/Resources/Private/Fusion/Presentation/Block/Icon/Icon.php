@@ -17,12 +17,16 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
 
     private string $iconName;
 
+    private ?IconSize $size;
+
     public function __construct(
         string $collectionName,
-        string $iconName
+        string $iconName,
+        ?IconSize $size
     ) {
         $this->collectionName = $collectionName;
         $this->iconName = $iconName;
+        $this->size = $size;
     }
 
     public function getCollectionName(): string
@@ -33,5 +37,10 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
     public function getIconName(): string
     {
         return $this->iconName;
+    }
+
+    public function getSize(): ?IconSize
+    {
+        return $this->size;
     }
 }

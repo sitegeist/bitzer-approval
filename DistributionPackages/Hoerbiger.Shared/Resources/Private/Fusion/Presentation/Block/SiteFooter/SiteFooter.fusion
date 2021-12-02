@@ -13,7 +13,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
     renderer = afx`
         <footer class={[
             "[Block.SiteFooter]",
-            "w-full flex-flex-col items-stretch"
+            "w-full max-w-screen flex-flex-col items-stretch z-content"
         ]}>
             <div
                 @if.1={presentationObject.contactFormLink}

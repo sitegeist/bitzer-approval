@@ -8,6 +8,8 @@ privilegeTargets:
       matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\StuffController->queryAction())'
     'Hoerbiger.HoerbigerCom:MostWanted':
       matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\WantedNodeController->(register)Action())'
+    'Hoerbiger.HoerbigerCom:ContactRequest':
+      matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\ContactRequestController->sendAction())'
 
 roles:
   'Neos.Flow:Everybody':
@@ -17,4 +19,7 @@ roles:
         permission: GRANT
       -
         privilegeTarget: 'Hoerbiger.HoerbigerCom:MostWanted'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:ContactRequest'
         permission: GRANT
