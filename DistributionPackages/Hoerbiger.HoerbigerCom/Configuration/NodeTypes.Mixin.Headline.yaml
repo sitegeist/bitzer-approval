@@ -8,3 +8,7 @@
         inline:
           editorOptions:
             placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
