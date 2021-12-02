@@ -40,7 +40,11 @@ form.placeholder.message,Ask your question or describe your concern here,Ask you
 form.error.message,Error for message,Please enter a message,Bitte teilen Sie uns Ihr Anliegen mit.
 form.label.customerGroup,customerGroup,Who are you?,Wer sind Sie?
 form.placeholder.customerGroup,select customer group,select customer group,Anwendergruppe auswählen
+form.dontknowoption.customerGroup,I dont know my customerGroup,I'm not sure about that,Ich bin mir nicht sicher
+form.error.customerGroup,Error for customerGroup,Please select an option,Bitte wählen Sie eine Option aus.
 form.label.applicationWorld,applicationWorld,Which area is your company most likely to be assigned to?,Welchem Gebiet ist Ihr Unternehmen am ehesten zuzuordnen?
 form.placeholder.applicationWorld,select applicationWorld,select applicationWorld,Gebiet auswählen
+form.dontknowoption.applicationWorld,I dont know the applicationWorld,I'm not sure about that,Ich bin mir nicht sicher
+form.error.applicationWorld,Error for applicationWorld,Please select an option,Bitte wählen Sie eine Option aus.
 form.content.fillRequiredFields,Fill required fields,* Fill these fields,* Felder müssen ausgefüllt sein
 form.submit,Submit label,submit request,Anfrage absenden
