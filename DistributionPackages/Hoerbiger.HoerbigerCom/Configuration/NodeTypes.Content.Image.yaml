@@ -1,7 +1,7 @@
 'Hoerbiger.HoerbigerCom:Content.Image':
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
-    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+    'Hoerbiger.HoerbigerCom:Mixin.ImageWithCaption': true
   ui:
     label: 'Bild'
     icon: image

@@ -7,6 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 
 final class FigureFactory extends AbstractComponentPresentationObjectFactory
@@ -27,7 +28,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100vw',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -40,7 +42,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100vw',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -58,7 +61,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             ]),
             '100vw',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -71,7 +75,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100vw',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -84,7 +89,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -97,11 +103,12 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::contain(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
-    public function forFullWidthImage(ImageSourceHelperInterface $imageSource): Figure
+    public function forFullWidthImage(ImageSourceHelperInterface $imageSource, ?SlotInterface $caption): Figure
     {
         return new Figure(
             $imageSource,
@@ -110,7 +117,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             null,
-            null
+            null,
+            $caption
         );
     }
 
@@ -123,7 +131,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -136,7 +145,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -149,7 +159,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -162,7 +173,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::contain(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -175,7 +187,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -188,7 +201,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::contain(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -201,7 +215,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::contain(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 
@@ -213,6 +228,7 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
+            null,
             null,
             null
         );
@@ -227,7 +243,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center()
+            FigureObjectPosition::center(),
+            null
         );
     }
 }
