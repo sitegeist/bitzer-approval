@@ -4,15 +4,21 @@ export default ($node: Element):void => {
 		const $video = $node.querySelector("video");
 
 		if ($poster instanceof HTMLElement) {
-			const onPosterClick = () => {
-				$poster.parentElement?.removeChild($poster);
+			const onPosterClick = (e: MouseEvent): void => {
+				if (e.currentTarget instanceof HTMLElement && !e.currentTarget.dataset.noPointerEvents) {
+					$poster.parentElement?.removeChild($poster);
 
-				if ($video instanceof HTMLVideoElement) {
-					$video.play();
+					if ($video instanceof HTMLVideoElement) {
+						$video.play();
+					}
+
+					$poster.removeEventListener("click", onPosterClick);
+				} else {
+					e.preventDefault();
 				}
 			};
 
-			$poster.addEventListener("click", onPosterClick, {once: true});
+			$poster.addEventListener("click", onPosterClick);
 		}
 	}
 };

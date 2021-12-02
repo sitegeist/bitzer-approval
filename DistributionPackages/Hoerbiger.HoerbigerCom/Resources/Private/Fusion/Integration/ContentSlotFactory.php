@@ -260,7 +260,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            $this->figureFactory->forFullWidthImage($imageSource)
+            $this->figureFactory->forFullWidthImage(
+                $imageSource,
+                Editable::fromNodeProperty($imageNode, 'image__caption')
+            )
         );
     }
 
