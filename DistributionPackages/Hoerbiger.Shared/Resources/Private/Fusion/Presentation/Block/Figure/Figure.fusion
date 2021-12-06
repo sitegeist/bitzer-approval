@@ -12,13 +12,14 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
             isToBeLoadedLazily = true
             objectFit = 'cover'
             objectPosition = 'topLeft'
+            caption = ' -- Add slot content here --'
         }
     }
 
     renderer = afx`
         <figure class={[
             "[Block.Figure (" + (presentationObject.objectFit || "no-objectFit") + ", " + (presentationObject.objectPosition || "no-objectPosition") + ")]",
-            "flex max-h-full",
+            "flex flex-col max-h-full relative",
             (presentationObject.objectFit.isCover || presentationObject.objectFit.isContain) && "w-full h-full"
         ]}>
             <Sitegeist.Lazybones:Image
@@ -43,6 +44,12 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
                     presentationObject.objectPosition.isRightBottom && "object-right-bottom"
                 ]), ' ')}
             />
+            <figcaption
+                @if.1={presentationObject.caption}
+                class="bg-light py-ch text-md text-neutral-darker"
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.caption} />
+            </figcaption>
         </figure>
     `
 }

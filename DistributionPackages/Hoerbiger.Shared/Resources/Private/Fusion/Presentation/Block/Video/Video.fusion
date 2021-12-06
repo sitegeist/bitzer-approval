@@ -13,7 +13,8 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
     renderer = afx`
         <div class={[
             "[Block.Video]",
-            "flex justify-center items-center relative"
+            "flex justify-center items-center relative",
+            presentationObject.caption && "pb-touch"
         ]}>
             <div class="relative mx-auto">
                 <video class="max-h-[70vh] mx-auto relative" controls>
@@ -32,6 +33,13 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
                             src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircle.svg')}
                         />
                     </div>
+                </div>
+                <div
+                    @if.1={presentationObject.caption}
+                    data-no-pointer-events
+                    class="absolute top-100 left-0 right-0 bg-light text-md text-neutral-darker min-h-touch max-h-touch overflow-hidden overflow-ellipsis flex items-center"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.caption} />
                 </div>
             </div>
         </div>

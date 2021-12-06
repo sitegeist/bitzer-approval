@@ -9,6 +9,7 @@ use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
 final class VideoFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -34,7 +35,8 @@ final class VideoFactory extends AbstractComponentPresentationObjectFactory
             (string) $assetUri,
             $imageSource
                 ? $this->figureFactory->forVideoPoster($imageSource)
-                : null
+                : null,
+            Editable::fromNodeProperty($videoNode, 'image__caption')
         );
     }
 }

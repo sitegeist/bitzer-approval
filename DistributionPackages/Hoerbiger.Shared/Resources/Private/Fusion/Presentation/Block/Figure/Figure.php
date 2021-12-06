@@ -7,6 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 
 /**
@@ -26,6 +27,8 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
 
     private ?FigureObjectPosition $objectPosition;
 
+    private ?SlotInterface $caption;
+
     public function __construct(
         ImageSourceHelperInterface $imageSource,
         bool $isToBeLoadedLazily,
@@ -33,7 +36,8 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
         QualifiedPresetIdentifiers $sizes,
         string $finalWidth,
         ?FigureObjectFit $objectFit,
-        ?FigureObjectPosition $objectPosition
+        ?FigureObjectPosition $objectPosition,
+        ?SlotInterface $caption
     ) {
         $this->imageSource = $imageSource;
         $this->isToBeLoadedLazily = $isToBeLoadedLazily;
@@ -46,6 +50,7 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
         );
         $this->objectFit = $objectFit;
         $this->objectPosition = $objectPosition;
+        $this->caption = $caption;
     }
 
     public function getImageSource(): ImageSourceHelperInterface
@@ -76,6 +81,11 @@ final class Figure extends AbstractComponentPresentationObject implements Figure
     public function getObjectPosition(): ?FigureObjectPosition
     {
         return $this->objectPosition;
+    }
+
+    public function getCaption(): ?SlotInterface
+    {
+        return $this->caption;
     }
 
     public function withObjectFitAndPosition(FigureObjectFit $objectFit, FigureObjectPosition $objectPosition): self

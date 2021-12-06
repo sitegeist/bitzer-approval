@@ -34,8 +34,8 @@ final class BreadcrumbFactory extends AbstractComponentPresentationObjectFactory
         return new Breadcrumb(
             $links,
             Value::fromString($current ? $current->getLabel() : ''),
-            new Icon('shared', 'chevronRight'),
-            new Icon('shared', 'chevronLeft')
+            new Icon('shared', 'chevronRight', null),
+            new Icon('shared', 'chevronLeft', null)
         );
     }
 }

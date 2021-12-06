@@ -6,6 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
  */
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 
 interface FigureInterface extends ComponentPresentationObjectInterface
@@ -21,4 +22,6 @@ interface FigureInterface extends ComponentPresentationObjectInterface
     public function getObjectFit(): ?FigureObjectFit;
 
     public function getObjectPosition(): ?FigureObjectPosition;
+
+    public function getCaption(): ?SlotInterface;
 }
