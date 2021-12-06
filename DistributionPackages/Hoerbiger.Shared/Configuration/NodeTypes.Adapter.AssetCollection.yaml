@@ -14,5 +14,6 @@
     name:
       type: string
       search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
         elasticSearchMapping:
           type: text
