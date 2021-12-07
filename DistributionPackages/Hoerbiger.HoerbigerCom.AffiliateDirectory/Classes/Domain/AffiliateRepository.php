@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Domain;
 
@@ -81,7 +81,7 @@ class AffiliateRepository
                             $telephone = $cell->getValue();
                             break;
                         case 'J':
-                            $tags[] = $this->resolveTagFromSBUDevision($cell->getValue());
+                            $tags[] = $this->resolveTagFromSBUDivision($cell->getValue());
                             break;
                         case 'K':
                             $tags[] = $this->resolveTagFromLocationType($cell->getValue());
@@ -97,7 +97,9 @@ class AffiliateRepository
             }
 
             $coordinates = $this->geoCoder->fetchCoordinatesByAddress($completeAddress);
-
+            if (is_null($coordinates)) {
+                $coordinates = $this->geoCoder->fetchCoordinatesByAddress($legalName);
+            }
             if (is_null($coordinates)) {
                 continue;
             }
@@ -130,7 +132,7 @@ class AffiliateRepository
         return $reader->load($this->dataSetPath);
     }
 
-    public function resolveTagFromSBUDevision(string $symbol): string
+    public function resolveTagFromSBUDivision(string $symbol): string
     {
         switch ($symbol) {
             case 'C':

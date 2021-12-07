@@ -58,7 +58,7 @@ final class JsonLDFactory implements ProtectedContextAwareInterface
         )?: '{}';
     }
 
-    public function allowsCallOfMethod($methodName)
+    public function allowsCallOfMethod($methodName): bool
     {
         return true;
     }
