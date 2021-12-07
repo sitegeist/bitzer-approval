@@ -35,6 +35,14 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             }
         }
 
+        body.@process.addExtraHtml = Neos.Fusion:Join {
+            googleTagManagerNoScript = Hoerbiger.Shared:Application.Tracking.GoogleTagManagerNoScript {
+                @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
+                trackingId = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.trackingId')}
+            }
+            default = ${value}
+        }
+
         bodyScripts = ${props.bodyScripts}
         bodyScripts.@position = 'before closingBodyTag'
     }
