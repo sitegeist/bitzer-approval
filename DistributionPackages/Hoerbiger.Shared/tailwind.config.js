@@ -200,6 +200,7 @@ module.exports = {
 
 			padding: {
 				...SPACES,
+				touch: MIN_TOUCH,
 				'ratio-square': '100%',
 				'ratio-2-1': '50%',
 				'ratio-4-3': 'calc(3 * 100% / 4)',
