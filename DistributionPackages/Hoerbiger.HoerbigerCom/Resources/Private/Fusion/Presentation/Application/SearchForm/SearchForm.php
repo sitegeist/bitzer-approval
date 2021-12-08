@@ -71,4 +71,16 @@ final class SearchForm extends AbstractComponentPresentationObject implements Se
     {
         return $this->mostWantedEndpointUri;
     }
+
+    public function getApplicationData(): string
+    {
+        return json_encode([
+            'endpointUri' => (string)$this->endpointUri,
+            'sortingPropertyOptions' => json_decode($this->sortingPropertyOptions),
+            'periodOptions' => json_decode($this->periodOptions),
+            'labels' => json_decode($this->labels),
+            'language' => $this->language,
+            'mostWantedEndpointUri' => (string)$this->mostWantedEndpointUri
+        ]) ?: '{}';
+    }
 }

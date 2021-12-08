@@ -1,2 +1,5 @@
 id,description,en,de
 title,the search title,search,Suche
+TypeIdentifier.WebPage,Type WebPage,Page,Seite
+TypeIdentifier.Product,Type Product,Product,Produkt
+TypeIdentifier.Document,Type Document,Download,Download

@@ -10,5 +10,5 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 
 interface CardFactoryInterface
 {
-    public function forThing(TraversableNodeInterface $thing): CardInterface;
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier): CardInterface;
 }

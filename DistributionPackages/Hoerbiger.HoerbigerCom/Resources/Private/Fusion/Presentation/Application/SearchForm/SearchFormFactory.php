@@ -34,22 +34,26 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
         $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
         $uriBuilder->setFormat('json');
         $endpointUri = new Uri(
-            $uriBuilder->uriFor(
-                'query',
-                [],
-                'Stuff',
-                'Hoerbiger.HoerbigerCom',
-                'Application'
-            )
+            $uriBuilder
+                ->setCreateAbsoluteUri(true)
+                ->uriFor(
+                    'query',
+                    [],
+                    'Stuff',
+                    'Hoerbiger.HoerbigerCom',
+                    'Application'
+                )
         );
         $mostWantedEndpointUri = new Uri(
-            $uriBuilder->uriFor(
-                'register',
-                [],
-                'WantedNode',
-                'Hoerbiger.HoerbigerCom',
-                'Application'
-            )
+            $uriBuilder
+                ->setCreateAbsoluteUri(true)
+                ->uriFor(
+                    'register',
+                    [],
+                    'WantedNode',
+                    'Hoerbiger.HoerbigerCom',
+                    'Application'
+                )
         );
 
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
