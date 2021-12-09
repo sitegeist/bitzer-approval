@@ -199,7 +199,8 @@ final class StuffRequest implements \JsonSerializable
                 'searchType' => [
                     'terms' => [
                         'field' => 'searchType',
-                        'size' => 1000
+                        'size' => 1000,
+                        'min_doc_count' => 0
                     ]
                 ]
             ],
