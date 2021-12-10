@@ -15,7 +15,7 @@ export const Client = (props: ApplicationData): JSX.Element => {
 	const [isFetching, setIsFetching] = React.useState(false);
 	const [requestParams, setRequestParams] = React.useState<SearchRequestParams>({
 		language: props.language,
-		searchTerm: null,
+		searchTerm: props.searchTerm ?? null,
 		sortingProperty: props.sortingPropertyOptions[0] ?? "",
 		period: null,
 		page: 1,

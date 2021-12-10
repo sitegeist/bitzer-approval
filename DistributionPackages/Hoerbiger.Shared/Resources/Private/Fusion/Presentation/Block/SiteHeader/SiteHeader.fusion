@@ -41,7 +41,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
                 <div class="flex items-center space-x-xs">
                     <!-- MAINNAVIGATION -->
-                    <div class="hidden menuToggle:flex self-end translate-y-[-26px] space-x-xs uppercase font-sans-bold z-50">
+                    <div class="hidden menuToggle:flex self-end translate-y-[-26px] space-x-xs uppercase font-sans-bold z-20 hover:z-50">
                         <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                             <div class="relative group z-10 hover:z-20">
                                 <div class="px-2 grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
@@ -80,10 +80,10 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
                     <div class="flex items-center space-x-2 z-30">
                         <!-- SEARCH -->
-                        <div class="bg-neutral-lighter w-[100px] h-[100px] relative">
-                            <div class="absolute inset-0 grid place-items-center">Search</div>
-                            <!-- <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.search} /> -->
-                        </div>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            @if.1={presentationObject.search}
+                            presentationObject={presentationObject.search}
+                        />
 
                         <!-- LANGUAGES -->
                         <div class="hidden menuToggle:flex w-[100px] h-[100px] relative text-neutral-contrast">

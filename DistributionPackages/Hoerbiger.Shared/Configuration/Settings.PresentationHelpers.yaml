@@ -31,3 +31,4 @@ Neos:
       Shared.MileStone: Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory
       Shared.Timeline: Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory
       Shared.NavigationItem: Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItemFactory
+      Shared.CompactSearchForm: Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory

@@ -1,0 +1,30 @@
+prototype(Hoerbiger.Shared:Application.CompactSearchForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Application\\CompactSearchForm\\CompactSearchFormInterface'
+
+    @styleguide {
+        title = 'CompactSearchForm'
+
+        props {
+            targetUri = '/'
+        }
+    }
+
+    renderer = afx`
+        <div
+            data-target-uri={presentationObject.targetUri}
+            class={[
+                "[Application.CompactSearchForm]",
+                "bg-neutral-lighter w-[100px] h-[100px] relative"
+            ]}
+        >
+            <div class="absolute inset-0 grid place-items-center text-neutral z-10">
+                <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.searchIcon}/>
+            </div>
+            <div
+                data-select="applicationRoot"
+                class="absolute inset-0 z-20"
+            >
+            </div>
+        </div>
+    `
+}

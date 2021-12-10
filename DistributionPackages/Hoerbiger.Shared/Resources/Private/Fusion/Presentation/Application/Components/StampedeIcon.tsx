@@ -5,7 +5,7 @@ type StampedeIconProps = {
 	collectionName?: string;
 	iconName: string;
 	className?: string;
-	size?: 1|2|3|4|100;
+	size?: 1|1.5|2|3|4|100;
 	spin?: boolean;
 }
 export const StampedeIcon = (props: StampedeIconProps): JSX.Element => {
@@ -19,6 +19,7 @@ export const StampedeIcon = (props: StampedeIconProps): JSX.Element => {
 			className={cx(
 				"fill-current",
 				props.size === 1 && "w-[1em] h-[1em]",
+				props.size === 1.5 && "w-[1.5em] h-[1.5em]",
 				props.size === 2 && "w-[2em] h-[2em]",
 				props.size === 3 && "w-[3em] h-[3em]",
 				props.size === 4 && "w-[4em] h-[4em]",

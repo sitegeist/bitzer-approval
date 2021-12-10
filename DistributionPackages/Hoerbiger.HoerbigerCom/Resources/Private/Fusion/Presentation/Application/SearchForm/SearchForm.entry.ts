@@ -16,6 +16,7 @@ export default ($node: Element): void => {
 						...applicationData,
 						getLabelFor: (key: string, fallback: string): string =>
 							labels[key] ?? fallback ?? key,
+						searchTerm: new URL(window.location.href).searchParams.get("searchTerm") ?? ""
 					} as ApplicationData
 				),
 				$applicationRoot

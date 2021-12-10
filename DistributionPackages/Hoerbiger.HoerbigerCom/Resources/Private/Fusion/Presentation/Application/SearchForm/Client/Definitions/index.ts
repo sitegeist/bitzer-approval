@@ -11,6 +11,7 @@ export interface ApplicationData {
 	language: string;
 	mostWantedEndpointUri: string;
 	getLabelFor: LabelGetter;
+	searchTerm: string;
 }
 
 export interface SearchRequestParams {
