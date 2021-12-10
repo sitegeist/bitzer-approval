@@ -11,6 +11,7 @@ export {ApplicationData};
 
 export const Client = (props: ApplicationData): JSX.Element => {
 	const isInitialized = React.useRef(false);
+	const $results = React.useRef<HTMLDivElement>(null);
 	const [isFetching, setIsFetching] = React.useState(false);
 	const [requestParams, setRequestParams] = React.useState<SearchRequestParams>({
 		language: props.language,
@@ -24,8 +25,6 @@ export const Client = (props: ApplicationData): JSX.Element => {
 	const [response, setResponse] = React.useState<SearchResponse|null>(null);
 	const [areFiltersExpanded, setAreFiltersExpanded] = React.useState(false);
 	const countActiveFilter = requestParams.types.length + (requestParams.period?.length ? 1 : 0);
-
-	console.log(requestParams);
 
 	React.useEffect(() => {
 		let isActive = true;
@@ -47,7 +46,11 @@ export const Client = (props: ApplicationData): JSX.Element => {
 	}, [requestParams]);
 
 	const onUpdateRequestParams = (update: Partial<SearchRequestParams>) =>
-		setRequestParams(state => ({...state, ...update}));
+		setRequestParams(state => ({
+			...state,
+			...update,
+			page: update.page ?? 1
+		}));
 
 	const onClickReset = (e: React.MouseEvent<HTMLElement>) => {
 		e.stopPropagation();
@@ -57,7 +60,16 @@ export const Client = (props: ApplicationData): JSX.Element => {
 		});
 	};
 
-	console.log(requestParams);
+	React.useLayoutEffect(() => {
+		if ($results.current instanceof HTMLElement) {
+			if ($results.current.getBoundingClientRect().top < 0) {
+				$results.current.scrollIntoView({
+					behavior: "smooth",
+					block: "start",
+				});
+			}
+		}
+	}, [response]);
 
 	return isInitialized.current && response
 		? (
@@ -126,11 +138,14 @@ export const Client = (props: ApplicationData): JSX.Element => {
 				</div>
 
 				{/* RESULTS */}
-
-				<div className={cx(
-					"grid grid-rows-1 gap-sm",
-					isFetching && "invisible"
-				)}>
+				<div
+					ref={$results}
+					style={{scrollMarginTop: "100px"}}
+					className={cx(
+						"grid grid-rows-1 gap-sm",
+						isFetching && "invisible"
+					)}
+				>
 					{
 						response?.results.map(result => (
 							<div
