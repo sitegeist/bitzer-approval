@@ -2,19 +2,21 @@ export type Labels = {
 	[key: string]: string;
 }
 
+export type LabelGetter = (key: string, fallback?: string) => string;
+
 export interface ApplicationData {
 	endpointUri: string;
 	sortingPropertyOptions: string[];
 	periodOptions: string[];
-	labels: Labels;
 	language: string;
 	mostWantedEndpointUri: string;
+	getLabelFor: LabelGetter;
 }
 
 export interface SearchRequestParams {
 	language: string;
 	searchTerm: string|null;
-	sortingProperty: string|null;
+	sortingProperty: string;
 	period: string|null;
 	page: number;
 	types: string[];
@@ -24,18 +26,16 @@ export interface SearchResult {
 	identifier: string;
 	content: string;
 }
-
-export interface Pagination {
-	numberOfPages: number;
+export interface TypeOption {
+	identifier: string;
 	totalNumberOfResults: number;
 }
 
-export interface SearchResponse extends Pagination {
+export interface SearchResponse {
+	numberOfPages: number;
+	totalNumberOfResults: number;
 	results: SearchResult[];
-	typeOptions: {
-		identifier: string;
-		totalNumberOfResults: number;
-	}[];
+	typeOptions: TypeOption[];
 }
 
 export type SearchRequest = (params: SearchRequestParams)

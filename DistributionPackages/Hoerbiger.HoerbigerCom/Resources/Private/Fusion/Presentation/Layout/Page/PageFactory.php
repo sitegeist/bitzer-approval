@@ -111,7 +111,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::regular(),
                     (new SearchFormFactory())->create($subgraph)
                 ),
             ]), $identity),

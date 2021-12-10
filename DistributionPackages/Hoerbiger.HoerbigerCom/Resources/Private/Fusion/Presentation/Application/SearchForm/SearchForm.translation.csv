@@ -1,5 +1,26 @@
 id,description,en,de
 title,the search title,search,Suche
-TypeIdentifier.WebPage,Type WebPage,Page,Seite
-TypeIdentifier.Product,Type Product,Product,Produkt
-TypeIdentifier.Document,Type Document,Download,Download
+type.WebPage,Type WebPage,Page,Seite
+type.Product,Type Product,Product,Produkt
+type.Document,Type Document,Download,Download
+type.WebPage.plural,Type WebPage plural,Pages,Seiten
+type.Product.plural,Type Product plural,Products,Produkte
+type.Document.plural,Type Document plural,Downloads,Downloads
+sortingProperty._score,Sort by Score,Score,Relevanz
+sortingProperty.dateModified,Sort by Modification,Topicality,Aktualität
+period.__allPeriods__,Option all periods,All,Alles
+period.P1W,Period last week,Last week,Letzte Woche
+period.P1M,Period last month,Last month,Letzter Monat
+period.P1Y,Period last year,Last year,Letztes Jahr
+placeholder.searchTerm,Placeholder for SearchTerm,Enter search term,Suchbegriff eingeben
+label.summary.hasResults,Message if there are results,We have found ### results.,Wir haben ### Ergebnisse gefunden.
+label.summary.noResults,Message if there are no results,Unfortunately we haven't found any result.,Leider haben wir keine Ergebnisse gefunden.
+label.sorting,Label sorting,Sorted by,Sortiert nach
+label.toggleFilters,Label toggle Filters,Limit results,Ergebnisse eingrenzen
+label.periods,Label Period,Limit the period,Zeitraum eingrenzen
+label.types,Label Types,Limit the types of results,Ergebnistypen eingrenzen
+label.isInitializing,Label is initializing,Initializing ...,Initialisiere ...
+label.isFetching,Label is fetching,Searching for results ...,Suche nach Ergebnissen ...
+label.requestFailed,Label request failed,Something went wrong. Please reload or try again later.,Da ist etwas schiefgelaufen. Bitte laden Sie die Seite neu oder versuchen Sie es später noch einmal.
+label.paginator.prev,Pagination prev,Prev,Zurück
+label.paginator.next,Pagination next,Next,Weiter

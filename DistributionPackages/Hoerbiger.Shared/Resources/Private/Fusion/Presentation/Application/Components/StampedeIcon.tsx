@@ -5,7 +5,7 @@ type StampedeIconProps = {
 	collectionName?: string;
 	iconName: string;
 	className?: string;
-	size?: number;
+	size?: 1|2|3|4;
 	spin?: boolean;
 }
 export const StampedeIcon = (props: StampedeIconProps): JSX.Element => {

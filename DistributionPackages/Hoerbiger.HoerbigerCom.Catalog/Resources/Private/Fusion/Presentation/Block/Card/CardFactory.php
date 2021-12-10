@@ -35,7 +35,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'
         );
         $label = $labelSource
-            ? $labelSource->findTranslationLabelByIdentifier('TypeIdentifier.' . $typeIdentifier)
+            ? $labelSource->findTranslationLabelByIdentifier('type.' . $typeIdentifier)
             : null;
         $translatedLabel = $label
             ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(

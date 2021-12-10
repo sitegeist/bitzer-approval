@@ -6,13 +6,17 @@ import {Client, ApplicationData} from "./Client";
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
 		const $applicationRoot = $node.querySelector("[data-select=applicationRoot]");
-		const applicationData = JSON.parse($node.querySelector("script[data-select=applicationData]")?.textContent ?? "{}");
+		const {labels, ...applicationData} = JSON.parse($node.querySelector("script[data-select=applicationData]")?.textContent ?? "{}");
 
 		if ($applicationRoot instanceof HTMLElement) {
 			ReactDom.render(
 				React.createElement(
 					Client,
-					applicationData as ApplicationData
+					{
+						...applicationData,
+						getLabelFor: (key: string, fallback: string): string =>
+							labels[key] ?? fallback ?? key,
+					} as ApplicationData
 				),
 				$applicationRoot
 			);
