@@ -20,6 +20,10 @@
     description:
       options:
         preset: 'rte.text'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
       ui:
         inline:
           editorOptions:

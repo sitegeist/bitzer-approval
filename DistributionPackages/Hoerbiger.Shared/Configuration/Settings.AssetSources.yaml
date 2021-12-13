@@ -1,0 +1,19 @@
+Neos:
+  Media:
+    assetSources:
+      'neos':
+        assetSource: 'Hoerbiger\Shared\Domain\AssetSource\LanguageAwareAssetSource'
+        assetSourceOptions:
+          label: 'English'
+          language: 'en'
+          icon: 'resource://Neos.Media/Public/Icons/NeosWhite.svg'
+          description: 'English assets in the local asset storage'
+          asyncThumbnails: ~
+      'neos-de':
+        assetSource: 'Hoerbiger\Shared\Domain\AssetSource\LanguageAwareAssetSource'
+        assetSourceOptions:
+          label: 'German'
+          language: 'de'
+          icon: 'resource://Neos.Media/Public/Icons/NeosWhite.svg'
+          description: 'German assets in the local asset storage'
+          asyncThumbnails: ~

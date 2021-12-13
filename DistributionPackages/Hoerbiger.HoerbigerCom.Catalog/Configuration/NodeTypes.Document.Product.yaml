@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -24,3 +25,7 @@
   ui:
     icon: barcode
     label: 'Produkt'
+  properties:
+    searchType:
+      search:
+        indexing: '${"Product"}'

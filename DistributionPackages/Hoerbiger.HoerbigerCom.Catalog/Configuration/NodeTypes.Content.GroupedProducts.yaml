@@ -19,6 +19,10 @@
         inline:
           editorOptions:
             placeholder: 'Bitte Titel eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
     products:
       type: references
       ui:

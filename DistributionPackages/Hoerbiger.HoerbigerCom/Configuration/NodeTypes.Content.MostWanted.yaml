@@ -1,0 +1,8 @@
+'Hoerbiger.HoerbigerCom:Content.MostWanted':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+  ui:
+    label: 'Meist gesucht'
+    icon: crosshairs

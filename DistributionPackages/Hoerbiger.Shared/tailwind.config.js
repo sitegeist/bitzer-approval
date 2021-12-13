@@ -1,4 +1,4 @@
-// const theme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 const selectorParser = require('postcss-selector-parser');
 
@@ -71,13 +71,16 @@ module.exports = {
 			'serif-regular': ['PT Serif', 'serif'],
 		},
 
+		screens: {
+			/* Breakpoint to switch between fullscreen and aside-offcanvas. */
+			offcanvas: '400px',
+			/* Breakpoint to switch between inline navigation and  offcanvas. */
+			menuToggle: '1300px',
+			xs: '480px',
+			...defaultTheme.screens
+		},
+
 		extend: {
-			screens: {
-				/* Breakpoint to switch between fullscreen and aside-offcanvas. */
-				offcanvas: '400px',
-				/* Breakpoint to switch between inline navigation and  offcanvas. */
-				menuToggle: '1300px',
-			},
 			typography: (theme) => ({
 				DEFAULT: {
 					css: {
@@ -234,9 +237,14 @@ module.exports = {
 				/* Will match to py-3. */
 				'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
 				'textbox': '0 0 14px rgba(0, 0, 0, .08)',
+				'textbox-hover': '0 0 24px rgba(0, 0, 0, .2)',
 				card: '0 0 14px rgba(0, 0, 0, 0.1)',
 				play: '0 0 48px #8D172E80',
-				submenu: '0 0 5px 2px rgb(0 0 0 / 10%)'
+				submenu: '0 0 5px 2px rgb(0 0 0 / 10%)',
+			},
+
+			dropShadow: {
+				brand: '0 0  5px #8D172E60',
 			},
 
 			outline: theme => ({

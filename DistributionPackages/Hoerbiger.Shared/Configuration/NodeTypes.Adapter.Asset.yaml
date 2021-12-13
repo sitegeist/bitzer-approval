@@ -1,0 +1,54 @@
+'Hoerbiger.Shared:Adapter.Asset':
+  class: 'Hoerbiger\Shared\Domain\Asset\AssetAdapter'
+  superTypes:
+    'Neos.Neos:Document': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
+    'Hoerbiger.Shared:Tag.ExcludeFromNodeTree': true
+  constraints:
+    nodeTypes:
+      '*': false
+  ui:
+    label: 'Mediendokument'
+    icon: 'file-text'
+  properties:
+    name:
+      type: string
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
+    headline:
+      type: string
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h1', value)}
+        elasticSearchMapping:
+          type: text
+    description:
+      type: string
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+    text:
+      type: string
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+        indexing: '${Shared.Indexing.getPdfContent(node)}'
+    copyrightHolder:
+      type: string
+      search:
+        elasticSearchMapping:
+          type: text
+    keywords:
+      type: string
+      search:
+        elasticSearchMapping:
+          type: keyword
+    searchType:
+      search:
+        indexing: '${"Document"}'
+    datePublished:
+      search:
+        indexing: '${(node.properties.datePublished ? Date.format(node.properties.datePublished, "Y-m-d\TH:i:sP") : null)}'
