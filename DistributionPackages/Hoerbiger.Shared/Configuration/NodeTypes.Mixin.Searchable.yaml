@@ -1,0 +1,15 @@
+'Hoerbiger.Shared:Mixin.Searchable':
+  abstract: true
+  properties:
+    searchType:
+      type: string
+      search:
+        elasticSearchMapping:
+          type: keyword
+    dateModified:
+      type: DateTime
+      search:
+        elasticSearchMapping:
+          type: date
+          format: 'date_time_no_millis'
+        indexing: '${Date.format(Shared.Indexing.getDateModified(node), "Y-m-d\TH:i:sP")}'

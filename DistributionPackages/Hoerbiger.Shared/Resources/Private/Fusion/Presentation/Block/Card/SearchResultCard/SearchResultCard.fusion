@@ -1,0 +1,21 @@
+prototype(Hoerbiger.Shared:Block.Card.SearchResultCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+    renderer = afx`
+        <div class={[
+            "[Block.Card.SearchResultCard]",
+            "flex flex-col space-y-ch-xs w-full shadow-textbox hover:shadow-textbox-hover p-xs"
+        ]}>
+            <div class="flex items-center uppercase text-sm font-sans-bold">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.subheader}
+                    @if.1={presentationObject.subheader}
+                />
+            </div>
+            <div class="text-xl md:text-2xl font-sans-bold mb-ch-xs">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} @if.1={presentationObject.header} />
+            </div>
+            <div class="flex-grow">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
+            </div>
+        </div>
+    `
+}

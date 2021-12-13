@@ -1,0 +1,19 @@
+'Hoerbiger.Shared:Adapter.AssetCollection':
+  class: 'Hoerbiger\Shared\Domain\Asset\AssetCollectionAdapter'
+  superTypes:
+    'Neos.Neos:Document': true
+    'Hoerbiger.Shared:Tag.ExcludeFromNodeTree': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.Shared:Adapter.Asset': true
+  ui:
+    label: 'Mediensammlung'
+    icon: 'photo-video'
+  properties:
+    name:
+      type: string
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text

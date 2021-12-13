@@ -21,6 +21,8 @@ hooks:
   - exec: sudo echo alias ll=\"ls -lhA\" >> ~/.bashrc
   - exec: bash -c 'cat /etc/custom-config/ssh-config.txt >> ~/.ssh/config'
 omit_containers: [dba]
+timezone: Europe/Berlin
+webimage_extra_packages: [poppler-utils]
 use_dns_when_possible: true
 composer_version: "2"
 web_environment:
