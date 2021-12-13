@@ -2524,7 +2524,7 @@
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.Shared",
-                "reference": "5ef338642b8876a36e045f5646f68dce8c6a32e1"
+                "reference": "5157b7f745ee22af5dde0db9c2df6f3ce7d6ac5c"
             },
             "require": {
                 "flowpack/elasticsearch-contentrepositoryadaptor": "~8.1",
@@ -2545,6 +2545,7 @@
                 "sitegeist/kaleidoscope": "^6.0",
                 "sitegeist/klarschiff": "^2.1",
                 "sitegeist/lazybones": "^3.0",
+                "sitegeist/lostintranslation": "^1.0",
                 "sitegeist/monocle": "^7.2",
                 "sitegeist/stampede": "^1.1"
             },
@@ -7271,6 +7272,49 @@
                 "source": "https://github.com/sitegeist/Sitegeist.Lazybones/tree/v3.1.0"
             },
             "time": "2021-06-04T11:23:36+00:00"
+        },
+        {
+            "name": "sitegeist/lostintranslation",
+            "version": "v1.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sitegeist/Sitegeist.LostInTranslation.git",
+                "reference": "500815992c5f70360ad20d598105a60d283755d6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sitegeist/Sitegeist.LostInTranslation/zipball/500815992c5f70360ad20d598105a60d283755d6",
+                "reference": "500815992c5f70360ad20d598105a60d283755d6",
+                "shasum": ""
+            },
+            "require": {
+                "neos/http-factories": "*",
+                "neos/neos": "*"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^0.12.78"
+            },
+            "type": "neos-package",
+            "extra": {
+                "neos": {
+                    "package-key": "Sitegeist.LostInTranslation"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sitegeist\\LostInTranslation\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-or-later"
+            ],
+            "description": "Automatic content translations for Neos using the DeepL Api",
+            "support": {
+                "issues": "https://github.com/sitegeist/Sitegeist.LostInTranslation/issues",
+                "source": "https://github.com/sitegeist/Sitegeist.LostInTranslation/tree/v1.1.0"
+            },
+            "time": "2021-11-05T16:06:17+00:00"
         },
         {
             "name": "sitegeist/monocle",
