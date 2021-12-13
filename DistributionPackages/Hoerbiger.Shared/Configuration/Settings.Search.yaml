@@ -1,0 +1,18 @@
+Neos:
+  ContentRepository:
+    Search:
+      defaultContext:
+        Shared.Indexing: Hoerbiger\Shared\Application\IndexingHelper
+      elasticSearch:
+        indexName: hoerbiger-neos-distribution-elasticsearch
+      indexAllWorkspaces: false
+      realtimeIndexing:
+        enabled: true
+
+Flowpack:
+  ElasticSearch:
+    ContentRepositoryAdaptor:
+      driver:
+        version: '7.x'
+      command:
+        useSubProcesses: false

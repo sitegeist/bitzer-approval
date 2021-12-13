@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Media\Domain\Model\Document;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
@@ -87,6 +88,17 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             LinkTarget::self(),
             null,
             Value::fromString($localeIdentifier)
+        );
+    }
+
+    public function forAsset(Document $asset): Link
+    {
+        return new Link(
+            LinkVariant::container(),
+            $this->uriService->getAssetUri($asset),
+            LinkTarget::blank(),
+            null,
+            null
         );
     }
 

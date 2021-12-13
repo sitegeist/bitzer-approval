@@ -1,0 +1,18 @@
+prototype(Hoerbiger.HoerbigerCom:Application.SearchForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\SearchForm\\SearchFormInterface'
+
+    renderer = afx`
+        <div class={[
+            "[Application.SearchForm]",
+            "min-h-screen"
+        ]}>
+            <div data-select="applicationRoot"></div>
+            <script
+                type="application/json"
+                data-select="applicationData"
+            >
+                {presentationObject.applicationData}
+            </script>
+        </div>
+    `
+}

@@ -1,0 +1,7 @@
+'Hoerbiger.HoerbigerCom:Document.SearchResultsPage':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+  ui:
+    icon: search
+    label: 'Suche'

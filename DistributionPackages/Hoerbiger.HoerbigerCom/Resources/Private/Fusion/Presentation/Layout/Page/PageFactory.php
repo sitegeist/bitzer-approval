@@ -5,13 +5,14 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchFormFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -23,13 +24,14 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     private SlidableFactory $slidableFactory;
 
     private StageFactory $stageFactory;
+
+    private ImageSourceFactory $imageSourceFactory;
 
     private SiteFooterFactory $siteFooterFactory;
 
@@ -38,11 +40,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function __construct(
         SlidableFactory $slidableFactory,
         StageFactory $stageFactory,
+        ImageSourceFactory $imageSourceFactory,
         SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory
     ) {
         $this->slidableFactory = $slidableFactory;
         $this->stageFactory = $stageFactory;
+        $this->imageSourceFactory = $imageSourceFactory;
         $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
@@ -72,6 +76,46 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
             $this->siteFooterFactory->forDocument($homepage, $homepage)
+        );
+    }
+
+    public function forSearchResultsPage(TraversableNodeInterface $searchResultsPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+        $imageSource = $this->imageSourceFactory->forImageMixin($searchResultsPage, $inBackend, true);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Introduction requires image for property media.');
+        }
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($searchResultsPage, $subgraph);
+
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($searchResultsPage, $inBackend);
+
+        return new Page(
+            $this->siteHeaderFactory->forDocument(
+                $searchResultsPage,
+                $siteNode,
+                $subgraph
+            ),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    $stage
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regular(),
+                    (new SearchFormFactory())->create($subgraph)
+                ),
+            ]), $identity),
+            $this->siteFooterFactory->forDocument($searchResultsPage, $siteNode)
         );
     }
 

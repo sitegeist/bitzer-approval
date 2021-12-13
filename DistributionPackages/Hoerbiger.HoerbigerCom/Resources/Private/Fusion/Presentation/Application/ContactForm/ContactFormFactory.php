@@ -21,7 +21,6 @@ use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Flow\Security\Context as SecurityContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 
 final class ContactFormFactory extends AbstractComponentPresentationObjectFactory
