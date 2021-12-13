@@ -4,7 +4,6 @@
   ui:
     icon: comment-alt
     label: 'Zitat'
-
   properties:
     text:
       options:
@@ -13,6 +12,10 @@
         inline:
           editorOptions:
             placeholder: 'Bitte Text eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
     spokenByCharacter:
       options:
         preset: 'rte.plain'

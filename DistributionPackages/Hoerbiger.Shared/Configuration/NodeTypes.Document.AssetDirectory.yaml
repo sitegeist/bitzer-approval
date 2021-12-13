@@ -1,0 +1,13 @@
+'Hoerbiger.Shared:Document.AssetDirectory':
+  class: 'Hoerbiger\Shared\Domain\Asset\AssetDirectory'
+  superTypes:
+    'Neos.Neos:Document': true
+    'Neos.Seo:NoindexMixin': true
+    'Hoerbiger.Shared:Tag.ExcludeFromNodeTree': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.Shared:Adapter.AssetCollection': true
+  ui:
+    label: 'Medienverzeichnis'
+    icon: 'folder-open'

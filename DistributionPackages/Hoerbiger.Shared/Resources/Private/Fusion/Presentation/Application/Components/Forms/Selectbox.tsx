@@ -14,6 +14,7 @@ type SelectboxProps = {
 	options?: SelectboxOption[];
 	initialValue?: string;
 	validate?: (value: any) => string|undefined;
+	onChange?: (value: string) => void;
 };
 export const Selectbox = (props: SelectboxProps): JSX.Element => {
 	const [isOpen, setIsOpen] = React.useState(false);
@@ -24,6 +25,7 @@ export const Selectbox = (props: SelectboxProps): JSX.Element => {
 	const refNode: React.RefObject<HTMLDivElement> = Hooks.useHandlerOnOuterClick(close);
 	const onSelect = (input: FieldInputProps<string, HTMLElement>, key: string) => () => {
 		input.onChange(key);
+		props.onChange && props.onChange(key);
 		close();
 	};
 

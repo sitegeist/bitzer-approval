@@ -5,7 +5,7 @@ Neos:
         properties:
           'rte':
             'plain':
-              type: string
+              type: 'string'
               ui:
                 inlineEditable: true
                 inline:
