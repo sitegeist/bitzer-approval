@@ -5,20 +5,20 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  * This file is part of the Hoerbiger.Shared package.
  */
 
-use Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchForm;
+use Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItem;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use Neos\ContentRepository\Domain\Model\Node;
-use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use Neos\Neos\Exception;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Neos\ContentRepository\Domain\Service\ContentDimensionPresetSourceInterface;
 use Neos\Neos\Domain\Service\ContentContextFactory;
+
 
 final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -45,10 +45,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     ): SiteHeaderInterface {
         return new SiteHeader(
             $this->getChildNavigationNodes($site, $document, 1),
-            new CompactSearchForm(
-                $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true),
-                new Icon("shared", "search", IconSize::size_1_5())
-            ),
+            (new CompactSearchFormFactory())->forDocument($site),
             $this->getLanguageNavigationItems($document, $subgraph),
             new Icon("shared", "chevronDown", IconSize::size_1_5()),
             new Icon("shared", "arrowRight", IconSize::size_1())

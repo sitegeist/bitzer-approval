@@ -12,6 +12,7 @@ prototype(Hoerbiger.Shared:Application.CompactSearchForm) < prototype(PackageFac
     renderer = afx`
         <div
             data-target-uri={presentationObject.targetUri}
+            data-labels={presentationObject.labels}
             class={[
                 "[Application.CompactSearchForm]",
                 "bg-neutral-lighter w-[100px] h-[100px] relative"

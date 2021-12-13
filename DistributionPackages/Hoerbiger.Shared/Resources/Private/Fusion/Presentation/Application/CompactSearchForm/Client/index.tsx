@@ -1,44 +1,71 @@
 import * as React from "react";
+import {useMediaQuery} from "beautiful-react-hooks";
 import cx from "classnames";
 
 import {StampedeIcon} from "../../Components";
+import {useHandlerOnOuterClick} from "../../Utils/Hooks";
 
 type ClientProps = {
 	targetUri: string;
+	labels: {
+		[key: string]: string;
+	}
 }
-export const Client = ({targetUri}: ClientProps): JSX.Element => {
+export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
+	const isTooSmallForExpandedView = useMediaQuery("(max-width: 780px)");
 	const [isExpanded, setIsExpandend] = React.useState(false);
 	const isRedirecting = React.useRef(false);
 	const [query, setQuery] = React.useState("");
-	const close = () => setIsExpandend(false);
-	const onSubmit = (e: React.FormEvent) => {
-		e.preventDefault();
 
-		if (query.length && !isRedirecting.current) {
+	const close = () => setIsExpandend(false);
+	const node = useHandlerOnOuterClick(close);
+
+	const redirectToSearchPage = () => {
+		if (!isRedirecting.current) {
 			isRedirecting.current = true;
 
 			const url = new URL(targetUri);
-			url.searchParams.append("searchTerm", query);
+
+			if (query.length) {
+				url.searchParams.append("searchTerm", query);
+			}
 
 			close();
 			window.location.href = url.toString();
 		}
 	};
 
+	const onSubmit = (e: React.FormEvent) => {
+		e.preventDefault();
+
+		if (query.length) {
+			redirectToSearchPage();
+		} else {
+			close();
+		}
+	};
+
+	const onClick = React.useMemo(() =>
+		isTooSmallForExpandedView
+			? redirectToSearchPage
+			: () => setIsExpandend(state => !state)
+	, [isTooSmallForExpandedView]);
+
 	return (
 		<div
 			onMouseLeave={close}
+			ref={node}
 			className="w-full h-full relative"
 		>
 			<div
-				onClick={() => setIsExpandend(state => !state)}
-				className="text-neutral-contrast w-full h-full grid place-items-center z-10"
+				onClick={onClick}
+				className="text-neutral-contrast w-full h-full grid place-items-center z-10 cursor-pointer"
 			>
 				<StampedeIcon iconName="search" size={1.5}/>
 
 			</div>
 			{
-				isExpanded && (
+				(isExpanded && !isTooSmallForExpandedView) && (
 					<form
 						onSubmit={onSubmit}
 						className={cx(
@@ -54,12 +81,13 @@ export const Client = ({targetUri}: ClientProps): JSX.Element => {
 								value={query}
 								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value)}
 								className="border-none w-[80%] mx-auto focus:outline-none"
-								placeholder="TL: Suchbegriff eingeben"
+								placeholder={labels["placeholder.searchInput"] ?? ""}
 							/>
 						</div>
 						<div
 							onClick={onSubmit}
 							className="w-full h-full cursor-pointer outline-brand"
+							title={labels["title.submit"] ?? ""}
 						>
 						</div>
 					</form>

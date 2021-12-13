@@ -14,4 +14,6 @@ interface CompactSearchFormInterface extends ComponentPresentationObjectInterfac
     public function getTargetUri(): UriInterface;
 
     public function getSearchIcon(): IconInterface;
+
+    public function getLabels(): string;
 }

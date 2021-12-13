@@ -19,12 +19,16 @@ final class CompactSearchForm extends AbstractComponentPresentationObject implem
 
     private IconInterface $searchIcon;
 
+    private string $labels;
+
     public function __construct(
         UriInterface $targetUri,
-        IconInterface $searchIcon
+        IconInterface $searchIcon,
+        string $labels
     ) {
         $this->targetUri = $targetUri;
         $this->searchIcon = $searchIcon;
+        $this->labels = $labels;
     }
 
     public function getTargetUri(): UriInterface
@@ -35,5 +39,10 @@ final class CompactSearchForm extends AbstractComponentPresentationObject implem
     public function getSearchIcon(): IconInterface
     {
         return $this->searchIcon;
+    }
+
+    public function getLabels(): string
+    {
+        return $this->labels;
     }
 }
