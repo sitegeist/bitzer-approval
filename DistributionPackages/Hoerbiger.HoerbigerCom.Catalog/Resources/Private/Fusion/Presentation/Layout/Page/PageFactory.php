@@ -9,7 +9,6 @@ use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -24,7 +23,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-
     private StageFactory $stageFactory;
 
     private SiteFooterFactory $siteFooterFactory;

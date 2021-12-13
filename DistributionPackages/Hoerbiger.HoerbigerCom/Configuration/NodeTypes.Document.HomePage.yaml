@@ -17,7 +17,12 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.DummyText': true
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.MostWanted': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+    assetdirectory:
+      type: 'Hoerbiger.Shared:Document.AssetDirectory'
+    searchresults:
+      type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
     chronicle:
       type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
     contact:
