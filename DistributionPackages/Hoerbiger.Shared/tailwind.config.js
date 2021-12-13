@@ -37,6 +37,7 @@ module.exports = {
 		'./Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom/AffiliateFinder/Private/Fusion/**/*',
 	],
 	darkMode: false,
 	theme: {

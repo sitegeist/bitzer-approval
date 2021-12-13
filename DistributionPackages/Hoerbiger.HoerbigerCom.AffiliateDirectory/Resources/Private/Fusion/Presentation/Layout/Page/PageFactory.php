@@ -10,6 +10,8 @@ use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
+use Hoerbiger\Shared\Presentation\Layout\Box\Box;
+use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -47,6 +49,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($affiliateFinder, $inBackend);
 
+        /** @var SlotInterface $application */
+        $application = (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0]);
+
         return new Page(
             $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
             Collection::fromIterable(array_filter([
@@ -58,7 +63,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0])
+                new ContentContainer(
+                    ContentContainerVariant::blankY(),
+                    new Box(
+                        BoxVariant::neutral(),
+                        $application
+                    )
+                )
             ]), $identity),
             $this->siteFooterFactory->forDocument($affiliateFinder, $site)
         );

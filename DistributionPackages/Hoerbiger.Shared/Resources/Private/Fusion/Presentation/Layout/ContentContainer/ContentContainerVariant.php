@@ -18,6 +18,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULARSM = 'regularSm';
     const VARIANT_REGULARX = 'regularX';
     const VARIANT_BLANK = 'blank';
+    const VARIANT_BLANKY = 'blankY';
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
 
@@ -41,6 +42,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULARSM
                 && $string !== self::VARIANT_REGULARX
                 && $string !== self::VARIANT_BLANK
+                && $string !== self::VARIANT_BLANKY
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
@@ -74,6 +76,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function blank(): self
     {
         return self::from(self::VARIANT_BLANK);
+    }
+
+    public static function blankY(): self
+    {
+        return self::from(self::VARIANT_BLANKY);
     }
 
     public static function stageAfterBreadcrumb(): self
@@ -111,6 +118,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BLANK;
     }
 
+    public function getIsBlankY(): bool
+    {
+        return $this->value === self::VARIANT_BLANKY;
+    }
+
     public function getIsStageAfterBreadcrumb(): bool
     {
         return $this->value === self::VARIANT_STAGEAFTERBREADCRUMB;
@@ -132,6 +144,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_REGULARSM),
             self::from(self::VARIANT_REGULARX),
             self::from(self::VARIANT_BLANK),
+            self::from(self::VARIANT_BLANKY),
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB)
         ];

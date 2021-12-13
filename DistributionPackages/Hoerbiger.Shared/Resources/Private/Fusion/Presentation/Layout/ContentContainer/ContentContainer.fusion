@@ -22,7 +22,8 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isRegularX && "max-w-content-full mx-auto px-md bg-light",
                 presentationObject.variant.isStageAfterBreadcrumb && "max-w-content-full mx-auto p-sm pt-0 bg-light",
                 presentationObject.variant.isRegularStageAfterBreadcrumb && "max-w-content-full mx-auto p-md pt-0 bg-light",
-                presentationObject.variant.isBlank && "w-full"
+                presentationObject.variant.isBlank && "w-full",
+                presentationObject.variant.isBlankY && "w-full py-md"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </div>
