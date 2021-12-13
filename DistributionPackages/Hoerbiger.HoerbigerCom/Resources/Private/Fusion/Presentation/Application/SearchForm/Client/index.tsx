@@ -4,6 +4,7 @@ import cx from "classnames";
 
 import {ApplicationData, SearchRequest, SearchRequestParams, SearchResponse} from "./Definitions";
 import {requestSearchApi} from "./Utils/requestSearchApi";
+import {mostWantedApi} from "./Utils/mostWantedApi";
 import {Filter, SearchInput, Sorter, Summary, Paginator} from "./Components";
 import {StampedeIcon} from "@hoerbiger/shared/Resources/Private/Fusion/Presentation/Application/Components";
 
@@ -70,6 +71,15 @@ export const Client = (props: ApplicationData): JSX.Element => {
 			}
 		}
 	}, [response]);
+
+	const registerForMostWanted = React.useCallback((identifier: string) => {
+		mostWantedApi({
+			api: props.mostWantedEndpointUri,
+			csrfProtectionToken: props.csrfProtectionToken,
+			language: props.language,
+			nodeAggregateIdentifier: identifier
+		});
+	}, [props.mostWantedEndpointUri]);
 
 	return isInitialized.current && response
 		? (
@@ -149,6 +159,7 @@ export const Client = (props: ApplicationData): JSX.Element => {
 					{
 						response?.results.map(result => (
 							<div
+								onClick={() => registerForMostWanted(result.identifier)}
 								key={result.identifier}
 								dangerouslySetInnerHTML={{__html: result.content}}
 							/>

@@ -21,6 +21,7 @@
     '@subpackage': 'Application'
     '@controller': 'WantedNode'
     '@action':     'register'
+    '@format':     'json'
   httpMethods: ['POST']
   appendExceedingArguments: true
 

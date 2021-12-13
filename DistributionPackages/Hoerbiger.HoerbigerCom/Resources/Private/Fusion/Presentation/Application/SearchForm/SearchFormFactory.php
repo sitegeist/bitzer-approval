@@ -14,6 +14,7 @@ use Neos\Flow\I18n\Service as LocalizationService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Sitegeist\CsvPO\Domain\TranslationLabel;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
+use Neos\Flow\Security\Context as SecurityContext;
 
 final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -28,6 +29,12 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
      * @var LocalizationService
      */
     protected $localizationService;
+
+    /**
+     * @Flow\Inject
+     * @var SecurityContext
+     */
+    protected $securityContext;
 
     public function create(ContentContext $subgraph): SearchForm
     {
@@ -68,6 +75,7 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
         $languageChain = $subgraph->getDimensions()['language'];
 
         return new SearchForm(
+            $this->securityContext->getCsrfProtectionToken(),
             $endpointUri,
             json_encode(SortingProperty::cases()) ?: '[]',
             json_encode(SearchPeriod::cases()) ?: '[]',

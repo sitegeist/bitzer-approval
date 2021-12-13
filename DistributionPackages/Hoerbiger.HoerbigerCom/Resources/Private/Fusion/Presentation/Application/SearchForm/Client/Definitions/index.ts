@@ -10,6 +10,7 @@ export interface ApplicationData {
 	periodOptions: string[];
 	language: string;
 	mostWantedEndpointUri: string;
+	csrfProtectionToken: string;
 	getLabelFor: LabelGetter;
 	searchTerm: string;
 }

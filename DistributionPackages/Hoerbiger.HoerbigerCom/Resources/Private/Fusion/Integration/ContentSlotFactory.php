@@ -315,30 +315,35 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         false
                     ),
                     new CacheSegment(
-                        Collection::fromIterable(
-                            $this->wantedNodeRepository->findMostWanted($language, $site),
-                            function (TraversableNodeInterface $node): LinkInterface {
-                                return new Link(
-                                    LinkVariant::label(),
-                                    $this->uriService->getNodeUri($node),
-                                    LinkTarget::self(),
-                                    null,
-                                    Value::fromString($node->getLabel())
-                                );
-                            }
+                        new Stack(
+                            StackVariant::noGap(),
+                            Collection::fromIterable(
+                                $this->wantedNodeRepository->findMostWanted($language, $site),
+                                function (TraversableNodeInterface $node): LinkInterface {
+                                    return new Link(
+                                        LinkVariant::label(),
+                                        $this->uriService->getNodeUri($node),
+                                        LinkTarget::self(),
+                                        null,
+                                        Value::fromString($node->getLabel())
+                                    );
+                                }
+                            ),
                         ),
                         'Hoerbiger.HoerbigerCom:CacheSegment.MostWanted'
                     )
-
                 ]), $identity)
             )
         );
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            new Grid(
-                GridVariant::twoColumns(),
-                Collection::fromIterable(array_filter([$figure, $text]), $identity)
+            new Box(
+                BoxVariant::neutral(),
+                new Grid(
+                    GridVariant::twoColumns(),
+                    Collection::fromIterable(array_filter([$figure, $text]), $identity)
+                )
             )
         );
     }

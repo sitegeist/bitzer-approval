@@ -62,7 +62,6 @@ export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
 				className="text-neutral-contrast w-full h-full grid place-items-center z-10 cursor-pointer"
 			>
 				<StampedeIcon iconName="search" size={1.5}/>
-
 			</div>
 			{
 				(isExpanded && !isTooSmallForExpandedView) && (
