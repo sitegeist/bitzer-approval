@@ -26,7 +26,8 @@
         "sitegeist/stampede": "^1.1",
         "sitegeist/archaeopteryx": "^1.0",
         "sitegeist/inspectorgadget": "*",
-        "sitegeist/bitzer-approval": "*"
+        "sitegeist/bitzer-approval": "*",
+        "sitegeist/lostintranslation": "^1.0"
     },
     "autoload": {
         "psr-4": {

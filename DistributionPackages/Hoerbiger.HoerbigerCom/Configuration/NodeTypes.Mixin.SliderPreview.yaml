@@ -9,6 +9,8 @@
           group: 'sliderPreview'
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
+      options:
+        translateOnAdoption: true
     slider__preview__description:
       type: 'string'
       ui:
@@ -20,6 +22,8 @@
             rows: 7
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
+      options:
+        translateOnAdoption: true
     slider__preview__image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       options:
@@ -38,6 +42,8 @@
           group: 'sliderPreview'
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
+      options:
+        translateOnAdoption: true
     slider__preview__image__title:
       type: 'string'
       ui:
@@ -64,6 +70,8 @@
           group: 'sliderPreview'
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
+      options:
+        translateOnAdoption: true
     slider__preview__background__title:
       type: 'string'
       ui:
@@ -72,3 +80,5 @@
           group: 'sliderPreview'
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
+      options:
+        translateOnAdoption: true
