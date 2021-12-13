@@ -33,7 +33,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                 >
                     <img
                         id="logo"
-                        class="h-full max-h-[75px] max-w-[60vw]"
+                        class="h-full max-h-[60px] max-w-[40vw] sm:max-h-[75px] sm:max-w-[60vw] my-3"
                         src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
                         {...props.logo}
                     />
@@ -80,7 +80,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
                     <div class="flex items-center space-x-2 z-30">
                         <!-- SEARCH -->
-                        <Neos.Fusion:Augmenter class="z-20">
+                        <Neos.Fusion:Augmenter class="z-20 w-touch h-touch sm:w-[100px] sm:h-[100px]">
                             <PackageFactory.AtomicFusion.PresentationObjects:Slot
                                 @if.1={presentationObject.search}
                                 presentationObject={presentationObject.search}
@@ -88,7 +88,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </Neos.Fusion:Augmenter>
 
                         <!-- LANGUAGES -->
-                        <div class="hidden menuToggle:flex w-[100px] h-[100px] relative text-neutral-contrast z-10">
+                        <div class="hidden menuToggle:flex w-touch h-touch sm:w-[100px] sm:h-[100px] relative text-neutral-contrast z-10">
                             <div class="absolute inset-0 grid grid-col-1 gap-2">
                                 <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                     <div class={[
@@ -114,7 +114,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         <!-- OFFCANVAS -->
                         <div
                             id="offcanvas"
-                            class="flex menuToggle:hidden bg-neutral-lighter w-[100px] h-[100px] relative group z-30"
+                            class="flex menuToggle:hidden bg-neutral-lighter w-touch h-touch sm:w-[100px] sm:h-[100px] relative group z-30"
                         >
                             <a
                                 href="#offcanvas"
