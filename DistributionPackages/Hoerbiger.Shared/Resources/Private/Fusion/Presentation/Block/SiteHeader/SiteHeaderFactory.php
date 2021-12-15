@@ -72,7 +72,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     ): ?NavigationItems {
         if ($currentLevel <= $maxDepth) {
             $menuItems = [];
-            $childNodes = $this->findChildNodesByNodeTypeFilterString($node, 'Neos.Neos:Document');
+            $childNodes = $this->findChildNodesByNodeTypeFilterString($node, 'Neos.Neos:Document,!Hoerbiger.Shared:Tag.ExcludeFromNavigation');
 
             foreach ($childNodes as $childNode) {
                 /** @var Node $childNode*/
