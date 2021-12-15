@@ -4,6 +4,7 @@
     'Neos.Neos:Document': true
     'Hoerbiger.Shared:Mixin.Searchable': true
     'Hoerbiger.Shared:Tag.ExcludeFromNodeTree': true
+    'Hoerbiger.Shared:Tag.ExcludeFromNavigation': true
   constraints:
     nodeTypes:
       '*': false
