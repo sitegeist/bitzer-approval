@@ -3,6 +3,7 @@
   superTypes:
     'Neos.Neos:Document': true
     'Hoerbiger.Shared:Tag.ExcludeFromNodeTree': true
+    'Hoerbiger.Shared:Tag.ExcludeFromNavigation': true
   constraints:
     nodeTypes:
       '*': false
