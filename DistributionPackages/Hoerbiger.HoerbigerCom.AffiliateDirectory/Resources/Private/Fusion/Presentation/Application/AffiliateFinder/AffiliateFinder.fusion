@@ -2,7 +2,7 @@ prototype(Hoerbiger.HoerbigerCom.AffiliateDirectory:Application.AffiliateFinder)
     @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\AffiliateDirectory\\Presentation\\Application\\AffiliateFinder\\AffiliateFinderInterface'
 
     renderer = afx`
-        <div class="[Application.AffiliateFinder] px-md py-sm relative">
+        <div class="[Application.AffiliateFinder] relative">
             <script
                 data-select="applicationData"
                 type="application/json"

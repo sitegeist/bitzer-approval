@@ -14,11 +14,15 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 final class AffiliateFinder extends AbstractComponentPresentationObject implements AffiliateFinderInterface
 {
     private Affiliates $affiliates;
+
     private string $googleMapsApiKey;
+
     /**
      * @var array<string,string>
      */
     private array $labels;
+
+    private string $language;
 
     /**
      * @param array<string,string> $labels
@@ -26,11 +30,13 @@ final class AffiliateFinder extends AbstractComponentPresentationObject implemen
     public function __construct(
         Affiliates $affiliates,
         string $googleMapsApiKey,
-        array $labels
+        array $labels,
+        string $language
     ) {
         $this->affiliates = $affiliates;
         $this->googleMapsApiKey = $googleMapsApiKey;
         $this->labels = $labels;
+        $this->language = $language;
     }
 
     public function getApplicationData(): string
@@ -39,7 +45,8 @@ final class AffiliateFinder extends AbstractComponentPresentationObject implemen
             [
                 'googleMapsApiKey' => $this->googleMapsApiKey,
                 'affiliates' => $this->affiliates,
-                'labels' => $this->labels
+                'labels' => $this->labels,
+                'language' => $this->language
             ]
         )?: '{}';
     }

@@ -12,6 +12,7 @@ use Neos\Flow\Annotations as Flow;
  */
 final class Affiliate implements \JsonSerializable
 {
+    private string $identifier;
     private string $legalName;
     private string $streetAddress;
     private string $postalCode;
@@ -30,6 +31,7 @@ final class Affiliate implements \JsonSerializable
      * @param array<int,string> $tags
      */
     public function __construct(
+        string $identifier,
         string $legalName,
         string $streetAddress,
         string $postalCode,
@@ -41,6 +43,7 @@ final class Affiliate implements \JsonSerializable
         float $longitude,
         array $tags
     ) {
+        $this->identifier = $identifier;
         $this->legalName = $legalName;
         $this->streetAddress = $streetAddress;
         $this->postalCode = $postalCode;
@@ -56,6 +59,7 @@ final class Affiliate implements \JsonSerializable
     public static function dummy(): self
     {
         return new self(
+            '123',
             'Peter klaus die fledermaus',
             'Poßmoorweg 2',
             '22312',
@@ -67,6 +71,11 @@ final class Affiliate implements \JsonSerializable
             10.0039283,
             []
         );
+    }
+
+    public function getIdentifier(): string
+    {
+        return $this->identifier;
     }
 
     public function getLegalName(): string
@@ -128,6 +137,7 @@ final class Affiliate implements \JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'identifier' => $this->identifier,
             'legalName' => $this->legalName,
             'streetAddress' => $this->streetAddress,
             'postalCode' => $this->postalCode,

@@ -38,7 +38,8 @@ final class AffiliateFinderFactory extends AbstractComponentPresentationObjectFa
         return new AffiliateFinder(
             $this->affiliateRepository->findAffiliates($locale),
             'AIzaSyDu4LZZnG6K5U5Yx-BrkLfLD4jxIi474aM',
-            $this->getLabels($locale)
+            $this->getLabels($locale),
+            $locale
         );
     }
 

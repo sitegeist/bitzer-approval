@@ -5,6 +5,7 @@ export type Labels = {
 }
 
 export interface Affiliate {
+	identifier: string;
 	legalName: string;
 	streetAddress:  string;
 	postalCode: string;
@@ -18,8 +19,33 @@ export interface Affiliate {
 }
 
 export interface ApplicationData {
+	// Injected.
 	affiliates: Affiliate[];
 	googleMapsApiKey: string;
+	language: string;
+	// Computed.
 	getLabelFor: LabelGetter;
 }
 
+export type Country = {
+	name: string;
+	affiliates: {
+		[sameAddress: string]: Affiliate[]
+	};
+	count: number;
+}
+
+export type Countries = {
+	[key: string]: Country;
+}
+
+export type ActiveState = {
+	country: Country|null;
+	geoIdentifier: string|null;
+}
+
+export type ActiveStateAction =
+| {type: "selectCountry", country: Country,}
+| {type: "selectGeoIdentifier", country: Country, geoIdentifier: string,}
+| {type: "unselectGeoIdentifier",}
+| {type: "reset",};

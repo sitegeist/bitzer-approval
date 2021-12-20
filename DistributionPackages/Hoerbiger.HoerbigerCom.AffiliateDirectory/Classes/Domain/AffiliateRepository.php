@@ -105,6 +105,7 @@ class AffiliateRepository
             }
 
             $affiliates[] = new Affiliate(
+                (string)$row->getRowIndex(),
                 $legalName,
                 $streetAddress,
                 $postalCode,

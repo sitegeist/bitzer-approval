@@ -64,11 +64,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::blankY(),
-                    new Box(
-                        BoxVariant::neutral(),
-                        $application
-                    )
+                    ContentContainerVariant::regularNeutral(),
+                    $application
                 )
             ]), $identity),
             $this->siteFooterFactory->forDocument($affiliateFinder, $site)

@@ -13,10 +13,12 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
     renderer = afx`
         <div class={[
             "[Layout.ContentContainer (" + presentationObject.variant + ")]",
-            "w-full"
+            "w-full",
+            presentationObject.variant.isRegularNeutral && "bg-neutral-lighter"
         ]}>
             <div class={[
                 presentationObject.variant.isRegular && "max-w-content-full mx-auto p-md bg-light",
+                presentationObject.variant.isRegularNeutral && "max-w-content-full mx-auto p-md",
                 presentationObject.variant.isTight && "max-w-content-66 mx-auto p-md bg-light",
                 presentationObject.variant.isRegularSm && "max-w-content-full mx-auto pb-sm sm:p-sm bg-light",
                 presentationObject.variant.isRegularX && "max-w-content-full mx-auto px-md bg-light",
