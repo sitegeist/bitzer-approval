@@ -28,12 +28,12 @@
 Build/Resources/Java/selenium-server-standalone*
 /"
 node_modules/
+yarn-error.log
 
 DistributionPackages/*/Resources/Private/**/*.css.fusion
 DistributionPackages/*/Resources/Private/**/*.css.json
 DistributionPackages/*/Resources/Private/**/*.js.fusion
-DistributionPackages/*/Resources/Public/JavaScript/
-DistributionPackages/*/Resources/Public/Styles/
+DistributionPackages/*/Resources/Public/Build/
 .build/
 
 .idea
