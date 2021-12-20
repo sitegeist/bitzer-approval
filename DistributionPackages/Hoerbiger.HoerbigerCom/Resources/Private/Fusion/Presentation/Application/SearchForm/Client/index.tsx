@@ -12,6 +12,7 @@ export {ApplicationData};
 
 export const Client = (props: ApplicationData): JSX.Element => {
 	const isInitialized = React.useRef(false);
+	const isWaitingForMostWanted = React.useRef(false);
 	const $results = React.useRef<HTMLDivElement>(null);
 	const [isFetching, setIsFetching] = React.useState(false);
 	const [requestParams, setRequestParams] = React.useState<SearchRequestParams>({
@@ -72,14 +73,25 @@ export const Client = (props: ApplicationData): JSX.Element => {
 		}
 	}, [response]);
 
-	const registerForMostWanted = React.useCallback((identifier: string) => {
-		mostWantedApi({
-			api: props.mostWantedEndpointUri,
-			csrfProtectionToken: props.csrfProtectionToken,
-			language: props.language,
-			nodeAggregateIdentifier: identifier
-		});
-	}, [props.mostWantedEndpointUri]);
+	const registerForMostWanted = (identifier: string) => (e: React.MouseEvent<HTMLDivElement>) => {
+		const target = e.currentTarget.querySelector(":scope > div > a")?.getAttribute("href");
+
+		if (!isWaitingForMostWanted.current) {
+			isWaitingForMostWanted.current = true;
+			(async () => {
+				await mostWantedApi({
+					api: props.mostWantedEndpointUri,
+					csrfProtectionToken: props.csrfProtectionToken,
+					language: props.language,
+					nodeAggregateIdentifier: identifier
+				});
+
+				if (target) {
+					window.location.href = target;
+				}
+			})();
+		}
+	};
 
 	return isInitialized.current && response
 		? (
@@ -159,10 +171,15 @@ export const Client = (props: ApplicationData): JSX.Element => {
 					{
 						response?.results.map(result => (
 							<div
-								onClick={() => registerForMostWanted(result.identifier)}
 								key={result.identifier}
-								dangerouslySetInnerHTML={{__html: result.content}}
-							/>
+								className="cursor-pointer hover:shadow-textbox-hover"
+								onClick={registerForMostWanted(result.identifier)}
+							>
+								<div
+									className="pointer-events-none"
+									dangerouslySetInnerHTML={{__html: result.content}}
+								></div>
+							</div>
 						))
 					}
 				</div>
