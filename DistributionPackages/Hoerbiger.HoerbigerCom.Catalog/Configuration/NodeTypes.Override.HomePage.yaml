@@ -2,4 +2,7 @@
   childNodes:
     catalog:
       type: 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog'
+      position: before industrysolutions
+    industrysolutions:
+      type: 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions'
       position: before notfound

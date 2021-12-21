@@ -5,10 +5,10 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
-use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
-use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
+use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
+use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;

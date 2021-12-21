@@ -19,12 +19,12 @@
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.MostWanted': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+    chronicle:
+      type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
     assetdirectory:
       type: 'Hoerbiger.Shared:Document.AssetDirectory'
     searchresults:
       type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
-    chronicle:
-      type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
     contact:
       type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
     notfound:

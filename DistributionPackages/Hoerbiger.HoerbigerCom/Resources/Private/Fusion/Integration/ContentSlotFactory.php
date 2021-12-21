@@ -7,9 +7,9 @@ namespace Hoerbiger\HoerbigerCom\Integration;
 
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
-use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
@@ -57,40 +57,40 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
  */
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ImageSourceFactory $imageSourceFactory;
-
     private CardFactory $cardFactory;
 
     private FigureFactory $figureFactory;
 
-    private PartialFigureEclipseFactory $partialFigureEclipseFactory;
-
-    private WantedNodeRepository $wantedNodeRepository;
-
-    private TimelineFactory $timelineFactory;
+    private ImageSourceFactory $imageSourceFactory;
 
     private MileStoneFactory $milestoneFactory;
 
+    private PartialFigureEclipseFactory $partialFigureEclipseFactory;
+
+    private TimelineFactory $timelineFactory;
+
     private VideoFactory $videoFactory;
 
+    private WantedNodeRepository $wantedNodeRepository;
+
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
         CardFactory $cardFactory,
         FigureFactory $figureFactory,
-        PartialFigureEclipseFactory $partialFigureEclipseFactory,
-        WantedNodeRepository $wantedNodeRepository,
-        TimelineFactory $timelineFactory,
+        ImageSourceFactory $imageSourceFactory,
         MileStoneFactory $milestoneFactory,
-        VideoFactory $videoFactory
+        PartialFigureEclipseFactory $partialFigureEclipseFactory,
+        TimelineFactory $timelineFactory,
+        VideoFactory $videoFactory,
+        WantedNodeRepository $wantedNodeRepository
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
         $this->cardFactory = $cardFactory;
         $this->figureFactory = $figureFactory;
-        $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
-        $this->wantedNodeRepository = $wantedNodeRepository;
-        $this->timelineFactory = $timelineFactory;
+        $this->imageSourceFactory = $imageSourceFactory;
         $this->milestoneFactory = $milestoneFactory;
+        $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
+        $this->timelineFactory = $timelineFactory;
         $this->videoFactory = $videoFactory;
+        $this->wantedNodeRepository = $wantedNodeRepository;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site): SlotInterface
