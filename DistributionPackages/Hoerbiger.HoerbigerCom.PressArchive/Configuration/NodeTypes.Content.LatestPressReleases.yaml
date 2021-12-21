@@ -31,3 +31,17 @@
       constraints:
         nodeTypes:
           'Hoerbiger.HoerbigerCom.PressArchive:Content.LatestPressReleases': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.LatestPressReleases': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.LatestPressReleases': true

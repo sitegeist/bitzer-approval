@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Catalog.Page.forIndustrySolution(site, documentNode, documentNode.context.inBackend, site.context)}
+        }
+    }
+}

@@ -1,0 +1,11 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList) < prototype(Hoerbiger.Shared:CacheSegment) {
+    @cache {
+        entryIdentifier {
+            node = ${node}
+        }
+        entryTags {
+            // whenever an industry solution is changed, the cache segment will flush
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution')}
+        }
+    }
+}
