@@ -13,6 +13,7 @@ use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -45,8 +46,10 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     public function forIndustrySolutionProducts(ContentContext $subgraph, TraversableNodeInterface $industrySolution): array
     {
         $cards = [];
+
         foreach ($this->catalog->findProductsForIndustrySolution($subgraph, $industrySolution) as $product) {
             $imageSource = $this->imageSourceFactory->forPreviewMixin($product, false);
+
             $cards[] = new ProductCard(
                 $imageSource ? $this->figureFactory->forProductCard($imageSource) : null,
                 Value::fromString($product->getLabel()),
@@ -70,12 +73,14 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
         ) as $industrySolution) {
             $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolutions, false);
+            $link = (new LinkFactory())->forLinkToDocument($industrySolution);
+
             $cards[] = new NavigationCard(
                 $imageSource ? $this->figureFactory->forNavigationCard($imageSource) : null,
                 Value::fromString($industrySolution->getLabel()),
                 null,
                 Value::fromString($industrySolution->getProperty('abstract') ?: ''),
-                null
+                $link
             );
         }
 

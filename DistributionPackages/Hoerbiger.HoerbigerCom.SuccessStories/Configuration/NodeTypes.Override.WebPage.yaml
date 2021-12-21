@@ -1,4 +1,25 @@
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories': true
+
 'Hoerbiger.HoerbigerCom:Document.WebPage':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
   childNodes:
     main:
       constraints:

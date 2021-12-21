@@ -8,11 +8,16 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
@@ -84,9 +89,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 new CacheSegment(
-                    Collection::fromIterable((new CardFactory())->forIndustrySolutions($industrySolutions), $identity),
+                    new ContentContainer(
+                        ContentContainerVariant::regular(),
+                        new Grid(
+                            GridVariant::threeColumnsGap(),
+                            Collection::fromIterable((new CardFactory())->forIndustrySolutions($industrySolutions), $identity)
+                        )
+                    ),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList'
-                )
+                ),
+                Content::fromNode($industrySolutions->findNamedChildNode(NodeName::fromString('main'))),
             ]), $identity),
             $this->siteFooterFactory->forDocument($industrySolutions, $site)
         );

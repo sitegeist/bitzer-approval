@@ -85,6 +85,8 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
             case 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog':
             case 'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory':
             case 'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
                 return $this->forSiteFooter($site);
             case 'Hoerbiger.HoerbigerCom:Document.ContactPage':
             default:
