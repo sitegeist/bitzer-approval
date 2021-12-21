@@ -85,6 +85,8 @@ export const Client = (props: ApplicationData): JSX.Element => {
 					language: props.language,
 					nodeAggregateIdentifier: identifier
 				});
+				// iOS/Safari-Fix
+				isWaitingForMostWanted.current = false;
 
 				if (target) {
 					window.location.href = target;
