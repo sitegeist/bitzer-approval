@@ -10,11 +10,13 @@ use Flowpack\ElasticSearch\ContentRepositoryAdaptor\ElasticSearchClient;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactoryInterface;
 use Hoerbiger\Shared\Infrastructure\FusionRenderer;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Media\Domain\Model\Document;
 use Neos\Media\Domain\Repository\DocumentRepository;
 use Neos\Neos\Domain\Service\ContentContext;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
  * @Flow\Scope("singleton")
@@ -31,18 +33,22 @@ final class Stuff
 
     private CardFactory $cardFactory;
 
+    private LinkFactory $linkFactory;
+
     public function __construct(
         ElasticSearchClient $searchClient,
         StuffContentContextFactory $contentContextFactory,
         DocumentRepository $documentRepository,
         FusionRenderer $fusionRenderer,
-        CardFactory $cardFactory
+        CardFactory $cardFactory,
+        LinkFactory $linkFactory
     ) {
         $this->searchClient = $searchClient;
         $this->contentContextFactory = $contentContextFactory;
         $this->documentRepository = $documentRepository;
         $this->fusionRenderer = $fusionRenderer;
         $this->cardFactory = $cardFactory;
+        $this->linkFactory = $linkFactory;
     }
 
     public function findThingsByQuery(StuffQuery $query): StuffResponse
@@ -102,7 +108,12 @@ final class Stuff
                 if (!$document instanceof Document) {
                     return null;
                 }
+                /** @var SlotInterface $card */
                 $card = $this->cardFactory->forDocument($document);
+                $link = $this->linkFactory
+                    ->forAsset($document)
+                    ->asContainer()
+                    ->withContent($card);
                 break;
             default:
                 $node = $contentContext->getNodeByIdentifier($searchHit['_source']['neos_node_identifier']);
@@ -118,15 +129,23 @@ final class Stuff
                 $cardFactoryClassName = $namespace . '\\Presentation\\Block\\Card\\CardFactory';
                 /** @var CardFactoryInterface $cardFactory */
                 $cardFactory = new $cardFactoryClassName();
-                $card = $cardFactory->forThing($node);
+                /** @var SlotInterface $card */
+                $card = $cardFactory->forThing(
+                    $node,
+                    $searchHit['_source']['searchType']
+                );
+                $link = $this->linkFactory
+                    ->forLinkToDocument($node)
+                    ->asContainer()
+                    ->withContent($card);
         }
 
         return new Thing(
             $searchHit['_source']['neos_node_identifier'],
             $this->fusionRenderer->render(
-                '/<Hoerbiger.Shared:Block.Card.ArticleCard>/renderer',
+                '/<Hoerbiger.Shared:Block.Link>/renderer',
                 [
-                    'presentationObject' => $card
+                    'presentationObject' => $link
                 ]
             )
         );

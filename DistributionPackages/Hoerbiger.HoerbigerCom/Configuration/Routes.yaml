@@ -24,3 +24,16 @@
     '@format':     'json'
   httpMethods: ['POST']
   appendExceedingArguments: true
+
+# Contact Request
+-
+  name:  'Contact Request'
+  uriPattern: 'contactrequest/send'
+  defaults:
+    '@package':    'Hoerbiger.HoerbigerCom'
+    '@subpackage': 'Application'
+    '@controller': 'ContactRequest'
+    '@action':     'send'
+    '@format':     'json'
+  httpMethods: ['POST']
+  appendExceedingArguments: true

@@ -10,6 +10,7 @@ use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
 use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
+use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -30,6 +31,9 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
+use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
+use Neos\Flow\I18n\Service as LocalizationService;
+use Neos\Flow\Annotations as Flow;
 
 final class CardFactory extends AbstractComponentPresentationObjectFactory implements CardFactoryInterface
 {
@@ -38,6 +42,18 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     private FigureFactory $figureFactory;
 
     private CsvPOTranslator $csvPOTranslator;
+
+    /**
+     * @var TranslationLabelSourceRepository
+     * @Flow\Inject
+     */
+    protected $translationLabelSourceRepository;
+
+    /**
+     * @Flow\Inject
+     * @var LocalizationService
+     */
+    protected $localizationService;
 
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
@@ -53,7 +69,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     {
         $link = (new LinkFactory())->forLinkToDocument($document);
 
-        $imageSource = $this->imageSourceFactory->forImageProperty($document, $inBackend, 'preview__image');
+        $imageSource = $this->imageSourceFactory->forPreviewMixin($document, $inBackend);
         $figure = $imageSource
             ? $link->asContainer()->withContent($this->figureFactory->forNavigationCard($imageSource))
             : null;
@@ -97,6 +113,42 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
+    public function forDocument(Document $document): CardInterface
+    {
+        return new ArticleCard(
+            null,
+            Value::fromString($document->getLabel()),
+            null,
+            null,
+            null
+        );
+    }
+
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier): CardInterface
+    {
+        $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
+            'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'
+        );
+        $label = $labelSource
+            ? $labelSource->findTranslationLabelByIdentifier('type.' . $typeIdentifier)
+            : null;
+        $translatedLabel = $label
+            ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+                $this->localizationService->getConfiguration()->getCurrentLocale()
+            ))->getTranslation()
+            : null;
+
+        return new SearchResultCard(
+            null,
+            Value::fromString($thing->getLabel()),
+            Value::fromString($translatedLabel ?: $typeIdentifier),
+            $thing->getProperty('preview__description')
+                ? Value::fromString($thing->getProperty('preview__description'))
+                : null,
+            null
+        );
+    }
+
     public function forDownloadNode(TraversableNodeInterface $downloadNode): DownloadCard
     {
         $identity = function (SlotInterface $slot) {
@@ -137,34 +189,12 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     ? $this->figureFactory->forDownloadCard(
                     $imageSource
                     )
-                    : new Icon('shared', 'pdf');
+                    : new Icon('shared', 'pdf', null);
             case 'ppt':
             case 'pptx':
-                return new Icon('shared', 'powerpoint');
+                return new Icon('shared', 'powerpoint', null);
             default:
-                return new Icon('shared', 'downloadFile');
+                return new Icon('shared', 'downloadFile', null);
         }
-    }
-
-    public function forDocument(Document $document): CardInterface
-    {
-        return new ArticleCard(
-            null,
-            Value::fromString($document->getLabel()),
-            null,
-            null,
-            null
-        );
-    }
-
-    public function forThing(TraversableNodeInterface $thing): CardInterface
-    {
-        return new ArticleCard(
-            null,
-            Value::fromString($thing->getLabel()),
-            null,
-            null,
-            null
-        );
     }
 }

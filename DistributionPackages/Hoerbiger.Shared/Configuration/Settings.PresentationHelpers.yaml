@@ -1,6 +1,7 @@
 Neos:
   Fusion:
     defaultContext:
+      DimensionResolution: Hoerbiger\Shared\Application\DimensionResolutionHelper
       Shared.SiteHeader: Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory
       Shared.SiteFooter: Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory
       Shared.Page: Hoerbiger\Shared\Presentation\Layout\Page\PageFactory
@@ -30,3 +31,5 @@ Neos:
       Shared.ContactFormLink: Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkFactory
       Shared.MileStone: Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory
       Shared.Timeline: Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory
+      Shared.NavigationItem: Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItemFactory
+      Shared.CompactSearchForm: Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory

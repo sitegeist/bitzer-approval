@@ -20,14 +20,14 @@
     description:
       options:
         preset: 'rte.text'
-      ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte Beschreibung eingeben'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
           type: text
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Beschreibung eingeben'
     asset:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:

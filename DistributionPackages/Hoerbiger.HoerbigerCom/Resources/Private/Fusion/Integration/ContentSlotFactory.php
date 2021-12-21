@@ -179,7 +179,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Grid(
-                GridVariant::twoColumnsGap(),
+                GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     TraversableNodes::fromArray($node->getProperty('documents') ?: []),
                     function (TraversableNodeInterface $document) use ($inBackend)  {
@@ -199,7 +199,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $columns = Columns::from($textNode->getProperty('columns') ?: Columns::VALUE_MAX_TWO);
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            $columns->getIsMaxOne()
+                ? ContentContainerVariant::tight()
+                : ContentContainerVariant::regular(),
             new Stack(
                 StackVariant::xs(),
                 Collection::fromIterable(array_filter([
@@ -275,7 +277,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            $this->figureFactory->forFullWidthImage($imageSource)
+            $this->figureFactory->forFullWidthImage(
+                $imageSource,
+                Editable::fromNodeProperty($imageNode, 'image__caption')
+            )
         );
     }
 
@@ -310,30 +315,35 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         false
                     ),
                     new CacheSegment(
-                        Collection::fromIterable(
-                            $this->wantedNodeRepository->findMostWanted($language, $site),
-                            function (TraversableNodeInterface $node): LinkInterface {
-                                return new Link(
-                                    LinkVariant::label(),
-                                    $this->uriService->getNodeUri($node),
-                                    LinkTarget::self(),
-                                    null,
-                                    Value::fromString($node->getLabel())
-                                );
-                            }
+                        new Stack(
+                            StackVariant::noGap(),
+                            Collection::fromIterable(
+                                $this->wantedNodeRepository->findMostWanted($language, $site),
+                                function (TraversableNodeInterface $node): LinkInterface {
+                                    return new Link(
+                                        LinkVariant::label(),
+                                        $this->uriService->getNodeUri($node),
+                                        LinkTarget::self(),
+                                        null,
+                                        Value::fromString($node->getLabel())
+                                    );
+                                }
+                            ),
                         ),
                         'Hoerbiger.HoerbigerCom:CacheSegment.MostWanted'
                     )
-
                 ]), $identity)
             )
         );
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            new Grid(
-                GridVariant::twoColumns(),
-                Collection::fromIterable(array_filter([$figure, $text]), $identity)
+            new Box(
+                BoxVariant::neutral(),
+                new Grid(
+                    GridVariant::twoColumns(),
+                    Collection::fromIterable(array_filter([$figure, $text]), $identity)
+                )
             )
         );
     }

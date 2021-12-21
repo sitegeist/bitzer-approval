@@ -4,7 +4,7 @@ Neos:
       defaultContext:
         Shared.Indexing: Hoerbiger\Shared\Application\IndexingHelper
       elasticSearch:
-        indexName: hoerbiger-websites
+        indexName: hoerbiger-neos-distribution-elasticsearch
       indexAllWorkspaces: false
       realtimeIndexing:
         enabled: true

@@ -31,7 +31,9 @@ final class NavigationNodeRepository
     public function findMainNavigationDocuments(TraversableNodeInterface $site): TraversableNodes
     {
         $documents = $site->findChildNodes(
-            $this->nodeTypeConstraintFactory->parseFilterString('Hoerbiger.HoerbigerCom:Document')
+            $this->nodeTypeConstraintFactory->parseFilterString(
+                'Hoerbiger.HoerbigerCom:Document,!Hoerbiger.Shared:Tag.ExcludeFromNavigation'
+            )
         )->toArray();
 
         return TraversableNodes::fromArray(array_filter(

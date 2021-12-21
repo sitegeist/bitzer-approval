@@ -1,7 +1,7 @@
 prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Neos.Fusion:Component) {
     renderer = Hoerbiger.HoerbigerCom:Document.Base {
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${Hoerbiger.Page.forNotFoundPage(site, documentNode)}
+            presentationObject = ${Hoerbiger.Page.forNotFoundPage(site, documentNode, documentNode.context, documentNode.context.inBackend )}
         }
     }
     prototype(Neos.Neos:Page) {
@@ -12,9 +12,11 @@ prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Neos.Fusion:Com
 }
 
 error {
-    @context.notfoundDocument = ${q(site).children('notfound').get(0)}
+    @context.dimensions = ${{'dimensions':{'language': DimensionResolution.resolveLanguage()}}}
 
     404 {
+        @context.notfoundDocument = ${q(site).context(dimensions).find('notfound').get(0)}
+        @context.site = ${q(site).context(dimensions).get(0)}
         @position = 'start'
         condition = ${statusCode == 404 && notfoundDocument}
         renderer = Neos.Fusion:Renderer {

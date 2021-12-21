@@ -8,10 +8,11 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
 use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
+use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -34,19 +35,23 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private StageFactory $stageFactory;
 
+    private SiteHeaderFactory $siteHeaderFactory;
+
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
         SiteFooterFactory $siteFooterFactory,
         SlidableFactory $slidableFactory,
-        StageFactory $stageFactory
+        StageFactory $stageFactory,
+        SiteHeaderFactory $siteHeaderFactory
     ) {
         $this->imageSourceFactory = $imageSourceFactory;
         $this->siteFooterFactory = $siteFooterFactory;
         $this->slidableFactory = $slidableFactory;
         $this->stageFactory = $stageFactory;
+        $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
-    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -58,7 +63,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $homepage,
+                $homepage,
+                $subgraph
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
@@ -86,7 +95,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($searchResultsPage, $subgraph);
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $searchResultsPage,
+                $siteNode,
+                $subgraph
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
@@ -97,7 +110,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::regular(),
                     (new SearchFormFactory())->create($subgraph)
                 ),
             ]), $identity),
@@ -113,6 +126,50 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
     }
 
+    public function forContactPage(TraversableNodeInterface $site, TraversableNodeInterface $contactPage, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        $languages = $subgraph->getDimensions()['language'];
+        $language = reset($languages);
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($contactPage, $inBackend);
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = (new BreadcrumbFactory())->forPage($contactPage, $subgraph);
+
+        return new Page(
+            $this->siteHeaderFactory->forDocument(
+                $contactPage,
+                $site,
+                $subgraph
+            ),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    $stage
+                ),
+                Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::blank(),
+                    (new ContactFormFactory())->create(
+                        $site,
+                        $language,
+                        $inBackend,
+                        Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonsuccess')), 'Hoerbiger.HoerbigerCom:ContentSlot'),
+                        Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonfail')), 'Hoerbiger.HoerbigerCom:ContentSlot')
+                    )
+                )
+            ]), $identity),
+            $this->siteFooterFactory->forDocument($contactPage, $site)
+        );
+    }
+
     public function forChroniclePage(TraversableNodeInterface $site, TraversableNodeInterface $chroniclePage, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
@@ -121,11 +178,28 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph);
     }
 
-    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage): PageInterface
+    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage, ContentContext $subgraph, bool $inBackend): PageInterface
     {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($notFoundPage, $inBackend);
+
         return new Page(
-            new SiteHeader(),
-            Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main'))),
+            $this->siteHeaderFactory->forDocument(
+                $notFoundPage,
+                $site,
+                $subgraph
+            ),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularSm(),
+                    $stage
+                ),
+                Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main')))
+            ]), $identity),
             $this->siteFooterFactory->forDocument($notFoundPage, $site)
         );
     }
@@ -140,7 +214,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
         return new Page(
-            new SiteHeader(),
+            $this->siteHeaderFactory->forDocument(
+                $document,
+                $site,
+                $subgraph
+            ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularX(),

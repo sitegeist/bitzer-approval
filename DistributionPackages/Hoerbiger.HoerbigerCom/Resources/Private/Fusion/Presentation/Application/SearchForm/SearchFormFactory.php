@@ -14,6 +14,7 @@ use Neos\Flow\I18n\Service as LocalizationService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Sitegeist\CsvPO\Domain\TranslationLabel;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
+use Neos\Flow\Security\Context as SecurityContext;
 
 final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -29,27 +30,37 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
      */
     protected $localizationService;
 
+    /**
+     * @Flow\Inject
+     * @var SecurityContext
+     */
+    protected $securityContext;
+
     public function create(ContentContext $subgraph): SearchForm
     {
         $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
         $uriBuilder->setFormat('json');
         $endpointUri = new Uri(
-            $uriBuilder->uriFor(
-                'query',
-                [],
-                'Stuff',
-                'Hoerbiger.HoerbigerCom',
-                'Application'
-            )
+            $uriBuilder
+                ->setCreateAbsoluteUri(true)
+                ->uriFor(
+                    'query',
+                    [],
+                    'Stuff',
+                    'Hoerbiger.HoerbigerCom',
+                    'Application'
+                )
         );
         $mostWantedEndpointUri = new Uri(
-            $uriBuilder->uriFor(
-                'register',
-                [],
-                'WantedNode',
-                'Hoerbiger.HoerbigerCom',
-                'Application'
-            )
+            $uriBuilder
+                ->setCreateAbsoluteUri(true)
+                ->uriFor(
+                    'register',
+                    [],
+                    'WantedNode',
+                    'Hoerbiger.HoerbigerCom',
+                    'Application'
+                )
         );
 
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
@@ -64,6 +75,7 @@ final class SearchFormFactory extends AbstractComponentPresentationObjectFactory
         $languageChain = $subgraph->getDimensions()['language'];
 
         return new SearchForm(
+            $this->securityContext->getCsrfProtectionToken(),
             $endpointUri,
             json_encode(SortingProperty::cases()) ?: '[]',
             json_encode(SearchPeriod::cases()) ?: '[]',

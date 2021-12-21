@@ -17,6 +17,24 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
             name = ${"[Block.Icon (" + presentationObject.collectionName + "::" + presentationObject.iconName + ")]"}
             base = "fill-current"
             @glue = " "
+
+            size_1 = "w-[1em] h-[1em]"
+            size_1.@if.1 = ${presentationObject.size.isSize_1}
+
+            size_1_5 = "w-[1.5em] h-[1.5em]"
+            size_1_5.@if.1 = ${presentationObject.size.isSize_1_5}
+
+            size_2 = "w-[2em] h-[2em]"
+            size_2.@if.1 = ${presentationObject.size.isSize_2}
+
+            size_2_5 = "w-[2.5em] h-[2.5em]"
+            size_2_5.@if.1 = ${presentationObject.size.isSize_2_5}
+
+            size_3 = "w-[3em] h-[3em]"
+            size_3.@if.1 = ${presentationObject.size.isSize_3}
+
+            size_4 = "w-[4em] h-[4em]"
+            size_4.@if.1 = ${presentationObject.size.isSize_4}
         }
         style = null
         inline = true

@@ -1,0 +1,12 @@
+'Hoerbiger.HoerbigerCom:Mixin.ImageWithCaption':
+  abstract: true
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  properties:
+    image__caption:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bildunterschrift eingeben'

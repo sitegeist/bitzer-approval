@@ -1,9 +1,11 @@
-// const theme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 const selectorParser = require('postcss-selector-parser');
 
 const MAX_CONTENT_WIDTH = '1920px';
 const MIN_TOUCH = '48px';
+
+const OFFCANVAS_WIDTH = '340px';
 
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
@@ -32,7 +34,9 @@ const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2']
 module.exports = {
 	mode: 'jit',
 	purge: [
-		'./Resources/Private/Fusion/**/*'
+		'./Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 	],
 	darkMode: false,
 	theme: {
@@ -65,6 +69,15 @@ module.exports = {
 			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
 			'serif-regular': ['PT Serif', 'serif'],
+		},
+
+		screens: {
+			/* Breakpoint to switch between fullscreen and aside-offcanvas. */
+			offcanvas: '400px',
+			/* Breakpoint to switch between inline navigation and  offcanvas. */
+			menuToggle: '1300px',
+			xs: '480px',
+			...defaultTheme.screens
 		},
 
 		extend: {
@@ -146,6 +159,10 @@ module.exports = {
 				'2-icon-1fr': '1.2em 1fr',
 			},
 
+			gridTemplateRows: {
+				'form-field': '2.5em max-content',
+			},
+
 			minWidth: {
 				touch: MIN_TOUCH,
 			},
@@ -161,12 +178,19 @@ module.exports = {
 			maxWidth: {
 				...SPACES,
 				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
+				'content-66': `min(calc(2/3 * ${MAX_CONTENT_WIDTH}), 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
 			},
 
+			width: {
+				offcanvas: OFFCANVAS_WIDTH,
+				touch: MIN_TOUCH,
+			},
+
 			height: {
 				...SPACES,
+				touch: MIN_TOUCH,
 			},
 
 			space: {
@@ -179,6 +203,7 @@ module.exports = {
 
 			padding: {
 				...SPACES,
+				touch: MIN_TOUCH,
 				'ratio-square': '100%',
 				'ratio-2-1': '50%',
 				'ratio-4-3': 'calc(3 * 100% / 4)',
@@ -212,8 +237,29 @@ module.exports = {
 				/* Will match to py-3. */
 				'decorative-heading-3': `1.25rem 0 0 #075289, -1.25rem 0 0 #075289`,
 				'textbox': '0 0 14px rgba(0, 0, 0, .08)',
+				'textbox-hover': '0 0 24px rgba(0, 0, 0, .2)',
 				card: '0 0 14px rgba(0, 0, 0, 0.1)',
 				play: '0 0 48px #8D172E80',
+				submenu: '0 0 5px 2px rgb(0 0 0 / 10%)',
+			},
+
+			dropShadow: {
+				brand: '0 0  5px #8D172E60',
+			},
+
+			outline: theme => ({
+				brand: `1px solid ${theme('colors.brand.DEFAULT')}`,
+			}),
+
+			zIndex: {
+				'form-field': '30',
+				'form-field-elevated': '50',
+				header: '70',
+				content: '50',
+			},
+
+			right: {
+				offcanvas: OFFCANVAS_WIDTH,
 			},
 		},
 	},

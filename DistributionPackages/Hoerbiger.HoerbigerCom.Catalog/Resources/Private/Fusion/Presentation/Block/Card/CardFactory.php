@@ -9,16 +9,18 @@ use Hoerbiger\HoerbigerCom\Catalog\Domain\Catalog;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactoryInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Card\ProductCard\ProductCard;
-use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
-use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
+use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
+use Neos\Flow\I18n\Service as LocalizationService;
+use Neos\Flow\Annotations as Flow;
+use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 
 final class CardFactory extends AbstractComponentPresentationObjectFactory implements CardFactoryInterface
 {
@@ -87,13 +89,39 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         return $cards;
     }
 
-    public function forThing(TraversableNodeInterface $thing): CardInterface
+    /**
+     * @var TranslationLabelSourceRepository
+     * @Flow\Inject
+     */
+    protected $translationLabelSourceRepository;
+
+    /**
+     * @Flow\Inject
+     * @var LocalizationService
+     */
+    protected $localizationService;
+
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier): CardInterface
     {
-        return new ArticleCard(
+        $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
+            'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'
+        );
+        $label = $labelSource
+            ? $labelSource->findTranslationLabelByIdentifier('type.' . $typeIdentifier)
+            : null;
+        $translatedLabel = $label
+            ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+                $this->localizationService->getConfiguration()->getCurrentLocale()
+            ))->getTranslation()
+            : null;
+
+        return new SearchResultCard(
             null,
             Value::fromString($thing->getLabel()),
-            null,
-            null,
+            Value::fromString($translatedLabel ?: $typeIdentifier),
+            $thing->getProperty('preview__description')
+                ? Value::fromString($thing->getProperty('preview__description'))
+                : null,
             null
         );
     }

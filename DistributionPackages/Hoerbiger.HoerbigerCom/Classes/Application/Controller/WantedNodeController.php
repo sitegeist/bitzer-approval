@@ -35,10 +35,12 @@ final class WantedNodeController extends RestController
         $this->commandHandler = $commandHandler;
     }
 
-    public function registerAction(string $command): void
+    public function registerAction(): void
     {
         try {
-            $this->commandHandler->handleRegisterWantedNode(RegisterWantedNode::fromJsonString($command));
+            $this->commandHandler->handleRegisterWantedNode(
+                RegisterWantedNode::fromJsonString((string)$this->request->getHttpRequest()->getBody())
+            );
         } catch (NodeCannotBeRegisteredAsWanted $exception) {
             $this->response->setStatusCode(400);
         }

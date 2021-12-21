@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Video;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
  * @Flow\Proxy(false)
@@ -18,12 +19,16 @@ final class Video extends AbstractComponentPresentationObject implements VideoIn
 
     private ?FigureInterface $figure;
 
+    private ?SlotInterface $caption;
+
     public function __construct(
         string $source,
-        ?FigureInterface $figure
+        ?FigureInterface $figure,
+        ?SlotInterface $caption
     ) {
         $this->source = $source;
         $this->figure = $figure;
+        $this->caption = $caption;
     }
 
     public function getSource(): string
@@ -34,5 +39,10 @@ final class Video extends AbstractComponentPresentationObject implements VideoIn
     public function getFigure(): ?FigureInterface
     {
         return $this->figure;
+    }
+
+    public function getCaption(): ?SlotInterface
+    {
+        return $this->caption;
     }
 }

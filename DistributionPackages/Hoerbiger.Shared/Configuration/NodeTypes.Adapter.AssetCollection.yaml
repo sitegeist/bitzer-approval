@@ -3,6 +3,7 @@
   superTypes:
     'Neos.Neos:Document': true
     'Hoerbiger.Shared:Tag.ExcludeFromNodeTree': true
+    'Hoerbiger.Shared:Tag.ExcludeFromNavigation': true
   constraints:
     nodeTypes:
       '*': false
@@ -14,5 +15,6 @@
     name:
       type: string
       search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
         elasticSearchMapping:
           type: text

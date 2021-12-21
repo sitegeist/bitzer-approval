@@ -43,13 +43,13 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
                 }
             ),
             new CacheSegment(
-            Collection::fromIterable(
-                $site->getProperty('footerMenu') ?: [],
-                function(TraversableNodeInterface $footerLinkNode) use ($linkFactory) {
-                    return $linkFactory->forFooterMenuItem($footerLinkNode);
-                }
+                Collection::fromIterable(
+                    $site->getProperty('footerMenu') ?: [],
+                    function(TraversableNodeInterface $footerLinkNode) use ($linkFactory) {
+                        return $linkFactory->forFooterMenuItem($footerLinkNode);
+                    }
                 ),
-            'Hoerbiger.Shared:CacheSegment.SiteReactive'
+                'Hoerbiger.Shared:CacheSegment.SiteReactive'
             ),
             $this->contactFormLinkFactory->forDocument($document, $site)
         );

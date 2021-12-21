@@ -1,0 +1,21 @@
+'Hoerbiger.HoerbigerCom:Document.ContactPage':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+  ui:
+    icon: envelope-open-text
+    label: 'Kontakt'
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+    contactonsuccess:
+      type: 'Hoerbiger.HoerbigerCom:Content.Text'
+    contactonfail:
+      type: 'Hoerbiger.HoerbigerCom:Content.Text'

@@ -14,6 +14,8 @@ use Psr\Http\Message\UriInterface;
  */
 final class SearchForm extends AbstractComponentPresentationObject implements SearchFormInterface
 {
+    private string $csrfProtectionToken;
+
     private UriInterface $endpointUri;
 
     private string $sortingPropertyOptions;
@@ -27,6 +29,7 @@ final class SearchForm extends AbstractComponentPresentationObject implements Se
     private UriInterface $mostWantedEndpointUri;
 
     public function __construct(
+        string $csrfProtectionToken,
         UriInterface $endpointUri,
         string $sortingPropertyOptions,
         string $periodOptions,
@@ -34,6 +37,7 @@ final class SearchForm extends AbstractComponentPresentationObject implements Se
         string $language,
         UriInterface $mostWantedEndpointUri
     ) {
+        $this->csrfProtectionToken = $csrfProtectionToken;
         $this->endpointUri = $endpointUri;
         $this->sortingPropertyOptions = $sortingPropertyOptions;
         $this->periodOptions = $periodOptions;
@@ -70,5 +74,18 @@ final class SearchForm extends AbstractComponentPresentationObject implements Se
     public function getMostWantedEndpointUri(): UriInterface
     {
         return $this->mostWantedEndpointUri;
+    }
+
+    public function getApplicationData(): string
+    {
+        return json_encode([
+            'csrfProtectionToken' => $this->csrfProtectionToken,
+            'endpointUri' => (string)$this->endpointUri,
+            'sortingPropertyOptions' => json_decode($this->sortingPropertyOptions),
+            'periodOptions' => json_decode($this->periodOptions),
+            'labels' => json_decode($this->labels),
+            'language' => $this->language,
+            'mostWantedEndpointUri' => (string)$this->mostWantedEndpointUri
+        ]) ?: '{}';
     }
 }

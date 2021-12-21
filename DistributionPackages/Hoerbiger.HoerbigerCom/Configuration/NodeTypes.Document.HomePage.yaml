@@ -25,6 +25,8 @@
       type: 'Hoerbiger.Shared:Document.AssetDirectory'
     searchresults:
       type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
+    contact:
+      type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:

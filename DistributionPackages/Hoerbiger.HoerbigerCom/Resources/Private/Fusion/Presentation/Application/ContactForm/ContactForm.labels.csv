@@ -1,0 +1,50 @@
+id,description,en,de
+customerGroup.existingCustomer,existing customer,Existing customer,Bestandskunde
+customerGroup.newCustomer,new customer,New customer,Neukunde
+customerGroup.supplier,supplier,Supplier,Lieferant
+customerGroup.jobCandidate,job candidate,Job candidate,Bewerber
+customerGroup.mediaRepresentative,media representative,Media representative,Medienvertreter
+salutation.Mr.,Mr.,Mr.,Herr
+salutation.Ms.,Ms.,Ms.,Frau
+salutation.none,none,none,divers
+customerConfirmation.subject,Subject,Your contact request,Ihre Kontaktanfrage
+customerConfirmation.salutation.Mr.,Salutation (Mr.),Dear Mr. {givenName} {familyName},Sehr geehrter Herr {familyName}
+customerConfirmation.salutation.Ms.,Salutation (Ms.),Dear Ms. {givenName} {familyName},Sehr geehrte Frau {familyName}
+customerConfirmation.salutation.none,Salutation (None),Dear {givenName} {familyName},Hallo {givenName} {familyName}
+customerConfirmation.message,Message,Your contact request has been received and will be processed shortly.,vielen Dank für Ihre Anfrage an HOERBIGER.<br /><br />Wir kümmern uns um Ihr Anliegen und melden uns so bald wie möglich.
+customerConfirmation.closing,Closing,"Yours sincerely,<br />HOERBIGER",Viele Grüße<br />Ihr HOERBIGER-Team
+form.label.salutation,salutation,salutation,Anrede
+form.label.givenName,given name,given name,Vorname
+form.placeholder.givenName,givenName,Max,Max
+form.error.givenName,Error for givenName,Please enter given name,Bitte Vornamen eintragen.
+form.label.familyName,family name,family name,Nachname
+form.placeholder.familyName,familyName,Mustermann,Mustermann
+form.error.familyName,Error for familyName,Please enter family name,Bitte Familiennamen eintragen.
+form.label.emailAddress,emailAddress,eMail,E-Mail Adresse
+form.placeholder.emailAddress,emailAddress,max.mustermann@mail.com,max.mustermann@mail.com
+form.error.emailAddress,Error for emailAddress,Please enter a valid email,Bitte gültige E-Mail Adresse eintragen.
+form.label.worksFor,worksFor,company,Unternehmen
+form.placeholder.worksFor,worksFor,Muster Company,Musterfirma
+form.label.telephone,telephone,telephone,Telefonnummer
+form.placeholder.telephone,+49 (0) 123456789,+49 (0) 123456789,+49 (0) 123456789
+form.label.streetAddress,streetAddress,street + no,Strasse + Nr.
+form.placeholder.streetAddress,Musterstr. 42,Musterstr. 42,Musterstr. 42
+form.label.postalCode,postalCode,postal code,PLZ
+form.placeholder.postalCode,12345,12345,12345
+form.label.addressLocality,city,locality,Ort
+form.placeholder.addressLocality,Musterstadt,Musterstadt,Musterstadt
+form.label.addressCountry,country,country,Land
+form.error.addressCountry,Error for addressCountry,select country,Bitte ein Land auswählen.
+form.label.message,message,message,Anliegen
+form.placeholder.message,Ask your question or describe your concern here,Ask your question or describe your concern here,Stellen Sie hier Ihre Frage oder schildern Sie Ihr Anliegen
+form.error.message,Error for message,Please enter a message,Bitte teilen Sie uns Ihr Anliegen mit.
+form.label.customerGroup,customerGroup,Who are you?,Wer sind Sie?
+form.placeholder.customerGroup,select customer group,select customer group,Anwendergruppe auswählen
+form.dontknowoption.customerGroup,I dont know my customerGroup,I'm not sure about that,Ich bin mir nicht sicher
+form.error.customerGroup,Error for customerGroup,Please select an option,Bitte wählen Sie eine Option aus.
+form.label.applicationWorld,applicationWorld,Which area is your company most likely to be assigned to?,Welchem Gebiet ist Ihr Unternehmen am ehesten zuzuordnen?
+form.placeholder.applicationWorld,select applicationWorld,select applicationWorld,Gebiet auswählen
+form.dontknowoption.applicationWorld,I dont know the applicationWorld,I'm not sure about that,Ich bin mir nicht sicher
+form.error.applicationWorld,Error for applicationWorld,Please select an option,Bitte wählen Sie eine Option aus.
+form.content.fillRequiredFields,Fill required fields,* Fill these fields,* Felder müssen ausgefüllt sein
+form.submit,Submit label,submit request,Anfrage absenden
