@@ -3,11 +3,6 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   properties:
-    headline:
-      search:
-        fulltextExtractor: ${Indexing.extractInto('h2', value)}
-        elasticSearchMapping:
-          type: text
     text:
       options:
         preset: 'rte.text'

@@ -1,6 +1,7 @@
 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
     'Hoerbiger.HoerbigerCom:Mixin.Link': true
     'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
@@ -8,18 +9,6 @@
     label: 'Bild mit überlappendem Text'
     icon: 'clone'
   properties:
-    headline:
-      type: string
-      ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
-      options:
-        preset: 'rte.plain'
-      search:
-        fulltextExtractor: ${Indexing.extractInto('h2', value)}
-        elasticSearchMapping:
-          type: text
     text:
       type: string
       ui:
