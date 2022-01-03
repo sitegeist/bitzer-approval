@@ -6,6 +6,10 @@
         "bin-dir": "bin",
         "platform": {
             "php": "7.4"
+        },
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "neos/composer-plugin": true
         }
     },
     "minimum-stability": "dev",
