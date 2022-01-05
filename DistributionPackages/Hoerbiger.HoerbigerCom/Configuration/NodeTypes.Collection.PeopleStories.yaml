@@ -1,0 +1,64 @@
+'Hoerbiger.HoerbigerCom:Collection.PeopleStories':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.PeopleStory': true
+  ui:
+    label: 'People Stories'
+    icon: users
+  options:
+    template:
+      childNodes:
+        'story1':
+          type: 'Hoerbiger.HoerbigerCom:Content.PeopleStory'
+        'story2':
+          type: 'Hoerbiger.HoerbigerCom:Content.PeopleStory'
+
+'Hoerbiger.HoerbigerCom:Content.PeopleStory':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+    'Hoerbiger.HoerbigerCom:Mixin.Quotation': true
+  ui:
+    label: 'People Story'
+    icon: user
+  properties:
+    metaline:
+      options:
+        preset: 'text.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Metaline eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+    tags:
+      options:
+        preset: 'text.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Tags eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+    introduction:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Text eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text

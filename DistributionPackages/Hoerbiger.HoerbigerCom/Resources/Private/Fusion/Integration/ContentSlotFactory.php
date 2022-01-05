@@ -149,6 +149,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forBenefitsNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Benefit':
                 return $this->forBenefitNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.PeopleStories':
+                return $this->forPeopleStoriesNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.PeopleStory':
+                return $this->forPeopleStoryNode($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -619,5 +623,76 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             Editable::fromNodeProperty($benefitNode, 'text'),
             null
         );
+    }
+
+    public function forPeopleStoriesNode(TraversableNodeInterface $peopleStoriesNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            Collection::fromIterable([
+                new Headline(
+                    HeadlineVariant::regular(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($peopleStoriesNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($peopleStoriesNode, 'text'),
+                    false
+                ),
+                new Grid(
+                    GridVariant::oneColumn(),
+                    Collection::fromNodes(
+                        $peopleStoriesNode->findChildNodes(),
+                        function(TraversableNodeInterface $node): Content {
+                            return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                        }
+                    )
+                )
+            ], $identity)
+        );
+    }
+
+    public function forPeopleStoryNode(TraversableNodeInterface $peopleStoryNode, bool $inBackend): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+        $imageSource = $this->imageSourceFactory->forImageMixin($peopleStoryNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element PeopleStory.');
+        }
+
+        return Collection::fromIterable([
+            $this->figureFactory->forPeopleStory($imageSource),
+            new Text(
+                TextVariant::lightContrast(),
+                Editable::fromNodeProperty($peopleStoryNode, 'metaline'),
+                false
+            ),
+            new Text(
+                TextVariant::neutralContrast(),
+                Editable::fromNodeProperty($peopleStoryNode, 'tags'),
+                false
+            ),
+            new Headline(
+                HeadlineVariant::regular(),
+                HeadlineType::h3(),
+                Editable::fromNodeProperty($peopleStoryNode, 'headline')
+            ),
+            new Text(
+                TextVariant::neutralContrast(),
+                Editable::fromNodeProperty($peopleStoryNode, 'introduction'),
+                false
+            ),
+            new Quotation(
+                Editable::fromNodeProperty($peopleStoryNode, 'text'),
+                Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
+            )
+        ], $identity);
     }
 }
