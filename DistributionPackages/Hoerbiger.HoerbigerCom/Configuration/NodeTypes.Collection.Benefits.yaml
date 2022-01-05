@@ -24,21 +24,7 @@
     'Hoerbiger.HoerbigerCom:Content': true
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
-    'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
+    'Hoerbiger.HoerbigerCom:Mixin.Icon': true
   ui:
     label: 'Benefit'
     icon: check
-  properties:
-    icon:
-      type: string
-      ui:
-        label: 'Icon'
-        reloadIfChanged: true
-        inspector:
-          group: 'adjust'
-          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-  postprocessors:
-    icons:
-      postprocessor: Hoerbiger\Shared\Application\IconProvider

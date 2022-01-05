@@ -153,6 +153,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forPeopleStoriesNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.PeopleStory':
                 return $this->forPeopleStoryNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.SectionIntroduction':
+                return $this->forSectionIntroductionNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -691,5 +693,33 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
             )
         ], $identity);
+    }
+
+    public function forSectionIntroductionNode(TraversableNodeInterface $sectionIntroductionNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            Collection::fromIterable([
+                new Icon(
+                    'shared',
+                    $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
+                    IconSize::size_4()
+                ),
+                new Headline(
+                    HeadlineVariant::regular(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($sectionIntroductionNode, 'text'),
+                    false
+                )
+            ], $identity)
+        );
     }
 }

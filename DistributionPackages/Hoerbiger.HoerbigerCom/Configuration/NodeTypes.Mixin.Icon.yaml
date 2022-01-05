@@ -1,0 +1,18 @@
+'Hoerbiger.HoerbigerCom:Mixin.Icon':
+  abstract: true
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
+  properties:
+    icon:
+      type: string
+      ui:
+        label: 'Icon'
+        reloadIfChanged: true
+        inspector:
+          group: 'adjust'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+  postprocessors:
+    icons:
+      postprocessor: Hoerbiger\Shared\Application\IconProvider
