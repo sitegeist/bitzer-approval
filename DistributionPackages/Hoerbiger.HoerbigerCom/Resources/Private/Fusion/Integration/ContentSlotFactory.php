@@ -669,15 +669,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return Collection::fromIterable([
             $this->figureFactory->forPeopleStory($imageSource),
-            new Text(
-                TextVariant::lightContrast(),
-                Editable::fromNodeProperty($peopleStoryNode, 'metaline'),
-                false
-            ),
-            new Text(
-                TextVariant::neutralContrast(),
-                Editable::fromNodeProperty($peopleStoryNode, 'tags'),
-                false
+            new Row(
+                RowVariant::alternateMetalineEllipsis(),
+                Collection::fromIterable([
+                    Editable::fromNodeProperty($peopleStoryNode, 'metaline'),
+                    Editable::fromNodeProperty($peopleStoryNode, 'tags')
+                ], $identity)
             ),
             new Headline(
                 HeadlineVariant::regular(),
