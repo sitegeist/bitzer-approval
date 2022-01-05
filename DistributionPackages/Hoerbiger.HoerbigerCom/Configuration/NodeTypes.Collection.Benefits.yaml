@@ -1,0 +1,44 @@
+'Hoerbiger.HoerbigerCom:Collection.Benefits':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.Benefit': true
+  ui:
+    label: 'Benefits'
+    icon: check
+  options:
+    template:
+      childNodes:
+        'benefit1':
+          type: 'Hoerbiger.HoerbigerCom:Content.Benefit'
+        'benefit2':
+          type: 'Hoerbiger.HoerbigerCom:Content.Benefit'
+
+'Hoerbiger.HoerbigerCom:Content.Benefit':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
+  ui:
+    label: 'Benefit'
+    icon: check
+  properties:
+    icon:
+      type: string
+      ui:
+        label: 'Icon'
+        reloadIfChanged: true
+        inspector:
+          group: 'adjust'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+  postprocessors:
+    icons:
+      postprocessor: Hoerbiger\Shared\Application\IconProvider

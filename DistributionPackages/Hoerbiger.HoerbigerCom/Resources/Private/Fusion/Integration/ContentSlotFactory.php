@@ -7,11 +7,14 @@ namespace Hoerbiger\HoerbigerCom\Integration;
 
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
@@ -142,6 +145,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forDefinitionListTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
                 return $this->forDownloadsTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.Benefits':
+                return $this->forBenefitsNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.Benefit':
+                return $this->forBenefitNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -564,6 +571,53 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             $this->timelineFactory->forMilestones($milestones)
+        );
+    }
+
+    public function forBenefitsNode(TraversableNodeInterface $benefitsNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            Collection::fromIterable([
+                new Headline(
+                    HeadlineVariant::regular(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($benefitsNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($benefitsNode, 'text'),
+                    false
+                ),
+                new Grid(
+                    GridVariant::twoColumnsGap(),
+                    Collection::fromNodes(
+                        $benefitsNode->findChildNodes(),
+                        function(TraversableNodeInterface $node): Content {
+                            return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                        }
+                    )
+                )
+            ], $identity)
+        );
+    }
+
+    public function forBenefitNode(TraversableNodeInterface $benefitNode): SlotInterface
+    {
+        return new IconCard(
+            new Icon(
+                'shared',
+                $benefitNode->getProperty('icon') ?: '',
+                IconSize::size_4()
+            ),
+            Editable::fromNodeProperty($benefitNode, 'headline'),
+            null,
+            Editable::fromNodeProperty($benefitNode, 'text'),
+            null
         );
     }
 }

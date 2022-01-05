@@ -1,0 +1,22 @@
+prototype(Hoerbiger.Shared:Block.Card.IconCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+    renderer = afx`
+        <div class={[
+            "[Block.Card.IconCard]"
+        ]}>
+            <dl>
+                <dt>Icon</dt>
+                <dd>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+                </dd>
+                <dt>Headline</dt>
+                <dd>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
+                </dd>
+                <dt>Text</dt>
+                <dd>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
+                </dd>
+            </dl>
+        </div>
+    `
+}
