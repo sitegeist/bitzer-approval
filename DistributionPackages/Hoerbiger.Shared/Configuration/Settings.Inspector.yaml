@@ -1,0 +1,17 @@
+Neos:
+  Neos:
+    userInterface:
+      inspector:
+        dataTypes:
+          Neos\Media\Domain\Model\ImageInterface:
+            editorOptions:
+              features:
+                upload: false
+          Neos\Media\Domain\Model\Asset:
+            editorOptions:
+              features:
+                upload: false
+          array<Neos\Media\Domain\Model\Asset>:
+            editorOptions:
+              features:
+                upload: false
