@@ -25,6 +25,11 @@ final class PdfInfoPdfContentExtractor implements PdfContentExtractorInterface
             $fileName = FLOW_PATH_DATA . 'Persistent/Resources/'
                 . $sha1[0] . '/' . $sha1[1] . '/' . $sha1[2] . '/' . $sha1[3] . '/' . $sha1;
 
+            if (!file_exists($fileName)) {
+                /* @phpstan-ignore-next-line */
+                \Neos\Flow\var_dump('file ' . $fileName . ' does not exist');
+            }
+
             $content = \shell_exec('timeout 2 pdftotext ' . $fileName . ' - 2> /dev/null');
             if ($content) {
                 if (!\mb_detect_encoding($content, 'UTF-8', true)) {
