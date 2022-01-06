@@ -82,7 +82,7 @@ final class LanguageAwareAssetProxy implements AssetProxyInterface, ProvidesOrig
 
     public function getFileSize(): int
     {
-        return $this->asset->getResource()->getFileSize() ?? 0;
+        return (int)$this->asset->getResource()->getFileSize();
     }
 
     public function getMediaType(): string

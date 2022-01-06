@@ -27,27 +27,27 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private SlidableFactory $slidableFactory;
-
-    private StageFactory $stageFactory;
-
     private ImageSourceFactory $imageSourceFactory;
 
     private SiteFooterFactory $siteFooterFactory;
 
+    private SlidableFactory $slidableFactory;
+
+    private StageFactory $stageFactory;
+
     private SiteHeaderFactory $siteHeaderFactory;
 
     public function __construct(
-        SlidableFactory $slidableFactory,
-        StageFactory $stageFactory,
         ImageSourceFactory $imageSourceFactory,
         SiteFooterFactory $siteFooterFactory,
+        SlidableFactory $slidableFactory,
+        StageFactory $stageFactory,
         SiteHeaderFactory $siteHeaderFactory
     ) {
-        $this->slidableFactory = $slidableFactory;
-        $this->stageFactory = $stageFactory;
         $this->imageSourceFactory = $imageSourceFactory;
         $this->siteFooterFactory = $siteFooterFactory;
+        $this->slidableFactory = $slidableFactory;
+        $this->stageFactory = $stageFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
@@ -88,12 +88,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         if (!$imageSource) {
             throw new \InvalidArgumentException('Introduction requires image for property media.');
         }
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($searchResultsPage, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($searchResultsPage, $subgraph);
-
-        /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($searchResultsPage, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(

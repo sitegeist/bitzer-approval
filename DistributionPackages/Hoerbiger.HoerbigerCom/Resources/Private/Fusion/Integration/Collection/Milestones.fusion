@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom:Collection.Milestones) < prototype(Neos.Neos:ContentComponent) {
     renderer = PackageFactory.AtomicFusion.PresentationObjects:Slot {
-        presentationObject = ${Hoerbiger.ContentSlot.forContentNode(node, node.context, node.context.inBackend)}
+        presentationObject = ${Hoerbiger.ContentSlot.forContentNode(node, node.context, node.context.inBackend, site)}
     }
 }
