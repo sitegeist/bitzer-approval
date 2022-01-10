@@ -17,6 +17,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
@@ -113,14 +114,26 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
-    public function forDocument(Document $document): CardInterface
+    public function forDocument(Document $document, string $typeIdentifier): CardInterface
     {
-        return new ArticleCard(
+        $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
+            'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'
+        );
+        $label = $labelSource
+            ? $labelSource->findTranslationLabelByIdentifier('type.' . $typeIdentifier)
+            : null;
+        $translatedLabel = $label
+            ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+                $this->localizationService->getConfiguration()->getCurrentLocale()
+            ))->getTranslation()
+            : null;
+
+        return new SearchResultCard(
             null,
             Value::fromString($document->getLabel()),
+            Value::fromString($translatedLabel ?: $typeIdentifier),
             null,
-            null,
-            null
+            new Icon("shared", "downloadFile", IconSize::size_2())
         );
     }
 

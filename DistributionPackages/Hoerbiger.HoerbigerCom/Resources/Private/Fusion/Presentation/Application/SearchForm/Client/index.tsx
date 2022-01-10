@@ -74,7 +74,7 @@ export const Client = (props: ApplicationData): JSX.Element => {
 	}, [response]);
 
 	const registerForMostWanted = (identifier: string) => (e: React.MouseEvent<HTMLDivElement>) => {
-		const target = e.currentTarget.querySelector(":scope > div > a")?.getAttribute("href");
+		const $link = e.currentTarget.querySelector(":scope > div > a");
 
 		if (!isWaitingForMostWanted.current) {
 			isWaitingForMostWanted.current = true;
@@ -88,8 +88,16 @@ export const Client = (props: ApplicationData): JSX.Element => {
 				// iOS/Safari-Fix
 				isWaitingForMostWanted.current = false;
 
-				if (target) {
-					window.location.href = target;
+				if ($link instanceof HTMLAnchorElement) {
+					const href = $link.getAttribute("href");
+
+					if (href) {
+						if ($link.getAttribute("target") === "_blank") {
+							window.open(href, "_blank")?.focus();
+						} else {
+							window.location.href = href;
+						}
+					}
 				}
 			})();
 		}

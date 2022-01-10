@@ -109,10 +109,14 @@ final class Stuff
                     return null;
                 }
                 /** @var SlotInterface $card */
-                $card = $this->cardFactory->forDocument($document);
+                $card = $this->cardFactory->forDocument(
+                    $document,
+                    $searchHit['_source']['searchType']
+                );
                 $link = $this->linkFactory
                     ->forAsset($document)
                     ->asContainer()
+                    ->asBlankTargetLink()
                     ->withContent($card);
                 break;
             default:
