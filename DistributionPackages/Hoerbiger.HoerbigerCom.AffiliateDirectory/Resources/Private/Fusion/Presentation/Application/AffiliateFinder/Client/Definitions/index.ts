@@ -27,11 +27,14 @@ export interface ApplicationData {
 	getLabelFor: LabelGetter;
 }
 
+export type AffiliateGroups = {
+	[sameAddress: string]: Affiliate[]
+};
+
 export type Country = {
 	name: string;
-	affiliates: {
-		[sameAddress: string]: Affiliate[]
-	};
+	affiliates: Affiliate[];
+	affiliateGroups: AffiliateGroups;
 	count: number;
 }
 

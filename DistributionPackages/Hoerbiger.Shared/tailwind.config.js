@@ -186,6 +186,7 @@ module.exports = {
 			},
 
 			width: {
+				...SPACES,
 				offcanvas: OFFCANVAS_WIDTH,
 				touch: MIN_TOUCH,
 			},

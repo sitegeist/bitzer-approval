@@ -14,7 +14,7 @@ export const AffiliateCard = (affiliate: Affiliate): JSX.Element => (
 			<a href={`tel:${affiliate.telephone}`}>{affiliate.telephone}</a>
 		</div>
 		<div className="mt-minus-ch ml-minus-ch flex flex-wrap divide-x">
-			{affiliate.tags.map(tag => (
+			{Array.from(new Set(affiliate.tags)).map(tag => (
 				<b
 					key={tag}
 					className="uppercase text-xs px-ch mt-ch"

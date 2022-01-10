@@ -8,6 +8,7 @@ const MIN_ZOOM = 2;
 const MAX_ZOOM = 7;
 const CENTER = {lat: 30.145127183376133, lng: 22.5};
 const MAP_ID = "6cb5b319efce68f9"; // Stored for styles in google.cloud.
+const BG_COLOR = "#F0F0F0"; // Background of Application. => tailwind "neutral-lighter"
 
 type MapViews = {
 	[countryKey: string]: {
@@ -23,8 +24,8 @@ const initMapViews = (countries: Countries): MapViews =>
 		if (country.count > 1) {
 			bounds = new google.maps.LatLngBounds();
 
-			Object.values(country.affiliates).forEach(affiliates =>
-				affiliates.forEach(({latitude: lat, longitude: lng}) => {
+			Object.values(country.affiliateGroups).forEach(affiliateGroup =>
+				affiliateGroup.forEach(({latitude: lat, longitude: lng}) => {
 					bounds?.extend({lat, lng});
 				})
 			);
@@ -37,8 +38,8 @@ const initMapViews = (countries: Countries): MapViews =>
 				center: bounds
 					? bounds.getCenter().toJSON()
 					: {
-						lat: Object.values(country.affiliates)[0][0].latitude,
-						lng: Object.values(country.affiliates)[0][0].longitude,
+						lat: Object.values(country.affiliateGroups)[0][0].latitude,
+						lng: Object.values(country.affiliateGroups)[0][0].longitude,
 					}
 			}
 		};
@@ -60,8 +61,8 @@ export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 	const onGoogleApiLoaded = React.useCallback(({map}: {map: google.maps.Map}) => {
 		mapRef.current = map;
 		mapViewsOfCountries.current = initMapViews(props.countries);
-		mostOuterBoundsRef.current = Object.values(props.countries).reduce((bounds, {affiliates}) => {
-			Object.values(affiliates).forEach(affiliates => {
+		mostOuterBoundsRef.current = Object.values(props.countries).reduce((bounds, {affiliateGroups}) => {
+			Object.values(affiliateGroups).forEach(affiliates => {
 				affiliates.forEach(({latitude: lat, longitude: lng}) => {
 					bounds.extend({lat, lng});
 				});
@@ -110,12 +111,12 @@ export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 			bootstrapURLKeys={{
 				key: props.googleMapsApiKey,
 				language: props.language,
-				// libraries:['places'],
 			}}
 			options={{
 				mapId: MAP_ID,
 				minZoom: MIN_ZOOM,
 				maxZoom: MAX_ZOOM,
+				// backgroundColor: BG_COLOR,
 				disableDefaultUI: true,
 				disableDoubleClickZoom: true,
 				fullscreenControl: false,
@@ -134,7 +135,7 @@ export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 				isReadyForMarker
 					? state.country
 						? Object.values(props.countries).map(country =>
-							Object.entries(country.affiliates).map(([geoIdentifier, [firstAffiliateAtLocation]]) => (
+							Object.entries(country.affiliateGroups).map(([geoIdentifier, [firstAffiliateAtLocation]]) => (
 								<Marker
 									key={geoIdentifier}
 									country={country}

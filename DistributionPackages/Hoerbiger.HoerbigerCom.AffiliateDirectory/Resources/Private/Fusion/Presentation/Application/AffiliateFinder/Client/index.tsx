@@ -1,12 +1,11 @@
 import * as React from "react";
 import {useMediaQuery} from "beautiful-react-hooks";
-import {Form} from "react-final-form";
 import cx from "classnames";
 
 import {ActiveState, ActiveStateAction, Affiliate, ApplicationData, Countries, Country} from "./Definitions";
 import {Map} from "./Components/Map";
-import {Selectbox} from "@hoerbiger/shared/Resources/Private/Fusion/Presentation/Application/Components/Forms";
-import { AffiliateCard } from "./Components/AffiliateCard";
+import {AffiliatesList} from "./Components/AffiliatesList";
+import {CountryForm} from "./Components/CountryForm";
 
 const groupAffiliatesByCountries = (affiliates: Affiliate[]): Countries => affiliates
 	.reduce((memo: Countries, affiliate: Affiliate) => {
@@ -14,7 +13,8 @@ const groupAffiliatesByCountries = (affiliates: Affiliate[]): Countries => affil
 
 		memo[affiliate.addressCountry] = memo[affiliate.addressCountry] ?? {
 			name: affiliate.addressCountry,
-			affiliates: {},
+			affiliates: [],
+			affiliateGroups: {},
 			count: 0,
 		};
 
@@ -22,9 +22,10 @@ const groupAffiliatesByCountries = (affiliates: Affiliate[]): Countries => affil
 			...memo,
 			[affiliate.addressCountry]: {
 				name: memo[affiliate.addressCountry].name,
-				affiliates: {
-					...memo[affiliate.addressCountry].affiliates,
-					[geoIdentifier]: (memo[affiliate.addressCountry].affiliates[geoIdentifier] ?? [])
+				affiliates: memo[affiliate.addressCountry].affiliates.concat(affiliate),
+				affiliateGroups: {
+					...memo[affiliate.addressCountry].affiliateGroups,
+					[geoIdentifier]: (memo[affiliate.addressCountry].affiliateGroups[geoIdentifier] ?? [])
 						.concat(affiliate),
 				},
 				count: memo[affiliate.addressCountry].count + 1
@@ -47,46 +48,34 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 		}
 	}, {country: null, geoIdentifier: null});
 
-	const isExtendedMapView = useMediaQuery("(min-width: 980px)");
 	const countries = React.useRef<Countries>(groupAffiliatesByCountries(affiliates));
 	const onSubmit = (formData: any) => {
 		const country = countries.current[formData?.activeCountry];
+
 		dispatch(country
 			? {type: "selectCountry", country}
 			: {type: "reset"}
 		);
 	};
-	const hasListViewForAffiliates = state.country && state.country.count > 1;
+	const isMapToBeRendered = useMediaQuery("(min-width: 980px)");
+	const hasAffiliatesList = isMapToBeRendered
+		? state.country && state.country.count > 1
+		: state.country && state.country.count > 0;
 
 	return (
 		<div className="flex flex-col space-y-sm">
-			<Form onSubmit={onSubmit}>
-				{({handleSubmit}) => (
-					<form
-						onSubmit={handleSubmit}
-						className="flex justify-center"
-					>
-						<div className="w-full max-w-[400px]">
-							<Selectbox
-								name="activeCountry"
-								label=""
-								initialValue={state.country?.name ?? ""}
-								options={[
-									{key: "", value: getLabelFor("input.activeCountry.all")},
-									...Object.keys(countries.current).map(key => ({key}))
-								]}
-								onChange={() => handleSubmit()}
-							/>
-						</div>
-					</form>
-				)}
-			</Form>
+			<CountryForm
+				onSubmit={onSubmit}
+				countries={countries.current}
+				currentCountry={state.country}
+				getLabelFor={getLabelFor}
+			/>
 			<div className={cx(
 				"grid",
-				isExtendedMapView && hasListViewForAffiliates && "grid-cols-affiliates-map-list"
+				isMapToBeRendered && hasAffiliatesList && "grid-cols-affiliates-map-list"
 			)}>
 				{
-					isExtendedMapView && (
+					isMapToBeRendered && (
 						<div className="relative w-full h-0 pt-ratio-google-map">
 							<div className="absolute inset-0">
 								<Map
@@ -98,23 +87,13 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 					)
 				}
 				{
-					hasListViewForAffiliates
-						? (
-							<div className={cx(
-								"flex flex-col space-y-xs p-xs bg-light"
-							)}>
-								{
-									// Render two cards with different addresses (explicite case)
-									state.country?.count == 2 && Object.keys(state.country?.affiliates).length == 2
-										? Object.values(state.country?.affiliates).map(affiliateGroup =>
-											affiliateGroup.map(affiliate => (
-												<AffiliateCard key={affiliate.identifier} {...affiliate}/>
-											))
-										)
-										: null
 
-								}
-							</div>
+					hasAffiliatesList && state.country
+						? (
+							<AffiliatesList
+								affiliates={state.country?.affiliates}
+								hasPages={isMapToBeRendered && state.country?.count > 2}
+							/>
 						)
 						: null
 				}
