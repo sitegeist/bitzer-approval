@@ -28,7 +28,7 @@ export interface ApplicationData {
 }
 
 export type AffiliateGroups = {
-	[sameAddress: string]: Affiliate[]
+	[geoIdentifier: string]: Affiliate[]
 };
 
 export type Country = {

@@ -3,10 +3,9 @@ import GoogleMapReact from "google-map-react";
 import cx from "classnames";
 
 import {ActiveState, Countries, Country} from "../Definitions";
-import { AffiliateCard } from "./AffiliateCard";
 
 const MIN_ZOOM = 2;
-const MAX_ZOOM = 7;
+const MAX_ZOOM = 6;
 const CENTER = {lat: 30.145127183376133, lng: 22.5};
 const MAP_ID = "6cb5b319efce68f9"; // Stored for styles in google.cloud.
 const BG_COLOR = "#F0F0F0"; // Background of Application. => tailwind "neutral-lighter"
@@ -52,7 +51,6 @@ type MapProps = {
 	countries: Countries;
 	state: ActiveState;
 	dispatch: React.Dispatch<any>;
-	hasInfoWindow: boolean;
 };
 export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 	const [isReadyForMarker, setIsReadyForMarker] = React.useState(false);
@@ -99,9 +97,9 @@ export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 		}
 	};
 
-	const onAffiliateSelect = (geoIdentifier: string, {country}: MarkerProps) => {
+	const onGeoIdentifierSelect = (geoIdentifier: string, {country}: MarkerProps) => {
 		if (geoIdentifier && country) {
-			dispatch({type: "selectCountry", country, geoIdentifier});
+			dispatch({type: "selectGeoIdentifier", geoIdentifier, country});
 		}
 	};
 
@@ -130,27 +128,23 @@ export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 			defaultCenter={CENTER}
 			defaultZoom={MIN_ZOOM}
 			onGoogleApiLoaded={onGoogleApiLoaded}
-			onChildClick={state.country ? onAffiliateSelect : onCountrySelect}
-			// onChildMouseEnter (func)
+			onChildClick={state.country ? onGeoIdentifierSelect : onCountrySelect}
 		>
 			{
 				isReadyForMarker
 					? state.country
 						? Object.values(props.countries).map(country =>
-							Object.entries(country.affiliateGroups).map(([geoIdentifier, [firstAffiliateAtLocation]]) => (
-								<Marker
-									key={geoIdentifier}
-									country={country}
-									lat={firstAffiliateAtLocation.latitude}
-									lng={firstAffiliateAtLocation.longitude}
-									isActive={firstAffiliateAtLocation.addressCountry === state.country?.name}
-								>
-									{props.hasInfoWindow && country.name === state.country?.name
-										? <AffiliateCard {...firstAffiliateAtLocation}/>
-										: null
-									}
-								</Marker>
-							))
+							Object.entries(country.affiliateGroups)
+								.map(([geoIdentifier, [firstAffiliateAtLocation]]) => (
+									<Marker
+										key={geoIdentifier}
+										country={country}
+										lat={firstAffiliateAtLocation.latitude}
+										lng={firstAffiliateAtLocation.longitude}
+										isActive={firstAffiliateAtLocation.addressCountry === state.country?.name}
+										isSelected={state.geoIdentifier === geoIdentifier}
+									/>
+								))
 						)
 						: Object.entries(mapViewsOfCountries.current).map(([countryKey, {center}]) => (
 							<Marker
@@ -168,27 +162,28 @@ type MarkerProps = {
 	lat: number;
 	lng: number;
 	isActive?: boolean;
+	isSelected?: boolean;
 	country?: Country;
-	children?: React.ReactChild|null;
 };
 const Marker = (props: MarkerProps): JSX.Element => (
 	<div
 		className={cx(
-			"-translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-1000 border border-neutral",
+			"-translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-500 border border-neutral",
 			"relative cursor-pointer",
 			props.isActive
-				? "bg-decorative w-4 h-4"
-				: "bg-brand w-3 h-3"
+				? "bg-decorative z-30"
+				: "bg-brand z-10",
+			props.isSelected
+				? "w-6 h-6 z-50"
+				: "w-3 h-3"
 		)}
 	>
-		{
-			props.children
-				? (
-					<div className="absolute left-1/2 -translate-x-1/2 -translate-y-3 bottom-full min-w-[300px]">
-						{props.children}
-					</div>
-				)
-				: null
-		}
+		<span className={cx(
+			"bg-light rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+			"transition-all duration-500",
+			props.isSelected
+				? "w-2 h-2 opacity-1"
+				: "w-0 h-0 opacity-0"
+		)}></span>
 	</div>
 );

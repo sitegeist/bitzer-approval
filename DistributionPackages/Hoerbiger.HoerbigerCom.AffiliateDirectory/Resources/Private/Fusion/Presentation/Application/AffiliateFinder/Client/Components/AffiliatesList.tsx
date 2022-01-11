@@ -1,69 +1,72 @@
 import * as React from "react";
 import cx from "classnames";
 
-import {Affiliate} from "../Definitions";
+import {AffiliateGroups} from "../Definitions";
 import {AffiliateCard} from "./AffiliateCard";
 
 type AffiliatesListProps = {
-	affiliates: Affiliate[];
+	affiliateGroups: AffiliateGroups;
 	hasPages: boolean;
-	perPage: number;
+	selectedGeoIdentifier: string|null;
+	onSelectGeoIdentifier: (geoIdentifier: string) => void;
 };
 
-export const AffiliatesList = ({affiliates, hasPages, perPage}: AffiliatesListProps): JSX.Element => {
+export const AffiliatesList = ({affiliateGroups, hasPages, selectedGeoIdentifier, onSelectGeoIdentifier}: AffiliatesListProps): JSX.Element => {
 	const [currentPage, setCurrentPage] = React.useState(0);
 
 	React.useEffect(() => {
-		setCurrentPage(0);
-	}, [affiliates, setCurrentPage]);
+		if (selectedGeoIdentifier) {
+			setCurrentPage(Math.max(0, Object.keys(affiliateGroups).indexOf(selectedGeoIdentifier)));
+		} else {
+			setCurrentPage(0);
+		}
+	}, [affiliateGroups, selectedGeoIdentifier, setCurrentPage]);
 
 	return (
 		<div className={cx(
-			"grid grid-cols-1 affiliates-map-toggle:grid-cols-2 xl:grid-cols-1 gap-xs p-xs"
+			"flex flex-col justify-between space-y-xs"
 		)}>
 			{
-				hasPages
-					? (
-						<>
-							{
-								affiliates.slice(currentPage * perPage, currentPage * perPage + perPage).map(affiliate => (
-									<AffiliateCard
-										key={affiliate.identifier}
-										{...affiliate}
-									/>
-								))
-							}
-							{
-								<div className="flex justify-center space-x-ch affiliates-map-toggle:col-span-2 xl:col-span-1">
-									{
-										Array.from({length: Math.ceil(affiliates.length / perPage)}, (v, i) => i)
-											.map(page => (
-												<span
-													key={page}
-													onClick={() => setCurrentPage(page)}
-													className={cx(
-														"w-2xs h-2xs cursor-pointer rounded-full",
-														currentPage === page ? "bg-decorative" : "bg-neutral"
-													)}
-												></span>
-											))
-									}
-								</div>
-							}
-						</>
+				Object.entries(affiliateGroups)
+					.slice(
+						hasPages ? currentPage : 0,
+						hasPages ? currentPage + 1 : undefined
 					)
-					: affiliates.map(affiliate => (
+					.map(([geoIdentifier, affiliates]) => (
 						<AffiliateCard
-							key={affiliate.identifier}
-							{...affiliate}
+							key={geoIdentifier}
+							affiliates={affiliates}
 						/>
 					))
-
+			}
+			{
+				hasPages && Object.keys(affiliateGroups).length > 1
+					? (
+						<div className="flex flex-wrap justify-center">
+							{
+								Array.from({length: Object.keys(affiliateGroups).length}, (v, i) => i)
+									.map(page => (
+										<span
+											key={page}
+											onClick={() => onSelectGeoIdentifier(Object.keys(affiliateGroups)[page])}
+											className="w-touch h-touch flex items-center justify-center cursor-pointer"
+										>
+											<span className={cx(
+												"w-[55%] h-[55%] rounded-full relative",
+												currentPage === page ? "bg-decorative" : "bg-neutral"
+											)}>
+												<span className={cx(
+													"bg-light w-2 h-2 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+													currentPage === page ? "opacity-1" : "opacity-0",
+												)}></span>
+											</span>
+										</span>
+									))
+							}
+						</div>
+					)
+					: null
 			}
 		</div>
 	);
-};
-
-AffiliatesList.defaultProps = {
-	perPage: 2,
 };
