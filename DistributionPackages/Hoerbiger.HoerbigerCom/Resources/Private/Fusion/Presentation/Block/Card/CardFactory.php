@@ -7,7 +7,6 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
 
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
-use Hoerbiger\Shared\Presentation\Block\Card\ArticleCard\ArticleCard;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
@@ -17,6 +16,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
@@ -113,18 +113,31 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
-    public function forDocument(Document $document): CardInterface
+    public function forDocument(Document $document, string $typeIdentifier): CardInterface
     {
-        return new ArticleCard(
+        return new SearchResultCard(
             null,
             Value::fromString($document->getLabel()),
+            Value::fromString($this->getTypeLabel($typeIdentifier)),
             null,
-            null,
-            null
+            new Icon("shared", "downloadFile", IconSize::size_2())
         );
     }
 
     public function forThing(TraversableNodeInterface $thing, string $typeIdentifier): CardInterface
+    {
+        return new SearchResultCard(
+            null,
+            Value::fromString($thing->getLabel()),
+            Value::fromString($this->getTypeLabel($typeIdentifier)),
+            $thing->getProperty('preview__description')
+                ? Value::fromString($thing->getProperty('preview__description'))
+                : null,
+            null
+        );
+    }
+
+    private function getTypeLabel(string $typeIdentifier): string
     {
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
             'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'
@@ -132,21 +145,12 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         $label = $labelSource
             ? $labelSource->findTranslationLabelByIdentifier('type.' . $typeIdentifier)
             : null;
-        $translatedLabel = $label
+
+        return $label
             ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
-            ))->getTranslation()
-            : null;
-
-        return new SearchResultCard(
-            null,
-            Value::fromString($thing->getLabel()),
-            Value::fromString($translatedLabel ?: $typeIdentifier),
-            $thing->getProperty('preview__description')
-                ? Value::fromString($thing->getProperty('preview__description'))
-                : null,
-            null
-        );
+            ))->getTranslation() ?: $typeIdentifier
+            : $typeIdentifier;
     }
 
     public function forDownloadNode(TraversableNodeInterface $downloadNode): DownloadCard
