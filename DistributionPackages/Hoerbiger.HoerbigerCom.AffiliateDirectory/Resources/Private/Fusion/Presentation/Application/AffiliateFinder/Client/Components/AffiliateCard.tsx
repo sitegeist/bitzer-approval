@@ -2,7 +2,7 @@ import * as React from "react";
 import {Affiliate} from "../Definitions";
 
 export const AffiliateCard = (affiliate: Affiliate): JSX.Element => (
-	<div className="flex flex-col space-y-ch bg-light p-xs shadow-textbox hover:shadow-textbox-hover">
+	<div className="flex flex-col space-y-ch bg-light p-xs shadow-textbox hover:shadow-textbox-hover leading-6 font-sans-regular">
 		<b>{affiliate.legalName}</b>
 		<div className="flex flex-col">
 			<span>{affiliate.streetAddress}</span>

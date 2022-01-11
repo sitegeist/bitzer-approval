@@ -2,10 +2,11 @@ import * as React from "react";
 import {useMediaQuery} from "beautiful-react-hooks";
 import cx from "classnames";
 
-import {ActiveState, ActiveStateAction, Affiliate, ApplicationData, Countries, Country} from "./Definitions";
+import {ActiveState, ActiveStateAction, Affiliate, ApplicationData, Countries} from "./Definitions";
 import {Map} from "./Components/Map";
 import {AffiliatesList} from "./Components/AffiliatesList";
 import {CountryForm} from "./Components/CountryForm";
+import {StampedeIcon} from "@hoerbiger/shared/Resources/Private/Fusion/Presentation/Application/Components";
 
 const groupAffiliatesByCountries = (affiliates: Affiliate[]): Countries => affiliates
 	.reduce((memo: Countries, affiliate: Affiliate) => {
@@ -72,7 +73,7 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 			/>
 			<div className={cx(
 				"grid",
-				isMapToBeRendered && hasAffiliatesList && "grid-cols-affiliates-map-list"
+				isMapToBeRendered && hasAffiliatesList && "grid-cols-1 xl:grid-cols-affiliates-map-list"
 			)}>
 				{
 					isMapToBeRendered && (
@@ -81,8 +82,24 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 								<Map
 									{...{googleMapsApiKey, language, state, dispatch}}
 									countries={countries.current}
+									hasInfoWindow={state.country?.count === 1}
 								/>
 							</div>
+							{
+								state.country
+									? (
+										<div
+											className="absolute top-xs left-xs bg-decorative text-decorative-contrast p-ch rounded-ch cursor-pointer"
+											onClick={() => dispatch({type: "reset"})}
+										>
+											<StampedeIcon
+												iconName="globe"
+												size={2}
+											/>
+										</div>
+									)
+									: null
+							}
 						</div>
 					)
 				}

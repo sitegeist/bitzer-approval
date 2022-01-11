@@ -19,7 +19,7 @@ export const AffiliatesList = ({affiliates, hasPages, perPage}: AffiliatesListPr
 
 	return (
 		<div className={cx(
-			"flex flex-col space-y-xs p-xs"
+			"grid grid-cols-1 affiliates-map-toggle:grid-cols-2 xl:grid-cols-1 gap-xs p-xs"
 		)}>
 			{
 				hasPages
@@ -34,7 +34,7 @@ export const AffiliatesList = ({affiliates, hasPages, perPage}: AffiliatesListPr
 								))
 							}
 							{
-								<div className="flex justify-center space-x-ch">
+								<div className="flex justify-center space-x-ch affiliates-map-toggle:col-span-2 xl:col-span-1">
 									{
 										Array.from({length: Math.ceil(affiliates.length / perPage)}, (v, i) => i)
 											.map(page => (

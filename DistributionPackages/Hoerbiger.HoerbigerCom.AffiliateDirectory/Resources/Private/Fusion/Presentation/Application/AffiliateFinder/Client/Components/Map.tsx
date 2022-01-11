@@ -3,6 +3,7 @@ import GoogleMapReact from "google-map-react";
 import cx from "classnames";
 
 import {ActiveState, Countries, Country} from "../Definitions";
+import { AffiliateCard } from "./AffiliateCard";
 
 const MIN_ZOOM = 2;
 const MAX_ZOOM = 7;
@@ -51,6 +52,7 @@ type MapProps = {
 	countries: Countries;
 	state: ActiveState;
 	dispatch: React.Dispatch<any>;
+	hasInfoWindow: boolean;
 };
 export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 	const [isReadyForMarker, setIsReadyForMarker] = React.useState(false);
@@ -142,7 +144,12 @@ export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 									lat={firstAffiliateAtLocation.latitude}
 									lng={firstAffiliateAtLocation.longitude}
 									isActive={firstAffiliateAtLocation.addressCountry === state.country?.name}
-								></Marker>
+								>
+									{props.hasInfoWindow && country.name === state.country?.name
+										? <AffiliateCard {...firstAffiliateAtLocation}/>
+										: null
+									}
+								</Marker>
 							))
 						)
 						: Object.entries(mapViewsOfCountries.current).map(([countryKey, {center}]) => (
@@ -162,14 +169,26 @@ type MarkerProps = {
 	lng: number;
 	isActive?: boolean;
 	country?: Country;
+	children?: React.ReactChild|null;
 };
 const Marker = (props: MarkerProps): JSX.Element => (
 	<div
 		className={cx(
 			"-translate-x-1/2 -translate-y-1/2 rounded-full transition-all duration-1000 border border-neutral",
+			"relative cursor-pointer",
 			props.isActive
 				? "bg-decorative w-4 h-4"
 				: "bg-brand w-3 h-3"
 		)}
-	></div>
+	>
+		{
+			props.children
+				? (
+					<div className="absolute left-1/2 -translate-x-1/2 -translate-y-3 bottom-full min-w-[300px]">
+						{props.children}
+					</div>
+				)
+				: null
+		}
+	</div>
 );

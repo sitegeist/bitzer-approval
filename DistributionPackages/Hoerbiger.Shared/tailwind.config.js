@@ -78,6 +78,7 @@ module.exports = {
 			/* Breakpoint to switch between inline navigation and  offcanvas. */
 			menuToggle: '1300px',
 			xs: '480px',
+			'affiliates-map-toggle': '980px',
 			...defaultTheme.screens
 		},
 

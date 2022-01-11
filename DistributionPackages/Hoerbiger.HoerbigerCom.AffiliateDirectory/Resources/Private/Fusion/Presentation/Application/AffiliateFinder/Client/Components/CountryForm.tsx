@@ -14,7 +14,6 @@ export const CountryForm = ({onSubmit, countries, currentCountry, getLabelFor}: 
 	const formChange = React.useRef<any>();
 
 	React.useEffect(() => {
-		console.log(currentCountry);
 		if (formChange.current && currentCountry?.name) {
 			formChange.current?.call(null, "activeCountry", currentCountry?.name);
 		}
