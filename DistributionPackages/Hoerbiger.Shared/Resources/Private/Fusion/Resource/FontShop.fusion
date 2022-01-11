@@ -1,0 +1,25 @@
+prototype(Hoerbiger.Shared:Resource.FontShop) < prototype(Neos.Fusion:Array) {
+    fontShopLegalNotice = Neos.Fusion:Tag {
+        tagName = 'style'
+        content = '
+            /**
+             * This CSS resource incorporates links to font software which is the valuable copyrighted property of Monotype and/or its suppliers. You may not attempt to copy, install, redistribute, convert, modify or reverse engineer this font software. Please contact Monotype with any questions regarding Web Fonts: http://www.fontshop.com
+             */
+        '
+    }
+
+    fontShopTracking = Neos.Fusion:Tag {
+        tagName = 'script'
+        attributes.src = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.Shared/Public/Fonts/Fontshop/mtiFontTrackingCode.js'
+            @process.stripBaseUri = ${(
+                String.replace(
+                    value,
+                    Configuration.setting('Neos.Flow.http.baseUri'),
+                    '/'
+                )
+            )}
+            @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+        }
+    }
+}

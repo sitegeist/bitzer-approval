@@ -325,7 +325,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         $this->uriService->getNodeUri($node),
                                         LinkTarget::self(),
                                         null,
-                                        Value::fromString($node->getLabel())
+                                        Value::fromString($node->getLabel()),
+                                        null
                                     );
                                 }
                             ),
