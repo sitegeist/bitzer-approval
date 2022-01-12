@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Layout\TabBox\Tab;
 
 /*
@@ -13,7 +16,9 @@ interface TabInterface extends ComponentPresentationObjectInterface
 {
     public function getLabel(): SlotInterface;
 
-    public function getLabelIcon(): IconInterface;
+    public function getTabIcon(): IconInterface;
+
+    public function getAccordionIcon(): IconInterface;
 
     public function getContent(): SlotInterface;
 }

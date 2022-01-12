@@ -78,6 +78,8 @@ module.exports = {
 			/* Breakpoint to switch between inline navigation and  offcanvas. */
 			menuToggle: '1300px',
 			xs: '480px',
+			/* Breakpoint to switch between accordeon and tabbed view of Block.TabBox.*/
+			tabBoxToggle: '800px',
 			...defaultTheme.screens
 		},
 

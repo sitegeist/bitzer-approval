@@ -13,9 +13,9 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
     renderer = afx`
         <div class={[
             "[Layout.TabBox]",
-            "grid grid-cols-tabs gap-xl"
+            "grid tabBoxToggle:grid-cols-tabs gap-xl"
         ]}>
-            <nav class="flex flex-col relative">
+            <nav class="hidden tabBoxToggle:flex flex-col relative">
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
                     <label
                         class={[
@@ -26,14 +26,19 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                         data-select="tab"
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
-                        <Neos.Fusion:Augmenter class="h-[.86em]">
-                            <Hoerbiger.Shared:Block.Icon presentationObject={item.labelIcon} />
-                        </Neos.Fusion:Augmenter>
+                        <Hoerbiger.Shared:Block.Icon presentationObject={item.tabIcon} />
                     </label>
                 </Neos.Fusion:Loop>
             </nav>
             <div class="relative">
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
+                    <div
+                        class="flex justify-between items-center cursor-pointer min-h-touch outline-brand tabBoxToggle:hidden"
+                        data-select="accordeon-header"
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
+                        <Hoerbiger.Shared:Block.Icon presentationObject={item.accordionIcon} />
+                    </div>
                     <div
                         class={iterator.isFirst ? "flex" : "hidden"}
                         data-select="tab-content"
