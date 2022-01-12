@@ -139,14 +139,10 @@ module.exports = {
 					css: {
 						color: theme('colors.transparent.contrast'),
 						strong: {
-							css: {
-								color: theme('colors.transparent.contrast'),
-							},
+							color: theme('colors.transparent.contrast'),
 						},
 						a: {
-							css: {
-								color: theme('colors.transparent.contrast'),
-							},
+							color: theme('colors.transparent.contrast'),
 						},
 					},
 				},
