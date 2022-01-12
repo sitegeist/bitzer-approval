@@ -18,7 +18,7 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
 {
     /**
      * @Flow\InjectConfiguration(path="socialMedia")
-     * @var array<string,string>
+     * @var array<string,array>
      */
     protected $socialMediaSettings;
 
@@ -34,11 +34,13 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
         $linkFactory = new LinkFactory();
 
         return new SiteFooter(
-            Collection::fromIterable($this->socialMediaSettings,
-                function($socialMediaItem) use($linkFactory) {
-                return $linkFactory->forSocialMediaIcon(
-                    key($socialMediaItem),
-                    reset($socialMediaItem)
+            Collection::fromIterable(
+                $this->socialMediaSettings,
+                function($socialMediaItem, $index) use($linkFactory) {
+                    return $linkFactory->forSocialMediaIcon(
+                        $index,
+                        $socialMediaItem["url"],
+                        $socialMediaItem["label"]
                     );
                 }
             ),

@@ -18,6 +18,8 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
             target={presentationObject.target}
             rel={presentationObject.rel}
             rel.@if.1={presentationObject.rel}
+            aria-label={presentationObject.ariaLabel}
+            aria-label.@if.1={presentationObject.ariaLabel}
             class={[
                 "[Block.Link (" + presentationObject.variant + ")]",
                 presentationObject.variant.isContainer && "w-full h-full",

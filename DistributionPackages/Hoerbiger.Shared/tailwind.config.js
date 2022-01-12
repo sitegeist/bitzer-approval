@@ -29,7 +29,7 @@ const SPACES = {
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
 
-const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2']
+const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
 
 module.exports = {
 	mode: 'jit',
@@ -66,9 +66,10 @@ module.exports = {
 		},
 
 		fontFamily: {
-			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
-			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
-			'serif-regular': ['PT Serif', 'serif'],
+			'sans-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
+			'serif-regular': ['Times New Roman', 'Times' , 'serif'],
 		},
 
 		screens: {
