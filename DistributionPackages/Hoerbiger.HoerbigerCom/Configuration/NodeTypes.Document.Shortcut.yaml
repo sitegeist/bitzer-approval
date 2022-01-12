@@ -2,3 +2,4 @@
   superTypes:
     'Neos.Neos:Shortcut': true
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
