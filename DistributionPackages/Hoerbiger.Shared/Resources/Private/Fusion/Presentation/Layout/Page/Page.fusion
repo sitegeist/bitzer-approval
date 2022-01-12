@@ -18,7 +18,7 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
             class={[
                 "[Layout.Page]",
                 "flex flex-col min-h-screen w-full max-w-[100vw] overflow-hidden",
-                "text-light-contrast bg-light font-sans-light"
+                "text-light-contrast bg-light font-sans-regular text-base leading-6"
             ]}
             style="hyphens:auto;word-break:normal;"
         >

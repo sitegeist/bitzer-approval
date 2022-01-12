@@ -61,10 +61,13 @@ export const Selectbox = (props: SelectboxProps): JSX.Element => {
 								input.value === "" && "text-neutral-darker",
 							)}>
 								{
-									(() => options
-										.find(({key}) => key === input.value)
-										?.value
-									)()
+									(() => {
+										const option = options.find(({key}) => key === input.value);
+
+										if (option) {
+											return option.value ?? option.key;
+										}
+									})()
 										?? props.placeholder
 										?? ""
 								}
