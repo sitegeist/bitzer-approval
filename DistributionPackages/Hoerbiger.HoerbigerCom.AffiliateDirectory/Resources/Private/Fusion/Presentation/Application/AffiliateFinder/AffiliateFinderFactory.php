@@ -33,11 +33,17 @@ final class AffiliateFinderFactory extends AbstractComponentPresentationObjectFa
      */
     protected $localizationService;
 
+    /**
+     * @Flow\InjectConfiguration(package="Hoerbiger.Shared", path="googleMaps.apiKey")
+     * @var string
+     */
+    protected $googleMapsApiKey;
+
     public function create(string $locale): AffiliateFinderInterface
     {
         return new AffiliateFinder(
             $this->affiliateRepository->findAffiliates($locale),
-            'AIzaSyDu4LZZnG6K5U5Yx-BrkLfLD4jxIi474aM',
+            $this->googleMapsApiKey,
             $this->getLabels($locale),
             $locale
         );
