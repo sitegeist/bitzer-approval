@@ -128,7 +128,8 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
             $this->href,
             LinkTarget::blank(),
             $this->rel,
-            $this->content
+            $this->content,
+            $this->ariaLabel
         );
     }
 }

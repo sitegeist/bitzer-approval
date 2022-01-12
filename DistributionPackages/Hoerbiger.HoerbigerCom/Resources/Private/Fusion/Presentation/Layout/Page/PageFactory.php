@@ -10,19 +10,27 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
+use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
@@ -72,6 +80,26 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
                     $stage
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regular(),
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            new Headline(
+                                HeadlineVariant::brand(),
+                                HeadlineType::h1(),
+                                Editable::fromNodeProperty($homepage, 'headline')
+                            ),
+                            $inBackend || $homepage->getProperty('text')
+                                ? new Text(
+                                    TextVariant::lightContrast(),
+                                    Editable::fromNodeProperty($homepage, 'text'),
+                                    false
+                                )
+                                : null
+                        ]), $identity)
+                    )
                 ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
