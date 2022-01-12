@@ -13,14 +13,15 @@ prototype(Hoerbiger.Shared:Layout.Stack) < prototype(PackageFactory.AtomicFusion
     renderer = afx`
         <div class={[
             "[Layout.Stack (" + presentationObject.variant + ")]",
-            "flex flex-col items-start",
-            presentationObject.variant.isNoGap && "space-y-0",
-            presentationObject.variant.isInline && "space-y-[1ch]",
-            presentationObject.variant.isXs && "space-y-xs",
-            presentationObject.variant.isSm && "space-y-sm",
-            presentationObject.variant.isMd && "space-y-md",
-            presentationObject.variant.isLg && "space-y-lg",
-            presentationObject.variant.isXl && "space-y-xl"
+            "flex flex-col",
+            presentationObject.variant.isNoGap && "space-y-0 items-start",
+            presentationObject.variant.isInline && "space-y-[1ch] items-start",
+            presentationObject.variant.isXs && "space-y-xs items-start",
+            presentationObject.variant.isXsStretch && "space-y-xs items-stretch",
+            presentationObject.variant.isSm && "space-y-sm items-start",
+            presentationObject.variant.isMd && "space-y-md items-start",
+            presentationObject.variant.isLg && "space-y-lg items-start",
+            presentationObject.variant.isXl && "space-y-xl items-start"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

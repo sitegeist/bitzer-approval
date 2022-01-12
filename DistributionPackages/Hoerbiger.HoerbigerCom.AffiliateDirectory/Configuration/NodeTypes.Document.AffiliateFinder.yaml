@@ -2,7 +2,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
-
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
   ui:
     icon: search-location
     label: 'Standortfinder'

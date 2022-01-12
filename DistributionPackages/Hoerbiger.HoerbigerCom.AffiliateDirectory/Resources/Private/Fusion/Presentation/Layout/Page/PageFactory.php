@@ -9,17 +9,25 @@ use Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\Affiliate
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
+use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
@@ -65,7 +73,26 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 new ContentContainer(
                     ContentContainerVariant::regularNeutral(),
-                    $application
+                    new Stack(
+                        StackVariant::xsStretch(),
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $affiliateFinder->getProperty('headline')
+                                ? new Headline(
+                                    HeadlineVariant::regular(),
+                                    HeadlineType::h2(),
+                                    Editable::fromNodeProperty($affiliateFinder, 'headline')
+                                )
+                                : null,
+                            $inBackend || $affiliateFinder->getProperty('text')
+                                ? new Text(
+                                    TextVariant::neutralContrast(),
+                                    Editable::fromNodeProperty($affiliateFinder, 'text'),
+                                    false
+                                )
+                                : null,
+                            $application
+                        ]), $identity)
+                    )
                 )
             ]), $identity),
             $this->siteFooterFactory->forDocument($affiliateFinder, $site)
