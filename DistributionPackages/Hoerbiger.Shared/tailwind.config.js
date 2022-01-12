@@ -178,6 +178,7 @@ module.exports = {
 				'content-66': `min(calc(2/3 * ${MAX_CONTENT_WIDTH}), 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
+				touch: MIN_TOUCH,
 			},
 
 			width: {
