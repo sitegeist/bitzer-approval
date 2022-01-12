@@ -65,8 +65,6 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 		? state.country && state.country.count > 1
 		: state.country && state.country.count > 0;
 
-	console.log(state);
-
 	return (
 		<div className="flex flex-col space-y-sm">
 			<CountryForm
