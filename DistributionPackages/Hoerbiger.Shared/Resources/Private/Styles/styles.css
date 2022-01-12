@@ -2,21 +2,30 @@
 @tailwind components;
 
 @font-face {
-	font-family: 'TradeGothic';
-	src: url(../../Fonts/TradeGot.woff) format('woff');
+	font-family:"TradeGothicNextLight";
+	src:
+		local(''),
+		url(../../Fonts/Fontshop/TradeGothicNextLight.woff2) format("woff2"),
+		url(../../Fonts/Fontshop/TradeGothicNextLight.woff) format("woff");
+	font-display: swap;
 }
 
 @font-face {
-	font-family: 'TradeGothicBold';
-	src: url(../../Fonts/TradeGotBol.woff) format('woff');
+	font-family:"TradeGothicNextRegular";
+	src:
+		local(''),
+		url(../../Fonts/Fontshop/TradeGothicNextRegular.woff2) format("woff2"),
+		url(../../Fonts/Fontshop/TradeGothicNextRegular.woff) format("woff");
+	font-display: swap;
 }
 
 @font-face {
-	font-family: 'PT Serif';
-	font-style: italic;
-	font-weight: 400;
-	src: local(''),
-		url(../../Fonts/PTSerif/pt-serif-v12-latin-italic.woff2) format('woff2');
+	font-family:"TradeGothicNextBold";
+	src:
+		local(''),
+		url(../../Fonts/Fontshop/TradeGothicNextBold.woff2) format("woff2"),
+		url(../../Fonts/Fontshop/TradeGothicNextBold.woff) format("woff");
+	font-display: swap;
 }
 
 .NEOS_BE_HELPER_Block_DefinitionList > div {

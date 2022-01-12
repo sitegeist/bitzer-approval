@@ -1,12 +1,23 @@
 prototype(Hoerbiger.Shared:Resource.Fonts) < prototype(Neos.Fusion:Join) {
+    trade_gothic_light = Neos.Fusion:Tag {
+        tagName = 'link'
+        attributes.rel = 'preload'
+        attributes.as = 'font'
+        attributes.type = 'font/woff2'
+        attributes.crossorigin = 'anonymous'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.Shared/Public/Fonts/Fontshop/TradeGothicNextLight.woff2'
+        }
+    }
+
     trade_gothic = Neos.Fusion:Tag {
         tagName = 'link'
         attributes.rel = 'preload'
         attributes.as = 'font'
-        attributes.type = 'font/woff'
+        attributes.type = 'font/woff2'
         attributes.crossorigin = 'anonymous'
         attributes.href = Neos.Fusion:ResourceUri {
-            path = 'resource://Hoerbiger.Shared/Public/Fonts/TradeGot.woff'
+            path = 'resource://Hoerbiger.Shared/Public/Fonts/Fontshop/TradeGothicNextRegular.woff2'
         }
     }
 
@@ -14,10 +25,10 @@ prototype(Hoerbiger.Shared:Resource.Fonts) < prototype(Neos.Fusion:Join) {
         tagName = 'link'
         attributes.rel = 'preload'
         attributes.as = 'font'
-        attributes.type = 'font/woff'
+        attributes.type = 'font/woff2'
         attributes.crossorigin = 'anonymous'
         attributes.href = Neos.Fusion:ResourceUri {
-            path = 'resource://Hoerbiger.Shared/Public/Fonts/TradeGotBol.woff'
+            path = 'resource://Hoerbiger.Shared/Public/Fonts/Fontshop/TradeGothicNextBold.woff2'
         }
     }
 }

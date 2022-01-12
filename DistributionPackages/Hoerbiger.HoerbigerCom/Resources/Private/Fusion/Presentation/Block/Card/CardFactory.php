@@ -174,6 +174,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     LinkTarget::blank(),
                     null,
                     Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
+                    null
                 ),
                 Value::fromString(
                     $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension())

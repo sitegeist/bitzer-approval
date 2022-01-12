@@ -95,7 +95,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         $this->uriService->getNodeUri($successStories),
                                         LinkTarget::self(),
                                         null,
-                                        Value::fromString($this->getLabel('list.seeAll') ?: '')
+                                        Value::fromString($this->getLabel('list.seeAll') ?: ''),
+                                        null
                                     )
                                 ], $identity)
                             ),
@@ -124,7 +125,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                     $this->uriService->getNodeUri($successStory),
                                                     LinkTarget::self(),
                                                     null,
-                                                    $this->figureFactory->forArticleCard($imageSource)
+                                                    $this->figureFactory->forArticleCard($imageSource),
+                                                    null
                                                 )
                                                 : null,
                                             Value::fromString(
