@@ -28,6 +28,7 @@
 Build/Resources/Java/selenium-server-standalone*
 /"
 node_modules/
+yarn-error.log
 
 DistributionPackages/*/Resources/Private/**/*.css.fusion
 DistributionPackages/*/Resources/Private/**/*.css.json
