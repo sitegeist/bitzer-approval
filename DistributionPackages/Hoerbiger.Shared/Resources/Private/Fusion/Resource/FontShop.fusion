@@ -9,9 +9,11 @@ prototype(Hoerbiger.Shared:Resource.FontShop) < prototype(Neos.Fusion:Array) {
     }
 
     fontShopTracking = Neos.Fusion:Tag {
+        @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
         tagName = 'script'
+        attributes.defer = true
         attributes.src = Neos.Fusion:ResourceUri {
-            path = 'resource://Hoerbiger.Shared/Public/Fonts/Fontshop/mtiFontTrackingCode.js'
+            path = 'resource://Hoerbiger.Shared/Public/Fonts/Fontshop/trackFontShopUse.js'
             @process.stripBaseUri = ${(
                 String.replace(
                     value,
