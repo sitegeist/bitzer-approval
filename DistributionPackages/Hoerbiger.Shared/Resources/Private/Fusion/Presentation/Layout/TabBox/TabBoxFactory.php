@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
 
 /*
@@ -6,6 +9,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\Tab\Tab;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -20,10 +24,11 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
             TabBoxVariant::regular(),
             Collection::fromNodes(
                 $tabBox->findChildNodes(),
-                function(TraversableNodeInterface $tabNode) {
+                function (TraversableNodeInterface $tabNode) {
                     return new Tab(
                         Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:TabLabel'),
-                        new Icon('shared', 'arrowRight', null),
+                        new Icon('shared', 'arrowRight', IconSize::size_1()),
+                        new Icon('shared', 'chevronDown', IconSize::size_1_5()),
                         Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:ContentSlot')
                     );
                 }
