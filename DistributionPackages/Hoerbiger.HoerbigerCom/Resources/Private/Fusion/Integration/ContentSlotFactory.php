@@ -112,7 +112,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
                 return $this->forTileNavigation($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
-                return $this->forTextNode($contentNode);
+                return $this->forTextNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
                 return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
@@ -203,7 +203,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forTextNode(TraversableNodeInterface $textNode): SlotInterface
+    public function forTextNode(TraversableNodeInterface $textNode, bool $inBackend): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -218,16 +218,20 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Stack(
                 StackVariant::xs(),
                 Collection::fromIterable(array_filter([
-                    new Headline(
-                        HeadlineVariant::important(),
-                        HeadlineType::h2(),
-                        Editable::fromNodeProperty($textNode, 'headline')
-                    ),
-                    new Text(
-                        TextVariant::lightContrast(),
-                        Editable::fromNodeProperty($textNode, 'text'),
-                        $columns->getIsMaxTwo()
-                    )
+                    $inBackend || $textNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineVariant::important(),
+                            HeadlineType::h2(),
+                            Editable::fromNodeProperty($textNode, 'headline')
+                        )
+                        : null,
+                    $inBackend || $textNode->getProperty('text')
+                        ? new Text(
+                            TextVariant::lightContrast(),
+                            Editable::fromNodeProperty($textNode, 'text'),
+                            $columns->getIsMaxTwo()
+                        )
+                        : null
                 ]), $identity)
             )
         );
@@ -338,7 +342,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         $this->uriService->getNodeUri($node),
                                         LinkTarget::self(),
                                         null,
-                                        Value::fromString($node->getLabel())
+                                        Value::fromString($node->getLabel()),
+                                        null
                                     );
                                 }
                             ),

@@ -27,7 +27,8 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
                 $href,
                 $linkTarget,
                 $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
-                Value::fromString($node->getProperty('link__label'))
+                Value::fromString($node->getProperty('link__label')),
+                null
             )
             : null;
     }
@@ -41,7 +42,8 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $this->uriService->getNodeUri($document),
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
-            Value::fromString($document->getProperty("titleOverride") ?? $document->getLabel())
+            Value::fromString($document->getProperty("titleOverride") ?? $document->getLabel()),
+            null
         );
     }
 
@@ -52,18 +54,20 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $this->uriService->getNodeUri($document),
             LinkTarget::self(),
             null,
-            Value::fromString($document->getLabel())
+            Value::fromString($document->getLabel()),
+            null
         );
     }
 
-    public function forSocialMediaIcon(string $iconName, string $socialMediaLink): Link
+    public function forSocialMediaIcon(string $iconName, string $socialMediaLink, string $socialMediaLabel): Link
     {
         return new Link(
             LinkVariant::touchIcon(),
             new Uri($socialMediaLink),
             LinkTarget::self(),
             null,
-            new Icon('shared', strtolower($iconName), null)
+            new Icon('shared', strtolower($iconName), null),
+            $socialMediaLabel
         );
     }
 
@@ -76,7 +80,8 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $this->uriService->getNodeUri($document),
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
-            Value::fromString($document->getLabel())
+            Value::fromString($document->getLabel()),
+            null
         );
     }
 
@@ -87,7 +92,8 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $documentUri,
             LinkTarget::self(),
             null,
-            Value::fromString($localeIdentifier)
+            Value::fromString($localeIdentifier),
+            null
         );
     }
 
@@ -97,6 +103,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             LinkVariant::container(),
             $this->uriService->getAssetUri($asset),
             LinkTarget::blank(),
+            null,
             null,
             null
         );

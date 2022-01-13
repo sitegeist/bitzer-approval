@@ -29,7 +29,7 @@ const SPACES = {
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
 
-const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2']
+const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
 
 module.exports = {
 	mode: 'jit',
@@ -37,6 +37,7 @@ module.exports = {
 		'./Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
 	],
 	darkMode: false,
 	theme: {
@@ -66,9 +67,10 @@ module.exports = {
 		},
 
 		fontFamily: {
-			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
-			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
-			'serif-regular': ['PT Serif', 'serif'],
+			'sans-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
+			'serif-regular': ['Times New Roman', 'Times' , 'serif'],
 		},
 
 		screens: {
@@ -77,6 +79,7 @@ module.exports = {
 			/* Breakpoint to switch between inline navigation and  offcanvas. */
 			menuToggle: '1300px',
 			xs: '480px',
+			'affiliates-map-toggle': '980px',
 			...defaultTheme.screens
 		},
 
@@ -138,14 +141,10 @@ module.exports = {
 					css: {
 						color: theme('colors.transparent.contrast'),
 						strong: {
-							css: {
-								color: theme('colors.transparent.contrast'),
-							},
+							color: theme('colors.transparent.contrast'),
 						},
 						a: {
-							css: {
-								color: theme('colors.transparent.contrast'),
-							},
+							color: theme('colors.transparent.contrast'),
 						},
 					},
 				},
@@ -157,6 +156,7 @@ module.exports = {
 				tabs: '35% 1fr',
 				'2-1fr-icon': '1fr 1.2em',
 				'2-icon-1fr': '1.2em 1fr',
+				'affiliates-map-list': '70% 1fr',
 			},
 
 			gridTemplateRows: {
@@ -184,6 +184,7 @@ module.exports = {
 			},
 
 			width: {
+				...SPACES,
 				offcanvas: OFFCANVAS_WIDTH,
 				touch: MIN_TOUCH,
 			},
@@ -210,6 +211,7 @@ module.exports = {
 				'ratio-5-4': 'calc(4 * 100% / 5)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
+				'ratio-google-map': 'calc(9 * 100% / 16)',
 			},
 
 			gap: {

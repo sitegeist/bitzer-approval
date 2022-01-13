@@ -29,18 +29,22 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
 
     private ?SlotInterface $content;
 
+    private ?string $ariaLabel;
+
     public function __construct(
         LinkVariant $variant,
         UriInterface $href,
         LinkTarget $target,
         ?string $rel,
-        ?SlotInterface $content
+        ?SlotInterface $content,
+        ?string $ariaLabel
     ) {
         $this->variant = $variant;
         $this->href = $href;
         $this->target = $target;
         $this->rel = $rel;
         $this->content = $content;
+        $this->ariaLabel = $ariaLabel;
     }
 
     public function getVariant(): LinkVariant
@@ -68,6 +72,11 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
         return $this->content;
     }
 
+    public function getAriaLabel(): ?string
+    {
+        return $this->ariaLabel;
+    }
+
     public function withContent(?SlotInterface $content): self
     {
         return new self(
@@ -75,7 +84,8 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
             $this->href,
             $this->target,
             $this->rel,
-            $content
+            $content,
+            $this->ariaLabel
         );
     }
 
@@ -106,7 +116,20 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
             $this->href,
             $this->target,
             $this->rel,
-            $this->content
+            $this->content,
+            $this->ariaLabel
+        );
+    }
+
+    public function asBlankTargetLink(): self
+    {
+        return new self(
+            $this->variant,
+            $this->href,
+            LinkTarget::blank(),
+            $this->rel,
+            $this->content,
+            $this->ariaLabel
         );
     }
 }

@@ -14,7 +14,8 @@
             "ESNext",
             "DOM"
         ],
-        "baseUrl": "."
+        "baseUrl": ".",
+        "types": ["googlemaps"]
     },
     "exclude": [
         "node_modules",
