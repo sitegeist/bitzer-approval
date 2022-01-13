@@ -26,14 +26,17 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                         data-select="tab"
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
-                        <Hoerbiger.Shared:Block.Icon presentationObject={item.tabIcon} />
+                        <span class="text-light-contrast"><Hoerbiger.Shared:Block.Icon presentationObject={item.tabIcon} /></span>
                     </label>
                 </Neos.Fusion:Loop>
             </nav>
             <div class="relative">
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
                     <div
-                        class="flex justify-between items-center cursor-pointer min-h-touch outline-brand tabBoxToggle:hidden"
+                        class={[
+                            "flex justify-between items-center cursor-pointer min-h-touch",
+                            "bg-light my-xs p-xs font-bold text-brand tabBoxToggle:hidden shadow tracking-wider"
+                        ]}
                         data-select="accordeon-header"
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
@@ -42,6 +45,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     <div
                         class={iterator.isFirst ? "flex" : "hidden"}
                         data-select="tab-content"
+
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.content} />
                     </div>
