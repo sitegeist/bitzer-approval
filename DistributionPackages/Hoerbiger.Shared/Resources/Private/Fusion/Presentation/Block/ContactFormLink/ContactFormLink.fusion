@@ -19,7 +19,7 @@ prototype(Hoerbiger.Shared:Block.ContactFormLink) < prototype(PackageFactory.Ato
 
     renderer = afx`
         <div class="w-full bg-neutral-lighter">
-            <div class="mx-auto max-w-content-full grid grid-cols-2-1fr-max gap-xl items-center">
+            <div class="mx-auto max-w-content-full grid sm:grid-cols-2-1fr-max gap-xl items-center">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
                 <Hoerbiger.Shared:Block.Button presentationObject={presentationObject.button} />
             </div>

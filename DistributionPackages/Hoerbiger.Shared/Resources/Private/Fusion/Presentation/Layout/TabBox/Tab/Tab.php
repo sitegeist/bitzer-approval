@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Layout\TabBox\Tab;
 
 /*
@@ -17,17 +20,21 @@ final class Tab extends AbstractComponentPresentationObject implements TabInterf
 {
     private SlotInterface $label;
 
-    private IconInterface $labelIcon;
+    private IconInterface $tabIcon;
+
+    private IconInterface $accordionIcon;
 
     private SlotInterface $content;
 
     public function __construct(
         SlotInterface $label,
-        IconInterface $labelIcon,
+        IconInterface $tabIcon,
+        IconInterface $accordionIcon,
         SlotInterface $content
     ) {
         $this->label = $label;
-        $this->labelIcon = $labelIcon;
+        $this->tabIcon = $tabIcon;
+        $this->accordionIcon = $accordionIcon;
         $this->content = $content;
     }
 
@@ -36,9 +43,14 @@ final class Tab extends AbstractComponentPresentationObject implements TabInterf
         return $this->label;
     }
 
-    public function getLabelIcon(): IconInterface
+    public function getTabIcon(): IconInterface
     {
-        return $this->labelIcon;
+        return $this->tabIcon;
+    }
+
+    public function getAccordionIcon(): IconInterface
+    {
+        return $this->accordionIcon;
     }
 
     public function getContent(): SlotInterface
