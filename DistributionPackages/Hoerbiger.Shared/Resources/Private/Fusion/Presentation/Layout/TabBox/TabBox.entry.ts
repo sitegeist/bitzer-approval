@@ -8,6 +8,8 @@ export default ($node: Element): void => {
 		const $accordeonHeader: Element[] = Array.from($node.querySelectorAll("[data-select='accordeon-header']"));
 		const $tabContents: Element[] = Array.from($node.querySelectorAll("[data-select='tab-content']"));
 
+		$accordeonHeader[0].children[0].classList.add("rotate-180");
+
 		if ($tabs.length === $tabContents.length && $accordeonHeader.length === $tabContents.length) {
 			const onUpdateIndex = (index: number) => {
 				if (index >= 0) {
@@ -16,6 +18,7 @@ export default ($node: Element): void => {
 						$tabs[i].classList.toggle("opacity-30", i !== index);
 						$tabContents[i].classList.toggle("flex", i === index);
 						$tabContents[i].classList.toggle("hidden", i !== index);
+						$accordeonHeader[i].children[0].classList.toggle("rotate-180", i === index);
 					}
 				}
 			};
