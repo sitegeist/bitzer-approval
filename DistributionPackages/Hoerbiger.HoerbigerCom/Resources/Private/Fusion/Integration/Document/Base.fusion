@@ -5,6 +5,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     stylesheets = Hoerbiger.Shared:Resource.StyleSheets
     body = null
     bodyScripts = Hoerbiger.Shared:Resource.BodyScripts
+    fontShop = Hoerbiger.Shared:Resource.FontShop
 
     renderer = Neos.Neos:Page {
         head {
@@ -26,6 +27,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
                     @if.isSet = ${!String.isBlank(Configuration.setting('Hoerbiger.HoerbigerCom.environmentPrefix'))}
                 }
             }
+
+            fontShop = ${props.fontShop}
         }
 
         body = ${props.body}

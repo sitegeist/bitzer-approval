@@ -16,6 +16,7 @@ final class StackVariant implements PseudoEnumInterface
     const VARIANT_NOGAP = 'noGap';
     const VARIANT_INLINE = 'inline';
     const VARIANT_XS = 'xs';
+    const VARIANT_XS_STRETCH = 'xs_stretch';
     const VARIANT_SM = 'sm';
     const VARIANT_MD = 'md';
     const VARIANT_LG = 'lg';
@@ -39,6 +40,7 @@ final class StackVariant implements PseudoEnumInterface
             if ($string !== self::VARIANT_NOGAP
                 && $string !== self::VARIANT_INLINE
                 && $string !== self::VARIANT_XS
+                && $string !== self::VARIANT_XS_STRETCH
                 && $string !== self::VARIANT_SM
                 && $string !== self::VARIANT_MD
                 && $string !== self::VARIANT_LG
@@ -64,6 +66,11 @@ final class StackVariant implements PseudoEnumInterface
     public static function xs(): self
     {
         return self::from(self::VARIANT_XS);
+    }
+
+    public static function xsStretch(): self
+    {
+        return self::from(self::VARIANT_XS_STRETCH);
     }
 
     public static function sm(): self
@@ -101,6 +108,11 @@ final class StackVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_XS;
     }
 
+    public function getIsXsStretch(): bool
+    {
+        return $this->value === self::VARIANT_XS_STRETCH;
+    }
+
     public function getIsSm(): bool
     {
         return $this->value === self::VARIANT_SM;
@@ -130,6 +142,7 @@ final class StackVariant implements PseudoEnumInterface
             self::from(self::VARIANT_NOGAP),
             self::from(self::VARIANT_INLINE),
             self::from(self::VARIANT_XS),
+            self::from(self::VARIANT_XS_STRETCH),
             self::from(self::VARIANT_SM),
             self::from(self::VARIANT_MD),
             self::from(self::VARIANT_LG),

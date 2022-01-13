@@ -22,6 +22,7 @@
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
   constraints:
     nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.WebPage': true
       'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory': true
   ui:
     icon: book

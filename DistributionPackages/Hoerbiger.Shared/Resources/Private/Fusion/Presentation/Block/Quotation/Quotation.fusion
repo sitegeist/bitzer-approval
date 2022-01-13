@@ -19,7 +19,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 class="absolute top-[5px] lg:top-[25px] left-0 w-[48px] lg:w-[64px]"
                 src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quote.svg')}
             />
-            <div class="text-4xl lg:text-6xl font-serif-regular">
+            <div class="text-4xl lg:text-6xl font-serif-regular italic">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
             </div>
             <div class="text-xl font-sans-bold">

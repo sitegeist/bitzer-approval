@@ -19,6 +19,8 @@ export default ($node: Element): void => {
 						} catch(e) {}
 						/* eslint-enable */
 					}
+				}, {
+					passive: true,
 				});
 		});
 	}

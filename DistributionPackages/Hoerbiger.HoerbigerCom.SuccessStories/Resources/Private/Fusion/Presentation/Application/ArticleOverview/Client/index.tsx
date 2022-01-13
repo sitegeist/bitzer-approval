@@ -11,6 +11,7 @@ export const Client = ({articles, labels}: ApplicationData): JSX.Element => {
 		...[...new Set(articles.map(article => article.applicationWorld))]
 	]);
 	const [currentFilter, setCurrentFilter] = React.useState(ALL_FILTER.current);
+	const filteredArticles = articles.filter(article => currentFilter === ALL_FILTER.current || currentFilter === article.applicationWorld);
 
 	return (
 		<div className={cx(
@@ -36,10 +37,14 @@ export const Client = ({articles, labels}: ApplicationData): JSX.Element => {
 					))
 				}
 			</div>
-			<div className="grid grid-cols-1 md:grid-cols-2 gap-xl md:gap-sm">
+			<div className={cx(
+				"grid",
+				filteredArticles.length === 1 && "grid-cols-1 mx-auto md:max-w-[66%] lg:max-w-[33%]",
+				filteredArticles.length === 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md mx-auto lg:max-w-[66%]",
+				filteredArticles.length > 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md lg:grid-cols-3",
+			)}>
 				{
-					articles
-						.filter(article => currentFilter === ALL_FILTER.current || currentFilter === article.applicationWorld)
+					filteredArticles
 						.map(article => (
 							<ArticleCard
 								key={article.url}

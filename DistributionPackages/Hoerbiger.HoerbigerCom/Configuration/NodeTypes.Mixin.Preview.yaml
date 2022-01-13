@@ -27,18 +27,24 @@
         label: 'Alt-Text'
         inspector:
           group: 'preview'
+      options:
+        translateOnAdoption: true
     preview__image__title:
       type: 'string'
       ui:
         label: 'Title-Text'
         inspector:
           group: 'preview'
+      options:
+        translateOnAdoption: true
     preview__headline:
       type: 'string'
       ui:
         label: 'Vorschau-Überschrift'
         inspector:
           group: 'preview'
+      options:
+        translateOnAdoption: true
     preview__description:
       type: 'string'
       ui:
@@ -48,3 +54,5 @@
           editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
           editorOptions:
             rows: 7
+      options:
+        translateOnAdoption: true

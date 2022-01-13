@@ -2,6 +2,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -46,6 +47,11 @@
           position: 10
 
   properties:
+    headline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte h1 der Seite eingeben'
     footerMenu:
       type: references
       ui:

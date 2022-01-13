@@ -26,7 +26,10 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
             <div class="bg-neutral-darker border border-t-4 border-t-brand">
                 <div class="mx-auto max-w-content-full px-md py-xs flex items-center justify-between">
                     <img
-                        class="h-full max-h-[50px]"
+                        alt="Logo Hoerbiger"
+                        class="max-w-[150px]"
+                        width="233"
+                        height="80"
                         src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_white.png')}
                     />
                     <div class="flex items-center space-x-xs">
