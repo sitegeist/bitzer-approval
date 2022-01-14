@@ -94,6 +94,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable([
                             new Tag(
                                 'span',
+                                null,
                                 Value::fromString($productDocument->getProperty('headline') ?: '')
                             ),
                             new Icon('shared', 'arrowRight', IconSize::size_1_5())

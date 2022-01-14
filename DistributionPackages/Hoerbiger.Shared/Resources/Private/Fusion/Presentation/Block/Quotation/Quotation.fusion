@@ -13,18 +13,38 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
     renderer = afx`
         <div class={[
             "[Block.Quotation]",
-            "flex flex-col w-full max-w-quotation mx-auto relative space-y-xs pl-[60px] lg:pl-[80px]"
+            "flex flex-col w-full relative",
+            presentationObject.variant.isRegular && "pl-[60px] lg:pl-[80px] max-w-quotation mx-auto",
+            presentationObject.variant.isInline && "pt-[3px] pl-[25px] lg:pl-[40px]"
         ]}>
+            <div class={[
+                "flex flex-col w-full",
+                presentationObject.variant.isRegular && "space-y-xs",
+                presentationObject.variant.isInline && "space-y-ch-xs lg:space-y-ch"
+            ]}>
+                <div class={[
+                    "font-serif-regular italic leading-tight lg:leading-normal",
+                    presentationObject.variant.isRegular && "text-4xl lg:text-6xl",
+                    presentationObject.variant.isInline && "text-2xl lg:text-3xl"
+                ]}>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
+                </div>
+                <div class={[
+                    "font-sans-bold",
+                    presentationObject.variant.isRegular && "text-xl",
+                    presentationObject.variant.isInline && "text-base"
+                ]}>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.spokenByCharacter} />
+                </div>
+            </div>
             <img
-                class="absolute top-[5px] lg:top-[25px] left-0 w-[48px] lg:w-[64px]"
+                class={[
+                    "absolute left-0",
+                    presentationObject.variant.isRegular && "top-[-10px] lg:top-[-15px] w-[44px] lg:w-[64px]",
+                    presentationObject.variant.isInline && "top-[5px] w-[18px] lg:w-[24px]"
+                ]}
                 src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quote.svg')}
             />
-            <div class="text-4xl lg:text-6xl font-serif-regular italic">
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
-            </div>
-            <div class="text-xl font-sans-bold">
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.spokenByCharacter} />
-            </div>
         </div>
     `
 }

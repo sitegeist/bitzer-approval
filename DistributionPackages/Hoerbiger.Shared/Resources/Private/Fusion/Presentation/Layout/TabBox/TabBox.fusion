@@ -53,7 +53,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     <div
                         class={[
                             iterator.isFirst ? "flex" : "hidden",
-                            "py-sm"
+                            "py-sm tabBoxToggle:py-0"
                         ]}
                         data-select="tab-content"
                     >

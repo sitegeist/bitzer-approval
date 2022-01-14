@@ -35,6 +35,9 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
 
             size_4 = "w-[4em] h-[4em]"
             size_4.@if.1 = ${presentationObject.size.isSize_4}
+
+            size_parent = "w-full h-full"
+            size_parent.@if.1 = ${presentationObject.size.isSizeParent}
         }
         style = null
         inline = true

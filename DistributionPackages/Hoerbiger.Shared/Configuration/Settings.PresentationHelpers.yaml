@@ -33,3 +33,4 @@ Neos:
       Shared.Timeline: Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory
       Shared.NavigationItem: Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItemFactory
       Shared.CompactSearchForm: Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory
+      Shared.PeopleStory: Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStoryFactory

@@ -159,6 +159,7 @@ module.exports = {
 				'2-1fr-icon': '1fr 1.2em',
 				'2-icon-1fr': '1.2em 1fr',
 				'affiliates-map-list': '70% 1fr',
+				'people-story': '25% 1fr',
 			},
 
 			gridTemplateRows: {
@@ -180,7 +181,8 @@ module.exports = {
 			maxWidth: {
 				...SPACES,
 				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
-				'content-66': `min(calc(2/3 * ${MAX_CONTENT_WIDTH}), 100vw)`,
+				'content-snug': `min(calc(3/4 * ${MAX_CONTENT_WIDTH}), 100vw)`,
+				'content-tight': `min(calc(2/3 * ${MAX_CONTENT_WIDTH}), 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
 				touch: MIN_TOUCH,
@@ -203,6 +205,7 @@ module.exports = {
 
 			margin: {
 				...SPACES,
+				'minus-contentcontainer': `calc(-1.25 * ${SPACE_SM})`,
 			},
 
 			padding: {
@@ -215,6 +218,7 @@ module.exports = {
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
 				'ratio-google-map': 'calc(9 * 100% / 16)',
+				contentcontainer: `calc(1.25 * ${SPACE_SM})`,
 			},
 
 			gap: {

@@ -12,5 +12,7 @@ interface TagInterface extends ComponentPresentationObjectInterface
 {
     public function getTagName(): string;
 
+    public function getVariant(): ?TagVariant;
+
     public function getContent(): SlotInterface;
 }

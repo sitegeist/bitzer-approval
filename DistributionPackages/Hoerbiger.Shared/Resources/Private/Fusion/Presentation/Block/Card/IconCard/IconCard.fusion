@@ -1,0 +1,18 @@
+prototype(Hoerbiger.Shared:Block.Card.IconCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+    renderer = afx`
+        <div class={[
+            "[Block.Card.IconCard]",
+            "shadow-card p-sm flex flex-col space-y-sm"
+        ]}>
+            <div class="grid grid-cols-2-max-1fr text-brand gap-xs items-center">
+                <div class="w-touch h-touch lg:w-[72px] lg:h-[72px]">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+                </div>
+                <div class="text-3xl lg:text-4xl font-sans-bold">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
+                </div>
+            </div>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
+        </div>
+    `
+}

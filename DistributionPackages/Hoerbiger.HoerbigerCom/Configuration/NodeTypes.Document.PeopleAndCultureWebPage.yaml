@@ -1,0 +1,36 @@
+'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox': true
+          'Hoerbiger.HoerbigerCom:Collection.Benefits': true
+          'Hoerbiger.HoerbigerCom:Collection.PeopleStories': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.SectionIntroduction': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
+  ui:
+    icon: file
+    label: 'Seite'
+  properties:
+    searchType:
+      search:
+        indexing: '${"WebPage"}'

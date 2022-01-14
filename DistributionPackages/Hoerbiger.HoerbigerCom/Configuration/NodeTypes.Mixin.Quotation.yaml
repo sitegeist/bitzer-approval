@@ -1,0 +1,21 @@
+'Hoerbiger.HoerbigerCom:Mixin.Quotation':
+  abstract: true
+  properties:
+    text:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Text eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+    spokenByCharacter:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Name eingeben'

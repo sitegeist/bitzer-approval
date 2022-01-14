@@ -16,19 +16,29 @@ final class Tag extends AbstractComponentPresentationObject implements TagInterf
 {
     private string $tagName;
 
+    private ?TagVariant $variant;
+
     private SlotInterface $content;
+
 
     public function __construct(
         string $tagName,
+        ?TagVariant $variant,
         SlotInterface $content
     ) {
         $this->tagName = $tagName;
+        $this->variant = $variant;
         $this->content = $content;
     }
 
     public function getTagName(): string
     {
         return $this->tagName;
+    }
+
+    public function getVariant(): ?TagVariant
+    {
+        return $this->variant;
     }
 
     public function getContent(): SlotInterface

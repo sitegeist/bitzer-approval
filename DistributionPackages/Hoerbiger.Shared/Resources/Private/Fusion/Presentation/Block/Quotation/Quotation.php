@@ -14,16 +14,25 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
  */
 final class Quotation extends AbstractComponentPresentationObject implements QuotationInterface
 {
+    private QuotationVariant $variant;
+
     private SlotInterface $text;
 
     private SlotInterface $spokenByCharacter;
 
     public function __construct(
+        QuotationVariant $variant,
         SlotInterface $text,
         SlotInterface $spokenByCharacter
     ) {
+        $this->variant = $variant;
         $this->text = $text;
         $this->spokenByCharacter = $spokenByCharacter;
+    }
+
+    public function getVariant(): QuotationVariant
+    {
+        return $this->variant;
     }
 
     public function getText(): SlotInterface

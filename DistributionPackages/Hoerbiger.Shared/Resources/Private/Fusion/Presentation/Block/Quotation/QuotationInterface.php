@@ -10,6 +10,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 interface QuotationInterface extends ComponentPresentationObjectInterface
 {
+    public function getVariant(): QuotationVariant;
+
     public function getText(): SlotInterface;
 
     public function getSpokenByCharacter(): SlotInterface;

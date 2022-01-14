@@ -243,6 +243,20 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
+            FigureObjectPosition::top(),
+            null
+        );
+    }
+
+    public function forPeopleStory(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100w',
+            FigureObjectFit::cover(),
             FigureObjectPosition::center(),
             null
         );
