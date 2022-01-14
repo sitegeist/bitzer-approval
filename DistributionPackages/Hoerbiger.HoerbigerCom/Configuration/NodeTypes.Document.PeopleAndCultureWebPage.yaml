@@ -12,7 +12,7 @@
           '*': false
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery': true
-          'Hoerbiger.HoerbigerCom:Collection.TabBox': true
+          'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox': true
           'Hoerbiger.HoerbigerCom:Collection.Benefits': true
           'Hoerbiger.HoerbigerCom:Collection.PeopleStories': true
           'Hoerbiger.HoerbigerCom:Content.Image': true

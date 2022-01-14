@@ -142,6 +142,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
                 return $this->forDefinitionItemNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
+            case 'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
                 return $this->forTabBox($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.TextTab':
                 return $this->forTextTabNode($contentNode);
@@ -149,6 +150,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forDefinitionListTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
                 return $this->forDownloadsTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab':
+                return $this->forPeopleAndCultureTextTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.Benefits':
                 return $this->forBenefitsNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Benefit':
@@ -550,6 +553,34 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new Stack(
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
+                new Headline(
+                    HeadlineVariant::regular(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($textTabNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($textTabNode, 'text'),
+                    false
+                )
+            ]), $identity)
+        );
+    }
+
+    public function forPeopleAndCultureTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new Stack(
+            StackVariant::xs(),
+            Collection::fromIterable(array_filter([
+                new Icon(
+                    'shared',
+                    $textTabNode->getProperty('icon') ?: 'arrow-right',
+                    IconSize::size_3()
+                ),
                 new Headline(
                     HeadlineVariant::regular(),
                     HeadlineType::h2(),
