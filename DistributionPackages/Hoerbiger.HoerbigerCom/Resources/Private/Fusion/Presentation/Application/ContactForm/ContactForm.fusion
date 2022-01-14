@@ -29,7 +29,7 @@ prototype(Hoerbiger.HoerbigerCom:Application.ContactForm) < prototype(PackageFac
             </div>
             <div
                 data-select="applicationRoot"
-                class="max-w-content-full mx-auto p-md bg-light"
+                class="max-w-content-full mx-auto px-md py-contentcontainer bg-light"
             >
                 <script
                     type="application/json"
