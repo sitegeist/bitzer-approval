@@ -24,7 +24,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
                 </div>
             </div>
             <div class="bg-neutral-darker border border-t-4 border-t-brand">
-                <div class="mx-auto max-w-content-full px-md py-md sm:py-xs flex flex-col sm:flex-row items-center sm:space-x-sm space-y-md sm:space-y-0">
+                <div class="mx-auto max-w-content-full px-md py-md sm:py-xs flex flex-col items-center md:flex-row items-center sm:space-x-sm space-y-md md:space-y-0">
                     <div class="flex w-full justify-between items-center ">
                         <img
                             alt="Logo Hoerbiger"
@@ -48,7 +48,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
 
                         <div
                             @if.1={presentationObject.navigationLinks}
-                            class="flex flex-wrap sm:flex-nowrap justify-center space-x-md sm:space-x-xs "
+                            class="flex flex-wrap md:flex-nowrap justify-center space-x-sm md:space-x-xs "
                         >
                             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.navigationLinks} />
                         </div>
