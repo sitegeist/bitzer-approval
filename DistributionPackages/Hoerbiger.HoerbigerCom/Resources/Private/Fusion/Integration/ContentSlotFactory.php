@@ -16,7 +16,6 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
-use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
@@ -107,10 +106,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forDownloadsNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Download':
                 return $this->cardFactory->forDownloadNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.DummyText':
-                return $this->forDummyTextNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage':
-                return $this->forDummyTextWithImageNode($contentNode, $inBackend, $subgraph);
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
                 return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
@@ -409,89 +404,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
 
         return $this->figureFactory->forGalleryImage($imageSource);
-    }
-
-    public function forDummyTextNode(TraversableNodeInterface $dummyTextNode): SlotInterface
-    {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
-
-        return new ContentContainer(
-            ContentContainerVariant::regular(),
-            new DummyContainer(
-                $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/sample.png'),
-                new Stack(
-                    StackVariant::xs(),
-                    Collection::fromIterable(array_filter([
-                        new Headline(
-                            HeadlineVariant::important(),
-                            HeadlineType::h2(),
-                            Editable::fromNodeProperty($dummyTextNode, 'headline')
-                        ),
-                        new Text(
-                            TextVariant::lightContrast(),
-                            Editable::fromNodeProperty($dummyTextNode, 'text'),
-                            true
-                        )
-                    ]), $identity)
-                )
-            )
-        );
-    }
-
-    public function forDummyTextWithImageNode(
-        TraversableNodeInterface $dummyTextWithImageNode,
-        bool $inBackend,
-        ContentContext $subgraph
-    ): SlotInterface {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
-
-        $imageSource = $this->imageSourceFactory->forImageMixin($dummyTextWithImageNode, $inBackend);
-        $figure = $imageSource
-            ? $this->figureFactory->forTwoColumnGrid($imageSource)
-            : null;
-
-        $text = new DummyContainer(
-                $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/sample.png'),
-                new Box(
-                BoxVariant::textCenter(),
-                new Stack(
-                    StackVariant::xs(),
-                    Collection::fromIterable(array_filter([
-                        $inBackend || $dummyTextWithImageNode->getProperty('headline')
-                            ? new Headline(
-                            HeadlineVariant::important(),
-                            HeadlineType::h2(),
-                            Editable::fromNodeProperty($dummyTextWithImageNode, 'headline')
-                        )
-                            : null,
-                        new Text(
-                            TextVariant::lightContrast(),
-                            Editable::fromNodeProperty($dummyTextWithImageNode, 'text'),
-                            false
-                        ),
-                        (new LinkFactory())->forLinkMixin($dummyTextWithImageNode, $subgraph)
-                    ]), $identity)
-                )
-            )
-        );
-        $layout = Layout::from(
-            $dummyTextWithImageNode->getProperty('layout')
-                ?: Layout::VALUE_IMAGEFIRST
-        );
-
-        return new ContentContainer(
-            ContentContainerVariant::regular(),
-            new Grid(
-                GridVariant::twoColumns(),
-                $layout->getIsImageFirst()
-                    ? Collection::fromIterable([$figure, $text], $identity)
-                    : Collection::fromIterable([$text, $figure], $identity)
-            )
-        );
     }
 
     public function forVideoNode(TraversableNodeInterface $videoNode, bool $inBackend): SlotInterface

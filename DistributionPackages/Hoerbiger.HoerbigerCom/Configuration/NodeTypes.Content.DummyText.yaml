@@ -1,7 +1,0 @@
-'Hoerbiger.HoerbigerCom:Content.DummyText':
-  superTypes:
-    'Hoerbiger.HoerbigerCom:Content': true
-    'Hoerbiger.HoerbigerCom:Mixin.Text': true
-  ui:
-    label: 'Dummy-Text'
-    icon: vial
