@@ -115,6 +115,9 @@ module.exports = {
 						a: {
 							color: theme('colors.brand.contrast'),
 						},
+						'ul li::before': {
+							backgroundColor: theme('colors.brand.contrast'),
+						},
 					},
 				},
 				'neutral-contrast': {
@@ -125,6 +128,9 @@ module.exports = {
 						},
 						a: {
 							color: theme('colors.neutral.contrast'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.neutral.contrast'),
 						},
 					},
 				},
@@ -137,6 +143,9 @@ module.exports = {
 						a: {
 							color: theme('colors.decorative.contrast'),
 						},
+						'ul li::before': {
+							backgroundColor: theme('colors.decorative.contrast'),
+						},
 					},
 				},
 				'transparent-contrast': {
@@ -147,6 +156,9 @@ module.exports = {
 						},
 						a: {
 							color: theme('colors.transparent.contrast'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.transparent.contrast'),
 						},
 					},
 				},
