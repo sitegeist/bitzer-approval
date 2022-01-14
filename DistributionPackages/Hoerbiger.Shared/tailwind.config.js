@@ -37,6 +37,7 @@ module.exports = {
 		'./Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
 	],
 	darkMode: false,
 	theme: {
@@ -78,6 +79,7 @@ module.exports = {
 			/* Breakpoint to switch between inline navigation and  offcanvas. */
 			menuToggle: '1300px',
 			xs: '480px',
+			'affiliates-map-toggle': '980px',
 			/* Breakpoint to switch between accordeon and tabbed view of Block.TabBox.*/
 			tabBoxToggle: '800px',
 			...defaultTheme.screens
@@ -156,6 +158,7 @@ module.exports = {
 				tabs: '35% 1fr',
 				'2-1fr-icon': '1fr 1.2em',
 				'2-icon-1fr': '1.2em 1fr',
+				'affiliates-map-list': '70% 1fr',
 			},
 
 			gridTemplateRows: {
@@ -184,6 +187,7 @@ module.exports = {
 			},
 
 			width: {
+				...SPACES,
 				offcanvas: OFFCANVAS_WIDTH,
 				touch: MIN_TOUCH,
 			},
@@ -210,6 +214,7 @@ module.exports = {
 				'ratio-5-4': 'calc(4 * 100% / 5)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
+				'ratio-google-map': 'calc(9 * 100% / 16)',
 			},
 
 			gap: {
