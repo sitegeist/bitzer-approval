@@ -24,6 +24,7 @@
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.SectionIntroduction': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage': true

@@ -22,6 +22,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_BLANKY = 'blankY';
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
+    const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
 
     /**
      * @var array<string,self>|self[]
@@ -46,7 +47,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_BLANK
                 && $string !== self::VARIANT_BLANKY
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
-                && $string !== self::VARIANT_STAGEAFTERBREADCRUMB) {
+                && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
+                && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -100,6 +102,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB);
     }
 
+    public static function regularWithoutBottom(): self
+    {
+        return self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -145,6 +152,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_REGULARSTAGEAFTERBREADCRUMB;
     }
 
+    public function getIsRegularWithoutBottom(): bool
+    {
+        return $this->value === self::VARIANT_REGULAR_WITHOUT_BOTTOM;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -159,7 +171,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_BLANK),
             self::from(self::VARIANT_BLANKY),
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
-            self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB)
+            self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
+            self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM)
         ];
     }
 

@@ -18,6 +18,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
         ]}>
             <div class={[
                 presentationObject.variant.isRegular && "max-w-content-full mx-auto p-md bg-light",
+                presentationObject.variant.isRegularWithoutBottom && "max-w-content-full mx-auto p-md pb-xs bg-light mb-minus-md",
                 presentationObject.variant.isRegularNeutral && "max-w-content-full mx-auto p-md",
                 presentationObject.variant.isTight && "max-w-content-66 mx-auto p-md bg-light",
                 presentationObject.variant.isRegularSm && "max-w-content-full mx-auto pb-sm sm:p-sm bg-light",
@@ -26,6 +27,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isRegularStageAfterBreadcrumb && "max-w-content-full mx-auto p-md pt-0 bg-light",
                 presentationObject.variant.isBlank && "w-full",
                 presentationObject.variant.isBlankY && "w-full py-md"
+
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </div>

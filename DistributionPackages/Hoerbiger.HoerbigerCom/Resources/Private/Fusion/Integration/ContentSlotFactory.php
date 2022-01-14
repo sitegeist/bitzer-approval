@@ -32,6 +32,8 @@ use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclips
 use Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
 use Hoerbiger\Shared\Presentation\Block\Quotation\QuotationVariant;
+use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
+use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
@@ -716,24 +718,36 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         };
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
-            Collection::fromIterable([
-                new Icon(
-                    'shared',
-                    $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
-                    IconSize::size_4()
-                ),
-                new Headline(
-                    HeadlineVariant::regular(),
-                    HeadlineType::h2(),
-                    Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
-                ),
-                new Text(
-                    TextVariant::neutralContrast(),
-                    Editable::fromNodeProperty($sectionIntroductionNode, 'text'),
-                    false
-                )
-            ], $identity)
+            ContentContainerVariant::regularWithoutBottom(),
+            new Stack(
+                StackVariant::xsStretch(),
+                Collection::fromIterable([
+                    new Grid(
+                        GridVariant::iconLeft(),
+                        Collection::fromIterable(array_filter([
+                            new Tag(
+                                'span',
+                                TagVariant::brandColor(),
+                                new Icon(
+                                    'shared',
+                                    $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
+                                    IconSize::size_2_5()
+                                ),
+                            ),
+                            new Headline(
+                                HeadlineVariant::regular(),
+                                HeadlineType::h2(),
+                                Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
+                            ),
+                        ]), $identity)
+                    ),
+                    new Text(
+                        TextVariant::neutralContrast(),
+                        Editable::fromNodeProperty($sectionIntroductionNode, 'text'),
+                        false
+                    )
+                ], $identity)
+            )
         );
     }
 }

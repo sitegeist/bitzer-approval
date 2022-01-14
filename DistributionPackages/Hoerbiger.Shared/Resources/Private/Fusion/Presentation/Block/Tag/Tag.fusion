@@ -6,12 +6,17 @@ prototype(Hoerbiger.Shared:Block.Tag) < prototype(PackageFactory.AtomicFusion.Pr
 
         props {
             tagName = 'Text'
+            variant = 'brandColor'
             content = '- Add Slot Content -'
         }
     }
 
     renderer = Neos.Fusion:Tag {
         tagName = ${presentationObject.tagName}
+        attributes.class = Neos.Fusion:Join {
+            brandColor = "text-brand"
+            brandColor.@if.1 = ${presentationObject.variant.isBrandColor}
+        }
         content = PackageFactory.AtomicFusion.PresentationObjects:Slot {
             presentationObject = ${presentationObject.content}
         }
