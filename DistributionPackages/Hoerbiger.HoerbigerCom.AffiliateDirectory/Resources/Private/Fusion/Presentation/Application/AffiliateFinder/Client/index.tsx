@@ -61,9 +61,7 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 		);
 	};
 	const isMapToBeRendered = useMediaQuery("(min-width: 980px)");
-	const hasAffiliatesList = isMapToBeRendered
-		? state.country && state.country.count > 1
-		: state.country && state.country.count > 0;
+	const hasAffiliatesList = state.country && state.country.count > 0;
 
 	return (
 		<div className="flex flex-col space-y-sm">
@@ -94,15 +92,6 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 											onClick={() => dispatch({type: "reset"})}
 										>
 											<StampedeIcon iconName="globe" size={2}/>
-										</div>
-									)
-									: null
-							}
-							{
-								state.country?.count === 1
-									? (
-										<div className="absolute top-1/2 right-1/4 translate-x-1/2 -translate-y-1/2 max-w-[350px]">
-											<AffiliateCard affiliates={state.country.affiliates}/>
 										</div>
 									)
 									: null
