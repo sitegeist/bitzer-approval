@@ -184,7 +184,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend);
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::snug(),
             $partialFigureEclipse
         );
     }
@@ -277,7 +277,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::snug(),
             new Grid(
                 GridVariant::twoColumns(),
                 $layout->getIsImageFirst()
