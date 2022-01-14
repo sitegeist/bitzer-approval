@@ -243,7 +243,7 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             new QualifiedPresetIdentifiers([]),
             '100w',
             FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectPosition::top(),
             null
         );
     }

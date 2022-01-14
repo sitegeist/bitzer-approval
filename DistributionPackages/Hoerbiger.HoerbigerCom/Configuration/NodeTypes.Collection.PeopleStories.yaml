@@ -29,6 +29,9 @@
     label: 'People Story'
     icon: user
   properties:
+    image:
+      options:
+        preset: 'image.square'
     metaline:
       options:
         preset: 'text.plain'

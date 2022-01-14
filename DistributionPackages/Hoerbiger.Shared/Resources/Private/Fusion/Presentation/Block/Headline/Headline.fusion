@@ -23,10 +23,10 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             h1Brand = "text-brand"
             h1Brand.@if.1 = ${presentationObject.type.isH1 && presentationObject.variant.isBrand}
 
-            h2 = "text-3xl lg:text-4xl text-brand font-sans-bold"
-            h2.@if.1 = ${presentationObject.type.isH2}
+            h2 = "text-3xl lg:text-4xl text-brand font-sans-regular"
+            h2.@if.1 = ${presentationObject.type.isH2 && !presentationObject.variant.isNoBrand}
 
-            h2Important = "text-5xl lg:text-6xl text-brand font-sans-regular leading-heading"
+            h2Important = "text-5xl lg:text-6xl leading-heading"
             h2Important.@if.1 = ${presentationObject.type.isH2 && presentationObject.variant.isImportant}
 
             h2noBrand = "text-light"
@@ -34,6 +34,9 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
 
             isDecorative = "inline bg-decorative text-decorative-contrast shadow-decorative-heading-3 py-3 translate-x-6 leading-normal sm:leading-normal lg:leading-normal xl:leading-normal"
             isDecorative.@if.1 = ${presentationObject.variant.isDecorative}
+
+            h3 = "text-2xl lg:text-3xl font-sans-bold"
+            h3.@if.1 = ${presentationObject.type.isH3}
         }
 
         content = PackageFactory.AtomicFusion.PresentationObjects:Slot {

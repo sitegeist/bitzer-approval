@@ -1,0 +1,55 @@
+prototype(Hoerbiger.Shared:Block.PeopleStory) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\PeopleStory\\PeopleStoryInterface'
+
+    @styleguide {
+        title = 'PeopleStory'
+
+        props {
+            figure = 'Text'
+            headline {
+                variant = 'regular'
+                type = 'h1'
+                content = '- Add Slot Content -'
+            }
+            text {
+                variant = 'lightContrast'
+                content = '- Add Slot Content -'
+                canHaveColumns = true
+            }
+            quotation {
+                text = '- Add Slot Content -'
+                spokenByCharacter = '- Add Slot Content -'
+            }
+            metaline = '- Add Slot Content -'
+            tags = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.PeopleStory]",
+            "grid md:grid-cols-people-story md:gap-sm",
+            "shadow-card"
+        ]}>
+            <div class="h-0 pt-ratio-square relative">
+                <div class="absolute inset-0">
+                    <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure} />
+                </div>
+            </div>
+            <div class="flex flex-col space-y-sm md:space-y-xs p-sm md:px-0">
+                <div class="flex text-sm uppercase space-x-ch font-sans-bold">
+                    <div class="text-brand">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.metaline} />
+                    </div>
+                    <span>ꞏ</span>
+                    <div>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.tags} />
+                    </div>
+                </div>
+                <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} />
+                <Hoerbiger.Shared:Block.Text presentationObject={presentationObject.text} @if.isToBeRendered={presentationObject.text} />
+                <Hoerbiger.Shared:Block.Quotation presentationObject={presentationObject.quotation} @if.isToBeRendered={presentationObject.quotation} />
+            </div>
+        </div>
+        `
+}

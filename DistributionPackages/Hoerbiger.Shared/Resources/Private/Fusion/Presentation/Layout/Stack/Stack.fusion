@@ -19,9 +19,13 @@ prototype(Hoerbiger.Shared:Layout.Stack) < prototype(PackageFactory.AtomicFusion
             presentationObject.variant.isXs && "space-y-xs items-start",
             presentationObject.variant.isXsStretch && "space-y-xs items-stretch",
             presentationObject.variant.isSm && "space-y-sm items-start",
+            presentationObject.variant.isSmStretch && "space-y-sm items-stretch",
             presentationObject.variant.isMd && "space-y-md items-start",
+            presentationObject.variant.isMdStretch && "space-y-md items-stretch",
             presentationObject.variant.isLg && "space-y-lg items-start",
-            presentationObject.variant.isXl && "space-y-xl items-start"
+            presentationObject.variant.isLgStretch && "space-y-lg items-stretch",
+            presentationObject.variant.isXl && "space-y-xl items-start",
+            presentationObject.variant.isXlStretch && "space-y-xl items-stretch"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

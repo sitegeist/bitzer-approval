@@ -29,7 +29,9 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
+use Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
+use Hoerbiger\Shared\Presentation\Block\Quotation\QuotationVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
@@ -150,7 +152,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.Benefit':
                 return $this->forBenefitNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.PeopleStories':
-                return $this->forPeopleStoriesNode($contentNode);
+                return $this->forPeopleStoriesNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.PeopleStory':
                 return $this->forPeopleStoryNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.SectionIntroduction':
@@ -371,6 +373,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Quotation(
+                QuotationVariant::regular(),
                 Editable::fromNodeProperty($quotationNode, 'text'),
                 Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
             )
@@ -632,7 +635,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forPeopleStoriesNode(TraversableNodeInterface $peopleStoriesNode): SlotInterface
+    public function forPeopleStoriesNode(TraversableNodeInterface $peopleStoriesNode, bool $inBackend): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -640,64 +643,70 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            Collection::fromIterable([
-                new Headline(
-                    HeadlineVariant::regular(),
-                    HeadlineType::h2(),
-                    Editable::fromNodeProperty($peopleStoriesNode, 'headline')
-                ),
-                new Text(
-                    TextVariant::neutralContrast(),
-                    Editable::fromNodeProperty($peopleStoriesNode, 'text'),
-                    false
-                ),
-                new Grid(
-                    GridVariant::oneColumn(),
+            new Stack(
+                StackVariant::smStretch(),
+                Collection::fromIterable(array_filter([
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $peopleStoriesNode->getProperty('headline')
+                                ? new Headline(
+                                    HeadlineVariant::regular(),
+                                    HeadlineType::h2(),
+                                    Editable::fromNodeProperty($peopleStoriesNode, 'headline')
+                                )
+                                : null,
+                            $inBackend || $peopleStoriesNode->getProperty('text')
+                                ? new Text(
+                                    TextVariant::neutralContrast(),
+                                    Editable::fromNodeProperty($peopleStoriesNode, 'text'),
+                                    false
+                                )
+                                : null,
+                        ]), $identity),
+                    ),
                     Collection::fromNodes(
                         $peopleStoriesNode->findChildNodes(),
                         function(TraversableNodeInterface $node): Content {
                             return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                         }
                     )
-                )
-            ], $identity)
+                ]), $identity)
+            )
         );
     }
 
     public function forPeopleStoryNode(TraversableNodeInterface $peopleStoryNode, bool $inBackend): SlotInterface
     {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
         $imageSource = $this->imageSourceFactory->forImageMixin($peopleStoryNode, $inBackend);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Property "image" is required for content element PeopleStory.');
         }
 
-        return Collection::fromIterable([
+        return new PeopleStory(
             $this->figureFactory->forPeopleStory($imageSource),
-            new Row(
-                RowVariant::alternateMetalineEllipsis(),
-                Collection::fromIterable([
-                    Editable::fromNodeProperty($peopleStoryNode, 'metaline'),
-                    Editable::fromNodeProperty($peopleStoryNode, 'tags')
-                ], $identity)
-            ),
             new Headline(
                 HeadlineVariant::regular(),
                 HeadlineType::h3(),
                 Editable::fromNodeProperty($peopleStoryNode, 'headline')
             ),
-            new Text(
-                TextVariant::neutralContrast(),
-                Editable::fromNodeProperty($peopleStoryNode, 'introduction'),
-                false
-            ),
-            new Quotation(
-                Editable::fromNodeProperty($peopleStoryNode, 'text'),
-                Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
-            )
-        ], $identity);
+            $inBackend || $peopleStoryNode->getProperty('introduction')
+                ? new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($peopleStoryNode, 'introduction'),
+                    false
+                )
+                : null,
+            $inBackend || $peopleStoryNode->getProperty('text')
+                ? new Quotation(
+                    QuotationVariant::inline(),
+                    Editable::fromNodeProperty($peopleStoryNode, 'text'),
+                    Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
+                )
+                : null,
+            Editable::fromNodeProperty($peopleStoryNode, 'metaline'),
+            Editable::fromNodeProperty($peopleStoryNode, 'tags')
+        );
     }
 
     public function forSectionIntroductionNode(TraversableNodeInterface $sectionIntroductionNode): SlotInterface
