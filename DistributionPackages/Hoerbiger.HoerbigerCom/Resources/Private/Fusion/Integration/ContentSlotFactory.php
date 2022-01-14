@@ -153,7 +153,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab':
                 return $this->forPeopleAndCultureTextTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.Benefits':
-                return $this->forBenefitsNode($contentNode);
+                return $this->forBenefitsNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Benefit':
                 return $this->forBenefitNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.PeopleStories':
@@ -621,7 +621,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forBenefitsNode(TraversableNodeInterface $benefitsNode): SlotInterface
+    public function forBenefitsNode(TraversableNodeInterface $benefitsNode, bool $inBackend): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -629,27 +629,39 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            Collection::fromIterable([
-                new Headline(
-                    HeadlineVariant::regular(),
-                    HeadlineType::h2(),
-                    Editable::fromNodeProperty($benefitsNode, 'headline')
-                ),
-                new Text(
-                    TextVariant::neutralContrast(),
-                    Editable::fromNodeProperty($benefitsNode, 'text'),
-                    false
-                ),
-                new Grid(
-                    GridVariant::twoColumnsGap(),
-                    Collection::fromNodes(
-                        $benefitsNode->findChildNodes(),
-                        function(TraversableNodeInterface $node): Content {
-                            return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                        }
+            new Stack(
+                StackVariant::smStretch(),
+                Collection::fromIterable(array_filter([
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $benefitsNode->getProperty('headline')
+                                ? new Headline(
+                                    HeadlineVariant::important(),
+                                    HeadlineType::h2(),
+                                    Editable::fromNodeProperty($benefitsNode, 'headline')
+                                )
+                                : null,
+                            $inBackend || $benefitsNode->getProperty('text')
+                                ? new Text(
+                                    TextVariant::neutralContrast(),
+                                    Editable::fromNodeProperty($benefitsNode, 'text'),
+                                    false
+                                )
+                                : null,
+                        ]), $identity),
+                    ),
+                    new Grid(
+                        GridVariant::twoColumnsGap(),
+                        Collection::fromNodes(
+                            $benefitsNode->findChildNodes(),
+                            function(TraversableNodeInterface $node): Content {
+                                return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                            }
+                        )
                     )
-                )
-            ], $identity)
+                ]), $identity)
+            )
         );
     }
 
@@ -659,11 +671,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Icon(
                 'shared',
                 $benefitNode->getProperty('icon') ?: '',
-                IconSize::size_4()
+                IconSize::sizeParent()
             ),
             Editable::fromNodeProperty($benefitNode, 'headline'),
             null,
-            Editable::fromNodeProperty($benefitNode, 'text'),
+            new Text(
+                TextVariant::neutralContrast(),
+                Editable::fromNodeProperty($benefitNode, 'text'),
+                false
+            ),
             null
         );
     }
@@ -684,7 +700,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $peopleStoriesNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineVariant::regular(),
+                                    HeadlineVariant::important(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($peopleStoriesNode, 'headline')
                                 )
@@ -762,11 +778,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 new Icon(
                                     'shared',
                                     $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
-                                    IconSize::size_2_5()
+                                    IconSize::size_4()
                                 ),
                             ),
                             new Headline(
-                                HeadlineVariant::regular(),
+                                HeadlineVariant::important(),
                                 HeadlineType::h2(),
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
                             ),

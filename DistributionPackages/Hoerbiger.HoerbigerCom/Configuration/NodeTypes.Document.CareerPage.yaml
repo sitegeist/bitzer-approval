@@ -25,6 +25,7 @@
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
           'Hoerbiger.HoerbigerCom:Content.SectionIntroduction': true
+          'Hoerbiger.HoerbigerCom:Collection.Benefits': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage': true
