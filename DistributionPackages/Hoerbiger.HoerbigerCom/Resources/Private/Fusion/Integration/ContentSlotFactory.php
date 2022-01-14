@@ -576,15 +576,24 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new Stack(
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
-                new Icon(
-                    'shared',
-                    $textTabNode->getProperty('icon') ?: 'arrow-right',
-                    IconSize::size_3()
-                ),
-                new Headline(
-                    HeadlineVariant::regular(),
-                    HeadlineType::h2(),
-                    Editable::fromNodeProperty($textTabNode, 'headline')
+                new Grid(
+                    GridVariant::iconLeft(),
+                    Collection::fromIterable(array_filter([
+                        new Tag(
+                            'span',
+                            TagVariant::brandColor(),
+                            new Icon(
+                                'shared',
+                                $textTabNode->getProperty('icon') ?: 'arrow-right',
+                                IconSize::size_3()
+                            )
+                        ),
+                        new Headline(
+                            HeadlineVariant::regular(),
+                            HeadlineType::h2(),
+                            Editable::fromNodeProperty($textTabNode, 'headline')
+                        ),
+                    ]), $identity)
                 ),
                 new Text(
                     TextVariant::neutralContrast(),
