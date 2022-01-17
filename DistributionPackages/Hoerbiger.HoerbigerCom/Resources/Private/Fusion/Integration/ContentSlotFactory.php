@@ -157,6 +157,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forPeopleStoryNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.SectionIntroduction':
                 return $this->forSectionIntroductionNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.CookieDeclaration':
+                return $this->forCookieDeclarationNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -716,6 +718,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     )
                 ], $identity)
             )
+        );
+    }
+
+    public function forCookieDeclarationNode(TraversableNodeInterface $cookieDeclarationNode): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            Value::fromString('<script id="CookieDeclaration" src="https://consent.cookiebot.com/aa81a090-a42f-459c-9c12-35f852ed4015/cd.js" type="text/javascript" async></script>')
         );
     }
 }

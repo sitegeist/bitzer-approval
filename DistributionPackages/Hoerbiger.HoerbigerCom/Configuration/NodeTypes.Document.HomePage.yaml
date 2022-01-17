@@ -28,6 +28,8 @@
       type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
     contact:
       type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
+    privacy:
+      type: 'Hoerbiger.HoerbigerCom:Document.PrivacyPage'
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:

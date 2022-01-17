@@ -67,6 +67,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }
 
+    public function forPrivacyPage(TraversableNodeInterface $privacyPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($privacyPage, $inBackend);
+
+        return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph);
+    }
+
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
