@@ -1,0 +1,6 @@
+'Hoerbiger.HoerbigerCom:Content.CookieDeclaration':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    label: 'Cookie Übersicht'
+    icon: cookie

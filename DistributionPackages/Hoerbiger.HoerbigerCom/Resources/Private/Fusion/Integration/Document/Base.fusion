@@ -6,19 +6,13 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     body = null
     bodyScripts = Hoerbiger.Shared:Resource.BodyScripts
     fontShop = Hoerbiger.Shared:Resource.FontShop
+    cookies = Hoerbiger.Shared:Resource.CookieBot
 
     renderer = Neos.Neos:Page {
         head {
             metaViewport = '<meta name="viewport" content="width=device-width">'
             stylesheets = ${props.stylesheets}
             fonts = Hoerbiger.Shared:Resource.Fonts
-
-            javascripts {
-                googleTagManager = Hoerbiger.Shared:Application.Tracking.GoogleTagManager {
-                    @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
-                    trackingId = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.trackingId')}
-                }
-            }
 
             titleTag {
                 content = ${props.titleOverride ? props.titleOverride : props.title}
@@ -28,7 +22,14 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
                 }
             }
 
-            fontShop = ${props.fontShop}
+            javascripts {
+                googleTagManager = Hoerbiger.Shared:Application.Tracking.GoogleTagManager {
+                    @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
+                    trackingId = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.trackingId')}
+                }
+                cookies = ${props.cookies}
+                fontShop = ${props.fontShop}
+            }
         }
 
         body = ${props.body}
