@@ -2,6 +2,7 @@ prototype(Hoerbiger.Shared:Resource.CookieBot) < prototype(Neos.Fusion:Array) {
     cookieBot = Neos.Fusion:Tag {
         tagName = 'script'
         attributes = Neos.Fusion:Attributes {
+            id = "CookieBot"
             async = true
             data-cbid = "aa81a090-a42f-459c-9c12-35f852ed4015"
             src = 'https://consent.cookiebot.com/uc.js'
