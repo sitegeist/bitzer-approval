@@ -1,6 +1,5 @@
 prototype(Hoerbiger.Shared:Resource.CookieBot) < prototype(Neos.Fusion:Array) {
     cookieBot = Neos.Fusion:Tag {
-        @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.cookieBot.isEnabled')}
         tagName = 'script'
         attributes = Neos.Fusion:Attributes {
             async = true
