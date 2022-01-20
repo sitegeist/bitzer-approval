@@ -63,7 +63,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 })
             ),
             new Headline(
-                HeadlineVariant::brand(),
+                HeadlineVariant::largeBrand(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
             ),

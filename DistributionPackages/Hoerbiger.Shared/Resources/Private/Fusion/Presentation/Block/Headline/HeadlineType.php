@@ -15,7 +15,7 @@ final class HeadlineType implements PseudoEnumInterface
 {
     const TYPE_H1 = 'h1';
     const TYPE_H2 = 'h2';
-    const TYPE_H3 = 'h3';
+    const TYPE_DIV = 'div';
 
     /**
      * @var array<string,self>|self[]
@@ -34,7 +34,7 @@ final class HeadlineType implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if ($string !== self::TYPE_H1
                 && $string !== self::TYPE_H2
-                && $string !== self::TYPE_H3) {
+                && $string !== self::TYPE_DIV) {
                 throw HeadlineTypeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -53,9 +53,9 @@ final class HeadlineType implements PseudoEnumInterface
         return self::from(self::TYPE_H2);
     }
 
-    public static function h3(): self
+    public static function div(): self
     {
-        return self::from(self::TYPE_H3);
+        return self::from(self::TYPE_DIV);
     }
 
     public function getIsH1(): bool
@@ -68,9 +68,9 @@ final class HeadlineType implements PseudoEnumInterface
         return $this->value === self::TYPE_H2;
     }
 
-    public function getIsH3(): bool
+    public function getIsDiv(): bool
     {
-        return $this->value === self::TYPE_H3;
+        return $this->value === self::TYPE_DIV;
     }
 
     /**
@@ -81,7 +81,7 @@ final class HeadlineType implements PseudoEnumInterface
         return [
             self::from(self::TYPE_H1),
             self::from(self::TYPE_H2),
-            self::from(self::TYPE_H3)
+            self::from(self::TYPE_DIV)
         ];
     }
 
