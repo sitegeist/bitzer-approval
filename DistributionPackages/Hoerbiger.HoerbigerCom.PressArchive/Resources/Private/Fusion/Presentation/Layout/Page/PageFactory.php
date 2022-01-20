@@ -101,7 +101,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     StackVariant::sm(),
                     Collection::fromIterable(array_filter([
                         new Headline(
-                            HeadlineVariant::regular(),
+                            HeadlineVariant::medium(),
                             HeadlineType::h2(),
                             Value::fromString((string)$year ?: '')
                         ),

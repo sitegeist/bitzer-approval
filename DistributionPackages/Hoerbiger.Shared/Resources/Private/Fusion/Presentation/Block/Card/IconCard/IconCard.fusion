@@ -8,7 +8,7 @@ prototype(Hoerbiger.Shared:Block.Card.IconCard) < prototype(Hoerbiger.Shared:Blo
                 <div class="w-touch h-touch lg:w-[72px] lg:h-[72px]">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
                 </div>
-                <div class="text-3xl lg:text-4xl font-sans-bold">
+                <div class="text-3xl lg:text-4xl font-sans-regular">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
                 </div>
             </div>

@@ -103,7 +103,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         StackVariant::xs(),
                         Collection::fromIterable(array_filter([
                             new Headline(
-                                HeadlineVariant::brand(),
+                                HeadlineVariant::largeBrand(),
                                 HeadlineType::h1(),
                                 Editable::fromNodeProperty($homepage, 'headline')
                             ),

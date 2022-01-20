@@ -57,8 +57,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             $documentHeadlineContent
                 ? new Headline(
-                    HeadlineVariant::noBrand(),
-                    HeadlineType::h2(),
+                    HeadlineVariant::largeWhite(),
+                    HeadlineType::div(),
                     Value::fromString($documentHeadlineContent)
                 )
                 : null,

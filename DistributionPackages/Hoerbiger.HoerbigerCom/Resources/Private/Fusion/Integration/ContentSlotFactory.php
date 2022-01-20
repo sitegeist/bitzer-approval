@@ -224,7 +224,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineVariant::important(),
+                            HeadlineVariant::largeBrand(),
                             HeadlineType::h2(),
                             Editable::fromNodeProperty($textNode, 'headline')
                         )
@@ -259,8 +259,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineVariant::important(),
-                            HeadlineType::h2(),
+                            HeadlineVariant::mediumBrand(),
+                            HeadlineType::div(),
                             Editable::fromNodeProperty($textWithImageNode, 'headline')
                         )
                         : null,
@@ -325,7 +325,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $mostWantedNode->getProperty('headline')
                         ? new Headline(
-                        HeadlineVariant::important(),
+                        HeadlineVariant::mediumBrand(),
                         HeadlineType::h2(),
                         Editable::fromNodeProperty($mostWantedNode, 'headline')
                     )
@@ -468,8 +468,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineVariant::regular(),
-                    HeadlineType::h2(),
+                    HeadlineVariant::mediumBrand(),
+                    HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
                 ),
                 new Text(
@@ -503,8 +503,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             )
                         ),
                         new Headline(
-                            HeadlineVariant::regular(),
-                            HeadlineType::h2(),
+                            HeadlineVariant::mediumBrand(),
+                            HeadlineType::div(),
                             Editable::fromNodeProperty($textTabNode, 'headline')
                         ),
                     ]), $identity)
@@ -560,7 +560,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $benefitsNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineVariant::important(),
+                                    HeadlineVariant::largeBrand(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($benefitsNode, 'headline')
                                 )
@@ -623,7 +623,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $peopleStoriesNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineVariant::important(),
+                                    HeadlineVariant::largeBrand(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($peopleStoriesNode, 'headline')
                                 )
@@ -658,8 +658,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new PeopleStory(
             $this->figureFactory->forPeopleStory($imageSource),
             new Headline(
-                HeadlineVariant::regular(),
-                HeadlineType::h3(),
+                HeadlineVariant::medium(),
+                HeadlineType::div(),
                 Editable::fromNodeProperty($peopleStoryNode, 'headline')
             ),
             $inBackend || $peopleStoryNode->getProperty('introduction')
@@ -705,7 +705,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 ),
                             ),
                             new Headline(
-                                HeadlineVariant::important(),
+                                HeadlineVariant::largeBrand(),
                                 HeadlineType::h2(),
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
                             ),
