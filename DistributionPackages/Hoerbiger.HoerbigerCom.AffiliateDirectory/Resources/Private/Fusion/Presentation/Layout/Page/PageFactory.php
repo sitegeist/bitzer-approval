@@ -78,7 +78,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         Collection::fromIterable(array_filter([
                             $inBackend || $affiliateFinder->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineVariant::regular(),
+                                    HeadlineVariant::largeBrand(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($affiliateFinder, 'headline')
                                 )

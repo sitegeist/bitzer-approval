@@ -14,6 +14,6 @@ final class HeadlineTypeIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid HeadlineType, must be one of the defined constants. ', 1631801789);
+        return new self('The given value "' . $attemptedValue . '" is no valid HeadlineType, must be one of the defined constants. ', 1642685063);
     }
 }

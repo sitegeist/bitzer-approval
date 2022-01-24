@@ -13,11 +13,12 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class HeadlineVariant implements PseudoEnumInterface
 {
-    const VARIANT_REGULAR = 'regular';
-    const VARIANT_IMPORTANT = 'important';
-    const VARIANT_DECORATIVE = 'decorative';
-    const VARIANT_NOBRAND = 'noBrand';
-    const VARIANT_BRAND = 'brand';
+    const VARIANT_LARGEBRAND = 'largeBrand';
+    const VARIANT_LARGEWHITE = 'largeWhite';
+    const VARIANT_LARGE = 'large';
+    const VARIANT_MEDIUMBRAND = 'mediumBrand';
+    const VARIANT_MEDIUMWHITE = 'mediumWhite';
+    const VARIANT_MEDIUM = 'medium';
 
     /**
      * @var array<string,self>|self[]
@@ -34,11 +35,12 @@ final class HeadlineVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_REGULAR
-                && $string !== self::VARIANT_IMPORTANT
-                && $string !== self::VARIANT_DECORATIVE
-                && $string !== self::VARIANT_NOBRAND
-                && $string !== self::VARIANT_BRAND) {
+            if ($string !== self::VARIANT_LARGEBRAND
+                && $string !== self::VARIANT_LARGEWHITE
+                && $string !== self::VARIANT_LARGE
+                && $string !== self::VARIANT_MEDIUMBRAND
+                && $string !== self::VARIANT_MEDIUMWHITE
+                && $string !== self::VARIANT_MEDIUM) {
                 throw HeadlineVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -47,54 +49,64 @@ final class HeadlineVariant implements PseudoEnumInterface
         return self::$instances[$string];
     }
 
-    public static function regular(): self
+    public static function largeBrand(): self
     {
-        return self::from(self::VARIANT_REGULAR);
+        return self::from(self::VARIANT_LARGEBRAND);
     }
 
-    public static function important(): self
+    public static function largeWhite(): self
     {
-        return self::from(self::VARIANT_IMPORTANT);
+        return self::from(self::VARIANT_LARGEWHITE);
     }
 
-    public static function decorative(): self
+    public static function large(): self
     {
-        return self::from(self::VARIANT_DECORATIVE);
+        return self::from(self::VARIANT_LARGE);
     }
 
-    public static function noBrand(): self
+    public static function mediumBrand(): self
     {
-        return self::from(self::VARIANT_NOBRAND);
+        return self::from(self::VARIANT_MEDIUMBRAND);
     }
 
-    public static function brand(): self
+    public static function mediumWhite(): self
     {
-        return self::from(self::VARIANT_BRAND);
+        return self::from(self::VARIANT_MEDIUMWHITE);
     }
 
-    public function getIsRegular(): bool
+    public static function medium(): self
     {
-        return $this->value === self::VARIANT_REGULAR;
+        return self::from(self::VARIANT_MEDIUM);
     }
 
-    public function getIsImportant(): bool
+    public function getIsLargeBrand(): bool
     {
-        return $this->value === self::VARIANT_IMPORTANT;
+        return $this->value === self::VARIANT_LARGEBRAND;
     }
 
-    public function getIsDecorative(): bool
+    public function getIsLargeWhite(): bool
     {
-        return $this->value === self::VARIANT_DECORATIVE;
+        return $this->value === self::VARIANT_LARGEWHITE;
     }
 
-    public function getIsNoBrand(): bool
+    public function getIsLarge(): bool
     {
-        return $this->value === self::VARIANT_NOBRAND;
+        return $this->value === self::VARIANT_LARGE;
     }
 
-    public function getIsBrand(): bool
+    public function getIsMediumBrand(): bool
     {
-        return $this->value === self::VARIANT_BRAND;
+        return $this->value === self::VARIANT_MEDIUMBRAND;
+    }
+
+    public function getIsMediumWhite(): bool
+    {
+        return $this->value === self::VARIANT_MEDIUMWHITE;
+    }
+
+    public function getIsMedium(): bool
+    {
+        return $this->value === self::VARIANT_MEDIUM;
     }
 
     /**
@@ -103,11 +115,12 @@ final class HeadlineVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::VARIANT_REGULAR),
-            self::from(self::VARIANT_IMPORTANT),
-            self::from(self::VARIANT_DECORATIVE),
-            self::from(self::VARIANT_NOBRAND),
-            self::from(self::VARIANT_BRAND)
+            self::from(self::VARIANT_LARGEBRAND),
+            self::from(self::VARIANT_LARGEWHITE),
+            self::from(self::VARIANT_LARGE),
+            self::from(self::VARIANT_MEDIUMBRAND),
+            self::from(self::VARIANT_MEDIUMWHITE),
+            self::from(self::VARIANT_MEDIUM)
         ];
     }
 
