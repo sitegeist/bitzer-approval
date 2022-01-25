@@ -9,12 +9,18 @@ use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\SvgImage\SvgImage;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
+use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\BrandStage\BrandStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -55,9 +61,18 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         return new BrandStage(
             StageVariant::fromTheme($theme),
             null,
+            new Headline(
+                // theme
+                HeadlineVariant::largeWhite(),
+                HeadlineType::h1(),
+                Editable::fromNodeProperty($documentNode, 'headline')
+            ),
             null,
-            null,
-            null,
+            new Text(
+                TextVariant::tryFromTheme($theme, true) ?: TextVariant::lightContrast(),
+                Editable::fromNodeProperty($documentNode, 'abstract'),
+                false
+            ),
             $media,
             $background
         );

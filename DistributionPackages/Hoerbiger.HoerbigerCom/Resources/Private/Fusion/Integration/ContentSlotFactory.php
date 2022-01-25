@@ -5,6 +5,7 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
@@ -21,6 +22,7 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -99,32 +101,40 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $this->wantedNodeRepository = $wantedNodeRepository;
     }
 
-    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site): SlotInterface
+    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site, TraversableNodeInterface $documentNode): SlotInterface
     {
+        $productClass = ProductClass::tryFrom($documentNode->getProperty('productClass'));
+        $theme = $productClass ? $productClass->toTheme() : null;
+
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom:Collection.Downloads':
                 return $this->forDownloadsNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Download':
-                return $this->cardFactory->forDownloadNode($contentNode);
+                return $this->cardFactory->forDownloadNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
-                return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
+                return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
+                // theme
                 return $this->forTileNavigation($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
+                // theme
                 return $this->forTextNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
-                return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph);
+                // theme
+                return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
                 return $this->forImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.MostWanted':
                 return $this->forMostWantedNode($contentNode, $inBackend, $subgraph, $site);
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
+                // theme
                 return $this->forQuotationNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Video':
+                // theme
                 return $this->forVideoNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Collection.Milestones':
                 return $this->forMilestonesNode($contentNode);
@@ -135,11 +145,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Collection.DefinitionList':
                 return $this->forDefinitionListNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
+                // theme
                 return $this->forDefinitionItemNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
+                // theme
+                return $this->forTabBox($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
                 return $this->forTabBox($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.TextTab':
+                // theme
                 return $this->forTextTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
                 return $this->forDefinitionListTabNode($contentNode);
@@ -180,10 +194,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): SlotInterface
+    private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
     {
         /** @var SlotInterface $partialFigureEclipse */
-        $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend);
+        $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend, $theme);
 
         return new ContentContainer(
             ContentContainerVariant::snug(),
@@ -241,7 +255,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend, ContentContext $subgraph): SlotInterface
+    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend, ContentContext $subgraph, ?Theme $theme): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -269,7 +283,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Editable::fromNodeProperty($textWithImageNode, 'text'),
                         false
                     ),
-                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph)
+                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme)
                 ]), $identity)
             )
         );

@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Quotation;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
@@ -15,6 +16,10 @@ final class QuotationVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
     const VARIANT_INLINE = 'inline';
+    const VARIANT_REGULAREXCITE = 'regularExcite';
+    const VARIANT_REGULAREXPERIENCE = 'regularExperience';
+    const VARIANT_REGULARLITE = 'regularLite';
+    const VARIANT_REGULARSERVICE = 'regularService';
 
     /**
      * @var array<string,self>|self[]
@@ -32,13 +37,24 @@ final class QuotationVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_REGULAR
-                && $string !== self::VARIANT_INLINE) {
+                && $string !== self::VARIANT_INLINE
+                && $string !== self::VARIANT_REGULAREXCITE
+                && $string !== self::VARIANT_REGULAREXPERIENCE
+                && $string !== self::VARIANT_REGULARLITE
+                && $string !== self::VARIANT_REGULARSERVICE) {
                 throw QuotationVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
         }
 
         return self::$instances[$string];
+    }
+
+    public static function tryFromTheme(?Theme $theme): ?self
+    {
+        return $theme
+            ? self::from('regular' . (ucfirst($theme->getValue())))
+            : null;
     }
 
     public static function regular(): self
@@ -51,6 +67,26 @@ final class QuotationVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_INLINE);
     }
 
+    public static function regularExcite(): self
+    {
+        return self::from(self::VARIANT_REGULAREXCITE);
+    }
+
+    public static function regularExperience(): self
+    {
+        return self::from(self::VARIANT_REGULAREXPERIENCE);
+    }
+
+    public static function regularLite(): self
+    {
+        return self::from(self::VARIANT_REGULARLITE);
+    }
+
+    public static function regularService(): self
+    {
+        return self::from(self::VARIANT_REGULARSERVICE);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -61,6 +97,26 @@ final class QuotationVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_INLINE;
     }
 
+    public function getIsRegularExcite(): bool
+    {
+        return $this->value === self::VARIANT_REGULAREXCITE;
+    }
+
+    public function getIsRegularExperience(): bool
+    {
+        return $this->value === self::VARIANT_REGULAREXPERIENCE;
+    }
+
+    public function getIsRegularLite(): bool
+    {
+        return $this->value === self::VARIANT_REGULARLITE;
+    }
+
+    public function getIsRegularService(): bool
+    {
+        return $this->value === self::VARIANT_REGULARSERVICE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -68,7 +124,11 @@ final class QuotationVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_REGULAR),
-            self::from(self::VARIANT_INLINE)
+            self::from(self::VARIANT_INLINE),
+            self::from(self::VARIANT_REGULAREXCITE),
+            self::from(self::VARIANT_REGULAREXPERIENCE),
+            self::from(self::VARIANT_REGULARLITE),
+            self::from(self::VARIANT_REGULARSERVICE)
         ];
     }
 

@@ -23,6 +23,7 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Utility\Files;
@@ -153,7 +154,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             : $typeIdentifier;
     }
 
-    public function forDownloadNode(TraversableNodeInterface $downloadNode): DownloadCard
+    public function forDownloadNode(TraversableNodeInterface $downloadNode, ?Theme $theme): DownloadCard
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -169,7 +170,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $asset instanceof Document
                 ? Collection::fromIterable([
                 new Link(
-                    LinkVariant::label(),
+                    LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
                     $this->uriService->getAssetUri($asset),
                     LinkTarget::blank(),
                     null,

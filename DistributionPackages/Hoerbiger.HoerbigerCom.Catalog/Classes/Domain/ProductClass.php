@@ -54,6 +54,13 @@ final class ProductClass
         return self::$instances[$string];
     }
 
+    public static function tryFrom(?string $string): ?self
+    {
+        return !is_null($string)
+            ? self::from($string)
+            : null;
+    }
+
     public static function excite(): self
     {
         return self::from(self::CLASS_EXCITE);

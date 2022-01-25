@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
@@ -20,6 +21,10 @@ final class LinkVariant implements PseudoEnumInterface
     const VARIANT_SITEFOOTER = 'siteFooter';
     const VARIANT_PLAINLABEL = 'plainLabel';
     const VARIANT_ICONLABEL = 'iconLabel';
+    const VARIANT_LABELEXCITE = 'labelExcite';
+    const VARIANT_LABELEXPERIENCE = 'labelExperience';
+    const VARIANT_LABELLITE = 'labelLite';
+    const VARIANT_LABELSERVICE = 'labelService';
 
     /**
      * @var array<string,self>|self[]
@@ -42,13 +47,24 @@ final class LinkVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_NOSTYLES
                 && $string !== self::VARIANT_SITEFOOTER
                 && $string !== self::VARIANT_PLAINLABEL
-                && $string !== self::VARIANT_ICONLABEL) {
+                && $string !== self::VARIANT_ICONLABEL
+                && $string !== self::VARIANT_LABELEXCITE
+                && $string !== self::VARIANT_LABELEXPERIENCE
+                && $string !== self::VARIANT_LABELLITE
+                && $string !== self::VARIANT_LABELSERVICE) {
                 throw LinkVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
         }
 
         return self::$instances[$string];
+    }
+
+    public static function tryFromTheme(?Theme $theme): ?self
+    {
+        return $theme
+            ? self::from('label' . (ucfirst($theme->getValue())))
+            : null;
     }
 
     public static function container(): self
@@ -86,6 +102,26 @@ final class LinkVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_ICONLABEL);
     }
 
+    public static function labelExcite(): self
+    {
+        return self::from(self::VARIANT_LABELEXCITE);
+    }
+
+    public static function labelExperience(): self
+    {
+        return self::from(self::VARIANT_LABELEXPERIENCE);
+    }
+
+    public static function labelLite(): self
+    {
+        return self::from(self::VARIANT_LABELLITE);
+    }
+
+    public static function labelService(): self
+    {
+        return self::from(self::VARIANT_LABELSERVICE);
+    }
+
     public function getIsContainer(): bool
     {
         return $this->value === self::VARIANT_CONTAINER;
@@ -121,6 +157,26 @@ final class LinkVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_ICONLABEL;
     }
 
+    public function getIsLabelExcite(): bool
+    {
+        return $this->value === self::VARIANT_LABELEXCITE;
+    }
+
+    public function getIsLabelExperience(): bool
+    {
+        return $this->value === self::VARIANT_LABELEXPERIENCE;
+    }
+
+    public function getIsLabelLite(): bool
+    {
+        return $this->value === self::VARIANT_LABELLITE;
+    }
+
+    public function getIsLabelService(): bool
+    {
+        return $this->value === self::VARIANT_LABELSERVICE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -133,7 +189,11 @@ final class LinkVariant implements PseudoEnumInterface
             self::from(self::VARIANT_NOSTYLES),
             self::from(self::VARIANT_SITEFOOTER),
             self::from(self::VARIANT_PLAINLABEL),
-            self::from(self::VARIANT_ICONLABEL)
+            self::from(self::VARIANT_ICONLABEL),
+            self::from(self::VARIANT_LABELEXCITE),
+            self::from(self::VARIANT_LABELEXPERIENCE),
+            self::from(self::VARIANT_LABELLITE),
+            self::from(self::VARIANT_LABELSERVICE)
         ];
     }
 

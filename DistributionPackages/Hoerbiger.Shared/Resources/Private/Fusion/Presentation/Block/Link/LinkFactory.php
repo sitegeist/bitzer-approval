@@ -7,6 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
 
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -16,14 +17,14 @@ use Psr\Http\Message\UriInterface;
 
 final class LinkFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forLinkMixin(TraversableNodeInterface $node, ContentContext $subgraph): ?Link
+    public function forLinkMixin(TraversableNodeInterface $node, ContentContext $subgraph, ?Theme $theme): ?Link
     {
         $href = $this->resolveRawLinkTargetUri($node->getProperty('link__target'), $subgraph);
         $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
 
         return $href
             ? new Link(
-                LinkVariant::label(),
+                LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
                 $href,
                 $linkTarget,
                 $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
