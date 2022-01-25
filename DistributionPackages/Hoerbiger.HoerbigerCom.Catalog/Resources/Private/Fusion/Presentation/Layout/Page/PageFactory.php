@@ -6,10 +6,10 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
+use Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Stage\StageFactory as CatalogStageFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -21,6 +21,7 @@ use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
+use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
@@ -28,6 +29,12 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
+    /**
+     * @Flow\Inject
+     * @var CatalogStageFactory
+     */
+    protected $catalogstageFactory;
+
     private StageFactory $stageFactory;
 
     private SiteFooterFactory $siteFooterFactory;
@@ -54,16 +61,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     public function forProductCategory(TraversableNodeInterface $site, TraversableNodeInterface $productCategory,  bool $inBackend, ContentContext $subgraph): PageInterface
     {
-        /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forDuoIntroduction($productCategory, $inBackend);
+        $stage = $this->catalogstageFactory->forProductAndCategoryIntroduction($productCategory, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $productCategory,$stage, $subgraph);
     }
 
     public function forProduct(TraversableNodeInterface $site, TraversableNodeInterface $product, bool $inBackend, ContentContext $subgraph): PageInterface
     {
-        /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forDuoIntroduction($product, $inBackend);
+        $stage = $this->catalogstageFactory->forProductAndCategoryIntroduction($product, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $product, $stage, $subgraph);
     }

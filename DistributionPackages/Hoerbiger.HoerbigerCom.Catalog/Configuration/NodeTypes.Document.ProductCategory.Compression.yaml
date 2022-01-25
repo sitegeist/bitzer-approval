@@ -1,0 +1,9 @@
+'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory.Compression':
+  superTypes:
+    'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory': true
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom.Catalog:Document.Product': false
+      'Hoerbiger.HoerbigerCom.Catalog:Document.Product.Compression': true
+  ui:
+    label: 'Compression-Produktkategorie'

@@ -57,30 +57,4 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             $this->figureFactory->forFullMediaStage($imageSource)
         );
     }
-
-    public function forDuoIntroduction(TraversableNodeInterface $node, bool $inBackend): StageInterface
-    {
-        $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
-        if (!$imageSource) {
-            throw new \InvalidArgumentException('Introduction requires image for property media.');
-        }
-
-        return new DuoStage(
-            StageVariant::duo(),
-            null,
-            new Headline(
-                HeadlineVariant::largeBrand(),
-                HeadlineType::h1(),
-                Editable::fromNodeProperty($node, 'headline', false)
-            ),
-            null,
-            new Text(
-                TextVariant::lightContrast(),
-                Editable::fromNodeProperty($node, 'abstract'),
-                false
-            ),
-            $this->figureFactory->forDuoStage($imageSource),
-            null
-        );
-    }
 }

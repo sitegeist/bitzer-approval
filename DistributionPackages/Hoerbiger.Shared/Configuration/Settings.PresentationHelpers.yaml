@@ -34,3 +34,4 @@ Neos:
       Shared.NavigationItem: Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItemFactory
       Shared.CompactSearchForm: Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory
       Shared.PeopleStory: Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStoryFactory
+      Shared.SvgImage: Hoerbiger\Shared\Presentation\Block\SvgImage\SvgImageFactory

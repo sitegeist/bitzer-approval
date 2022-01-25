@@ -1,0 +1,7 @@
+prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
+    renderer = afx`
+        <div>[Layout.BrandStage] Stage me!</div>
+        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
+        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
+    `
+}

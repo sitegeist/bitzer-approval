@@ -14,6 +14,6 @@ final class StageVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid StageVariant, must be one of the defined constants. ', 1632226845);
+        return new self('The given value "' . $attemptedValue . '" is no valid StageVariant, must be one of the defined constants. ', 1643104962);
     }
 }
