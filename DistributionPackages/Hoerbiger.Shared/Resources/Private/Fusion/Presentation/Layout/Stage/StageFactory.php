@@ -8,9 +8,9 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
-use Hoerbiger\Shared\Presentation\Layout\Stage\DuoStage\DuoStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\FullMediaStage\FullMediaStage;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
@@ -43,7 +43,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             StageVariant::from($node->getProperty('stage__variant') ?: StageVariant::VARIANT_FULLMEDIATEXTLEFT),
             null,
             new Headline(
-                HeadlineVariant::largeWhite(),
+                HeadlineSize::large(),
+                HeadlineColor::white(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($node, 'headline')
             ),

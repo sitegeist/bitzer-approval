@@ -11,8 +11,9 @@ use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\Slidab
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
@@ -103,7 +104,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         StackVariant::xs(),
                         Collection::fromIterable(array_filter([
                             new Headline(
-                                HeadlineVariant::largeBrand(),
+                                HeadlineSize::large(),
+                                HeadlineColor::brand(),
                                 HeadlineType::h1(),
                                 Editable::fromNodeProperty($homepage, 'headline')
                             ),

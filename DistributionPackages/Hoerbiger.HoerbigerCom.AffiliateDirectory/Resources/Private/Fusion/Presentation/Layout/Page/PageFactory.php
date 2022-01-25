@@ -6,17 +6,16 @@ namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\AffiliateFinderFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
-use Hoerbiger\Shared\Presentation\Layout\Box\Box;
-use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -78,7 +77,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         Collection::fromIterable(array_filter([
                             $inBackend || $affiliateFinder->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineVariant::largeBrand(),
+                                    HeadlineSize::large(),
+                                    HeadlineColor::brand(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($affiliateFinder, 'headline')
                                 )

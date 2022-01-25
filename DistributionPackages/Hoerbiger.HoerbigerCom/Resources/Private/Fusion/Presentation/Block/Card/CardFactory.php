@@ -13,6 +13,8 @@ use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
@@ -66,7 +68,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         $this->csvPOTranslator = $csvPOTranslator;
     }
 
-    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend): NavigationCard
+    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ?Theme $theme): NavigationCard
     {
         $link = (new LinkFactory())->forLinkToDocument($document);
 
@@ -82,7 +84,8 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($headlineProperty) {
             $headline = new Headline(
-                HeadlineVariant::medium(),
+                HeadlineSize::medium(),
+                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::text(),
                 HeadlineType::div(),
                 Value::fromString($headlineProperty)
             );
@@ -95,7 +98,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($abstractProperty) {
             $text = new Text(
-                TextVariant::lightContrast(),
+                TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
                 Value::fromString($abstractProperty),
                 false
             );

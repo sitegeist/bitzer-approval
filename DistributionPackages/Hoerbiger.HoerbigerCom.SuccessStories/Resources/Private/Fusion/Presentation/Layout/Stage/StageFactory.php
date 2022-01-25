@@ -10,13 +10,13 @@ use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
-use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StackStage\StackStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
@@ -73,7 +73,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 })
             ),
             new Headline(
-                HeadlineVariant::largeBrand(),
+                HeadlineSize::large(),
+                HeadlineColor::brand(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($successStory, 'headline', false)
             ),
