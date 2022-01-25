@@ -2,19 +2,20 @@ Neos:
   ContentRepository:
     contentDimensions:
       language:
-        default: en
-        defaultPreset: en
+        default: de
+        defaultPreset: de
         label: Sprache
         icon: icon-language
         presets:
-          en:
-            label: English
-            values: ['en']
-            uriSegment: en
           de:
             label: Deutsch
-            values: ['de', 'en']
+            values: ['de']
             uriSegment: de
+          en:
+            label: English
+            values: ['en', 'de']
+            uriSegment: en
+
   Neos:
     routing:
       supportEmptySegmentForDimensions: false
