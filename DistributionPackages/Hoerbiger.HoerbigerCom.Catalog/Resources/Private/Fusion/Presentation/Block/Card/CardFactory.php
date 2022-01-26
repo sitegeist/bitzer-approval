@@ -11,12 +11,21 @@ use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Card\ProductCard\ProductCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
+use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Flow\Annotations as Flow;
@@ -123,6 +132,89 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                 ? Value::fromString($thing->getProperty('preview__description'))
                 : null,
             null
+        );
+    }
+
+    public function forGroupedProductsNode(TraversableNodeInterface $groupedProductListNode, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($groupedProductListNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forProductCard($imageSource)
+            : null;
+
+        $products = Collection::fromNodes(
+            TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),
+            function (TraversableNodeInterface $productDocument) {
+                $link = (new LinkFactory())
+                    ->forLinkToDocument($productDocument)
+                    ->asPlainLabel();
+
+                return $link->withContent(
+                    new Grid(
+                        GridVariant::iconRight(),
+                        Collection::fromIterable([
+                            new Tag(
+                                'span',
+                                Value::fromString($productDocument->getProperty('headline') ?: '')
+                            ),
+                            new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                        ], function (SlotInterface $slot) {
+                            return $slot;
+                        })
+                    )
+                );
+            }
+        );
+
+        return new ProductCard(
+            $figure,
+            Editable::fromNodeProperty($groupedProductListNode, 'name'),
+            null,
+            null,
+            $products
+        );
+    }
+
+    /**
+     * @param array<int,TraversableNodeInterface> $products
+     */
+    public function forProductGroup(TraversableNodeInterface $productGroup, array $products, bool $inBackend) :SlotInterface
+    {
+        $imageSource = ($this->imageSourceFactory)->forImageMixin($productGroup, $inBackend);
+        $figure = $imageSource
+            ? ($this->figureFactory)->forProductCard($imageSource)
+            : null;
+
+        $products = Collection::fromNodes(
+            TraversableNodes::fromArray($products),
+            function (TraversableNodeInterface $productDocument) {
+                $link = (new LinkFactory())
+                    ->forLinkToDocument($productDocument)
+                    ->asPlainLabel();
+
+                return $link->withContent(
+                    new Grid(
+                        GridVariant::iconRight(),
+                        Collection::fromIterable([
+                            new Tag(
+                                'span',
+                                Value::fromString($productDocument->getProperty('headline') ?: '')
+                            ),
+                            new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                        ], function (SlotInterface $slot) {
+                            return $slot;
+                        })
+                    )
+                );
+            }
+        );
+
+        return new ProductCard(
+            $figure,
+            Editable::fromNodeProperty($productGroup, 'title'),
+            null,
+            null,
+            $products
         );
     }
 }

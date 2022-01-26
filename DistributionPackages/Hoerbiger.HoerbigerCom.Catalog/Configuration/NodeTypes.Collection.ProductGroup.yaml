@@ -1,0 +1,15 @@
+'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductGroup':
+  superTypes:
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup': true
+
+  childNodes:
+    freestanding:
+      type: 'Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup'
+  ui:
+    label: 'Gruppenverwaltungen'
+    icon: 'dot-circle'
+

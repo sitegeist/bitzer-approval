@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
+use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\ProductCard\ProductCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
@@ -49,7 +50,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList':
                 return $this->forProductListNode($contentNode);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts':
-                return $this->forGroupedProductsNode($contentNode, $inBackend);
+                return (new CardFactory)->forGroupedProductsNode($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -71,46 +72,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     }
                 )
             )
-        );
-    }
-
-    public function forGroupedProductsNode(TraversableNodeInterface $groupedProductListNode, bool $inBackend): SlotInterface
-    {
-        $imageSource = $this->imageSourceFactory->forImageMixin($groupedProductListNode, $inBackend);
-        $figure = $imageSource
-            ? $this->figureFactory->forProductCard($imageSource)
-            : null;
-
-        $products = Collection::fromNodes(
-            TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),
-            function (TraversableNodeInterface $productDocument) {
-                $link = (new LinkFactory())
-                    ->forLinkToDocument($productDocument)
-                    ->asPlainLabel();
-
-                return $link->withContent(
-                    new Grid(
-                        GridVariant::iconRight(),
-                        Collection::fromIterable([
-                            new Tag(
-                                'span',
-                                Value::fromString($productDocument->getProperty('headline') ?: '')
-                            ),
-                            new Icon('shared', 'arrowRight', IconSize::size_1_5())
-                        ], function (SlotInterface $slot) {
-                            return $slot;
-                        })
-                    )
-                );
-            }
-        );
-
-        return new ProductCard(
-            $figure,
-            Editable::fromNodeProperty($groupedProductListNode, 'name'),
-            null,
-            null,
-            $products
         );
     }
 }

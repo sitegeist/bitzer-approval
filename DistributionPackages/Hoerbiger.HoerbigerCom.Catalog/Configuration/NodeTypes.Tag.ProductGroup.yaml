@@ -1,0 +1,22 @@
+'Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  ui:
+    label: 'Produktgruppe'
+    icon: 'genderless'
+    inspector:
+      groups:
+        groupSetting:
+          label: 'Produktgruppe'
+          icon: 'object-group'
+          position: before image
+
+  properties:
+    title:
+      type: 'string'
+      ui:
+        label: 'Titel'
+        inspector:
+          group: 'groupSetting'
+
