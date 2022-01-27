@@ -27,7 +27,10 @@
             'listItem3':
               type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
         'tab3':
-          type: 'Hoerbiger.HoerbigerCom:Content.TextTab'
+          type: 'Hoerbiger.HoerbigerCom:Content.DownloadsTab'
+          childNodes:
+            'download1':
+              type: 'Hoerbiger.HoerbigerCom:Content.Download'
 
 'Hoerbiger.HoerbigerCom:Content.TextTab':
   superTypes:

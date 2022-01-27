@@ -5,6 +5,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     stylesheets = Hoerbiger.Shared:Resource.StyleSheets
     body = null
     bodyScripts = Hoerbiger.Shared:Resource.BodyScripts
+    fontShop = Hoerbiger.Shared:Resource.FontShop
+    cookies = Hoerbiger.Shared:Resource.CookieBot
 
     renderer = Neos.Neos:Page {
         head {
@@ -12,19 +14,21 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             stylesheets = ${props.stylesheets}
             fonts = Hoerbiger.Shared:Resource.Fonts
 
-            javascripts {
-                googleTagManager = Hoerbiger.Shared:Application.Tracking.GoogleTagManager {
-                    @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
-                    trackingId = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.trackingId')}
-                }
-            }
-
             titleTag {
                 content = ${props.titleOverride ? props.titleOverride : props.title}
                 content.@process.environmentPrefix {
                     expression = ${Configuration.setting('Hoerbiger.HoerbigerCom.environmentPrefix') + ' ' + value}
                     @if.isSet = ${!String.isBlank(Configuration.setting('Hoerbiger.HoerbigerCom.environmentPrefix'))}
                 }
+            }
+
+            javascripts {
+                googleTagManager = Hoerbiger.Shared:Application.Tracking.GoogleTagManager {
+                    @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
+                    trackingId = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.trackingId')}
+                }
+                cookies = ${props.cookies}
+                fontShop = ${props.fontShop}
             }
         }
 

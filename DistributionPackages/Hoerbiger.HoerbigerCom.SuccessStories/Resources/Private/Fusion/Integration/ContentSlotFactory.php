@@ -86,7 +86,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 GridVariant::twoColumnsFrMaxGap(),
                                 Collection::fromIterable([
                                     new Headline(
-                                        HeadlineVariant::regular(),
+                                        HeadlineVariant::mediumBrand(),
                                         HeadlineType::h2(),
                                         Editable::fromNodeProperty($topSuccessStories, 'headline')
                                     ),
@@ -95,7 +95,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         $this->uriService->getNodeUri($successStories),
                                         LinkTarget::self(),
                                         null,
-                                        Value::fromString($this->getLabel('list.seeAll') ?: '')
+                                        Value::fromString($this->getLabel('list.seeAll') ?: ''),
+                                        null
                                     )
                                 ], $identity)
                             ),
@@ -124,7 +125,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                     $this->uriService->getNodeUri($successStory),
                                                     LinkTarget::self(),
                                                     null,
-                                                    $this->figureFactory->forArticleCard($imageSource)
+                                                    $this->figureFactory->forArticleCard($imageSource),
+                                                    null
                                                 )
                                                 : null,
                                             Value::fromString(

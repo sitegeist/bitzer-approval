@@ -3,7 +3,7 @@
     'Hoerbiger.HoerbigerCom:Content': true
     'Hoerbiger.HoerbigerCom:Mixin.ImageWithCaption': true
   ui:
-    label: 'video'
+    label: 'Video'
     icon: video
     inspector:
       groups:

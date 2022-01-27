@@ -2,6 +2,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -15,10 +16,10 @@
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-          'Hoerbiger.HoerbigerCom:Content.DummyText': true
-          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.MostWanted': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+    career:
+      type: 'Hoerbiger.HoerbigerCom:Document.CareerPage'
     chronicle:
       type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
     assetdirectory:
@@ -27,6 +28,8 @@
       type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
     contact:
       type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
+    privacy:
+      type: 'Hoerbiger.HoerbigerCom:Document.PrivacyPage'
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
   constraints:
@@ -44,6 +47,11 @@
           position: 10
 
   properties:
+    headline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte h1 der Seite eingeben'
     footerMenu:
       type: references
       ui:

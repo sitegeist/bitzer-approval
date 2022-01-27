@@ -33,7 +33,10 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                 >
                     <img
                         id="logo"
-                        class="h-full max-h-[60px] max-w-[40vw] sm:max-h-[75px] sm:max-w-[60vw] my-3"
+                        width="158"
+                        height="55"
+                        alt="Logo Hoerbiger"
+                        class="h-full max-w-[40vw] sm:max-w-[60vw] my-3"
                         src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
                         {...props.logo}
                     />

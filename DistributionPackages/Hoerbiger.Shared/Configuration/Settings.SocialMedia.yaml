@@ -1,4 +1,8 @@
 Hoerbiger:
   Shared:
     socialMedia:
-      - linkedIn: 'https://www.linkedin.com/company/hoerbiger'
+      linkedIn:
+          url: 'https://www.linkedin.com/company/hoerbiger'
+          label: 'LinkedIn'
+
+

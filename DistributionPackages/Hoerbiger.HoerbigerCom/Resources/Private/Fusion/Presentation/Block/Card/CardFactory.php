@@ -81,8 +81,8 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($headlineProperty) {
             $headline = new Headline(
-                HeadlineVariant::regular(),
-                HeadlineType::h2(),
+                HeadlineVariant::medium(),
+                HeadlineType::div(),
                 Value::fromString($headlineProperty)
             );
         }
@@ -174,6 +174,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     LinkTarget::blank(),
                     null,
                     Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
+                    null
                 ),
                 Value::fromString(
                     $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension())

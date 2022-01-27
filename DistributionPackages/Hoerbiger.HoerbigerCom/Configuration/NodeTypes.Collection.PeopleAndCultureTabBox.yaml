@@ -1,0 +1,42 @@
+'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab': true
+      'Hoerbiger.HoerbigerCom:Content.DefinitionListTab': true
+      'Hoerbiger.HoerbigerCom:Content.DownloadsTab': true
+  ui:
+    label: 'Tab-Box'
+    icon: th-list
+  options:
+    reloadIfChildChanged: true
+    template:
+      childNodes:
+        'tab1':
+          type: 'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab'
+        'tab2':
+          type: 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab'
+          childNodes:
+            'listItem1':
+              type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+            'listItem2':
+              type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+            'listItem3':
+              type: 'Hoerbiger.HoerbigerCom:Content.DefinitionItem'
+        'tab3':
+          type: 'Hoerbiger.HoerbigerCom:Content.DownloadsTab'
+          childNodes:
+            'download1':
+              type: 'Hoerbiger.HoerbigerCom:Content.Download'
+
+'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Tab': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Hoerbiger.HoerbigerCom:Mixin.Icon': true
+  ui:
+    label: 'Text-Tab'

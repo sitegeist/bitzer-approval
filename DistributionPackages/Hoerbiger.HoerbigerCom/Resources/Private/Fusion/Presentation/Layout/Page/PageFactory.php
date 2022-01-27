@@ -10,19 +10,27 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
+use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
@@ -51,6 +59,22 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
+    public function forCareerPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($careerPage, $inBackend);
+
+        return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
+    }
+
+    public function forPrivacyPage(TraversableNodeInterface $privacyPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($privacyPage, $inBackend);
+
+        return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph);
+    }
+
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         $identity = function (SlotInterface $slot) {
@@ -72,6 +96,26 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
                     $stage
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regular(),
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            new Headline(
+                                HeadlineVariant::largeBrand(),
+                                HeadlineType::h1(),
+                                Editable::fromNodeProperty($homepage, 'headline')
+                            ),
+                            $inBackend || $homepage->getProperty('text')
+                                ? new Text(
+                                    TextVariant::lightContrast(),
+                                    Editable::fromNodeProperty($homepage, 'text'),
+                                    false
+                                )
+                                : null
+                        ]), $identity)
+                    )
                 ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity),
@@ -124,6 +168,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
+    }
+
+    public function forPeopleAndCultureWebPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($careerPage, $inBackend);
+
+        return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }
 
     public function forContactPage(TraversableNodeInterface $site, TraversableNodeInterface $contactPage, bool $inBackend, ContentContext $subgraph): PageInterface

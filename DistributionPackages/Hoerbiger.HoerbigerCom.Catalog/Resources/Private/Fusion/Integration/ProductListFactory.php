@@ -134,7 +134,7 @@ final class ProductListFactory
                     StackVariant::sm(),
                     Collection::fromIterable([
                         new Headline(
-                            HeadlineVariant::important(),
+                            HeadlineVariant::large(),
                             HeadlineType::h2(),
                             Value::fromString(
                                 $this->csvPOTranslator->getLabel(PageFactory::class,'products')

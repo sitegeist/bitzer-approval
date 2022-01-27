@@ -7,13 +7,15 @@ namespace Hoerbiger\HoerbigerCom\Integration;
 
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
-use Hoerbiger\Shared\Presentation\Dummy\DummyContainer\DummyContainer;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
@@ -26,7 +28,11 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
+use Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
+use Hoerbiger\Shared\Presentation\Block\Quotation\QuotationVariant;
+use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
+use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
@@ -100,16 +106,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forDownloadsNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Download':
                 return $this->cardFactory->forDownloadNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.DummyText':
-                return $this->forDummyTextNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage':
-                return $this->forDummyTextWithImageNode($contentNode, $inBackend, $subgraph);
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
                 return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
                 return $this->forTileNavigation($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
-                return $this->forTextNode($contentNode);
+                return $this->forTextNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
                 return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
@@ -135,6 +137,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
                 return $this->forDefinitionItemNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
+            case 'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
                 return $this->forTabBox($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.TextTab':
                 return $this->forTextTabNode($contentNode);
@@ -142,6 +145,20 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forDefinitionListTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
                 return $this->forDownloadsTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab':
+                return $this->forPeopleAndCultureTextTabNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.Benefits':
+                return $this->forBenefitsNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.Benefit':
+                return $this->forBenefitNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Collection.PeopleStories':
+                return $this->forPeopleStoriesNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.PeopleStory':
+                return $this->forPeopleStoryNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.SectionIntroduction':
+                return $this->forSectionIntroductionNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.CookieDeclaration':
+                return $this->forCookieDeclarationNode($contentNode);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -169,7 +186,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend);
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::snug(),
             $partialFigureEclipse
         );
     }
@@ -190,7 +207,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forTextNode(TraversableNodeInterface $textNode): SlotInterface
+    public function forTextNode(TraversableNodeInterface $textNode, bool $inBackend): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -205,16 +222,20 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Stack(
                 StackVariant::xs(),
                 Collection::fromIterable(array_filter([
-                    new Headline(
-                        HeadlineVariant::important(),
-                        HeadlineType::h2(),
-                        Editable::fromNodeProperty($textNode, 'headline')
-                    ),
-                    new Text(
-                        TextVariant::lightContrast(),
-                        Editable::fromNodeProperty($textNode, 'text'),
-                        $columns->getIsMaxTwo()
-                    )
+                    $inBackend || $textNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineVariant::largeBrand(),
+                            HeadlineType::h2(),
+                            Editable::fromNodeProperty($textNode, 'headline')
+                        )
+                        : null,
+                    $inBackend || $textNode->getProperty('text')
+                        ? new Text(
+                            TextVariant::lightContrast(),
+                            Editable::fromNodeProperty($textNode, 'text'),
+                            $columns->getIsMaxTwo()
+                        )
+                        : null
                 ]), $identity)
             )
         );
@@ -238,8 +259,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineVariant::important(),
-                            HeadlineType::h2(),
+                            HeadlineVariant::mediumBrand(),
+                            HeadlineType::div(),
                             Editable::fromNodeProperty($textWithImageNode, 'headline')
                         )
                         : null,
@@ -258,7 +279,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::snug(),
             new Grid(
                 GridVariant::twoColumns(),
                 $layout->getIsImageFirst()
@@ -304,7 +325,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $mostWantedNode->getProperty('headline')
                         ? new Headline(
-                        HeadlineVariant::important(),
+                        HeadlineVariant::mediumBrand(),
                         HeadlineType::h2(),
                         Editable::fromNodeProperty($mostWantedNode, 'headline')
                     )
@@ -325,7 +346,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         $this->uriService->getNodeUri($node),
                                         LinkTarget::self(),
                                         null,
-                                        Value::fromString($node->getLabel())
+                                        Value::fromString($node->getLabel()),
+                                        null
                                     );
                                 }
                             ),
@@ -353,6 +375,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Quotation(
+                QuotationVariant::regular(),
                 Editable::fromNodeProperty($quotationNode, 'text'),
                 Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
             )
@@ -383,89 +406,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
 
         return $this->figureFactory->forGalleryImage($imageSource);
-    }
-
-    public function forDummyTextNode(TraversableNodeInterface $dummyTextNode): SlotInterface
-    {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
-
-        return new ContentContainer(
-            ContentContainerVariant::regular(),
-            new DummyContainer(
-                $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/sample.png'),
-                new Stack(
-                    StackVariant::xs(),
-                    Collection::fromIterable(array_filter([
-                        new Headline(
-                            HeadlineVariant::important(),
-                            HeadlineType::h2(),
-                            Editable::fromNodeProperty($dummyTextNode, 'headline')
-                        ),
-                        new Text(
-                            TextVariant::lightContrast(),
-                            Editable::fromNodeProperty($dummyTextNode, 'text'),
-                            true
-                        )
-                    ]), $identity)
-                )
-            )
-        );
-    }
-
-    public function forDummyTextWithImageNode(
-        TraversableNodeInterface $dummyTextWithImageNode,
-        bool $inBackend,
-        ContentContext $subgraph
-    ): SlotInterface {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
-
-        $imageSource = $this->imageSourceFactory->forImageMixin($dummyTextWithImageNode, $inBackend);
-        $figure = $imageSource
-            ? $this->figureFactory->forTwoColumnGrid($imageSource)
-            : null;
-
-        $text = new DummyContainer(
-                $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/sample.png'),
-                new Box(
-                BoxVariant::textCenter(),
-                new Stack(
-                    StackVariant::xs(),
-                    Collection::fromIterable(array_filter([
-                        $inBackend || $dummyTextWithImageNode->getProperty('headline')
-                            ? new Headline(
-                            HeadlineVariant::important(),
-                            HeadlineType::h2(),
-                            Editable::fromNodeProperty($dummyTextWithImageNode, 'headline')
-                        )
-                            : null,
-                        new Text(
-                            TextVariant::lightContrast(),
-                            Editable::fromNodeProperty($dummyTextWithImageNode, 'text'),
-                            false
-                        ),
-                        (new LinkFactory())->forLinkMixin($dummyTextWithImageNode, $subgraph)
-                    ]), $identity)
-                )
-            )
-        );
-        $layout = Layout::from(
-            $dummyTextWithImageNode->getProperty('layout')
-                ?: Layout::VALUE_IMAGEFIRST
-        );
-
-        return new ContentContainer(
-            ContentContainerVariant::regular(),
-            new Grid(
-                GridVariant::twoColumns(),
-                $layout->getIsImageFirst()
-                    ? Collection::fromIterable([$figure, $text], $identity)
-                    : Collection::fromIterable([$text, $figure], $identity)
-            )
-        );
     }
 
     public function forVideoNode(TraversableNodeInterface $videoNode, bool $inBackend): SlotInterface
@@ -528,9 +468,46 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineVariant::regular(),
-                    HeadlineType::h2(),
+                    HeadlineVariant::mediumBrand(),
+                    HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
+                ),
+                new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($textTabNode, 'text'),
+                    false
+                )
+            ]), $identity)
+        );
+    }
+
+    public function forPeopleAndCultureTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new Stack(
+            StackVariant::xs(),
+            Collection::fromIterable(array_filter([
+                new Grid(
+                    GridVariant::iconLeft(),
+                    Collection::fromIterable(array_filter([
+                        new Tag(
+                            'span',
+                            TagVariant::brandColor(),
+                            new Icon(
+                                'shared',
+                                $textTabNode->getProperty('icon') ?: 'arrow-right',
+                                IconSize::size_3()
+                            )
+                        ),
+                        new Headline(
+                            HeadlineVariant::mediumBrand(),
+                            HeadlineType::div(),
+                            Editable::fromNodeProperty($textTabNode, 'headline')
+                        ),
+                    ]), $identity)
                 ),
                 new Text(
                     TextVariant::neutralContrast(),
@@ -564,6 +541,191 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             $this->timelineFactory->forMilestones($milestones)
+        );
+    }
+
+    public function forBenefitsNode(TraversableNodeInterface $benefitsNode, bool $inBackend): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Stack(
+                StackVariant::smStretch(),
+                Collection::fromIterable(array_filter([
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $benefitsNode->getProperty('headline')
+                                ? new Headline(
+                                    HeadlineVariant::largeBrand(),
+                                    HeadlineType::h2(),
+                                    Editable::fromNodeProperty($benefitsNode, 'headline')
+                                )
+                                : null,
+                            $inBackend || $benefitsNode->getProperty('text')
+                                ? new Text(
+                                    TextVariant::neutralContrast(),
+                                    Editable::fromNodeProperty($benefitsNode, 'text'),
+                                    false
+                                )
+                                : null,
+                        ]), $identity),
+                    ),
+                    new Grid(
+                        GridVariant::twoColumnsGap(),
+                        Collection::fromNodes(
+                            $benefitsNode->findChildNodes(),
+                            function(TraversableNodeInterface $node): Content {
+                                return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                            }
+                        )
+                    )
+                ]), $identity)
+            )
+        );
+    }
+
+    public function forBenefitNode(TraversableNodeInterface $benefitNode): SlotInterface
+    {
+        return new IconCard(
+            new Icon(
+                'shared',
+                $benefitNode->getProperty('icon') ?: '',
+                IconSize::sizeParent()
+            ),
+            Editable::fromNodeProperty($benefitNode, 'headline'),
+            null,
+            new Text(
+                TextVariant::neutralContrast(),
+                Editable::fromNodeProperty($benefitNode, 'text'),
+                false
+            ),
+            null
+        );
+    }
+
+    public function forPeopleStoriesNode(TraversableNodeInterface $peopleStoriesNode, bool $inBackend): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Stack(
+                StackVariant::smStretch(),
+                Collection::fromIterable(array_filter([
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $peopleStoriesNode->getProperty('headline')
+                                ? new Headline(
+                                    HeadlineVariant::largeBrand(),
+                                    HeadlineType::h2(),
+                                    Editable::fromNodeProperty($peopleStoriesNode, 'headline')
+                                )
+                                : null,
+                            $inBackend || $peopleStoriesNode->getProperty('text')
+                                ? new Text(
+                                    TextVariant::neutralContrast(),
+                                    Editable::fromNodeProperty($peopleStoriesNode, 'text'),
+                                    false
+                                )
+                                : null,
+                        ]), $identity),
+                    ),
+                    Collection::fromNodes(
+                        $peopleStoriesNode->findChildNodes(),
+                        function(TraversableNodeInterface $node): Content {
+                            return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                        }
+                    )
+                ]), $identity)
+            )
+        );
+    }
+
+    public function forPeopleStoryNode(TraversableNodeInterface $peopleStoryNode, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($peopleStoryNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element PeopleStory.');
+        }
+
+        return new PeopleStory(
+            $this->figureFactory->forPeopleStory($imageSource),
+            new Headline(
+                HeadlineVariant::medium(),
+                HeadlineType::div(),
+                Editable::fromNodeProperty($peopleStoryNode, 'headline')
+            ),
+            $inBackend || $peopleStoryNode->getProperty('introduction')
+                ? new Text(
+                    TextVariant::neutralContrast(),
+                    Editable::fromNodeProperty($peopleStoryNode, 'introduction'),
+                    false
+                )
+                : null,
+            $inBackend || $peopleStoryNode->getProperty('text')
+                ? new Quotation(
+                    QuotationVariant::inline(),
+                    Editable::fromNodeProperty($peopleStoryNode, 'text'),
+                    Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
+                )
+                : null,
+            Editable::fromNodeProperty($peopleStoryNode, 'metaline'),
+            Editable::fromNodeProperty($peopleStoryNode, 'tags')
+        );
+    }
+
+    public function forSectionIntroductionNode(TraversableNodeInterface $sectionIntroductionNode): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::regularWithoutBottom(),
+            new Stack(
+                StackVariant::xsStretch(),
+                Collection::fromIterable([
+                    new Grid(
+                        GridVariant::iconLeft(),
+                        Collection::fromIterable(array_filter([
+                            new Tag(
+                                'span',
+                                TagVariant::brandColor(),
+                                new Icon(
+                                    'shared',
+                                    $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
+                                    IconSize::size_4()
+                                ),
+                            ),
+                            new Headline(
+                                HeadlineVariant::largeBrand(),
+                                HeadlineType::h2(),
+                                Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
+                            ),
+                        ]), $identity)
+                    ),
+                    new Text(
+                        TextVariant::neutralContrast(),
+                        Editable::fromNodeProperty($sectionIntroductionNode, 'text'),
+                        false
+                    )
+                ], $identity)
+            )
+        );
+    }
+
+    public function forCookieDeclarationNode(TraversableNodeInterface $cookieDeclarationNode): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            Value::fromString('<script id="CookieDeclaration" src="https://consent.cookiebot.com/aa81a090-a42f-459c-9c12-35f852ed4015/cd.js" type="text/javascript" async></script>')
         );
     }
 }

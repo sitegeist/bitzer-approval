@@ -29,7 +29,7 @@ const SPACES = {
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
 };
 
-const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2']
+const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
 
 module.exports = {
 	mode: 'jit',
@@ -37,6 +37,7 @@ module.exports = {
 		'./Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
 	],
 	darkMode: false,
 	theme: {
@@ -66,9 +67,10 @@ module.exports = {
 		},
 
 		fontFamily: {
-			'sans-regular': ['TradeGothic', 'Helvetica', 'Arial', 'sans-serif'],
-			'sans-bold': ['TradeGothicBold', 'Helvetica', 'Arial', 'sans-serif'],
-			'serif-regular': ['PT Serif', 'serif'],
+			'sans-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
+			'serif-regular': ['Times New Roman', 'Times' , 'serif'],
 		},
 
 		screens: {
@@ -77,6 +79,9 @@ module.exports = {
 			/* Breakpoint to switch between inline navigation and  offcanvas. */
 			menuToggle: '1300px',
 			xs: '480px',
+			'affiliates-map-toggle': '980px',
+			/* Breakpoint to switch between accordeon and tabbed view of Block.TabBox.*/
+			tabBoxToggle: '800px',
 			...defaultTheme.screens
 		},
 
@@ -110,6 +115,9 @@ module.exports = {
 						a: {
 							color: theme('colors.brand.contrast'),
 						},
+						'ul li::before': {
+							backgroundColor: theme('colors.brand.contrast'),
+						},
 					},
 				},
 				'neutral-contrast': {
@@ -120,6 +128,9 @@ module.exports = {
 						},
 						a: {
 							color: theme('colors.neutral.contrast'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.neutral.contrast'),
 						},
 					},
 				},
@@ -132,20 +143,22 @@ module.exports = {
 						a: {
 							color: theme('colors.decorative.contrast'),
 						},
+						'ul li::before': {
+							backgroundColor: theme('colors.decorative.contrast'),
+						},
 					},
 				},
 				'transparent-contrast': {
 					css: {
 						color: theme('colors.transparent.contrast'),
 						strong: {
-							css: {
-								color: theme('colors.transparent.contrast'),
-							},
+							color: theme('colors.transparent.contrast'),
 						},
 						a: {
-							css: {
-								color: theme('colors.transparent.contrast'),
-							},
+							color: theme('colors.transparent.contrast'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.transparent.contrast'),
 						},
 					},
 				},
@@ -157,6 +170,8 @@ module.exports = {
 				tabs: '35% 1fr',
 				'2-1fr-icon': '1fr 1.2em',
 				'2-icon-1fr': '1.2em 1fr',
+				'affiliates-map-list': '70% 1fr',
+				'people-story': '25% 1fr',
 			},
 
 			gridTemplateRows: {
@@ -178,12 +193,15 @@ module.exports = {
 			maxWidth: {
 				...SPACES,
 				'content-full': `min(${MAX_CONTENT_WIDTH}, 100vw)`,
-				'content-66': `min(calc(2/3 * ${MAX_CONTENT_WIDTH}), 100vw)`,
+				'content-snug': `min(calc(3/4 * ${MAX_CONTENT_WIDTH}), 100vw)`,
+				'content-tight': `min(calc(2/3 * ${MAX_CONTENT_WIDTH}), 100vw)`,
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
+				touch: MIN_TOUCH,
 			},
 
 			width: {
+				...SPACES,
 				offcanvas: OFFCANVAS_WIDTH,
 				touch: MIN_TOUCH,
 			},
@@ -199,6 +217,7 @@ module.exports = {
 
 			margin: {
 				...SPACES,
+				'minus-contentcontainer': `calc(-1.25 * ${SPACE_SM})`,
 			},
 
 			padding: {
@@ -210,6 +229,8 @@ module.exports = {
 				'ratio-5-4': 'calc(4 * 100% / 5)',
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
+				'ratio-google-map': 'calc(9 * 100% / 16)',
+				contentcontainer: `calc(1.25 * ${SPACE_SM})`,
 			},
 
 			gap: {

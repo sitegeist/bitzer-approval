@@ -1,0 +1,9 @@
+'Hoerbiger.HoerbigerCom:Content.SectionIntroduction':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Hoerbiger.HoerbigerCom:Mixin.Icon': true
+  ui:
+    label: 'Einleitung für Abschnitt'
+    icon: heading

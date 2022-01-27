@@ -17,6 +17,7 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
+use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -50,6 +51,18 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
      * @var FigureFactory
      */
     protected $figureFactory;
+
+    /**
+     * @var TranslationLabelSourceRepository
+     * @Flow\Inject
+     */
+    protected $translationLabelSourceRepository;
+
+    /**
+     * @Flow\Inject
+     * @var LocalizationService
+     */
+    protected $localizationService;
 
     /**
      * @return array<int,ProductCard>
@@ -98,18 +111,6 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         return $cards;
     }
 
-    /**
-     * @var TranslationLabelSourceRepository
-     * @Flow\Inject
-     */
-    protected $translationLabelSourceRepository;
-
-    /**
-     * @Flow\Inject
-     * @var LocalizationService
-     */
-    protected $localizationService;
-
     public function forThing(TraversableNodeInterface $thing, string $typeIdentifier): CardInterface
     {
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
@@ -155,6 +156,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                         Collection::fromIterable([
                             new Tag(
                                 'span',
+                                TagVariant::brandColor(),
                                 Value::fromString($productDocument->getProperty('headline') ?: '')
                             ),
                             new Icon('shared', 'arrowRight', IconSize::size_1_5())
@@ -198,6 +200,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                         Collection::fromIterable([
                             new Tag(
                                 'span',
+                                TagVariant::brandColor(),
                                 Value::fromString($productDocument->getProperty('headline') ?: '')
                             ),
                             new Icon('shared', 'arrowRight', IconSize::size_1_5())

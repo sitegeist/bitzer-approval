@@ -49,10 +49,11 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                         Collection::fromIterable([
                             new Tag(
                                 'strong',
+                                null,
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_subline'))
                             ),
                             new Headline(
-                                HeadlineVariant::regular(),
+                                HeadlineVariant::largeBrand(),
                                 HeadlineType::h2(),
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_headline'))
                             )

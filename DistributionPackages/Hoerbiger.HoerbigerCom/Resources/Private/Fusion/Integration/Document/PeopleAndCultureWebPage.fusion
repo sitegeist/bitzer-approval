@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Hoerbiger.Page.forPeopleAndCultureWebPage(documentNode, site, documentNode.context.inBackend, site.context)}
+        }
+    }
+}

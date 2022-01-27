@@ -16,10 +16,15 @@ final class StackVariant implements PseudoEnumInterface
     const VARIANT_NOGAP = 'noGap';
     const VARIANT_INLINE = 'inline';
     const VARIANT_XS = 'xs';
+    const VARIANT_XS_STRETCH = 'xs_stretch';
     const VARIANT_SM = 'sm';
+    const VARIANT_SM_STRETCH = 'sm_stretch';
     const VARIANT_MD = 'md';
+    const VARIANT_MD_STRETCH = 'md_stretch';
     const VARIANT_LG = 'lg';
+    const VARIANT_LG_STRETCH = 'lg_stretch';
     const VARIANT_XL = 'xl';
+    const VARIANT_XL_STRETCH = 'xl_stretch';
 
     /**
      * @var array<string,self>|self[]
@@ -39,10 +44,15 @@ final class StackVariant implements PseudoEnumInterface
             if ($string !== self::VARIANT_NOGAP
                 && $string !== self::VARIANT_INLINE
                 && $string !== self::VARIANT_XS
+                && $string !== self::VARIANT_XS_STRETCH
                 && $string !== self::VARIANT_SM
+                && $string !== self::VARIANT_SM_STRETCH
                 && $string !== self::VARIANT_MD
+                && $string !== self::VARIANT_MD_STRETCH
                 && $string !== self::VARIANT_LG
-                && $string !== self::VARIANT_XL) {
+                && $string !== self::VARIANT_LG_STRETCH
+                && $string !== self::VARIANT_XL
+                && $string !== self::VARIANT_XL_STRETCH) {
                 throw StackVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -66,9 +76,19 @@ final class StackVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_XS);
     }
 
+    public static function xsStretch(): self
+    {
+        return self::from(self::VARIANT_XS_STRETCH);
+    }
+
     public static function sm(): self
     {
         return self::from(self::VARIANT_SM);
+    }
+
+    public static function smStretch(): self
+    {
+        return self::from(self::VARIANT_SM_STRETCH);
     }
 
     public static function md(): self
@@ -76,14 +96,29 @@ final class StackVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_MD);
     }
 
+    public static function mdStretch(): self
+    {
+        return self::from(self::VARIANT_MD_STRETCH);
+    }
+
     public static function lg(): self
     {
         return self::from(self::VARIANT_LG);
     }
 
+    public static function lgStretch(): self
+    {
+        return self::from(self::VARIANT_LG_STRETCH);
+    }
+
     public static function xl(): self
     {
         return self::from(self::VARIANT_XL);
+    }
+
+    public static function xlStretch(): self
+    {
+        return self::from(self::VARIANT_XL_STRETCH);
     }
 
     public function getIsNoGap(): bool
@@ -101,9 +136,19 @@ final class StackVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_XS;
     }
 
+    public function getIsXsStretch(): bool
+    {
+        return $this->value === self::VARIANT_XS_STRETCH;
+    }
+
     public function getIsSm(): bool
     {
         return $this->value === self::VARIANT_SM;
+    }
+
+    public function getIsSmStretch(): bool
+    {
+        return $this->value === self::VARIANT_SM_STRETCH;
     }
 
     public function getIsMd(): bool
@@ -111,14 +156,29 @@ final class StackVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_MD;
     }
 
+    public function getIsMdStretch(): bool
+    {
+        return $this->value === self::VARIANT_MD_STRETCH;
+    }
+
     public function getIsLg(): bool
     {
         return $this->value === self::VARIANT_LG;
     }
 
+    public function getIsLgStretch(): bool
+    {
+        return $this->value === self::VARIANT_LG_STRETCH;
+    }
+
     public function getIsXl(): bool
     {
         return $this->value === self::VARIANT_XL;
+    }
+
+    public function getIsXlStretch(): bool
+    {
+        return $this->value === self::VARIANT_XL_STRETCH;
     }
 
     /**
@@ -130,10 +190,15 @@ final class StackVariant implements PseudoEnumInterface
             self::from(self::VARIANT_NOGAP),
             self::from(self::VARIANT_INLINE),
             self::from(self::VARIANT_XS),
+            self::from(self::VARIANT_XS_STRETCH),
             self::from(self::VARIANT_SM),
+            self::from(self::VARIANT_SM_STRETCH),
             self::from(self::VARIANT_MD),
+            self::from(self::VARIANT_MD_STRETCH),
             self::from(self::VARIANT_LG),
-            self::from(self::VARIANT_XL)
+            self::from(self::VARIANT_LG_STRETCH),
+            self::from(self::VARIANT_XL),
+            self::from(self::VARIANT_XL_STRETCH)
         ];
     }
 

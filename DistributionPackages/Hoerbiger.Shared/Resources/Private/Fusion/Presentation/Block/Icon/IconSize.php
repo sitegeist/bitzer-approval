@@ -19,6 +19,7 @@ final class IconSize implements PseudoEnumInterface
     const SIZE_SIZE_2_5 = 'size_2_5';
     const SIZE_SIZE_3 = 'size_3';
     const SIZE_SIZE_4 = 'size_4';
+    const SIZE_PARENT = 'size_parent';
 
     /**
      * @var array<string,self>|self[]
@@ -40,7 +41,8 @@ final class IconSize implements PseudoEnumInterface
                 && $string !== self::SIZE_SIZE_2
                 && $string !== self::SIZE_SIZE_2_5
                 && $string !== self::SIZE_SIZE_3
-                && $string !== self::SIZE_SIZE_4) {
+                && $string !== self::SIZE_SIZE_4
+                && $string !== self::SIZE_PARENT) {
                 throw IconSizeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -79,6 +81,11 @@ final class IconSize implements PseudoEnumInterface
         return self::from(self::SIZE_SIZE_4);
     }
 
+    public static function sizeParent(): self
+    {
+        return self::from(self::SIZE_PARENT);
+    }
+
     public function getIsSize_1(): bool
     {
         return $this->value === self::SIZE_SIZE_1;
@@ -109,6 +116,11 @@ final class IconSize implements PseudoEnumInterface
         return $this->value === self::SIZE_SIZE_4;
     }
 
+    public function getIsSizeParent(): bool
+    {
+        return $this->value === self::SIZE_PARENT;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -120,7 +132,8 @@ final class IconSize implements PseudoEnumInterface
             self::from(self::SIZE_SIZE_2),
             self::from(self::SIZE_SIZE_2_5),
             self::from(self::SIZE_SIZE_3),
-            self::from(self::SIZE_SIZE_4)
+            self::from(self::SIZE_SIZE_4),
+            self::from(self::SIZE_PARENT)
         ];
     }
 

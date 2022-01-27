@@ -14,6 +14,6 @@ final class StackVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
     {
-        return new self('The given value "' . $attemptedValue . '" is no valid StackVariant, must be one of the defined constants. ', 1632382725);
+        return new self('The given value "' . $attemptedValue . '" is no valid StackVariant, must be one of the defined constants. ', 1642147101);
     }
 }
