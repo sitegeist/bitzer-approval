@@ -25,33 +25,33 @@ use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
-use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
-use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 
 final class ProductListFactory
 {
-    private CsvPOTranslator $csvPOTranslator;
+    /**
+     * @Flow\Inject
+     * @var CsvPOTranslator
+     */
+    protected $csvPOTranslator;
 
-    public function __construct(
-        CsvPOTranslator $csvPOTranslator
-    ) {
-        $this->csvPOTranslator = $csvPOTranslator;
-    }
+    /**
+     * @Flow\Inject
+     * @var Catalog
+     */
+    protected $catalog;
+
     public function forIndustrySolution(
         TraversableNodeInterface $industrySolution,
         ContentContext $subGraph,
         bool $inBackend
     ): SlotInterface {
-        $catalog = new Catalog();
+        $products = $this->catalog->findProductsForIndustrySolution($subGraph,$industrySolution);
 
-        $products = $catalog->findProductsForIndustrySolution($subGraph,$industrySolution);
-
-        return $this->productGroupCards(
+        return $this->createProductGroupCards(
             $industrySolution->getLabel(),
             $products,
             $subGraph,
@@ -64,15 +64,9 @@ final class ProductListFactory
         ContentContext $subGraph,
         bool $inBackend
     ): SlotInterface {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
+        $products = $this->catalog->findProductsForApplicationWorld($subGraph,$applicationWorld);
 
-        $catalog = new Catalog();
-
-        $products = $catalog->findProductsForApplicationWorld($subGraph,$applicationWorld);
-
-        return $this->productGroupCards(
+        return $this->createProductGroupCards(
             $applicationWorld->getLabel(),
             $products,
             $subGraph,
@@ -83,8 +77,8 @@ final class ProductListFactory
     /**
      * @param TraversableNodes<int,TraversableNodeInterface> $products
      */
-    private function productGroupCards(
-        String $productListTitle,
+    private function createProductGroupCards(
+        string $productListTitle,
         TraversableNodes $products,
         ContentContext $subGraph,
         bool $inBackend
@@ -92,14 +86,11 @@ final class ProductListFactory
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
-
-        $catalog = new Catalog();
-
-        $freestandingGroup = $catalog->findProductGroupByNodeName('freestanding', $subGraph);
+        $freestandingGroup = $this->catalog->findProductGroupByNodeName('freestanding', $subGraph);
 
         $cardFactory = new CardFactory();
 
-        $productsByGroup = array_fill_keys($catalog->findProductGroupIdentifiers($subGraph),[]);
+        $productsByGroup = array_fill_keys($this->catalog->findProductGroupIdentifiers($subGraph),[]);
 
         foreach ($products as $product) {
             /** @var TraversableNodeInterface $product */
