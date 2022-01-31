@@ -6,7 +6,7 @@
   properties:
     productClass:
       type: string
-      defaultValue: 'default'
+      defaultValue: 'exite'
       ui:
         label: 'Produktklasse'
         reloadIfChanged: true

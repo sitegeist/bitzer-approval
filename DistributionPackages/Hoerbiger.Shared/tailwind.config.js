@@ -39,6 +39,7 @@ module.exports = {
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
 	],
+
 	darkMode: false,
 	theme: {
 		colors: {
@@ -64,13 +65,31 @@ module.exports = {
 				DEFAULT: 'transparent',
 				contrast: '#fff',
 			},
+
+			excite: {
+				DEFAULT: '#A89379',
+				contrast: '#fff'
+			},
+			experience: {
+				DEFAULT: '#5E8AB4',
+				contrast: '#fff'
+			},
+			lite: {
+				DEFAULT: '#FF671F',
+				contrast: '#fff'
+			},
+			service: {
+				DEFAULT: '#D9D9D9',
+				contrast: 'rgba(0, 0, 0, .85)'
+			}
+
 		},
 
 		fontFamily: {
 			'sans-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
-			'serif-regular': ['Times New Roman', 'Times' , 'serif'],
+			'serif-regular': ['Times New Roman', 'Times', 'serif'],
 		},
 
 		screens: {
