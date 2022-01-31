@@ -214,7 +214,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         return new ProductCard(
             $figure,
-            Editable::fromNodeProperty($productGroup, 'title'),
+            Value::fromString($productGroup->getLabel()),
             null,
             null,
             $products
