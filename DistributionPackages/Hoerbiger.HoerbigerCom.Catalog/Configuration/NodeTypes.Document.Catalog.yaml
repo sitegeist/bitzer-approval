@@ -4,6 +4,8 @@
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   childNodes:
+    productGroupTags:
+      type: 'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductGroup'
     main:
       type: 'Neos.Neos:ContentCollection'
       constraints:

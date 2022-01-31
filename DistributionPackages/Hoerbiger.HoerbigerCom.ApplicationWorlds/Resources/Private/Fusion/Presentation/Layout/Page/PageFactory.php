@@ -6,9 +6,9 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
+use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -30,14 +30,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteHeaderFactory $siteHeaderFactory;
 
+    private ProductListFactory $productListFactory;
+
     public function __construct(
         StageFactory $stageFactory,
         SiteFooterFactory $siteFooterFactory,
-        SiteHeaderFactory $siteHeaderFactory
+        SiteHeaderFactory $siteHeaderFactory,
+        ProductListFactory $productListFactory
     ) {
         $this->stageFactory = $stageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
+        $this->productListFactory = $productListFactory;
     }
 
     public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subGraph): PageInterface
@@ -67,7 +71,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main')))
+                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
+                $this->productListFactory->forApplicationWorld($applicationWorld, $subGraph, $inBackend)
             ]), $identity),
             $this->siteFooterFactory->forDocument($applicationWorld, $site)
         );

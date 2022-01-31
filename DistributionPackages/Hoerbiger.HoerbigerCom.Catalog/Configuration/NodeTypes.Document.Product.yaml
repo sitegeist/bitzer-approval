@@ -51,6 +51,16 @@
           editorOptions:
             nodeTypes:
               - 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
+    productGroup:
+      type: reference
+      ui:
+        label: 'Produktgruppe'
+        reloadIfChanged: true
+        inspector:
+          group: product
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup'
     searchType:
       search:
         indexing: '${"Product"}'

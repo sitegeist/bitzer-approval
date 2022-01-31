@@ -5,11 +5,12 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
+use Hoerbiger\HoerbigerCom\Catalog\Domain\Catalog;
+use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -34,14 +35,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteHeaderFactory $siteHeaderFactory;
 
+    private ProductListFactory $productListFactory;
+
     public function __construct(
         StageFactory $stageFactory,
         SiteFooterFactory $siteFooterFactory,
-        SiteHeaderFactory $siteHeaderFactory
+        SiteHeaderFactory $siteHeaderFactory,
+        ProductListFactory $productListFactory
     ) {
         $this->stageFactory = $stageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
+        $this->productListFactory = $productListFactory;
     }
 
     public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): PageInterface
@@ -142,7 +147,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new CacheSegment(
                     Collection::fromIterable((new CardFactory())->forIndustrySolutionProducts($subgraph, $industrySolution), $identity),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList'
-                )
+                ),
+                $this->productListFactory->forIndustrySolution($industrySolution, $subgraph, $inBackend)
             ]), $identity),
             $this->siteFooterFactory->forDocument($industrySolution, $site)
         );
