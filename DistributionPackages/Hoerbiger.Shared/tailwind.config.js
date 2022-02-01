@@ -206,11 +206,56 @@ module.exports = {
 						},
 					},
 				},
+				'excite': {
+					css: {
+						a: {
+							color: theme('colors.excite.DEFAULT'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.excite.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.excite.DEFAULT'),
+						},
+					},
+				},
+				'experience': {
+					css: {
+						a: {
+							color: theme('colors.experience.DEFAULT'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.experience.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.experience.DEFAULT'),
+						},
+					},
+				},
 				'lite': {
 					css: {
 						a: {
 							color: theme('colors.lite.DEFAULT'),
-						}
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.lite.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.lite.DEFAULT'),
+						},
+					},
+				},
+				'service': {
+					css: {
+						a: {
+							color: theme('colors.service.contrast'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.service.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.service.DEFAULT'),
+						},
 					},
 				},
 			}),

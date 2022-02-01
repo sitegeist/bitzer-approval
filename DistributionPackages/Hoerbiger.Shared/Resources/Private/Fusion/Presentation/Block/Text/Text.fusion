@@ -20,7 +20,11 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.isBrandContrast && "prose-brand-contrast",
             presentationObject.variant.isNeutralContrast && "prose-neutral-contrast",
             presentationObject.variant.isDecorativeContrast && "prose-decorative-contrast",
-            presentationObject.variant.isTransparentContrast && "prose-transparent-contrast"
+            presentationObject.variant.isTransparentContrast && "prose-transparent-contrast",
+            presentationObject.variant.isLite && "prose-lite",
+            presentationObject.variant.isExcite && "prose-excite",
+            presentationObject.variant.isExperience && "prose-experience",
+            presentationObject.variant.isServiceContrast && "prose-service"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>
