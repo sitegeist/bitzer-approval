@@ -43,7 +43,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                     presentationObject.variant.isRegular && "top-[-10px] lg:top-[-15px] w-[44px] lg:w-[64px]",
                     presentationObject.variant.isInline && "top-[5px] w-[18px] lg:w-[24px]"
                 ]}
-                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quote.svg')}
+                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quoteVariants/'+presentationObject.variant+'.svg')}
             />
         </div>
     `

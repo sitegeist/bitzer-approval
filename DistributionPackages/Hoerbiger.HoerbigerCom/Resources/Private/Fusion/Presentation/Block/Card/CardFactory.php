@@ -198,12 +198,12 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     ? $this->figureFactory->forDownloadCard(
                     $imageSource
                     )
-                    : new Icon('shared', 'pdf', null);
+                    : new Icon('shared', 'pdf');
             case 'ppt':
             case 'pptx':
-                return new Icon('shared', 'powerpoint', null);
+                return new Icon('shared', 'powerpoint');
             default:
-                return new Icon('shared', 'downloadFile', null);
+                return new Icon('shared', 'downloadFile');
         }
     }
 }

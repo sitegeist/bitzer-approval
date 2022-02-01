@@ -1,4 +1,5 @@
 <?php declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Icon;
 
 /*
@@ -19,14 +20,19 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
 
     private ?IconSize $size;
 
+    private ?IconColor $color;
+
     public function __construct(
-        string $collectionName,
-        string $iconName,
-        ?IconSize $size
-    ) {
+        string     $collectionName,
+        string     $iconName,
+        ?IconSize  $size = null,
+        ?IconColor $color = null
+    )
+    {
         $this->collectionName = $collectionName;
         $this->iconName = $iconName;
         $this->size = $size;
+        $this->color = is_null($color) ? IconColor::current() : $color;
     }
 
     public function getCollectionName(): string
@@ -42,5 +48,10 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
     public function getSize(): ?IconSize
     {
         return $this->size;
+    }
+
+    public function getColor(): ?IconColor
+    {
+        return $this->color;
     }
 }

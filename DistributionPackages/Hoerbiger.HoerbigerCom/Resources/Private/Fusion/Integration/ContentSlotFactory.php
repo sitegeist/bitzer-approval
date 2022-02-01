@@ -17,6 +17,7 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
@@ -455,11 +456,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forTabBox(TraversableNodeInterface $tabBox, ?Theme $theme): SlotInterface
     {
+
+
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Box(
                 BoxVariant::tryFromTheme($theme) ?: BoxVariant::decorative(),
-                (new TabBoxFactory())->forTabBox($tabBox)
+                (new TabBoxFactory())->forTabBox($tabBox, $theme)
             )
         );
     }
@@ -608,7 +611,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Icon(
                 'shared',
                 $benefitNode->getProperty('icon') ?: '',
-                IconSize::sizeParent()
+                IconSize::sizeParent(),
             ),
             Editable::fromNodeProperty($benefitNode, 'headline'),
             null,
@@ -717,7 +720,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 new Icon(
                                     'shared',
                                     $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
-                                    IconSize::size_4()
+                                    IconSize::size_4(),
                                 ),
                             ),
                             new Headline(

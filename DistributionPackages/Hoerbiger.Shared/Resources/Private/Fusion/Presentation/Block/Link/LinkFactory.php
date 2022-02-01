@@ -67,7 +67,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             new Uri($socialMediaLink),
             LinkTarget::self(),
             null,
-            new Icon('shared', strtolower($iconName), null),
+            new Icon('shared', strtolower($iconName)),
             $socialMediaLabel
         );
     }

@@ -17,10 +17,10 @@ final class BoxVariant implements PseudoEnumInterface
     const VARIANT_TEXTCENTER = 'textCenter';
     const VARIANT_NEUTRAL = 'neutral';
     const VARIANT_DECORATIVE = 'decorative';
-    const VARIANT_DECORATIVEEXCITE = 'decorativeExcite';
-    const VARIANT_DECORATIVEEXPERIENCE = 'decorativeExperience';
-    const VARIANT_DECORATIVELITE = 'decorativeLite';
-    const VARIANT_DECORATIVESERVICE = 'decorativeService';
+    const VARIANT_EXCITE = 'excite';
+    const VARIANT_EXPERIENCE = 'experience';
+    const VARIANT_LITE = 'lite';
+    const VARIANT_SERVICE = 'service';
 
     /**
      * @var array<string,self>|self[]
@@ -40,10 +40,10 @@ final class BoxVariant implements PseudoEnumInterface
             if ($string !== self::VARIANT_TEXTCENTER
                 && $string !== self::VARIANT_NEUTRAL
                 && $string !== self::VARIANT_DECORATIVE
-                && $string !== self::VARIANT_DECORATIVEEXCITE
-                && $string !== self::VARIANT_DECORATIVEEXPERIENCE
-                && $string !== self::VARIANT_DECORATIVELITE
-                && $string !== self::VARIANT_DECORATIVESERVICE) {
+                && $string !== self::VARIANT_EXCITE
+                && $string !== self::VARIANT_EXPERIENCE
+                && $string !== self::VARIANT_LITE
+                && $string !== self::VARIANT_SERVICE) {
                 throw BoxVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -55,7 +55,7 @@ final class BoxVariant implements PseudoEnumInterface
     public static function tryFromTheme(?Theme $theme): ?self
     {
         return $theme
-            ? self::from('decorative' . (ucfirst($theme->getValue())))
+            ? self::from($theme->getValue())
             : null;
     }
 
@@ -74,24 +74,24 @@ final class BoxVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_DECORATIVE);
     }
 
-    public static function decorativeExcite(): self
+    public static function excite(): self
     {
-        return self::from(self::VARIANT_DECORATIVEEXCITE);
+        return self::from(self::VARIANT_EXCITE);
     }
 
-    public static function decorativeExperience(): self
+    public static function experience(): self
     {
-        return self::from(self::VARIANT_DECORATIVEEXPERIENCE);
+        return self::from(self::VARIANT_EXPERIENCE);
     }
 
-    public static function decorativeLite(): self
+    public static function lite(): self
     {
-        return self::from(self::VARIANT_DECORATIVELITE);
+        return self::from(self::VARIANT_LITE);
     }
 
-    public static function decorativeService(): self
+    public static function service(): self
     {
-        return self::from(self::VARIANT_DECORATIVESERVICE);
+        return self::from(self::VARIANT_SERVICE);
     }
 
     public function getIsTextCenter(): bool
@@ -109,24 +109,24 @@ final class BoxVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_DECORATIVE;
     }
 
-    public function getIsDecorativeExcite(): bool
+    public function getIsExcite(): bool
     {
-        return $this->value === self::VARIANT_DECORATIVEEXCITE;
+        return $this->value === self::VARIANT_EXCITE;
     }
 
-    public function getIsDecorativeExperience(): bool
+    public function getIsExperience(): bool
     {
-        return $this->value === self::VARIANT_DECORATIVEEXPERIENCE;
+        return $this->value === self::VARIANT_EXPERIENCE;
     }
 
-    public function getIsDecorativeLite(): bool
+    public function getIsLite(): bool
     {
-        return $this->value === self::VARIANT_DECORATIVELITE;
+        return $this->value === self::VARIANT_LITE;
     }
 
-    public function getIsDecorativeService(): bool
+    public function getIsService(): bool
     {
-        return $this->value === self::VARIANT_DECORATIVESERVICE;
+        return $this->value === self::VARIANT_SERVICE;
     }
 
     /**
@@ -138,10 +138,10 @@ final class BoxVariant implements PseudoEnumInterface
             self::from(self::VARIANT_TEXTCENTER),
             self::from(self::VARIANT_NEUTRAL),
             self::from(self::VARIANT_DECORATIVE),
-            self::from(self::VARIANT_DECORATIVEEXCITE),
-            self::from(self::VARIANT_DECORATIVEEXPERIENCE),
-            self::from(self::VARIANT_DECORATIVELITE),
-            self::from(self::VARIANT_DECORATIVESERVICE)
+            self::from(self::VARIANT_EXCITE),
+            self::from(self::VARIANT_EXPERIENCE),
+            self::from(self::VARIANT_LITE),
+            self::from(self::VARIANT_SERVICE)
         ];
     }
 

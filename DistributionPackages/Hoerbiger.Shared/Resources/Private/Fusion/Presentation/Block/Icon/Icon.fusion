@@ -10,12 +10,13 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
         }
     }
 
+
     renderer = Sitegeist.Stampede:Icon {
         collection = ${presentationObject.collectionName}
         icon = ${presentationObject.iconName}
         class = Neos.Fusion:Join {
             name = ${"[Block.Icon (" + presentationObject.collectionName + "::" + presentationObject.iconName + ")]"}
-            base = "fill-current"
+            // base = "fill-current"
             @glue = " "
 
             size_1 = "w-[1em] h-[1em]"
@@ -38,6 +39,40 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
 
             size_parent = "w-full h-full"
             size_parent.@if.1 = ${presentationObject.size.isSizeParent}
+
+
+
+            colorCurrent = "fill-current"
+            colorCurrent.@if.1 = ${presentationObject.color.isCurrent}
+
+            colorBrand = "fill-brand"
+            colorBrand.@if.1 = ${presentationObject.color.isBrand}
+
+            colorWhite = "fill-white"
+            colorWhite.@if.1 = ${presentationObject.color.isWhite}
+
+            colorExcite = "fill-excite"
+            colorExcite.@if.1 = ${presentationObject.color.isExcite}
+
+            colorExciteContrast = "fill-excite-contrast"
+            colorExciteContrast.@if.1 = ${presentationObject.color.isExciteContrast}
+
+            colorExperience = "fill-experience"
+            colorExperience.@if.1 = ${presentationObject.color.isExperience}
+
+            colorExperienceContrast = "fill-experience-contrast"
+            colorExperienceContrast.@if.1 = ${presentationObject.color.isExperienceContrast}
+
+            colorLite = "fill-lite"
+            colorLite.@if.1 = ${presentationObject.color.isLite}
+
+            colorLiteContrast = "fill-lite-contrast"
+            colorLiteContrast.@if.1 = ${presentationObject.color.isLiteContrast}
+
+            colorServiceContrast = "fill-service-contrast"
+            colorServiceContrast.@if.1 = ${presentationObject.color.isServiceContrast}
+
+
         }
         style = null
         inline = true

@@ -43,6 +43,10 @@ module.exports = {
 	darkMode: false,
 	theme: {
 		colors: {
+			current: {
+				DEFAULT: 'currentColor'
+			},
+
 			light: {
 				DEFAULT: '#fff',
 				contrast: 'rgba(0, 0, 0, .85)'
@@ -81,6 +85,27 @@ module.exports = {
 			service: {
 				DEFAULT: '#D9D9D9',
 				contrast: 'rgba(0, 0, 0, .85)'
+			}
+
+		},
+		fill: {
+			current: {
+				DEFAULT: 'currentColor'
+			},
+			brand: {
+				DEFAULT: '#8D172E',
+			},
+			excite: {
+				DEFAULT: '#A89379',
+			},
+			experience: {
+				DEFAULT: '#5E8AB4',
+			},
+			lite: {
+				DEFAULT: '#FF671F',
+			},
+			service: {
+				DEFAULT: '#D9D9D9',
 			}
 
 		},
@@ -179,6 +204,13 @@ module.exports = {
 						'ul li::before': {
 							backgroundColor: theme('colors.transparent.contrast'),
 						},
+					},
+				},
+				'lite': {
+					css: {
+						a: {
+							color: theme('colors.lite.DEFAULT'),
+						}
 					},
 				},
 			}),

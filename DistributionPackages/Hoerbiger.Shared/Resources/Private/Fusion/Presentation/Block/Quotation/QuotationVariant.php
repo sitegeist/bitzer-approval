@@ -16,10 +16,10 @@ final class QuotationVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
     const VARIANT_INLINE = 'inline';
-    const VARIANT_REGULAREXCITE = 'regularExcite';
-    const VARIANT_REGULAREXPERIENCE = 'regularExperience';
-    const VARIANT_REGULARLITE = 'regularLite';
-    const VARIANT_REGULARSERVICE = 'regularService';
+    const VARIANT_EXCITE = 'excite';
+    const VARIANT_EXPERIENCE = 'experience';
+    const VARIANT_LITE = 'lite';
+    const VARIANT_SERVICE = 'service';
 
     /**
      * @var array<string,self>|self[]
@@ -38,10 +38,10 @@ final class QuotationVariant implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_REGULAR
                 && $string !== self::VARIANT_INLINE
-                && $string !== self::VARIANT_REGULAREXCITE
-                && $string !== self::VARIANT_REGULAREXPERIENCE
-                && $string !== self::VARIANT_REGULARLITE
-                && $string !== self::VARIANT_REGULARSERVICE) {
+                && $string !== self::VARIANT_EXCITE
+                && $string !== self::VARIANT_EXPERIENCE
+                && $string !== self::VARIANT_LITE
+                && $string !== self::VARIANT_SERVICE) {
                 throw QuotationVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -53,7 +53,7 @@ final class QuotationVariant implements PseudoEnumInterface
     public static function tryFromTheme(?Theme $theme): ?self
     {
         return $theme
-            ? self::from('regular' . (ucfirst($theme->getValue())))
+            ? self::from($theme->getValue())
             : null;
     }
 
@@ -69,22 +69,22 @@ final class QuotationVariant implements PseudoEnumInterface
 
     public static function regularExcite(): self
     {
-        return self::from(self::VARIANT_REGULAREXCITE);
+        return self::from(self::VARIANT_EXCITE);
     }
 
-    public static function regularExperience(): self
+    public static function experience(): self
     {
-        return self::from(self::VARIANT_REGULAREXPERIENCE);
+        return self::from(self::VARIANT_EXPERIENCE);
     }
 
-    public static function regularLite(): self
+    public static function lite(): self
     {
-        return self::from(self::VARIANT_REGULARLITE);
+        return self::from(self::VARIANT_LITE);
     }
 
-    public static function regularService(): self
+    public static function service(): self
     {
-        return self::from(self::VARIANT_REGULARSERVICE);
+        return self::from(self::VARIANT_SERVICE);
     }
 
     public function getIsRegular(): bool
@@ -97,24 +97,24 @@ final class QuotationVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_INLINE;
     }
 
-    public function getIsRegularExcite(): bool
+    public function getIsExcite(): bool
     {
-        return $this->value === self::VARIANT_REGULAREXCITE;
+        return $this->value === self::VARIANT_EXCITE;
     }
 
-    public function getIsRegularExperience(): bool
+    public function getIsExperience(): bool
     {
-        return $this->value === self::VARIANT_REGULAREXPERIENCE;
+        return $this->value === self::VARIANT_EXPERIENCE;
     }
 
-    public function getIsRegularLite(): bool
+    public function getIsLite(): bool
     {
-        return $this->value === self::VARIANT_REGULARLITE;
+        return $this->value === self::VARIANT_LITE;
     }
 
-    public function getIsRegularService(): bool
+    public function getIsService(): bool
     {
-        return $this->value === self::VARIANT_REGULARSERVICE;
+        return $this->value === self::VARIANT_SERVICE;
     }
 
     /**
@@ -125,10 +125,10 @@ final class QuotationVariant implements PseudoEnumInterface
         return [
             self::from(self::VARIANT_REGULAR),
             self::from(self::VARIANT_INLINE),
-            self::from(self::VARIANT_REGULAREXCITE),
-            self::from(self::VARIANT_REGULAREXPERIENCE),
-            self::from(self::VARIANT_REGULARLITE),
-            self::from(self::VARIANT_REGULARSERVICE)
+            self::from(self::VARIANT_EXCITE),
+            self::from(self::VARIANT_EXPERIENCE),
+            self::from(self::VARIANT_LITE),
+            self::from(self::VARIANT_SERVICE)
         ];
     }
 
