@@ -2,7 +2,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
 
     class = Neos.Fusion:DataStructure {
         name = ${"[Block.BrandStage (" + presentationObject.variant + ")]"}
-        default = "relative"
+        default = "relative h-[500px] sm:h-auto"
 
         lite = "lite"
         lite.@if.1 = ${presentationObject.variant.isLarge}
@@ -31,22 +31,27 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
                 @if.1={presentationObject.mediaBackground}/>
 
             <div class="absolute top-0 left-0">
-                <img src={presentationObject.media.source.path} alt={presentationObject.media.source.alt}
+                <img class="w-screen xs:w-[300px]" src={presentationObject.media.source.path} alt={presentationObject.media.source.alt}
                     title={presentationObject.media.source.title} width="300px" height="auto"
                 />
             </div>
 
 
-            <div class="absolute bottom-0 right-0 w-[40%] overflow-hidden">
+            <div class="absolute bottom-0 right-0 w-full sm:w-[40%] overflow-hidden">
                 <div class={props.contentBlockClass}></div>
-                <div class="relative mt-lg p-sm">
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                        presentationObject={presentationObject.headline}
-                        @if.1={presentationObject.headline}/>
-
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                        presentationObject={presentationObject.text}
-                        @if.1={presentationObject.text}/>
+                <div class="relative mt-lg p-md sm:p-sm">
+                    <div class="mb-0">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.headline}
+                            @if.1={presentationObject.headline}
+                        />
+                    </div>
+                    <div class="mt-0">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.text}
+                            @if.1={presentationObject.text}
+                        />
+                    </div>
                 </div>
             </div>
         </div>
