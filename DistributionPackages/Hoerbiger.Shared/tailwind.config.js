@@ -148,6 +148,9 @@ module.exports = {
 						'ul li::before': {
 							backgroundColor: theme('colors.light.contrast'),
 						},
+						p: {
+							marginTop: 0
+						}
 					},
 				},
 				'brand-contrast': {
