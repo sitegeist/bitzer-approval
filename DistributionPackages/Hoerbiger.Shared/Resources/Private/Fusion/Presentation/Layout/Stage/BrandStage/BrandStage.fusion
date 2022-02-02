@@ -2,14 +2,14 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
 
     class = Neos.Fusion:DataStructure {
         name = ${"[Block.BrandStage (" + presentationObject.variant + ")]"}
-        default = "relative h-[500px] sm:h-auto"
+        default = "relative flex flex-col sm:h-[500px] sm:h-auto"
 
         lite = "lite"
         lite.@if.1 = ${presentationObject.variant.isLarge}
     }
 
     contentBlockClass = Neos.Fusion:DataStructure {
-        default = "w-full h-[150%] absolute -skew-y-6 mt-lg"
+        default = "w-full h-[150%] absolute skew-y-[-4] mt-lg"
 
         lite = "bg-lite"
         lite.@if.1 = ${presentationObject.variant.isLite}
@@ -26,20 +26,24 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
 
     renderer = afx`
         <div class={props.class}>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                presentationObject={presentationObject.mediaBackground}
-                @if.1={presentationObject.mediaBackground}/>
+            <div class="order-2 mt-[-10%] sm:mt-0">
 
-            <div class="absolute top-0 left-0">
-                <img class="w-screen xs:w-[300px]" src={presentationObject.media.source.path} alt={presentationObject.media.source.alt}
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.mediaBackground}
+                    @if.1={presentationObject.mediaBackground}/>
+            </div>
+
+            <div class="relative sm:absolute order-1 top-0 left-0 sm:w-auto">
+                <img class="w-full" src={presentationObject.media.source.path} alt={presentationObject.media.source.alt}
                     title={presentationObject.media.source.title} width="300px" height="auto"
                 />
             </div>
 
 
-            <div class="absolute bottom-0 right-0 w-full sm:w-[40%] overflow-hidden">
+            <div
+                class="relative sm:absolute order-3 mt-[-15%] sm:mt-0 bottom-0 right-0 w-full sm:w-[60%] md:w-[40%] overflow-hidden">
                 <div class={props.contentBlockClass}></div>
-                <div class="relative mt-lg p-md sm:p-sm">
+                <div class="relative mt-lg pt-md px-md sm:p-sm pb-0">
                     <div class="mb-0">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot
                             presentationObject={presentationObject.headline}
