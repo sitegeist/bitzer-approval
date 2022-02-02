@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Headline;
 
 /*
@@ -40,7 +43,8 @@ final class HeadlineColor implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::COLOR_BRAND
+            if (
+                $string !== self::COLOR_BRAND
                 && $string !== self::COLOR_WHITE
                 && $string !== self::COLOR_TEXT
                 && $string !== self::COLOR_EXCITE
@@ -49,7 +53,8 @@ final class HeadlineColor implements PseudoEnumInterface
                 && $string !== self::COLOR_EXPERIENCE_CONTRAST
                 && $string !== self::COLOR_LITE
                 && $string !== self::COLOR_LITE_CONTRAST
-                && $string !== self::COLOR_SERVICE_CONTRAST) {
+                && $string !== self::COLOR_SERVICE_CONTRAST
+            ) {
                 throw HeadlineColorIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -60,12 +65,17 @@ final class HeadlineColor implements PseudoEnumInterface
 
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {
-        return $theme
-            ? self::from(
-                $theme->getIsService()
-                    ? $theme->getValue() . 'Contrast'
-                    : $theme->getValue() . ($contrast ? 'Contrast' : ''))
-            : null;
+        if ($theme) {
+            switch ($theme->getValue()) {
+                case Theme::VALUE_SERVICE:
+                    return self::from($theme->getValue() . 'Contrast');
+                case Theme::VALUE_DEFAULT:
+                    return self::liteContrast();
+                default:
+                    return self::from($theme->getValue() . ($contrast ? 'Contrast' : ''));
+            }
+        }
+        return null;
     }
 
     public static function brand(): self

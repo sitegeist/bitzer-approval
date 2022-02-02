@@ -9,18 +9,19 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
     }
 
     contentBlockClass = Neos.Fusion:DataStructure {
-        default = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg"
+        default = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-decorative"
+        default.@if.1 = ${presentationObject.variant.isDefault}
 
-        lite = "bg-lite"
+        lite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-lite"
         lite.@if.1 = ${presentationObject.variant.isLite}
 
-        excite = "bg-excite"
+        excite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-excite"
         excite.@if.1 = ${presentationObject.variant.isExcite}
 
-        experience = "bg-experience"
+        experience = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-experience"
         experience.@if.1 = ${presentationObject.variant.isExperience}
 
-        service = "bg-service"
+        service = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-service"
         service.@if.1 = ${presentationObject.variant.isService}
     }
 
@@ -33,12 +34,13 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
                     @if.1={presentationObject.mediaBackground}/>
             </div>
 
-            <div class="relative sm:absolute order-1 top-0 left-0 sm:w-auto">
+            <div class="relative sm:absolute order-1 top-0 left-0 sm:w-auto"
+                @if.1={presentationObject.media}
+            >
                 <img class="w-full" src={presentationObject.media.source.path} alt={presentationObject.media.source.alt}
                     title={presentationObject.media.source.title} width="300px" height="auto"
                 />
             </div>
-
 
             <div
                 class="relative sm:absolute order-3 mt-[-15%] sm:mt-0 bottom-0 w-[101%] sm:right-0 sm:w-[70%] md:w-[40%] overflow-hidden">

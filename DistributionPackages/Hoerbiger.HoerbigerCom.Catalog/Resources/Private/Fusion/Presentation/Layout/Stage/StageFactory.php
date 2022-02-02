@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Stage;
 
 /*
@@ -43,7 +46,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ? ProductClass::from($documentNode->getProperty('productClass'))
             : null;
         $theme = $productClass ? $productClass->toTheme() : null;
-        $media = $productClass
+        $media = $productClass && !$productClass->getIsDefault()
             ? new SvgImage(
                 $this->resolveProductClassImageUri($productClass),
                 $productClass->getLabel(),

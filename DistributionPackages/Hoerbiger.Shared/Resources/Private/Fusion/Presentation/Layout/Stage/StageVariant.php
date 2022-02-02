@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Layout\Stage;
 
 /*
@@ -38,14 +41,16 @@ final class StageVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_FULLMEDIATEXTLEFT
+            if (
+                $string !== self::VARIANT_FULLMEDIATEXTLEFT
                 && $string !== self::VARIANT_FULLMEDIATEXTRIGHT
                 && $string !== self::VARIANT_STACK
                 && $string !== self::VARIANT_EXCITE
                 && $string !== self::VARIANT_EXPERIENCE
                 && $string !== self::VARIANT_LITE
                 && $string !== self::VARIANT_SERVICE
-                && $string !== self::VARIANT_DEFAULT) {
+                && $string !== self::VARIANT_DEFAULT
+            ) {
                 throw StageVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -56,9 +61,10 @@ final class StageVariant implements PseudoEnumInterface
 
     public static function fromTheme(?Theme $theme): self
     {
-        return $theme
-            ? self::from($theme->getValue())
-            : self::default();
+        if (!$theme || $theme->getValue() == 'default') {
+            return self::from(self::VARIANT_DEFAULT);
+        }
+        return self::from($theme->getValue());
     }
 
     public static function fullMediaTextLeft(): self

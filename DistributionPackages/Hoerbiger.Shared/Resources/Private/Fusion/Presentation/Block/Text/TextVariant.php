@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Text;
 
 /*
@@ -41,7 +44,8 @@ final class TextVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_LIGHT_CONTRAST
+            if (
+                $string !== self::VARIANT_LIGHT_CONTRAST
                 && $string !== self::VARIANT_BRAND_CONTRAST
                 && $string !== self::VARIANT_NEUTRAL_CONTRAST
                 && $string !== self::VARIANT_TRANSPARENT_CONTRAST
@@ -51,7 +55,8 @@ final class TextVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_EXPERIENCE_CONTRAST
                 && $string !== self::VARIANT_LITE
                 && $string !== self::VARIANT_LITE_CONTRAST
-                && $string !== self::VARIANT_SERVICE_CONTRAST) {
+                && $string !== self::VARIANT_SERVICE_CONTRAST
+            ) {
                 throw TextVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -62,13 +67,19 @@ final class TextVariant implements PseudoEnumInterface
 
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {
-        return $theme
-            ? self::from(
-                $theme->getIsService()
-                    ? $theme->getValue() . 'Contrast'
-                    : $theme->getValue() . ($contrast ? 'Contrast' : ''))
-            : null;
+        if ($theme) {
+            switch ($theme->getValue()) {
+                case Theme::VALUE_SERVICE:
+                    return self::from($theme->getValue() . 'Contrast');
+                case Theme::VALUE_DEFAULT:
+                    return self::brandContrast();
+                default:
+                    return self::from($theme->getValue() . ($contrast ? 'Contrast' : ''));
+            }
+        }
+        return null;
     }
+
 
     public static function lightContrast(): self
     {
