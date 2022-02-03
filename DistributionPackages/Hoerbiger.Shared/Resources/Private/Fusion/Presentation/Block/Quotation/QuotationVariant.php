@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Quotation;
 
 /*
@@ -36,12 +39,14 @@ final class QuotationVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_REGULAR
+            if (
+                $string !== self::VARIANT_REGULAR
                 && $string !== self::VARIANT_INLINE
                 && $string !== self::VARIANT_EXCITE
                 && $string !== self::VARIANT_EXPERIENCE
                 && $string !== self::VARIANT_LITE
-                && $string !== self::VARIANT_SERVICE) {
+                && $string !== self::VARIANT_SERVICE
+            ) {
                 throw QuotationVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -50,11 +55,12 @@ final class QuotationVariant implements PseudoEnumInterface
         return self::$instances[$string];
     }
 
-    public static function tryFromTheme(?Theme $theme): ?self
+    public static function tryFromTheme(?Theme $theme): self
     {
-        return $theme
-            ? self::from($theme->getValue())
-            : null;
+        if (!$theme || $theme->getValue() == 'default') {
+            return self::from(self::VARIANT_REGULAR);
+        }
+        return self::from($theme->getValue());
     }
 
     public static function regular(): self

@@ -72,7 +72,7 @@ final class TextVariant implements PseudoEnumInterface
                 case Theme::VALUE_SERVICE:
                     return self::from($theme->getValue() . 'Contrast');
                 case Theme::VALUE_DEFAULT:
-                    return self::brandContrast();
+                    return self::excite();
                 default:
                     return self::from($theme->getValue() . ($contrast ? 'Contrast' : ''));
             }

@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\HoerbigerCom\Integration;
 
 /*
@@ -181,7 +184,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     $downloadsNode->findChildNodes(),
-                    function(TraversableNodeInterface $node): Content {
+                    function (TraversableNodeInterface $node): Content {
                         return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                     }
                 )
@@ -208,7 +211,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     TraversableNodes::fromArray($node->getProperty('documents') ?: []),
-                    function (TraversableNodeInterface $document) use ($inBackend, $theme)  {
+                    function (TraversableNodeInterface $document) use ($inBackend, $theme) {
                         return $this->cardFactory->forNavigationTile($document, $inBackend, $theme);
                     }
                 )
@@ -387,7 +390,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Quotation(
-                QuotationVariant::tryFromTheme($theme) ?: QuotationVariant::regular(),
+                QuotationVariant::tryFromTheme($theme),
                 Editable::fromNodeProperty($quotationNode, 'text'),
                 Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
             )
@@ -402,7 +405,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 RowVariant::gallery(),
                 Collection::fromNodes(
                     $galleryNode->findChildNodes(),
-                    function(TraversableNodeInterface $galleryImage) {
+                    function (TraversableNodeInterface $galleryImage) {
                         return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
                     }
                 )
@@ -545,7 +548,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             GridVariant::twoColumnsGap(),
             Collection::fromNodes(
                 $downloadsNode->findChildNodes(),
-                function(TraversableNodeInterface $node): Content {
+                function (TraversableNodeInterface $node): Content {
                     return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                 }
             )
@@ -595,7 +598,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         GridVariant::twoColumnsGap(),
                         Collection::fromNodes(
                             $benefitsNode->findChildNodes(),
-                            function(TraversableNodeInterface $node): Content {
+                            function (TraversableNodeInterface $node): Content {
                                 return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                             }
                         )
@@ -657,7 +660,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ),
                     Collection::fromNodes(
                         $peopleStoriesNode->findChildNodes(),
-                        function(TraversableNodeInterface $node): Content {
+                        function (TraversableNodeInterface $node): Content {
                             return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                         }
                     )

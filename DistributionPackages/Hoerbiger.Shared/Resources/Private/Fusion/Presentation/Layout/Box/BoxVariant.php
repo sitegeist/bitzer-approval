@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Layout\Box;
 
 /*
@@ -37,13 +40,15 @@ final class BoxVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_TEXTCENTER
+            if (
+                $string !== self::VARIANT_TEXTCENTER
                 && $string !== self::VARIANT_NEUTRAL
                 && $string !== self::VARIANT_DECORATIVE
                 && $string !== self::VARIANT_EXCITE
                 && $string !== self::VARIANT_EXPERIENCE
                 && $string !== self::VARIANT_LITE
-                && $string !== self::VARIANT_SERVICE) {
+                && $string !== self::VARIANT_SERVICE
+            ) {
                 throw BoxVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -54,9 +59,10 @@ final class BoxVariant implements PseudoEnumInterface
 
     public static function tryFromTheme(?Theme $theme): ?self
     {
-        return $theme
-            ? self::from($theme->getValue())
-            : null;
+        if (!$theme || $theme->getValue() == 'default') {
+            return self::from(self::VARIANT_DECORATIVE);
+        }
+        return self::from($theme->getValue());
     }
 
     public static function textCenter(): self

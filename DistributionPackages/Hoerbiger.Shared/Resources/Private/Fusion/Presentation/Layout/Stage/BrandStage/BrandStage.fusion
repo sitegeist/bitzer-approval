@@ -46,7 +46,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
                 class="relative sm:absolute order-3 mt-[-15%] sm:mt-0 bottom-0 w-[101%] sm:right-0 sm:w-[70%] md:w-[40%] overflow-hidden">
                 <div class={props.contentBlockClass}></div>
                 <div class="relative mt-lg pt-md px-md sm:pt-sm sm:px-sm pb-0">
-                    <div class="mb-0">
+                    <div class="mb-0 text-light">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot
                             presentationObject={presentationObject.headline}
                             @if.1={presentationObject.headline}

@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Video;
 
 /*
@@ -38,7 +41,7 @@ final class VideoFactory extends AbstractComponentPresentationObjectFactory
                 ? $this->figureFactory->forVideoPoster($imageSource)
                 : null,
             Editable::fromNodeProperty($videoNode, 'image__caption'),
-            VideoVariant::tryFromTheme($theme) ?: VideoVariant::regular()
+            VideoVariant::tryFromTheme($theme)
         );
     }
 }

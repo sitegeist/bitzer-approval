@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Icon;
 
 /*
@@ -25,6 +28,8 @@ final class IconColor implements PseudoEnumInterface
     const COLOR_LITE = 'lite';
     const COLOR_LITE_CONTRAST = 'liteContrast';
     const COLOR_SERVICE_CONTRAST = 'serviceContrast';
+    const COLOR_DEFAULT = 'default';
+
 
     /**
      * @var array<string,self>|self[]
@@ -41,7 +46,8 @@ final class IconColor implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::COLOR_BRAND
+            if (
+                $string !== self::COLOR_BRAND
                 && $string !== self::COLOR_CURRENT
                 && $string !== self::COLOR_WHITE
                 && $string !== self::COLOR_TEXT
@@ -51,7 +57,10 @@ final class IconColor implements PseudoEnumInterface
                 && $string !== self::COLOR_EXPERIENCE_CONTRAST
                 && $string !== self::COLOR_LITE
                 && $string !== self::COLOR_LITE_CONTRAST
-                && $string !== self::COLOR_SERVICE_CONTRAST) {
+                && $string !== self::COLOR_SERVICE_CONTRAST
+                && $string !== self::COLOR_DEFAULT
+
+            ) {
                 throw IconColorIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -66,7 +75,8 @@ final class IconColor implements PseudoEnumInterface
             ? self::from(
                 $theme->getIsService()
                     ? $theme->getValue() . 'Contrast'
-                    : $theme->getValue() . ($contrast ? 'Contrast' : ''))
+                    : $theme->getValue() . ($contrast ? 'Contrast' : '')
+            )
             : null;
     }
 
@@ -125,6 +135,11 @@ final class IconColor implements PseudoEnumInterface
         return self::from(self::COLOR_SERVICE_CONTRAST);
     }
 
+    public static function default(): self
+    {
+        return self::from(self::COLOR_DEFAULT);
+    }
+
     public function getIsBrand(): bool
     {
         return $this->value === self::COLOR_BRAND;
@@ -179,6 +194,11 @@ final class IconColor implements PseudoEnumInterface
         return $this->value === self::COLOR_SERVICE_CONTRAST;
     }
 
+    public function getIsDefault(): bool
+    {
+        return $this->value === self::COLOR_DEFAULT;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -195,7 +215,7 @@ final class IconColor implements PseudoEnumInterface
             self::from(self::COLOR_EXPERIENCE_CONTRAST),
             self::from(self::COLOR_LITE),
             self::from(self::COLOR_LITE_CONTRAST),
-            self::from(self::COLOR_SERVICE_CONTRAST)
+            self::from(self::COLOR_SERVICE_CONTRAST),
         ];
     }
 

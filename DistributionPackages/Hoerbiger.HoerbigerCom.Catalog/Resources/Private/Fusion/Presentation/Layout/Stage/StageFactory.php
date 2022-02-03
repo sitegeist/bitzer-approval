@@ -67,7 +67,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             new Headline(
                 HeadlineSize::large(),
-                HeadlineColor::tryFromTheme($theme, true) ?: HeadlineColor::white(),
+                HeadlineColor::white(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($documentNode, 'headline')
             ),

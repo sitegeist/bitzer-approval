@@ -69,7 +69,6 @@ module.exports = {
 				DEFAULT: 'transparent',
 				contrast: '#fff',
 			},
-
 			excite: {
 				DEFAULT: '#A89379',
 				contrast: '#fff'
@@ -85,6 +84,10 @@ module.exports = {
 			service: {
 				DEFAULT: '#D9D9D9',
 				contrast: 'rgba(0, 0, 0, .85)'
+			},
+			default: {
+				DEFAULT: '#075289',
+				contrast: '#fff'
 			}
 
 		},
