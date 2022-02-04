@@ -1,0 +1,65 @@
+prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
+
+    class = Neos.Fusion:DataStructure {
+        name = ${"[Block.BrandStage (" + presentationObject.variant + ")]"}
+        default = "relative flex flex-col sm:h-[500px] sm:h-auto overflow-hidden"
+
+        lite = "lite"
+        lite.@if.1 = ${presentationObject.variant.isLarge}
+    }
+
+    contentBlockClass = Neos.Fusion:DataStructure {
+        default = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-decorative"
+        default.@if.1 = ${presentationObject.variant.isDefault}
+
+        lite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-lite"
+        lite.@if.1 = ${presentationObject.variant.isLite}
+
+        excite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-excite"
+        excite.@if.1 = ${presentationObject.variant.isExcite}
+
+        experience = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-experience"
+        experience.@if.1 = ${presentationObject.variant.isExperience}
+
+        service = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-service"
+        service.@if.1 = ${presentationObject.variant.isService}
+    }
+
+    renderer = afx`
+        <div class={props.class}>
+            <div class="order-2 mt-[-10%] sm:mt-0">
+
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.mediaBackground}
+                    @if.1={presentationObject.mediaBackground}/>
+            </div>
+
+            <div class="relative sm:absolute order-1 top-0 left-0 sm:w-auto"
+                @if.1={presentationObject.media}
+            >
+                <img class="w-full" src={presentationObject.media.source.path} alt={presentationObject.media.source.alt}
+                    title={presentationObject.media.source.title} width="300px" height="auto"
+                />
+            </div>
+
+            <div
+                class="relative sm:absolute order-3 mt-[-15%] sm:mt-0 bottom-0 w-[101%] sm:right-0 sm:w-[70%] md:w-[40%] overflow-hidden">
+                <div class={props.contentBlockClass}></div>
+                <div class="relative mt-lg pt-md px-md sm:pt-sm sm:px-sm pb-0">
+                    <div class="mb-0 text-light">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.headline}
+                            @if.1={presentationObject.headline}
+                        />
+                    </div>
+                    <div class="mt-0">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.text}
+                            @if.1={presentationObject.text}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+}

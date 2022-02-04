@@ -1,10 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\HoerbigerCom\Integration;
 
 /*
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
@@ -13,7 +17,10 @@ use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
@@ -21,11 +28,11 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStory;
@@ -99,33 +106,36 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $this->wantedNodeRepository = $wantedNodeRepository;
     }
 
-    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site): SlotInterface
+    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site, TraversableNodeInterface $documentNode): SlotInterface
     {
+        $productClass = ProductClass::tryFrom($documentNode->getProperty('productClass'));
+        $theme = $productClass ? $productClass->toTheme() : null;
+
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom:Collection.Downloads':
                 return $this->forDownloadsNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Download':
-                return $this->cardFactory->forDownloadNode($contentNode);
+                return $this->cardFactory->forDownloadNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
-                return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend);
+                return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
-                return $this->forTileNavigation($contentNode, $inBackend);
+                return $this->forTileNavigation($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
-                return $this->forTextNode($contentNode, $inBackend);
+                return $this->forTextNode($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
-                return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph);
+                return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
                 return $this->forImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.MostWanted':
                 return $this->forMostWantedNode($contentNode, $inBackend, $subgraph, $site);
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
-                return $this->forQuotationNode($contentNode);
+                return $this->forQuotationNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Video':
-                return $this->forVideoNode($contentNode, $inBackend);
+                return $this->forVideoNode($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Collection.Milestones':
                 return $this->forMilestonesNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.Milestone':
@@ -135,12 +145,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Collection.DefinitionList':
                 return $this->forDefinitionListNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
+                // @todo how?
                 return $this->forDefinitionItemNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
+                return $this->forTabBox($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
-                return $this->forTabBox($contentNode);
+                return $this->forTabBox($contentNode, null);
             case 'Hoerbiger.HoerbigerCom:Content.TextTab':
-                return $this->forTextTabNode($contentNode);
+                return $this->forTextTabNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
                 return $this->forDefinitionListTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
@@ -172,7 +184,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     $downloadsNode->findChildNodes(),
-                    function(TraversableNodeInterface $node): Content {
+                    function (TraversableNodeInterface $node): Content {
                         return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                     }
                 )
@@ -180,10 +192,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend): SlotInterface
+    private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
     {
         /** @var SlotInterface $partialFigureEclipse */
-        $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend);
+        $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend, $theme);
 
         return new ContentContainer(
             ContentContainerVariant::snug(),
@@ -191,7 +203,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forTileNavigation(TraversableNodeInterface $node, bool $inBackend): SlotInterface
+    private function forTileNavigation(TraversableNodeInterface $node, bool $inBackend, ?Theme $theme): SlotInterface
     {
         return new ContentContainer(
             ContentContainerVariant::regular(),
@@ -199,15 +211,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::threeColumnsGap(),
                 Collection::fromNodes(
                     TraversableNodes::fromArray($node->getProperty('documents') ?: []),
-                    function (TraversableNodeInterface $document) use ($inBackend)  {
-                        return $this->cardFactory->forNavigationTile($document, $inBackend);
+                    function (TraversableNodeInterface $document) use ($inBackend, $theme) {
+                        return $this->cardFactory->forNavigationTile($document, $inBackend, $theme);
                     }
                 )
             )
         );
     }
 
-    public function forTextNode(TraversableNodeInterface $textNode, bool $inBackend): SlotInterface
+    public function forTextNode(TraversableNodeInterface $textNode, bool $inBackend, ?Theme $theme): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -224,14 +236,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineVariant::largeBrand(),
+                            HeadlineSize::large(),
+                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                             HeadlineType::h2(),
                             Editable::fromNodeProperty($textNode, 'headline')
                         )
                         : null,
                     $inBackend || $textNode->getProperty('text')
                         ? new Text(
-                            TextVariant::lightContrast(),
+                            TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
                             Editable::fromNodeProperty($textNode, 'text'),
                             $columns->getIsMaxTwo()
                         )
@@ -241,7 +254,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend, ContentContext $subgraph): SlotInterface
+    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend, ContentContext $subgraph, ?Theme $theme): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -259,17 +272,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineVariant::mediumBrand(),
+                            HeadlineSize::medium(),
+                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textWithImageNode, 'headline')
                         )
                         : null,
                     new Text(
-                        TextVariant::lightContrast(),
+                        TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
                         Editable::fromNodeProperty($textWithImageNode, 'text'),
                         false
                     ),
-                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph)
+                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme)
                 ]), $identity)
             )
         );
@@ -325,10 +339,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $mostWantedNode->getProperty('headline')
                         ? new Headline(
-                        HeadlineVariant::mediumBrand(),
-                        HeadlineType::h2(),
-                        Editable::fromNodeProperty($mostWantedNode, 'headline')
-                    )
+                            HeadlineSize::medium(),
+                            HeadlineColor::brand(),
+                            HeadlineType::h2(),
+                            Editable::fromNodeProperty($mostWantedNode, 'headline')
+                        )
                         : null,
                     new Text(
                         TextVariant::lightContrast(),
@@ -370,12 +385,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forQuotationNode(TraversableNodeInterface $quotationNode): SlotInterface
+    public function forQuotationNode(TraversableNodeInterface $quotationNode, ?Theme $theme): SlotInterface
     {
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Quotation(
-                QuotationVariant::regular(),
+                QuotationVariant::tryFromTheme($theme),
                 Editable::fromNodeProperty($quotationNode, 'text'),
                 Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
             )
@@ -390,7 +405,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 RowVariant::gallery(),
                 Collection::fromNodes(
                     $galleryNode->findChildNodes(),
-                    function(TraversableNodeInterface $galleryImage) {
+                    function (TraversableNodeInterface $galleryImage) {
                         return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
                     }
                 )
@@ -408,11 +423,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return $this->figureFactory->forGalleryImage($imageSource);
     }
 
-    public function forVideoNode(TraversableNodeInterface $videoNode, bool $inBackend): SlotInterface
+    public function forVideoNode(TraversableNodeInterface $videoNode, bool $inBackend, ?Theme $theme): SlotInterface
     {
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            $this->videoFactory->forVideo($videoNode, $inBackend)
+            $this->videoFactory->forVideo($videoNode, $inBackend, $theme)
         );
     }
 
@@ -442,13 +457,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return (new ListItemFactory())->forDefinition($definitionNode);
     }
 
-    public function forTabBox(TraversableNodeInterface $tabBox): SlotInterface
+    public function forTabBox(TraversableNodeInterface $tabBox, ?Theme $theme): SlotInterface
     {
+
+
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Box(
-                BoxVariant::decorative(),
-                (new TabBoxFactory())->forTabBox($tabBox)
+                BoxVariant::tryFromTheme($theme) ?: BoxVariant::decorative(),
+                (new TabBoxFactory())->forTabBox($tabBox, $theme)
             )
         );
     }
@@ -458,7 +475,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return Editable::fromNodeProperty($tabNode, 'tab__label');
     }
 
-    public function forTextTabNode(TraversableNodeInterface $textTabNode): SlotInterface
+    public function forTextTabNode(TraversableNodeInterface $textTabNode, ?Theme $theme): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -468,12 +485,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineVariant::mediumBrand(),
+                    HeadlineSize::medium(),
+                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
                 ),
                 new Text(
-                    TextVariant::neutralContrast(),
+                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::neutralContrast(),
                     Editable::fromNodeProperty($textTabNode, 'text'),
                     false
                 )
@@ -503,7 +521,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             )
                         ),
                         new Headline(
-                            HeadlineVariant::mediumBrand(),
+                            HeadlineSize::medium(),
+                            HeadlineColor::brand(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textTabNode, 'headline')
                         ),
@@ -529,7 +548,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             GridVariant::twoColumnsGap(),
             Collection::fromNodes(
                 $downloadsNode->findChildNodes(),
-                function(TraversableNodeInterface $node): Content {
+                function (TraversableNodeInterface $node): Content {
                     return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                 }
             )
@@ -560,7 +579,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $benefitsNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineVariant::largeBrand(),
+                                    HeadlineSize::large(),
+                                    HeadlineColor::brand(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($benefitsNode, 'headline')
                                 )
@@ -578,7 +598,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         GridVariant::twoColumnsGap(),
                         Collection::fromNodes(
                             $benefitsNode->findChildNodes(),
-                            function(TraversableNodeInterface $node): Content {
+                            function (TraversableNodeInterface $node): Content {
                                 return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                             }
                         )
@@ -594,7 +614,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Icon(
                 'shared',
                 $benefitNode->getProperty('icon') ?: '',
-                IconSize::sizeParent()
+                IconSize::sizeParent(),
             ),
             Editable::fromNodeProperty($benefitNode, 'headline'),
             null,
@@ -623,7 +643,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $peopleStoriesNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineVariant::largeBrand(),
+                                    HeadlineSize::large(),
+                                    HeadlineColor::brand(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($peopleStoriesNode, 'headline')
                                 )
@@ -639,7 +660,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ),
                     Collection::fromNodes(
                         $peopleStoriesNode->findChildNodes(),
-                        function(TraversableNodeInterface $node): Content {
+                        function (TraversableNodeInterface $node): Content {
                             return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
                         }
                     )
@@ -658,7 +679,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new PeopleStory(
             $this->figureFactory->forPeopleStory($imageSource),
             new Headline(
-                HeadlineVariant::medium(),
+                HeadlineSize::medium(),
+                HeadlineColor::text(),
                 HeadlineType::div(),
                 Editable::fromNodeProperty($peopleStoryNode, 'headline')
             ),
@@ -701,11 +723,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 new Icon(
                                     'shared',
                                     $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
-                                    IconSize::size_4()
+                                    IconSize::size_4(),
                                 ),
                             ),
                             new Headline(
-                                HeadlineVariant::largeBrand(),
+                                HeadlineSize::large(),
+                                HeadlineColor::brand(),
                                 HeadlineType::h2(),
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
                             ),

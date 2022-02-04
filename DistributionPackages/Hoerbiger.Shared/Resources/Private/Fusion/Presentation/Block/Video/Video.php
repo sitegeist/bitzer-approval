@@ -21,14 +21,18 @@ final class Video extends AbstractComponentPresentationObject implements VideoIn
 
     private ?SlotInterface $caption;
 
+    private VideoVariant $variant;
+
     public function __construct(
         string $source,
         ?FigureInterface $figure,
-        ?SlotInterface $caption
+        ?SlotInterface $caption,
+        VideoVariant $variant
     ) {
         $this->source = $source;
         $this->figure = $figure;
         $this->caption = $caption;
+        $this->variant = $variant;
     }
 
     public function getSource(): string
@@ -44,5 +48,10 @@ final class Video extends AbstractComponentPresentationObject implements VideoIn
     public function getCaption(): ?SlotInterface
     {
         return $this->caption;
+    }
+
+    public function getVariant(): VideoVariant
+    {
+        return $this->variant;
     }
 }

@@ -6,13 +6,13 @@ namespace Hoerbiger\Shared\Presentation\Block\Headline;
  */
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 interface HeadlineInterface extends ComponentPresentationObjectInterface
 {
-    public function getVariant(): HeadlineVariant;
+    public function getSize(): HeadlineSize;
+
+    public function getColor(): HeadlineColor;
 
     public function getType(): HeadlineType;
 

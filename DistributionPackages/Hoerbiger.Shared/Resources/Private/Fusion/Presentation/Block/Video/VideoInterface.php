@@ -16,4 +16,6 @@ interface VideoInterface extends ComponentPresentationObjectInterface
     public function getFigure(): ?FigureInterface;
 
     public function getCaption(): ?SlotInterface;
+
+    public function getVariant(): VideoVariant;
 }

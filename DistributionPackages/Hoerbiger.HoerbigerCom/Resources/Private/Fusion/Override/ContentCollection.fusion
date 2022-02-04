@@ -1,0 +1,7 @@
+prototype(Neos.Neos:ContentCollection) {
+    @cache {
+        entryTags {
+            document = ${Neos.Caching.nodeTag(documentNode)}
+        }
+    }
+}

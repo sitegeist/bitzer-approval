@@ -1,0 +1,21 @@
+'Hoerbiger.HoerbigerCom.Catalog:Document.Product.Compression':
+  superTypes:
+    'Hoerbiger.HoerbigerCom.Catalog:Document.Product': true
+  ui:
+    label: 'Compression-Produkt'
+  properties:
+    productClass:
+      type: string
+      defaultValue: 'default'
+      ui:
+        label: 'Produktklasse'
+        reloadIfChanged: true
+        inspector:
+          group: product
+          position: 'start'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
+  postprocessors:
+    productClass:
+      postprocessor: Hoerbiger\HoerbigerCom\Catalog\Application\ProductClassProvider

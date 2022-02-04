@@ -8,12 +8,12 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\SlideStage\SlideStage;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -57,7 +57,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             $documentHeadlineContent
                 ? new Headline(
-                    HeadlineVariant::largeWhite(),
+                    HeadlineSize::large(),
+                    HeadlineColor::white(),
                     HeadlineType::div(),
                     Value::fromString($documentHeadlineContent)
                 )

@@ -6,12 +6,13 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\PressReleaseCard\PressReleaseCard;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -101,7 +102,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     StackVariant::sm(),
                     Collection::fromIterable(array_filter([
                         new Headline(
-                            HeadlineVariant::medium(),
+                            HeadlineSize::medium(),
+                            HeadlineColor::text(),
                             HeadlineType::h2(),
                             Value::fromString((string)$year ?: '')
                         ),

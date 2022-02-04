@@ -14,4 +14,6 @@ interface IconInterface extends ComponentPresentationObjectInterface
     public function getIconName(): string;
 
     public function getSize(): ?IconSize;
+
+    public function getColor(): ?IconColor;
 }

@@ -13,7 +13,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
     renderer = afx`
         <div class={[
             "[Layout.TabBox]",
-            "grid tabBoxToggle:grid-cols-tabs gap-xl"
+            "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red"
         ]}>
             <nav class="hidden tabBoxToggle:flex flex-col relative">
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
@@ -35,7 +35,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     <div
                         class={[
                             "flex justify-between items-center cursor-pointer min-h-touch",
-                            "bg-light my-xs p-xs font-bold text-brand tabBoxToggle:hidden shadow tracking-wider"
+                            "bg-light my-xs p-xs font-bold tabBoxToggle:hidden shadow tracking-wider color-current"
                         ]}
                         data-select="accordeon-header"
                     >

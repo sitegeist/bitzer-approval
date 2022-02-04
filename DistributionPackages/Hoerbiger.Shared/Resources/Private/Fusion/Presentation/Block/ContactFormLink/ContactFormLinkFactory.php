@@ -10,6 +10,8 @@ use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
@@ -53,7 +55,8 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_subline'))
                             ),
                             new Headline(
-                                HeadlineVariant::largeBrand(),
+                                HeadlineSize::large(),
+                                HeadlineColor::brand(),
                                 HeadlineType::h2(),
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_headline'))
                             )
