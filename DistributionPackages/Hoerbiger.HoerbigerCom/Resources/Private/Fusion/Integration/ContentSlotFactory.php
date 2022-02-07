@@ -275,7 +275,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             HeadlineSize::medium(),
                             HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                             HeadlineType::div(),
-                            Editable::fromNodeProperty($textWithImageNode, 'headline')
+                            Editable::fromNodeProperty($textWithImageNode, 'Brand')
                         )
                         : null,
                     new Text(

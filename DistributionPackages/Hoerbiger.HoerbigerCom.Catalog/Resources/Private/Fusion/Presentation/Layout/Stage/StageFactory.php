@@ -61,7 +61,6 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             );
         }
         $background = $this->figureFactory->forFullMediaStage($backgroundImageSource);
-
         return new BrandStage(
             StageVariant::fromTheme($theme),
             null,

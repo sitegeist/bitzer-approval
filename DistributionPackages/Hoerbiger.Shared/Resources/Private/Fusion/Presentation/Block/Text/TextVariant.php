@@ -17,6 +17,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class TextVariant implements PseudoEnumInterface
 {
+    const VARIANT_DEFAULT = 'default';
     const VARIANT_LIGHT_CONTRAST = 'lightContrast';
     const VARIANT_BRAND_CONTRAST = 'brandContrast';
     const VARIANT_NEUTRAL_CONTRAST = 'neutralContrast';
@@ -45,7 +46,8 @@ final class TextVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if (
-                $string !== self::VARIANT_LIGHT_CONTRAST
+                $string !== self::VARIANT_DEFAULT
+                && $string !== self::VARIANT_LIGHT_CONTRAST
                 && $string !== self::VARIANT_BRAND_CONTRAST
                 && $string !== self::VARIANT_NEUTRAL_CONTRAST
                 && $string !== self::VARIANT_TRANSPARENT_CONTRAST
@@ -67,12 +69,13 @@ final class TextVariant implements PseudoEnumInterface
 
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {
+
         if ($theme) {
             switch ($theme->getValue()) {
                 case Theme::VALUE_SERVICE:
                     return self::from($theme->getValue() . 'Contrast');
                 case Theme::VALUE_DEFAULT:
-                    return self::excite();
+                    return self::default();
                 default:
                     return self::from($theme->getValue() . ($contrast ? 'Contrast' : ''));
             }
@@ -80,6 +83,11 @@ final class TextVariant implements PseudoEnumInterface
         return null;
     }
 
+
+    public static function default(): self
+    {
+        return self::from(self::VARIANT_DEFAULT);
+    }
 
     public static function lightContrast(): self
     {
@@ -134,6 +142,11 @@ final class TextVariant implements PseudoEnumInterface
     public static function serviceContrast(): self
     {
         return self::from(self::VARIANT_SERVICE_CONTRAST);
+    }
+
+    public function getIsDefault(): bool
+    {
+        return $this->value === self::VARIANT_DEFAULT;
     }
 
     public function getIsLightContrast(): bool
@@ -197,6 +210,7 @@ final class TextVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::VARIANT_DEFAULT),
             self::from(self::VARIANT_LIGHT_CONTRAST),
             self::from(self::VARIANT_BRAND_CONTRAST),
             self::from(self::VARIANT_NEUTRAL_CONTRAST),

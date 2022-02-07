@@ -17,6 +17,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
                 : "max-w-content-tight",
+            presentationObject.variant.isDefault && "prose-brand-contrast",
             presentationObject.variant.isBrandContrast && "prose-brand-contrast",
             presentationObject.variant.isNeutralContrast && "prose-neutral-contrast",
             presentationObject.variant.isDecorativeContrast && "prose-decorative-contrast",
