@@ -33,3 +33,49 @@
 }
 
 @tailwind utilities;
+
+/* css für die Datenschutzerklärung */
+
+div#CookieDeclarationUserStatusLabelOn {
+color: #8D172E;
+font-weight: bold;
+font-size:18px;
+margin-bottom: .5rem;
+}
+
+p.CookieDeclarationTypeHeader {
+color: #8D172E;
+}
+
+#CookeDeclaration a {
+text-decoration: underline;
+color: #8D172E;
+}
+
+td.CookieDeclarationTableCell a {
+text-decoration: underline;
+color: #8D172E;
+}
+p.CookieDeclarationTypeHeader {
+color: #8D172E;
+}
+
+#CookeDeclaration a {
+text-decoration: underline;
+color: #8D172E;
+}
+
+td.CookieDeclarationTableCell a {
+text-decoration: underline;
+color: #8D172E;
+}
+
+a#CookieDeclarationChangeConsentWithdraw {
+color:#8D172E;
+text-decoration:underline;
+}
+
+a#CookieDeclarationChangeConsentChange {
+color:#8D172E;
+text-decoration:underline;
+}
