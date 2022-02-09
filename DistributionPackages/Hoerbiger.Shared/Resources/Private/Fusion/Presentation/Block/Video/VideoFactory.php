@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Video;
 
 /*
@@ -7,6 +10,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Video;
 
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
@@ -25,7 +29,7 @@ final class VideoFactory extends AbstractComponentPresentationObjectFactory
         $this->figureFactory = $figureFactory;
     }
 
-    public function forVideo(TraversableNodeInterface $videoNode, bool $inBackend): Video
+    public function forVideo(TraversableNodeInterface $videoNode, bool $inBackend, ?Theme $theme): Video
     {
         $asset = $videoNode->getProperty('video');
         $assetUri = $asset ? $this->uriService->getAssetUri($asset) : '';
@@ -36,7 +40,8 @@ final class VideoFactory extends AbstractComponentPresentationObjectFactory
             $imageSource
                 ? $this->figureFactory->forVideoPoster($imageSource)
                 : null,
-            Editable::fromNodeProperty($videoNode, 'image__caption')
+            Editable::fromNodeProperty($videoNode, 'image__caption'),
+            VideoVariant::tryFromTheme($theme)
         );
     }
 }

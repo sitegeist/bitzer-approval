@@ -13,6 +13,8 @@ use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
@@ -23,6 +25,7 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Utility\Files;
@@ -65,7 +68,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         $this->csvPOTranslator = $csvPOTranslator;
     }
 
-    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend): NavigationCard
+    public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ?Theme $theme): NavigationCard
     {
         $link = (new LinkFactory())->forLinkToDocument($document);
 
@@ -81,7 +84,8 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($headlineProperty) {
             $headline = new Headline(
-                HeadlineVariant::medium(),
+                HeadlineSize::medium(),
+                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::text(),
                 HeadlineType::div(),
                 Value::fromString($headlineProperty)
             );
@@ -94,7 +98,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($abstractProperty) {
             $text = new Text(
-                TextVariant::lightContrast(),
+                TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
                 Value::fromString($abstractProperty),
                 false
             );
@@ -153,7 +157,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             : $typeIdentifier;
     }
 
-    public function forDownloadNode(TraversableNodeInterface $downloadNode): DownloadCard
+    public function forDownloadNode(TraversableNodeInterface $downloadNode, ?Theme $theme): DownloadCard
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -169,7 +173,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $asset instanceof Document
                 ? Collection::fromIterable([
                 new Link(
-                    LinkVariant::label(),
+                    LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
                     $this->uriService->getAssetUri($asset),
                     LinkTarget::blank(),
                     null,
@@ -194,12 +198,12 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     ? $this->figureFactory->forDownloadCard(
                     $imageSource
                     )
-                    : new Icon('shared', 'pdf', null);
+                    : new Icon('shared', 'pdf');
             case 'ppt':
             case 'pptx':
-                return new Icon('shared', 'powerpoint', null);
+                return new Icon('shared', 'powerpoint');
             default:
-                return new Icon('shared', 'downloadFile', null);
+                return new Icon('shared', 'downloadFile');
         }
     }
 }

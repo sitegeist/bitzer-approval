@@ -9,8 +9,9 @@ use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Row\Row;
@@ -63,7 +64,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 })
             ),
             new Headline(
-                HeadlineVariant::largeBrand(),
+                HeadlineSize::large(),
+                HeadlineColor::brand(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
             ),

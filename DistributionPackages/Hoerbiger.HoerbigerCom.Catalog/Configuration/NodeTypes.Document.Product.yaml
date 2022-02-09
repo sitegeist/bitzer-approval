@@ -64,3 +64,6 @@
     searchType:
       search:
         indexing: '${"Product"}'
+    image:
+      options:
+        preset: 'image.landscape'

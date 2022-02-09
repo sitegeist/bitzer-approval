@@ -1,0 +1,22 @@
+prototype(Hoerbiger.Shared:Block.SvgImage) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\SvgImage\\SvgImageInterface'
+
+    @styleguide {
+        title = 'SvgImage'
+
+        props {
+            source = 'https://www.neos.io'
+            alt = 'Text'
+            title = 'Text'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>source:</dt>
+        <dd>{presentationObject.source}</dd>
+        <dt>alt:</dt>
+        <dd>{presentationObject.alt}</dd>
+        <dt>title:</dt>
+        <dd>{presentationObject.title}</dd>
+    </dl>`
+}

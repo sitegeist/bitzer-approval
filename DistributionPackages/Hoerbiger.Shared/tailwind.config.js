@@ -39,9 +39,14 @@ module.exports = {
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
 	],
+
 	darkMode: false,
 	theme: {
 		colors: {
+			current: {
+				DEFAULT: 'currentColor'
+			},
+
 			light: {
 				DEFAULT: '#fff',
 				contrast: 'rgba(0, 0, 0, .85)'
@@ -64,13 +69,55 @@ module.exports = {
 				DEFAULT: 'transparent',
 				contrast: '#fff',
 			},
+			excite: {
+				DEFAULT: '#A89379',
+				contrast: '#fff'
+			},
+			experience: {
+				DEFAULT: '#5E8AB4',
+				contrast: '#fff'
+			},
+			lite: {
+				DEFAULT: '#FF671F',
+				contrast: '#fff'
+			},
+			service: {
+				DEFAULT: '#D9D9D9',
+				contrast: 'rgba(0, 0, 0, .85)'
+			},
+			default: {
+				DEFAULT: '#075289',
+				contrast: '#fff'
+			}
+
+		},
+		fill: {
+			current: {
+				DEFAULT: 'currentColor'
+			},
+			brand: {
+				DEFAULT: '#8D172E',
+			},
+			excite: {
+				DEFAULT: '#A89379',
+			},
+			experience: {
+				DEFAULT: '#5E8AB4',
+			},
+			lite: {
+				DEFAULT: '#FF671F',
+			},
+			service: {
+				DEFAULT: '#D9D9D9',
+			}
+
 		},
 
 		fontFamily: {
 			'sans-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
-			'serif-regular': ['Times New Roman', 'Times' , 'serif'],
+			'serif-regular': ['Times New Roman', 'Times', 'serif'],
 		},
 
 		screens: {
@@ -104,6 +151,9 @@ module.exports = {
 						'ul li::before': {
 							backgroundColor: theme('colors.light.contrast'),
 						},
+						p: {
+							marginTop: 0
+						}
 					},
 				},
 				'brand-contrast': {
@@ -159,6 +209,58 @@ module.exports = {
 						},
 						'ul li::before': {
 							backgroundColor: theme('colors.transparent.contrast'),
+						},
+					},
+				},
+				'excite': {
+					css: {
+						a: {
+							color: theme('colors.excite.DEFAULT'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.excite.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.excite.DEFAULT'),
+						},
+					},
+				},
+				'experience': {
+					css: {
+						a: {
+							color: theme('colors.experience.DEFAULT'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.experience.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.experience.DEFAULT'),
+						},
+					},
+				},
+				'lite': {
+					css: {
+						a: {
+							color: theme('colors.lite.DEFAULT'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.lite.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.lite.DEFAULT'),
+						},
+					},
+				},
+				'service': {
+					css: {
+						a: {
+							color: theme('colors.service.contrast'),
+						},
+						'ul li::before': {
+							backgroundColor: theme('colors.service.DEFAULT'),
+						},
+						'ol li::before': {
+							color: theme('colors.service.DEFAULT'),
 						},
 					},
 				},

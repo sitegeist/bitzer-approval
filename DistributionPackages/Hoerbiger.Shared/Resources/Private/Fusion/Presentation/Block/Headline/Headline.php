@@ -7,8 +7,6 @@ namespace Hoerbiger\Shared\Presentation\Block\Headline;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
@@ -16,25 +14,34 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
  */
 final class Headline extends AbstractComponentPresentationObject implements HeadlineInterface
 {
-    private HeadlineVariant $variant;
+    private HeadlineSize $size;
+
+    private HeadlineColor $color;
 
     private HeadlineType $type;
 
     private SlotInterface $content;
 
     public function __construct(
-        HeadlineVariant $variant,
+        HeadlineSize $size,
+        HeadlineColor $color,
         HeadlineType $type,
         SlotInterface $content
     ) {
-        $this->variant = $variant;
+        $this->size = $size;
+        $this->color = $color;
         $this->type = $type;
         $this->content = $content;
     }
 
-    public function getVariant(): HeadlineVariant
+    public function getSize(): HeadlineSize
     {
-        return $this->variant;
+        return $this->size;
+    }
+
+    public function getColor(): HeadlineColor
+    {
+        return $this->color;
     }
 
     public function getType(): HeadlineType

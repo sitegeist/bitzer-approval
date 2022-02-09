@@ -30,7 +30,7 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
                     <div class="w-32 h-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <img
                             class="w-full h-full object-contain rounded-full hover:shadow-play"
-                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircle.svg')}
+                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircleVariants/'+presentationObject.variant+'.svg')}
                         />
                     </div>
                 </div>

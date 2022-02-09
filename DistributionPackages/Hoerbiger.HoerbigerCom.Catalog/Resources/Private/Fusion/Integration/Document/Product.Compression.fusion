@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product.Compression) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Catalog.Page.forProduct(site, documentNode, documentNode.context.inBackend, site.context)}
+        }
+    }
+}
