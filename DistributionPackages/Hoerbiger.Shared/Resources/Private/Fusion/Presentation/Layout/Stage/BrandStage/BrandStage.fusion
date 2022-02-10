@@ -12,7 +12,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
         default = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-decorative"
         default.@if.1 = ${presentationObject.variant.isDefault}
 
-        lite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-lite"
+        lite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-lite text-light"
         lite.@if.1 = ${presentationObject.variant.isLite}
 
         excite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-excite"
@@ -43,7 +43,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
             </div>
 
             <div
-                class="relative sm:absolute order-3 mt-[-15%] sm:mt-0 bottom-0 w-[101%] sm:right-0 sm:w-[70%] md:w-[40%] overflow-hidden z-10">
+                class="relative sm:absolute order-3 mt-[-15%] sm:mt-0 bottom-0 w-[101%] sm:right-0 sm:w-[70%] md:w-[50%] overflow-hidden z-10">
                 <div class={props.contentBlockClass}></div>
                 <div class="relative mt-lg pt-md px-md sm:pt-sm sm:px-sm pb-0 ">
                     <div class="mb-0 text-light">
