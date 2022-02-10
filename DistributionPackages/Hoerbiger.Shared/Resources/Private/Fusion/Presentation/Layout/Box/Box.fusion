@@ -15,7 +15,8 @@ prototype(Hoerbiger.Shared:Layout.Box) < prototype(PackageFactory.AtomicFusion.P
             "[Layout.Box (" + presentationObject.variant + ")]",
             presentationObject.variant.isTextCenter && "flex items-center p-md",
             presentationObject.variant.isNeutral && "bg-neutral-lighter",
-            presentationObject.variant.isDecorative && "relative w-full p-md bg-neutral-lighter before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-full before:max-w-md before:h-2 before:bg-brand"
+            presentationObject.variant.isDecorative && "relative w-full p-md bg-neutral-lighter before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-full before:max-w-md before:h-2 before:bg-brand",
+            presentationObject.variant.isLite && "relative w-full p-md bg-neutral-lighter before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-full before:max-w-md before:h-2 before:bg-lite"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

@@ -460,7 +460,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     public function forTabBox(TraversableNodeInterface $tabBox, ?Theme $theme): SlotInterface
     {
 
-
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Box(
@@ -480,6 +479,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
+
 
         return new Stack(
             StackVariant::xs(),
