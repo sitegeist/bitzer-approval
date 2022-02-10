@@ -65,7 +65,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
         $this->textColor = TextVariant::tryFromTheme($theme, true) ?: TextVariant::lightContrast();
 
-        if($theme && $theme->getValue() === 'default'){
+        if(($theme && $theme->getValue() === 'default') || !$theme){
             $this->textColor = TextVariant::brandContrast();
         }
 
