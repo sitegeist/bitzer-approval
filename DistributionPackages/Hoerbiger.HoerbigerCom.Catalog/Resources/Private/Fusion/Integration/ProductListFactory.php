@@ -51,7 +51,7 @@ final class ProductListFactory
         ContentContext $subGraph,
         bool $inBackend
     ): SlotInterface {
-        $products = $this->catalog->findProductsForIndustrySolution($subGraph,$industrySolution);
+        $products = $this->catalog->findProductsForIndustrySolution($subGraph, $industrySolution);
 
         return $this->createProductGroupCards(
             $industrySolution->getLabel(),
@@ -66,7 +66,7 @@ final class ProductListFactory
         ContentContext $subGraph,
         bool $inBackend
     ): SlotInterface {
-        $products = $this->catalog->findProductsForApplicationWorld($subGraph,$applicationWorld);
+        $products = $this->catalog->findProductsForApplicationWorld($subGraph, $applicationWorld);
 
         return $this->createProductGroupCards(
             $applicationWorld->getLabel(),
@@ -92,7 +92,7 @@ final class ProductListFactory
 
         $cardFactory = new CardFactory();
 
-        $productsByGroup = array_fill_keys($this->catalog->findProductGroupIdentifiers($subGraph),[]);
+        $productsByGroup = array_fill_keys($this->catalog->findProductGroupIdentifiers($subGraph), []);
 
         foreach ($products as $product) {
             /** @var TraversableNodeInterface $product */
@@ -106,7 +106,7 @@ final class ProductListFactory
         foreach ($productsByGroup as $productGroupNodeIdentifier => $products) {
             /** @var string $productGroupNodeIdentifier */
 
-            if(!empty($products)) {
+            if (!empty($products)) {
                 /** @var ?TraversableNodeInterface $productGroup */
                 $productGroup = $subGraph->getNodeByIdentifier($productGroupNodeIdentifier);
                 if ($productGroup) {
@@ -130,9 +130,9 @@ final class ProductListFactory
                             HeadlineColor::brand(),
                             HeadlineType::h2(),
                             Value::fromString(
-                                $this->csvPOTranslator->getLabel(PageFactory::class,'products')
-                                . ' '
-                                . $productListTitle
+                                $this->csvPOTranslator->getLabel(PageFactory::class, 'products')
+                                    . ' '
+                                    . $productListTitle
                             )
                         ),
                         new Grid(
