@@ -15,16 +15,24 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
             "[Block.Quotation]",
             "flex flex-col w-full relative",
             presentationObject.variant.isRegular && "pl-[60px] lg:pl-[80px] max-w-quotation mx-auto",
+            presentationObject.variant.isExperience && "pl-[60px] lg:pl-[80px] max-w-quotation mx-auto",
+            presentationObject.variant.isLite && "pl-[60px] lg:pl-[80px] max-w-quotation mx-auto",
+            presentationObject.variant.isExcite && "pl-[60px] lg:pl-[80px] max-w-quotation mx-auto",
+            presentationObject.variant.isService && "pl-[60px] lg:pl-[80px] max-w-quotation mx-auto",
             presentationObject.variant.isInline && "pt-[3px] pl-[25px] lg:pl-[40px]"
         ]}>
             <div class={[
                 "flex flex-col w-full pl-[70px]",
-                presentationObject.variant.isRegular && "space-y-xs",
                 presentationObject.variant.isInline && "space-y-ch-xs lg:space-y-ch"
             ]}>
                 <div class={[
                     "font-serif-regular italic leading-tight lg:leading-normal",
                     presentationObject.variant.isRegular && "text-4xl lg:text-6xl",
+                    presentationObject.variant.isExperience && "text-4xl lg:text-6xl",
+                    presentationObject.variant.isLite && "text-4xl lg:text-6xl",
+                    presentationObject.variant.isExcite && "text-4xl lg:text-6xl",
+                    presentationObject.variant.isService && "text-4xl lg:text-6xl",
+
                     presentationObject.variant.isInline && "text-2xl lg:text-3xl"
                 ]}>
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
@@ -32,6 +40,10 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 <div class={[
                     "font-sans-bold",
                     presentationObject.variant.isRegular && "text-xl",
+                    presentationObject.variant.isExperience && "text-xl",
+                    presentationObject.variant.isLite && "text-xl",
+                    presentationObject.variant.isExcite && "text-xl",
+                    presentationObject.variant.isService && "text-xl",
                     presentationObject.variant.isInline && "text-base"
                 ]}>
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.spokenByCharacter} />
@@ -41,6 +53,10 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 class={[
                     "absolute left-0",
                     presentationObject.variant.isRegular && "top-[-10px] lg:top-[-15px] w-[44px] lg:w-[64px]",
+                    presentationObject.variant.isExperience && "top-[-10px] lg:top-[-15px] w-[44px] lg:w-[64px]",
+                    presentationObject.variant.isLite && "top-[-10px] lg:top-[-15px] w-[44px] lg:w-[64px]",
+                    presentationObject.variant.isExcite && "top-[-10px] lg:top-[-15px] w-[44px] lg:w-[64px]",
+                    presentationObject.variant.isService && "top-[-10px] lg:top-[-15px] w-[44px] lg:w-[64px]",
                     presentationObject.variant.isInline && "top-[5px] w-[18px] lg:w-[24px]"
                 ]}
                 src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quoteVariants/'+presentationObject.variant+'.svg')}
