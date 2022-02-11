@@ -8,15 +8,15 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
-
 use Hoerbiger\HoerbigerCom\Catalog\Domain\Catalog;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page\PageFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -126,7 +126,8 @@ final class ProductListFactory
                     StackVariant::sm(),
                     Collection::fromIterable([
                         new Headline(
-                            HeadlineVariant::large(),
+                            HeadlineSize::large(),
+                            HeadlineColor::text(),
                             HeadlineType::h2(),
                             Value::fromString(
                                 $this->csvPOTranslator->getLabel(PageFactory::class,'products')
