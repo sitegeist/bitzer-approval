@@ -275,7 +275,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             HeadlineSize::medium(),
                             HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                             HeadlineType::div(),
-                            Editable::fromNodeProperty($textWithImageNode, 'Brand')
+                            Editable::fromNodeProperty($textWithImageNode, 'headline')
                         )
                         : null,
                     new Text(
@@ -460,7 +460,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     public function forTabBox(TraversableNodeInterface $tabBox, ?Theme $theme): SlotInterface
     {
 
-
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Box(
@@ -480,6 +479,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
+
 
         return new Stack(
             StackVariant::xs(),

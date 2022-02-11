@@ -47,7 +47,7 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             colorLiteContrast = "text-lite-contrast"
             colorLiteContrast.@if.1 = ${presentationObject.color.isLiteContrast}
 
-            colorServiceContrast = "text-service-contrast"
+            colorServiceContrast = "text-service-darker"
             colorServiceContrast.@if.1 = ${presentationObject.color.isServiceContrast}
 
         }
