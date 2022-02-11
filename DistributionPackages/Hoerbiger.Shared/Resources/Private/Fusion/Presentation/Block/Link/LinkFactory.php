@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Link;
 
 /*
@@ -21,7 +24,6 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     {
         $href = $this->resolveRawLinkTargetUri($node->getProperty('link__target'), $subgraph);
         $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
-
         return $href
             ? new Link(
                 LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),

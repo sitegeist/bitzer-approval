@@ -63,10 +63,9 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         }
         $background = $this->figureFactory->forFullMediaStage($backgroundImageSource);
 
-        $this->textColor = TextVariant::tryFromTheme($theme, true) ?: TextVariant::lightContrast();
-
-        if(($theme && $theme->getValue() === 'default') || !$theme){
-            $this->textColor = TextVariant::brandContrast();
+        $this->textColor = TextVariant::brandContrast();
+        if (($theme && $theme->getValue() === 'service')) {
+            $this->textColor = TextVariant::lite();
         }
 
         return new BrandStage(

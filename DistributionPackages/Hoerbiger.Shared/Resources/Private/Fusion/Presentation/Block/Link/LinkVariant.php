@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Link;
 
 /*
@@ -25,6 +28,8 @@ final class LinkVariant implements PseudoEnumInterface
     const VARIANT_LABELEXPERIENCE = 'labelExperience';
     const VARIANT_LABELLITE = 'labelLite';
     const VARIANT_LABELSERVICE = 'labelService';
+    const VARIANT_LABELDEFAULT = 'labelDefault';
+
 
     /**
      * @var array<string,self>|self[]
@@ -41,7 +46,8 @@ final class LinkVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_CONTAINER
+            if (
+                $string !== self::VARIANT_CONTAINER
                 && $string !== self::VARIANT_LABEL
                 && $string !== self::VARIANT_TOUCHICON
                 && $string !== self::VARIANT_NOSTYLES
@@ -51,7 +57,9 @@ final class LinkVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_LABELEXCITE
                 && $string !== self::VARIANT_LABELEXPERIENCE
                 && $string !== self::VARIANT_LABELLITE
-                && $string !== self::VARIANT_LABELSERVICE) {
+                && $string !== self::VARIANT_LABELSERVICE
+                && $string !== self::VARIANT_LABELDEFAULT
+            ) {
                 throw LinkVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -122,6 +130,11 @@ final class LinkVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_LABELSERVICE);
     }
 
+    public static function labelDefault(): self
+    {
+        return self::from(self::VARIANT_LABELDEFAULT);
+    }
+
     public function getIsContainer(): bool
     {
         return $this->value === self::VARIANT_CONTAINER;
@@ -177,6 +190,11 @@ final class LinkVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_LABELSERVICE;
     }
 
+    public function getIsLabelDefault(): bool
+    {
+        return $this->value === self::VARIANT_LABELDEFAULT;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -193,7 +211,8 @@ final class LinkVariant implements PseudoEnumInterface
             self::from(self::VARIANT_LABELEXCITE),
             self::from(self::VARIANT_LABELEXPERIENCE),
             self::from(self::VARIANT_LABELLITE),
-            self::from(self::VARIANT_LABELSERVICE)
+            self::from(self::VARIANT_LABELSERVICE),
+            self::from(self::VARIANT_LABELDEFAULT)
         ];
     }
 
