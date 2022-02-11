@@ -83,7 +83,8 @@ module.exports = {
 			},
 			service: {
 				DEFAULT: '#D9D9D9',
-				contrast: 'rgba(0, 0, 0, .85)'
+				contrast: 'rgba(0, 0, 0, .85)',
+				darker: '#8A9199'
 			},
 			default: {
 				DEFAULT: '#075289',

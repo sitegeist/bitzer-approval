@@ -39,6 +39,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
      * @var FigureFactory
      */
     protected $figureFactory;
+    private TextVariant $textColor;
 
     public function forProductAndCategoryIntroduction(TraversableNodeInterface $documentNode, bool $inBackend): BrandStage
     {
@@ -61,6 +62,12 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             );
         }
         $background = $this->figureFactory->forFullMediaStage($backgroundImageSource);
+
+        $this->textColor = TextVariant::brandContrast();
+        if (($theme && $theme->getValue() === 'service')) {
+            $this->textColor = TextVariant::lite();
+        }
+
         return new BrandStage(
             StageVariant::fromTheme($theme),
             null,
@@ -72,7 +79,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ),
             null,
             new Text(
-                TextVariant::tryFromTheme($theme, true) ?: TextVariant::lightContrast(),
+                $this->textColor,
                 Editable::fromNodeProperty($documentNode, 'abstract'),
                 false
             ),

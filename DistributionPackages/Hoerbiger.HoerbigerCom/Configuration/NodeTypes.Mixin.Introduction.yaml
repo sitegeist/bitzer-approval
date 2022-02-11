@@ -12,7 +12,7 @@
   properties:
     image:
       options:
-        preset: 'image.square'
+        preset: 'image.landscape'
     abstract:
       ui:
         inline:
