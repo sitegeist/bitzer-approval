@@ -36,7 +36,8 @@
 
 /* css für die Datenschutzerklärung */
 
-div#CookieDeclarationUserStatusLabelOn {
+div#CookieDeclarationUserStatusLabelOn,
+div#CookieDeclarationUserStatusLabelOff {
 color: #8D172E;
 font-weight: bold;
 font-size:18px;
