@@ -26,7 +26,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
         return $href
             ? new Link(
-                LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+                LinkVariant::tryFromTheme($theme, false) ?: LinkVariant::labelDefault(),
                 $href,
                 $linkTarget,
                 $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
