@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
 
 /*
@@ -70,7 +73,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
     public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ?Theme $theme): NavigationCard
     {
-        $link = (new LinkFactory())->forLinkToDocument($document);
+        $link = (new LinkFactory())->forLinkToDocument($document, $theme);
 
         $imageSource = $this->imageSourceFactory->forPreviewMixin($document, $inBackend);
         $figure = $imageSource
@@ -172,31 +175,31 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             Editable::fromNodeProperty($downloadNode, 'description'),
             $asset instanceof Document
                 ? Collection::fromIterable([
-                new Link(
-                    LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
-                    $this->uriService->getAssetUri($asset),
-                    LinkTarget::blank(),
-                    null,
-                    Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
-                    null
-                ),
-                Value::fromString(
-                    $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension())
-                    . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
-                )
-            ], $identity)
+                    new Link(
+                        LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+                        $this->uriService->getAssetUri($asset),
+                        LinkTarget::blank(),
+                        null,
+                        Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
+                        null
+                    ),
+                    Value::fromString(
+                        $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension())
+                            . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
+                    )
+                ], $identity)
                 : null,
         );
     }
 
-    private function getMediaForDocument(Document $asset) : SlotInterface
+    private function getMediaForDocument(Document $asset): SlotInterface
     {
         switch ($asset->getFileExtension()) {
             case 'pdf':
                 $imageSource = $this->imageSourceFactory->forDocument($asset);
                 return $imageSource
                     ? $this->figureFactory->forDownloadCard(
-                    $imageSource
+                        $imageSource
                     )
                     : new Icon('shared', 'pdf');
             case 'ppt':

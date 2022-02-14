@@ -44,7 +44,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 
         return new Slidable(
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
-                $link = $linkFactory->forLinkToDocument($targetNode);
+                $link = $linkFactory->forLinkToDocument($targetNode, null);
                 $stage = $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
 
                 return $link->asContainer()->withContent($stage);

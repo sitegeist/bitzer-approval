@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page;
 
 /*
@@ -129,7 +132,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                                 ?: ''
                                         ),
                                         $linkFactory
-                                            ->forLinkToDocument($pressRelease)
+                                            ->forLinkToDocument($pressRelease, null)
                                             ->withContent(Value::fromString($this->getLabel('list.learnMore')))
                                     );
                                 }

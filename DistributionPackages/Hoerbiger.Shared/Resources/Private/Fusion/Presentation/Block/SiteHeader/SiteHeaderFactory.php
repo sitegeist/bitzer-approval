@@ -82,7 +82,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
                 if (!$childNode->isHiddenInIndex()) {
                     try {
                         $menuItems[] = new NavigationItem(
-                            $this->linkFactory->forLinkToDocument($childNode)->asPlainLabel(),
+                            $this->linkFactory->forLinkToDocument($childNode, null)->asPlainLabel(),
                             $this->getChildNavigationNodes(
                                 $childNode,
                                 $currentDocumentNode,
