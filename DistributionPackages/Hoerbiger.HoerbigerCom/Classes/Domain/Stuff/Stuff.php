@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 
@@ -139,7 +141,7 @@ final class Stuff
                     $searchHit['_source']['searchType']
                 );
                 $link = $this->linkFactory
-                    ->forLinkToDocument($node)
+                    ->forLinkToDocument($node, null)
                     ->asContainer()
                     ->withContent($card);
         }
