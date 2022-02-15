@@ -26,7 +26,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
         return $href
             ? new Link(
-                LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+                LinkVariant::tryFromTheme($theme) ?: LinkVariant::labelDefault(),
                 $href,
                 $linkTarget,
                 $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
@@ -36,12 +36,11 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             : null;
     }
 
-    public function forLinkToDocument(TraversableNodeInterface $document): Link
+    public function forLinkToDocument(TraversableNodeInterface $document, ?Theme $theme): Link
     {
         $linkTarget = LinkTarget::forNode($document);
-
         return new Link(
-            LinkVariant::label(),
+            LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
             $this->uriService->getNodeUri($document),
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,

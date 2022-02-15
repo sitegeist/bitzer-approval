@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
 
 /*
@@ -40,7 +43,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
 
     public function forDocument(
         TraversableNodeInterface $document,
-        TraversableNodeInterface $site ,
+        TraversableNodeInterface $site,
         ContentContext $subgraph
     ): SiteHeaderInterface {
         return new SiteHeader(
@@ -79,7 +82,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
                 if (!$childNode->isHiddenInIndex()) {
                     try {
                         $menuItems[] = new NavigationItem(
-                            $this->linkFactory->forLinkToDocument($childNode)->asPlainLabel(),
+                            $this->linkFactory->forLinkToDocument($childNode, null)->asPlainLabel(),
                             $this->getChildNavigationNodes(
                                 $childNode,
                                 $currentDocumentNode,
@@ -87,8 +90,8 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
                             ),
                             $this->isParentNodeOfCurrentDocument($childNode, $currentDocumentNode)
                         );
-
-                    } catch (Exception $e) {}
+                    } catch (Exception $e) {
+                    }
                 }
             }
 
@@ -103,10 +106,10 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     protected function isParentNodeOfCurrentDocument(TraversableNodeInterface $childDocument, TraversableNodeInterface $currentDocument): bool
     {
         $childNodePath = rtrim((string)$childDocument->findNodePath(), '/') . '/';
-        return str_starts_with($currentDocument->findNodePath() . '/',$childNodePath );
+        return str_starts_with($currentDocument->findNodePath() . '/', $childNodePath);
     }
 
-    protected function getLanguageNavigationItems(TraversableNodeInterface $documentNode, ContentContext $subgraph ): NavigationItems
+    protected function getLanguageNavigationItems(TraversableNodeInterface $documentNode, ContentContext $subgraph): NavigationItems
     {
         /* Languages */
         $currentLanguageIdentifier = strtoupper(reset($subgraph->getDimensions()['language']));

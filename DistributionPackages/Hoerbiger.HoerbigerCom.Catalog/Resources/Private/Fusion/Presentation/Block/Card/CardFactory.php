@@ -97,7 +97,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
         ) as $industrySolution) {
             $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolutions, false);
-            $link = (new LinkFactory())->forLinkToDocument($industrySolution);
+            $link = (new LinkFactory())->forLinkToDocument($industrySolution, null);
 
             $cards[] = new NavigationCard(
                 $imageSource ? $this->figureFactory->forNavigationCard($imageSource) : null,
@@ -147,7 +147,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),
             function (TraversableNodeInterface $productDocument) {
                 $link = (new LinkFactory())
-                    ->forLinkToDocument($productDocument)
+                    ->forLinkToDocument($productDocument, null)
                     ->asPlainLabel();
 
                 return $link->withContent(
@@ -191,7 +191,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             TraversableNodes::fromArray($products),
             function (TraversableNodeInterface $productDocument) {
                 $link = (new LinkFactory())
-                    ->forLinkToDocument($productDocument)
+                    ->forLinkToDocument($productDocument, null)
                     ->asPlainLabel();
 
                 return $link->withContent(
