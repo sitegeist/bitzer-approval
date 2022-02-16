@@ -20,18 +20,25 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
     career:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerPage'
-    chronicle:
-      type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
-    assetdirectory:
-      type: 'Hoerbiger.Shared:Document.AssetDirectory'
-    searchresults:
-      type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
+      position: 128
     contact:
       type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
+      position: 256
+    chronicle:
+      type: 'Hoerbiger.HoerbigerCom:Document.Chronicle'
+      position: 384
     privacy:
       type: 'Hoerbiger.HoerbigerCom:Document.PrivacyPage'
+      position: 512
+    searchresults:
+      type: 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage'
+      position: 640
     notfound:
       type: 'Hoerbiger.HoerbigerCom:Document.Error.404'
+      position: 768
+    assetdirectory:
+      type: 'Hoerbiger.Shared:Document.AssetDirectory'
+      position: 1024
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
