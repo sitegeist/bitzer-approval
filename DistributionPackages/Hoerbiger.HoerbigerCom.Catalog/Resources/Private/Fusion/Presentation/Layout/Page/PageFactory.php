@@ -151,10 +151,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($industrySolution->findNamedChildNode(NodeName::fromString('main'))),
                 new CacheSegment(
-                    Collection::fromIterable((new CardFactory())->forIndustrySolutionProducts($subgraph, $industrySolution), $identity),
+                    $this->productListFactory->forIndustrySolution($industrySolution, $subgraph, $inBackend),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList'
                 ),
-                $this->productListFactory->forIndustrySolution($industrySolution, $subgraph, $inBackend)
             ]), $identity),
             $this->siteFooterFactory->forDocument($industrySolution, $site)
         );
