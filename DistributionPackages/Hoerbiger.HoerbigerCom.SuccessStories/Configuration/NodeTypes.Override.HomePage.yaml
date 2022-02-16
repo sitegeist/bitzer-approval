@@ -2,7 +2,7 @@
   childNodes:
     magazine:
       type: 'Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine'
-      position: before notfound
+      position: 320
     main:
       constraints:
         nodeTypes:

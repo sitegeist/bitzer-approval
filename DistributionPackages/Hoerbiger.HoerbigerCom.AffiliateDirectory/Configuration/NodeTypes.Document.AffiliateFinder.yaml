@@ -11,3 +11,4 @@
   childNodes:
     affiliatefinder:
       type: 'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder'
+      position: 448
