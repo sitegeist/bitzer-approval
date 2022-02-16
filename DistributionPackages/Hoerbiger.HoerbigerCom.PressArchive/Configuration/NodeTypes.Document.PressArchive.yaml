@@ -13,4 +13,4 @@
   childNodes:
     pressarchive:
       type: 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressArchive'
-      position: before notfound
+      position: 352
