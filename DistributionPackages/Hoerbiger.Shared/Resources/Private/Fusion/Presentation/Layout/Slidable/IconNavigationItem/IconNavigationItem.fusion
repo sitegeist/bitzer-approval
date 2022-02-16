@@ -1,0 +1,37 @@
+prototype(Hoerbiger.Shared:Layout.Slidable.IconNavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\IconNavigationItem\\IconNavigationItemInterface'
+
+    @styleguide {
+        title = 'ThumbNavigationItem'
+
+        props {
+            icon {
+                collectionName = 'shared'
+                iconName = 'arrowRight'
+            }
+            label = 'Text'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Layout.Slidable.ThumbNavigationItem]",
+            "flex flex-1 items-center cursor-pointer overflow-hidden",
+            "rounded-[10px] h-xs bg-neutral-lighter lg:space-x-xs",
+            "md:h-[70px]"
+        ]}>
+            <div class="hidden lg:flex max-w-[25%] w-full h-full relative">
+                <div class="absolute w-[150%] h-[150%] right-0 top-1/2 -translate-y-1/2">
+                    <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.icon} />
+                </div>
+            </div>
+
+            <span class={[
+                "hidden md:flex justify-center text-center text-lg font-semibold mx-2 leading-[1.3em]",
+                "lg:justify-start lg:text-left"
+            ]}>
+                {presentationObject.label}
+            </span>
+        </div>
+    `
+}

@@ -56,15 +56,15 @@ final class Catalog
     /**
      * @return TraversableNodes<int,TraversableNodeInterface>
      */
-    public function findProductsForApplicationWorld(
+    public function findProductsForSection(
         ContentContext $subgraph,
-        TraversableNodeInterface $applicationWorld
+        TraversableNodeInterface $section
     ): TraversableNodes {
         $this->searchClient->setContextNode($subgraph->getCurrentSiteNode());
         /** @var TraversableNodeInterface $siteNode */
         $siteNode = $subgraph->getCurrentSiteNode();
         $request = CatalogRequest::create($siteNode);
-        $request = $request->withApplicationWorld($applicationWorld);
+        $request = $request->withSection($section);
 
         $result = $this->searchClient->getIndex()
             ->request('GET', '/_search', [], json_encode($request) ?: null)

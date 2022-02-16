@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                         data-select="tab"
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
-                        <Hoerbiger.Shared:Block.Icon presentationObject={item.tabIcon} />
+                        <Hoerbiger.Shared:Block.Icon @if.1={item.tabIcon} presentationObject={item.tabIcon} />
                     </label>
                 </Neos.Fusion:Loop>
             </nav>
@@ -41,6 +41,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
                         <span
+                            @if.1={item.accordionIcon}
                             data-select="icon"
                             class={[
                                 "transition-all",

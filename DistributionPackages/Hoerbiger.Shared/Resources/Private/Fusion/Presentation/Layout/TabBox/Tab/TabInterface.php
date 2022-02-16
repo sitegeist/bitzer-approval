@@ -16,9 +16,9 @@ interface TabInterface extends ComponentPresentationObjectInterface
 {
     public function getLabel(): SlotInterface;
 
-    public function getTabIcon(): IconInterface;
+    public function getTabIcon(): ?IconInterface;
 
-    public function getAccordionIcon(): IconInterface;
+    public function getAccordionIcon(): ?IconInterface;
 
     public function getContent(): SlotInterface;
 }

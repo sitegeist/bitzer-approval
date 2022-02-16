@@ -31,16 +31,16 @@
           label: Produkt
           icon: barcode
   properties:
-    applicationWorlds:
+    sections:
       type: references
       ui:
-        label: 'Anwendungswelten'
+        label: 'Bereiche'
         reloadIfChanged: true
         inspector:
           group: product
           editorOptions:
             nodeTypes:
-              - 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+              - 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.Section'
     industrySolutions:
       type: references
       ui:

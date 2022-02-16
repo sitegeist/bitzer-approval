@@ -1,0 +1,60 @@
+'Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.Section':
+  label: '${q(node).property("name") ? q(node).property("name") : node.nodeType.label}'
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+    'Hoerbiger.HoerbigerCom:Mixin.Icon': true
+  ui:
+    icon: compact-disc
+    label: 'Bereich'
+    inspector:
+      groups:
+        section:
+          label: 'Bereich'
+          icon: compact-disc
+  properties:
+    name:
+      type: string
+      ui:
+        label: 'Name'
+        inspector:
+          group: section
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
+      options:
+        translateOnAdoption: true
+    image:
+      options:
+        preset: 'image.landscape'
+    tab__image:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      options:
+        preset: 'image.square'
+      ui:
+        label: 'Tab-Bild'
+        inspector:
+          group: section
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': { }
+    tab__image__alt:
+      type: 'string'
+      ui:
+        label: 'Alt-Text Tab-Bild'
+        inspector:
+          group: section
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': { }
+      options:
+        translateOnAdoption: true
+    tab__image__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text Tab-Bild'
+        inspector:
+          group: section
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': { }
+      options:
+        translateOnAdoption: true

@@ -38,7 +38,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
             >
                 <Neos.Fusion:Loop items={presentationObject.thumbs.items}>
                     <Neos.Fusion:Augmenter data-select="jumper">
-                        <Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem presentationObject={item}/>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                     </Neos.Fusion:Augmenter>
                 </Neos.Fusion:Loop>
             </div>

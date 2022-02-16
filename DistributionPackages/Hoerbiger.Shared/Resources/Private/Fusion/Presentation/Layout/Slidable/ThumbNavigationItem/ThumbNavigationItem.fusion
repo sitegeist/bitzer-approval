@@ -7,9 +7,9 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
         props {
             figure {
                 imageSource = Sitegeist.Kaleidoscope:DummyImageSource {
-                height = 1920
-                width = 1080
-            }
+                    height = 1920
+                    width = 1080
+                }
                 isToBeLoadedLazily = true
                 objectFit = 'cover'
                 objectPosition = 'topLeft'

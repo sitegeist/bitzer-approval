@@ -78,9 +78,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
+        $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
         $stage = $this->slidableFactory->forSliderPreviewMixins(
             $this->findChildNodesByNodeTypeFilterString($homepage, 'Hoerbiger.HoerbigerCom:Mixin.SliderPreview'),

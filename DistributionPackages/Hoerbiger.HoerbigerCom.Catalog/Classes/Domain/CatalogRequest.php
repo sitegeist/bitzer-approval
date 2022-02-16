@@ -103,12 +103,12 @@ final class CatalogRequest implements \JsonSerializable
         return new self($request);
     }
 
-    public function withApplicationWorld(TraversableNodeInterface $applicationWorld): self
+    public function withSection(TraversableNodeInterface $section): self
     {
         $request = $this->request;
         $request['query']['bool']['filter']['bool']['must'][] = [
             'term' => [
-                'applicationWorlds' => $applicationWorld->getNodeAggregateIdentifier()
+                'sections' => $section->getNodeAggregateIdentifier()
             ]
         ];
 
