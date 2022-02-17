@@ -11,8 +11,9 @@
         inspector:
           group: 'adjust'
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            dataSourceIdentifier: 'sitegeist-stampede-icons'
+            dataSourceAdditionalData:
+              collections: [shared]
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': {}
-  postprocessors:
-    icons:
-      postprocessor: Hoerbiger\Shared\Application\IconProvider

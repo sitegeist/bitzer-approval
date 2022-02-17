@@ -20,7 +20,6 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
-use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
@@ -514,9 +513,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         new Tag(
                             'span',
                             TagVariant::brandColor(),
-                            new Icon(
-                                'shared',
-                                $textTabNode->getProperty('icon') ?: 'arrow-right',
+                            Icon::fromStampedeDataSourceValue(
+                                $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
                                 IconSize::size_3()
                             )
                         ),
@@ -611,10 +609,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     public function forBenefitNode(TraversableNodeInterface $benefitNode): SlotInterface
     {
         return new IconCard(
-            new Icon(
-                'shared',
-                $benefitNode->getProperty('icon') ?: '',
-                IconSize::sizeParent(),
+            Icon::fromStampedeDataSourceValue(
+                $benefitNode->getProperty('icon') ?: 'benefits:responsibility',
+                IconSize::sizeParent()
             ),
             Editable::fromNodeProperty($benefitNode, 'headline'),
             null,
@@ -705,9 +702,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forSectionIntroductionNode(TraversableNodeInterface $sectionIntroductionNode): SlotInterface
     {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
+        $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
         return new ContentContainer(
             ContentContainerVariant::regularWithoutBottom(),
@@ -720,10 +715,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             new Tag(
                                 'span',
                                 TagVariant::brandColor(),
-                                new Icon(
-                                    'shared',
-                                    $sectionIntroductionNode->getProperty('icon') ?: 'arrow-right',
-                                    IconSize::size_4(),
+                                Icon::fromStampedeDataSourceValue(
+                                    $sectionIntroductionNode->getProperty('icon') ?: 'peopleCulture:faqs',
+                                    IconSize::size_4()
                                 ),
                             ),
                             new Headline(
