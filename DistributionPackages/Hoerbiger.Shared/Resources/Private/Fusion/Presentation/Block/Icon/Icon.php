@@ -40,7 +40,12 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
         ?IconSize $size = null,
         ?IconColor $color = null
     ): self {
-        list($collectionName, $iconName) = explode(':', $dataSourceValue);
+        if (\mb_strpos($dataSourceValue, ':') !== false) {
+            list($collectionName, $iconName) = explode(':', $dataSourceValue);
+        } else {
+            $collectionName = 'shared';
+            $iconName = $dataSourceValue;
+        }
 
         return new self(
             $collectionName,
