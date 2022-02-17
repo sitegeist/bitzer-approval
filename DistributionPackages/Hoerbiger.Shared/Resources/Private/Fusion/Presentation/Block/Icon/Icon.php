@@ -23,9 +23,9 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
     private ?IconColor $color;
 
     public function __construct(
-        string     $collectionName,
-        string     $iconName,
-        ?IconSize  $size = null,
+        string $collectionName,
+        string $iconName,
+        ?IconSize $size = null,
         ?IconColor $color = null
     )
     {
@@ -33,6 +33,21 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
         $this->iconName = $iconName;
         $this->size = $size;
         $this->color = is_null($color) ? IconColor::current() : $color;
+    }
+
+    public static function fromStampedeDataSourceValue(
+        string $dataSourceValue,
+        ?IconSize $size = null,
+        ?IconColor $color = null
+    ): self {
+        list($collectionName, $iconName) = explode(':', $dataSourceValue);
+
+        return new self(
+            $collectionName,
+            $iconName,
+            $size,
+            $color
+        );
     }
 
     public function getCollectionName(): string

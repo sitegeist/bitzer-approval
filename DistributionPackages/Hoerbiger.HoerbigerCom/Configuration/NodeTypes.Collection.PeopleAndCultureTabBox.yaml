@@ -40,3 +40,10 @@
     'Hoerbiger.HoerbigerCom:Mixin.Icon': true
   ui:
     label: 'Text-Tab'
+  properties:
+    icon:
+      ui:
+        inspector:
+          editorOptions:
+            dataSourceAdditionalData:
+              collections: [peopleCulture]
