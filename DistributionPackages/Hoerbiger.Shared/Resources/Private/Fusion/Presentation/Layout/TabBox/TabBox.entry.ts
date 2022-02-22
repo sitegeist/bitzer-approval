@@ -7,17 +7,34 @@ export default ($node: Element): void => {
 		const $tabs: Element[] = Array.from($node.querySelectorAll("[data-select='tab']"));
 		const $accordeonHeader: Element[] = Array.from($node.querySelectorAll("[data-select='accordeon-header']"));
 		const $tabContents: Element[] = Array.from($node.querySelectorAll("[data-select='tab-content']"));
+		const $isHorizontal: boolean = $node.dataset.orientation === "horizontal";
 
 		if ($tabs.length === $tabContents.length && $accordeonHeader.length === $tabContents.length) {
+			const updateInnerButtons = (index:number): void => {
+				$tabs.forEach(($tab, i) =>  {
+					const $button: Element = $tab.children[0];
+					console.log(i, index);
+					$button.classList.toggle("text-light", i === index);
+
+					$button.classList.toggle("bg-brand", i === index);
+					$button.classList.toggle("bg-neutral", i !== index);
+				});
+			};
+
 			const onUpdateIndex = (index: number) => {
 				if (index >= 0) {
-					for (let i = 0; i < $tabs.length; i+=1) {
-						$tabs[i].classList.toggle("opacity-100", i === index);
-						$tabs[i].classList.toggle("opacity-30", i !== index);
+					$tabs.forEach(($tab, i) =>{
+
+						if($isHorizontal){
+							updateInnerButtons(index);
+						}else{
+							$tab.classList.toggle("opacity-100", i === index);
+							$tab.classList.toggle("opacity-30", i !== index);
+						}
 						$tabContents[i].classList.toggle("flex", i === index);
 						$tabContents[i].classList.toggle("hidden", i !== index);
 						$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.toggle("rotate-180", i === index);
-					}
+					});
 				}
 			};
 
@@ -39,6 +56,9 @@ export default ($node: Element): void => {
 
 			$tabs.forEach(($tab, index) => $tab.addEventListener("click", () => onUpdateIndex(index)));
 			$accordeonHeader.forEach(($item, index) => $item.addEventListener("click", () => onUpdateIndex(index)));
+			if($isHorizontal){
+				updateInnerButtons(0);
+			}
 		}
 	}
 };
