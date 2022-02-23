@@ -37,7 +37,6 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
             <span class={[
                 "md:flex px-xs text-lg font-semibold leading-[1.3em]",
                 "lg:justify-start lg:text-left font-sans-bold"
-
             ]}>
                 {presentationObject.label}
             </span>

@@ -10,11 +10,20 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
         }
     }
 
+    thumbnailListClass = ${presentationObject.IsApplicationWorld ? [
+        'absolute bottom-[20px] left-0 right-0 flex overflow-hidden space-x-xs mt-xs mx-xs md:mx-0 md:w-full',
+        'w-[90%] justify-around mx-auto'
+    ]
+        :
+        'absolute top-0 left-0 right-0 flex overflow-hidden space-x-xs mt-xs mx-xs md:relative md:mx-0 md:w-full'
+    }
+
     renderer = afx`
         <div class="[Layout.Slidable] w-full relative flex flex-col">
             <div
                 class="w-full flex overflow-hidden relative"
                 data-select="slidable"
+                data-is-application-world={presentationObject.IsApplicationWorld ? "true" : null}
             >
                 <Neos.Fusion:Loop items={presentationObject.slides.items}>
                     <div class="keen-slider__slide data-keen-slider-pe w-full min-w-full max-h-[70vh]">
@@ -31,10 +40,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
 
             <div
                 @if.1={presentationObject.thumbs.items}
-                class={[
-                    "absolute top-0 left-0 right-0 flex overflow-hidden space-x-xs mt-xs mx-xs",
-                    "md:relative md:mx-0 md:w-full"
-                ]}
+                class={props.thumbnailListClass}
             >
                 <Neos.Fusion:Loop items={presentationObject.thumbs.items}>
                     <Neos.Fusion:Augmenter data-select="jumper">

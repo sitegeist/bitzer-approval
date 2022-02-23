@@ -5,6 +5,9 @@ export default ($node: Element): void => {
 		const $slidable = $node.querySelector("[data-select='slidable']");
 		const $progress = $node.querySelector("[data-select='progress']");
 		const $jumper = $node.querySelectorAll("[data-select='jumper']");
+		const $isApplicationWorld: boolean = $slidable.dataset.isApplicationWorld;
+
+		console.log("$node.dataset.isApplicationWorld" ,$isApplicationWorld,  $slidable.dataset);
 
 		if ($slidable instanceof HTMLElement) {
 			const DURATION = 4000;
@@ -19,9 +22,14 @@ export default ($node: Element): void => {
 				if ($jumper instanceof NodeList) {
 					$jumper.forEach(($node, index) => {
 						if ($node instanceof HTMLElement) {
-							$node.classList.toggle("!bg-brand", currentSlide === index);
-							$node.classList.toggle("!text-brand-contrast", currentSlide === index);
-							$node.classList.toggle("bg-neutral-lighter", currentSlide !== index);
+							if(!$isApplicationWorld){
+								$node.classList.toggle("!bg-brand", currentSlide === index);
+								$node.classList.toggle("!text-brand-contrast", currentSlide === index);
+								$node.classList.toggle("bg-neutral-lighter", currentSlide !== index);
+							}else{
+								$node.classList.toggle("opacity-100", currentSlide === index);
+								$node.classList.toggle("opacity-30", currentSlide !== index);
+							}
 						}
 					});
 				}

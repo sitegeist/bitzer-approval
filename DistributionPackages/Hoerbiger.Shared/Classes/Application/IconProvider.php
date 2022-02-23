@@ -28,7 +28,7 @@ final class IconProvider implements NodeTypePostprocessorInterface
      */
     public function process(NodeType $nodeType, array &$configuration, array $options): void
     {
-        $icons = ['arrowRight'];
+        $icons = ['building', 'car-outline', 'wind'];
         foreach ($icons as $icon) {
             $configuration['properties']['icon']['ui']['inspector']['editorOptions']['values'][$icon] = [
                 'label' => $this->translator->translateById(

@@ -5,6 +5,7 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Doctrine\DBAL\Types\Type;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
@@ -19,6 +20,8 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+
+use function PHPSTORM_META\type;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -69,7 +72,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
     {
         $linkFactory = new LinkFactory();
         $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
-
+        $isApplicationWorld = true;
         return new Slidable(
             Collection::fromNodes($sections, function($targetNode) use ($inBackend, $linkFactory, $applicationWorld): Link {
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
@@ -82,7 +85,8 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     new Icon('shared', $section->getProperty('icon')),
                     $section->getLabel()
                 );
-            })
+            }),
+            $isApplicationWorld
         );
     }
 }
