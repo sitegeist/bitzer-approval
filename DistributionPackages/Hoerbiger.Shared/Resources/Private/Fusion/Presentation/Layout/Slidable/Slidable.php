@@ -19,6 +19,8 @@ final class Slidable extends AbstractComponentPresentationObject implements Slid
 
     private ?SlotInterface $thumbs;
 
+    private ?bool $isApplicationWorld;
+
     public function __construct(
         SlotInterface $slides,
         ?SlotInterface $thumbs,

@@ -2,7 +2,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={[
             "[Layout.SlideStage (" + presentationObject.variant + ")]",
-            "relative w-full h-full lg:h-0 lg:pt-ratio-2-1"
+            "relative w-full h-full md:h-0 md:pt-ratio-2-1"
         ]}>
             <div
                 class="absolute inset-0 z-10 blur"
@@ -15,7 +15,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
                 class={[
                     "absolute flex items-center justify-center z-20 p-xl w-full h-full",
                     "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-                    "md:top-0 md:bottom-0 md:pt-md md:pb-md md:pl-md md:pr-md md:transform-none lg:w-1/2",
+                    "md:top-0 md:bottom-0 md:pt-md md:pb-md md:pl-md md:pr-md md:transform-none md:w-1/2",
                     presentationObject.variant.isFullMediaTextLeft &&  "md:left-1/2 md:right-0",
                     presentationObject.variant.isFullMediaTextRight &&  "md:left-0 md:right-1/2"
                 ]}
@@ -33,10 +33,10 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
             <div class={[
                 "relative px-md pb-md pt-[80vmin] flex flex-col justify-center bg-transparent space-y-xs z-30 text-light",
                 "md:border-2 md:border-light",
-                "lg:absolute lg:inset-md lg:p-sm",
-                "lg:-translate-y-1/2 lg:bottom-auto lg:top-1/2 lg:max-w-[35%] lg:w-full",
-                presentationObject.variant.isFullMediaTextLeft &&  "lg:right-auto",
-                presentationObject.variant.isFullMediaTextRight &&  "lg:left-auto"
+                "md:absolute md:inset-md md:p-sm",
+                "md:-translate-y-1/2 md:bottom-auto md:top-1/2 md:max-w-[35%] md:w-full",
+                presentationObject.variant.isFullMediaTextLeft &&  "md:right-auto",
+                presentationObject.variant.isFullMediaTextRight &&  "md:left-auto"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     presentationObject={presentationObject.subheadline}

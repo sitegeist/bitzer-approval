@@ -21,8 +21,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
-use function PHPSTORM_META\type;
-
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 {
     private StageFactory $stageFactory;
