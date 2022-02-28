@@ -23,9 +23,9 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
             "[Layout.Slidable.ThumbNavigationItem]",
             "flex items-center cursor-pointer overflow-hidden",
             "rounded-[10px] h-xs bg-neutral-lighter",
-            "md:h-[70px] whitespace-nowrap"
+            "md:h-[70px]  w-1/5 sm:w-full"
         ]}>
-            <div class="hidden md:flex w-[90px] h-full relative">
+            <div class="hidden md:flex w-[90px] h-full relative flex-shrink-0">
                 <div class="absolute w-[150%] h-[150%] right-0 top-1/2 -translate-y-1/2">
                     <Hoerbiger.Shared:Block.Figure
                         @if.1={presentationObject.figure}
@@ -35,8 +35,8 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
             </div>
 
             <span class={[
-                "hidden md:flex px-xs md:pl-0 text-lg font-semibold leading-[1.3em]",
-                "md:justify-start lg:text-left font-sans-bold"
+                "hidden md:block px-xs md:pl-0 text-lg font-semibold leading-[1.3em]",
+                "md:justify-start lg:text-left font-sans-bold truncate"
             ]}>
                 {presentationObject.label}
             </span>

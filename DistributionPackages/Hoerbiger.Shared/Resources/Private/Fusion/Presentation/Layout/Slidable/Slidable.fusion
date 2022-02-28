@@ -10,12 +10,13 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
         }
     }
 
-    thumbnailListClass = ${presentationObject.IsApplicationWorld ? [
+    thumbnailListClass = ${presentationObject.IsApplicationWorld
+    ? [
         'absolute md:bottom-[20px] left-0 right-0 top-0 flex overflow-hidden md:space-x-xs mt-xs mx-xs md:mx-auto ',
         'md:w-[90%] md:justify-around'
     ]
-        :
-        'absolute top-0 left-0 right-0 flex overflow-hidden space-x-xs mt-xs mx-xs md:relative md:mx-0 md:w-full'
+    :
+        'absolute top-0 left-0 right-0 flex overflow-hidden space-x-xs mt-xs mx-xs md:relative md:mx-0 md:w-full md:justify-between'
     }
 
     renderer = afx`
