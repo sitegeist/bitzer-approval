@@ -504,20 +504,24 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             return $slot;
         };
 
+        $icon = $textTabNode->getProperty('icon');
+
         return new Stack(
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Grid(
-                    GridVariant::iconLeft(),
+                    $icon ? GridVariant::iconLeft() : GridVariant::oneColumn(),
                     Collection::fromIterable(array_filter([
-                        new Tag(
+                        $icon ?
+                            new Tag(
                             'span',
                             TagVariant::brandColor(),
                             Icon::fromStampedeDataSourceValue(
                                 $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
                                 IconSize::size_3()
+                                )
                             )
-                        ),
+                            : null,
                         new Headline(
                             HeadlineSize::medium(),
                             HeadlineColor::brand(),

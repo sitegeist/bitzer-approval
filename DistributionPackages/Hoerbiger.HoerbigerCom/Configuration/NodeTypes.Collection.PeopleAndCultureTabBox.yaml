@@ -47,3 +47,5 @@
           editorOptions:
             dataSourceAdditionalData:
               collections: [peopleCulture]
+            allowEmpty: true
+      validation: ~
