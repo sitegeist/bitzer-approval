@@ -1,0 +1,4 @@
+Neos:
+  Fusion:
+    defaultContext:
+      HR.Page: Hoerbiger\HoerbigerCom\HR\Presentation\Layout\Page\PageFactory

@@ -1,0 +1,6 @@
+'Hoerbiger.HoerbigerCom.HR:Document.Job':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+  ui:
+    icon: glasses
+    label: 'Jobdetailseite'
