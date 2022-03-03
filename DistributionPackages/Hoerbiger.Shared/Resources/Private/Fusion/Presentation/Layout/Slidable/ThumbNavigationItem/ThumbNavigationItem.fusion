@@ -20,7 +20,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
 
     renderer = afx`
         <div class={[
-            "[Layout.Slidable.ThumbNavigationItem]",
+            "[Layout.Slidable.ThumbNavigationItem " + presentationObject.type + "]",
             "flex items-center cursor-pointer overflow-hidden",
             "rounded-[10px] h-xs bg-neutral-lighter",
             "md:h-[70px]  w-1/5 sm:w-full"

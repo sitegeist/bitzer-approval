@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 
 /**
  * @Flow\Proxy(false)
@@ -18,12 +19,16 @@ final class ThumbNavigationItem extends AbstractComponentPresentationObject impl
 
     private string $label;
 
+    private  ?ThumbNavigationItemType $type;
+
     public function __construct(
         ?FigureInterface $figure,
-        string $label
+        string $label,
+        ?ThumbNavigationItemType $type
     ) {
         $this->figure = $figure;
         $this->label = $label;
+        $this->type = $type;
     }
 
     public function getFigure(): ?FigureInterface
@@ -35,4 +40,11 @@ final class ThumbNavigationItem extends AbstractComponentPresentationObject impl
     {
         return $this->label;
     }
+
+    public function getType(): ?ThumbNavigationItemType
+    {
+        return $this->type;
+    }
+
+
 }

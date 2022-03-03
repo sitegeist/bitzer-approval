@@ -20,6 +20,7 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\Tab\Tab;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBox;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxVariant;
@@ -99,7 +100,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                     $thumbnailImageSource
                                         ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                                         : null,
-                                    $section->getLabel()
+                                    $section->getLabel(),
+                                    ThumbNavigationItemType::getIsPlainText()
                                 ),
                                 null,
                                 null,

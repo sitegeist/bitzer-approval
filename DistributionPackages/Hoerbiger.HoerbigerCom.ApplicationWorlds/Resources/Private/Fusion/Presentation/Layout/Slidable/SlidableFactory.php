@@ -19,6 +19,7 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
@@ -60,7 +61,10 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     $thumbnailImageSource
                         ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                         : null,
-                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: ''
+                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
+                    ThumbNavigationItemType::plainText()
+
+
                 );
             })
         );

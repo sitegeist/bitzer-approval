@@ -13,4 +13,6 @@ interface ThumbNavigationItemInterface extends ComponentPresentationObjectInterf
     public function getFigure(): ?FigureInterface;
 
     public function getLabel(): string;
+
+    public function getType(): ?ThumbNavigationItemType;
 }

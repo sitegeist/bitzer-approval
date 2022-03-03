@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class ThumbNavigationItemType implements PseudoEnumInterface
 {
     const TYPE_UNDERLINE = 'underLine';
+    const TYPE_PLAINTEXT = 'plainText';
 
     /**
      * @var array<string,self>|self[]
@@ -30,7 +31,10 @@ final class ThumbNavigationItemType implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::TYPE_UNDERLINE) {
+            if (
+                $string !== self::TYPE_UNDERLINE
+                && $string !== self::TYPE_PLAINTEXT
+            ) {
                 throw ThumbNavigationItemTypeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -48,6 +52,15 @@ final class ThumbNavigationItemType implements PseudoEnumInterface
     {
         return $this->value === self::TYPE_UNDERLINE;
     }
+    public static function plainText(): self
+    {
+        return self::from(self::TYPE_PLAINTEXT);
+    }
+
+    public function getIsPlainText(): bool
+    {
+        return $this->value === self::TYPE_PLAINTEXT;
+    }
 
     /**
      * @return array<int,self>|self[]
@@ -55,7 +68,8 @@ final class ThumbNavigationItemType implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::TYPE_UNDERLINE)
+            self::from(self::TYPE_UNDERLINE),
+            self::from(self::TYPE_PLAINTEXT),
         ];
     }
 
