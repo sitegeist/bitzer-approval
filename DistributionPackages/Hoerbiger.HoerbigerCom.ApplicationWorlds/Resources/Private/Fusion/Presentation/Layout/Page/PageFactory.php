@@ -101,7 +101,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                         ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                                         : null,
                                     $section->getLabel(),
-                                    ThumbNavigationItemType::getIsPlainText()
+                                    ThumbNavigationItemType::plainText()
                                 ),
                                 null,
                                 null,
