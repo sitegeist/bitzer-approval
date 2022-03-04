@@ -13,9 +13,7 @@ export default ($node: Element): void => {
 			const updateInnerButtons = (index:number): void => {
 				$tabs.forEach(($tab, i) =>  {
 					const $button: Element = $tab.children[0];
-					console.log(i, index);
 					$button.classList.toggle("text-light", i === index);
-
 					$button.classList.toggle("bg-brand", i === index);
 					$button.classList.toggle("md:bg-neutral-lighter", i !== index);
 				});
