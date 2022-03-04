@@ -28,7 +28,7 @@ final class Catalog
      * @return TraversableNodes<int,TraversableNodeInterface>
      */
     public function findProductsForIndustrySolution(
-        ContentContext $subgraph,
+        ContentContext           $subgraph,
         TraversableNodeInterface $industrySolution
     ): TraversableNodes {
         $this->searchClient->setContextNode($subgraph->getCurrentSiteNode());
@@ -57,7 +57,7 @@ final class Catalog
      * @return TraversableNodes<int,TraversableNodeInterface>
      */
     public function findProductsForSection(
-        ContentContext $subgraph,
+        ContentContext           $subgraph,
         TraversableNodeInterface $section
     ): TraversableNodes {
         $this->searchClient->setContextNode($subgraph->getCurrentSiteNode());
@@ -69,9 +69,6 @@ final class Catalog
         $result = $this->searchClient->getIndex()
             ->request('GET', '/_search', [], json_encode($request) ?: null)
             ->getTreatedContent();
-
-        var_dump($result);
-        die();
 
         $products = [];
         foreach ($result['hits']['hits'] as $searchHit) {
@@ -88,7 +85,7 @@ final class Catalog
     }
 
     public function findProductGroupByNodeName(
-        string $productGroupNodeName,
+        string         $productGroupNodeName,
         ContentContext $subGraph
     ): TraversableNodeInterface {
         /** @var TraversableNodeInterface $siteNode */

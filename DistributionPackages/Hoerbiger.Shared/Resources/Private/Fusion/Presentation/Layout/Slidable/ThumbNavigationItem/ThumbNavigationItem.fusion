@@ -38,10 +38,9 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
             <span class={[
                 "px-xs md:pl-0 md:text-lg md:font-semibold leading-[1.3em]",
                 "md:justify-start lg:text-left md:font-sans-bold md:truncate",
-                 presentationObject.type.isDefault && "hidden md:block",
-                 presentationObject.type.isPlainText && "block "
-            ]}>
-                {presentationObject.label}
+            presentationObject.type.isDefault && "hidden md:block",
+            presentationObject.type.isPlainText && "block "
+            ]}>{presentationObject.label}
             </span>
         </div>
     `
