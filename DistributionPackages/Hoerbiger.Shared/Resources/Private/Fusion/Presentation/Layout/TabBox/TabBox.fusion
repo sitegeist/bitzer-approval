@@ -17,6 +17,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
             presentationObject.variant.isHorizontal && "flex flex-col mx-auto px-sm"
         ]} data-orientation={presentationObject.variant} >
             <nav class={[
+                "hidden md:flex",
                 presentationObject.variant.isRegular && "hidden tabBoxToggle:flex flex-col relative",
                 presentationObject.variant.isHorizontal && "flex flex-row justify-flex-start flex-wrap w-full"
             ]}>
@@ -41,7 +42,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
                     <div
                         class={[
-                            "flex justify-between items-center cursor-pointer min-h-touch",
+                            "flex md:hidden justify-between items-center cursor-pointer min-h-touch",
                             "bg-light my-xs p-xs font-bold tabBoxToggle:hidden shadow tracking-wider color-current"
                         ]}
                         data-select="accordeon-header"

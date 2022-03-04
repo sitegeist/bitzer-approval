@@ -16,6 +16,7 @@
         nodeTypes:
           '*': false
           'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
   constraints:
     nodeTypes:
       '*': false

@@ -62,7 +62,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                         ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                         : null,
                     $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
-                    ThumbNavigationItemType::plainText()
+                    ThumbNavigationItemType::default()
 
 
                 );

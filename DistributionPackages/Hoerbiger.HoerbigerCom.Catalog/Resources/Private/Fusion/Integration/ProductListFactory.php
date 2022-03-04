@@ -84,6 +84,7 @@ final class ProductListFactory
         ContentContext $subGraph,
         bool $inBackend
     ): SlotInterface {
+
         $identity = function (SlotInterface $slot) {
             return $slot;
         };

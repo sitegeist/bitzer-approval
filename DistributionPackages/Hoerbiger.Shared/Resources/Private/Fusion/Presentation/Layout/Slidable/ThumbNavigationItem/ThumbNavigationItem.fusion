@@ -21,9 +21,11 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
     renderer = afx`
         <div class={[
             "[Layout.Slidable.ThumbNavigationItem " + presentationObject.type + "]",
-            "flex items-center cursor-pointer overflow-hidden",
-            "rounded-[10px] h-xs bg-neutral-lighter",
-            "md:h-[70px]  w-1/5 sm:w-full"
+            "sm:flex sm:items-center cursor-pointer md:overflow-hidden",
+            "rounded-[10px]  md:bg-neutral-lighter",
+            "md:h-[70px]  w-full",
+            presentationObject.type.isPlainText && "block h-full bg-none",
+            presentationObject.type.isDefault && "h-xs"
         ]}>
             <div class="hidden md:flex w-[90px] h-full relative flex-shrink-0">
                 <div class="absolute w-[150%] h-[150%] right-0 top-1/2 -translate-y-1/2">
@@ -33,10 +35,11 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
                     />
                 </div>
             </div>
-
             <span class={[
-                "hidden md:block px-xs md:pl-0 text-lg font-semibold leading-[1.3em]",
-                "md:justify-start lg:text-left font-sans-bold truncate"
+                "px-xs md:pl-0 md:text-lg md:font-semibold leading-[1.3em]",
+                "md:justify-start lg:text-left md:font-sans-bold md:truncate",
+                 presentationObject.type.isDefault && "hidden md:block",
+                 presentationObject.type.isPlainText && "block "
             ]}>
                 {presentationObject.label}
             </span>

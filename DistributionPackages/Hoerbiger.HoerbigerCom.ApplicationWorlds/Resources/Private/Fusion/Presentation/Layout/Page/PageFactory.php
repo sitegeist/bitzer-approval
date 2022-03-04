@@ -13,6 +13,9 @@ use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -104,7 +107,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                     ThumbNavigationItemType::plainText()
                                 ),
                                 null,
-                                null,
+                                new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::current()),
                                 $this->productListFactory->forSection($section, $subgraph, $inBackend)
                             );
                         }

@@ -70,10 +70,15 @@ final class Catalog
             ->request('GET', '/_search', [], json_encode($request) ?: null)
             ->getTreatedContent();
 
+        var_dump($result);
+        die();
+
         $products = [];
         foreach ($result['hits']['hits'] as $searchHit) {
             /** @var ?TraversableNodeInterface $product */
             $product = $subgraph->getNodeByIdentifier($searchHit['_source']['neos_node_identifier']);
+
+
             if ($product) {
                 $products[] = $product;
             }

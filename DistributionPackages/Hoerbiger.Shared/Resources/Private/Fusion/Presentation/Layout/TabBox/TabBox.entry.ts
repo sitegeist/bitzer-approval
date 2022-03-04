@@ -17,7 +17,7 @@ export default ($node: Element): void => {
 					$button.classList.toggle("text-light", i === index);
 
 					$button.classList.toggle("bg-brand", i === index);
-					$button.classList.toggle("bg-neutral-lighter", i !== index);
+					$button.classList.toggle("md:bg-neutral-lighter", i !== index);
 				});
 			};
 
