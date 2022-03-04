@@ -80,3 +80,7 @@ a#CookieDeclarationChangeConsentChange {
 color:#8D172E;
 text-decoration:underline;
 }
+
+li::marker {
+color:#000;
+}
