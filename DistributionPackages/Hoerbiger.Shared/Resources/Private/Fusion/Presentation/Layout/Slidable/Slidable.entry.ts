@@ -2,12 +2,10 @@ import KeenSlider from "keen-slider";
 
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
-		const $slidable = $node.querySelector("[data-select='slidable']");
+		const $slidable = $node.querySelector("[data-select='slidable']") as HTMLElement;
 		const $progress = $node.querySelector("[data-select='progress']");
 		const $jumper = $node.querySelectorAll("[data-select='jumper']");
-		const $isApplicationWorld: boolean = $slidable.dataset.isApplicationWorld;
-
-		console.log("$node.dataset.isApplicationWorld" ,$isApplicationWorld,  $slidable.dataset);
+		const $isApplicationWorld: boolean = $slidable.dataset.isApplicationWorld ? true : false;
 
 		if ($slidable instanceof HTMLElement) {
 			const DURATION = 4000;
