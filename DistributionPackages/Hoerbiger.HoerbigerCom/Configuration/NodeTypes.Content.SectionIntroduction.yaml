@@ -7,3 +7,10 @@
   ui:
     label: 'Einleitung für Abschnitt'
     icon: heading
+  properties:
+    icon:
+      ui:
+        inspector:
+          editorOptions:
+            dataSourceAdditionalData:
+              collections: [peopleCulture]

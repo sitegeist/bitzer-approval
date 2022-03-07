@@ -80,12 +80,17 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
         return array_map(
             function(TraversableNodeInterface $successStory): array {
                 $image = $successStory->getProperty('preview__image') ?: $successStory->getProperty('image');
-                $rendition = $image
-                    ? $this->thumbnailService->getThumbnail(
-                        $image,
-                        $this->thumbnailService->getThumbnailConfigurationForPreset('md')
-                    )
-                    : null;
+
+                try {
+                    $rendition = $image
+                        ? $this->thumbnailService->getThumbnail(
+                            $image,
+                            $this->thumbnailService->getThumbnailConfigurationForPreset('md')
+                        )
+                        : null;
+                } catch (\Exception $exception) {
+                    $rendition = null;
+                }
 
                 /** @var Node $successStory */
                 $datePublished = $successStory->getProperty('datePublished') ?: $successStory->getCreationDateTime();

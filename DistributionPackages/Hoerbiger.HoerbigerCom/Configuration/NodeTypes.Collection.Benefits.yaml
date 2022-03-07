@@ -28,3 +28,10 @@
   ui:
     label: 'Benefit'
     icon: check
+  properties:
+    icon:
+      ui:
+        inspector:
+          editorOptions:
+            dataSourceAdditionalData:
+              collections: [benefits]

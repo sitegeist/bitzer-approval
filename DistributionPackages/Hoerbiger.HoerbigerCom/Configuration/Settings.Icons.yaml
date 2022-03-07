@@ -1,0 +1,9 @@
+Sitegeist:
+  Stampede:
+    collections:
+      'peopleCulture':
+        label: "People & Culture Icons"
+        path: resource://Hoerbiger.HoerbigerCom/Private/Icons/PeopleCulture
+      'benefits':
+        label: "Benefits Icons"
+        path: resource://Hoerbiger.HoerbigerCom/Private/Icons/Benefits
