@@ -5,16 +5,13 @@ export default ($node: Element): void => {
 		const $slidable = $node.querySelector("[data-select='slidable']");
 		const $progress = $node.querySelector("[data-select='progress']");
 		const $jumper = $node.querySelectorAll("[data-select='jumper']");
-		const $isApplicationWorld: boolean = $slidable.dataset.isApplicationWorld;
-
-		console.log("$node.dataset.isApplicationWorld" ,$isApplicationWorld,  $slidable.dataset);
 
 		if ($slidable instanceof HTMLElement) {
+			const $isApplicationWorld = !!$slidable.dataset.isApplicationWorld;
 			const DURATION = 4000;
 			let timeout = 0;
 			let updatedAt = 0;
 			let currentSlide = 0;
-
 			const onSlideChanged = (instance: KeenSlider) => {
 				currentSlide = instance.details().relativeSlide;
 				updatedAt = Date.now();
