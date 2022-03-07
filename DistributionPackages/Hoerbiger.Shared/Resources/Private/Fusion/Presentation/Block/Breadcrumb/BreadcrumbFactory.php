@@ -16,12 +16,12 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class BreadcrumbFactory extends AbstractComponentPresentationObjectFactory
 {
-    public function forPage(TraversableNodeInterface $currentDocument, ContentContext $subgraph): BreadcrumbInterface
+    public function forPage(TraversableNodeInterface $currentDocument, ContentContext $subgraph): Breadcrumb
     {
         $nodesOnPath = $subgraph->getNodesOnPath(
             $subgraph->getCurrentSiteNode(),
-            $currentDocument);
-        //$nodesOnPath = $siteNode->getContext()->getNodesOnPath($siteNode, $currentDocument);
+            $currentDocument
+        );
         $current = array_pop($nodesOnPath);
 
         $links = Collection::fromNodes(

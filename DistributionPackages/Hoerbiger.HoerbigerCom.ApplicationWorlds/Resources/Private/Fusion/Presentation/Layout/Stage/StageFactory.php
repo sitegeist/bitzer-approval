@@ -1,9 +1,12 @@
-<?php declare(strict_types=1);
-namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage;
+<?php
 
 /*
  * This file is part of the Hoerbiger.HoerbigerCom.ApplicationWorlds package.
  */
+
+declare(strict_types=1);
+
+namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage;
 
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
@@ -74,6 +77,27 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             $mediaImageSource
                 ? $this->figureFactory->forSlideStageIcon($mediaImageSource)
                 : null,
+            $mediaBackgroundImageSource
+                ? $this->figureFactory->forSlideStageBackground($mediaBackgroundImageSource)
+                : null
+        );
+    }
+
+    public function forSection(TraversableNodeInterface $section, TraversableNodeInterface $applicationWorld, bool $inBackend): SlideStage
+    {
+        $mediaBackgroundImageSource = $this->imageSourceFactory->forImageMixin($section, $inBackend);
+
+        return new SlideStage(
+            StageVariant::default(),
+            null,
+            null,
+            null,
+            new Text(
+                TextVariant::transparentContrast(),
+                Value::fromString($applicationWorld->getLabel()),
+                false
+            ),
+            null,
             $mediaBackgroundImageSource
                 ? $this->figureFactory->forSlideStageBackground($mediaBackgroundImageSource)
                 : null

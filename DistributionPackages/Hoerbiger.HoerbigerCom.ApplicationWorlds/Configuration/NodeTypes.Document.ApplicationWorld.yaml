@@ -4,21 +4,19 @@
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.HoerbigerCom:Mixin.SliderPreview': true
   childNodes:
+    sections:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.Section': true
     main:
       type: 'Neos.Neos:ContentCollection'
       constraints:
         nodeTypes:
           '*': false
-          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
-          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
-          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
-          'Hoerbiger.HoerbigerCom:Content.Image': true
-          'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
-          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-          'Hoerbiger.HoerbigerCom:Content.DummyText': true
-          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
-          'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
   constraints:
     nodeTypes:
       '*': false

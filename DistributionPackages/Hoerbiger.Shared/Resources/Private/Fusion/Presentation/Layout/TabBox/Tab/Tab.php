@@ -20,16 +20,16 @@ final class Tab extends AbstractComponentPresentationObject implements TabInterf
 {
     private SlotInterface $label;
 
-    private IconInterface $tabIcon;
+    private ?IconInterface $tabIcon;
 
-    private IconInterface $accordionIcon;
+    private ?IconInterface $accordionIcon;
 
     private SlotInterface $content;
 
     public function __construct(
         SlotInterface $label,
-        IconInterface $tabIcon,
-        IconInterface $accordionIcon,
+        ?IconInterface $tabIcon,
+        ?IconInterface $accordionIcon,
         SlotInterface $content
     ) {
         $this->label = $label;
@@ -43,12 +43,12 @@ final class Tab extends AbstractComponentPresentationObject implements TabInterf
         return $this->label;
     }
 
-    public function getTabIcon(): IconInterface
+    public function getTabIcon(): ?IconInterface
     {
         return $this->tabIcon;
     }
 
-    public function getAccordionIcon(): IconInterface
+    public function getAccordionIcon(): ?IconInterface
     {
         return $this->accordionIcon;
     }

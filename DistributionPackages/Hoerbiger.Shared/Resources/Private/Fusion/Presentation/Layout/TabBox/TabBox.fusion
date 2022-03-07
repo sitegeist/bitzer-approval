@@ -12,21 +12,29 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
 
     renderer = afx`
         <div class={[
-            "[Layout.TabBox]",
-            "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red"
-        ]}>
-            <nav class="hidden tabBoxToggle:flex flex-col relative">
+            "[Layout.TabBox (" + presentationObject.variant + ")]",
+            presentationObject.variant.isRegular && "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red",
+            presentationObject.variant.isHorizontal && "flex flex-col mx-auto px-sm"
+        ]} data-orientation={presentationObject.variant} >
+            <nav class={[
+                "hidden md:flex",
+                presentationObject.variant.isRegular && "hidden tabBoxToggle:flex flex-col relative",
+                presentationObject.variant.isHorizontal && "flex flex-row justify-flex-start flex-wrap w-full"
+            ]}>
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
                     <label
                         class={[
+                            presentationObject.variant.isRegular &&
                             "cursor-pointer py-xs flex items-center justify-between text-lg font-semibold whitespace-nowrap",
                             "border-b text-light-contrast border-light-contrast",
-                            iterator.isFirst ? "opacity-100" : "opacity-30"
+                            presentationObject.variant.isHorizontal && "border-none flex mr-xs mb-xs last:mr-0",
+                            presentationObject.variant.isRegular && "opacity-30",
+                            (presentationObject.variant.isRegular && iterator.isFirst) && "opacity-100",
+                            presentationObject.variant.isHorizontal && "opacity-100"
                         ]}
-                        data-select="tab"
-                    >
-                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
-                        <Hoerbiger.Shared:Block.Icon presentationObject={item.tabIcon} />
+                        data-select="tab">
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
+                        <Hoerbiger.Shared:Block.Icon @if.1={item.tabIcon} presentationObject={item.tabIcon} />
                     </label>
                 </Neos.Fusion:Loop>
             </nav>
@@ -34,13 +42,14 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
                     <div
                         class={[
-                            "flex justify-between items-center cursor-pointer min-h-touch",
+                            "flex md:hidden justify-between items-center cursor-pointer min-h-touch",
                             "bg-light my-xs p-xs font-bold tabBoxToggle:hidden shadow tracking-wider color-current"
                         ]}
                         data-select="accordeon-header"
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
                         <span
+                            @if.1={item.accordionIcon}
                             data-select="icon"
                             class={[
                                 "transition-all",

@@ -60,17 +60,17 @@ final class ProductListFactory
         );
     }
 
-    public function forApplicationWorld(
-        TraversableNodeInterface $applicationWorld,
-        ContentContext $subGraph,
+    public function forSection(
+        TraversableNodeInterface $section,
+        ContentContext $subgraph,
         bool $inBackend
     ): SlotInterface {
-        $products = $this->catalog->findProductsForApplicationWorld($subGraph, $applicationWorld);
+        $products = $this->catalog->findProductsForSection($subgraph, $section);
 
         return $this->createProductGroupCards(
-            $applicationWorld->getLabel(),
+            $section->getLabel(),
             $products,
-            $subGraph,
+            $subgraph,
             $inBackend
         );
     }
@@ -84,6 +84,7 @@ final class ProductListFactory
         ContentContext $subGraph,
         bool $inBackend
     ): SlotInterface {
+
         $identity = function (SlotInterface $slot) {
             return $slot;
         };

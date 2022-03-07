@@ -1,21 +1,35 @@
-<?php declare(strict_types=1);
-namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
+<?php
 
 /*
  * This file is part of the Hoerbiger.HoerbigerCom.ApplicationWorlds package.
  */
 
-use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
+declare(strict_types=1);
+
+namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
+
+use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
+use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
+use Hoerbiger\Shared\Presentation\Layout\TabBox\Tab\Tab;
+use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBox;
+use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -24,7 +38,23 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private StageFactory $stageFactory;
+    /**
+     * @Flow\Inject
+     * @var SlidableFactory
+     */
+    protected $slidableFactory;
+
+    /**
+     * @Flow\Inject
+     * @var ImageSourceFactory
+     */
+    protected $imageSourceFactory;
+
+    /**
+     * @Flow\Inject
+     * @var FigureFactory
+     */
+    protected $figureFactory;
 
     private SiteFooterFactory $siteFooterFactory;
 
@@ -33,46 +63,56 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     private ProductListFactory $productListFactory;
 
     public function __construct(
-        StageFactory $stageFactory,
         SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory,
         ProductListFactory $productListFactory
     ) {
-        $this->stageFactory = $stageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
         $this->productListFactory = $productListFactory;
     }
 
-    public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subGraph): PageInterface
+    public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subgraph): PageInterface
     {
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
-
-        /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($applicationWorld, $subGraph);
-
-        /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
+        $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $applicationWorld,
                 $site,
-                $subGraph
+                $subgraph
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
-                    $breadcrumb
+                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
                 ),
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
-                    $stage
+                    $this->slidableFactory->forApplicationWorld($applicationWorld, $inBackend)
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
-                $this->productListFactory->forApplicationWorld($applicationWorld, $subGraph, $inBackend)
+                new TabBox(
+                    TabBoxVariant::horizontal(),
+                    Collection::fromIterable(
+                        $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
+                        function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {
+                            $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($section, $inBackend, 'tab__image');
+                            return new Tab(
+                                new ThumbNavigationItem(
+                                    $thumbnailImageSource
+                                        ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
+                                        : null,
+                                    $section->getLabel(),
+                                    ThumbNavigationItemType::plainText()
+                                ),
+                                null,
+                                new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::current()),
+                                $this->productListFactory->forSection($section, $subgraph, $inBackend)
+                            );
+                        }
+                    )
+                ),
             ]), $identity),
             $this->siteFooterFactory->forDocument($applicationWorld, $site)
         );

@@ -1,0 +1,15 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroupForSection) < prototype(Hoerbiger.Shared:CacheSegment) {
+    @cache {
+        entryIdentifier {
+            node = ${node}
+        }
+        entryTags {
+            // whenever a section is changed, the cache segment will flush
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.Section')}
+            // whenever a product group is changed, the cache segment will flush
+            2 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup')}
+            // whenever a product is changed, the cache segment will flush
+            3 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.Product')}
+        }
+    }
+}

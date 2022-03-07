@@ -7,9 +7,9 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
         props {
             figure {
                 imageSource = Sitegeist.Kaleidoscope:DummyImageSource {
-                height = 1920
-                width = 1080
-            }
+                    height = 1920
+                    width = 1080
+                }
                 isToBeLoadedLazily = true
                 objectFit = 'cover'
                 objectPosition = 'topLeft'
@@ -20,12 +20,14 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
 
     renderer = afx`
         <div class={[
-            "[Layout.Slidable.ThumbNavigationItem]",
-            "flex flex-1 items-center cursor-pointer overflow-hidden",
-            "rounded-[10px] h-xs bg-neutral-lighter lg:space-x-xs",
-            "md:h-[70px]"
+            "[Layout.Slidable.ThumbNavigationItem " + presentationObject.type + "]",
+            "sm:flex sm:items-center cursor-pointer md:overflow-hidden",
+            "rounded-[10px]  md:bg-neutral-lighter",
+            "md:h-[70px]  w-full",
+            presentationObject.type.isPlainText && "block h-full bg-none",
+            presentationObject.type.isDefault && "h-xs"
         ]}>
-            <div class="hidden lg:flex max-w-[25%] w-full h-full relative">
+            <div class="hidden md:flex w-[90px] h-full relative flex-shrink-0">
                 <div class="absolute w-[150%] h-[150%] right-0 top-1/2 -translate-y-1/2">
                     <Hoerbiger.Shared:Block.Figure
                         @if.1={presentationObject.figure}
@@ -33,12 +35,12 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
                     />
                 </div>
             </div>
-
             <span class={[
-                "hidden md:flex justify-center text-center text-lg font-semibold mx-2 leading-[1.3em]",
-                "lg:justify-start lg:text-left"
-            ]}>
-                {presentationObject.label}
+                "px-xs md:pl-0 md:text-lg md:font-semibold leading-[1.3em]",
+                "md:justify-start lg:text-left md:font-sans-bold md:truncate",
+            presentationObject.type.isDefault && "hidden md:block",
+            presentationObject.type.isPlainText && "block "
+            ]}>{presentationObject.label}
             </span>
         </div>
     `

@@ -28,7 +28,7 @@ final class Catalog
      * @return TraversableNodes<int,TraversableNodeInterface>
      */
     public function findProductsForIndustrySolution(
-        ContentContext $subgraph,
+        ContentContext           $subgraph,
         TraversableNodeInterface $industrySolution
     ): TraversableNodes {
         $this->searchClient->setContextNode($subgraph->getCurrentSiteNode());
@@ -56,15 +56,15 @@ final class Catalog
     /**
      * @return TraversableNodes<int,TraversableNodeInterface>
      */
-    public function findProductsForApplicationWorld(
-        ContentContext $subgraph,
-        TraversableNodeInterface $applicationWorld
+    public function findProductsForSection(
+        ContentContext           $subgraph,
+        TraversableNodeInterface $section
     ): TraversableNodes {
         $this->searchClient->setContextNode($subgraph->getCurrentSiteNode());
         /** @var TraversableNodeInterface $siteNode */
         $siteNode = $subgraph->getCurrentSiteNode();
         $request = CatalogRequest::create($siteNode);
-        $request = $request->withApplicationWorld($applicationWorld);
+        $request = $request->withSection($section);
 
         $result = $this->searchClient->getIndex()
             ->request('GET', '/_search', [], json_encode($request) ?: null)
@@ -74,6 +74,8 @@ final class Catalog
         foreach ($result['hits']['hits'] as $searchHit) {
             /** @var ?TraversableNodeInterface $product */
             $product = $subgraph->getNodeByIdentifier($searchHit['_source']['neos_node_identifier']);
+
+
             if ($product) {
                 $products[] = $product;
             }
@@ -83,7 +85,7 @@ final class Catalog
     }
 
     public function findProductGroupByNodeName(
-        string $productGroupNodeName,
+        string         $productGroupNodeName,
         ContentContext $subGraph
     ): TraversableNodeInterface {
         /** @var TraversableNodeInterface $siteNode */

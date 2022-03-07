@@ -5,15 +5,21 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Doctrine\DBAL\Types\Type;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\IconNavigationItem\IconNavigationItem;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
+use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
-use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
@@ -28,8 +34,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         StageFactory $stageFactory,
         ImageSourceFactory $imageSourceFactory,
         FigureFactory $figureFactory
-    )
-    {
+    ) {
         $this->stageFactory = $stageFactory;
         $this->imageSourceFactory = $imageSourceFactory;
         $this->figureFactory = $figureFactory;
@@ -56,9 +61,34 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     $thumbnailImageSource
                         ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                         : null,
-                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: ''
+                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
+                    ThumbNavigationItemType::default()
+
+
                 );
             })
+        );
+    }
+
+    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): Slidable
+    {
+        $linkFactory = new LinkFactory();
+        $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
+        $isApplicationWorld = true;
+        return new Slidable(
+            Collection::fromNodes($sections, function($targetNode) use ($inBackend, $linkFactory, $applicationWorld): Link {
+                $link = $linkFactory->forLinkToDocument($targetNode, null);
+                $stage = $this->stageFactory->forSection($targetNode, $applicationWorld, $inBackend);
+
+                return $link->asContainer()->withContent($stage);
+            }),
+            Collection::fromNodes($sections, function($section): IconNavigationItem {
+                return new IconNavigationItem(
+                    new Icon('shared', $section->getProperty('icon')),
+                    $section->getLabel()
+                );
+            }),
+            $isApplicationWorld
         );
     }
 }
