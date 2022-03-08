@@ -10,6 +10,7 @@ use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFact
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\IconNavigationItem\IconNavigationItem;
@@ -84,7 +85,10 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
             }),
             Collection::fromNodes($sections, function($section): IconNavigationItem {
                 return new IconNavigationItem(
-                    new Icon('shared', $section->getProperty('icon')),
+                    Icon::fromStampedeDataSourceValue(
+                        $section->getProperty('icon') ?: 'shared:search',
+                        IconSize::size_2()
+                    ),
                     $section->getLabel()
                 );
             }),
