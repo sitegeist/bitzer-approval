@@ -71,7 +71,8 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $node,
         TraversableNodeInterface $currentDocumentNode,
         int $currentLevel,
-        int $maxDepth = 2
+        int $maxDepth = 2,
+        int $maxItemsPerColumn = 7
     ): ?NavigationItems {
         if ($currentLevel <= $maxDepth) {
             $menuItems = [];
@@ -96,7 +97,24 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             }
 
             if (count($menuItems)) {
-                return new NavigationItems($menuItems);
+                if ($currentLevel <= 1) {
+                    return new NavigationItems($menuItems);
+                } else {
+                    $totalItems = count($menuItems);
+                    $countColumns = ceil($totalItems / $maxItemsPerColumn);
+
+                    $newMenuItems = [];
+
+                    for ($i = 0; $i <= $countColumns - 1; $i++) {
+                        $newMenuItems[$i] = new NavigationItem(
+                            $menuItems[$i]->getLink(),
+                            new NavigationItems(array_slice($menuItems, ($i * $maxItemsPerColumn), $maxItemsPerColumn)),
+                            true
+                        );
+                    };
+
+                    return new NavigationItems($newMenuItems);
+                }
             }
         }
 
