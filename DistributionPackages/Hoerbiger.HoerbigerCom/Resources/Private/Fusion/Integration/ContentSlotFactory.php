@@ -197,7 +197,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend, $theme);
 
         return new ContentContainer(
-            ContentContainerVariant::snug(),
+            ContentContainerVariant::regular(),
             $partialFigureEclipse
         );
     }
@@ -271,7 +271,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::medium(),
+                            HeadlineSize::large(),
                             HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textWithImageNode, 'headline')
@@ -292,9 +292,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
 
         return new ContentContainer(
-            ContentContainerVariant::snug(),
+            ContentContainerVariant::regular(),
             new Grid(
-                GridVariant::twoColumns(),
+                GridVariant::twoColumnsNoGap(),
                 $layout->getIsImageFirst()
                     ? Collection::fromIterable([$figure, $text], $identity)
                     : Collection::fromIterable([$text, $figure], $identity)
@@ -484,7 +484,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineSize::medium(),
+                    HeadlineSize::large(),
                     HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
@@ -680,7 +680,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new PeopleStory(
             $this->figureFactory->forPeopleStory($imageSource),
             new Headline(
-                HeadlineSize::medium(),
+                HeadlineSize::large(),
                 HeadlineColor::text(),
                 HeadlineType::div(),
                 Editable::fromNodeProperty($peopleStoryNode, 'headline')

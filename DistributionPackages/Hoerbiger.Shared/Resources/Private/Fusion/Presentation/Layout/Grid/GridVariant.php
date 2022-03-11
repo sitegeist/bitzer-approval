@@ -15,6 +15,7 @@ final class GridVariant implements PseudoEnumInterface
 {
     const VARIANT_ONECOLUMN = 'oneColumn';
     const VARIANT_TWOCOLUMNS = 'twoColumns';
+    const VARIANT_TWOCOLUMNSNOGAP = 'twoColumnsNoGap';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
     const VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
     const VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
@@ -38,6 +39,7 @@ final class GridVariant implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_ONECOLUMN
                 && $string !== self::VARIANT_TWOCOLUMNS
+                && $string !== self::VARIANT_TWOCOLUMNSNOGAP
                 && $string !== self::VARIANT_TWOCOLUMNSGAP
                 && $string !== self::VARIANT_THREECOLUMNSGAP
                 && $string !== self::VARIANT_TWOCOLUMNSFRMAXGAP
@@ -59,6 +61,11 @@ final class GridVariant implements PseudoEnumInterface
     public static function twoColumns(): self
     {
         return self::from(self::VARIANT_TWOCOLUMNS);
+    }
+
+    public static function twoColumnsNoGap(): self
+    {
+        return self::from(self::VARIANT_TWOCOLUMNSNOGAP);
     }
 
     public static function twoColumnsGap(): self
@@ -96,6 +103,11 @@ final class GridVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TWOCOLUMNS;
     }
 
+    public function getIsTwoColumnsNoGap(): bool
+    {
+        return $this->value === self::VARIANT_TWOCOLUMNSNOGAP;
+    }
+
     public function getIsTwoColumnsGap(): bool
     {
         return $this->value === self::VARIANT_TWOCOLUMNSGAP;
@@ -129,6 +141,7 @@ final class GridVariant implements PseudoEnumInterface
         return [
             self::from(self::VARIANT_ONECOLUMN),
             self::from(self::VARIANT_TWOCOLUMNS),
+            self::from(self::VARIANT_TWOCOLUMNSNOGAP),
             self::from(self::VARIANT_TWOCOLUMNSGAP),
             self::from(self::VARIANT_THREECOLUMNSGAP),
             self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP),
