@@ -22,6 +22,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -73,15 +74,11 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 
     public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): Slidable
     {
-        $linkFactory = new LinkFactory();
         $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
-        $isApplicationWorld = true;
-        return new Slidable(
-            Collection::fromNodes($sections, function($targetNode) use ($inBackend, $linkFactory, $applicationWorld): Link {
-                $link = $linkFactory->forLinkToDocument($targetNode, null);
-                $stage = $this->stageFactory->forSection($targetNode, $applicationWorld, $inBackend);
 
-                return $link->asContainer()->withContent($stage);
+        return new Slidable(
+            Collection::fromNodes($sections, function($targetNode) use ($inBackend, $applicationWorld): SlotInterface {
+                return $this->stageFactory->forSection($targetNode, $applicationWorld, $inBackend);
             }),
             Collection::fromNodes($sections, function($section): IconNavigationItem {
                 return new IconNavigationItem(
@@ -92,7 +89,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     $section->getLabel()
                 );
             }),
-            $isApplicationWorld
+            true
         );
     }
 }
