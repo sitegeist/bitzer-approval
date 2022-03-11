@@ -52,8 +52,8 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <div
                                         data-touch-hover="1"
                                         class={["relative after:absolute after:bottom-0 after:w-full",
-                                         "after:h-6 after:border-b-4 after:translate-y-[26px]",
-                                         item.isActive ? "after:border-brand" : "after:border-light"
+                                            "after:h-6 after:border-b-4 after:translate-y-[26px]",
+                                            item.isActive ? "after:border-brand" : "after:border-light"
                                         ]}
                                     >
                                         <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
