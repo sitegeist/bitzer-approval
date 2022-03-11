@@ -21,6 +21,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
             }
         }
     }
+
     renderer = afx`
         <header class="w-full bg-light text-light-contrast border-b border-neutral z-header">
             <div class="max-w-content-full mx-auto px-md flex items-center justify-between">
@@ -44,13 +45,13 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
                 <div class="flex items-center space-x-xs">
                     <!-- MAINNAVIGATION -->
-                    <div class="hidden menuToggle:flex self-end translate-y-[-26px] space-x-xs uppercase font-sans-bold z-20 hover:z-50">
+                    <div class="hidden menuToggle:flex self-end translate-y-[-26px] space-x-xs uppercase font-sans-bold z-20 hover:z-50 ">
                         <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                             <div class="relative group z-10 hover:z-20">
                                 <div class="px-2 grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
                                     <Neos.Fusion:Augmenter
                                         data-touch-hover="1"
-                                        class="relative after:absolute after:bottom-0 after:w-full after:h-1 after:bg-brand after:translate-y-[26px]"
+                                        class="relative after:absolute after:bottom-0 after:w-full after:h-6 after:border-b-4 after:border-brand after:translate-y-[26px]"
                                         class.@if.1={item.isActive}
                                     >
                                         <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
@@ -65,15 +66,23 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 <div
                                     @if.1={item.subItems}
                                     class={[
-                                        "absolute top-[75px] left-minus-xs w-[350px] py-ch px-xs",
-                                        "opacity-0 pointer-events-none translate-y-5 duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0",
-                                        "bg-light text-light-contrast shadow-submenu divide-y divide-light-contrast leading-tight"
+                                        "opacity-0 absolute top-[74px] left-minus-xs py-ch flex z-20",
+                                        "pointer-events-none translate-y-5 duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0",
+                                        "shadow-submenu bg-light pl-xs"
                                     ]}
                                 >
                                     <Neos.Fusion:Loop items={item.subItems}>
-                                        <div class="py-ch px-2 hover:bg-neutral-lighter grid gap-x-ch-xs grid-cols-2-1fr-icon items-center">
-                                            <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
-                                            <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.subLevelIcon}/>
+                                        <div class="py-ch px-2 grid gap-x-ch-xs grid-cols-2-1fr-icon items-start w-[300px]">
+                                            <div>
+                                                <Neos.Fusion:Loop items={item.subItems}>
+                                                    <div class={["py-ch px-2 grid gap-x-ch-xs grid-cols-2-1fr-icon items-center",
+                                                        " text-light-contrast hover:bg-neutral-lighter border-b"
+                                                    ]}>
+                                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                                        <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.subLevelIcon}/>
+                                                    </div>
+                                                </Neos.Fusion:Loop>
+                                            </div>
                                         </div>
                                     </Neos.Fusion:Loop>
                                 </div>
@@ -129,7 +138,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             </a>
 
                             <div class={["
-                                fixed top-0 h-[100vh] overflow-y-auto w-full -right-full overflow-y-auto",
+                                fixed top-0 h-[100vh] overflow-y-auto w-full -right-full",
                                 "offcanvas:w-offcanvas offcanvas:right-offcanvas",
                                 "group-target:right-0 transition-right duration-500",
                                 "bg-neutral-darker border-l-4 border-brand text-light flex flex-col p-sm space-y-xs uppercase"
@@ -161,9 +170,11 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                 <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
                                             </div>
                                             <Neos.Fusion:Loop @if.1={item.subItems} items={item.subItems}>
-                                                <div class="min-h-touch ml-xs">
-                                                    <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
-                                                </div>
+                                                <Neos.Fusion:Loop items={item.subItems}>
+                                                    <div class="min-h-touch ml-xs">
+                                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                                    </div>
+                                                </Neos.Fusion:Loop>
                                             </Neos.Fusion:Loop>
                                         </Neos.Fusion:Loop>
                                     </nav>
