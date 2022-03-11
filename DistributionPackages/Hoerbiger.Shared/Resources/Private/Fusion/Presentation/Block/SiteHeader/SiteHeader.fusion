@@ -49,13 +49,15 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                             <div class="relative group z-10 hover:z-20">
                                 <div class="px-2 grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
-                                    <Neos.Fusion:Augmenter
+                                    <div
                                         data-touch-hover="1"
-                                        class="relative after:absolute after:bottom-0 after:w-full after:h-6 after:border-b-4 after:border-brand after:translate-y-[26px]"
-                                        class.@if.1={item.isActive}
+                                        class={["relative after:absolute after:bottom-0 after:w-full",
+                                         "after:h-6 after:border-b-4 after:translate-y-[26px]",
+                                         item.isActive ? "after:border-brand" : "after:border-light"
+                                        ]}
                                     >
                                         <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
-                                    </Neos.Fusion:Augmenter>
+                                    </div>
                                     <div class="text-brand group-hover:-rotate-180 origin-center duration-500 w-max">
                                         <Hoerbiger.Shared:Block.Icon
                                             @if.1={item.subItems}
