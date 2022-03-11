@@ -1,0 +1,20 @@
+'Hoerbiger.HoerbigerCom.HR:Document.JobList':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+  childNodes:
+    job:
+      type: 'Hoerbiger.HoerbigerCom.HR:Document.Job'
+    jobApplication:
+      type: 'Hoerbiger.HoerbigerCom.HR:Document.JobApplication'
+    jobNotification:
+      type: 'Hoerbiger.HoerbigerCom.HR:Document.JobNotification'
+  ui:
+    icon: bullhorn
+    label: 'Ergebnisliste'
+
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    jobList:
+      type: 'Hoerbiger.HoerbigerCom.HR:Document.JobList'
+      position: 1000

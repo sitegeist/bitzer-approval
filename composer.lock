@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6078e6c4377e9183a6eb387324998356",
+    "content-hash": "cd7e483cd855ea06a2a6c0a71b741029",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2541,6 +2541,34 @@
                     "Hoerbiger\\HoerbigerCom\\Catalog\\": "Classes/",
                     "Hoerbiger\\HoerbigerCom\\Catalog\\Presentation\\": "Resources/Private/Fusion/Presentation/",
                     "Hoerbiger\\HoerbigerCom\\Catalog\\Integration\\": "Resources/Private/Fusion/Integration/"
+                }
+            },
+            "transport-options": {
+                "relative": true
+            }
+        },
+        {
+            "name": "hoerbiger/hoerbigercom-hr",
+            "version": "1.0.0",
+            "dist": {
+                "type": "path",
+                "url": "./DistributionPackages/Hoerbiger.HoerbigerCom.HR",
+                "reference": "f2026fea23bb97ab72f9c792cea115a582ad92e7"
+            },
+            "require": {
+                "hoerbiger/hoerbigercom": "*"
+            },
+            "type": "neos-hoerbiger",
+            "extra": {
+                "neos": {
+                    "package-key": "Hoerbiger.HoerbigerCom.HR"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Hoerbiger\\HoerbigerCom\\HR\\": "Classes/",
+                    "Hoerbiger\\HoerbigerCom\\HR\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+                    "Hoerbiger\\HoerbigerCom\\HR\\Integration\\": "Resources/Private/Fusion/Integration/"
                 }
             },
             "transport-options": {
@@ -12803,5 +12831,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }

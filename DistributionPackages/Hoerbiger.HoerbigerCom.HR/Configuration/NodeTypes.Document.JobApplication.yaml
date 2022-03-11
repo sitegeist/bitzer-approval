@@ -1,0 +1,6 @@
+'Hoerbiger.HoerbigerCom.HR:Document.JobApplication':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+  ui:
+    icon: pen
+    label: 'Bewerbungsformular'

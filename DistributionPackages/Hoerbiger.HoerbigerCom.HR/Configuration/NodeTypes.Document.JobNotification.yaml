@@ -1,0 +1,6 @@
+'Hoerbiger.HoerbigerCom.HR:Document.JobNotification':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+  ui:
+    icon: bell
+    label: 'Anmeldung zum Job Alert'
