@@ -16,6 +16,7 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
             'grid w-full',
             presentationObject.variant.isOneColumn && "grid-cols-1 gap-xl md:gap-md",
             presentationObject.variant.isTwoColumns && "grid-cols-1 gap-xl lg:grid-cols-2 md:gap-sm",
+            presentationObject.variant.isTwoColumnsNoGap && "grid-cols-1 lg:grid-cols-2",
             presentationObject.variant.isTwoColumnsGap && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-sm",
             presentationObject.variant.isThreeColumnsGap && Array.length(presentationObject.content.items) == 1 && "grid-cols-1 mx-auto md:max-w-[66%] lg:max-w-[33%]",
             presentationObject.variant.isThreeColumnsGap && Array.length(presentationObject.content.items) == 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md mx-auto lg:max-w-[66%]",

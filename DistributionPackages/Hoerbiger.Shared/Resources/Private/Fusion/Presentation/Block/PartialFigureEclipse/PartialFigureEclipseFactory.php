@@ -61,7 +61,7 @@ final class PartialFigureEclipseFactory extends AbstractComponentPresentationObj
                 Collection::fromIterable(array_filter([
                     ($inBackend || $node->getProperty('headline'))
                         ? new Headline(
-                            HeadlineSize::medium(),
+                            HeadlineSize::large(),
                             HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($node, 'headline')

@@ -2,7 +2,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
     renderer = afx`
         <div class={[
             "[Layout.FullMediaStage (" + presentationObject.variant + ")]",
-            "relative w-full h-0 pt-ratio-2-1"
+            "relative h-0 pt-ratio-2-1"
         ]}>
             <div
                 class="absolute inset-0 z-10"
