@@ -308,7 +308,7 @@ module.exports = {
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
 				'ratio-google-map': 'calc(9 * 100% / 16)',
-				contentcontainer: `calc(1.25 * ${SPACE_SM})`,
+				contentcontainer: SPACE_SM,
 			},
 
 			gap: {

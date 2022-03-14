@@ -597,7 +597,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         ]), $identity),
                     ),
                     new Grid(
-                        GridVariant::twoColumnsGap(),
+                        GridVariant::threeColumnsNarrowGap(),
                         Collection::fromNodes(
                             $benefitsNode->findChildNodes(),
                             function (TraversableNodeInterface $node): Content {

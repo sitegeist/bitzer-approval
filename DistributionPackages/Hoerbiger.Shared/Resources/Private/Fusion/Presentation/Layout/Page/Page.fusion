@@ -20,7 +20,7 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
                 "flex flex-col min-h-screen w-full max-w-[100vw] overflow-hidden",
                 "text-light-contrast bg-light font-sans-light text-base leading-6"
             ]}
-            style="hyphens:auto;word-break:normal;"
+            style="word-break:normal;"
         >
             <Hoerbiger.Shared:Block.SiteHeader presentationObject={presentationObject.siteHeader} />
             <main class="flex-grow flex flex-col items-stretch z-content">

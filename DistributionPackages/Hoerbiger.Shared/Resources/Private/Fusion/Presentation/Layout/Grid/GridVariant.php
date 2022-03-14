@@ -18,6 +18,7 @@ final class GridVariant implements PseudoEnumInterface
     const VARIANT_TWOCOLUMNSNOGAP = 'twoColumnsNoGap';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
     const VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
+    const VARIANT_THREECOLUMNSNARROWGAP = 'threeColumnsnNarrowGap';
     const VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
     const VARIANT_ICONLEFT = 'iconLeft';
     const VARIANT_ICONRIGHT = 'iconRight';
@@ -42,6 +43,7 @@ final class GridVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_TWOCOLUMNSNOGAP
                 && $string !== self::VARIANT_TWOCOLUMNSGAP
                 && $string !== self::VARIANT_THREECOLUMNSGAP
+                && $string !== self::VARIANT_THREECOLUMNSNARROWGAP
                 && $string !== self::VARIANT_TWOCOLUMNSFRMAXGAP
                 && $string !== self::VARIANT_ICONLEFT
                 && $string !== self::VARIANT_ICONRIGHT) {
@@ -76,6 +78,11 @@ final class GridVariant implements PseudoEnumInterface
     public static function threeColumnsGap(): self
     {
         return self::from(self::VARIANT_THREECOLUMNSGAP);
+    }
+
+    public static function threeColumnsNarrowGap(): self
+    {
+        return self::from(self::VARIANT_THREECOLUMNSNARROWGAP);
     }
 
     public static function twoColumnsFrMaxGap(): self
@@ -118,6 +125,11 @@ final class GridVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_THREECOLUMNSGAP;
     }
 
+    public function getIsThreeColumnsNarrowGap(): bool
+    {
+        return $this->value === self::VARIANT_THREECOLUMNSNARROWGAP;
+    }
+
     public function getIsTwoColumnsFrMaxGap(): bool
     {
         return $this->value === self::VARIANT_TWOCOLUMNSFRMAXGAP;
@@ -144,6 +156,7 @@ final class GridVariant implements PseudoEnumInterface
             self::from(self::VARIANT_TWOCOLUMNSNOGAP),
             self::from(self::VARIANT_TWOCOLUMNSGAP),
             self::from(self::VARIANT_THREECOLUMNSGAP),
+            self::from(self::VARIANT_THREECOLUMNSNARROWGAP),
             self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP),
             self::from(self::VARIANT_ICONLEFT),
             self::from(self::VARIANT_ICONRIGHT)
