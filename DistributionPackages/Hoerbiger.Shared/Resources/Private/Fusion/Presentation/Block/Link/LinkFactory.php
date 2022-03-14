@@ -30,7 +30,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
                 $href,
                 $linkTarget,
                 $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
-                Value::fromString($node->getProperty('link__label')),
+                Value::fromString($node->getProperty('link__label') ?: ''),
                 null
             )
             : null;
