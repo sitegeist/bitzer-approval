@@ -3,7 +3,6 @@ import KeenSlider from "keen-slider";
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
 		const $slidable = $node.querySelector("[data-select='slidable']");
-		const $progress = $node.querySelector("[data-select='progress']");
 		const $jumper = $node.querySelectorAll("[data-select='jumper']");
 
 		if ($slidable instanceof HTMLElement) {
@@ -47,18 +46,6 @@ export default ($node: Element): void => {
 				duration: 1000,
 				slideChanged: onSlideChanged,
 			});
-
-			// ProgressBar
-			if ($progress instanceof HTMLElement) {
-				const tick = () => {
-					window.requestAnimationFrame(() => {
-						$progress.style.width = `${Math.min(100, 100 * (Date.now() - updatedAt) / DURATION)}%`;
-						tick();
-					});
-				};
-
-				tick();
-			}
 
 			// JumperNavigation.
 			if ($jumper instanceof NodeList) {

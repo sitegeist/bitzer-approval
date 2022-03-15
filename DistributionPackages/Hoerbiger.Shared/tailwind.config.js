@@ -1,8 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 const selectorParser = require('postcss-selector-parser');
+const { lineHeight } = require('tailwindcss/defaultTheme');
 
-const MAX_CONTENT_WIDTH = '1920px';
+const MAX_CONTENT_WIDTH = '1800px';
 const MIN_TOUCH = '48px';
 
 const OFFCANVAS_WIDTH = '340px';
@@ -139,6 +140,7 @@ module.exports = {
 					css: {
 						color: theme('colors.light.contrast'),
 						fontSize: '1.25rem',
+						lineHeight: 1.6,
 						strong: {
 							color: theme('colors.light.contrast'),
 							fontFamily: theme('fontFamily.sans-bold'),
@@ -153,7 +155,7 @@ module.exports = {
 							backgroundColor: theme('colors.light.contrast'),
 						},
 						p: {
-							marginTop: 0
+							marginTop: 0,
 						}
 					},
 				},
@@ -306,7 +308,7 @@ module.exports = {
 				'ratio-16-9': 'calc(9 * 100% / 16)',
 				'ratio-16-10': 'calc(10 * 100% / 16)',
 				'ratio-google-map': 'calc(9 * 100% / 16)',
-				contentcontainer: `calc(1.25 * ${SPACE_SM})`,
+				contentcontainer: SPACE_SM,
 			},
 
 			gap: {

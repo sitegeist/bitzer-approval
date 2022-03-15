@@ -54,7 +54,7 @@ export const Client = (props: ApplicationData): JSX.Element => {
 					<div className="mb-xs w-full flex justify-end">
 						<Label label={props.labels["form.content.fillRequiredFields"] ?? ""}/>
 					</div>
-					<div className={cx("w-full grid grid-cols-1 md:grid-cols-2 gap-md md:gap-sm")}>
+					<div className={cx("w-full grid grid-cols-1 md:grid-cols-2 gap-md md:gap-x-sm md:gap-y-ch")}>
 						<Selectbox {...getFieldConfigFor("customerGroup")} />
 						<Selectbox {...getFieldConfigFor("applicationWorld")} />
 

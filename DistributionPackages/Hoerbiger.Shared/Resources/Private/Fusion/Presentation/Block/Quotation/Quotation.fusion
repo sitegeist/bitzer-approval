@@ -22,7 +22,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
             presentationObject.variant.isInline && "pt-[3px] pl-[25px] lg:pl-[40px]"
         ]}>
             <div class={[
-                "flex flex-col w-full pl-[70px]",
+                "flex flex-col w-full",
                 presentationObject.variant.isInline && "space-y-ch-xs lg:space-y-ch"
             ]}>
                 <div class={[

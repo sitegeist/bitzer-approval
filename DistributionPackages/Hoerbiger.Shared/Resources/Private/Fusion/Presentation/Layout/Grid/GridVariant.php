@@ -15,8 +15,10 @@ final class GridVariant implements PseudoEnumInterface
 {
     const VARIANT_ONECOLUMN = 'oneColumn';
     const VARIANT_TWOCOLUMNS = 'twoColumns';
+    const VARIANT_TWOCOLUMNSNOGAP = 'twoColumnsNoGap';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
     const VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
+    const VARIANT_THREECOLUMNSNARROWGAP = 'threeColumnsnNarrowGap';
     const VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
     const VARIANT_ICONLEFT = 'iconLeft';
     const VARIANT_ICONRIGHT = 'iconRight';
@@ -38,8 +40,10 @@ final class GridVariant implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_ONECOLUMN
                 && $string !== self::VARIANT_TWOCOLUMNS
+                && $string !== self::VARIANT_TWOCOLUMNSNOGAP
                 && $string !== self::VARIANT_TWOCOLUMNSGAP
                 && $string !== self::VARIANT_THREECOLUMNSGAP
+                && $string !== self::VARIANT_THREECOLUMNSNARROWGAP
                 && $string !== self::VARIANT_TWOCOLUMNSFRMAXGAP
                 && $string !== self::VARIANT_ICONLEFT
                 && $string !== self::VARIANT_ICONRIGHT) {
@@ -61,6 +65,11 @@ final class GridVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_TWOCOLUMNS);
     }
 
+    public static function twoColumnsNoGap(): self
+    {
+        return self::from(self::VARIANT_TWOCOLUMNSNOGAP);
+    }
+
     public static function twoColumnsGap(): self
     {
         return self::from(self::VARIANT_TWOCOLUMNSGAP);
@@ -69,6 +78,11 @@ final class GridVariant implements PseudoEnumInterface
     public static function threeColumnsGap(): self
     {
         return self::from(self::VARIANT_THREECOLUMNSGAP);
+    }
+
+    public static function threeColumnsNarrowGap(): self
+    {
+        return self::from(self::VARIANT_THREECOLUMNSNARROWGAP);
     }
 
     public static function twoColumnsFrMaxGap(): self
@@ -96,6 +110,11 @@ final class GridVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TWOCOLUMNS;
     }
 
+    public function getIsTwoColumnsNoGap(): bool
+    {
+        return $this->value === self::VARIANT_TWOCOLUMNSNOGAP;
+    }
+
     public function getIsTwoColumnsGap(): bool
     {
         return $this->value === self::VARIANT_TWOCOLUMNSGAP;
@@ -104,6 +123,11 @@ final class GridVariant implements PseudoEnumInterface
     public function getIsThreeColumnsGap(): bool
     {
         return $this->value === self::VARIANT_THREECOLUMNSGAP;
+    }
+
+    public function getIsThreeColumnsNarrowGap(): bool
+    {
+        return $this->value === self::VARIANT_THREECOLUMNSNARROWGAP;
     }
 
     public function getIsTwoColumnsFrMaxGap(): bool
@@ -129,8 +153,10 @@ final class GridVariant implements PseudoEnumInterface
         return [
             self::from(self::VARIANT_ONECOLUMN),
             self::from(self::VARIANT_TWOCOLUMNS),
+            self::from(self::VARIANT_TWOCOLUMNSNOGAP),
             self::from(self::VARIANT_TWOCOLUMNSGAP),
             self::from(self::VARIANT_THREECOLUMNSGAP),
+            self::from(self::VARIANT_THREECOLUMNSNARROWGAP),
             self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP),
             self::from(self::VARIANT_ICONLEFT),
             self::from(self::VARIANT_ICONRIGHT)

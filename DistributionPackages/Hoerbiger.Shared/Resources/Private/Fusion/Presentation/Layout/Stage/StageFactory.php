@@ -46,7 +46,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             StageVariant::from($node->getProperty('stage__variant') ?: StageVariant::VARIANT_FULLMEDIATEXTLEFT),
             null,
             new Headline(
-                HeadlineSize::large(),
+                HeadlineSize::medium(),
                 HeadlineColor::white(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($node, 'headline')
