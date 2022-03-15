@@ -147,9 +147,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 // @todo how?
                 return $this->forDefinitionItemNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
-                return $this->forTabBox($contentNode, $theme);
+                return $this->forTabBox($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
-                return $this->forTabBox($contentNode, null);
+                return $this->forTabBox($contentNode, $inBackend, null);
             case 'Hoerbiger.HoerbigerCom:Content.TextTab':
                 return $this->forTextTabNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
@@ -338,7 +338,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $mostWantedNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::medium(),
+                            HeadlineSize::large(),
                             HeadlineColor::brand(),
                             HeadlineType::h2(),
                             Editable::fromNodeProperty($mostWantedNode, 'headline')
@@ -456,14 +456,30 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return (new ListItemFactory())->forDefinition($definitionNode);
     }
 
-    public function forTabBox(TraversableNodeInterface $tabBox, ?Theme $theme): SlotInterface
+    public function forTabBox(TraversableNodeInterface $tabBox, bool $inBackend, ?Theme $theme): SlotInterface
     {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Box(
                 BoxVariant::tryFromTheme($theme) ?: BoxVariant::decorative(),
-                (new TabBoxFactory())->forTabBox($tabBox, $theme)
+                new Stack(
+                    StackVariant::xsStretch(),
+                    Collection::fromIterable(array_filter([
+                        $inBackend || $tabBox->getProperty('headline')
+                            ? new Headline(
+                                HeadlineSize::large(),
+                                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                                HeadlineType::div(),
+                                Editable::fromNodeProperty($tabBox, 'headline')
+                            )
+                            : null,
+                        (new TabBoxFactory())->forTabBox($tabBox, $theme)
+                    ]), $identity)
+                )
             )
         );
     }
