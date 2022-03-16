@@ -126,7 +126,7 @@ final class ProductListFactory
                     StackVariant::sm(),
                     Collection::fromIterable([
                         new Headline(
-                            HeadlineSize::large(),
+                            HeadlineSize::largeCentered(),
                             HeadlineColor::brand(),
                             HeadlineType::h2(),
                             Value::fromString(
