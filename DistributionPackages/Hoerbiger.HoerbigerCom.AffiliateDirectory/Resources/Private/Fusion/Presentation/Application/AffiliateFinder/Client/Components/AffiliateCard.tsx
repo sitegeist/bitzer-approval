@@ -32,14 +32,6 @@ export const AffiliateCard = ({affiliates}: AffiliateCardProps): JSX.Element => 
 						<a href={`mailto:${affiliate.email}`}>{affiliate.email}</a>
 						<a href={`tel:${affiliate.telephone}`}>{affiliate.telephone}</a>
 					</div>
-					<div className="mt-minus-ch ml-minus-ch flex flex-wrap divide-x">
-						{Array.from(new Set(affiliate.tags)).map(tag => (
-							<b
-								key={tag}
-								className="uppercase text-xs px-ch mt-ch"
-							>{tag}</b>
-						))}
-					</div>
 				</div>
 			))
 		}

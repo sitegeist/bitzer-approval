@@ -14,7 +14,6 @@ export interface Affiliate {
 	email: string;
 	latitude: number;
 	longitude: number;
-	tags: string[];
 	telephone: string;
 }
 
