@@ -31,7 +31,7 @@ form.label.streetAddress,streetAddress,street + no,Strasse + Nr.
 form.placeholder.streetAddress,Musterstr. 42,Musterstr. 42,Musterstr. 42
 form.label.postalCode,postalCode,postal code,PLZ
 form.placeholder.postalCode,12345,12345,12345
-form.label.addressLocality,city,locality,Ort
+form.label.addressLocality,city,location,Ort
 form.placeholder.addressLocality,Musterstadt,Musterstadt,Musterstadt
 form.label.addressCountry,country,country,Land
 form.error.addressCountry,Error for addressCountry,select country,Bitte ein Land auswählen.
