@@ -22,14 +22,7 @@ final class Affiliate implements \JsonSerializable
     private ?string $telephone;
     private float $latitude;
     private float $longitude;
-    /**
-     * @var array<int,string>
-     */
-    private array $tags;
 
-    /**
-     * @param array<int,string> $tags
-     */
     public function __construct(
         string $identifier,
         string $legalName,
@@ -40,8 +33,7 @@ final class Affiliate implements \JsonSerializable
         string $email,
         ?string $telephone,
         float $latitude,
-        float $longitude,
-        array $tags
+        float $longitude
     ) {
         $this->identifier = $identifier;
         $this->legalName = $legalName;
@@ -53,7 +45,6 @@ final class Affiliate implements \JsonSerializable
         $this->telephone = $telephone;
         $this->latitude = $latitude;
         $this->longitude = $longitude;
-        $this->tags = $tags;
     }
 
     public static function dummy(): self
@@ -68,8 +59,7 @@ final class Affiliate implements \JsonSerializable
             'fledermaus@sitegeist.de',
             '004512345678',
             53.5853532,
-            10.0039283,
-            []
+            10.0039283
         );
     }
 
@@ -124,14 +114,6 @@ final class Affiliate implements \JsonSerializable
     }
 
     /**
-     * @return array<int,string>
-     */
-    public function getTags(): array
-    {
-        return $this->tags;
-    }
-
-    /**
      * @return array<string,mixed>
      */
     public function jsonSerialize(): array
@@ -146,8 +128,7 @@ final class Affiliate implements \JsonSerializable
             'email' => $this->email,
             'telephone' => $this->telephone,
             'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
-            'tags' => $this->tags
+            'longitude' => $this->longitude
         ];
     }
 }
