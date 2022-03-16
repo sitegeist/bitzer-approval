@@ -16,12 +16,12 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
         <div class={[
             "[Layout.TabBox (" + presentationObject.variant + ")]",
             presentationObject.variant.isRegular && "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red",
-            presentationObject.variant.isHorizontal && "flex flex-col mx-auto px-sm"
+            presentationObject.variant.isHorizontal && "flex flex-col w-full"
         ]} data-orientation={presentationObject.variant} >
             <nav class={[
                 "hidden md:flex",
                 presentationObject.variant.isRegular && "hidden tabBoxToggle:flex flex-col relative",
-                presentationObject.variant.isHorizontal && "flex flex-row justify-flex-start flex-wrap w-full"
+                presentationObject.variant.isHorizontal && "flex flex-row justify-flex-start flex-wrap w-full justify-center"
             ]}>
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
                     <label

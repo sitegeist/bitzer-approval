@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class HeadlineSize implements PseudoEnumInterface
 {
     const SIZE_LARGE = 'large';
+    const SIZE_LARGE_CENTERED = 'largeCentered';
     const SIZE_MEDIUM = 'medium';
     const SIZE_SMALL = 'small';
 
@@ -33,8 +34,10 @@ final class HeadlineSize implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::SIZE_LARGE
+                && $string !== self::SIZE_LARGE_CENTERED
                 && $string !== self::SIZE_MEDIUM
-                && $string !== self::SIZE_SMALL) {
+                && $string !== self::SIZE_SMALL
+                ) {
                 throw HeadlineSizeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -46,6 +49,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function large(): self
     {
         return self::from(self::SIZE_LARGE);
+    }
+
+    public static function largeCentered(): self
+    {
+        return self::from(self::SIZE_LARGE_CENTERED);
     }
 
     public static function medium(): self
@@ -61,6 +69,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public function getIsLarge(): bool
     {
         return $this->value === self::SIZE_LARGE;
+    }
+
+    public function getIsLargeCentered(): bool
+    {
+        return $this->value === self::SIZE_LARGE_CENTERED;
     }
 
     public function getIsMedium(): bool
@@ -80,6 +93,7 @@ final class HeadlineSize implements PseudoEnumInterface
     {
         return [
             self::from(self::SIZE_LARGE),
+            self::from(self::SIZE_LARGE_CENTERED),
             self::from(self::SIZE_MEDIUM),
             self::from(self::SIZE_SMALL)
         ];

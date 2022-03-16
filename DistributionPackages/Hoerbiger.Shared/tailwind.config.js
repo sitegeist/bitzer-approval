@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin');
 const selectorParser = require('postcss-selector-parser');
 const { lineHeight } = require('tailwindcss/defaultTheme');
 
-const MAX_CONTENT_WIDTH = '1800px';
+const MAX_CONTENT_WIDTH = '1600px';
 const MIN_TOUCH = '48px';
 
 const OFFCANVAS_WIDTH = '340px';

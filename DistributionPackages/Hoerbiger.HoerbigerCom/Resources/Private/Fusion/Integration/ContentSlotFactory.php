@@ -741,7 +741,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 ),
                             ),
                             new Headline(
-                                HeadlineSize::large(),
+                                HeadlineSize::medium(),
                                 HeadlineColor::brand(),
                                 HeadlineType::h2(),
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
