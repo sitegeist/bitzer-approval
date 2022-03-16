@@ -21,8 +21,19 @@ export default ($node: Element): void => {
 
 			const onUpdateIndex = (index: number) => {
 				if (index >= 0) {
-					$tabs.forEach(($tab, i) =>{
+					const $boxId = $tabs[index].getAttribute("data-box-id");
 
+					if ($boxId) {
+						const $parentElements = $node.parentNode?.parentNode?.parentNode;
+						if ($parentElements) {
+							const $element = $parentElements.querySelector(`#anchor-${$boxId}`);
+							if ($element) {
+								$element.scrollIntoView(true);
+							}
+						}
+					}
+
+					$tabs.forEach(($tab, i) =>{
 						if($isHorizontal){
 							updateInnerButtons(index);
 						}else{

@@ -1,6 +1,7 @@
 'Hoerbiger.HoerbigerCom:Collection.TabBox':
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
     'Neos.Neos:ContentCollection': true
   constraints:
     nodeTypes:
