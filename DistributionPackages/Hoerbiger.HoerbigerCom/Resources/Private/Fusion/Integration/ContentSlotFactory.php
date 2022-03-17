@@ -503,7 +503,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineSize::large(),
+                    HeadlineSize::small(),
                     HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
@@ -542,7 +542,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             )
                             : null,
                         new Headline(
-                            HeadlineSize::medium(),
+                            HeadlineSize::small(),
                             HeadlineColor::brand(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textTabNode, 'headline')
