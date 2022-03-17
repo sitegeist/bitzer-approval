@@ -145,22 +145,22 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 "group-target:right-0 transition-right duration-500",
                                 "bg-neutral-lighter border-l-4 border-brand text-light-contrast flex flex-col p-sm space-y-xs uppercase"
                             ]}>
-                                <a href="#" class="w-touch h-touch text-light flex justify-stretch items-stretch">
+                                <a href="#" class="w-touch h-touch text-light-contrast flex justify-stretch items-stretch ">
                                     <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
                                 </a>
 
                                 <div class="flex flex-col space-y-ch divide-y pr-sm">
-                                    <nav class="flex font-sans-bold space-x-ch">
+                                    <nav class="flex font-sans-bold space-x-ch justify-center">
                                         <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                             <Neos.Fusion:Augmenter
                                                 @if.1={!item.isActive}
-                                                class="min-h-touch min-w-touch flex items-center justify-center text-center"
+                                                class="bg-light min-h-touch min-w-touch flex items-center justify-center text-center text-light-contrast px-[50px] rounded-full"
                                             >
                                                 <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
                                             </Neos.Fusion:Augmenter>
                                             <div
                                                 @if.1={item.isActive}
-                                                class="min-h-touch min-w-touch flex items-center justify-center text-center bg-neutral-lighter text-neutral-contrast"
+                                                class="bg-brand min-h-touch min-w-touch flex items-center justify-center text-center text-light px-[50px] rounded-full"
                                             >
                                                 {item.link.content}
                                             </div>
