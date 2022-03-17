@@ -21,7 +21,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
 {
 
-    public function forTabBox(TraversableNodeInterface $tabBox, ?Theme $theme = null): TabBox
+    public function forTabBox(TraversableNodeInterface $tabBox, string $identifier, ?Theme $theme = null): TabBox
     {
         return new TabBox(
             TabBoxVariant::regular(),
@@ -35,7 +35,8 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
                         Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:ContentSlot')
                     );
                 }
-            )
+            ),
+            $identifier
         );
     }
 }

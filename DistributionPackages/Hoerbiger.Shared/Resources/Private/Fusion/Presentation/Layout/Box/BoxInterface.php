@@ -14,4 +14,6 @@ interface BoxInterface extends ComponentPresentationObjectInterface
     public function getVariant(): BoxVariant;
 
     public function getContent(): SlotInterface;
+
+    public function getIdentifier(): ?string;
 }

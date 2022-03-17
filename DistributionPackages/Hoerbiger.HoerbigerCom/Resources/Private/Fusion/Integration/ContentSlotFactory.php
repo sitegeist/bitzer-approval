@@ -462,6 +462,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             return $slot;
         };
 
+        $identifier = "anchor-" . (string)$tabBox->getNodeAggregateIdentifier();
+
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Box(
@@ -477,9 +479,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 Editable::fromNodeProperty($tabBox, 'headline')
                             )
                             : null,
-                        (new TabBoxFactory())->forTabBox($tabBox, $theme)
+                        (new TabBoxFactory())->forTabBox($tabBox, $identifier, $theme)
                     ]), $identity)
-                )
+                ),
+                $identifier
             )
         );
     }
@@ -500,7 +503,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineSize::large(),
+                    HeadlineSize::small(),
                     HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
@@ -539,7 +542,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             )
                             : null,
                         new Headline(
-                            HeadlineSize::medium(),
+                            HeadlineSize::small(),
                             HeadlineColor::brand(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textTabNode, 'headline')
@@ -741,7 +744,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 ),
                             ),
                             new Headline(
-                                HeadlineSize::medium(),
+                                HeadlineSize::large(),
                                 HeadlineColor::brand(),
                                 HeadlineType::h2(),
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
