@@ -22,11 +22,10 @@ export default ($node: Element): void => {
 			const onUpdateIndex = (index: number) => {
 				if (index >= 0) {
 					const $boxId = $tabs[index].getAttribute("data-box-id");
-
 					if ($boxId) {
 						const $parentElements = $node.parentNode?.parentNode?.parentNode;
 						if ($parentElements) {
-							const $element = $parentElements.querySelector(`#anchor-${$boxId}`);
+							const $element = $parentElements.querySelector(`#${$boxId}`);
 							if ($element) {
 								$element.scrollIntoView(true);
 							}

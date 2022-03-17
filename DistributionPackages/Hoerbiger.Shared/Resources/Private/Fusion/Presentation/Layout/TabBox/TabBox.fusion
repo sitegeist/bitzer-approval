@@ -10,8 +10,6 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
         }
     }
 
-    boxId = ${q(node).closest("[instanceof Hoerbiger.HoerbigerCom:Collection.TabBox]").get(0).identifier}
-
     renderer = afx`
         <div class={[
             "[Layout.TabBox (" + presentationObject.variant + ")]",
@@ -35,7 +33,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                             presentationObject.variant.isHorizontal && "opacity-100"
                         ]}
                         data-select="tab"
-                        data-box-id={props.boxId}>
+                        data-box-id={presentationObject.identifier}>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.label} />
                         <Hoerbiger.Shared:Block.Icon @if.1={item.tabIcon} presentationObject={item.tabIcon} />
                     </label>

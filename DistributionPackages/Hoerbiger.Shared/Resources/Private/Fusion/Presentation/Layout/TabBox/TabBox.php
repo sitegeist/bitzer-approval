@@ -19,12 +19,16 @@ final class TabBox extends AbstractComponentPresentationObject implements TabBox
 
     private Collection $tabs;
 
+    private ?string $identifier;
+
     public function __construct(
         TabBoxVariant $variant,
-        Collection $tabs
+        Collection $tabs,
+        ?string $identifier = null
     ) {
         $this->variant = $variant;
         $this->tabs = $tabs;
+        $this->identifier = $identifier;
     }
 
     public function getVariant(): TabBoxVariant
@@ -35,5 +39,10 @@ final class TabBox extends AbstractComponentPresentationObject implements TabBox
     public function getTabs(): Collection
     {
         return $this->tabs;
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
     }
 }

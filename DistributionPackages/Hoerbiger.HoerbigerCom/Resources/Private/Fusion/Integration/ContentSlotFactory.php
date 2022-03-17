@@ -462,6 +462,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             return $slot;
         };
 
+        $identifier = "anchor-" . (string)$tabBox->getNodeAggregateIdentifier();
+
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Box(
@@ -477,9 +479,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 Editable::fromNodeProperty($tabBox, 'headline')
                             )
                             : null,
-                        (new TabBoxFactory())->forTabBox($tabBox, $theme)
+                        (new TabBoxFactory())->forTabBox($tabBox, $identifier, $theme)
                     ]), $identity)
-                )
+                ),
+                $identifier
             )
         );
     }
@@ -741,7 +744,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 ),
                             ),
                             new Headline(
-                                HeadlineSize::medium(),
+                                HeadlineSize::large(),
                                 HeadlineColor::brand(),
                                 HeadlineType::h2(),
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')

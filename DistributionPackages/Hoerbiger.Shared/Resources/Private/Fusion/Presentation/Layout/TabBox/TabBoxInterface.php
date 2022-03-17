@@ -14,4 +14,6 @@ interface TabBoxInterface extends ComponentPresentationObjectInterface
     public function getVariant(): TabBoxVariant;
 
     public function getTabs(): Collection;
+
+    public function getIdentifier(): ?string;
 }

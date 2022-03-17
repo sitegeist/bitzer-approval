@@ -19,12 +19,16 @@ final class Box extends AbstractComponentPresentationObject implements BoxInterf
 
     private SlotInterface $content;
 
+    private ?string $identifier;
+
     public function __construct(
         BoxVariant $variant,
-        SlotInterface $content
+        SlotInterface $content,
+        ?string $identifier = null
     ) {
         $this->variant = $variant;
         $this->content = $content;
+        $this->identifier = $identifier;
     }
 
     public function getVariant(): BoxVariant
@@ -35,5 +39,10 @@ final class Box extends AbstractComponentPresentationObject implements BoxInterf
     public function getContent(): SlotInterface
     {
         return $this->content;
+    }
+
+    public function getIdentifier(): ?string
+    {
+        return $this->identifier;
     }
 }
