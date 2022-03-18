@@ -41,7 +41,7 @@ prototype(Hoerbiger.Shared:Block.PeopleStory) < prototype(PackageFactory.AtomicF
                     <div class="text-brand">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.metaline} />
                     </div>
-                    <span>ꞏ</span>
+                    <span class="font-bold">&#8226;</span>
                     <div>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.tags} />
                     </div>
