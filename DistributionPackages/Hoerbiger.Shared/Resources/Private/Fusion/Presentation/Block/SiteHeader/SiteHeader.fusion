@@ -173,7 +173,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 <div class={["p-md h-full "]}>
                                     <div class="flex flex-col justify-between h-full space-y-ch ">
 
-                                        <nav class="flex flex-col font-sans-bold">
+                                        <nav class="flex flex-col font-sans-bold text-brand">
                                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                                                 <div>
                                                     <div class="min-h-touch" data-accordion="nav-accordion">
