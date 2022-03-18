@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 const selectorParser = require('postcss-selector-parser');
 const { lineHeight } = require('tailwindcss/defaultTheme');
+const { RuntimeGlobals } = require('webpack');
 
 const MAX_CONTENT_WIDTH = '1800px';
 const MIN_TOUCH = '48px';
@@ -57,6 +58,7 @@ module.exports = {
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
 				contrast: 'rgba(0, 0, 0, .85)',
+				transparent: 'rgba(240, 240, 240, .95)',
 			},
 			brand: {
 				DEFAULT: '#8D172E',
