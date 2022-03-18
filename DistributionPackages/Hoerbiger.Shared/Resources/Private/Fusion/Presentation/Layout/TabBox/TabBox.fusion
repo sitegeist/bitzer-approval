@@ -16,7 +16,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
         <div class={[
             "[Layout.TabBox (" + presentationObject.variant + ")]",
             presentationObject.variant.isRegular && "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red",
-            presentationObject.variant.isHorizontal && "flex flex-col w-full"
+            presentationObject.variant.isHorizontal && "flex flex-col w-full max-w-full-content p-md"
         ]} data-orientation={presentationObject.variant} >
             <nav class={[
                 "hidden md:flex",
