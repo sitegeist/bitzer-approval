@@ -58,7 +58,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     >
                                         <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
                                     </div>
-                                    <div class="text-brand group-hover:-rotate-180 origin-center duration-500 w-max">
+                                    <div class="group-hover:-rotate-180 origin-center duration-500 w-max">
                                         <Hoerbiger.Shared:Block.Icon
                                             @if.1={item.subItems}
                                             presentationObject={presentationObject.rootLevelIcon}
@@ -140,46 +140,86 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             </a>
 
                             <div class={["
-                                fixed top-0 h-[100vh] overflow-y-auto w-full -right-full",
-                                "offcanvas:w-offcanvas offcanvas:right-offcanvas",
+                                fixed top-0 h-screen overflow-y-auto w-full -right-full",
+                                "offcanvas:right-offcanvas",
                                 "group-target:right-0 transition-right duration-500",
-                                "bg-neutral-darker border-l-4 border-brand text-light flex flex-col p-sm space-y-xs uppercase"
+                                "bg-neutral-transparent text-light-contrast flex flex-col space-y-xs uppercase "
                             ]}>
-                                <a href="#" class="w-touch h-touch text-light flex justify-stretch items-stretch">
-                                    <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
-                                </a>
 
-                                <div class="flex flex-col space-y-ch divide-y">
-                                    <nav class="flex font-sans-bold space-x-ch">
-                                        <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
-                                            <Neos.Fusion:Augmenter
-                                                @if.1={!item.isActive}
-                                                class="min-h-touch min-w-touch flex items-center justify-center text-center"
-                                            >
-                                                <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
-                                            </Neos.Fusion:Augmenter>
-                                            <div
-                                                @if.1={item.isActive}
-                                                class="min-h-touch min-w-touch flex items-center justify-center text-center bg-neutral-lighter text-neutral-contrast"
-                                            >
-                                                {item.link.content}
-                                            </div>
-                                        </Neos.Fusion:Loop>
-                                    </nav>
-                                    <nav class="flex flex-col font-sans-bold">
-                                        <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
-                                            <div class="min-h-touch">
-                                                <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
-                                            </div>
-                                            <Neos.Fusion:Loop @if.1={item.subItems} items={item.subItems}>
-                                                <Neos.Fusion:Loop items={item.subItems}>
-                                                    <div class="min-h-touch ml-xs">
-                                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                <div class="bg-light border-brand border-b-4">
+                                    <div class="max-w-content-full mx-auto px-md flex items-center justify-between">
+                                        <!-- HOMELINK + LOGO -->
+                                        <a
+                                            class="contents"
+                                            id="logoLink"
+                                            href="/"
+                                            target="_self"
+                                        >
+                                            <img
+                                                id="logo"
+                                                width="158"
+                                                height="55"
+                                                alt="Logo Hoerbiger"
+                                                class="h-full max-w-[40vw] sm:max-w-[60vw] my-3"
+                                                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
+                                                {...props.logo}
+                                            />
+                                        </a>
+                                        <a href="#" class="w-[3em] h-[3em] text-light-contrast flex justify-center items-center bg-neutral-lighter font-thin p-[0.5em]">
+                                            <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class={["p-md h-full "]}>
+                                    <div class="flex flex-col justify-between h-full space-y-ch ">
+
+                                        <nav class="flex flex-col font-sans-bold">
+                                            <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
+                                                <div>
+                                                    <div class="min-h-touch" data-accordion="nav-accordion">
+                                                        <Neos.Fusion:Augmenter class="justify-end text-right">
+                                                            <div class="flex">
+                                                                <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
+                                                                    <img
+                                                                        class="w-[30px] h-[30px] object-contai rounded-full translate-y-[10px] ml-ch"
+                                                                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownBrand.svg')}
+                                                                        data-accimage="nav-image"
+                                                                    />
+                                                            </div>
+                                                        </Neos.Fusion:Augmenter>
                                                     </div>
-                                                </Neos.Fusion:Loop>
+
+                                                    <div data-accitem="sub-nav" @if.1={item.subItems} class="hidden text-neutral-darker pr-[40px]">
+                                                        <Neos.Fusion:Loop @if.1={item.subItems} items={item.subItems}>
+                                                            <Neos.Fusion:Loop items={item.subItems}>
+                                                                <div class="min-h-touch ml-xs">
+                                                                    <Neos.Fusion:Augmenter class="justify-end text-right">
+                                                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                                                    </Neos.Fusion:Augmenter>
+                                                                </div>
+                                                            </Neos.Fusion:Loop>
+                                                        </Neos.Fusion:Loop>
+                                                    </div>
+                                                </div>
                                             </Neos.Fusion:Loop>
-                                        </Neos.Fusion:Loop>
-                                    </nav>
+                                        </nav>
+                                        <nav class="flex font-sans-bold justify-between space-x-sm mb-sm">
+                                            <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
+                                                <Neos.Fusion:Augmenter
+                                                    @if.1={!item.isActive}
+                                                    class="bg-light min-h-touch min-w-touch flex items-center justify-center text-center text-light-contrast px-[50px] rounded-full w-1/2"
+                                                >
+                                                    <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
+                                                </Neos.Fusion:Augmenter>
+                                                <div
+                                                    @if.1={item.isActive}
+                                                    class="bg-brand min-h-touch min-w-touch flex items-center justify-center text-center text-light px-[50px] rounded-full w-1/2"
+                                                >
+                                                    {item.link.content}
+                                                </div>
+                                            </Neos.Fusion:Loop>
+                                        </nav>
+                                    </div>
                                 </div>
                             </div>
                         </div>

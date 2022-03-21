@@ -2,7 +2,7 @@ prototype(Hoerbiger.Shared:Block.Card.ProductCard) < prototype(Hoerbiger.Shared:
     renderer = afx`
         <div class={[
             "[Block.Card.ProductCard]",
-            "flex flex-col bg-neutral-lighter"
+            "flex flex-col bg-neutral-lighter p-sm md:p-0"
         ]}>
             <div class="w-full h-0 pt-ratio-square relative">
                 <div class="absolute inset-xs">

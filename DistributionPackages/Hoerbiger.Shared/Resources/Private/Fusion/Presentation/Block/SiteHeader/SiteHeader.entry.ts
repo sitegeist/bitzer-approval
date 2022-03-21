@@ -23,5 +23,27 @@ export default ($node: Element): void => {
 					passive: true,
 				});
 		});
+
+		// handle mobile navigation as accordion
+		Array.from($node.querySelectorAll("[data-accordion]")).forEach($link => {
+			$link.addEventListener("click", (e: Event) => {
+				if (e.currentTarget instanceof HTMLElement) {
+					const $sibling = e.currentTarget.nextSibling as HTMLElement|undefined;
+
+					if ($sibling && $sibling.dataset.accitem) {
+						const $imgElement = e.currentTarget.querySelector("[data-accimage]");
+						if ($imgElement) {
+							$imgElement.classList.toggle("transition-all");
+							$imgElement.classList.toggle("rotate-180");
+						}
+
+						$sibling.classList.toggle("hidden");
+						e.preventDefault();
+					}
+				}
+
+			});
+
+		});
 	}
 };

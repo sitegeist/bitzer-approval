@@ -33,14 +33,22 @@ export default ($node: Element): void => {
 					}
 
 					$tabs.forEach(($tab, i) =>{
-						if($isHorizontal){
+						if ($isHorizontal) {
 							updateInnerButtons(index);
-						}else{
+
+							let toggleCondition = (i !== index) ? true : false;
+
+							if (!$tabContents[i].classList.contains("hidden")) {
+								toggleCondition = true;
+							}
+							$tabContents[i].classList.toggle("hidden", toggleCondition);
+						} else {
 							$tab.classList.toggle("opacity-100", i === index);
 							$tab.classList.toggle("opacity-30", i !== index);
+
+							$tabContents[i].classList.toggle("flow", i === index);
+							$tabContents[i].classList.toggle("hidden", i !== index);
 						}
-						$tabContents[i].classList.toggle("flex", i === index);
-						$tabContents[i].classList.toggle("hidden", i !== index);
 						$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.toggle("rotate-180", i === index);
 					});
 				}

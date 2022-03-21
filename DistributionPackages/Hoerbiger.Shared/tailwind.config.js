@@ -50,13 +50,14 @@ module.exports = {
 
 			light: {
 				DEFAULT: '#fff',
-				contrast: 'rgba(0, 0, 0, .85)'
+				contrast: 'rgba(0, 0, 0, .85)',
 			},
 			neutral: {
 				lighter: '#F0F0F0',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
 				contrast: 'rgba(0, 0, 0, .85)',
+				transparent: 'rgba(240, 240, 240, .95)',
 			},
 			brand: {
 				DEFAULT: '#8D172E',

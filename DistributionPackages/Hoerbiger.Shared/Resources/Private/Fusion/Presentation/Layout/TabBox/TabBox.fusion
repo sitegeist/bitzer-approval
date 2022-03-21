@@ -14,7 +14,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
         <div class={[
             "[Layout.TabBox (" + presentationObject.variant + ")]",
             presentationObject.variant.isRegular && "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red",
-            presentationObject.variant.isHorizontal && "flex flex-col w-full"
+            presentationObject.variant.isHorizontal && "flex flex-col w-full max-w-full-content p-md"
         ]} data-orientation={presentationObject.variant} >
             <nav class={[
                 "hidden md:flex",
@@ -44,7 +44,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     <div
                         class={[
                             "flex md:hidden justify-between items-center cursor-pointer min-h-touch",
-                            "bg-light my-xs p-xs font-bold tabBoxToggle:hidden shadow tracking-wider color-current"
+                            "bg-light my-xs p-xs font-bold tabBoxToggle:hidden shadow tracking-wider color-current text-brand"
                         ]}
                         data-select="accordeon-header"
                     >
@@ -62,7 +62,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     </div>
                     <div
                         class={[
-                            iterator.isFirst ? "flex" : "hidden",
+                            "hidden",
                             "py-sm tabBoxToggle:py-0"
                         ]}
                         data-select="tab-content"

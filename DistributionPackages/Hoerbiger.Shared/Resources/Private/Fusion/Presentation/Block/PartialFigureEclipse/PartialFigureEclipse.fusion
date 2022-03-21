@@ -35,16 +35,16 @@ prototype(Hoerbiger.Shared:Block.PartialFigureEclipse) < prototype(PackageFactor
     renderer = afx`
         <div class={[
             "[Block.PartialFigureEclipse]",
-            "relative pt-xl",
-            "grid grid-cols-2"
+            "relative sm:pt-xl",
+            "flex flex-col sm:grid sm:grid-cols-2"
         ]}>
             <div class={[
-                "col-span-1 relative z-20",
+                "sm:col-span-1 relative z-20",
                 presentationObject.variant.isImageLeft && "col-start-1",
                 presentationObject.variant.isImageRight && "col-start-2"
             ]}>
                 <div class={[
-                    "absolute top-minus-xl bottom-sm",
+                    "sm:absolute sm:top-minus-xl sm:bottom-sm",
                     presentationObject.variant.isImageLeft && "left-md right-minus-md",
                     presentationObject.variant.isImageRight && "left-minus-md right-md"
                 ]}>
@@ -52,7 +52,7 @@ prototype(Hoerbiger.Shared:Block.PartialFigureEclipse) < prototype(PackageFactor
                 </div>
             </div>
             <div class={[
-                "col-span-1 w-full max-w-[90%] relative z-40",
+                "sm:col-span-1 sm:w-full sm:max-w-[90%] relative z-40",
                 "bg-light p-sm border border-neutral-lighter shadow-textbox",
                 presentationObject.variant.isImageLeft && "col-start-2 justify-self-start",
                 presentationObject.variant.isImageRight && "col-start-1 row-start-1 justify-self-end"
