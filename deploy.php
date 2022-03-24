@@ -126,6 +126,7 @@ task('release', [
     'deploy:run_migrations',
     'deploy:node_repair',
     'deploy:publish_resources',
+    'deploy:writable',
     'deploy:symlink'
 ]);
 
