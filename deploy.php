@@ -15,7 +15,6 @@ set('ssh_multiplexing', true);
 set('writable_mode', 'chmod');
 set('writable_chmod_mode', '0775');
 set('writable_dirs', ['.']);
-set('writable_recursive', false);
 
 // composer
 set('composer_options', function() {
