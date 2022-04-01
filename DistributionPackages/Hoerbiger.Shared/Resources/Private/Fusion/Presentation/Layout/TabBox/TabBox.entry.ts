@@ -50,7 +50,12 @@ export default ($node: Element): void => {
 							$tabContents[i].classList.toggle("flow", i === index);
 							$tabContents[i].classList.toggle("hidden", i !== index);
 						}
-						$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.toggle("rotate-180", i === index);
+
+						if (i === index) {
+							$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.toggle("rotate-180");
+						} else {
+							$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.remove("rotate-180");
+						}
 					});
 				}
 			};
