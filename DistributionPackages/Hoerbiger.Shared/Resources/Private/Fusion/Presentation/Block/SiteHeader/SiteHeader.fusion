@@ -189,6 +189,18 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                         </Neos.Fusion:Augmenter>
                                                     </div>
                                                     <div data-accitem="sub-nav" @if.1={item.subItems} class="hidden text-[16px]">
+                                                        <div class="min-h-touch ml-xs">
+                                                            <Neos.Fusion:Augmenter class="justify-end flex items-center text-right pr-[8px]">
+                                                                <Neos.Fusion:Augmenter class="before:content-['Alle'] before:mr-[5px]">
+                                                                    <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                                                </Neos.Fusion:Augmenter>
+                                                                <img
+                                                                    class="w-[18px] ml-[16px]"
+                                                                    src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/subMenuArrow.svg')}
+                                                                    data-accimage="nav-image"
+                                                                />
+                                                            </Neos.Fusion:Augmenter>
+                                                        </div>
                                                         <Neos.Fusion:Loop @if.1={item.subItems} items={item.subItems}>
                                                             <Neos.Fusion:Loop items={item.subItems}>
                                                                 <div class="min-h-touch ml-xs">
