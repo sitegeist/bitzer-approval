@@ -24,7 +24,7 @@ prototype(Hoerbiger.Shared:Block.Card.ProductCard) < prototype(Hoerbiger.Shared:
                     class="flex flex-col divide-y"
                 >
                     <Neos.Fusion:Loop items={presentationObject.buttons.items}>
-                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item}/>
+                        <div class="py-[5px]"><PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item}/></div>
                     </Neos.Fusion:Loop>
                 </div>
             </div>

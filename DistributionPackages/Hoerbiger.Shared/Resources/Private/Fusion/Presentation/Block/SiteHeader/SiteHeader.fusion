@@ -171,9 +171,9 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     </div>
                                 </div>
                                 <div class={["p-md h-full "]}>
-                                    <div class="flex flex-col justify-between h-full space-y-ch ">
+                                    <div class="flex flex-col h-full space-y-ch ">
 
-                                        <nav class="flex flex-col font-sans-bold">
+                                        <nav class="flex flex-col font-sans-bold text-[20px]">
                                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                                                 <div>
                                                     <div class="min-h-touch" data-accordion="nav-accordion">
@@ -181,20 +181,24 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                             <div class="flex">
                                                                 <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
                                                                     <img
-                                                                        class="w-[30px] h-[30px] object-contai rounded-full translate-y-[10px] ml-ch"
+                                                                        class="w-[30px] h-[30px] object-contain rounded-full translate-y-[10px] ml-ch"
                                                                         src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownBrand.svg')}
                                                                         data-accimage="nav-image"
                                                                     />
                                                             </div>
                                                         </Neos.Fusion:Augmenter>
                                                     </div>
-
-                                                    <div data-accitem="sub-nav" @if.1={item.subItems} class="hidden text-neutral-darker pr-[40px]">
+                                                    <div data-accitem="sub-nav" @if.1={item.subItems} class="hidden text-[16px]">
                                                         <Neos.Fusion:Loop @if.1={item.subItems} items={item.subItems}>
                                                             <Neos.Fusion:Loop items={item.subItems}>
                                                                 <div class="min-h-touch ml-xs">
-                                                                    <Neos.Fusion:Augmenter class="justify-end text-right">
+                                                                    <Neos.Fusion:Augmenter class="justify-end flex items-center text-right pr-[8px]">
                                                                         <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                                                        <img
+                                                                            class="w-[18px] ml-[16px]"
+                                                                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/subMenuArrow.svg')}
+                                                                            data-accimage="nav-image"
+                                                                        />
                                                                     </Neos.Fusion:Augmenter>
                                                                 </div>
                                                             </Neos.Fusion:Loop>
@@ -203,7 +207,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                 </div>
                                             </Neos.Fusion:Loop>
                                         </nav>
-                                        <nav class="flex font-sans-bold justify-between space-x-sm mb-sm">
+                                        <nav class="flex font-sans-bold justify-between space-x-sm mb-sm pt-md">
                                             <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                                 <Neos.Fusion:Augmenter
                                                     @if.1={!item.isActive}
