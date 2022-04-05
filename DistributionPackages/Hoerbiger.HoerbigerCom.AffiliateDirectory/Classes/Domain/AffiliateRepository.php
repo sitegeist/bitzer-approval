@@ -54,7 +54,6 @@ class AffiliateRepository
             $telephone =
             $countryCode =
             $streetAddress = '';
-            $tags = [];
             foreach ($row->getCellIterator('G') as $columnLabel => $cell) {
                 if (!is_null($cell) && !is_null($cell->getValue())) {
                     switch ($columnLabel) {
@@ -79,12 +78,6 @@ class AffiliateRepository
                             break;
                         case 'Q':
                             $telephone = $cell->getValue();
-                            break;
-                        case 'J':
-                            $tags[] = $this->resolveTagFromSBUDivision($cell->getValue());
-                            break;
-                        case 'K':
-                            $tags[] = $this->resolveTagFromLocationType($cell->getValue());
                             break;
                     }
                 }
@@ -114,8 +107,7 @@ class AffiliateRepository
                 $email,
                 $telephone,
                 $coordinates->getLatitude(),
-                $coordinates->getLongitude(),
-                $tags
+                $coordinates->getLongitude()
             );
         }
 
@@ -131,43 +123,5 @@ class AffiliateRepository
         $reader->setReadDataOnly(true);
 
         return $reader->load($this->dataSetPath);
-    }
-
-    public function resolveTagFromSBUDivision(string $symbol): string
-    {
-        switch ($symbol) {
-            case 'C':
-                return 'Compression Technology';
-            case 'D':
-                return 'Drive Technology';
-            case 'E':
-                return 'Engine';
-            case 'H':
-                return 'Automotive Hydraulics';
-            case 'HH':
-                return 'HOERBIGER Holding';
-            case 'R':
-                return 'Rotary Solutions';
-            case 'S':
-                return 'Safety';
-            default:
-                return '';
-        }
-    }
-
-    public function resolveTagFromLocationType(string $symbol): string
-    {
-        switch ($symbol) {
-            case 'IO':
-                return 'Compression Technology';
-            case 'LP':
-                return 'Drive Technology';
-            case 'S':
-                return 'Engine';
-            case 'SP':
-                return 'Automotive Hydraulics';
-            default:
-                return '';
-        }
     }
 }
