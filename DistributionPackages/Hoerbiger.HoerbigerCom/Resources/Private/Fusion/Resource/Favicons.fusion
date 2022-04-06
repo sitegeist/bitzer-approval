@@ -21,6 +21,17 @@ prototype(Hoerbiger.HoerbigerCom:Resource.Favicons) < prototype(Neos.Fusion:Arra
         }
     }
 
+    icon_192_192 = Neos.Fusion:Tag {
+        tagName = 'link'
+        attributes.rel = 'icon'
+        attributes.type= 'image/png'
+        attributes.sizes = '192x192'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.HoerbigerCom/Public/Favicons/favicon-192x192.png'
+            @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+        }
+    }
+
     apple_touch = Neos.Fusion:Tag {
         tagName = 'link'
         aattributes.rel = 'apple-touch-icon'
