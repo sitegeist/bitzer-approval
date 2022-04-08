@@ -8,7 +8,7 @@ prototype(Hoerbiger.Shared:Application.Tracking.MatomoTagManager) < prototype(Ne
                     _paq.push(['trackPageView']);
                     _paq.push(['enableLinkTracking']);
                     (function() {
-                        var u=https://piwik.hoerbiger.com/;
+                        var u='https://piwik.hoerbiger.com/';
                         _paq.push(['setTrackerUrl', u+'matomo.php']);
                         _paq.push(['setSiteId', '39']);
                         var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
