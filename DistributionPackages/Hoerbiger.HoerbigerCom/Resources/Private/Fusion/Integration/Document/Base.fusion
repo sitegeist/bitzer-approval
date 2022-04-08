@@ -11,6 +11,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     renderer = Neos.Neos:Page {
         head {
             metaViewport = '<meta name="viewport" content="width=device-width">'
+            favicons = Hoerbiger.HoerbigerCom:Resource.Favicons
             stylesheets = ${props.stylesheets}
             fonts = Hoerbiger.Shared:Resource.Fonts
 

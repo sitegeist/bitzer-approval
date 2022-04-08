@@ -1,0 +1,43 @@
+prototype(Hoerbiger.HoerbigerCom:Resource.Favicons) < prototype(Neos.Fusion:Array) {
+    icon_32_32 = Neos.Fusion:Tag {
+        tagName = 'link'
+        attributes.rel = 'icon'
+        attributes.type= 'image/png'
+        attributes.sizes = '32x32'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.HoerbigerCom/Public/Favicons/favicon-32x32.png'
+            @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+        }
+    }
+
+    icon_96_96 = Neos.Fusion:Tag {
+        tagName = 'link'
+        attributes.rel = 'icon'
+        attributes.type= 'image/png'
+        attributes.sizes = '96x96'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.HoerbigerCom/Public/Favicons/favicon-96x96.png'
+            @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+        }
+    }
+
+    icon_192_192 = Neos.Fusion:Tag {
+        tagName = 'link'
+        attributes.rel = 'icon'
+        attributes.type= 'image/png'
+        attributes.sizes = '192x192'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.HoerbigerCom/Public/Favicons/favicon-192x192.png'
+            @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+        }
+    }
+
+    apple_touch = Neos.Fusion:Tag {
+        tagName = 'link'
+        aattributes.rel = 'apple-touch-icon'
+        attributes.href = Neos.Fusion:ResourceUri {
+            path = 'resource://Hoerbiger.HoerbigerCom/Public/Favicons/apple-icon-180x180.png'
+            @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+        }
+    }
+}
