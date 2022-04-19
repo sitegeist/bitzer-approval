@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
+use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -63,19 +64,28 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private ProductListFactory $productListFactory;
 
+    private StageFactory $stageFactory;
+
     public function __construct(
         SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory,
-        ProductListFactory $productListFactory
+        ProductListFactory $productListFactory,
+        StageFactory $stageFactory
     ) {
         $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
         $this->productListFactory = $productListFactory;
+        $this->stageFactory = $stageFactory;
     }
 
     public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
+
+        $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
+        $stage = $sections->count() > 0
+            ? $this->slidableFactory->forApplicationWorld($applicationWorld, $inBackend)
+            : $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -90,7 +100,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
-                    $this->slidableFactory->forApplicationWorld($applicationWorld, $inBackend)
+                    $stage
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
                 new CacheSegment(
