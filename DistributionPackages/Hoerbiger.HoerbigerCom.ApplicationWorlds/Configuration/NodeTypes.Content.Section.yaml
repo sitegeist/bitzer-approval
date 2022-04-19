@@ -58,3 +58,9 @@
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
         translateOnAdoption: true
+    icon:
+      ui:
+        inspector:
+          editorOptions:
+            dataSourceAdditionalData:
+              collections: [applicationWorlds]

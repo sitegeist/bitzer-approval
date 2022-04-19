@@ -1,0 +1,6 @@
+Sitegeist:
+  Stampede:
+    collections:
+      'applicationWorlds':
+        label: "Application Worlds Collection"
+        path: resource://Hoerbiger.HoerbigerCom.ApplicationWorlds/Private/Icons
