@@ -9,7 +9,9 @@ declare(strict_types=1);
 namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
+use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
@@ -35,6 +37,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -62,19 +65,28 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private ProductListFactory $productListFactory;
 
+    private StageFactory $stageFactory;
+
     public function __construct(
         SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory,
-        ProductListFactory $productListFactory
+        ProductListFactory $productListFactory,
+        StageFactory $stageFactory
     ) {
         $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
         $this->productListFactory = $productListFactory;
+        $this->stageFactory = $stageFactory;
     }
 
     public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
+
+        $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
+        $stage = $sections->count() > 0
+            ? $this->slidableFactory->forApplicationWorld($applicationWorld, $inBackend)
+            : $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -89,29 +101,32 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
-                    $this->slidableFactory->forApplicationWorld($applicationWorld, $inBackend)
+                    $stage ?: Value::fromString('')
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
-                new TabBox(
-                    TabBoxVariant::horizontal(),
-                    Collection::fromIterable(
-                        $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
-                        function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {
-                            $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($section, $inBackend, 'tab__image');
-                            return new Tab(
-                                new ThumbNavigationItem(
-                                    $thumbnailImageSource
-                                        ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
-                                        : null,
-                                    $section->getLabel(),
-                                    ThumbNavigationItemType::plainText()
-                                ),
-                                null,
-                                new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::current()),
-                                $this->productListFactory->forSection($section, $subgraph, $inBackend)
-                            );
-                        }
-                    )
+                new CacheSegment(
+                    new TabBox(
+                        TabBoxVariant::horizontal(),
+                        Collection::fromIterable(
+                            $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
+                            function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {
+                                $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($section, $inBackend, 'tab__image');
+                                return new Tab(
+                                    new ThumbNavigationItem(
+                                        $thumbnailImageSource
+                                            ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
+                                            : null,
+                                        $section->getLabel(),
+                                        ThumbNavigationItemType::plainText()
+                                    ),
+                                    null,
+                                    new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::current()),
+                                    $this->productListFactory->forSection($section, $subgraph, $inBackend)
+                                );
+                            }
+                        )
+                    ),
+                    'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup'
                 ),
             ]), $identity),
             $this->siteFooterFactory->forDocument($applicationWorld, $site)

@@ -16,10 +16,12 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\FullMediaStage\FullMediaStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\SlideStage\SlideStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
@@ -37,9 +39,32 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $this->figureFactory = $figureFactory;
     }
 
-    public function forApplicationWorld(TraversableNodeInterface $documents, bool $inBackend): SlotInterface
+    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): ?FullMediaStage
     {
-        return Value::fromString('to be implemented');
+        $imageSource = $this->imageSourceFactory->forImageMixin($applicationWorld, $inBackend);
+
+        if (!$imageSource) {
+            return null;
+        }
+
+        return new FullMediaStage(
+            StageVariant::fullMediaTextLeft(),
+            null,
+            new Headline(
+                HeadlineSize::large(),
+                HeadlineColor::white(),
+                HeadlineType::h1(),
+                Editable::fromNodeProperty($applicationWorld, 'headline')
+            ),
+            null,
+            new Text(
+                TextVariant::brandContrast(),
+                Editable::fromNodeProperty($applicationWorld, 'abstract'),
+                false
+            ),
+            null,
+            $this->figureFactory->forFullMediaStage($imageSource)
+        );
     }
 
     public function forSliderPreviewMixin(TraversableNodeInterface $targetNode, bool $inBackend): SlideStage

@@ -19,22 +19,23 @@ class DimensionResolutionHelper implements ProtectedContextAwareInterface
     protected $contentDimensionPresetSource;
 
     /**
-     * @return array<int,string>|string[]
+     * @return array<string,mixed>
      */
-    public function resolveLanguage(): array
+    public function resolveContextDimensions(): array
     {
         $pathSegments = explode('/', ServerRequest::getUriFromGlobals()->getPath());
+        $activePreset = $this->contentDimensionPresetSource->findPresetByUriSegment('language', $pathSegments[1])
+            ?: $this->contentDimensionPresetSource->getDefaultPreset('language');
+        $values = $activePreset['values'];
 
-        $contentDimensionPreset = $this->contentDimensionPresetSource->findPresetByUriSegment(
-            'language',
-            $pathSegments[1]
-            ?? 'en'
-        );
-
-        if (!$contentDimensionPreset) {
-            return ['en'];
-        }
-        return $contentDimensionPreset['values'];
+        return [
+            'dimensions' => [
+                'language' => $values
+            ],
+            'targetDimensions' => [
+                'language' => reset($values)
+            ]
+        ];
     }
 
     /**
