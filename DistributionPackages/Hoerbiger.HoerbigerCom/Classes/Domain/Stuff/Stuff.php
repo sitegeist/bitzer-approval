@@ -109,6 +109,9 @@ final class Stuff
             foreach ($searchHit['highlight'] as $highlightsByProperty) {
                 $highlight = reset($highlightsByProperty);
                 if (!empty($highlight)) {
+                    if (\mb_substr($highlight, -1) !== '.') {
+                        $highlight .= '...';
+                    }
                     break;
                 }
             }
