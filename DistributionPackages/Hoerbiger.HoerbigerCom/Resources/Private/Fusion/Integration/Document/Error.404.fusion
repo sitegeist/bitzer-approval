@@ -12,7 +12,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Error.404) < prototype(Neos.Fusion:Com
 }
 
 error {
-    @context.dimensions = ${{'dimensions':{'language': DimensionResolution.resolveLanguage()}}}
+    @context.dimensions = ${DimensionResolution.resolveContextDimensions()}
 
     404 {
         @context.notfoundDocument = ${q(site).context(dimensions).find('notfound').get(0)}
