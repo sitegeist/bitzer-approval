@@ -92,7 +92,7 @@ final class Stuff
         $totalNumberOfHits = $result['hits']['total']['value'] ?? 0;
 
         return new StuffResponse(
-            (int)($totalNumberOfHits / StuffRequest::DEFAULT_LIMIT) + 1,
+            (int)($totalNumberOfHits / StuffRequest::DEFAULT_LIMIT),
             new Things($things),
             $totalNumberOfHits,
             TypeOptions::fromAggregations($result['aggregations'])
