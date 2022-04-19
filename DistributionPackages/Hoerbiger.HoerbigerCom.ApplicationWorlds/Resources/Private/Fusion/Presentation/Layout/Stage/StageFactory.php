@@ -39,15 +39,12 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $this->figureFactory = $figureFactory;
     }
 
-    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): SlotInterface
+    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): ?FullMediaStage
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($applicationWorld, $inBackend);
 
         if (!$imageSource) {
-            throw new \InvalidArgumentException(
-                'Application world stages cannot be rendered without an image.',
-                1650372025
-            );
+            return null;
         }
 
         return new FullMediaStage(

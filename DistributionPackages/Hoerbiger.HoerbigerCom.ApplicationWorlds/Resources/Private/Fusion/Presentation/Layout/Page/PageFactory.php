@@ -37,6 +37,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -100,7 +101,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
-                    $stage
+                    $stage ?: Value::fromString('')
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
                 new CacheSegment(
