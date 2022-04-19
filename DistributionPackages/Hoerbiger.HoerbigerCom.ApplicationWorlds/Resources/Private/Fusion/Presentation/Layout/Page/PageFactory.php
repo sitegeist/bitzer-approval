@@ -10,6 +10,7 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
 
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
@@ -92,26 +93,29 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $this->slidableFactory->forApplicationWorld($applicationWorld, $inBackend)
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
-                new TabBox(
-                    TabBoxVariant::horizontal(),
-                    Collection::fromIterable(
-                        $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
-                        function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {
-                            $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($section, $inBackend, 'tab__image');
-                            return new Tab(
-                                new ThumbNavigationItem(
-                                    $thumbnailImageSource
-                                        ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
-                                        : null,
-                                    $section->getLabel(),
-                                    ThumbNavigationItemType::plainText()
-                                ),
-                                null,
-                                new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::current()),
-                                $this->productListFactory->forSection($section, $subgraph, $inBackend)
-                            );
-                        }
-                    )
+                new CacheSegment(
+                    new TabBox(
+                        TabBoxVariant::horizontal(),
+                        Collection::fromIterable(
+                            $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
+                            function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {
+                                $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($section, $inBackend, 'tab__image');
+                                return new Tab(
+                                    new ThumbNavigationItem(
+                                        $thumbnailImageSource
+                                            ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
+                                            : null,
+                                        $section->getLabel(),
+                                        ThumbNavigationItemType::plainText()
+                                    ),
+                                    null,
+                                    new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::current()),
+                                    $this->productListFactory->forSection($section, $subgraph, $inBackend)
+                                );
+                            }
+                        )
+                    ),
+                    'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup'
                 ),
             ]), $identity),
             $this->siteFooterFactory->forDocument($applicationWorld, $site)
