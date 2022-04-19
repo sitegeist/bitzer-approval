@@ -17,6 +17,15 @@
           '*': false
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+    footer:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
   constraints:
     nodeTypes:
       '*': false
@@ -32,4 +41,3 @@
         sliderPreview:
           label: 'Vorschau Slider Homepage'
           tab: 'sliderPreview'
-

@@ -1,0 +1,10 @@
+'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories': true
+    footer:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.SuccessStories:Content.TopSuccessStories': true

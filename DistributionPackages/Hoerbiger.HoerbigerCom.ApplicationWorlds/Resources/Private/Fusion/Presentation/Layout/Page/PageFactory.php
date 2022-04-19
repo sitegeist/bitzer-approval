@@ -113,6 +113,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         }
                     )
                 ),
+                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer')))
             ]), $identity),
             $this->siteFooterFactory->forDocument($applicationWorld, $site)
         );
