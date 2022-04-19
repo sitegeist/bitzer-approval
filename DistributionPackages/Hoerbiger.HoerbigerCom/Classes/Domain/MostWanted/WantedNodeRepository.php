@@ -45,6 +45,9 @@ final class WantedNodeRepository
         $records = $this->databaseConnection->executeQuery(
             'SELECT node_aggregate_identifier FROM ' . self::TABLE_NAME . '
                 WHERE language = :language
+                AND node_aggregate_identifier IN (
+                    SELECT DISTINCT identifier FROM neos_contentrepository_domain_model_nodedata
+                )
                 AND node_aggregate_identifier NOT IN (:excludedIdentifiers)
                 ORDER BY count DESC
                 LIMIT 5',
