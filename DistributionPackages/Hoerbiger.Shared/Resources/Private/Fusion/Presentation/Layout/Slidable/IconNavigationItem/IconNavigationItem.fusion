@@ -21,7 +21,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable.IconNavigationItem) < prototype(Packa
         ]}>
             <div class="hidden md:flex items-center">
                 <div class="relative">
-                    <div class="w-touch h-touch">
+                    <div class="w-touch h-touch flex items-center justify-center">
                         <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.icon} />
                     </div>
                 </div>
