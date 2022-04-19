@@ -32,7 +32,7 @@ final class ContentContextFactory
         /** @var ContentContext $contentContext */
         $contentContext = $this->coreContentContextFactory->create([
             'workspaceName' => 'live',
-            'dimensions' => $language === 'en' ? ['language' => ['en']] : ['language' => [$language, 'en']],
+            'dimensions' => ['language' => [$language]],
             'targetDimensions' => ['language' => $language],
             'currentSite' => $this->siteRepository->findOneByNodeName('hoerbiger-hoerbigercom')
         ]);
