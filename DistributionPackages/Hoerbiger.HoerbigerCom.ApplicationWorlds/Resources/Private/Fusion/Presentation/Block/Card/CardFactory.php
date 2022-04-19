@@ -32,15 +32,15 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
      */
     protected $localizationService;
 
-    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier): CardInterface
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): CardInterface
     {
+        $supportingText = $highlight ?: $thing->getProperty('preview__description');
+
         return new SearchResultCard(
             null,
             Value::fromString($thing->getLabel()),
             Value::fromString($this->getTypeLabel($typeIdentifier)),
-            $thing->getProperty('preview__description')
-                ? Value::fromString($thing->getProperty('preview__description'))
-                : null,
+            $supportingText ? Value::fromString($supportingText) : null,
             null
         );
     }

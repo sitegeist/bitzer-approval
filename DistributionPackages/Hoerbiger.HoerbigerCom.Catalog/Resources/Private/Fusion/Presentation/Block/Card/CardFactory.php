@@ -111,7 +111,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         return $cards;
     }
 
-    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier): CardInterface
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): CardInterface
     {
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
             'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'
@@ -125,13 +125,13 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             ))->getTranslation()
             : null;
 
+        $supportingText = $highlight ?: $thing->getProperty('preview__description');
+
         return new SearchResultCard(
             null,
             Value::fromString($thing->getLabel()),
             Value::fromString($translatedLabel ?: $typeIdentifier),
-            $thing->getProperty('preview__description')
-                ? Value::fromString($thing->getProperty('preview__description'))
-                : null,
+            $supportingText ? Value::fromString($supportingText) : null,
             null
         );
     }

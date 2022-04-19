@@ -163,8 +163,10 @@ final class StuffRequest implements \JsonSerializable
         ];
         $request['query']['bool']['minimum_should_match'] = 1;
         $request['highlight'] = [
-            'number_of_fragments' => 0,
+            'number_of_fragments' => 1,
+            'fragment_size' => 100,
             'fields' => [
+                'neos_fulltext.*' => new \stdClass,
                 'title' => new \stdClass,
                 'headline' => new \stdClass,
                 'abstract' => new \stdClass,
