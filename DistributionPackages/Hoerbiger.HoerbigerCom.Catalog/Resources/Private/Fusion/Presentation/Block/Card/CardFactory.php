@@ -16,8 +16,15 @@ use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
+use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -99,12 +106,29 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolutions, false);
             $link = (new LinkFactory())->forLinkToDocument($industrySolution, null);
 
+            $headline = new Headline(
+                HeadlineSize::small(),
+                HeadlineColor::brand(),
+                HeadlineType::div(),
+                Value::fromString($industrySolution->getLabel())
+            );
+
+            $text = new Text(
+                TextVariant::lightContrast(),
+                Value::fromString($industrySolution->getProperty('abstract') ?: ''),
+                false
+            );
+
             $cards[] = new NavigationCard(
                 $imageSource ? $this->figureFactory->forNavigationCard($imageSource) : null,
-                Value::fromString($industrySolution->getLabel()),
+                $headline,
                 null,
-                Value::fromString($industrySolution->getProperty('abstract') ?: ''),
-                $link
+                $text,
+                $link->withContent(
+                    Value::fromString(
+                        $this->translator->translateById('link.label', [], null, null, 'Block.Card.NavigationCard', 'Hoerbiger.HoerbigerCom') ?: ''
+                    )
+                )
             );
         }
 
