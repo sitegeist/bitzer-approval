@@ -33,7 +33,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable.IconNavigationItem) < prototype(Packa
                     {presentationObject.label}
                 </span>
             </div>
-            <div class="bg-brand rounded-[10px] h-xs md:h-[8px] md:mt-ch w-full flex"></div>
+            <div class="bg-brand rounded-[10px] opacity-50 h-xs md:h-[8px] md:mt-ch w-full flex"></div>
         </div>
     `
 }
