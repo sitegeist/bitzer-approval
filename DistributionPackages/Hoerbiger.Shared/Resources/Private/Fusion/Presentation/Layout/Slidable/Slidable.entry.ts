@@ -25,7 +25,7 @@ export default ($node: Element): void => {
 								$node.classList.toggle("bg-neutral-lighter", currentSlide !== index);
 							}else{
 								$node.classList.toggle("opacity-100", currentSlide === index);
-								$node.classList.toggle("opacity-30", currentSlide !== index);
+								$node.classList.toggle("opacity-50", currentSlide !== index);
 							}
 						}
 					});
@@ -47,20 +47,17 @@ export default ($node: Element): void => {
 				slideChanged: onSlideChanged,
 			});
 
-			// JumperNavigation.
-			if ($jumper instanceof NodeList) {
-				const onActivate = (index:number) => (e: MouseEvent) => {
-					e.preventDefault();
-					if (index !== currentSlide) {
-						keenSlider.moveToSlide(index);
-					}
-				};
+			if (keenSlider) {
+				const $prev = $node.querySelector("[data-select='prev']");
+				const $next = $node.querySelector("[data-select='next']");
 
-				$jumper.forEach(($node, index) => {
-					if ($node instanceof HTMLElement) {
-						$node.addEventListener("click", onActivate(index));
-					}
-				});
+				if ($prev instanceof HTMLElement) {
+					$prev.addEventListener("click", keenSlider.prev, false);
+				}
+
+				if ($next instanceof HTMLElement) {
+					$next.addEventListener("click", keenSlider.next, false);
+				}
 			}
 		}
 	}

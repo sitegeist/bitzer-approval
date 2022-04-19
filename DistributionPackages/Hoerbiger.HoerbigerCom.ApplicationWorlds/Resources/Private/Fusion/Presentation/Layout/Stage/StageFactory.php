@@ -88,15 +88,16 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $mediaBackgroundImageSource = $this->imageSourceFactory->forImageMixin($section, $inBackend);
 
         return new SlideStage(
-            StageVariant::default(),
+            StageVariant::fullMediaTextCenter(),
             null,
             null,
-            null,
-            new Text(
-                TextVariant::transparentContrast(),
-                Value::fromString($applicationWorld->getLabel()),
-                false
+            new Headline(
+                HeadlineSize::large(),
+                HeadlineColor::white(),
+                HeadlineType::h1(),
+                Value::fromString($applicationWorld->getLabel())
             ),
+            null,
             null,
             $mediaBackgroundImageSource
                 ? $this->figureFactory->forSlideStageBackground($mediaBackgroundImageSource)

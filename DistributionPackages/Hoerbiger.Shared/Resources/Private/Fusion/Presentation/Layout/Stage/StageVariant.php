@@ -19,6 +19,7 @@ final class StageVariant implements PseudoEnumInterface
 {
     const VARIANT_FULLMEDIATEXTLEFT = 'fullMediaTextLeft';
     const VARIANT_FULLMEDIATEXTRIGHT = 'fullMediaTextRight';
+    const VARIANT_FULLMEDIATEXTCENTER = 'fullMediaTextCenter';
     const VARIANT_STACK = 'stack';
     const VARIANT_EXCITE = 'excite';
     const VARIANT_EXPERIENCE = 'experience';
@@ -44,6 +45,7 @@ final class StageVariant implements PseudoEnumInterface
             if (
                 $string !== self::VARIANT_FULLMEDIATEXTLEFT
                 && $string !== self::VARIANT_FULLMEDIATEXTRIGHT
+                && $string !== self::VARIANT_FULLMEDIATEXTCENTER
                 && $string !== self::VARIANT_STACK
                 && $string !== self::VARIANT_EXCITE
                 && $string !== self::VARIANT_EXPERIENCE
@@ -75,6 +77,11 @@ final class StageVariant implements PseudoEnumInterface
     public static function fullMediaTextRight(): self
     {
         return self::from(self::VARIANT_FULLMEDIATEXTRIGHT);
+    }
+
+    public static function fullMediaTextCenter(): self
+    {
+        return self::from(self::VARIANT_FULLMEDIATEXTCENTER);
     }
 
     public static function stack(): self
@@ -117,6 +124,11 @@ final class StageVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_FULLMEDIATEXTRIGHT;
     }
 
+    public function getIsFullMediaTextCenter(): bool
+    {
+        return $this->value === self::VARIANT_FULLMEDIATEXTCENTER;
+    }
+
     public function getIsStack(): bool
     {
         return $this->value === self::VARIANT_STACK;
@@ -155,6 +167,7 @@ final class StageVariant implements PseudoEnumInterface
         return [
             self::from(self::VARIANT_FULLMEDIATEXTLEFT),
             self::from(self::VARIANT_FULLMEDIATEXTRIGHT),
+            self::from(self::VARIANT_FULLMEDIATEXTCENTER),
             self::from(self::VARIANT_STACK),
             self::from(self::VARIANT_EXCITE),
             self::from(self::VARIANT_EXPERIENCE),

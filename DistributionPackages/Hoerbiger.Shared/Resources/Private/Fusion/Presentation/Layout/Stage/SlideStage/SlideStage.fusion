@@ -32,11 +32,12 @@ prototype(Hoerbiger.Shared:Layout.Stage.SlideStage) < prototype(Hoerbiger.Shared
             ]}></div>
             <div class={[
                 "relative px-md pb-md pt-[80vmin] flex flex-col justify-center bg-transparent space-y-xs z-30 text-light",
-                "md:border-2 md:border-light",
+                (!presentationObject.variant.isFullMediaTextCenter) && "md:border-2 md:border-light",
+                (!presentationObject.variant.isFullMediaTextCenter) && "md:-translate-y-1/2 md:bottom-auto md:top-1/2 md:max-w-[35%] md:w-full",
                 "md:absolute md:inset-md md:p-sm",
-                "md:-translate-y-1/2 md:bottom-auto md:top-1/2 md:max-w-[35%] md:w-full",
                 presentationObject.variant.isFullMediaTextLeft &&  "md:right-auto",
-                presentationObject.variant.isFullMediaTextRight &&  "md:left-auto"
+                presentationObject.variant.isFullMediaTextRight &&  "md:left-auto",
+                presentationObject.variant.isFullMediaTextCenter &&  "text-center mx-auto"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     presentationObject={presentationObject.subheadline}
