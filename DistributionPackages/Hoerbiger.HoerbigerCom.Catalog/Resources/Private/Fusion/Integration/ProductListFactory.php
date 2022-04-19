@@ -119,33 +119,30 @@ final class ProductListFactory
             }
         }
 
-        return new CacheSegment(
-            new ContentContainer(
-                ContentContainerVariant::regular(),
-                new Stack(
-                    StackVariant::sm(),
-                    Collection::fromIterable([
-                        new Headline(
-                            HeadlineSize::largeCentered(),
-                            HeadlineColor::brand(),
-                            HeadlineType::h2(),
-                            Value::fromString(
-                                $this->csvPOTranslator->getLabel(PageFactory::class, 'products')
-                                    . ' '
-                                    . $productListTitle
-                            )
-                        ),
-                        new Grid(
-                            GridVariant::threeColumnsGap(),
-                            Collection::fromIterable(
-                                $productCards,
-                                $identity
-                            )
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable([
+                    new Headline(
+                        HeadlineSize::largeCentered(),
+                        HeadlineColor::brand(),
+                        HeadlineType::h2(),
+                        Value::fromString(
+                            $this->csvPOTranslator->getLabel(PageFactory::class, 'products')
+                                . ' '
+                                . $productListTitle
                         )
-                    ], $identity)
-                )
-            ),
-            'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup'
+                    ),
+                    new Grid(
+                        GridVariant::threeColumnsGap(),
+                        Collection::fromIterable(
+                            $productCards,
+                            $identity
+                        )
+                    )
+                ], $identity)
+            )
         );
     }
 }

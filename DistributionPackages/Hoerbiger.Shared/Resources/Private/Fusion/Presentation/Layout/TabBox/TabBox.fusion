@@ -62,7 +62,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     </div>
                     <div
                         class={[
-                            "hidden",
+                            !iterator.isFirst &&"hidden",
                             "py-sm tabBoxToggle:py-0"
                         ]}
                         data-select="tab-content"

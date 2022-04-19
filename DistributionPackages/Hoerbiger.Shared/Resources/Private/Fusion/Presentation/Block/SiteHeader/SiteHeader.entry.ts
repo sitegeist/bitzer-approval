@@ -35,6 +35,7 @@ export default ($node: Element): void => {
 						if ($imgElement) {
 							$imgElement.classList.toggle("transition-all");
 							$imgElement.classList.toggle("rotate-180");
+							e.currentTarget.classList.toggle("text-brand");
 						}
 
 						$sibling.classList.toggle("hidden");

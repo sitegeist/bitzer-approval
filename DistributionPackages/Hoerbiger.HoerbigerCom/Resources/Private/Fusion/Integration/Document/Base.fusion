@@ -11,6 +11,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     renderer = Neos.Neos:Page {
         head {
             metaViewport = '<meta name="viewport" content="width=device-width">'
+            favicons = Hoerbiger.HoerbigerCom:Resource.Favicons
             stylesheets = ${props.stylesheets}
             fonts = Hoerbiger.Shared:Resource.Fonts
 
@@ -23,9 +24,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             }
 
             javascripts {
-                googleTagManager = Hoerbiger.Shared:Application.Tracking.GoogleTagManager {
+                matomoTagManager = Hoerbiger.Shared:Application.Tracking.MatomoTagManager {
                     @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
-                    trackingId = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.trackingId')}
                 }
                 cookies = ${props.cookies}
                 fontShop = ${props.fontShop}
@@ -40,9 +40,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
         }
 
         body.@process.addExtraHtml = Neos.Fusion:Join {
-            googleTagManagerNoScript = Hoerbiger.Shared:Application.Tracking.GoogleTagManagerNoScript {
+            matomoTagManagerNoScript = Hoerbiger.Shared:Application.Tracking.MatomoTagManagerNoScript {
                 @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
-                trackingId = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.trackingId')}
             }
             default = ${value}
         }

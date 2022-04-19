@@ -7,7 +7,9 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup) < prototype(
             // whenever a product group is changed, the cache segment will flush
             1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup')}
             // whenever a product is changed, the cache segment will flush
-            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.Product')}
+            2 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.Product')}
+            // whenever a section is changed, the cache segment will flush
+            3 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.Section')}
         }
     }
 }
