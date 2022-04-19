@@ -15,6 +15,12 @@ final class SearchType implements \JsonSerializable
     const TYPE_PRODUCT = 'Product';
     const TYPE_WEBPAGE = 'WebPage';
     const TYPE_DOCUMENT = 'Document';
+    const TYPE_APPLICATION_WORLD = 'ApplicationWorld';
+    const TYPE_PEOPLE_AND_CULTURE = 'PeopleAndCulture';
+    const TYPE_INDUSTRY_SOLUTION = 'IndustrySolution';
+    const TYPE_SUCCESS_STORY = 'SuccessStory';
+    const TYPE_PRESS_RELEASE = 'PressRelease';
+    const TYPE_PRIVACY = 'Privacy';
 
     /**
      * @var array<string,self>|self[]
@@ -33,55 +39,19 @@ final class SearchType implements \JsonSerializable
         if (!isset(self::$instances[$string])) {
             if ($string !== self::TYPE_PRODUCT
                 && $string !== self::TYPE_WEBPAGE
-                && $string !== self::TYPE_DOCUMENT) {
+                && $string !== self::TYPE_DOCUMENT
+                && $string !== self::TYPE_APPLICATION_WORLD
+                && $string !== self::TYPE_PEOPLE_AND_CULTURE
+                && $string !== self::TYPE_INDUSTRY_SOLUTION
+                && $string !== self::TYPE_SUCCESS_STORY
+                && $string !== self::TYPE_PRESS_RELEASE
+                && $string !== self::TYPE_PRIVACY) {
                 throw SearchTypeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
         }
 
         return self::$instances[$string];
-    }
-
-    public static function product(): self
-    {
-        return self::from(self::TYPE_PRODUCT);
-    }
-
-    public static function webPage(): self
-    {
-        return self::from(self::TYPE_WEBPAGE);
-    }
-
-    public static function document(): self
-    {
-        return self::from(self::TYPE_DOCUMENT);
-    }
-
-    public function getIsProduct(): bool
-    {
-        return $this->value === self::TYPE_PRODUCT;
-    }
-
-    public function getIsWebPage(): bool
-    {
-        return $this->value === self::TYPE_WEBPAGE;
-    }
-
-    public function getIsDocument(): bool
-    {
-        return $this->value === self::TYPE_DOCUMENT;
-    }
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::TYPE_PRODUCT),
-            self::from(self::TYPE_WEBPAGE),
-            self::from(self::TYPE_DOCUMENT)
-        ];
     }
 
     public function getValue(): string

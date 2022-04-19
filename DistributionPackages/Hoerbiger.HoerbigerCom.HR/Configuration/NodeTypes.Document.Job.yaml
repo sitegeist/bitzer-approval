@@ -1,6 +1,11 @@
 'Hoerbiger.HoerbigerCom.HR:Document.Job':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   ui:
     icon: glasses
     label: 'Jobdetailseite'
+  properties:
+    searchType:
+      search:
+        indexing: '${"PeopleAndCulture"}'

@@ -3,9 +3,14 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom.SuccessStories:Document.SuccessStory': true
   ui:
     icon: newspaper
     label: 'Magazin'
+  properties:
+    searchType:
+      search:
+        indexing: '${"SuccessStory"}'

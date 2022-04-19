@@ -2,6 +2,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   ui:
     icon: user-tie
     label: 'Karriere'
@@ -28,3 +29,7 @@
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage': true
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
+  properties:
+    searchType:
+      search:
+        indexing: '${"PeopleAndCulture"}'

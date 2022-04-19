@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.HoerbigerCom:Mixin.SliderPreview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     sections:
       type: 'Neos.Neos:ContentCollection'
@@ -32,4 +33,8 @@
         sliderPreview:
           label: 'Vorschau Slider Homepage'
           tab: 'sliderPreview'
+  properties:
+    searchType:
+      search:
+        indexing: '${"ApplicationWorld"}'
 

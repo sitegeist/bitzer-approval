@@ -1,6 +1,11 @@
 'Hoerbiger.HoerbigerCom.HR:Document.JobNotification':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   ui:
     icon: bell
     label: 'Anmeldung zum Job Alert'
+  properties:
+    searchType:
+      search:
+        indexing: '${"PeopleAndCulture"}'

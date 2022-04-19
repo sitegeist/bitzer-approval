@@ -2,19 +2,24 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     job:
       type: 'Hoerbiger.HoerbigerCom.HR:Document.Job'
-    jobApplication:
+    jobapplication:
       type: 'Hoerbiger.HoerbigerCom.HR:Document.JobApplication'
-    jobNotification:
+    jobnotification:
       type: 'Hoerbiger.HoerbigerCom.HR:Document.JobNotification'
   ui:
     icon: bullhorn
     label: 'Ergebnisliste'
+  properties:
+    searchType:
+      search:
+        indexing: '${"PeopleAndCulture"}'
 
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   childNodes:
-    jobList:
+    joblist:
       type: 'Hoerbiger.HoerbigerCom.HR:Document.JobList'
       position: 1000

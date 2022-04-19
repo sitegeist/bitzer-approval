@@ -3,8 +3,9 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
-    productGroupTags:
+    productgrouptags:
       type: 'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductGroup'
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -29,3 +30,7 @@
   ui:
     icon: book
     label: 'Katalog'
+  properties:
+    searchType:
+      search:
+        indexing: '${"Product"}'

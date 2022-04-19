@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -20,3 +21,7 @@
   ui:
     icon: lock
     label: 'Datenschutz'
+  properties:
+    searchType:
+      search:
+        indexing: '${"Privacy"}'

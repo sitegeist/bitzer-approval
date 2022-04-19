@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -42,3 +43,6 @@
       validation: ~
     image__title:
       validation: ~
+    searchType:
+      search:
+        indexing: '${"PressRelease"}'
