@@ -11,6 +11,10 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Block\Card;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactoryInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
@@ -38,9 +42,16 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             ?: $thing->getProperty('preview__description')
             ?: $thing->getProperty('abstract');
 
+        $headline = new Headline(
+            HeadlineSize::tiny(),
+            HeadlineColor::brand(),
+            HeadlineType::h2(),
+            Value::fromString($thing->getLabel())
+        );
+
         return new SearchResultCard(
             null,
-            Value::fromString($thing->getLabel()),
+            $headline,
             Value::fromString($this->getTypeLabel($typeIdentifier)),
             $supportingText ? Value::fromString($supportingText) : null,
             null
