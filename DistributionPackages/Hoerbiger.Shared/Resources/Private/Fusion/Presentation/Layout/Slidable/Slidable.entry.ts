@@ -19,13 +19,22 @@ export default ($node: Element): void => {
 				if ($jumper instanceof NodeList) {
 					$jumper.forEach(($node, index) => {
 						if ($node instanceof HTMLElement) {
-							if(!$isApplicationWorld){
-								$node.classList.toggle("!bg-brand", currentSlide === index);
-								$node.classList.toggle("!text-brand-contrast", currentSlide === index);
-								$node.classList.toggle("bg-neutral-lighter", currentSlide !== index);
+							let $element: HTMLElement | null = $node;
+
+							const $isThumNavigation = $node.querySelector("[data-type='ThumbNavigationItem']");
+							if ($isThumNavigation instanceof HTMLElement) {
+								$element = $node.querySelector("[data-type='ThumbNavigationItem']");
+							}
+
+							if($element && !$isApplicationWorld){
+								$element.classList.toggle("!bg-brand", currentSlide === index);
+								$element.classList.toggle("!text-brand-contrast", currentSlide === index);
+								$element.classList.toggle("bg-neutral-lighter", currentSlide !== index);
 							}else{
-								$node.classList.toggle("opacity-100", currentSlide === index);
-								$node.classList.toggle("opacity-50", currentSlide !== index);
+								if ($element) {
+									$element.classList.toggle("opacity-100", currentSlide === index);
+									$element.classList.toggle("opacity-50", currentSlide !== index);
+								}
 							}
 						}
 					});

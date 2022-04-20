@@ -20,13 +20,15 @@ prototype(Hoerbiger.Shared:Layout.Slidable.ThumbNavigationItem) < prototype(Pack
 
     renderer = afx`
         <div class={[
-            "[Layout.Slidable.ThumbNavigationItem " + presentationObject.type + "]",
-            "sm:flex sm:items-center cursor-pointer md:overflow-hidden",
-            "rounded-[10px]  md:bg-neutral-lighter",
-            "md:h-[70px]  w-full",
-            presentationObject.type.isPlainText && "block h-full bg-none",
-            presentationObject.type.isDefault && "h-xs"
-        ]}>
+                "[Layout.Slidable.ThumbNavigationItem " + presentationObject.type + "]",
+                "sm:flex sm:items-center cursor-pointer md:overflow-hidden",
+                "rounded-[10px]  md:bg-neutral-lighter",
+                "md:h-[70px]  w-full",
+                presentationObject.type.isPlainText && "block h-full bg-none",
+                presentationObject.type.isDefault && "h-xs"
+            ]}
+            data-type="ThumbNavigationItem"
+        >
             <div class="hidden md:flex w-[90px] h-full relative flex-shrink-0">
                 <div class="absolute w-[150%] h-[150%] right-0 top-1/2 -translate-y-1/2">
                     <Hoerbiger.Shared:Block.Figure
