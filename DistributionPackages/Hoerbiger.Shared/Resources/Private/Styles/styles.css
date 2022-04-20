@@ -91,3 +91,7 @@ details summary::-webkit-details-marker {
 	display:none;
 }
 
+.searchCardResults em {
+	font-weight: bold;
+	font-style: normal;
+}

@@ -16,6 +16,10 @@ use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -127,9 +131,16 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         $supportingText = $highlight ?: $thing->getProperty('preview__description');
 
+        $headline = new Headline(
+            HeadlineSize::tiny(),
+            HeadlineColor::brand(),
+            HeadlineType::h2(),
+            Value::fromString($thing->getLabel())
+        );
+
         return new SearchResultCard(
             null,
-            Value::fromString($thing->getLabel()),
+            $headline,
             Value::fromString($translatedLabel ?: $typeIdentifier),
             $supportingText ? Value::fromString($supportingText) : null,
             null

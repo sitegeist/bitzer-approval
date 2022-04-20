@@ -17,6 +17,7 @@ final class HeadlineSize implements PseudoEnumInterface
     const SIZE_LARGE_CENTERED = 'largeCentered';
     const SIZE_MEDIUM = 'medium';
     const SIZE_SMALL = 'small';
+    const SIZE_TINY = 'tiny';
 
     /**
      * @var array<string,self>|self[]
@@ -37,6 +38,7 @@ final class HeadlineSize implements PseudoEnumInterface
                 && $string !== self::SIZE_LARGE_CENTERED
                 && $string !== self::SIZE_MEDIUM
                 && $string !== self::SIZE_SMALL
+                && $string !== self::SIZE_TINY
                 ) {
                 throw HeadlineSizeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -66,6 +68,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return self::from(self::SIZE_SMALL);
     }
 
+    public static function tiny(): self
+    {
+        return self::from(self::SIZE_TINY);
+    }
+
     public function getIsLarge(): bool
     {
         return $this->value === self::SIZE_LARGE;
@@ -86,6 +93,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return $this->value === self::SIZE_SMALL;
     }
 
+    public function getIsTiny(): bool
+    {
+        return $this->value === self::SIZE_TINY;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -95,7 +107,8 @@ final class HeadlineSize implements PseudoEnumInterface
             self::from(self::SIZE_LARGE),
             self::from(self::SIZE_LARGE_CENTERED),
             self::from(self::SIZE_MEDIUM),
-            self::from(self::SIZE_SMALL)
+            self::from(self::SIZE_SMALL),
+            self::from(self::SIZE_TINY)
         ];
     }
 

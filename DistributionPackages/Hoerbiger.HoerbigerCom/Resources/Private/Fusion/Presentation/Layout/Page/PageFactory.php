@@ -154,7 +154,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regular(),
+                    ContentContainerVariant::snugOverlay(),
                     (new SearchFormFactory())->create($subgraph)
                 ),
             ]), $identity),
