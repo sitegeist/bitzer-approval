@@ -11,7 +11,7 @@ type CheckIndicatorProps = {
 export const CheckIndicator = (props: CheckIndicatorProps): JSX.Element => (
 	<div className={(cx(
 		"relative w-[20px] h-[20px]",
-		"bg-light border border-brand",
+		"bg-light border border-brand flex-shrink-0",
 		props.look === "checkbox" && "rounded-[2px]",
 		props.look === "radiobutton" && "rounded-full",
 		props.className,
