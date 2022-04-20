@@ -2,14 +2,14 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
 
     class = Neos.Fusion:DataStructure {
         name = ${"[Block.BrandStage (" + presentationObject.variant + ")]"}
-        default = "relative flex flex-col sm:h-[500px] sm:h-auto overflow-hidden"
+        default = "relative flex flex-col sm:h-[500px] sm:h-auto overflow-hidden shadow-textbox"
 
         lite = "lite"
         lite.@if.1 = ${presentationObject.variant.isLarge}
     }
 
     contentBlockClass = Neos.Fusion:DataStructure {
-        default = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-decorative"
+        default = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-decorative opacity-80"
         default.@if.1 = ${presentationObject.variant.isDefault}
 
         lite = "w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-lite text-light"
@@ -28,10 +28,13 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={props.class}>
             <div class="order-2 mt-[-10%] sm:mt-0">
-
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                    presentationObject={presentationObject.mediaBackground}
-                    @if.1={presentationObject.mediaBackground}/>
+                <div class={[
+                    presentationObject.variant.isDefault && "mt-md sm:mt-0 sm:mr-lg sm:mb-lg"
+                ]}>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.mediaBackground}
+                        @if.1={presentationObject.mediaBackground}/>
+                </div>
             </div>
 
             <div class="relative z-10 sm:absolute order-1 top-0 left-0"
