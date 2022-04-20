@@ -122,9 +122,16 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
     public function forDocument(Document $document, string $typeIdentifier, ?string $highlight): CardInterface
     {
+        $headline = new Headline(
+            HeadlineSize::tiny(),
+            HeadlineColor::brand(),
+            HeadlineType::h2(),
+            Value::fromString($document->getLabel())
+        );
+
         return new SearchResultCard(
             null,
-            Value::fromString($document->getLabel()),
+            $headline,
             Value::fromString($this->getTypeLabel($typeIdentifier)),
             $highlight ? Value::fromString($highlight) : null,
             new Icon("shared", "downloadFile", IconSize::size_2())
@@ -134,10 +141,16 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): CardInterface
     {
         $supportingText = $highlight ?: $thing->getProperty('preview__description');
+        $headline = new Headline(
+            HeadlineSize::tiny(),
+            HeadlineColor::brand(),
+            HeadlineType::h2(),
+            Value::fromString($thing->getLabel())
+        );
 
         return new SearchResultCard(
             null,
-            Value::fromString($thing->getLabel()),
+            $headline,
             Value::fromString($this->getTypeLabel($typeIdentifier)),
             $supportingText ? Value::fromString($supportingText) : null,
             null
