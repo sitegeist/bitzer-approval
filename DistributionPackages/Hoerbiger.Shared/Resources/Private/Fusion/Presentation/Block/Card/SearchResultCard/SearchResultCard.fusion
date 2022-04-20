@@ -14,7 +14,7 @@ prototype(Hoerbiger.Shared:Block.Card.SearchResultCard) < prototype(Hoerbiger.Sh
                 <div class="text-xl md:text-2xl font-sans-bold mb-ch-xs">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} @if.1={presentationObject.header} />
                 </div>
-                <div class="flex-grow">
+                <div class="flex-grow searchCardResults">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
                 </div>
             </div>

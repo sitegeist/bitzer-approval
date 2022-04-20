@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution': true
@@ -27,3 +28,7 @@
   ui:
     icon: lightbulb
     label: 'Branchenlösungen'
+  properties:
+    searchType:
+      search:
+        indexing: '${"IndustrySolution"}'

@@ -92,7 +92,7 @@ final class Stuff
         $totalNumberOfHits = $result['hits']['total']['value'] ?? 0;
 
         return new StuffResponse(
-            (int)($totalNumberOfHits / StuffRequest::DEFAULT_LIMIT) + 1,
+            (int)($totalNumberOfHits / StuffRequest::DEFAULT_LIMIT),
             new Things($things),
             $totalNumberOfHits,
             TypeOptions::fromAggregations($result['aggregations'])
@@ -104,6 +104,18 @@ final class Stuff
      */
     private function createThing(array $searchHit, ContentContext $contentContext): ?Thing
     {
+        $highlight = null;
+        if (isset($searchHit['highlight']) && is_array($searchHit['highlight']) && !empty($searchHit['highlight'])) {
+            foreach ($searchHit['highlight'] as $highlightsByProperty) {
+                $highlight = reset($highlightsByProperty);
+                if (!empty($highlight)) {
+                    if (\mb_substr($highlight, -1) !== '.') {
+                        $highlight .= '...';
+                    }
+                    break;
+                }
+            }
+        }
         switch ($searchHit['_source']['neos_type']) {
             case 'Hoerbiger.Shared:Adapter.Asset':
                 $document = $this->documentRepository->findByIdentifier($searchHit['_source']['neos_node_identifier']);
@@ -113,7 +125,8 @@ final class Stuff
                 /** @var SlotInterface $card */
                 $card = $this->cardFactory->forDocument(
                     $document,
-                    $searchHit['_source']['searchType']
+                    $searchHit['_source']['searchType'],
+                    $highlight
                 );
                 $link = $this->linkFactory
                     ->forAsset($document)
@@ -138,7 +151,8 @@ final class Stuff
                 /** @var SlotInterface $card */
                 $card = $cardFactory->forThing(
                     $node,
-                    $searchHit['_source']['searchType']
+                    $searchHit['_source']['searchType'],
+                    $highlight
                 );
                 $link = $this->linkFactory
                     ->forLinkToDocument($node, null)

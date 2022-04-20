@@ -1,11 +1,23 @@
 id,description,en,de
 title,the search title,search,Suche
 type.WebPage,Type WebPage,Page,Seite
-type.Product,Type Product,Product,Produkt
+type.Product,Type Product,Products & Services,Produkte & Services
 type.Document,Type Document,Download,Download
+type.IndustrySolution,Type Industry Solution,Industry Solution,Branchenlösung
+type.PeopleAndCulture,Type People and Culture,People & Culture,People & Culture
+type.ApplicationWorld,Type Application World,Division,Fachbereich
+type.SuccessStory,Type Success Story,Success Story,Success Story
+type.PressRelease,Type Press Release,Press Release,Pressemitteilung
+type.Privacy,Type Privacy,Privacy,Datenschutz
 type.WebPage.plural,Type WebPage plural,Pages,Seiten
-type.Product.plural,Type Product plural,Products,Produkte
+type.Product.plural,Type Product plural,Products & Services,Produkte & Services
 type.Document.plural,Type Document plural,Downloads,Downloads
+type.IndustrySolution.plural,Type Industry Solution plural,Industry Solutions,Branchenlösungen
+type.PeopleAndCulture.plural,Type People and Culture plural,People & Culture,People & Culture
+type.ApplicationWorld.plural,Type Application World plural,Divisions,Fachbereiche
+type.SuccessStory.plural,Type Success Story plural,Success Stories,Success Stories
+type.PressRelease.plural,Type Press Release plural,Press Releases,Pressemitteilungen
+type.Privacy.plural,Type Privacy plural,Privacy,Datenschutz
 sortingProperty._score,Sort by Score,Score,Relevanz
 sortingProperty.dateModified,Sort by Modification,Topicality,Aktualität
 period.__allPeriods__,Option all periods,All,Alles

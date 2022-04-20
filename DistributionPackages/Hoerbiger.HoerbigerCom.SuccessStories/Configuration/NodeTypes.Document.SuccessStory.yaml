@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -55,3 +56,6 @@
             placeholder: 'Bitte Überschrift eingeben'
       options:
         preset: 'rte.plain'
+    searchType:
+      search:
+        indexing: '${"SuccessStory"}'

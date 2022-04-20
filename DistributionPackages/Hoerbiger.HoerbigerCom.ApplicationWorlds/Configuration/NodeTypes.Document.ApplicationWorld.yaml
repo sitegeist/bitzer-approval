@@ -4,6 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.HoerbigerCom:Mixin.SliderPreview': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     sections:
       type: 'Neos.Neos:ContentCollection'
@@ -49,4 +50,7 @@
       validation: ~
     image__title:
       validation: ~
+    searchType:
+      search:
+        indexing: '${"ApplicationWorld"}'
 

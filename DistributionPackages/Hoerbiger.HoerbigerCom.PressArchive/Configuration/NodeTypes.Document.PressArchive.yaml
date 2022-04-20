@@ -2,12 +2,17 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease': true
   ui:
     icon: archive
     label: 'Pressearchiv'
+  properties:
+    searchType:
+      search:
+        indexing: '${"PressRelease"}'
 
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   childNodes:

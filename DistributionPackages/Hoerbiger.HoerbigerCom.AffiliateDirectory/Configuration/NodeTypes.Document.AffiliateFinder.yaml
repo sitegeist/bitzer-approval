@@ -3,9 +3,14 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   ui:
     icon: search-location
     label: 'Standortfinder'
+  properties:
+    searchType:
+      search:
+        indexing: '${"WebPage"}'
 
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   childNodes:

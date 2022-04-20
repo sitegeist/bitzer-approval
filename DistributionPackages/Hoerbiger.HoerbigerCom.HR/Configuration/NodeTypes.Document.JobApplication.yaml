@@ -1,6 +1,11 @@
 'Hoerbiger.HoerbigerCom.HR:Document.JobApplication':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
   ui:
     icon: pen
     label: 'Bewerbungsformular'
+  properties:
+    searchType:
+      search:
+        indexing: '${"PeopleAndCulture"}'
