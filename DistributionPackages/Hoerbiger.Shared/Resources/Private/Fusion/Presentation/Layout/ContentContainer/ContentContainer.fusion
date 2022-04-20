@@ -21,7 +21,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isRegularWithoutBottom && "max-w-content-full mx-auto px-md pt-contentcontainer pb-xs bg-light mb-minus-contentcontainer",
                 presentationObject.variant.isRegularNeutral && "max-w-content-full mx-auto px-md py-contentcontainer",
                 presentationObject.variant.isSnug && "max-w-content-snug mx-auto px-md py-contentcontainer bg-light",
-                presentationObject.variant.isSnugOverlay && "w-[90%]  mx-auto lg:mt-[-180px] xl:mt-[-250px] px-md py-contentcontainer bg-light z-50 relative shadow-textbox",
+                presentationObject.variant.isSnugOverlay && "w-content-full lg:w-[90%]  mx-auto lg:mt-[-180px] xl:mt-[-250px] px-md py-contentcontainer bg-light z-50 relative shadow-textbox",
                 presentationObject.variant.isTight && "max-w-content-tight mx-auto px-md py-contentcontainer bg-light",
                 presentationObject.variant.isRegularSm && "max-w-content-full mx-auto pb-sm sm:p-sm bg-light",
                 presentationObject.variant.isRegularX && "max-w-content-full mx-auto px-md bg-light",
