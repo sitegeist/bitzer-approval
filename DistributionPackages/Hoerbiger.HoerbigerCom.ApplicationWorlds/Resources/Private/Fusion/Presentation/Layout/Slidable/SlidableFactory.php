@@ -56,18 +56,23 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 
                 return $link->asContainer()->withContent($stage);
             }),
-            Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+                $link = $linkFactory->forLinkToDocument($targetNode, null);
 
-                return new ThumbNavigationItem(
+                $thumNavigationItem = new ThumbNavigationItem(
                     $thumbnailImageSource
                         ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                         : null,
                     $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
                     ThumbNavigationItemType::default()
-
-
                 );
+
+                if ($inBackend) {
+                    return $thumNavigationItem;
+                } else {
+                    return $link->asContainer()->withContent($thumNavigationItem);
+                }
             })
         );
     }
