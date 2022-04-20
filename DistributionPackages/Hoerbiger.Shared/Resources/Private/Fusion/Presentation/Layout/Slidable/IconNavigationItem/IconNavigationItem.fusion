@@ -16,7 +16,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable.IconNavigationItem) < prototype(Packa
     renderer = afx`
         <div class={[
             "[Layout.Slidable.IconNavigationItem]",
-            "flex flex-col items-center cursor-pointer",
+            "flex flex-col items-center",
             "bg-transparent  justify-between md:justify-end text-transparent px-xs md:px-0 py-xs w-full"
         ]}>
             <div class="hidden md:flex items-center">

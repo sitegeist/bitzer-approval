@@ -48,7 +48,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         }
 
         return new FullMediaStage(
-            StageVariant::fullMediaTextLeft(),
+            StageVariant::fullMediaTextCenter(),
             null,
             new Headline(
                 HeadlineSize::large(),
