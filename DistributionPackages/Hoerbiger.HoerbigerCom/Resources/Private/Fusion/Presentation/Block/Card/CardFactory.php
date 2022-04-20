@@ -151,7 +151,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         return new SearchResultCard(
             null,
             $headline,
-            Value::fromString($this->getTypeLabel($typeIdentifier)),
+            null,
             $supportingText ? Value::fromString($supportingText) : null,
             null
         );

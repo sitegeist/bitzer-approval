@@ -36,12 +36,12 @@ final class TypeOptions implements \IteratorAggregate, \Countable, \JsonSerializ
      */
     public static function fromAggregations(array $aggregations): self
     {
-        return new self(array_map(function (array $bucket): TypeOption {
-            return new TypeOption(
+        return new self(array_filter(array_map(function (array $bucket): ?TypeOption {
+            return $bucket['key'] === SearchType::TYPE_WEBPAGE ? null : new TypeOption(
                 $bucket['key'],
                 $bucket['doc_count']
             );
-        }, $aggregations['facets']['searchType']['searchType']['buckets'] ?? []));
+        }, $aggregations['facets']['searchType']['searchType']['buckets'] ?? [])));
     }
 
     /**
