@@ -128,6 +128,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup'
                 ),
+                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer')))
             ]), $identity),
             $this->siteFooterFactory->forDocument($applicationWorld, $site)
         );
