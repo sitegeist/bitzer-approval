@@ -20,6 +20,7 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
@@ -634,7 +635,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new IconCard(
             Icon::fromStampedeDataSourceValue(
                 $benefitNode->getProperty('icon') ?: 'benefits:responsibility',
-                IconSize::sizeParent()
+                IconSize::sizeParent(),
+                IconColor::white()
             ),
             Editable::fromNodeProperty($benefitNode, 'headline'),
             null,
