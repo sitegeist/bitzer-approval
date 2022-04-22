@@ -59,7 +59,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             new Row(
                 RowVariant::alternateMetaline(),
                 Collection::fromIterable(array_filter([
-                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
+                    //Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                     new CacheSegment(
                         Value::fromString(
                             $successStory->getProperty('applicationWorld')
