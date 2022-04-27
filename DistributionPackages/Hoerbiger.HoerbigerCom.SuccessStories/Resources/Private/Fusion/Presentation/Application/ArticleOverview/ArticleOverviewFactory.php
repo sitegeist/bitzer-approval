@@ -97,7 +97,7 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
                 /** @var TraversableNodeInterface $successStory */
 
                 return [
-                    'datePublished' => (string)Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
+                    //'datePublished' => (string)Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                     'image' => [
                         'src' => $rendition instanceof Thumbnail ? $this->resourceManager->getPublicPersistentResourceUri($rendition->getResource()) : '',
                         'alt' => $successStory->getProperty('preview__image__alt') ?: $successStory->getProperty('image__alt') ?: '',

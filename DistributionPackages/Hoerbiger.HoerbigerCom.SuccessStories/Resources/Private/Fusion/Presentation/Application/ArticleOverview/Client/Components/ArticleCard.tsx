@@ -21,9 +21,9 @@ export const ArticleCard = ({labels, article}: ArticleCardProps): JSX.Element =>
 		</div>
 		<div className="flex-grow flex flex-col p-xs mx-sm mt-minus-sm bg-light z-50 border border-neutral-lighter shadow-textbox">
 			<div className="uppercase font-sans-bold text-base flex space-x-ch items-center flex-nowrap max-w-full min-w-0">
-				<span className="text-light-contrast flex-shrink-0">{article.datePublished}</span>
-				<span className="text-light-contrast flex-shrink-0">ꞏ</span>
-				<span className="text-brand whitespace-nowrap overflow-hidden overflow-ellipsis">{article.applicationWorld}</span>
+				{/*<span className="text-light-contrast flex-shrink-0">{article.datePublished}</span>
+				<span className="text-light-contrast flex-shrink-0">ꞏ</span>*/}
+				<span className="text-light-contrast whitespace-nowrap overflow-hidden overflow-ellipsis">{article.applicationWorld}</span>
 			</div>
 
 			<h2
