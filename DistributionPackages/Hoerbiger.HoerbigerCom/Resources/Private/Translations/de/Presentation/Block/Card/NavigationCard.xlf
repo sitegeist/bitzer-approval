@@ -3,6 +3,7 @@
     <file original="Block.Card.NavigationCard" product-name="Hoerbiger.HoerbigerCom" source-language="en" target-language="de" datatype="plaintext">
         <body>
             <trans-unit id="link.label" xml:space="preserve">
+                <source>learn more</source>
                 <target>mehr erfahren</target>
             </trans-unit>
         </body>
