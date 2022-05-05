@@ -51,8 +51,8 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                             presentationObject={presentationObject.text}
                         />
                     </div>
-                    <div class="text-light-contrast" @if.1={presentationObject.button}>
-                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />)
+                    <div class="text-light-contrast inline-flex" @if.1={presentationObject.button}>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />
                     </div>
                 </div>
             </div>
