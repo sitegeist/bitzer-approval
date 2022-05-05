@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage;
 
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -63,7 +64,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 false
             ),
             null,
-            $this->figureFactory->forFullMediaStage($imageSource)
+            $this->figureFactory->forFullMediaStage($imageSource),
         );
     }
 

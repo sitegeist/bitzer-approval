@@ -26,4 +26,6 @@ interface StageInterface extends ComponentPresentationObjectInterface
     public function getMedia(): ?SlotInterface;
 
     public function getMediaBackground(): ?SlotInterface;
+
+    public function getButton(): ?SlotInterface;
 }

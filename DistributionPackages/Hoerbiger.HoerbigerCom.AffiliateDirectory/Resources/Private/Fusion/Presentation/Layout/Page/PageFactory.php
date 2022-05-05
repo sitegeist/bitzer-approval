@@ -54,7 +54,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($affiliateFinder, $subGraph);
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($affiliateFinder, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($affiliateFinder, $subGraph, $inBackend);
 
         /** @var SlotInterface $application */
         $application = (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0]);

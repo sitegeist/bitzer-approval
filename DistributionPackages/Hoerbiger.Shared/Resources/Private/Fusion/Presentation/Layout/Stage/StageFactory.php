@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -18,6 +19,7 @@ use Hoerbiger\Shared\Presentation\Layout\Stage\FullMediaStage\FullMediaStage;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
@@ -35,12 +37,13 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $this->figureFactory = $figureFactory;
     }
 
-    public function forFullMediaIntroduction(TraversableNodeInterface $node, bool $inBackend): StageInterface
+    public function forFullMediaIntroduction(TraversableNodeInterface $node, ContentContext $subGraph, bool $inBackend): StageInterface
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Introduction requires image for property media.');
         }
+        $button = (new ButtonFactory())->forButtonMixin($node, $subGraph);
 
         return new FullMediaStage(
             StageVariant::from($node->getProperty('stage__variant') ?: StageVariant::VARIANT_FULLMEDIATEXTLEFT),
@@ -58,7 +61,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 false
             ),
             null,
-            $this->figureFactory->forFullMediaStage($imageSource)
+            $this->figureFactory->forFullMediaStage($imageSource),
+            $button
         );
     }
 }
