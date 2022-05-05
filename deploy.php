@@ -95,7 +95,7 @@ task('deploy:run_migrations', function () {
  * Publish resources
  */
 task('deploy:publish_resources', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow resource:publish');
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow resource:publish');
 })->desc('Publish resources');
 
 
