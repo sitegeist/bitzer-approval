@@ -31,6 +31,8 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
 
     private ?SlotInterface $mediaBackground;
 
+    private ?SlotInterface $button;
+
     public function __construct(
         StageVariant $variant,
         ?SlotInterface $metaline,
@@ -38,7 +40,8 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
         ?SlotInterface $subheadline,
         ?TextInterface $text,
         ?SlotInterface $media,
-        ?SlotInterface $mediaBackground
+        ?SlotInterface $mediaBackground,
+        ?SlotInterface $button = null
     ) {
         $this->variant = $variant;
         $this->metaline = $metaline;
@@ -47,6 +50,7 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
         $this->text = $text;
         $this->media = $media;
         $this->mediaBackground = $mediaBackground;
+        $this->button = $button;
     }
 
     public function getVariant(): StageVariant
@@ -82,5 +86,10 @@ abstract class AbstractStage extends AbstractComponentPresentationObject impleme
     public function getMediaBackground(): ?SlotInterface
     {
         return $this->mediaBackground;
+    }
+
+    public function getButton(): ?SlotInterface
+    {
+        return $this->button;
     }
 }

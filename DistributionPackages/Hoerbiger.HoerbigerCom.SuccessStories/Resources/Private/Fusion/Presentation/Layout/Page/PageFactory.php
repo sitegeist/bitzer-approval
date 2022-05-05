@@ -58,7 +58,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $subgraph, $inBackend);
 
         $identity = function (SlotInterface $slot) {
             return $slot;

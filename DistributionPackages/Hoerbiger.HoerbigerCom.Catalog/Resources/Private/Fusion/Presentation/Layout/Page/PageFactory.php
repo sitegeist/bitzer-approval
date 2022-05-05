@@ -60,7 +60,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($catalog, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($catalog, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $catalog, $stage, $subgraph);
     }
@@ -86,7 +86,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolutions, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolutions, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolutions, $subgraph);
@@ -129,7 +129,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolution, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolution, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolution, $subgraph);

@@ -27,6 +27,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
   ui:
     inspector:
       groups:
