@@ -1,0 +1,5 @@
+Neos:
+  Flow:
+    error:
+      debugger:
+        recursionLimit: 10
