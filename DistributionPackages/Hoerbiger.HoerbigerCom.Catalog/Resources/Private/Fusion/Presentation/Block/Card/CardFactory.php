@@ -103,7 +103,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $industrySolutions,
             'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
         ) as $industrySolution) {
-            $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolutions, false);
+            $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolution, false);
             $link = (new LinkFactory())->forLinkToDocument($industrySolution, null);
 
             $headline = new Headline(
@@ -115,7 +115,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
             $text = new Text(
                 TextVariant::lightContrast(),
-                Value::fromString($industrySolution->getProperty('abstract') ?: ''),
+                Value::fromString($industrySolution->getProperty('preview__description') ?: ''),
                 false
             );
 
