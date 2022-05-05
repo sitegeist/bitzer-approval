@@ -79,7 +79,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($magazine, $subgraph);
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $subgraph, $inBackend);
 
         $pressReleases = $magazine->findChildNodes()->toArray();
         uasort($pressReleases, function (Node $a, Node $b) {

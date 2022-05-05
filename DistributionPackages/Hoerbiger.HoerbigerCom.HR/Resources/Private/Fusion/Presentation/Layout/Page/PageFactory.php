@@ -49,7 +49,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($jobList, $subGraph);
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($jobList, $inBackend);
+        $stage = $this->stageFactory->forFullMediaIntroduction($jobList, $subGraph, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument($jobList, $site, $subGraph),
