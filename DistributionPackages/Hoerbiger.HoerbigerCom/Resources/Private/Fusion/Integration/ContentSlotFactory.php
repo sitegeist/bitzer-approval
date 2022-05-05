@@ -11,6 +11,7 @@ namespace Hoerbiger\HoerbigerCom\Integration;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
@@ -121,7 +122,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
                 return $this->forTileNavigation($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
-                return $this->forTextNode($contentNode, $inBackend, $theme);
+                return $this->forTextNode($contentNode, $subgraph, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
                 return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
@@ -219,7 +220,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forTextNode(TraversableNodeInterface $textNode, bool $inBackend, ?Theme $theme): SlotInterface
+    public function forTextNode(TraversableNodeInterface $textNode, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -248,6 +249,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             Editable::fromNodeProperty($textNode, 'text'),
                             $columns->getIsMaxTwo()
                         )
+                        : null,
+                    $inBackend || $textNode->getProperty('link__target')
+                        ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
                         : null
                 ]), $identity)
             )
