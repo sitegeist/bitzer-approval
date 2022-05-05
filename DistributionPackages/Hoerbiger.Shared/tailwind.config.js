@@ -64,7 +64,7 @@ module.exports = {
 				contrast: '#fff',
 			},
 			decorative: {
-				DEFAULT: '#075289',
+				DEFAULT: '#1B365D',
 				contrast: '#fff',
 			},
 			transparent: {
