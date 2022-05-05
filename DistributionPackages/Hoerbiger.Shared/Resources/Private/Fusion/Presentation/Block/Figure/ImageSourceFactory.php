@@ -90,21 +90,21 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
             case ['width' => 1, 'height' => 1]:
                 /** @var DummyImageSourceHelper $imageSource */
                 $imageSource = $imageSource
-                    ->withWidth(1080)
-                    ->withHeight(1080);
+                    ->setWidth(1080)
+                    ->setHeight(1080);
                 break;
             case ['width' => 3, 'height' => 1]:
                 /** @var DummyImageSourceHelper $imageSource */
                 $imageSource = $imageSource
-                    ->withWidth(1920)
-                    ->withHeight(640);
+                    ->setWidth(1920)
+                    ->setHeight(640);
                 break;
             case null:
             default:
                 /** @var DummyImageSourceHelper $imageSource */
                 $imageSource = $imageSource
-                    ->withWidth(1920)
-                    ->withHeight(1080);
+                    ->setWidth(1920)
+                    ->setHeight(1080);
         }
 
         return $imageSource;
