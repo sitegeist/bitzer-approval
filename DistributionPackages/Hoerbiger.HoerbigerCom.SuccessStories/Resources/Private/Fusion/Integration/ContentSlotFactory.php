@@ -137,9 +137,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                     ?: $successStory->getProperty('headline') ?: ''
                                             ),
                                             new Row(
-                                                RowVariant::alternateMetalineEllipsis(),
+                                                RowVariant::alternateMetaline(),
                                                 Collection::fromIterable([
-                                                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
+                                                    // Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                                                     Value::fromString($applicationWorld->getProperty('previewHeadline')
                                                         ? $applicationWorld->getProperty('previewHeadline')
                                                         : $applicationWorld->getProperty('title') ?? ''
