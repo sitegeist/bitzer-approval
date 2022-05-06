@@ -1,5 +1,8 @@
 prototype(Hoerbiger.HoerbigerCom.HR:Document.JobNotification) <  prototype(Neos.Fusion:Component) {
-    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+    renderer = Hoerbiger.HoerbigerCom.HR:Document.Base {
+        componentsContext = 'search-agent'
+        renderBodyScript = ${false}
+        renderStylesheets = ${false}
         body = Hoerbiger.Shared:Layout.Page {
             presentationObject = ${HR.Page.forJobNotification(site, documentNode, site.context)}
         }

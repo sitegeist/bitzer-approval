@@ -1,5 +1,7 @@
 prototype(Hoerbiger.HoerbigerCom.HR:Document.JobApplication) <  prototype(Neos.Fusion:Component) {
-    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+    renderer =  Hoerbiger.HoerbigerCom.HR:Document.Base {
+        renderHeadScript = ${false}
+        renderBodyScript = ${false}
         body = Hoerbiger.Shared:Layout.Page {
             presentationObject = ${HR.Page.forJobApplication(site, documentNode, site.context)}
         }

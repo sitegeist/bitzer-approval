@@ -8,7 +8,8 @@ namespace Hoerbiger\HoerbigerCom\HR\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.HR package.
  */
 
-
+use Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\PlaceholderFactory;
+use Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\PlaceholderInterface;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
@@ -21,6 +22,7 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
@@ -32,11 +34,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SiteHeaderFactory $siteHeaderFactory;
 
-    public function __construct(StageFactory $stageFactory, SiteFooterFactory $siteFooterFactory, SiteHeaderFactory $siteHeaderFactory)
-    {
+    private PlaceholderFactory $placeholderFactory;
+
+    public function __construct(
+        StageFactory $stageFactory,
+        SiteFooterFactory $siteFooterFactory,
+        SiteHeaderFactory $siteHeaderFactory,
+        PlaceholderFactory $placeholderFactory
+    ) {
         $this->stageFactory = $stageFactory;
         $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
+        $this->placeholderFactory = $placeholderFactory;
     }
 
     public function forJobList(TraversableNodeInterface $site, TraversableNodeInterface $jobList, bool $inBackend, ContentContext $subGraph): PageInterface
@@ -62,7 +71,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                Value::fromString("Job List Placeholder")
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $this->placeholderFactory->forJobList()
+                )
             ]), $identity),
             $this->siteFooterFactory->forDocument($jobList, $site)
         );
@@ -70,21 +82,30 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     public function forJob(TraversableNodeInterface $site, TraversableNodeInterface $job, ContentContext $subGraph): PageInterface
     {
-        $content = Value::fromString("Job Details Placeholder");
+        $content = new ContentContainer(
+            ContentContainerVariant::regularX(),
+            $this->placeholderFactory->forJob()
+        );
 
         return $this->forDocumentWithoutIntroduction($site,$job,$content,$subGraph);
     }
 
     public function forJobNotification(TraversableNodeInterface $site, TraversableNodeInterface $jobNotification, ContentContext $subGraph): PageInterface
     {
-        $content = Value::fromString("Job Notification Form Placeholder");
+        $content = new ContentContainer(
+            ContentContainerVariant::regularX(),
+            $this->placeholderFactory->forJobNotification()
+        );
 
         return $this->forDocumentWithoutIntroduction($site,$jobNotification,$content,$subGraph);
     }
 
     public function forJobApplication(TraversableNodeInterface $site, TraversableNodeInterface $jobApplication, ContentContext $subGraph): PageInterface
     {
-        $content = Value::fromString("Job Application Placeholder");
+        $content = new ContentContainer(
+            ContentContainerVariant::regularX(),
+            $this->placeholderFactory->forJobApplication()
+        );
 
         return $this->forDocumentWithoutIntroduction($site,$jobApplication,$content,$subGraph);
     }

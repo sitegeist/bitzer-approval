@@ -1,0 +1,12 @@
+prototype(Hoerbiger.HoerbigerCom.HR:Block.Placeholder.IndexPlaceholder) < prototype(Hoerbiger.HoerbigerCom.HR:Block.AbstractPlaceholder) {
+    renderer = afx`
+        <div class="tlk-fo-components-styling-context">
+            <div class="tlk-fo-context-with-search-criteria container tlk-fo-component-container search-horizontal tlk-fo-language-select">
+                <div class="horizontal-top-bar">
+                    <div id="lumesseLanguageSelectWidget"></div>
+                </div>
+            </div>
+        </div>
+        <main data-talentlink-fo-root-container></main>
+    `
+}

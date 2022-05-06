@@ -1,0 +1,45 @@
+prototype(Hoerbiger.HoerbigerCom.HR:Document.Base) < prototype(Hoerbiger.HoerbigerCom:Document.Base) {
+    componentsContext = ''
+    renderHeadScript = ${true}
+    @context.renderBodyScript = ${true}
+    @context.renderStylesheets = ${true}
+    renderer.head.javascripts {
+        talentlink = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.src = ${Configuration.setting('Hoerbiger.HoerbigerCom.HR.talentlink.src')}
+            attributes.data-talentlink-fo-layout = 'wcag'
+            attributes.data-talentlink-fo-components-context = ${props.componentsContext}
+            attributes.data-talentlink-fo-site-tech-id = ${Configuration.setting('Hoerbiger.HoerbigerCom.HR.talentlink.siteTechId')}
+            attributes.data-talentlink-fo-host = ${Configuration.setting('Hoerbiger.HoerbigerCom.HR.talentlink.host')}
+        }
+        talentlink.@if.notInApplicationPage = ${props.renderHeadScript}
+    }
+
+    stylesheets {
+        talentlink = Neos.Fusion:Tag {
+            tagName = 'link'
+            attributes.rel = 'stylesheet'
+            attributes.href = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.HR/Public/Styles/custom.css'
+                @process.stripBaseUri = ${(
+                    String.replace(
+                        value,
+                        Configuration.setting('Neos.Flow.http.baseUri'),
+                        '/'
+                    )
+                )}
+            }
+        }
+        talentlink.@if.notInNotificationPage = ${renderStylesheets}
+    }
+    bodyScripts {
+        talentlink = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.async = true
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.HR/Public/JavaScript/custom.js'
+            }
+        }
+        talentlink.@if.notInApplicationAndNotificationPages = ${renderBodyScript}
+    }
+}

@@ -1,0 +1,5 @@
+prototype(Hoerbiger.HoerbigerCom.HR:Block.Placeholder.RegularPlaceholder) < prototype(Hoerbiger.HoerbigerCom.HR:Block.AbstractPlaceholder) {
+    renderer = afx`
+        <main data-talentlink-fo-root-container></main>
+    `
+}
