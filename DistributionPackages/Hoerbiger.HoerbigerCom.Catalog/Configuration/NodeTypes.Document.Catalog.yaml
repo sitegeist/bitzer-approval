@@ -27,6 +27,7 @@
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
       'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   ui:
     icon: book
     label: 'Katalog'
