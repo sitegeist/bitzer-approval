@@ -20,3 +20,7 @@
       type: 'Hoerbiger.HoerbigerCom:Content.Text'
     contactonfail:
       type: 'Hoerbiger.HoerbigerCom:Content.Text'
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
