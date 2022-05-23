@@ -47,4 +47,4 @@ form.placeholder.applicationWorld,select applicationWorld,select applicationWorl
 form.dontknowoption.applicationWorld,I dont know the applicationWorld,I'm not sure about that,Ich bin mir nicht sicher
 form.error.applicationWorld,Error for applicationWorld,Please select an option,Bitte wählen Sie eine Option aus.
 form.content.fillRequiredFields,Fill required fields,* Fill these fields,* Felder müssen ausgefüllt sein
-form.submit,Submit label,submit request,Anfrage absenden
+form.submit,Submit label,Submit request,Anfrage absenden
