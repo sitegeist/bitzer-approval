@@ -111,6 +111,12 @@ class AffiliateRepository
             );
         }
 
+        if ($locale != 'de') {
+            usort($affiliates, function ($affiliateA, $affiliateB) {
+                return strcmp($affiliateA->getAddressCountry(), $affiliateB->getAddressCountry());
+            });
+        }
+
         return new Affiliates($affiliates);
     }
 
