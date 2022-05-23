@@ -180,9 +180,6 @@ module.exports = {
 						strong: {
 							color: theme('colors.neutral.contrast'),
 						},
-						a: {
-							color: theme('colors.neutral.contrast'),
-						}
 					},
 				},
 				'decorative-contrast': {
