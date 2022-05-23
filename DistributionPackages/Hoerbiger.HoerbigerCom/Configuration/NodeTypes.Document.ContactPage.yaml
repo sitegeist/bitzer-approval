@@ -22,5 +22,5 @@
       type: 'Hoerbiger.HoerbigerCom:Content.Text'
   constraints:
     nodeTypes:
-      'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage': true
+      'Hoerbiger.HoerbigerCom:Document.WebPage': true
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
