@@ -10,6 +10,7 @@ use Neos\ContentRepository\DimensionSpace\DimensionSpace\DimensionSpacePoint;
 use Neos\ContentRepository\Domain\ContentStream\ContentStreamIdentifier;
 use Neos\ContentRepository\Domain\ContentSubgraph\NodePath;
 use Neos\ContentRepository\Domain\Model\ArrayPropertyCollection;
+use Neos\ContentRepository\Domain\Model\NodeData;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\NodeTemplate;
 use Neos\ContentRepository\Domain\Model\NodeType;
@@ -318,7 +319,12 @@ abstract class AbstractMediaNodeAdapter implements NodeInterface, TraversableNod
 
     public function getNodeData()
     {
-        throw MethodIsNotSupportedInAdapter::becauseAdaptersEncapsulateNoNodeDataObject('getNodeData');
+        return new NodeData(
+            $this->path,
+            $this->getWorkspace(),
+            $this->identifier,
+            $this->getDimensions()
+        );
     }
 
     public function getContext(): Context
