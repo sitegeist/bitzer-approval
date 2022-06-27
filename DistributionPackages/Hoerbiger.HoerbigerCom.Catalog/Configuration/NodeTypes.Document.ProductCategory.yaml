@@ -24,7 +24,7 @@
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
   constraints:
     nodeTypes:
-      'Hoerbiger.HoerbigerCom.Catalog:Document.Product': true
+      'Hoerbiger.HoerbigerCom.Catalog:Tag.Product': true
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
   ui:
     icon: boxes

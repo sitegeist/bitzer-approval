@@ -1,0 +1,39 @@
+'Hoerbiger.HoerbigerCom.Catalog:Mixin.ProductCategorization':
+  abstract: true
+  ui:
+    inspector:
+      groups:
+        product:
+          label: Produkt
+          icon: barcode
+  properties:
+    sections:
+      type: references
+      ui:
+        label: 'Bereiche'
+        reloadIfChanged: true
+        inspector:
+          group: product
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.Section'
+    industrySolutions:
+      type: references
+      ui:
+        label: 'Branchenlösungen'
+        reloadIfChanged: true
+        inspector:
+          group: product
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
+    productGroup:
+      type: reference
+      ui:
+        label: 'Produktgruppe'
+        reloadIfChanged: true
+        inspector:
+          group: product
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup'

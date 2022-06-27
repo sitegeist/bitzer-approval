@@ -1,0 +1,27 @@
+'Hoerbiger.HoerbigerCom.Catalog:Document.ExternalProduct':
+  superTypes:
+    'Neos.Neos:Shortcut': true
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom.Catalog:Mixin.ProductCategorization': true
+    'Hoerbiger.HoerbigerCom.Catalog:Tag.Product': true
+  ui:
+    icon: barcode
+    label: 'Externes Produkt'
+  properties:
+    targetMode:
+      defaultValue: 'selectedTarget'
+      ui:
+        inspector:
+          group: '_hidden'
+    target:
+      type: string
+      ui:
+        label: 'URL'
+        reloadPageIfChanged: true
+        inspector:
+          hidden: ~
+          group: 'product'
+          editor: Neos.Neos/Inspector/Editors/TextFieldEditor
+          editorListeners: ~
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}

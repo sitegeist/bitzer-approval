@@ -58,7 +58,7 @@ final class CatalogRequest implements \JsonSerializable
                                 ],
                                 [
                                     'term' => [
-                                        'neos_type_and_supertypes' => 'Hoerbiger.HoerbigerCom.Catalog:Document.Product'
+                                        'neos_type_and_supertypes' => 'Hoerbiger.HoerbigerCom.Catalog:Tag.Product'
                                     ]
                                 ]
                             ],

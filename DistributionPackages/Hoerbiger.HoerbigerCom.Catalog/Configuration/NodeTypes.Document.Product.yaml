@@ -1,9 +1,11 @@
 'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom.Catalog:Mixin.ProductCategorization': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.Shared:Mixin.Searchable': true
+    'Hoerbiger.HoerbigerCom.Catalog:Tag.Product': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -25,42 +27,7 @@
   ui:
     icon: barcode
     label: 'Produkt'
-    inspector:
-      groups:
-        product:
-          label: Produkt
-          icon: barcode
   properties:
-    sections:
-      type: references
-      ui:
-        label: 'Bereiche'
-        reloadIfChanged: true
-        inspector:
-          group: product
-          editorOptions:
-            nodeTypes:
-              - 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.Section'
-    industrySolutions:
-      type: references
-      ui:
-        label: 'Branchenlösungen'
-        reloadIfChanged: true
-        inspector:
-          group: product
-          editorOptions:
-            nodeTypes:
-              - 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
-    productGroup:
-      type: reference
-      ui:
-        label: 'Produktgruppe'
-        reloadIfChanged: true
-        inspector:
-          group: product
-          editorOptions:
-            nodeTypes:
-              - 'Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup'
     searchType:
       search:
         indexing: '${"Product"}'
