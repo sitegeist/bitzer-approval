@@ -25,6 +25,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
+use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -79,6 +80,9 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             : null;
 
         $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+        if ($mediaImageSource instanceof AssetImageSourceHelper) {
+            $mediaImageSource->setAsync(true);
+        }
         $mediaBackgroundImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__background');
 
         return new SlideStage(

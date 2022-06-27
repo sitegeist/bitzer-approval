@@ -23,6 +23,7 @@ use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -58,6 +59,9 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
             }),
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+                if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
+                    $thumbnailImageSource->setAsync(true);
+                }
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
 
                 $thumNavigationItem = new ThumbNavigationItem(
