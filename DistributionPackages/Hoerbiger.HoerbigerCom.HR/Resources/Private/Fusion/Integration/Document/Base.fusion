@@ -10,6 +10,7 @@ prototype(Hoerbiger.HoerbigerCom.HR:Document.Base) < prototype(Hoerbiger.Hoerbig
             attributes.data-talentlink-fo-layout = 'wcag'
             attributes.data-talentlink-fo-components-context = ${props.componentsContext}
             attributes.data-talentlink-fo-site-tech-id = ${Configuration.setting('Hoerbiger.HoerbigerCom.HR.talentlink.siteTechId')}
+            attributes.data-talentlink-fo-iso-langcode = ${Array.first(node.context.dimensions.language) == 'de' ? 'de_DE' : 'en_US'}
             attributes.data-talentlink-fo-host = ${Configuration.setting('Hoerbiger.HoerbigerCom.HR.talentlink.host')}
         }
         talentlink.@if.notInApplicationPage = ${props.renderHeadScript}
