@@ -2,3 +2,4 @@ Neos:
   Fusion:
     defaultContext:
       HR.Page: Hoerbiger\HoerbigerCom\HR\Presentation\Layout\Page\PageFactory
+      HR.PlaceHolder: Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\PlaceholderFactory

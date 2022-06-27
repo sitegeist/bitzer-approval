@@ -1,5 +1,6 @@
 prototype(Hoerbiger.HoerbigerCom.HR:Document.JobList) <  prototype(Neos.Fusion:Component) {
-    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+    renderer = Hoerbiger.HoerbigerCom.HR:Document.Base {
+        componentsContext = 'list'
         body = Hoerbiger.Shared:Layout.Page {
             presentationObject = ${HR.Page.forJobList(site, documentNode, documentNode.context.inBackend, site.context)}
         }
