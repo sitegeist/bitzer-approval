@@ -115,6 +115,18 @@ final class CatalogRequest implements \JsonSerializable
         return new self($request);
     }
 
+    public function sortByDocumentTreePosition(): self
+    {
+        $request = $this->request;
+        $request['sort'] = [
+            [
+                'neos_sort_index' => 'asc'
+            ]
+        ];
+
+        return new self($request);
+    }
+
     /**
      * @return array<string,mixed> $request
      */

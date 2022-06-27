@@ -64,7 +64,8 @@ final class Catalog
         /** @var TraversableNodeInterface $siteNode */
         $siteNode = $subgraph->getCurrentSiteNode();
         $request = CatalogRequest::create($siteNode);
-        $request = $request->withSection($section);
+        $request = $request->withSection($section)
+            ->sortByDocumentTreePosition();
 
         $result = $this->searchClient->getIndex()
             ->request('GET', '/_search', [], json_encode($request) ?: null)
