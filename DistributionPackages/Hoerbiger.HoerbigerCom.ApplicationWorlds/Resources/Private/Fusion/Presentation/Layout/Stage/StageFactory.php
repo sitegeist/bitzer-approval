@@ -84,6 +84,9 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             $mediaImageSource->setAsync(true);
         }
         $mediaBackgroundImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__background');
+        if ($mediaBackgroundImageSource instanceof AssetImageSourceHelper) {
+            $mediaBackgroundImageSource->setAsync(true);
+        }
 
         return new SlideStage(
             StageVariant::fullMediaTextRight(),
