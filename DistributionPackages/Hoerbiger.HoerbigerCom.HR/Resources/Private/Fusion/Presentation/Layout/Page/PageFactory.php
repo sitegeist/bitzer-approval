@@ -9,7 +9,6 @@ namespace Hoerbiger\HoerbigerCom\HR\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\PlaceholderFactory;
-use Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\PlaceholderInterface;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
@@ -22,9 +21,7 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
