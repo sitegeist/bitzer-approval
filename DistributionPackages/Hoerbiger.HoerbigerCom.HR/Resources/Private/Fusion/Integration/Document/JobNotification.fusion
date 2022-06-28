@@ -4,7 +4,7 @@ prototype(Hoerbiger.HoerbigerCom.HR:Document.JobNotification) <  prototype(Neos.
         renderBodyScript = ${false}
         renderStylesheets = ${false}
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${HR.Page.forJobNotification(site, documentNode, site.context)}
+            presentationObject = ${HR.Page.forJobNotification(site, documentNode, site.context, request)}
         }
     }
 }

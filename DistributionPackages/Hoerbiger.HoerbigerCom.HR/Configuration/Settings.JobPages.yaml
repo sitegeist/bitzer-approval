@@ -1,0 +1,10 @@
+Hoerbiger:
+  HoerbigerCom:
+    HR:
+      redirects:
+        '/de/details.html': 'de/offene-stellen/jobdetailseite.html'
+        '/en/details.html': 'en/open-positions/job-details.html'
+        '/de/apply.html': '/de/offene-stellen/bewerbungsformular.html'
+        '/en/apply.html': '/en/open-positions/job-application-form.html'
+        '/de/searchagent.html': '/de/offene-stellen/jobalert.html'
+        '/en/searchagent.html': '/en/open-positions/job-notification.html'

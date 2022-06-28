@@ -1,0 +1,11 @@
+prototype(Hoerbiger.Shared:Block.SiteHeader) {
+    @cache {
+        mode = 'cached'
+        entryIdentifier {
+            requestUri = ${request.HttpRequest.serverParams['REQUEST_URI']}
+        }
+        entryTags {
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.HR:Document.Job')}
+        }
+    }
+}

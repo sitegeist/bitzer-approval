@@ -1,0 +1,7 @@
+Neos:
+  Flow:
+    http:
+      middlewares:
+        'pageRedirection':
+          position: 'before dispatch'
+          middleware: 'Hoerbiger\HoerbigerCom\HR\Infrastructure\PageRedirectionMiddleware'
