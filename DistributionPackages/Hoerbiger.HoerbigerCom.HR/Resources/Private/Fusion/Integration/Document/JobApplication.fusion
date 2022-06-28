@@ -3,7 +3,7 @@ prototype(Hoerbiger.HoerbigerCom.HR:Document.JobApplication) <  prototype(Neos.F
         renderHeadScript = ${false}
         renderBodyScript = ${false}
         body = Hoerbiger.Shared:Layout.Page {
-            presentationObject = ${HR.Page.forJobApplication(site, documentNode, site.context)}
+            presentationObject = ${HR.Page.forJobApplication(site, documentNode, site.context, request)}
         }
     }
 }
