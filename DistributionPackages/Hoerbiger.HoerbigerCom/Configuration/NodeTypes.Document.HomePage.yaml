@@ -48,6 +48,9 @@
     label: 'Homepage'
     inspector:
       groups:
+        video:
+          label: 'Video'
+          icon: 'icon-video'
         menu:
           label: 'Footer'
           icon: 'shoe-prints'
@@ -59,6 +62,39 @@
         inline:
           editorOptions:
             placeholder: 'Bitte h1 der Seite eingeben'
+    thumbs_headline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte die optionale Überschrift eingeben'
+    video__source__desktop:
+      type: 'Neos\Media\Domain\Model\Asset'
+      ui:
+        label: 'Video (Desktop)'
+        reloadIfChanged: true
+        inspector:
+          group: 'video'
+          editorOptions:
+            constraints:
+              mediaTypes: ['video/mp4']
+            accept:
+              video/mp4
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': []
+    video__source__mobile:
+      type: 'Neos\Media\Domain\Model\Asset'
+      ui:
+        label: 'Video (Mobil)'
+        reloadIfChanged: true
+        inspector:
+          group: 'video'
+          editorOptions:
+            constraints:
+              mediaTypes: ['video/mp4']
+            accept:
+              video/mp4
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': []
     footerMenu:
       type: references
       ui:

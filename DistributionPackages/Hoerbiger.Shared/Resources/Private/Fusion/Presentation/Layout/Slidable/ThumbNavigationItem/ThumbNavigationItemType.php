@@ -15,6 +15,7 @@ final class ThumbNavigationItemType implements PseudoEnumInterface
 {
     const TYPE_DEFAULT = 'default';
     const TYPE_PLAINTEXT = 'plainText';
+    const TYPE_MOBILE = 'mobile';
 
     /**
      * @var array<string,self>|self[]
@@ -34,6 +35,7 @@ final class ThumbNavigationItemType implements PseudoEnumInterface
             if (
                 $string !== self::TYPE_DEFAULT
                 && $string !== self::TYPE_PLAINTEXT
+                && $string !== self::TYPE_MOBILE
             ) {
                 throw ThumbNavigationItemTypeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -63,6 +65,16 @@ final class ThumbNavigationItemType implements PseudoEnumInterface
         return $this->value === self::TYPE_PLAINTEXT;
     }
 
+    public static function mobile(): self
+    {
+        return self::from(self::TYPE_MOBILE);
+    }
+
+    public function getIsMobile(): bool
+    {
+        return $this->value === self::TYPE_MOBILE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -71,6 +83,7 @@ final class ThumbNavigationItemType implements PseudoEnumInterface
         return [
             self::from(self::TYPE_DEFAULT),
             self::from(self::TYPE_PLAINTEXT),
+            self::from(self::TYPE_MOBILE),
         ];
     }
 

@@ -101,4 +101,35 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
             true
         );
     }
+
+    /**
+     * @param TraversableNodes<int,TraversableNodeInterface> $nodes
+     */
+    public function forThumbs(TraversableNodes $nodes, bool $inBackend): SlotInterface
+    {
+        $linkFactory = new LinkFactory();
+
+        $result = Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
+            $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+            if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
+                $thumbnailImageSource->setAsync(true);
+            }
+            $link = $linkFactory->forLinkToDocument($targetNode, null);
+
+            $thumNavigationItem = new ThumbNavigationItem(
+                $thumbnailImageSource
+                    ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
+                    : null,
+                $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
+                ThumbNavigationItemType::mobile()
+            );
+
+            if ($inBackend) {
+                return $thumNavigationItem;
+            } else {
+                return $link->asContainer()->withContent($thumNavigationItem);
+            }
+        });
+        return $result;
+    }
 }

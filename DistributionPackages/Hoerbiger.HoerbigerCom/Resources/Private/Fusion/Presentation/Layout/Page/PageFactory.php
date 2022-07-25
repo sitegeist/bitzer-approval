@@ -18,6 +18,7 @@ use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Block\ThumbnailList\ThumbnailListFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -85,6 +86,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $inBackend
         );
 
+        $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage, $inBackend);
+
+        $thumbs =  $this->slidableFactory->forThumbs(
+            $this->findChildNodesByNodeTypeFilterString($homepage, 'Hoerbiger.HoerbigerCom:Mixin.SliderPreview'),
+            $inBackend
+        );;
+
+        $thumbnailList = (new ThumbnailListFactory())->forHomepage($homepage, $thumbs, $inBackend);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $homepage,
@@ -93,27 +103,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
-                    $stage
+                    ContentContainerVariant::blank(),
+                    $videoStage
                 ),
                 new ContentContainer(
                     ContentContainerVariant::regular(),
                     new Stack(
                         StackVariant::xs(),
                         Collection::fromIterable(array_filter([
-                            new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::brand(),
-                                HeadlineType::h1(),
-                                Editable::fromNodeProperty($homepage, 'headline')
-                            ),
-                            $inBackend || $homepage->getProperty('text')
-                                ? new Text(
-                                    TextVariant::lightContrast(),
-                                    Editable::fromNodeProperty($homepage, 'text'),
-                                    false
-                                )
-                                : null
+                            $thumbnailList,
                         ]), $identity)
                     )
                 ),
