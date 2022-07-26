@@ -18,6 +18,7 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.MostWanted': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
     career:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerPage'
       position: 128
