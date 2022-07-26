@@ -81,17 +81,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
-        $stage = $this->slidableFactory->forSliderPreviewMixins(
-            $this->findChildNodesByNodeTypeFilterString($homepage, 'Hoerbiger.HoerbigerCom:Mixin.SliderPreview'),
-            $inBackend
-        );
-
         $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage, $inBackend);
 
         $thumbs =  $this->slidableFactory->forThumbs(
             $this->findChildNodesByNodeTypeFilterString($homepage, 'Hoerbiger.HoerbigerCom:Mixin.SliderPreview'),
             $inBackend
-        );;
+        );
 
         $thumbnailList = (new ThumbnailListFactory())->forHomepage($homepage, $thumbs, $inBackend);
 
