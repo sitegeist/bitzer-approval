@@ -47,7 +47,7 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                 StackVariant::xs(),
                 Collection::fromIterable([
                     new Stack(
-                        StackVariant::inline(),
+                        StackVariant::noGap(),
                         Collection::fromIterable([
                             new Tag(
                                 'strong',
