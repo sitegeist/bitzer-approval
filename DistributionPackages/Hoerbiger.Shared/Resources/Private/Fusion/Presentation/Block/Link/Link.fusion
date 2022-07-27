@@ -29,15 +29,19 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.isLabelExcite && "flex items-center min-h-touch min-w-touch text-excite font-sans-bold text-xl",
                 presentationObject.variant.isLabelExperience && "flex items-center min-h-touch min-w-touch text-experience font-sans-bold text-xl",
                 presentationObject.variant.isTouchIcon && "flex items-center h-full max-h-touch",
-                presentationObject.variant.isSiteFooter && "text-light uppercase font-semibold min-h-touch flex items-center whitespace-nowrap",
+                presentationObject.variant.isSquareTouchIcon && "flex items-center h-full max-h-touch max-w-touch",
+                presentationObject.variant.isSiteFooter && "text-light uppercase font-bold min-h-touch xl:min-h-full flex items-center whitespace-nowrap",
                 presentationObject.variant.isPlainLabel && "min-h-touch flex items-center",
                 presentationObject.variant.isIconLabel && "min-h-touch flex items-center justify-between",
                 presentationObject.variant.isLabelDefault && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
             ]}
         >
             <Neos.Fusion:Augmenter
-                class.@if.1={presentationObject.variant.isTouchIcon}
-                class="max-h-touch"
+                class={Array.join(Array.filter([
+                    presentationObject.variant.isTouchIcon && "max-h-touch",
+                    presentationObject.variant.isSquareTouchIcon && "max-h-touch max-w-touch"
+                ]))}
+                class.@if.any={presentationObject.variant.isTouchIcon || presentationObject.variant.isSquareTouchIcon}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     @if.1={presentationObject.content}

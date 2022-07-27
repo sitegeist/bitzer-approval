@@ -11,8 +11,6 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
-use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
-
 
 final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -24,35 +22,41 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
 
     private ContactFormLinkFactory $contactFormLinkFactory;
 
-    public function __construct(ContactFormLinkFactory $contactFormLinkFactory)
+    private LinkFactory $linkFactory;
+
+    public function __construct(ContactFormLinkFactory $contactFormLinkFactory, LinkFactory $linkFactory)
     {
         $this->contactFormLinkFactory = $contactFormLinkFactory;
+        $this->linkFactory = $linkFactory;
     }
 
     public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): SiteFooterInterface
     {
-        $linkFactory = new LinkFactory();
+        $socialMediaLinks = Collection::fromIterable(
+            $this->socialMediaSettings,
+            fn ($socialMediaItem, $index) => $this->linkFactory->forSocialMediaIcon(
+                $index,
+                $socialMediaItem["url"],
+                $socialMediaItem["label"]
+            )
+        );
 
         return new SiteFooter(
+            $this->uriService->getNodeUri($site),
+            $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/logo_white.png'),
             Collection::fromIterable(
-                $this->socialMediaSettings,
-                function($socialMediaItem, $index) use($linkFactory) {
-                    return $linkFactory->forSocialMediaIcon(
-                        $index,
-                        $socialMediaItem["url"],
-                        $socialMediaItem["label"]
-                    );
-                }
+                $site->getProperty('primaryFooter') ?: [],
+                fn (TraversableNodeInterface $footerLinkNode) => $this->linkFactory->forFooterMenuItem($footerLinkNode)
             ),
-            new CacheSegment(
-                Collection::fromIterable(
-                    $site->getProperty('footerMenu') ?: [],
-                    function(TraversableNodeInterface $footerLinkNode) use ($linkFactory) {
-                        return $linkFactory->forFooterMenuItem($footerLinkNode);
-                    }
-                ),
-                'Hoerbiger.Shared:CacheSegment.SiteReactive'
+            Collection::fromIterable(
+                $site->getProperty('secondaryFooter') ?: [],
+                fn (TraversableNodeInterface $footerLinkNode) => $this->linkFactory->forFooterMenuItem($footerLinkNode)
             ),
+            Collection::fromIterable(
+                $site->getProperty('tertiaryFooter') ?: [],
+                fn (TraversableNodeInterface $footerLinkNode) => $this->linkFactory->forFooterMenuItem($footerLinkNode)
+            ),
+            $socialMediaLinks,
             $this->contactFormLinkFactory->forDocument($document, $site)
         );
     }

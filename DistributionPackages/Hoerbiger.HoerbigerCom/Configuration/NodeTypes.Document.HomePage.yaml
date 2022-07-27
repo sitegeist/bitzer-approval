@@ -59,10 +59,10 @@
         inline:
           editorOptions:
             placeholder: 'Bitte h1 der Seite eingeben'
-    footerMenu:
+    primaryFooter:
       type: references
-      ui:
-        label: 'Menüpunkte Footer'
+      ui: &footerMenu
+        label: 'Menüpunkte Primärer Footer'
         reloadIfChanged: true
         inspector:
           group: menu
@@ -70,3 +70,13 @@
             nodeTypes:
               - 'Hoerbiger.HoerbigerCom:Document.WebPage'
               - 'Neos.Neos:Shortcut'
+    secondaryFooter:
+      type: references
+      ui:
+        <<: *footerMenu
+        label: 'Menüpunkte Sekundärer Footer'
+    tertiaryFooter:
+      type: references
+      ui:
+        <<: *footerMenu
+        label: 'Menüpunkte Tertiärer Footer'

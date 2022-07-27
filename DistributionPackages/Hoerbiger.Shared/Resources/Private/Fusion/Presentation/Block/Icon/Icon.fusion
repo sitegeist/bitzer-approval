@@ -48,7 +48,7 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
             colorBrand = "fill-brand"
             colorBrand.@if.1 = ${presentationObject.color.isBrand}
 
-            colorWhite = "fill-white"
+            colorWhite = "fill-[#ffffff]"
             colorWhite.@if.1 = ${presentationObject.color.isWhite}
 
             colorExcite = "fill-excite"

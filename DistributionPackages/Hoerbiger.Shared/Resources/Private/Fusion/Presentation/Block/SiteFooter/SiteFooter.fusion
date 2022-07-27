@@ -1,15 +1,6 @@
 prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
     @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\SiteFooter\\SiteFooterInterface'
 
-    @styleguide {
-        title = 'SiteFooter'
-
-        props {
-            socialLinks = '- Add Slot Content -'
-            navigationLinks = '- Add Slot Content -'
-        }
-    }
-
     renderer = afx`
         <footer class={[
             "[Block.SiteFooter]",
@@ -23,34 +14,51 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
                     <Hoerbiger.Shared:Block.ContactFormLink presentationObject={presentationObject.contactFormLink} />
                 </div>
             </div>
-            <div class="bg-neutral-darker border border-t-4 border-t-brand">
-                <div class="mx-auto max-w-content-full px-md py-md sm:py-xs flex flex-col items-center lg:flex-row sm:space-x-sm space-y-md lg:space-y-0">
-                    <div class="flex w-full justify-between items-center ">
-                        <img
-                            alt="Logo Hoerbiger"
-                            class="max-w-[150px]"
-                            width="233"
-                            height="80"
-                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_white.png')}
-                        />
-                        <div
-                            @if.1={presentationObject.socialLinks}
-                            class="flex text-light space-x-xs"
-                        >
-                            <Neos.Fusion:Loop items={presentationObject.socialLinks.items} >
-                                <Neos.Fusion:Augmenter class="max-w-touch">
-                                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
-                                </Neos.Fusion:Augmenter>
-                            </Neos.Fusion:Loop>
+            <div class="bg-neutral-darker border border-t-4 border-t-brand font-sans-bold">
+                <div class="mx-auto max-w-content-full py-lg px-xl md:px-md md:py-md">
+                    <div class={[
+                        "w-full flex flex-col space-y-lg",
+                        "md:space-y-10 lg:space-y-0 lg:grid lg:gap-lg lg:grid-cols-2 xl:grid-cols-5"
+                    ]}>
+                        <div class="col-span-3 xl:col-span-1 flex justify-center items-start">
+                            <a href={presentationObject.siteUri}>
+                                <img
+                                    alt="Logo Hoerbiger"
+                                    title="Hoerbiger"
+                                    class="max-w-[240px]"
+                                    width="233"
+                                    height="80"
+                                    src={presentationObject.logoUri}
+                                />
+                            </a>
                         </div>
-                    </div>
-                    <div class="flex items-center space-x-xs">
-
-                        <div
-                            @if.1={presentationObject.navigationLinks}
-                            class="flex flex-wrap md:flex-nowrap justify-center space-x-sm md:space-x-xs "
-                        >
-                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.navigationLinks} />
+                        <ul class="flex flex-col space-y-3 xl:space-y-5">
+                            <Neos.Fusion:Loop items={presentationObject.primaryNavigationItems.items}>
+                                <li>
+                                    <Hoerbiger.Shared:Block.Link presentationObject={item}/>
+                                </li>
+                            </Neos.Fusion:Loop>
+                        </ul>
+                        <ul class="flex flex-col space-y-3 xl:space-y-5">
+                            <Neos.Fusion:Loop items={presentationObject.secondaryNavigationItems.items}>
+                                <li>
+                                    <Hoerbiger.Shared:Block.Link presentationObject={item}/>
+                                </li>
+                            </Neos.Fusion:Loop>
+                        </ul>
+                        <ul class="flex flex-col space-y-3 xl:space-y-5">
+                            <Neos.Fusion:Loop items={presentationObject.tertiaryNavigationItems.items}>
+                                <li>
+                                    <Hoerbiger.Shared:Block.Link presentationObject={item}/>
+                                </li>
+                            </Neos.Fusion:Loop>
+                        </ul>
+                        <div class="flex col-span-3 xl:col-span-1 items-start justify-center">
+                            <div class="flex justify-center xl:flex-col gap-2">
+                                <Neos.Fusion:Loop items={presentationObject.socialLinks.items}>
+                                    <Hoerbiger.Shared:Block.Link presentationObject={item}/>
+                                </Neos.Fusion:Loop>
+                            </div>
                         </div>
                     </div>
                 </div>

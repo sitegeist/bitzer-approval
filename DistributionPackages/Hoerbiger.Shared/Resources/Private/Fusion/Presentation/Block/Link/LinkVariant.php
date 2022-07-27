@@ -20,6 +20,7 @@ final class LinkVariant implements PseudoEnumInterface
     const VARIANT_CONTAINER = 'container';
     const VARIANT_LABEL = 'label';
     const VARIANT_TOUCHICON = 'touchIcon';
+    const VARIANT_SQUARETOUCHICON = 'squareTouchIcon';
     const VARIANT_NOSTYLES = 'noStyles';
     const VARIANT_SITEFOOTER = 'siteFooter';
     const VARIANT_PLAINLABEL = 'plainLabel';
@@ -50,6 +51,7 @@ final class LinkVariant implements PseudoEnumInterface
                 $string !== self::VARIANT_CONTAINER
                 && $string !== self::VARIANT_LABEL
                 && $string !== self::VARIANT_TOUCHICON
+                && $string !== self::VARIANT_SQUARETOUCHICON
                 && $string !== self::VARIANT_NOSTYLES
                 && $string !== self::VARIANT_SITEFOOTER
                 && $string !== self::VARIANT_PLAINLABEL
@@ -88,6 +90,11 @@ final class LinkVariant implements PseudoEnumInterface
     public static function touchIcon(): self
     {
         return self::from(self::VARIANT_TOUCHICON);
+    }
+
+    public static function squareTouchIcon(): self
+    {
+        return self::from(self::VARIANT_SQUARETOUCHICON);
     }
 
     public static function noStyles(): self
@@ -148,6 +155,11 @@ final class LinkVariant implements PseudoEnumInterface
     public function getIsTouchIcon(): bool
     {
         return $this->value === self::VARIANT_TOUCHICON;
+    }
+
+    public function getIsSquareTouchIcon(): bool
+    {
+        return $this->value === self::VARIANT_SQUARETOUCHICON;
     }
 
     public function getIsNoStyles(): bool

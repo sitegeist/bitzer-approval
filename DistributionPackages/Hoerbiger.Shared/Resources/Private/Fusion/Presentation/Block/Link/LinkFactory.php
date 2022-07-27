@@ -10,6 +10,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
 
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
@@ -64,11 +65,11 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     public function forSocialMediaIcon(string $iconName, string $socialMediaLink, string $socialMediaLabel): Link
     {
         return new Link(
-            LinkVariant::touchIcon(),
+            LinkVariant::squareTouchIcon(),
             new Uri($socialMediaLink),
             LinkTarget::self(),
             null,
-            new Icon('shared', strtolower($iconName)),
+            new Icon('shared', strtolower($iconName), null, IconColor::white()),
             $socialMediaLabel
         );
     }
