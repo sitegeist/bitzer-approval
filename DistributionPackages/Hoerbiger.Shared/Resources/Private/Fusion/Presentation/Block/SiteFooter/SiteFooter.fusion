@@ -6,6 +6,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
             "[Block.SiteFooter]",
             "w-full max-w-screen flex-flex-col items-stretch z-content"
         ]}>
+            <div class="bg-triangle"></div>
             <div
                 @if.1={presentationObject.contactFormLink}
                 class="bg-neutral-lighter "

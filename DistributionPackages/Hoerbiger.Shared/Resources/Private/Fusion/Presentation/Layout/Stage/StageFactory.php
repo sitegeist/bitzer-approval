@@ -18,6 +18,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Layout\Stage\FullMediaStage\FullMediaStage;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\VideoStage\VideoStage;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -63,6 +64,47 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             $this->figureFactory->forFullMediaStage($imageSource),
             $button
+        );
+    }
+
+    public function forVideoStageIntroduction(TraversableNodeInterface $node, bool $inBackend): VideoStage
+    {
+        $desktopVideoSource = $node->getProperty('video__source__desktop')
+            ? $this->uriService->getAssetUri($node->getProperty('video__source__desktop'))
+            : null ;
+
+        if (!$desktopVideoSource) {
+            throw new \InvalidArgumentException('Property "desktop video" is required for content element.');
+        }
+
+        $mobileVideoSource = $node->getProperty('video__source__mobile')
+            ? $this->uriService->getAssetUri($node->getProperty('video__source__mobile'))
+            : null ;
+
+        if (!$mobileVideoSource) {
+            throw new \InvalidArgumentException('Property "mobile video" is required for content element.');
+        }
+
+        return new VideoStage(
+            StageVariant::default(),
+            null,
+            new Headline(
+                HeadlineSize::large(),
+                HeadlineColor::brand(),
+                HeadlineType::h1(),
+                Editable::fromNodeProperty($node, 'headline')
+            ),
+            null,
+            new Text(
+                TextVariant::lightContrast(),
+                Editable::fromNodeProperty($node, 'text'),
+                false
+            ),
+            null,
+            null,
+            null,
+            $desktopVideoSource,
+            $mobileVideoSource
         );
     }
 }

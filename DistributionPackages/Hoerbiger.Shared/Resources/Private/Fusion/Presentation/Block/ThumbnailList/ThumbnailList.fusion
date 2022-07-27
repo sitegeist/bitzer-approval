@@ -1,0 +1,37 @@
+prototype(Hoerbiger.Shared:Block.ThumbnailList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ThumbnailList\\ThumbnailListInterface'
+
+    @styleguide {
+        title = 'ThumbnailList'
+
+        props {
+            variant = 'regular'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.ThumbnailList]",
+            "w-full"
+        ]}>
+            <Hoerbiger.Shared:Block.Headline
+                @if.1={presentationObject.headline}
+                presentationObject={presentationObject.headline}
+            />
+
+            <div
+                @if.1={presentationObject.thumbnailList.items}
+                class={[
+                    "flex flex-col md:flex-row overflow-hidden space-y-xs md:space-y-0 md:space-x-xs mt-xs mx-xs relative mx-0 w-full justify-between w-full"
+                ]}
+            >
+                <Neos.Fusion:Loop items={presentationObject.thumbnailList.items}>
+                    <Neos.Fusion:Augmenter data-select="jumper">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                    </Neos.Fusion:Augmenter>
+                </Neos.Fusion:Loop>
+            </div>
+        </div>
+    `
+}
