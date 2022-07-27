@@ -106,7 +106,7 @@
           editorOptions:
             nodeTypes:
               - 'Hoerbiger.HoerbigerCom:Document.WebPage'
-              - 'Neos.Neos:Shortcut'
+              - 'Hoerbiger.HoerbigerCom:Document.Shortcut'
     secondaryFooter:
       type: references
       ui:

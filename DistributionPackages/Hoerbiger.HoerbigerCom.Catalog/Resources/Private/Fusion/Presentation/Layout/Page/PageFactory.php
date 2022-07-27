@@ -5,13 +5,11 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
-use Hoerbiger\HoerbigerCom\Catalog\Domain\Catalog;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Stage\StageFactory as CatalogStageFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -39,20 +37,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private StageFactory $stageFactory;
 
-    private SiteFooterFactory $siteFooterFactory;
-
     private SiteHeaderFactory $siteHeaderFactory;
 
     private ProductListFactory $productListFactory;
 
     public function __construct(
         StageFactory $stageFactory,
-        SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory,
         ProductListFactory $productListFactory
     ) {
         $this->stageFactory = $stageFactory;
-        $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
         $this->productListFactory = $productListFactory;
     }
@@ -117,8 +111,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList'
                 ),
                 Content::fromNode($industrySolutions->findNamedChildNode(NodeName::fromString('main'))),
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($industrySolutions, $site)
+            ]), $identity)
         );
     }
 
@@ -154,8 +147,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $this->productListFactory->forIndustrySolution($industrySolution, $subgraph, $inBackend),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList'
                 ),
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($industrySolution, $site)
+            ]), $identity)
         );
     }
 
@@ -184,8 +176,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($document, $site)
+            ]), $identity)
         );
     }
 }

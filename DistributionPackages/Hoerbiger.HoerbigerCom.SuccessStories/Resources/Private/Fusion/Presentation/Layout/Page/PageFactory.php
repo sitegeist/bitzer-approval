@@ -6,14 +6,12 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Application\ArticleOverview\ArticleOverviewFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Stage\StageFactory as SuccessStoriesStageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -37,21 +35,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private SuccessStoriesStageFactory $successStoriesStageFactory;
 
-    private SiteFooterFactory $siteFooterFactory;
-
     private SiteHeaderFactory $siteHeaderFactory;
 
     public function __construct(
         ArticleOverviewFactory $articleOverviewFactory,
         StageFactory $stageFactory,
         SuccessStoriesStageFactory $successStoriesStageFactory,
-        SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory
     ) {
         $this->articleOverviewFactory = $articleOverviewFactory;
         $this->stageFactory = $stageFactory;
         $this->successStoriesStageFactory = $successStoriesStageFactory;
-        $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
@@ -89,8 +83,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         'Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList'
                     )
                 )
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($magazine, $site)
+            ]), $identity)
         );
 
     }
@@ -128,8 +121,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $introSection
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($document, $site)
+            ]), $identity)
         );
     }
 }

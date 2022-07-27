@@ -11,7 +11,6 @@ namespace Hoerbiger\HoerbigerCom\HR\Presentation\Layout\Page;
 use Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\PlaceholderFactory;
 use Hoerbiger\HoerbigerCom\HR\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -28,20 +27,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     private StageFactory $stageFactory;
 
-    private SiteFooterFactory $siteFooterFactory;
-
     private SiteHeaderFactory $siteHeaderFactory;
 
     private PlaceholderFactory $placeholderFactory;
 
     public function __construct(
         StageFactory $stageFactory,
-        SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory,
         PlaceholderFactory $placeholderFactory
     ) {
         $this->stageFactory = $stageFactory;
-        $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
         $this->placeholderFactory = $placeholderFactory;
     }
@@ -77,8 +72,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::regularX(),
                     $this->placeholderFactory->forJobList()
                 )
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($jobList, $site)
+            ]), $identity)
         );
     }
 
@@ -157,8 +151,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $breadcrumb
                 ),
                 $content
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($document, $site)
+            ]), $identity)
         );
     }
 }

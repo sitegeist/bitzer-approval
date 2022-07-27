@@ -1,1 +1,16 @@
 include: ./**/*.fusion
+
+siteFooter = Hoerbiger.Shared:Block.SiteFooter {
+    presentationObject = ${Shared.SiteFooter.forDocument(documentNode, site)}
+
+    @cache {
+        mode = 'cached'
+        entryIdentifier {
+            site = ${site}
+        }
+        entryTags {
+            // any document might be part of the footer
+            document = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom:Document')}
+        }
+    }
+}

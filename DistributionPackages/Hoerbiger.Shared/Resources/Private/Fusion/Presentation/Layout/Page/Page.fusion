@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
             <main class="flex-grow flex flex-col items-stretch z-content">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </main>
-            <Hoerbiger.Shared:Block.SiteFooter presentationObject={presentationObject.siteFooter} />
+            <Neos.Fusion:Renderer renderPath="/siteFooter" />
         </div>
     `
 }

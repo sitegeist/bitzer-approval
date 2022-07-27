@@ -25,7 +25,6 @@ use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
@@ -51,21 +50,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     private FormattedDateFactory $formattedDateFactory;
 
-    private SiteFooterFactory $siteFooterFactory;
-
     private SiteHeaderFactory $siteHeaderFactory;
 
     public function __construct(
         StageFactory $stageFactory,
         PressArchiveStageFactory $pressArchivestageFactory,
         FormattedDateFactory $formattedDateFactory,
-        SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory
     ) {
         $this->stageFactory = $stageFactory;
         $this->pressArchivestageFactory = $pressArchivestageFactory;
         $this->formattedDateFactory = $formattedDateFactory;
-        $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
@@ -165,8 +160,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                 ]),
                 $identity
-            ),
-            $this->siteFooterFactory->forDocument($magazine, $site)
+            )
         );
     }
 
@@ -206,8 +200,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
                 ]),
                 $identity
-            ),
-            $this->siteFooterFactory->forDocument($document, $site)
+            )
         );
     }
 

@@ -15,6 +15,4 @@ interface PageInterface extends ComponentPresentationObjectInterface
     public function getSiteHeader(): SiteHeaderInterface;
 
     public function getContent(): SlotInterface;
-
-    public function getSiteFooter(): SiteFooterInterface;
 }

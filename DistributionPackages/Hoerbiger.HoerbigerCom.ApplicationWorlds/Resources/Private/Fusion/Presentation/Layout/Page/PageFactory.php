@@ -18,7 +18,6 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -59,8 +58,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
      */
     protected $figureFactory;
 
-    private SiteFooterFactory $siteFooterFactory;
-
     private SiteHeaderFactory $siteHeaderFactory;
 
     private ProductListFactory $productListFactory;
@@ -68,12 +65,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     private StageFactory $stageFactory;
 
     public function __construct(
-        SiteFooterFactory $siteFooterFactory,
         SiteHeaderFactory $siteHeaderFactory,
         ProductListFactory $productListFactory,
         StageFactory $stageFactory
     ) {
-        $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
         $this->productListFactory = $productListFactory;
         $this->stageFactory = $stageFactory;
@@ -129,8 +124,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup'
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer')))
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($applicationWorld, $site)
+            ]), $identity)
         );
     }
 }

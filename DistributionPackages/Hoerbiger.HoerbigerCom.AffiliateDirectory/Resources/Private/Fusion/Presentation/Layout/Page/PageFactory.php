@@ -13,7 +13,6 @@ use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -33,14 +32,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     private StageFactory $stageFactory;
 
-    private SiteFooterFactory $siteFooterFactory;
-
     private SiteHeaderFactory $siteHeaderFactory;
 
-    public function __construct(StageFactory $stageFactory, SiteFooterFactory $siteFooterFactory, SiteHeaderFactory $siteHeaderFactory)
+    public function __construct(StageFactory $stageFactory, SiteHeaderFactory $siteHeaderFactory)
     {
         $this->stageFactory = $stageFactory;
-        $this->siteFooterFactory = $siteFooterFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
@@ -94,8 +90,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         ]), $identity)
                     )
                 )
-            ]), $identity),
-            $this->siteFooterFactory->forDocument($affiliateFinder, $site)
+            ]), $identity)
         );
     }
 }

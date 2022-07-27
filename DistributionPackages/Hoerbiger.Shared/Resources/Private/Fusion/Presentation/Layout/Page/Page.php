@@ -20,16 +20,12 @@ final class Page extends AbstractComponentPresentationObject implements PageInte
 
     private SlotInterface $content;
 
-    private SiteFooterInterface $siteFooter;
-
     public function __construct(
         SiteHeaderInterface $siteHeader,
-        SlotInterface $content,
-        SiteFooterInterface $siteFooter
+        SlotInterface $content
     ) {
         $this->siteHeader = $siteHeader;
         $this->content = $content;
-        $this->siteFooter = $siteFooter;
     }
 
     public function getSiteHeader(): SiteHeaderInterface
@@ -40,10 +36,5 @@ final class Page extends AbstractComponentPresentationObject implements PageInte
     public function getContent(): SlotInterface
     {
         return $this->content;
-    }
-
-    public function getSiteFooter(): SiteFooterInterface
-    {
-        return $this->siteFooter;
     }
 }
