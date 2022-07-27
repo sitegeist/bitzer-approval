@@ -105,7 +105,7 @@
           group: menu
           editorOptions:
             nodeTypes:
-              - 'Hoerbiger.HoerbigerCom:Document.WebPage'
+              - 'Hoerbiger.HoerbigerCom:Document'
               - 'Hoerbiger.HoerbigerCom:Document.Shortcut'
     secondaryFooter:
       type: references
