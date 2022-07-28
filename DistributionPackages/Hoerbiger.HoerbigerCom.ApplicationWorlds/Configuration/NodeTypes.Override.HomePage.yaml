@@ -6,12 +6,12 @@
     applicationworld2:
       type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
       position: 289
-    applicationworld3:
+    applicationworld5:
       type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
       position: 290
-    applicationworld4:
+    applicationworld3:
       type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
       position: 291
-    applicationworld5:
+    applicationworld4:
       type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
       position: 292
