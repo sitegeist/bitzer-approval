@@ -7,6 +7,8 @@ siteFooter = Hoerbiger.Shared:Block.SiteFooter {
         mode = 'cached'
         entryIdentifier {
             site = ${site}
+            document = ${documentNode}
+            document.@if.inContactPage = ${q(documentNode).is('[instanceof Hoerbiger.HoerbigerCom:Document.ContactPage]')}
         }
         entryTags {
             // any document might be part of the footer
