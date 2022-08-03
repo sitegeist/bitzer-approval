@@ -4,6 +4,9 @@
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.Shared:Mixin.Searchable': true
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
