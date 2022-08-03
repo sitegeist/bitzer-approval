@@ -7,6 +7,7 @@
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
