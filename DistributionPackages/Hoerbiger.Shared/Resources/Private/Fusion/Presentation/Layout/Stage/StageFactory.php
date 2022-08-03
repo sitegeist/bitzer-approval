@@ -67,44 +67,39 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forVideoStageIntroduction(TraversableNodeInterface $node, bool $inBackend): VideoStage
+    public function forVideoStageIntroduction(TraversableNodeInterface $node): ?VideoStage
     {
         $desktopVideoSource = $node->getProperty('video__source__desktop')
             ? $this->uriService->getAssetUri($node->getProperty('video__source__desktop'))
-            : null ;
-
-        if (!$desktopVideoSource) {
-            throw new \InvalidArgumentException('Property "desktop video" is required for content element.');
-        }
+            : null;
 
         $mobileVideoSource = $node->getProperty('video__source__mobile')
             ? $this->uriService->getAssetUri($node->getProperty('video__source__mobile'))
-            : null ;
+            : null;
 
-        if (!$mobileVideoSource) {
-            throw new \InvalidArgumentException('Property "mobile video" is required for content element.');
-        }
 
-        return new VideoStage(
-            StageVariant::default(),
-            null,
-            new Headline(
-                HeadlineSize::large(),
-                HeadlineColor::brand(),
-                HeadlineType::h1(),
-                Editable::fromNodeProperty($node, 'headline')
-            ),
-            null,
-            new Text(
-                TextVariant::lightContrast(),
-                Editable::fromNodeProperty($node, 'text'),
-                false
-            ),
-            null,
-            null,
-            null,
-            $desktopVideoSource,
-            $mobileVideoSource
-        );
+        return $desktopVideoSource && $mobileVideoSource
+            ? new VideoStage(
+                StageVariant::default(),
+                null,
+                new Headline(
+                    HeadlineSize::large(),
+                    HeadlineColor::brand(),
+                    HeadlineType::h1(),
+                    Editable::fromNodeProperty($node, 'headline')
+                ),
+                null,
+                new Text(
+                    TextVariant::lightContrast(),
+                    Editable::fromNodeProperty($node, 'text'),
+                    false
+                ),
+                null,
+                null,
+                null,
+                $desktopVideoSource,
+                $mobileVideoSource
+            )
+            : null;
     }
 }

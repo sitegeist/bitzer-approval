@@ -69,7 +69,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
-        $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage, $inBackend);
+        $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage);
 
         $thumbs =  $this->slidableFactory->forThumbs(
             $this->findChildNodesByNodeTypeFilterString($homepage, 'Hoerbiger.HoerbigerCom:Mixin.SliderPreview'),
@@ -85,10 +85,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new ContentContainer(
-                    ContentContainerVariant::blank(),
-                    $videoStage
-                ),
+                $videoStage
+                    ? new ContentContainer(
+                        ContentContainerVariant::blank(),
+                        $videoStage
+                    )
+                    : null,
                 new ContentContainer(
                     ContentContainerVariant::regular(),
                     new Stack(
