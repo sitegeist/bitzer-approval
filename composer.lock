@@ -2644,7 +2644,7 @@
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.Shared",
-                "reference": "51a3dd46ffbe5129f5fba6b303209cf80d0d6e08"
+                "reference": "3bdba705c3282b069470ef09c3bc40dda0b0e02b"
             },
             "require": {
                 "flowpack/elasticsearch-contentrepositoryadaptor": "~8.1",
@@ -2658,6 +2658,7 @@
                 "neos/seo": "^3.0",
                 "neos/swiftmailer": "^7.1",
                 "packagefactory/atomicfusion-presentationobjects": "^3.0",
+                "shel/neos-hyphens": "^1.2",
                 "sitegeist/bitzer-approval": "*",
                 "sitegeist/csvpo": "^1.3",
                 "sitegeist/inspectorgadget": "*",
@@ -7651,6 +7652,57 @@
                 "source": "https://github.com/Seldaek/phar-utils/tree/1.2.0"
             },
             "time": "2021-12-10T11:20:11+00:00"
+        },
+        {
+            "name": "shel/neos-hyphens",
+            "version": "1.2.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Sebobo/Shel.Neos.Hyphens.git",
+                "reference": "bfe347fd58d0812fe34553103208f7920b724f16"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Sebobo/Shel.Neos.Hyphens/zipball/bfe347fd58d0812fe34553103208f7920b724f16",
+                "reference": "bfe347fd58d0812fe34553103208f7920b724f16",
+                "shasum": ""
+            },
+            "require": {
+                "neos/neos": "^4.3 || ^5.0 || ^7.0 || ^8.0 || dev-master",
+                "neos/neos-ui": "^4.0 || ^5.0 || ^7.0 || ^8.0 || dev-master"
+            },
+            "type": "neos-plugin",
+            "extra": {
+                "neos": {
+                    "package-key": "Shel.Neos.Hyphens"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "Sebastian Helzle",
+                    "email": "sebastian@helzle.it",
+                    "homepage": "https://www.helzle.it",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A plugin for Neos CMS which provides hyphens for the inline editor",
+            "keywords": [
+                "CKEditor",
+                "Neos",
+                "editor",
+                "flow",
+                "hyphens",
+                "neoscms"
+            ],
+            "support": {
+                "issues": "https://github.com/Sebobo/Shel.Neos.Hyphens/issues",
+                "source": "https://github.com/Sebobo/Shel.Neos.Hyphens/tree/1.2.2"
+            },
+            "time": "2022-04-19T11:13:48+00:00"
         },
         {
             "name": "sitegeist/bitzer",
@@ -12782,5 +12834,5 @@
     "platform-overrides": {
         "php": "7.4"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
