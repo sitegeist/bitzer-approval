@@ -11,6 +11,7 @@ Neos:
                 inline:
                   editorOptions:
                     autoparagraph: false
+                    hyphens: true
                     formatting:
                       removeFormat: true
                       sup: true
@@ -22,6 +23,7 @@ Neos:
                 inline:
                   editorOptions:
                     autoparagraph: true
+                    hyphens: true
                     linking:
                       anchor: true
                       title: true
