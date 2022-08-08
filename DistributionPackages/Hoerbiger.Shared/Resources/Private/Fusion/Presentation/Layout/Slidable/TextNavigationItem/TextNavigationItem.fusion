@@ -1,0 +1,36 @@
+prototype(Hoerbiger.Shared:Layout.Slidable.TextNavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\TextNavigationItem\\TextNavigationItemInterface'
+
+    @styleguide {
+        title = 'TextNavigationItem'
+
+        props {
+            icon {
+                collectionName = 'shared'
+                iconName = 'arrowRight'
+            }
+            label = 'Text'
+        }
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                "[Layout.Slidable.TextNavigationItem]",
+                "flex flex-col items-center",
+                "bg-transparent  justify-between md:justify-end text-transparent px-xs md:px-0 py-xs w-full"
+            ]}
+            data-select="jumper"
+        >
+            <div class="hidden md:flex items-center">
+                <span class={[
+                    "hidden lg:block justify-center text-center text-lg font-semibold mx-2 leading-[1.3em]",
+                    "lg:justify-start lg:text-left uppercase whitespace-nowrap text-light"
+                ]}>
+                    {presentationObject.label}
+                </span>
+            </div>
+            <div class="bg-brand rounded-[10px] opacity-50 h-xs md:h-[8px] md:mt-ch w-full flex"></div>
+        </div>
+    `
+}

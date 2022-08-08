@@ -19,15 +19,23 @@ final class Slidable extends AbstractComponentPresentationObject implements Slid
 
     private ?SlotInterface $thumbs;
 
+    private ?SlotInterface $inlineNavigation;
+
+    private ?SlotInterface $dots;
+
     private ?bool $isApplicationWorld;
 
     public function __construct(
         SlotInterface $slides,
         ?SlotInterface $thumbs,
+        ?SlotInterface $inlineNavigation = null,
+        ?SlotInterface $dots = null,
         ?bool $isApplicationWorld = false
     ) {
         $this->slides = $slides;
         $this->thumbs = $thumbs;
+        $this->inlineNavigation = $inlineNavigation;
+        $this->dots = $dots;
         $this->isApplicationWorld = $isApplicationWorld;
     }
 
@@ -39,6 +47,16 @@ final class Slidable extends AbstractComponentPresentationObject implements Slid
     public function getThumbs(): ?SlotInterface
     {
         return $this->thumbs;
+    }
+
+    public function getInlineNavigation(): ?SlotInterface
+    {
+        return $this->inlineNavigation;
+    }
+
+    public function getDots(): ?SlotInterface
+    {
+        return $this->dots;
     }
 
     public function getIsApplicationWorld(): ?bool

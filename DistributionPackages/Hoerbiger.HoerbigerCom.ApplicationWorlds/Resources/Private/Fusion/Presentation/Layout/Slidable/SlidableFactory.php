@@ -13,7 +13,9 @@ use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\DotNavigationItem\DotNavigationItem;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\IconNavigationItem\IconNavigationItem;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\TextNavigationItem\TextNavigationItem;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -53,9 +55,25 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         return new Slidable(
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
-                $stage = $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
+                return $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
+            }),
+            null,
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
+                $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+                if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
+                    $thumbnailImageSource->setAsync(true);
+                }
+                $link = $linkFactory->forLinkToDocument($targetNode, null);
 
-                return $link->asContainer()->withContent($stage);
+                $thumNavigationItem = new TextNavigationItem(
+                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
+                );
+
+                if ($inBackend) {
+                    return $thumNavigationItem;
+                } else {
+                    return $link->asNoStyles()->withContent($thumNavigationItem);
+                }
             }),
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
@@ -64,18 +82,12 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                 }
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
 
-                $thumNavigationItem = new ThumbNavigationItem(
-                    $thumbnailImageSource
-                        ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
-                        : null,
-                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
-                    ThumbNavigationItemType::default()
-                );
+                $thumNavigationItem = new DotNavigationItem();
 
                 if ($inBackend) {
                     return $thumNavigationItem;
                 } else {
-                    return $link->asContainer()->withContent($thumNavigationItem);
+                    return $link->asNoStyles()->withContent($thumNavigationItem);
                 }
             })
         );
@@ -98,6 +110,8 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     $section->getLabel()
                 );
             }),
+            null,
+            null,
             true
         );
     }

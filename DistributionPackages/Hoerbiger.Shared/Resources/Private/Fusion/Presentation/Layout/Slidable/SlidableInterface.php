@@ -14,5 +14,9 @@ interface SlidableInterface extends ComponentPresentationObjectInterface
 
     public function getThumbs(): ?SlotInterface;
 
+    public function getInlineNavigation(): ?SlotInterface;
+
+    public function getDots(): ?SlotInterface;
+
     public function getIsApplicationWorld(): ?bool;
 }

@@ -1,0 +1,20 @@
+prototype(Hoerbiger.Shared:Layout.Stage.ApplicationWorldNavStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
+    renderer = afx`
+        <div class={[
+            "[Layout.ApplicationWorldNavStage (" + presentationObject.variant + ")]",
+            "relative w-full h-full md:h-0 md:pt-ratio-2-1 bg-[#1B365D]"
+        ]}>
+            <div
+                @if.1={presentationObject.media}
+                class={[
+                    "absolute flex items-center justify-center z-20 p-xl w-full h-full",
+                    "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
+                    "md:top-0 md:bottom-0 md:pt-md md:pb-md md:pl-md md:pr-md md:transform-none md:w-1/2",
+                    "md:left-1/2 md:right-0"
+                ]}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+            </div>
+        </div>
+    `
+}

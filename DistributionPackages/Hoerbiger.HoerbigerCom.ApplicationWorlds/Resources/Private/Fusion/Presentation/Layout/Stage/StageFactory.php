@@ -17,6 +17,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\ApplicationWorldNavStage\ApplicationWorldNavStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\FullMediaStage\FullMediaStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\SlideStage\SlideStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
@@ -69,7 +70,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forSliderPreviewMixin(TraversableNodeInterface $targetNode, bool $inBackend): SlideStage
+    public function forSliderPreviewMixin(TraversableNodeInterface $targetNode, bool $inBackend): ApplicationWorldNavStage
     {
         $documentHeadlineContent = $targetNode->getProperty('slider__preview__headline')
             ?: $targetNode->getProperty('headline')
@@ -88,7 +89,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             $mediaBackgroundImageSource->setAsync(true);
         }
 
-        return new SlideStage(
+        return new ApplicationWorldNavStage(
             StageVariant::fullMediaTextRight(),
             null,
             $documentHeadlineContent
