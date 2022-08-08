@@ -10,6 +10,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
                     class="mx-auto relative w-full"
                     autoplay
                     muted
+                    loop
                 >
                     <source src={presentationObject.desktopVideoUri} type={'video/mp4'}/>
                     Your browser does not support the video tag.
@@ -20,6 +21,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
                     class="mx-auto relative w-full"
                     autoplay
                     muted
+                    loop
                 >
                     <source src={presentationObject.mobileVideoUri} type={'video/mp4'}/>
                     Your browser does not support the video tag.
