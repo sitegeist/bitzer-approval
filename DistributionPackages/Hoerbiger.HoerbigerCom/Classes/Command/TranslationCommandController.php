@@ -10,16 +10,16 @@ namespace Hoerbiger\HoerbigerCom\Command;
 
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Cli\CommandController;
 use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use Neos\Neos\Domain\Service\ContentContextFactory;
 use Sitegeist\LostInTranslation\Domain\TranslationServiceInterface;
-use Sitegeist\MagicWand\Command\AbstractCommandController;
 
 /**
  * @Flow\Scope("singleton")
  */
-class TranslationCommandController extends AbstractCommandController
+class TranslationCommandController extends CommandController
 {
     /**
      * @Flow\Inject
