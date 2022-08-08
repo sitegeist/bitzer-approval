@@ -15,7 +15,7 @@ prototype(Hoerbiger.Shared:Application.CompactSearchForm) < prototype(PackageFac
             data-labels={presentationObject.labels}
             class={[
                 "[Application.CompactSearchForm]",
-                "bg-neutral-lighter w-[100px] h-[100px] relative"
+                "bg-standard w-[100px] h-[100px] relative"
             ]}
         >
             <div class="absolute inset-0 flex items-center justify-center text-neutral z-10">

@@ -15,6 +15,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
+use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
@@ -51,19 +52,19 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                         Collection::fromIterable([
                             new Tag(
                                 'strong',
-                                null,
+                                TagVariant::brandColorContrast(),
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_subline'))
                             ),
                             new Headline(
                                 HeadlineSize::large(),
-                                HeadlineColor::brand(),
+                                HeadlineColor::liteContrast(),
                                 HeadlineType::h2(),
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_headline'))
                             )
                         ], $identity),
                     ),
                     new Text(
-                        TextVariant::neutralContrast(),
+                        TextVariant::brandContrast(),
                         Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_text')),
                         false
                     )
@@ -71,7 +72,7 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
             ),
             new Button(
                 ButtonType::link(),
-                ButtonVariant::cta(),
+                ButtonVariant::ctaContrast(),
                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_button')),
                 $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('contact'))),
                 "_self",

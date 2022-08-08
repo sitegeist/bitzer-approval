@@ -23,7 +23,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
     }
 
     renderer = afx`
-        <header class="w-full bg-light text-light-contrast border-b border-neutral z-header">
+        <header class="w-full bg-standard text-light border-b border-neutral z-header">
             <div class="max-w-content-full mx-auto px-md flex items-center justify-between">
                 <!-- HOMELINK + LOGO -->
                 <a
@@ -38,7 +38,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         height="55"
                         alt="Logo Hoerbiger"
                         class="h-full max-w-[40vw] sm:max-w-[60vw] my-3"
-                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
+                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_white.svg')}
                         {...props.logo}
                     />
                 </a>
@@ -52,8 +52,8 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <div
                                         data-touch-hover="1"
                                         class={["relative after:absolute after:bottom-0 after:w-full",
-                                            "after:h-6 after:border-b-4 after:translate-y-[26px]",
-                                            item.isActive ? "after:border-brand" : "after:border-light"
+                                            "after:h-6 after:border-b-4 after:translate-y-[27px]",
+                                            item.isActive ? "after:border-light" : "after:border-none"
                                         ]}
                                     >
                                         <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
@@ -102,12 +102,12 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </Neos.Fusion:Augmenter>
 
                         <!-- LANGUAGES -->
-                        <div class="hidden menuToggle:flex w-touch h-touch sm:w-[100px] sm:h-[100px] relative text-neutral-contrast z-10">
+                        <div class="hidden menuToggle:flex w-touch h-touch sm:w-[100px] sm:h-[100px] relative text-light z-10">
                             <div class="absolute inset-0 grid grid-col-1 gap-2">
                                 <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                     <div class={[
                                         "flex items-center justify-center font-sans-bold text-center",
-                                        item.isActive ? "bg-neutral" : "bg-neutral-lighter hover:bg-neutral"
+                                        item.isActive ? "bg-standard" : "bg-standard hover:border border-light"
                                     ]}>
                                         <Neos.Fusion:Augmenter
                                             @if.1={!item.isActive}

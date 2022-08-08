@@ -37,6 +37,9 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
 
                 cta = "bg-brand text-brand-contrast font-sans-bold"
                 cta.@if.1 = ${presentationObject.variant.isCta}
+
+                ctaContrast = "bg-light text-standard font-sans-bold"
+                ctaContrast.@if.1 = ${presentationObject.variant.isCtaContrast}
             }
 
             href = ${presentationObject.href}
