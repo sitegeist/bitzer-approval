@@ -15,3 +15,7 @@
     applicationworld4:
       type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
       position: 292
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.ApplicationWorldNavigation': true

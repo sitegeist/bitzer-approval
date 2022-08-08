@@ -1,0 +1,12 @@
+'Hoerbiger.HoerbigerCom.ApplicationWorlds:Content.ApplicationWorldNavigation':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+  ui:
+    icon: compact-disc
+    label: 'Anwendungswelt-Navigation'
+    inspector:
+      groups:
+        section:
+          label: 'Bereich'
+          icon: compact-disc
