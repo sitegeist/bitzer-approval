@@ -67,6 +67,20 @@ Neos:
                         locked:
                           width: 2
                           height: 1
+            'landscape_5_2':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 5
+                          height: 2
             'panorama':
               type: 'Neos\Media\Domain\Model\ImageInterface'
               ui:
