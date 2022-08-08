@@ -99,6 +99,12 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
                     ->withWidth(1920)
                     ->withHeight(640);
                 break;
+            case ['width' => 3, 'height' => 4]:
+                /** @var DummyImageSourceHelper $imageSource */
+                $imageSource = $imageSource
+                    ->withWidth(810)
+                    ->withHeight(1080);
+                break;
             case null:
             default:
                 /** @var DummyImageSourceHelper $imageSource */

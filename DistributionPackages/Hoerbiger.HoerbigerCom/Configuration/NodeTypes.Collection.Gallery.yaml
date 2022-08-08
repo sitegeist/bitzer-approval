@@ -7,7 +7,7 @@
       '*': false
       'Hoerbiger.HoerbigerCom:Content.GalleryImage': true
   ui:
-    label: 'Bilder-Galerie'
+    label: 'Bilder-Galerie (2:1)'
     icon: images
   options:
     template:

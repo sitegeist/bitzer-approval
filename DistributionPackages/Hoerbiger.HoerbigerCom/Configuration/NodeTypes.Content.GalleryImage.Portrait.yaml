@@ -1,0 +1,7 @@
+'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content.GalleryImage': true
+  properties:
+    image:
+      options:
+        preset: 'image.portrait'
