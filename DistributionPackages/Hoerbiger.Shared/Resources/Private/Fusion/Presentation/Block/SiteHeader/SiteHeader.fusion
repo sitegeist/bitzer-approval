@@ -24,7 +24,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
     renderer = afx`
         <header class="w-full bg-standard text-light border-b border-neutral z-header">
-            <div class="max-w-content-full mx-auto px-md flex items-center justify-between">
+            <div class=" mx-auto pl-md flex items-center justify-between">
                 <!-- HOMELINK + LOGO -->
                 <a
                     class="contents"
@@ -92,7 +92,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </Neos.Fusion:Loop>
                     </div>
 
-                    <div class="flex items-center space-x-2 z-30">
+                    <div class="flex items-between space-x-2 z-30">
                         <!-- SEARCH -->
                         <Neos.Fusion:Augmenter class="z-20 w-touch h-touch sm:w-[100px] sm:h-[100px]">
                             <PackageFactory.AtomicFusion.PresentationObjects:Slot
@@ -102,12 +102,12 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </Neos.Fusion:Augmenter>
 
                         <!-- LANGUAGES -->
-                        <div class="hidden menuToggle:flex w-touch h-touch sm:w-[100px] sm:h-[100px] relative text-light z-10">
-                            <div class="absolute inset-0 grid grid-col-1 gap-2">
+                        <div class="hidden menuToggle:flex w-touch h-full sm:w-[80px] sm:h-[80px] relative text-light z-10">
+                            <div class="absolute inset-0 grid grid-col-1 gap-2 h-[100px]">
                                 <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                     <div class={[
                                         "flex items-center justify-center font-sans-bold text-center",
-                                        item.isActive ? "bg-standard" : "bg-standard hover:border border-light"
+                                        item.isActive ? "bg-standard" : "bg-standard border border-standard hover:border-light"
                                     ]}>
                                         <Neos.Fusion:Augmenter
                                             @if.1={!item.isActive}
@@ -128,7 +128,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         <!-- OFFCANVAS -->
                         <div
                             id="offcanvas"
-                            class="flex menuToggle:hidden bg-neutral-lighter w-touch h-touch sm:w-[100px] sm:h-[100px] relative group z-30"
+                            class="flex menuToggle:hidden  w-touch h-touch sm:w-[100px] sm:h-[100px] relative group z-30"
                         >
                             <a
                                 href="#offcanvas"
