@@ -5,7 +5,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
     'Hoerbiger.HoerbigerCom:Mixin.Link': true
   ui:
-    label: 'Verlinkt Bild mit Headline '
+    label: 'Verlinkt Bild'
     icon: 'anchor'
   properties:
     image:
