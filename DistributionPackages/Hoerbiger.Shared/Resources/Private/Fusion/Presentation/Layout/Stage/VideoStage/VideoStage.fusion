@@ -3,9 +3,9 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={[
             "[Layout.VideoStage (" + presentationObject.variant + ")]",
-            "relative"
+            "relative w-full"
         ]}>
-            <div class="hidden sm:block">
+            <div class="hidden sm:block sm:pb-[100px]">
                 <video
                     class="mx-auto relative w-full"
                     autoplay
@@ -27,21 +27,28 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
             </div>
 
             <div>
-                <div class="relative sm:absolute order-3 mt-[-15%] sm:mt-0 bottom-0 w-[101%] sm:right-0 overflow-hidden z-10">
-                    <div class="w-full h-[150%] absolute skew-y-[-4deg] mt-lg bg-neutral-lighter"></div>
-                    <div class="relative mt-lg pt-md px-md sm:pt-sm sm:px-sm pb-xs ">
-                        <div class="flex flex-row-reverse">
-                            <div class="max-w-content-tight text-right justify-items-end">
+                <div class={[
+                    "relative sm:absolute order-3 mt-[-30%] sm:mt-0 bottom-0 sm:right-0 overflow-hidden z-10",
+                    "w-full"
+                ]}>
+                    <div>
+                        <div class="max-w-content-full mx-auto px-md py-contentcontainer">
+                            <div class="sm:max-w-[40%]">
                                 <Hoerbiger.Shared:Block.Headline
                                     @if.1={presentationObject.headline}
                                     presentationObject={presentationObject.headline}
                                 />
-                                <div class="pt-[10px]">
-                                    <Hoerbiger.Shared:Block.Text
-                                        @if.1={presentationObject.text}
-                                        presentationObject={presentationObject.text}
-                                    />
-                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-triangle-light"></div>
+                    <div class="relative bg-light">
+                        <div class="max-w-content-full mx-auto px-md py-contentcontainer sm:py-[50px] flex">
+                            <div class="sm:max-w-[66%]">
+                                <Hoerbiger.Shared:Block.Text
+                                    @if.1={presentationObject.text}
+                                    presentationObject={presentationObject.text}
+                                />
                             </div>
                         </div>
                     </div>

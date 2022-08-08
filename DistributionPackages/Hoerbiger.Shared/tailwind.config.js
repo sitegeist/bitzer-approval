@@ -377,6 +377,11 @@ module.exports = {
 					'height': (Math.tan(4 * Math.PI / 180) * 100).toFixed(3) + 'vw',
 					'border-width': `0 0 ${(Math.tan(4 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
 					'border-color': `transparent transparent #F0F0F0 transparent`,
+				},
+				'.bg-triangle-light': {
+					'height': (Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw',
+					'border-width': `0 0 ${(Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
+					'border-color': `transparent transparent #FFFFFF transparent`,
 				}
 			}, ['responsive']);
 		}),
