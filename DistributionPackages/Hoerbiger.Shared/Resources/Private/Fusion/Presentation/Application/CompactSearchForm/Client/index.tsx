@@ -50,8 +50,6 @@ export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
 			? redirectToSearchPage
 			: () => setIsExpandend(state => !state)
 	, [isTooSmallForExpandedView]);
-	console.log(isExpanded);
-	console.log(!isTooSmallForExpandedView);
 
 	return (
 		<div
@@ -63,7 +61,7 @@ export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
 				onClick={onClick}
 				className={cx(
 					"w-full h-full grid place-items-center z-50 cursor-pointer relative",
-					(isExpanded && !isTooSmallForExpandedView)
+					isExpanded && !isTooSmallForExpandedView
 						? "text-standard"
 						: "text-light"
 				)}
