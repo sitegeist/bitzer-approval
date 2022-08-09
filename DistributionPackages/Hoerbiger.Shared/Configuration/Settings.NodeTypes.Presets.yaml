@@ -81,6 +81,20 @@ Neos:
                         locked:
                           width: 3
                           height: 1
+            'portrait':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 3
+                          height: 4
             '5_4':
               type: 'Neos\Media\Domain\Model\ImageInterface'
               ui:

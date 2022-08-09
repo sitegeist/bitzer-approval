@@ -13,6 +13,8 @@
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
           'Hoerbiger.HoerbigerCom:Content.Image': true
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true

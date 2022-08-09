@@ -1,0 +1,18 @@
+'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait': true
+  ui:
+    label: 'Bilder-Galerie (3:4)'
+    icon: images
+  options:
+    template:
+      childNodes:
+        'image1':
+          type: 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait'
+        'image2':
+          type: 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait'

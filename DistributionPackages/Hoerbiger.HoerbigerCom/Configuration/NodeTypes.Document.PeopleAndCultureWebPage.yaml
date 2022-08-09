@@ -12,6 +12,8 @@
           '*': false
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
           'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox': true
           'Hoerbiger.HoerbigerCom:Collection.Benefits': true
           'Hoerbiger.HoerbigerCom:Collection.PeopleStories': true
