@@ -76,19 +76,19 @@ task('upload', function () {
  * Run node repair
  */
 task('deploy:node_repair', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow node:repair --only addMissingDefaultValues,createMissingChildNodes');
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow node:repair --only addMissingDefaultValues,createMissingChildNodes');
 })->desc('Run node repair');
 
 /**
  * Flow cache flush
  */
 task('deploy:flush_caches', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow flow:cache:flush --force');
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow flow:cache:flush --force');
 })->desc('Run node repair');
 
 
 task('deploy:run_migrations', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php {{dockerRoot}}/releases/{{release_name}}/flow doctrine:migrate');
+    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow doctrine:migrate');
 })->desc('Apply database migrations');
 
 /**

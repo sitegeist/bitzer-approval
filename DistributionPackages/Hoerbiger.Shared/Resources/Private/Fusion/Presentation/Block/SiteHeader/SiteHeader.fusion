@@ -23,7 +23,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
     }
 
     renderer = afx`
-        <header class="w-full bg-standard text-light border-b border-neutral z-header">
+        <header class="w-full bg-standard text-light z-header">
             <div class=" mx-auto pl-md flex items-center justify-between">
                 <!-- HOMELINK + LOGO -->
                 <a
@@ -107,7 +107,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                     <div class={[
                                         "flex items-center justify-center font-sans-bold text-center",
-                                        item.isActive ? "bg-standard" : "bg-standard border border-standard hover:border-light"
+                                        item.isActive ? "bg-standard border border-light" : "bg-standard border border-standard hover:border-light"
                                     ]}>
                                         <Neos.Fusion:Augmenter
                                             @if.1={!item.isActive}
