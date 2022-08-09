@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class TagVariant implements PseudoEnumInterface
 {
     const VARIANT_BRANDCOLOR = 'brandColor';
+    const VARIANT_BRANDCOLOR_CONTRAST = 'brandColorContrast';
 
     /**
      * @var array<string,self>|self[]
@@ -30,7 +31,7 @@ final class TagVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_BRANDCOLOR) {
+            if ($string !== self::VARIANT_BRANDCOLOR && $string !== self::VARIANT_BRANDCOLOR_CONTRAST ) {
                 throw TagVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -44,9 +45,19 @@ final class TagVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_BRANDCOLOR);
     }
 
+    public static function brandColorContrast(): self
+    {
+        return self::from(self::VARIANT_BRANDCOLOR_CONTRAST);
+    }
+
     public function getIsBrandColor(): bool
     {
         return $this->value === self::VARIANT_BRANDCOLOR;
+    }
+
+    public function getIsBrandColorContrast(): bool
+    {
+        return $this->value === self::VARIANT_BRANDCOLOR_CONTRAST;
     }
 
     /**
@@ -55,7 +66,8 @@ final class TagVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::VARIANT_BRANDCOLOR)
+            self::from(self::VARIANT_BRANDCOLOR),
+            self::from(self::VARIANT_BRANDCOLOR_CONTRAST)
         ];
     }
 
