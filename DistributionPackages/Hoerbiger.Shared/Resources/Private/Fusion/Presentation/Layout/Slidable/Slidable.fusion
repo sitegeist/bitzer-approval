@@ -42,7 +42,11 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
                 data-is-application-world={presentationObject.IsApplicationWorld ? "true" : null}
             >
                 <Neos.Fusion:Loop items={presentationObject.slides.items}>
-                    <div class="keen-slider__slide data-keen-slider-pe w-full min-w-full max-h-[70vh]">
+                    <div
+                        class={[
+                            "keen-slider__slide data-keen-slider-pe w-full min-w-full",
+                            !presentationObject.variant.isApplicationWorld && "max-h-[70vh]"
+                    ]}>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                     </div>
                 </Neos.Fusion:Loop>
