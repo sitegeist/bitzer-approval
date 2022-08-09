@@ -29,6 +29,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
@@ -54,7 +55,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
     /**
      * @param TraversableNodes<int,TraversableNodeInterface> $nodes
      */
-    public function forSliderPreviewMixins(TraversableNodes $nodes, bool $inBackend): Slidable
+    public function forSliderPreviewMixins(TraversableNodes $nodes, TraversableNodeInterface $productListNode, bool $inBackend): Slidable
     {
         $linkFactory = new LinkFactory();
 
@@ -97,12 +98,14 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     return $link->asNoStyles()->withContent($thumNavigationItem);
                 }
             }),
-            new Headline(
-                HeadlineSize::large(),
-                HeadlineColor::white(),
-                HeadlineType::h2(),
-                Value::fromString("Unsere Geschäftsbereiche")
-            )
+            ($inBackend || $productListNode->getProperty("headline"))
+                ? new Headline(
+                    HeadlineSize::large(),
+                    HeadlineColor::white(),
+                    HeadlineType::h2(),
+                    Editable::fromNodeProperty($productListNode, 'headline')
+                )
+                : null
         );
     }
 

@@ -51,17 +51,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             Collection::fromIterable([
-                new Headline(
-                    HeadlineSize::large(),
-                    HeadlineColor::brand(),
-                    HeadlineType::h2(),
-                    Editable::fromNodeProperty($productListNode, 'headline')
-                ),
                 $this->slidableFactory->forSliderPreviewMixins(
                     $this->findChildNodesByNodeTypeFilterString(
                         $siteNode,
                         'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
                     ),
+                    $productListNode,
                     $inBackend
                 )
             ], fn (SlotInterface $slot): SlotInterface => $slot)
