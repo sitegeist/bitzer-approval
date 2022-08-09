@@ -17,20 +17,21 @@ prototype(Hoerbiger.Shared:Layout.Slidable.TextNavigationItem) < prototype(Packa
         <div
             class={[
                 "[Layout.Slidable.TextNavigationItem]",
-                "flex flex-col items-center",
-                "bg-transparent  justify-between md:justify-end text-transparent px-xs md:px-0 py-xs w-full"
+                "flex flex-col",
+                "bg-transparent justify-between text-transparent mx-xs md:mx-0 py-[10px] xl:py-[15px]"
             ]}
-            data-select="jumper"
         >
-            <div class="hidden md:flex items-center">
-                <span class={[
-                    "hidden lg:block justify-center text-center text-lg font-semibold mx-2 leading-[1.3em]",
-                    "lg:justify-start lg:text-left uppercase whitespace-nowrap text-light"
-                ]}>
+            <div>
+                <span
+                    class={[
+                        "text-2xl md:text-3xl lg:text-4xl leading-[12px] md:leading-[12px] lg:leading-[1em]",
+                        "whitespace-nowrap text-light pb-[5px]"
+                    ]}
+                    data-select="textNavJumper"
+                >
                     {presentationObject.label}
                 </span>
             </div>
-            <div class="bg-brand rounded-[10px] opacity-50 h-xs md:h-[8px] md:mt-ch w-full flex"></div>
         </div>
     `
 }

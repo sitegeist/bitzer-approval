@@ -9,12 +9,17 @@ use Doctrine\DBAL\Types\Type;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\DotNavigationItem\DotNavigationItem;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\IconNavigationItem\IconNavigationItem;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\SlidableVariant;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\TextNavigationItem\TextNavigationItem;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
@@ -25,6 +30,7 @@ use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
@@ -53,6 +59,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $linkFactory = new LinkFactory();
 
         return new Slidable(
+            SlidableVariant::applicationWorld(),
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
                 return $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
@@ -89,7 +96,13 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                 } else {
                     return $link->asNoStyles()->withContent($thumNavigationItem);
                 }
-            })
+            }),
+            new Headline(
+                HeadlineSize::large(),
+                HeadlineColor::white(),
+                HeadlineType::h2(),
+                Value::fromString("Unsere Geschäftsbereiche")
+            )
         );
     }
 
@@ -98,6 +111,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
 
         return new Slidable(
+            SlidableVariant::regular(),
             Collection::fromNodes($sections, function($targetNode) use ($inBackend, $applicationWorld): SlotInterface {
                 return $this->stageFactory->forSection($targetNode, $applicationWorld, $inBackend);
             }),
@@ -110,6 +124,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     $section->getLabel()
                 );
             }),
+            null,
             null,
             null,
             true

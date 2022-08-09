@@ -5,6 +5,14 @@ export default ($node: Element): void => {
 		const $slidable = $node.querySelector("[data-select='slidable']");
 		const $jumper = $node.querySelectorAll("[data-select='jumper']");
 		const $dotsJumper = $node.querySelectorAll("[data-select='dotsJumper']");
+		const $textNavJumper = $node.querySelectorAll("[data-select='textNavJumper']");
+
+		const $slidableVariant = $node.querySelector("[data-slidable-variant]")?.getAttribute("data-slidable-variant");
+
+		let duration = 1000;
+		if ($slidableVariant && $slidableVariant === "applicationWorld") {
+			duration = 1;
+		}
 
 		if ($slidable instanceof HTMLElement) {
 			const $isApplicationWorld = !!$slidable.dataset.isApplicationWorld;
@@ -36,6 +44,25 @@ export default ($node: Element): void => {
 									$element.classList.toggle("opacity-100", currentSlide === index);
 									$element.classList.toggle("opacity-50", currentSlide !== index);
 								}
+							}
+						}
+					});
+				}
+
+				if ($textNavJumper instanceof NodeList) {
+					$textNavJumper.forEach(($node, index) => {
+						if ($node instanceof HTMLElement) {
+							let $element: HTMLElement | null = $node;
+
+							const $isThumNavigation = $node.querySelector("[data-type='ThumbNavigationItem']");
+							if ($isThumNavigation instanceof HTMLElement) {
+								$element = $node.querySelector("[data-type='ThumbNavigationItem']");
+							}
+
+							if ($element) {
+								$element.classList.toggle("border-light", currentSlide === index);
+								$element.classList.toggle("border-b-[2px]", currentSlide === index);
+								$element.classList.toggle("font-sans-bold", currentSlide === index);
 							}
 						}
 					});
@@ -77,8 +104,8 @@ export default ($node: Element): void => {
 				controls: false,
 				slidesPerView: 1,
 				mode: "snap",
-				duration: 1000,
-				slideChanged: onSlideChanged,
+				duration: duration,
+				slideChanged: onSlideChanged
 			});
 
 			if (keenSlider) {
