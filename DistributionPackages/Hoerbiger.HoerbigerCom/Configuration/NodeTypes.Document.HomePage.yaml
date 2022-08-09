@@ -3,6 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -62,15 +63,8 @@
 
   properties:
     headline:
-      ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte h1 der Seite eingeben'
-    thumbs_headline:
-      ui:
-        inline:
-          editorOptions:
-            placeholder: 'Bitte die optionale Überschrift eingeben'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': []
     video__source__desktop:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:

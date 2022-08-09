@@ -71,13 +71,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
         $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage);
 
-        $thumbs =  $this->slidableFactory->forThumbs(
-            $this->findChildNodesByNodeTypeFilterString($homepage, 'Hoerbiger.HoerbigerCom:Mixin.SliderPreview'),
-            $inBackend
-        );
-
-        $thumbnailList = (new ThumbnailListFactory())->forHomepage($homepage, $thumbs, $inBackend);
-
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $homepage,
@@ -91,15 +84,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         $videoStage
                     )
                     : null,
-                new ContentContainer(
-                    ContentContainerVariant::regular(),
-                    new Stack(
-                        StackVariant::xs(),
-                        Collection::fromIterable(array_filter([
-                            $thumbnailList,
-                        ]), $identity)
-                    )
-                ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity)
         );
