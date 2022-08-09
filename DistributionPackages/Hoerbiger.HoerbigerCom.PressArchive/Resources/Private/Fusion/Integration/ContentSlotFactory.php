@@ -82,7 +82,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ContentContainerVariant::regular(),
             new CacheSegment(
                 new Box(
-                    BoxVariant::decorative(),
+                    BoxVariant::light(),
                     new Stack(
                         StackVariant::sm(),
                         Collection::fromIterable([
@@ -109,7 +109,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 GridVariant::threeColumnsGap(),
                                 Collection::fromIterable(
                                     $latestPressReleases,
-                                    function (TraversableNodeInterface $pressRelease) use ($inBackend, $identity): ArticleCard {
+                                    function (TraversableNodeInterface $pressRelease) use ($inBackend): ArticleCard {
                                         $imageSource = $this->imageSourceFactory->forPreviewMixin(
                                             $pressRelease,
                                             $inBackend,
@@ -121,7 +121,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         }
 
                                         /** @var Node $pressRelease */
-                                        $datePublished = $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime();
                                         /** @var TraversableNodeInterface $pressRelease */
 
                                         return new ArticleCard(
@@ -137,12 +136,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                 $pressRelease->getProperty('preview__headline')
                                                     ?: $pressRelease->getProperty('headline') ?: ''
                                             ),
-                                            new Row(
-                                                RowVariant::alternateMetalineEllipsis(),
-                                                Collection::fromIterable(array_filter([
-                                                    Value::fromString($this->formattedDateFactory->createFullDate($datePublished))
-                                                ]), $identity)
-                                            ),
+                                            null,
                                             new Text(
                                                 TextVariant::lightContrast(),
                                                 Value::fromString(

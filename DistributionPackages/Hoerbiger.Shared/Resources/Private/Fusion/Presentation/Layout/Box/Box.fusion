@@ -13,14 +13,15 @@ prototype(Hoerbiger.Shared:Layout.Box) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <div id={presentationObject.identifier} class={[
             "[Layout.Box (" + presentationObject.variant + ")]",
-            "relative w-full p-md bg-neutral-lighter before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-full before:max-w-md before:h-2",
-            presentationObject.variant.isTextCenter && "flex items-center p-md",
-            presentationObject.variant.isNeutral && "bg-neutral-lighter",
-            presentationObject.variant.isDecorative && "before:bg-brand",
-            presentationObject.variant.isExcite && "before:bg-excite",
-            presentationObject.variant.isExperience && "before:bg-experience",
-            presentationObject.variant.isLite && "before:bg-lite",
-            presentationObject.variant.isService && "before:bg-service"
+            "relative w-full before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-full before:max-w-md before:h-2",
+            presentationObject.variant.isTextCenter && "flex items-center p-md bg-neutral-lighter p-md",
+            presentationObject.variant.isNeutral && "bg-neutral-lighter p-md",
+            presentationObject.variant.isDecorative && "bg-neutral-lighter before:bg-brand p-md",
+            presentationObject.variant.isExcite && "bg-neutral-lighter before:bg-excite p-md",
+            presentationObject.variant.isExperience && "bg-neutral-lighter before:bg-experience p-md",
+            presentationObject.variant.isLite && "bg-neutral-lighter before:bg-lite p-md",
+            presentationObject.variant.isService && "bg-neutral-lighter before:bg-service p-md",
+            presentationObject.variant.isLight && "bg-light py-md"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

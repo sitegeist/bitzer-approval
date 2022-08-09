@@ -23,6 +23,7 @@ final class BoxVariant implements PseudoEnumInterface
     const VARIANT_EXCITE = 'excite';
     const VARIANT_EXPERIENCE = 'experience';
     const VARIANT_LITE = 'lite';
+    const VARIANT_LIGHT = 'light';
     const VARIANT_SERVICE = 'service';
     const VARIANT_DEFAULT = 'default';
 
@@ -48,6 +49,7 @@ final class BoxVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_EXCITE
                 && $string !== self::VARIANT_EXPERIENCE
                 && $string !== self::VARIANT_LITE
+                && $string !== self::VARIANT_LIGHT
                 && $string !== self::VARIANT_SERVICE
                 && $string !== self::VARIANT_DEFAULT
             ) {
@@ -97,6 +99,11 @@ final class BoxVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_LITE);
     }
 
+    public static function light(): self
+    {
+        return self::from(self::VARIANT_LIGHT);
+    }
+
     public static function service(): self
     {
         return self::from(self::VARIANT_SERVICE);
@@ -137,6 +144,11 @@ final class BoxVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_LITE;
     }
 
+    public function getIsLight(): bool
+    {
+        return $this->value === self::VARIANT_LIGHT;
+    }
+
     public function getIsService(): bool
     {
         return $this->value === self::VARIANT_SERVICE;
@@ -159,6 +171,7 @@ final class BoxVariant implements PseudoEnumInterface
             self::from(self::VARIANT_EXCITE),
             self::from(self::VARIANT_EXPERIENCE),
             self::from(self::VARIANT_LITE),
+            self::from(self::VARIANT_LIGHT),
             self::from(self::VARIANT_SERVICE),
             self::from(self::VARIANT_DEFAULT)
         ];
