@@ -1,0 +1,7 @@
+'Hoerbiger.HoerbigerCom:Content.GalleryImage.Square':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content.GalleryImage': true
+  properties:
+    image:
+      options:
+        preset: 'image.square'

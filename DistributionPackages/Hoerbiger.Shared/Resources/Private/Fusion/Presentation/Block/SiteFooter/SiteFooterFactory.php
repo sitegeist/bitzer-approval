@@ -43,7 +43,7 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
 
         return new SiteFooter(
             $this->uriService->getNodeUri($site),
-            $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/logo_white.png'),
+            $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/logo_white.svg'),
             Collection::fromIterable(
                 $site->getProperty('primaryFooter') ?: [],
                 fn (TraversableNodeInterface $footerLinkNode) => $this->linkFactory->forFooterMenuItem($footerLinkNode)

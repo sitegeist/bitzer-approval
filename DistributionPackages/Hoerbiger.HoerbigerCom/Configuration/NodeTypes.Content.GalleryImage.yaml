@@ -9,3 +9,10 @@
     image:
       options:
         preset: 'image.landscape'
+    caption:
+      type: string
+      ui:
+        inlineEditable: true
+        inline:
+          editorOptions:
+            placeholder: 'Hier kann eine Bildunterschrift eingegeben werden'

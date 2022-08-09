@@ -33,6 +33,7 @@
       options:
         preset: 'image.square'
     metaline:
+      type: string
       options:
         preset: 'text.plain'
       ui:
@@ -44,6 +45,7 @@
         elasticSearchMapping:
           type: text
     tags:
+      type: string
       options:
         preset: 'text.plain'
       ui:
@@ -55,6 +57,7 @@
         elasticSearchMapping:
           type: text
     introduction:
+      type: string
       options:
         preset: 'rte.text'
       ui:

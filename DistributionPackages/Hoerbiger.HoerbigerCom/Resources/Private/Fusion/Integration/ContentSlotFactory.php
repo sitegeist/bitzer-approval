@@ -132,8 +132,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
                 return $this->forQuotationNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
+            case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Square':
+            case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait':
                 return $this->forGalleryNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
+            case 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Square':
+            case 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait':
                 return $this->forGalleryImageNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Video':
                 return $this->forVideoNode($contentNode, $inBackend, $theme);
@@ -424,7 +428,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             throw new \InvalidArgumentException('Property "image" is required for content element GalleryImage.');
         }
 
-        return $this->figureFactory->forGalleryImage($imageSource);
+        return new Stack(
+            StackVariant::sm(),
+            Collection::fromIterable([
+                $this->figureFactory->forGalleryImage($imageSource),
+                new Text(
+                    TextVariant::default(),
+                    Editable::fromNodeProperty($galleryImageNode, 'caption'),
+                    false
+                )
+            ], fn (SlotInterface $slot): SlotInterface => $slot)
+        );
     }
 
     public function forVideoNode(TraversableNodeInterface $videoNode, bool $inBackend, ?Theme $theme): SlotInterface
