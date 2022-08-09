@@ -9,11 +9,18 @@ use Doctrine\DBAL\Types\Type;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\DotNavigationItem\DotNavigationItem;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\IconNavigationItem\IconNavigationItem;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\SlidableVariant;
+use Hoerbiger\Shared\Presentation\Layout\Slidable\TextNavigationItem\TextNavigationItem;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItem;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -23,6 +30,7 @@ use Hoerbiger\Shared\Presentation\Layout\Slidable\Slidable;
 use Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem\ThumbNavigationItemType;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
@@ -51,11 +59,28 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $linkFactory = new LinkFactory();
 
         return new Slidable(
+            SlidableVariant::applicationWorld(),
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
-                $stage = $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
+                return $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
+            }),
+            null,
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
+                $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+                if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
+                    $thumbnailImageSource->setAsync(true);
+                }
+                $link = $linkFactory->forLinkToDocument($targetNode, null);
 
-                return $link->asContainer()->withContent($stage);
+                $thumNavigationItem = new TextNavigationItem(
+                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
+                );
+
+                if ($inBackend) {
+                    return $thumNavigationItem;
+                } else {
+                    return $link->asNoStyles()->withContent($thumNavigationItem);
+                }
             }),
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
@@ -64,20 +89,20 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                 }
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
 
-                $thumNavigationItem = new ThumbNavigationItem(
-                    $thumbnailImageSource
-                        ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
-                        : null,
-                    $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
-                    ThumbNavigationItemType::default()
-                );
+                $thumNavigationItem = new DotNavigationItem();
 
                 if ($inBackend) {
                     return $thumNavigationItem;
                 } else {
-                    return $link->asContainer()->withContent($thumNavigationItem);
+                    return $link->asNoStyles()->withContent($thumNavigationItem);
                 }
-            })
+            }),
+            new Headline(
+                HeadlineSize::large(),
+                HeadlineColor::white(),
+                HeadlineType::h2(),
+                Value::fromString("Unsere Geschäftsbereiche")
+            )
         );
     }
 
@@ -86,6 +111,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
 
         return new Slidable(
+            SlidableVariant::regular(),
             Collection::fromNodes($sections, function($targetNode) use ($inBackend, $applicationWorld): SlotInterface {
                 return $this->stageFactory->forSection($targetNode, $applicationWorld, $inBackend);
             }),
@@ -98,6 +124,9 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     $section->getLabel()
                 );
             }),
+            null,
+            null,
+            null,
             true
         );
     }

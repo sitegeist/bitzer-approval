@@ -35,7 +35,7 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             colorBrand = "text-brand"
             colorBrand.@if.1 = ${presentationObject.color.isBrand}
 
-            colorWhite = "text-white"
+            colorWhite = "text-light"
             colorWhite.@if.1 = ${presentationObject.color.isWhite}
 
             colorExcite = "text-excite"

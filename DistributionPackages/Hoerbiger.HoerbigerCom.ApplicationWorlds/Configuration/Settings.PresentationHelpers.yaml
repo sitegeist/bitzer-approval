@@ -2,3 +2,4 @@ Neos:
   Fusion:
     defaultContext:
       ApplicationWorlds.Page: Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page\PageFactory
+      ApplicationWorlds.ContentSlot: Hoerbiger\HoerbigerCom\ApplicationWorlds\Integration\ContentSlotFactory

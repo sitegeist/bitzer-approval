@@ -1,0 +1,27 @@
+prototype(Hoerbiger.Shared:Layout.Slidable.DotNavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\DotNavigationItem\\DotNavigationItemInterface'
+
+    @styleguide {
+        title = 'DotNavigationItem'
+
+        props {
+            icon {
+                collectionName = 'shared'
+                iconName = 'arrowRight'
+            }
+            label = 'Text'
+        }
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                "[Layout.Slidable.DotNavigationItem]",
+                "flex flex-col items-center bg-neutral-lighter rounded-[50%]",
+                "justify-between md:justify-end text-transparent px-xs md:px-0 w-[15px] h-[15px]"
+            ]}
+            data-select="dotsJumper"
+        >
+        </div>
+    `
+}

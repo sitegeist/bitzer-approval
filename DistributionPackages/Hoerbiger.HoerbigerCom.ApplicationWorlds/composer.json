@@ -8,7 +8,8 @@
     "autoload": {
         "psr-4": {
             "Hoerbiger\\HoerbigerCom\\ApplicationWorlds\\": "Classes/",
-            "Hoerbiger\\HoerbigerCom\\ApplicationWorlds\\Presentation\\": "Resources/Private/Fusion/Presentation/"
+            "Hoerbiger\\HoerbigerCom\\ApplicationWorlds\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+            "Hoerbiger\\HoerbigerCom\\ApplicationWorlds\\Integration\\": "Resources/Private/Fusion/Integration/"
         }
     },
     "extra": {

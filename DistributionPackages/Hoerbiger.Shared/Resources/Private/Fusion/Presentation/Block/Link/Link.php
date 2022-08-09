@@ -109,6 +109,11 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
         return $this->withLinkVariant(LinkVariant::iconLabel());
     }
 
+    public function asNoStyles(): self
+    {
+        return $this->withLinkVariant(LinkVariant::noStyles());
+    }
+
     public function withLinkVariant(LinkVariant $variant): self
     {
         return new self(
