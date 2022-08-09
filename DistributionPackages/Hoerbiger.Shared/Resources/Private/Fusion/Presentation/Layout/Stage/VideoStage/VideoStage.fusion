@@ -5,7 +5,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
             "[Layout.VideoStage (" + presentationObject.variant + ")]",
             "relative w-full"
         ]}>
-            <div class="hidden sm:block sm:pb-[100px]">
+            <div class="hidden sm:block sm:pb-[200px] md:pb-[100px]">
                 <video
                     class="mx-auto relative w-full"
                     autoplay
@@ -33,7 +33,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
                 ]}>
                     <div>
                         <div class="max-w-content-full mx-auto px-md py-contentcontainer">
-                            <div class="sm:max-w-[40%]">
+                            <div class="lg:max-w-[66%] xl:max-w-[40%]">
                                 <Hoerbiger.Shared:Block.Headline
                                     @if.1={presentationObject.headline}
                                     presentationObject={presentationObject.headline}
@@ -44,7 +44,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
                     <div class="bg-triangle-light"></div>
                     <div class="relative bg-light">
                         <div class="max-w-content-full mx-auto px-md py-contentcontainer sm:py-[50px] flex">
-                            <div class="sm:max-w-[66%]">
+                            <div class="lg:max-w-[66%]">
                                 <Hoerbiger.Shared:Block.Text
                                     @if.1={presentationObject.text}
                                     presentationObject={presentationObject.text}
