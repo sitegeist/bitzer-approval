@@ -176,6 +176,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forSectionIntroductionNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.CookieDeclaration':
                 return $this->forCookieDeclarationNode($contentNode);
+            case 'Hoerbiger.HoerbigerCom:Content.ImageWithLink':
+                return $this->forImageWithLink($contentNode, $subgraph, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -786,6 +788,46 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             Value::fromString('<script id="CookieDeclaration" src="https://consent.cookiebot.com/aa81a090-a42f-459c-9c12-35f852ed4015/cd.js" type="text/javascript" async></script>')
+        );
+    }
+
+    public function forImageWithLink(TraversableNodeInterface $imageWithLinkNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        $identity = fn (SlotInterface $slot): SlotInterface => $slot;
+
+        $link = (new LinkFactory())->forLinkMixin($imageWithLinkNode, $subgraph, null);
+
+        $imageSource = $this->imageSourceFactory->forImageMixin($imageWithLinkNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element image.');
+        }
+        $figure = $this->figureFactory->forFullWidthImage(
+            $imageSource,
+            Editable::fromNodeProperty($imageWithLinkNode, 'image__caption')
+        );
+
+        return new ContentContainer(
+            ContentContainerVariant::blank(),
+            Collection::fromIterable([
+                new ContentContainer(
+                    ContentContainerVariant::regular(),
+                    new Grid(
+                        GridVariant::twoColumnsFrMaxGap(),
+                        Collection::fromIterable(array_filter([
+                            new Headline(
+                                HeadlineSize::large(),
+                                HeadlineColor::brand(),
+                                HeadlineType::h2(),
+                                Editable::fromNodeProperty($imageWithLinkNode, 'headline')
+                            ),
+                            $link
+                        ]), $identity)
+                    )
+                ),
+                $link
+                    ? $link->asContainer()->withContent($figure)
+                    : $figure
+            ],$identity)
         );
     }
 }
