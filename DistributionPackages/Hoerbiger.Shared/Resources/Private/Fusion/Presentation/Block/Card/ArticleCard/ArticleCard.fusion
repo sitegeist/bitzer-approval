@@ -4,7 +4,10 @@ prototype(Hoerbiger.Shared:Block.Card.ArticleCard) < prototype(Hoerbiger.Shared:
             "[Block.Card.ArticleCard]",
             "flex flex-col max-w-full overflow-hidden"
         ]}>
-            <div class="h-[2.5em] flex items-center uppercase text-sm font-sans-bold overflow-hidden">
+            <div
+                class="h-[2.5em] flex items-center uppercase text-sm font-sans-bold overflow-hidden"
+                @if.1={presentationObject.subheader}
+            >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     presentationObject={presentationObject.subheader}
                     @if.1={presentationObject.subheader}
