@@ -18,7 +18,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable.TextNavigationItem) < prototype(Packa
             class={[
                 "[Layout.Slidable.TextNavigationItem]",
                 "flex flex-col",
-                "bg-transparent justify-between text-transparent mx-xs md:mx-0 py-[10px] xl:py-[15px]"
+                "bg-transparent justify-between text-transparent mx-sm md:mx-0 py-[10px] xl:py-[15px]"
             ]}
         >
             <div>

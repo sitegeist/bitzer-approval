@@ -45,7 +45,8 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
                     <div
                         class={[
                             "keen-slider__slide data-keen-slider-pe w-full min-w-full",
-                            !presentationObject.variant.isApplicationWorld && "max-h-[70vh]"
+                            !presentationObject.variant.isApplicationWorld && "max-h-[70vh]",
+                            presentationObject.variant.isApplicationWorld && "max-h-[664px]"
                     ]}>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                     </div>
