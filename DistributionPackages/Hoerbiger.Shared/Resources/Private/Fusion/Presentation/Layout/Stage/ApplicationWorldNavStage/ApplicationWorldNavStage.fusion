@@ -9,8 +9,9 @@ prototype(Hoerbiger.Shared:Layout.Stage.ApplicationWorldNavStage) < prototype(Ho
                 class={[
                     "absolute flex items-center justify-center z-20 p-sm w-full h-full",
                     "top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-                    "md:top-0 md:bottom-0 md:pt-md md:pb-md md:pl-md md:pr-md md:transform-none md:w-1/2",
-                    "md:left-1/2 md:right-0"
+                    "md:top-0 md:bottom-0 md:pt-sm md:pb-sm md:pl-sm md:pr-sm md:transform-none md:w-1/2",
+                    "md:left-1/2 md:right-0",
+                    "max-h-[664px]"
                 ]}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
