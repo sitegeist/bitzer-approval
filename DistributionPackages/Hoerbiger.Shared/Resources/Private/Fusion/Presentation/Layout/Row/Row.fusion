@@ -37,7 +37,7 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                         presentationObject.variant.isSm && "mt-sm ml-sm",
                         presentationObject.variant.isMd && "mt-md ml-md",
                         presentationObject.variant.isLg && "mt-lg ml-lg",
-                        presentationObject.variant.isGallery && "mt-xs ml-xs max-w-[350px] max-h-[700px]",
+                        presentationObject.variant.isGallery && "mt-xs ml-xs max-w-[350px] max-h-[700px] flex-grow",
                         (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && "mt-ch ml-ch",
                         (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isOdd && "text-light-contrast",
                         (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isEven && "text-brand",
