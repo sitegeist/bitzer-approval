@@ -25,7 +25,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                     <label
                         class={[
                             presentationObject.variant.isRegular &&
-                            "cursor-pointer py-xs flex items-center justify-between text-lg font-semibold whitespace-nowrap",
+                            "cursor-pointer py-xs flex items-center justify-between text-lg font-semibold",
                             "border-b text-light-contrast border-light-contrast",
                             presentationObject.variant.isHorizontal && "border-none flex mr-xs mb-xs last:mr-0",
                             (presentationObject.variant.isRegular && !iterator.isFirst) && "opacity-30",
