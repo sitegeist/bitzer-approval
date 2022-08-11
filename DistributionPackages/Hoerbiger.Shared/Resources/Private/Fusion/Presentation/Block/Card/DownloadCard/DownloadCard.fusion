@@ -4,7 +4,7 @@ prototype(Hoerbiger.Shared:Block.Card.DownloadCard) < prototype(Hoerbiger.Shared
             "[Block.Card.DownloadCard]",
             "flex flex-col p-xs border border-neutral-lighter shadow-card space-y-ch bg-light"
         ]}>
-            <div class="grid grid-cols-1 2xl:grid-cols-2-max-1fr gap-xs flex-grow">
+            <div class="grid grid-cols-2-max-1fr tabBoxToggle:grid-cols-1 2xl:grid-cols-2-max-1fr gap-xs flex-grow">
                 <div class="w-[100px] h-0 pt-ratio-square relative border border-neutral-lighter shadow-card">
                     <div class="absolute inset-ch">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot
