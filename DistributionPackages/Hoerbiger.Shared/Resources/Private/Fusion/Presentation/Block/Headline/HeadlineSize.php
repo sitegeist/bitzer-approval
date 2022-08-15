@@ -14,7 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class HeadlineSize implements PseudoEnumInterface
 {
     const SIZE_SUPER_LARGE = 'superLarge';
-    const SIZE_EXTRA_ARGE = 'extraLarge';
+    const SIZE_EXTRA_LARGE = 'extraLarge';
     const SIZE_LARGE = 'large';
     const SIZE_LARGE_CENTERED = 'largeCentered';
     const SIZE_MEDIUM = 'medium';
@@ -37,7 +37,7 @@ final class HeadlineSize implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::SIZE_SUPER_LARGE
-                && $string !== self::SIZE_EXTRA_ARGE
+                && $string !== self::SIZE_EXTRA_LARGE
                 && $string !== self::SIZE_LARGE
                 && $string !== self::SIZE_LARGE_CENTERED
                 && $string !== self::SIZE_MEDIUM
@@ -59,7 +59,7 @@ final class HeadlineSize implements PseudoEnumInterface
 
     public static function extraLarge(): self
     {
-        return self::from(self::SIZE_EXTRA_ARGE);
+        return self::from(self::SIZE_EXTRA_LARGE);
     }
 
     public static function large(): self
@@ -87,9 +87,14 @@ final class HeadlineSize implements PseudoEnumInterface
         return self::from(self::SIZE_TINY);
     }
 
+    public function getIsLarge(): bool
+    {
+        return $this->value === self::SIZE_LARGE;
+    }
+
     public function getIsExtraLarge(): bool
     {
-        return $this->value === self::SIZE_EXTRA_ARGE;
+        return $this->value === self::SIZE_EXTRA_LARGE;
     }
 
     public function getIsSuperLarge(): bool
@@ -123,7 +128,7 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
-            self::from(self::SIZE_EXTRA_ARGE),
+            self::from(self::SIZE_EXTRA_LARGE),
             self::from(self::SIZE_SUPER_LARGE),
             self::from(self::SIZE_LARGE),
             self::from(self::SIZE_LARGE_CENTERED),
