@@ -16,7 +16,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
                 </div>
             </div>
             <div class="bg-standard border border-t-2 border-t-light font-sans-bold">
-                <div class="test mx-auto max-w-content-full px-xl md:px-md py-sm">
+                <div class="mx-auto max-w-content-full px-xl md:px-md py-sm">
                     <div class={[
                         "w-full flex flex-col space-y-lg lg:px-md xl:px-0",
                         "md:space-y-10 lg:space-y-0 lg:grid lg:gap-lg lg:grid-cols-2 xl:grid-cols-5"
