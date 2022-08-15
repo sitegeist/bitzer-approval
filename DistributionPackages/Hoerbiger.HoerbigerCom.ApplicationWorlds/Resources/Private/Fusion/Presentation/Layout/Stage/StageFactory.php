@@ -54,14 +54,14 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             StageVariant::fullMediaTextCenter(),
             null,
             new Headline(
-                HeadlineSize::large(),
+                HeadlineSize::extraLarge(),
                 HeadlineColor::white(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($applicationWorld, 'headline')
             ),
             null,
             new Text(
-                TextVariant::brandContrast(),
+                TextVariant::centered(),
                 Editable::fromNodeProperty($applicationWorld, 'abstract'),
                 false
             ),
