@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 presentationObject.variant.isInline && "space-y-ch-xs lg:space-y-ch"
             ]}>
                 <div class={[
-                    "font-serif-regular italic leading-tight lg:leading-normal",
+                    "font-serif-regular italic leading-tight lg:leading-snug",
                     presentationObject.variant.isRegular && "text-3xl lg:text-5xl",
                     presentationObject.variant.isExperience && "text-3xl lg:text-5xl",
                     presentationObject.variant.isLite && "text-3xl lg:text-5xl",
@@ -38,7 +38,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
                 </div>
                 <div class={[
-                    "font-sans-bold",
+                    "font-sans-bold mt-[10px]",
                     presentationObject.variant.isRegular && "text-xl",
                     presentationObject.variant.isExperience && "text-xl",
                     presentationObject.variant.isLite && "text-xl",
