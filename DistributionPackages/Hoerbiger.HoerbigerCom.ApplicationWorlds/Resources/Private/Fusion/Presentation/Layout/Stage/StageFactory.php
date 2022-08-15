@@ -17,8 +17,8 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\ApplicationWorldMediaStage\ApplicationWorldMediaStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\ApplicationWorldNavStage\ApplicationWorldNavStage;
-use Hoerbiger\Shared\Presentation\Layout\Stage\FullMediaStage\FullMediaStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\SlideStage\SlideStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -42,7 +42,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $this->figureFactory = $figureFactory;
     }
 
-    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): ?FullMediaStage
+    public function forApplicationWorld(TraversableNodeInterface $applicationWorld, bool $inBackend): ?ApplicationWorldMediaStage
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($applicationWorld, $inBackend);
 
@@ -50,7 +50,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             return null;
         }
 
-        return new FullMediaStage(
+        return new ApplicationWorldMediaStage(
             StageVariant::fullMediaTextCenter(),
             null,
             new Headline(
