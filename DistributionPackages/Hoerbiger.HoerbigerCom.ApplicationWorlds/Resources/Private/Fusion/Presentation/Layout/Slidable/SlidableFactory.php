@@ -118,15 +118,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromNodes($sections, function($targetNode) use ($inBackend, $applicationWorld): SlotInterface {
                 return $this->stageFactory->forSection($targetNode, $applicationWorld, $inBackend);
             }),
-            Collection::fromNodes($sections, function($section): IconNavigationItem {
-                return new IconNavigationItem(
-                    Icon::fromStampedeDataSourceValue(
-                        $section->getProperty('icon') ?: 'shared:search',
-                        IconSize::size_2()
-                    ),
-                    $section->getLabel()
-                );
-            }),
+            null,
             null,
             null,
             null,

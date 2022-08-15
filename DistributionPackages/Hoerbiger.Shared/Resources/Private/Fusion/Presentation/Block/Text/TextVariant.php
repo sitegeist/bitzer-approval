@@ -18,6 +18,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class TextVariant implements PseudoEnumInterface
 {
     const VARIANT_DEFAULT = 'default';
+    const VARIANT_CENTERED = 'centered';
     const VARIANT_LIGHT_CONTRAST = 'lightContrast';
     const VARIANT_BRAND_CONTRAST = 'brandContrast';
     const VARIANT_NEUTRAL_CONTRAST = 'neutralContrast';
@@ -47,6 +48,7 @@ final class TextVariant implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if (
                 $string !== self::VARIANT_DEFAULT
+                && $string !== self::VARIANT_CENTERED
                 && $string !== self::VARIANT_LIGHT_CONTRAST
                 && $string !== self::VARIANT_BRAND_CONTRAST
                 && $string !== self::VARIANT_NEUTRAL_CONTRAST
@@ -83,10 +85,14 @@ final class TextVariant implements PseudoEnumInterface
         return null;
     }
 
-
     public static function default(): self
     {
         return self::from(self::VARIANT_DEFAULT);
+    }
+
+    public static function centered(): self
+    {
+        return self::from(self::VARIANT_CENTERED);
     }
 
     public static function lightContrast(): self
@@ -147,6 +153,11 @@ final class TextVariant implements PseudoEnumInterface
     public function getIsDefault(): bool
     {
         return $this->value === self::VARIANT_DEFAULT;
+    }
+
+    public function getIsCentered(): bool
+    {
+        return $this->value === self::VARIANT_CENTERED;
     }
 
     public function getIsLightContrast(): bool
@@ -211,6 +222,7 @@ final class TextVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_DEFAULT),
+            self::from(self::VARIANT_CENTERED),
             self::from(self::VARIANT_LIGHT_CONTRAST),
             self::from(self::VARIANT_BRAND_CONTRAST),
             self::from(self::VARIANT_NEUTRAL_CONTRAST),

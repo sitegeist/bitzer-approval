@@ -13,6 +13,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class HeadlineSize implements PseudoEnumInterface
 {
+    const SIZE_SUPER_LARGE = 'superLarge';
+    const SIZE_EXTRA_ARGE = 'extraLarge';
     const SIZE_LARGE = 'large';
     const SIZE_LARGE_CENTERED = 'largeCentered';
     const SIZE_MEDIUM = 'medium';
@@ -34,7 +36,9 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::SIZE_LARGE
+            if ($string !== self::SIZE_SUPER_LARGE
+                && $string !== self::SIZE_EXTRA_ARGE
+                && $string !== self::SIZE_LARGE
                 && $string !== self::SIZE_LARGE_CENTERED
                 && $string !== self::SIZE_MEDIUM
                 && $string !== self::SIZE_SMALL
@@ -46,6 +50,16 @@ final class HeadlineSize implements PseudoEnumInterface
         }
 
         return self::$instances[$string];
+    }
+
+    public static function superLarge(): self
+    {
+        return self::from(self::SIZE_SUPER_LARGE);
+    }
+
+    public static function extraLarge(): self
+    {
+        return self::from(self::SIZE_EXTRA_ARGE);
     }
 
     public static function large(): self
@@ -73,9 +87,14 @@ final class HeadlineSize implements PseudoEnumInterface
         return self::from(self::SIZE_TINY);
     }
 
-    public function getIsLarge(): bool
+    public function getIsExtraLarge(): bool
     {
-        return $this->value === self::SIZE_LARGE;
+        return $this->value === self::SIZE_EXTRA_ARGE;
+    }
+
+    public function getIsSuperLarge(): bool
+    {
+        return $this->value === self::SIZE_SUPER_LARGE;
     }
 
     public function getIsLargeCentered(): bool
@@ -104,6 +123,8 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::SIZE_EXTRA_ARGE),
+            self::from(self::SIZE_SUPER_LARGE),
             self::from(self::SIZE_LARGE),
             self::from(self::SIZE_LARGE_CENTERED),
             self::from(self::SIZE_MEDIUM),
