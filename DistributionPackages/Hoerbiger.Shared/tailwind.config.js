@@ -138,6 +138,11 @@ module.exports = {
 			...defaultTheme.screens
 		},
 
+		fontSize: {
+			'largeHeadline': '42px',
+			'extraLarge': '72px',
+		},
+
 		extend: {
 			typography: (theme) => ({
 				DEFAULT: {

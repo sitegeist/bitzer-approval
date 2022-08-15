@@ -126,12 +126,16 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             null,
             new Headline(
-                HeadlineSize::large(),
+                HeadlineSize::extraLarge(),
                 HeadlineColor::white(),
                 HeadlineType::h1(),
                 Value::fromString($applicationWorld->getLabel())
             ),
-            null,
+            new Text(
+                TextVariant::centered(),
+                Value::fromString($section->getLabel()),
+                false
+            ),
             null,
             $mediaBackgroundImageSource
                 ? $this->figureFactory->forSlideStageBackground($mediaBackgroundImageSource)

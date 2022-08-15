@@ -17,6 +17,12 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
         attributes.class = Neos.Fusion:DataStructure {
             name = ${"[Block.Headline (" + presentationObject.type + "_" + presentationObject.size + "_" + presentationObject.color + ")]"}
 
+            extraLarge = "font-sans-regular font-bold text-3xl sm:text-4xl lg:text-extraLarge xl:text-extraLarge"
+            extraLarge.@if.1 = ${presentationObject.size.isExtraLarge}
+
+            superLarge = "font-sans-regular text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
+            superLarge.@if.1 = ${presentationObject.size.isSuperLarge}
+
             large = "font-sans-regular text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
             large.@if.1 = ${presentationObject.size.isLarge}
 
