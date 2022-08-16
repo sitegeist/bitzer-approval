@@ -5,57 +5,55 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
             "[Layout.FullMediaStage (" + presentationObject.variant + ")]",
             "relative sm:h-0 sm:pt-ratio-2-1"
         ]}>
-            <div
-                class="sm:absolute inset-0 z-10"
-                @if.1={presentationObject.mediaBackground}
-            >
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
-            </div>
-            <div class={[
-                "hidden sm:flex sm:absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
-                "sm:bg-transparent sm:bg-gradient-to-t",
-                presentationObject.variant.isFullMediaTextLeft &&  "lg:bg-gradient-to-r",
-                presentationObject.variant.isFullMediaTextRight &&  "lg:bg-gradient-to-l"
-
-            ]}></div>
-            <div class={[
-                "sm:absolute sm:inset-md p-md sm:p-sm flex flex-col sm:justify-center items-center top-auto",
-                "bg-neutral sm:bg-transparent z-30 text-light",
-                (!presentationObject.variant.isFullMediaTextCenter) && "sm:border-2 sm:border-light sm:space-y-xs",
-                "sm:top-auto sm:items-start",
-                "lg:-translate-y-1/2 lg:bottom-auto lg:top-1/2 lg:max-w-[35%] lg:w-full",
-                presentationObject.variant.isFullMediaTextLeft && "lg:right-auto",
-                presentationObject.variant.isFullMediaTextRight && "lg:left-auto",
-                presentationObject.variant.isFullMediaTextCenter && "text-center mx-auto"
-            ]}>
+            <div>
+                <div
+                    class="sm:absolute inset-0 z-10"
+                    @if.1={presentationObject.mediaBackground}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
+                </div>
                 <div class={[
-                    "border-light border-2 p-sm sm:border-0 pb-xs",
-                    presentationObject.variant.isFullMediaTextCenter && "w-full"
+                    "hidden sm:flex sm:absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
+                    "sm:bg-transparent sm:bg-gradient-to-t",
+                    "lg:bg-gradient-to-r"
+                ]}></div>
+            </div>
+            <div class="relative z-50">
+                <div class={[
+                    "relative sm:absolute order-3 mt-[-30%] sm:mt-0 bottom-0 sm:right-0 overflow-hidden z-10",
+                    "w-full"
                 ]}>
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                        presentationObject={presentationObject.subheadline}
-                        @if.1={presentationObject.subheadline}
-                    />
-                    <div class={[
-                        "text-center",
-                        (!presentationObject.variant.isFullMediaTextCenter) && "sm:text-left"
-                    ]}>
-                        <Hoerbiger.Shared:Block.Headline
-                            @if.1={presentationObject.headline}
-                            presentationObject={presentationObject.headline}
-                        />
+                    <div>
+                        <div class="max-w-content-full mx-auto px-md py-contentcontainer">
+                            <div class="lg:max-w-[66%] xl:max-w-[40%]">
+                                <Hoerbiger.Shared:Block.Headline
+                                    @if.1={presentationObject.headline}
+                                    presentationObject={presentationObject.headline}
+                                />
+                            </div>
+                        </div>
                     </div>
-                    <div class="text-light-contrast mt-xs mb-xs">
-                        <Hoerbiger.Shared:Block.Text
-                            @if.1={presentationObject.text}
-                            presentationObject={presentationObject.text}
-                        />
-                    </div>
-                    <div class="text-light-contrast block sm:flex mb-sm sm:mb-0" @if.1={presentationObject.button}>
-                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />
+                    <div class="bg-triangle-light"></div>
+                    <div class="relative bg-light">
+                        <div class="max-w-content-full mx-auto px-md py-contentcontainer sm:py-[50px] flex">
+                            <div class="lg:max-w-[66%]">
+                                <Hoerbiger.Shared:Block.Text
+                                    @if.1={presentationObject.text}
+                                    presentationObject={presentationObject.text}
+                                />
+                                <div class="text-light-contrast block sm:flex my-sm sm:mb-0" @if.1={presentationObject.button}>
+                                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
             </div>
+
+
+
+
         </div>
     `
 }
