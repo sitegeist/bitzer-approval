@@ -88,7 +88,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
             <div
                 @if.1={presentationObject.inlineNavigation.items}
                 class={[
-                    "relative md:absolute md:top-[110px] lg:top-[150px] md:left-sm pb-sm"
+                    "[Slidable.InlineNavigation] relative md:absolute md:top-[110px] lg:top-[150px] md:left-sm pb-sm md:pt-[15px] lg:pt-0"
                 ]}
             >
                 <Neos.Fusion:Loop items={presentationObject.inlineNavigation.items}>
