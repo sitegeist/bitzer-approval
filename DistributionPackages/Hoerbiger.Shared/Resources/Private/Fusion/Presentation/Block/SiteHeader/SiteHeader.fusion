@@ -138,7 +138,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M3 4h18v2H3V4zm0 7h18v2H3v-2zm0 7h18v2H3v-2z"></path></svg>
                                 </div>
                             </a>
-
+                            <!-- mobile -->
                             <div class={["
                                 fixed top-0 h-screen overflow-y-auto w-full -right-full",
                                 "offcanvas:right-offcanvas",
@@ -146,8 +146,8 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 "bg-neutral-transparent text-light-contrast flex flex-col space-y-xs uppercase "
                             ]}>
 
-                                <div class="bg-light border-brand border-b-4">
-                                    <div class="max-w-content-full mx-auto px-md flex items-center justify-between">
+                                <div class="bg-standard">
+                                    <div class="max-w-content-full mx-auto px-md flex items-center justify-between h-touch sm:h-[100px]">
                                         <!-- HOMELINK + LOGO -->
                                         <a
                                             class="contents"
@@ -161,11 +161,11 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                 height="55"
                                                 alt="Logo Hoerbiger"
                                                 class="h-full max-w-[40vw] sm:max-w-[60vw] my-3"
-                                                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_colors.png')}
+                                                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_white.svg')}
                                                 {...props.logo}
                                             />
                                         </a>
-                                        <a href="#" class="w-[3em] h-[3em] text-light-contrast flex justify-center items-center bg-neutral-lighter font-thin p-[0.5em]">
+                                        <a href="#" class="w-[3em] h-[3em] text-light flex justify-center items-center font-thin p-[0.5em]">
                                             <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
                                         </a>
                                     </div>
@@ -182,7 +182,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                                 <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
                                                                     <img
                                                                         class="w-[30px] h-[30px] object-contain rounded-full translate-y-[10px] ml-ch"
-                                                                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownBrand.svg')}
+                                                                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownStandard.svg')}
                                                                         data-accimage="nav-image"
                                                                     />
                                                             </div>
@@ -229,7 +229,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                 </Neos.Fusion:Augmenter>
                                                 <div
                                                     @if.1={item.isActive}
-                                                    class="bg-brand min-h-touch min-w-touch flex items-center justify-center text-center text-light px-[50px] rounded-full w-1/2"
+                                                    class="bg-standard min-h-touch min-w-touch flex items-center justify-center text-center text-light px-[50px] rounded-full w-1/2"
                                                 >
                                                     {item.link.content}
                                                 </div>
