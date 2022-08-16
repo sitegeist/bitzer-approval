@@ -147,7 +147,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             ]}>
 
                                 <div class="bg-standard">
-                                    <div class="max-w-content-full mx-auto px-md flex items-center justify-between h-touch sm:h-[100px]">
+                                    <div class="max-w-content-full mx-auto pl-md flex items-center justify-between h-touch sm:h-[100px]">
                                         <!-- HOMELINK + LOGO -->
                                         <a
                                             class="contents"
@@ -165,9 +165,13 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                 {...props.logo}
                                             />
                                         </a>
-                                        <a href="#" class="w-[3em] h-[3em] text-light flex justify-center items-center font-thin p-[0.5em]">
-                                            <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
-                                        </a>
+                                        <div class="flex w-touch h-touch sm:w-[100px] sm:h-[100px] relative">
+                                            <a href="#" class="absolute inset-0 text-light flex justify-center items-center font-thin p-[0.5em]">
+                                                <div class="w-[2em] h-[2em]">
+                                                <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
+                                                </div>
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class={["p-md h-full "]}>
