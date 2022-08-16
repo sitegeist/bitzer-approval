@@ -27,11 +27,11 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
             ]}>
                 <div class={[
                     "font-serif-regular italic leading-tight lg:leading-snug",
-                    presentationObject.variant.isRegular && "text-3xl lg:text-5xl",
-                    presentationObject.variant.isExperience && "text-3xl lg:text-5xl",
-                    presentationObject.variant.isLite && "text-3xl lg:text-5xl",
-                    presentationObject.variant.isExcite && "text-3xl lg:text-5xl",
-                    presentationObject.variant.isService && "text-3xl lg:text-5xl",
+                    presentationObject.variant.isRegular && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.isExperience && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.isLite && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.isExcite && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.isService && "text-3xl lg:text-largeHeadline",
 
                     presentationObject.variant.isInline && "text-2xl lg:text-3xl"
                 ]}>
