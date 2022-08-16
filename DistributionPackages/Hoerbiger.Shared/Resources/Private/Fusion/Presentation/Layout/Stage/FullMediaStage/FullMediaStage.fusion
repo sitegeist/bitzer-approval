@@ -15,9 +15,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                 <div class={[
                     "hidden sm:flex sm:absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
                     "sm:bg-transparent sm:bg-gradient-to-t",
-                    presentationObject.variant.isFullMediaTextLeft &&  "lg:bg-gradient-to-r",
-                    presentationObject.variant.isFullMediaTextRight &&  "lg:bg-gradient-to-l"
-
+                    "lg:bg-gradient-to-r"
                 ]}></div>
             </div>
             <div class="relative z-50">
