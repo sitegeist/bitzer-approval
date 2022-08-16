@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                     "w-full"
                 ]}>
                     <div>
-                        <div class="max-w-content-full mx-auto px-sm py-contentcontainer">
+                        <div class="max-w-content-full mx-auto px-md py-contentcontainer">
                             <div class="lg:max-w-[66%] xl:max-w-[40%]">
                                 <Hoerbiger.Shared:Block.Headline
                                     @if.1={presentationObject.headline}
@@ -37,7 +37,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                     </div>
                     <div class="bg-triangle-light"></div>
                     <div class="relative bg-light">
-                        <div class="max-w-content-full mx-auto px-sm py-contentcontainer sm:py-[50px] flex">
+                        <div class="max-w-content-full mx-auto px-md py-contentcontainer sm:py-[50px] flex">
                             <div class="lg:max-w-[66%]">
                                 <Hoerbiger.Shared:Block.Text
                                     @if.1={presentationObject.text}
