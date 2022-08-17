@@ -147,7 +147,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             ]}>
 
                                 <div class="bg-standard">
-                                    <div class="max-w-content-full mx-auto pl-md flex items-center justify-between h-touch sm:h-[100px]">
+                                    <div class="max-w-content-full mx-auto pl-md flex items-center justify-between sm:h-[100px]">
                                         <!-- HOMELINK + LOGO -->
                                         <a
                                             class="contents"
