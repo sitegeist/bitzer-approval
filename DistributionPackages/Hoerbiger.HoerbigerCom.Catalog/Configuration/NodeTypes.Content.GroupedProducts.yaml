@@ -33,3 +33,4 @@
           editorOptions:
             nodeTypes:
               - 'Hoerbiger.HoerbigerCom.Catalog:Document.Product'
+              - 'Hoerbiger.HoerbigerCom.Catalog:Document.ExternalProduct'
