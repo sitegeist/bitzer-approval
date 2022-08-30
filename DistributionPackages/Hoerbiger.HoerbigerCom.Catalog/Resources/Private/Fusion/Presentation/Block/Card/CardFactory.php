@@ -188,7 +188,10 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                             new Tag(
                                 'span',
                                 TagVariant::brandColor(),
-                                Value::fromString($productDocument->getProperty('headline') ?: '')
+                                Value::fromString(
+                                    $productDocument->getProperty('headline')
+                                        ?: $productDocument->getLabel()
+                                )
                             ),
                             new Icon('shared', 'arrowRight', IconSize::size_1_5())
                         ], function (SlotInterface $slot) {
