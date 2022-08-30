@@ -7,6 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Domain;
  */
 
 use Flowpack\ElasticSearch\ContentRepositoryAdaptor\ElasticSearchClient;
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
@@ -23,6 +24,34 @@ final class Catalog
      * @Flow\Inject
      */
     protected $searchClient;
+
+    /**
+     * @return TraversableNodes<int,TraversableNodeInterface>
+     */
+    public function findAllProducts(ContentContext $subgraph): TraversableNodes
+    {
+        $siteNode = $subgraph->getCurrentSiteNode();
+
+        $this->searchClient->setContextNode($siteNode);
+
+        /** @var TraversableNodeInterface $siteNode */
+        $request = CatalogRequest::create($siteNode)->sortByDocumentTreePosition();
+
+        $result = $this->searchClient->getIndex()
+            ->request('GET', '/_search', [], json_encode($request) ?: null)
+            ->getTreatedContent();
+
+        $products = [];
+        foreach ($result['hits']['hits'] as $searchHit) {
+            /** @var ?TraversableNodeInterface $product */
+            $product = $subgraph->getNodeByIdentifier($searchHit['_source']['neos_node_identifier']);
+            if ($product) {
+                $products[] = $product;
+            }
+        }
+
+        return TraversableNodes::fromArray($products);
+    }
 
     /**
      * @return TraversableNodes<int,TraversableNodeInterface>
@@ -115,5 +144,33 @@ final class Catalog
         return array_map(function (TraversableNodeInterface $productGroup): string {
             return (string)$productGroup->getNodeAggregateIdentifier();
         }, $productGroups);
+    }
+
+    /**
+     * @return TraversableNodes<int,TraversableNodeInterface>
+     */
+    public function findUnusedProductGroups(ContentContext $subgraph): TraversableNodes
+    {
+        $products = $this->findAllProducts($subgraph);
+        $productGroupIdentifiers = $this->findProductGroupIdentifiers($subgraph);
+
+        $usedGroupIdentifiers = [];
+        foreach ($products as $product) {
+            /** @var ?TraversableNodeInterface $productGroup */
+            $productGroup = $product->getProperty('productGroup');
+            if (!$productGroup) {
+                continue;
+            }
+            $usedGroupIdentifiers[] = (string)$productGroup->getNodeAggregateIdentifier();
+        }
+
+        $unusedGroupIdentifiers = array_diff($productGroupIdentifiers, $usedGroupIdentifiers);
+        /** @var TraversableNodeInterface[] $unusedGroups */
+        $unusedGroups = array_map(
+            fn (string $groupIdentifier) => $subgraph->getNodeByIdentifier($groupIdentifier),
+            $unusedGroupIdentifiers
+        );
+
+        return TraversableNodes::fromArray($unusedGroups);
     }
 }
