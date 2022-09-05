@@ -47,6 +47,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         ContentContext $subgraph
     ): SiteHeaderInterface {
         return new SiteHeader(
+            $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
             (new CompactSearchFormFactory())->forDocument($site),
             $this->getLanguageNavigationItems($document, $subgraph),

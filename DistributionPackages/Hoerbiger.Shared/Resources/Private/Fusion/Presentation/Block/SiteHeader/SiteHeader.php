@@ -10,12 +10,15 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
+use Psr\Http\Message\UriInterface;
 
 /**
  * @Flow\Proxy(false)
  */
 final class SiteHeader extends AbstractComponentPresentationObject implements SiteHeaderInterface
 {
+    private UriInterface $siteUri;
+
     private ?NavigationItems $mainNavigation;
 
     private SlotInterface $search;
@@ -27,17 +30,24 @@ final class SiteHeader extends AbstractComponentPresentationObject implements Si
     private Icon $subLevelIcon;
 
     public function __construct(
+        UriInterface $siteUri,
         ?NavigationItems $mainNavigation,
         SlotInterface $search,
         NavigationItems $languageNavigation,
         Icon $rootLevelIcon,
         Icon $subLevelIcon
     ) {
+        $this->siteUri = $siteUri;
         $this->mainNavigation = $mainNavigation;
         $this->search = $search;
         $this->languageNavigation = $languageNavigation;
         $this->rootLevelIcon = $rootLevelIcon;
         $this->subLevelIcon = $subLevelIcon;
+    }
+
+    public function getSiteUri(): UriInterface
+    {
+        return $this->siteUri;
     }
 
     public function getMainNavigation(): ?NavigationItems

@@ -9,9 +9,12 @@ use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use Psr\Http\Message\UriInterface;
 
 interface SiteHeaderInterface extends ComponentPresentationObjectInterface
 {
+    public function getSiteUri(): UriInterface;
+
     public function getMainNavigation(): ?NavigationItems;
 
     public function getSearch(): SlotInterface;
