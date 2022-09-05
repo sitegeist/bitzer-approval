@@ -6,7 +6,6 @@ export default function ($node: Element) {
 
 		if (scrollBtn instanceof HTMLElement) {
 			scrollBtn.addEventListener('click', () => {
-				console.log("Hallo");
 				window.scrollTo({
 					top: 0,
 					left: 0,
