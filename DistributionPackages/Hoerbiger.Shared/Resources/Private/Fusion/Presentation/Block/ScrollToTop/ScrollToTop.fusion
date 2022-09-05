@@ -1,0 +1,24 @@
+prototype(Hoerbiger.Shared:Block.ScrollToTop) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ScrollToTop\\ScrollToTopInterface'
+
+    @styleguide {
+        title = 'ScrollToTop'
+
+        props {
+
+        }
+    }
+
+    renderer = afx`
+        <div
+        data-select="scrollBtn"
+        class={[
+            "min-h-[48px] min-w-[48px] cursor-pointer fixed bottom-[1em] right-[1em] bg-standard",
+            "opacity-1 transition-opacity z-content -rotate-90 flex justify-center p-[10px]"
+        ]}>
+            <svg viewBox="0 0 14 9" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M8.85355 0.146484L13.2071 4.50004L8.85355 8.85359L8.14645 8.14648L11.2929 5.00004H0V4.00004H11.2929L8.14645 0.853591L8.85355 0.146484Z" fill="current"/>
+            </svg>
+        </div>
+    `
+}
