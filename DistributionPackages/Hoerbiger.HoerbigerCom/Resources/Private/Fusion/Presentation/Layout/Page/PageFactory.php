@@ -10,6 +10,8 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
+use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTopFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\ThumbnailList\ThumbnailListFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
@@ -78,6 +80,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ScrollToTop(),
                 $videoStage
                     ? new ContentContainer(
                         ContentContainerVariant::blank(),
