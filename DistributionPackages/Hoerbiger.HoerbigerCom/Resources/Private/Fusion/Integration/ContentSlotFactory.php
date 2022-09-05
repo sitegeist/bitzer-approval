@@ -275,6 +275,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ? $this->figureFactory->forTwoColumnGrid($imageSource)
             : null;
 
+        $textBlockImageSource = $this->imageSourceFactory->forImageProperty(
+            $textWithImageNode,
+            $inBackend,
+            'text__block__image'
+        );
+
+        $textBlockFigure = $textBlockImageSource
+            ? $this->figureFactory->forTextBlockImage($textBlockImageSource)
+            : null;
+
         $text = new Box(
             BoxVariant::textCenter(),
             new Stack(
@@ -293,7 +303,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Editable::fromNodeProperty($textWithImageNode, 'text'),
                         false
                     ),
-                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme)
+                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme),
+                    $textBlockFigure
                 ]), $identity)
             )
         );

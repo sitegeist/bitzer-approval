@@ -7,6 +7,11 @@
   ui:
     label: 'Bild mit Text'
     icon: id-card
+    inspector:
+      groups:
+        text:
+          label: 'Text'
+          icon: 'align-left'
   properties:
     layout:
       type: string
@@ -17,6 +22,26 @@
         inspector:
           group: 'image'
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+    text__block__image:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      ui:
+        label: 'Bild im Text'
+        reloadIfChanged: true
+        inspector:
+          group: 'text'
+    text__block__image__alt:
+      type: 'string'
+      ui:
+        label: 'Alt-Text'
+        inspector:
+          group: 'text'
+    text__block__image__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text'
+        inspector:
+          group: 'text'
+
   postprocessors:
     layouts:
       postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
