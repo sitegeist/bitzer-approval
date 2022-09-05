@@ -4,13 +4,13 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
         <div class={[
             "[Layout.FullMediaStage (" + presentationObject.variant + ")]",
             "relative sm:h-0 sm:pt-ratio-2-1",
-            presentationObject.variant.isfullMediaTextLeft && "pb-[100px]"
+            presentationObject.variant.isfullMediaTextLeft && "sm:pb-[100px]"
         ]}>
             <div>
                 <div
                     class={[
                         "sm:absolute inset-0 z-10",
-                        presentationObject.variant.isfullMediaTextLeft && "pb-[100px]"
+                        presentationObject.variant.isfullMediaTextLeft && "sm:pb-[100px]"
                     ]}
                     @if.1={presentationObject.mediaBackground}
                 >
@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                 <div class={[
                     "relative sm:absolute order-3 mt-[-30%] sm:mt-0 sm:right-0 overflow-hidden z-10",
                     "w-full",
-                    presentationObject.variant.isfullMediaTextLeft ? "bottom-[-100px]" : "bottom-0"
+                    presentationObject.variant.isfullMediaTextLeft ? "bottom-0 sm:bottom-[-100px]" : "bottom-0"
                 ]}>
                     <div>
                         <div class="max-w-content-full mx-auto px-md py-contentcontainer">
