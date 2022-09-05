@@ -13,13 +13,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
  */
 final class ScrollToTop extends AbstractComponentPresentationObject implements ScrollToTopInterface
 {
-    
+
 
     public function __construct(
-        
+
     ) {
-        
+
     }
 
-    
+
 }

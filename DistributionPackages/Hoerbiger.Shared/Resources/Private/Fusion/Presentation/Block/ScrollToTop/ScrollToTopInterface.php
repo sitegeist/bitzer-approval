@@ -9,5 +9,5 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentation
 
 interface ScrollToTopInterface extends ComponentPresentationObjectInterface
 {
-    
+
 }

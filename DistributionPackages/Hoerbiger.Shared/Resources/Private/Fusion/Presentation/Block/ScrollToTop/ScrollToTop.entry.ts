@@ -11,7 +11,7 @@ export default function ($node: Element) {
 					top: 0,
 					left: 0,
 					behavior: 'smooth'
-				  });
+				});
 			})
 		}
 	}
