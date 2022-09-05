@@ -566,7 +566,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         $icon ?
                             new Tag(
                             'span',
-                            TagVariant::brandColor(),
+                            TagVariant::transparent(),
                             Icon::fromStampedeDataSourceValue(
                                 $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
                                 IconSize::size_3()
@@ -770,7 +770,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             new Tag(
                                 'span',
-                                TagVariant::brandColor(),
+                                TagVariant::transparent(),
                                 Icon::fromStampedeDataSourceValue(
                                     $sectionIntroductionNode->getProperty('icon') ?: 'peopleCulture:faqs',
                                     IconSize::size_4()
