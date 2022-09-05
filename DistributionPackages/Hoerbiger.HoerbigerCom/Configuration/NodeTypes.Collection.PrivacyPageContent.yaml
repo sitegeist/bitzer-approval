@@ -1,0 +1,17 @@
+'Hoerbiger.HoerbigerCom:Collection.PrivacyPageContent':
+  superTypes:
+    'Neos.Neos:ContentCollection': true
+  childNodes:
+    matomooptout:
+      type: 'Hoerbiger.HoerbigerCom:Content.MatomoOptOut'
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+      'Hoerbiger.HoerbigerCom:Content.Image': true
+      'Hoerbiger.HoerbigerCom:Content.Text': true
+      'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+      'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+      'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+      'Hoerbiger.HoerbigerCom:Content.Video': true
+      'Hoerbiger.HoerbigerCom:Content.CookieDeclaration': true

@@ -6,18 +6,7 @@
     'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
-      type: 'Neos.Neos:ContentCollection'
-      constraints:
-        nodeTypes:
-          '*': false
-          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
-          'Hoerbiger.HoerbigerCom:Content.Image': true
-          'Hoerbiger.HoerbigerCom:Content.Text': true
-          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
-          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
-          'Hoerbiger.HoerbigerCom:Content.Video': true
-          'Hoerbiger.HoerbigerCom:Content.CookieDeclaration': true
+      type: 'Hoerbiger.HoerbigerCom:Collection.PrivacyPageContent'
   ui:
     icon: lock
     label: 'Datenschutz'

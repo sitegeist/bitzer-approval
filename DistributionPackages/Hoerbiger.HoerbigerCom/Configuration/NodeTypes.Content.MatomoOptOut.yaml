@@ -1,0 +1,6 @@
+'Hoerbiger.HoerbigerCom:Content.MatomoOptOut':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    label: 'Matomo Opt-Out'
+    icon: eye-slash
