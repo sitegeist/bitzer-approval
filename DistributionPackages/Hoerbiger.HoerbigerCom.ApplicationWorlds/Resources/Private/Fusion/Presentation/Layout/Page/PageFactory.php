@@ -91,6 +91,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new scrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)

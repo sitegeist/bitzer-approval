@@ -61,6 +61,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument($jobList, $site, $subGraph, null),
             Collection::fromIterable(array_filter([
+                new scrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb
@@ -147,6 +148,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument($document, $site, $subGraph, $request),
             Collection::fromIterable(array_filter([
+                new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb

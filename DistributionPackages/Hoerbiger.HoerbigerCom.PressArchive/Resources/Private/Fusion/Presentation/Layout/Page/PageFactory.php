@@ -25,6 +25,7 @@ use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
@@ -99,6 +100,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new Stack(
                     StackVariant::sm(),
                     Collection::fromIterable(array_filter([
+                        new ScrollToTop(),
                         new Headline(
                             HeadlineSize::medium(),
                             HeadlineColor::text(),
@@ -146,6 +148,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(
                 array_filter([
+                    new ScrollToTop(),
                     new ContentContainer(
                         ContentContainerVariant::regularX(),
                         $breadcrumb
@@ -189,6 +192,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(
                 array_filter([
+                    new ScrollToTop(),
                     new ContentContainer(
                         ContentContainerVariant::regularX(),
                         $breadcrumb
