@@ -6,6 +6,8 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage\VideoStage;
  */
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\Shared\Presentation\Block\Figure\Figure;
+use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineInterface;
 use Hoerbiger\Shared\Presentation\Block\Text\TextInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stage\AbstractStage;
@@ -16,11 +18,11 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 /**
  * @Flow\Proxy(false)
  */
-final class VideoStage extends AbstractStage
+final class VideoStage extends AbstractStage implements VideoStageInterface
 {
     private Uri $desktopVideoUri;
 
-    private Uri $mobileVideoUri;
+    private Figure $mobileFigure;
 
     public function __construct(
         StageVariant $variant,
@@ -32,10 +34,10 @@ final class VideoStage extends AbstractStage
         ?SlotInterface $mediaBackground,
         ?SlotInterface $button,
         Uri $desktopVideoUri,
-        Uri $mobileVideoUri
+        Figure $mobileFigure
     ) {
         $this->desktopVideoUri = $desktopVideoUri;
-        $this->mobileVideoUri = $mobileVideoUri;
+        $this->mobileFigure = $mobileFigure;
 
         parent::__construct(
             $variant,
@@ -54,8 +56,8 @@ final class VideoStage extends AbstractStage
         return $this->desktopVideoUri;
     }
 
-    public function getMobileVideoUri(): Uri
+    public function getMobileFigure(): FigureInterface
     {
-        return $this->mobileVideoUri;
+        return $this->mobileFigure;
     }
 }

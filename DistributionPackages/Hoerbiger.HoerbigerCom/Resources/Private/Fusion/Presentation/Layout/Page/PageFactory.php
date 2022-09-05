@@ -69,7 +69,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
-        $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage);
+        $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
