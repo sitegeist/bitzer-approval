@@ -3,9 +3,12 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
     renderer = afx`
         <div class={[
             "[Layout.FullMediaStage (" + presentationObject.variant + ")]",
-            "relative sm:h-0 sm:pt-ratio-2-1"
+            "relative sm:h-0 sm:pt-ratio-2-1",
+            presentationObject.variant.isfullMediaTextLeft && "pb-[100px]"
         ]}>
-            <div>
+            <div class={[
+                presentationObject.variant.isfullMediaTextLeft && "pb-[100px]"
+            ]}>
                 <div
                     class="sm:absolute inset-0 z-10"
                     @if.1={presentationObject.mediaBackground}
@@ -20,8 +23,9 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
             </div>
             <div class="relative z-50">
                 <div class={[
-                    "relative sm:absolute order-3 mt-[-30%] sm:mt-0 bottom-0 sm:right-0 overflow-hidden z-10",
-                    "w-full"
+                    "relative sm:absolute order-3 mt-[-30%] sm:mt-0 sm:right-0 overflow-hidden z-10",
+                    "w-full",
+                    presentationObject.variant.isfullMediaTextLeft ? "bottom-[-100px]" : "bottom-0"
                 ]}>
                     <div>
                         <div class="max-w-content-full mx-auto px-md py-contentcontainer">
@@ -48,12 +52,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                         </div>
                     </div>
                 </div>
-
             </div>
-
-
-
-
         </div>
     `
 }
