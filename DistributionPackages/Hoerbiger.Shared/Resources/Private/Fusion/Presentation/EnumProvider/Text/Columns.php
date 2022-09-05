@@ -15,6 +15,7 @@ final class Columns implements PseudoEnumInterface
 {
     const VALUE_MAX_ONE = 'maxOne';
     const VALUE_MAX_TWO = 'maxTwo';
+    const VALUE_MAX_ONE_LEFT = 'maxOneLeft';
 
     /**
      * @var array<string,self>|self[]
@@ -32,7 +33,8 @@ final class Columns implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VALUE_MAX_ONE
-                && $string !== self::VALUE_MAX_TWO) {
+                && $string !== self::VALUE_MAX_TWO
+                && $string !== self::VALUE_MAX_ONE_LEFT) {
                 throw ColumnsIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -51,6 +53,11 @@ final class Columns implements PseudoEnumInterface
         return self::from(self::VALUE_MAX_TWO);
     }
 
+    public static function maxOneLeft(): self
+    {
+        return self::from(self::VALUE_MAX_ONE_LEFT);
+    }
+
     public function getIsMaxOne(): bool
     {
         return $this->value === self::VALUE_MAX_ONE;
@@ -61,6 +68,11 @@ final class Columns implements PseudoEnumInterface
         return $this->value === self::VALUE_MAX_TWO;
     }
 
+    public function getIsMaxOneLeft(): bool
+    {
+        return $this->value === self::VALUE_MAX_ONE_LEFT;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -68,7 +80,8 @@ final class Columns implements PseudoEnumInterface
     {
         return [
             self::from(self::VALUE_MAX_ONE),
-            self::from(self::VALUE_MAX_TWO)
+            self::from(self::VALUE_MAX_TWO),
+            self::from(self::VALUE_MAX_ONE_LEFT)
         ];
     }
 
