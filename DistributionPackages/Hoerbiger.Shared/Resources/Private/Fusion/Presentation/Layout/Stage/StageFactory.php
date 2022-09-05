@@ -67,16 +67,20 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forVideoStageIntroduction(TraversableNodeInterface $node): ?VideoStage
+    public function forVideoStageIntroduction(TraversableNodeInterface $node, bool $inBackend): ?VideoStage
     {
         $desktopVideoSource = $node->getProperty('video__source__desktop')
             ? $this->uriService->getAssetUri($node->getProperty('video__source__desktop'))
             : null;
 
+        $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Introduction requires image for property media.');
+        }
+
         $mobileVideoSource = $node->getProperty('video__source__mobile')
             ? $this->uriService->getAssetUri($node->getProperty('video__source__mobile'))
             : null;
-
 
         return $desktopVideoSource && $mobileVideoSource
             ? new VideoStage(
@@ -98,7 +102,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 null,
                 null,
                 $desktopVideoSource,
-                $mobileVideoSource
+                $this->figureFactory->forFullMediaStage($imageSource)
             )
             : null;
     }
