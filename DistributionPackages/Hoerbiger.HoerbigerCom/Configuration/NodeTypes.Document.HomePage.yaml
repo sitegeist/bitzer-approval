@@ -4,6 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'
@@ -73,27 +74,28 @@
         reloadIfChanged: true
         inspector:
           group: 'video'
+          position: 'before image'
           editorOptions:
             constraints:
               mediaTypes: ['video/mp4']
             accept:
               video/mp4
       validation:
-        'Neos.Neos/Validation/NotEmptyValidator': []
-    video__source__mobile:
-      type: 'Neos\Media\Domain\Model\Asset'
+        'Neos.Neos/Validation/NotEmptyValidator': {}
+    image:
       ui:
-        label: 'Video (Mobil)'
+        label: 'Bild (Mobil)'
         reloadIfChanged: true
         inspector:
           group: 'video'
-          editorOptions:
-            constraints:
-              mediaTypes: ['video/mp4']
-            accept:
-              video/mp4
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': []
+    image__alt:
+      ui:
+        inspector:
+          group: 'video'
+    image__title:
+      ui:
+        inspector:
+          group: 'video'
     primaryFooter:
       type: references
       ui: &footerMenu
