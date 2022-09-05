@@ -73,37 +73,35 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ? $this->uriService->getAssetUri($node->getProperty('video__source__desktop'))
             : null;
 
+        if (!$desktopVideoSource) {
+            throw new \InvalidArgumentException('Introduction requires video for property media.');
+        }
+
         $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Introduction requires image for property media.');
         }
 
-        $mobileVideoSource = $node->getProperty('video__source__mobile')
-            ? $this->uriService->getAssetUri($node->getProperty('video__source__mobile'))
-            : null;
-
-        return $desktopVideoSource && $mobileVideoSource
-            ? new VideoStage(
-                StageVariant::default(),
-                null,
-                new Headline(
-                    HeadlineSize::superLarge(),
-                    HeadlineColor::liteContrast(),
-                    HeadlineType::h1(),
-                    Editable::fromNodeProperty($node, 'headline')
-                ),
-                null,
-                new Text(
-                    TextVariant::lightContrast(),
-                    Editable::fromNodeProperty($node, 'text'),
-                    false
-                ),
-                null,
-                null,
-                null,
-                $desktopVideoSource,
-                $this->figureFactory->forFullMediaStage($imageSource)
-            )
-            : null;
+        return new VideoStage(
+            StageVariant::default(),
+            null,
+            new Headline(
+                HeadlineSize::superLarge(),
+                HeadlineColor::liteContrast(),
+                HeadlineType::h1(),
+                Editable::fromNodeProperty($node, 'headline')
+            ),
+            null,
+            new Text(
+                TextVariant::lightContrast(),
+                Editable::fromNodeProperty($node, 'text'),
+                false
+            ),
+            null,
+            null,
+            null,
+            $desktopVideoSource,
+            $this->figureFactory->forFullMediaStage($imageSource)
+        );
     }
 }
