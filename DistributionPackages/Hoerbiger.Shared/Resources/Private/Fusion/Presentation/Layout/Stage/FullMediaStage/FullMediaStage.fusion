@@ -6,11 +6,12 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
             "relative sm:h-0 sm:pt-ratio-2-1",
             presentationObject.variant.isfullMediaTextLeft && "pb-[100px]"
         ]}>
-            <div class={[
-                presentationObject.variant.isfullMediaTextLeft && "pb-[100px]"
-            ]}>
+            <div>
                 <div
-                    class="sm:absolute inset-0 z-10"
+                    class={[
+                        "sm:absolute inset-0 z-10",
+                        presentationObject.variant.isfullMediaTextLeft && "pb-[100px]"
+                    ]}
                     @if.1={presentationObject.mediaBackground}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
