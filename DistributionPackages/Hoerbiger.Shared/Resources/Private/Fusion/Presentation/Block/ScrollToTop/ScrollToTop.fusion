@@ -13,7 +13,7 @@ prototype(Hoerbiger.Shared:Block.ScrollToTop) < prototype(PackageFactory.AtomicF
         <div
         data-select="scrollBtn"
         class={[
-            "min-h-[48px] min-w-[48px] cursor-pointer fixed bottom-[1em] right-[1em] bg-standard",
+            "h-[48px] w-[48px] cursor-pointer fixed bottom-[1em] right-[1em] bg-standard",
             "opacity-1 transition-opacity z-content -rotate-90 flex justify-center p-[10px]"
         ]}>
             <svg viewBox="0 0 14 9" fill="#ffffff" xmlns="http://www.w3.org/2000/svg">
