@@ -7,5 +7,8 @@ export default function ($node: Element) {
 				behavior: 'smooth'
 			});
 		})
+		window.addEventListener('scroll', () => {
+			$node.classList.toggle('opacity-0', window.scrollY < 100);
+		});
 	}
 }
