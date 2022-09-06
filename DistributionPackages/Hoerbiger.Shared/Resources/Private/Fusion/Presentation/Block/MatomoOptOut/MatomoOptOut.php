@@ -25,7 +25,7 @@ final class MatomoOptOut extends AbstractComponentPresentationObject implements 
 
     public static function forLocale(string $locale): self
     {
-        return new self(new Uri('https://piwik.hoerbiger.com/index.php?module=CoreAdminHome&action=optOut&language=' . $locale . '&backgroundColor=&fontColor=ffffff&fontSize=&fontFamily=bzw'));
+        return new self(new Uri('https://piwik.hoerbiger.com/index.php?module=CoreAdminHome&action=optOut&language=' . $locale . '&backgroundColor=&fontColor=000000&fontSize=&fontFamily=bzw'));
     }
 
     public function getSrc(): UriInterface

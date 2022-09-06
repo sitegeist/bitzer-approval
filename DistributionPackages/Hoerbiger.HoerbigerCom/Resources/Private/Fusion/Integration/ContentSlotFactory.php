@@ -841,7 +841,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $languages = $subgraph->getDimensions()['language'];
 
         return new ContentContainer(
-            ContentContainerVariant::blank(),
+            ContentContainerVariant::regular(),
             MatomoOptOut::forLocale(reset($languages))
         );
     }
