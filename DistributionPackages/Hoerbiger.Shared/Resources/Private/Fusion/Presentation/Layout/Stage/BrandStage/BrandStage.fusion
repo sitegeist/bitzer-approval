@@ -28,9 +28,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.BrandStage) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={props.class}>
             <div class="order-2 mt-[-10%] sm:mt-0">
-                <div class={[
-                    presentationObject.variant.isDefault && "mt-md sm:mt-0 sm:mr-lg sm:mb-lg"
-                ]}>
+                <div>
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot
                         presentationObject={presentationObject.mediaBackground}
                         @if.1={presentationObject.mediaBackground}/>

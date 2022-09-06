@@ -16,12 +16,14 @@ use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItem;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Neos\Domain\Service\ContentContext;
 use Neos\Neos\Exception;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Neos\ContentRepository\Domain\Service\ContentDimensionPresetSourceInterface;
 use Neos\Neos\Domain\Service\ContentContextFactory;
-
+use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
+use Neos\Flow\Annotations as Flow;
 
 final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -30,6 +32,18 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     private ContentContextFactory $contentContextFactory;
 
     private LinkFactory $linkFactory;
+
+    /**
+     * @var TranslationLabelSourceRepository
+     * @Flow\Inject
+     */
+    protected $translationLabelSourceRepository;
+
+    /**
+     * @Flow\Inject
+     * @var LocalizationService
+     */
+    protected $localizationService;
 
     public function __construct(
         ContentDimensionPresetSourceInterface $contentDimensionPresetSource,
@@ -47,6 +61,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         ContentContext $subgraph
     ): SiteHeaderInterface {
         return new SiteHeader(
+            $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
             (new CompactSearchFormFactory())->forDocument($site),
             $this->getLanguageNavigationItems($document, $subgraph),
@@ -74,6 +89,20 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         int $maxDepth = 2,
         int $maxItemsPerColumn = 6
     ): ?NavigationItems {
+        $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
+            'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv'
+        );
+
+        $label = $labelSource
+            ? $labelSource->findTranslationLabelByIdentifier('label_overview')
+            : null;
+
+        $translatedLabel = $label
+            ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+                $this->localizationService->getConfiguration()->getCurrentLocale()
+            ))->getTranslation()
+            : null;
+
         if ($currentLevel <= $maxDepth) {
             $menuItems = [];
             $childNodes = $this->findChildNodesByNodeTypeFilterString($node, 'Neos.Neos:Document,!Hoerbiger.Shared:Tag.ExcludeFromNavigation');
@@ -100,15 +129,27 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
                 if ($currentLevel <= 1) {
                     return new NavigationItems($menuItems);
                 } else {
+                    $labelContent = $translatedLabel.' ' .$node->getLabel();
+                    $parentNavItem[] = new NavigationItem(
+                        $this->linkFactory->forLinkToDocumentNavigationOverview($node, $labelContent, null)->asPlainLabel(),
+                        null,
+                        $this->isParentNodeOfCurrentDocument($node, $currentDocumentNode)
+                    );
+
                     $totalItems = count($menuItems);
                     $countColumns = ceil($totalItems / $maxItemsPerColumn);
 
                     $newMenuItems = [];
 
                     for ($i = 0; $i <= $countColumns - 1; $i++) {
+                        $subItems = array_slice($menuItems, ($i * $maxItemsPerColumn), $maxItemsPerColumn);
+                        if ($i === 0) {
+                            $subItems = array_merge($parentNavItem, $subItems);
+                        }
+
                         $newMenuItems[$i] = new NavigationItem(
                             $menuItems[$i]->getLink(),
-                            new NavigationItems(array_slice($menuItems, ($i * $maxItemsPerColumn), $maxItemsPerColumn)),
+                            new NavigationItems($subItems),
                             true
                         );
                     };

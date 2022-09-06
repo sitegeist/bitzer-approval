@@ -94,6 +94,20 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
+    public function forTextBlockImage(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100w',
+            null,
+            null,
+            null
+        );
+    }
+
     public function forGalleryImage(ImageSourceHelperInterface $imageSource): Figure
     {
         return new Figure(

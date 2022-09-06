@@ -18,7 +18,8 @@ prototype(Hoerbiger.Shared:Block.Tag) < prototype(PackageFactory.AtomicFusion.Pr
             brandColor.@if.1 = ${presentationObject.variant.isBrandColor}
             brandColorContrast = "text-brand-contrast"
             brandColorContrast.@if.1 = ${presentationObject.variant.isBrandColorContrast}
-
+            transparent = "text-[transparent]"
+            transparent.@if.1 = ${presentationObject.variant.isTransparent}
         }
         content = PackageFactory.AtomicFusion.PresentationObjects:Slot {
             presentationObject = ${presentationObject.content}

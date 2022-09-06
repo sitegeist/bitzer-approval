@@ -144,6 +144,11 @@ module.exports = {
 			...defaultTheme.fontSize
 		},
 
+		lineHeight: {
+			'largeHeadline': '46px',
+			...defaultTheme.lineHeight
+		},
+
 		extend: {
 			typography: (theme) => ({
 				DEFAULT: {

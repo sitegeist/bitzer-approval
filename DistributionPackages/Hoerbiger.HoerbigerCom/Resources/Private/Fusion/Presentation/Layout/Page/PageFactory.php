@@ -10,6 +10,8 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
+use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTopFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\ThumbnailList\ThumbnailListFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
@@ -69,7 +71,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
-        $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage);
+        $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -78,6 +80,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ScrollToTop(),
                 $videoStage
                     ? new ContentContainer(
                         ContentContainerVariant::blank(),
@@ -111,6 +114,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb
@@ -163,6 +167,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb
@@ -210,6 +215,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),
                     $stage
@@ -235,6 +241,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new scrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb

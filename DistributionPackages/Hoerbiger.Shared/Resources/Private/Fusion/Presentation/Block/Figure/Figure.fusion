@@ -30,7 +30,7 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
                 sizes={presentationObject.sizes.sizes}
                 lazy={presentationObject.isToBeLoadedLazily}
                 class={Array.join(Array.filter([
-                    "w-full h-full",
+                    (presentationObject.objectFit.isCover || presentationObject.objectFit.isContain) && "w-full h-full",
                     presentationObject.objectFit.isCover && "object-cover",
                     presentationObject.objectFit.isContain && "object-contain",
                     presentationObject.objectPosition.isCenter && "object-center",

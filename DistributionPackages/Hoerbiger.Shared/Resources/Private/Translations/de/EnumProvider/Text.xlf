@@ -10,6 +10,10 @@
                 <source>Two columns</source>
                 <target>Zweispaltig</target>
             </trans-unit>
+            <trans-unit id="columns.maxOneLeft" xml:space="preserve">
+                <source>One column left aligned</source>
+                <target>Einspaltig linksbündig</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

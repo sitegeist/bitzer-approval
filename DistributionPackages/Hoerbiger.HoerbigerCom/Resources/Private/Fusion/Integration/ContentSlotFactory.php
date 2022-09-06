@@ -275,6 +275,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ? $this->figureFactory->forTwoColumnGrid($imageSource)
             : null;
 
+        $textBlockImageSource = $this->imageSourceFactory->forImageProperty(
+            $textWithImageNode,
+            $inBackend,
+            'text__block__image'
+        );
+
+        $textBlockFigure = $textBlockImageSource
+            ? $this->figureFactory->forTextBlockImage($textBlockImageSource)
+            : null;
+
         $text = new Box(
             BoxVariant::textCenter(),
             new Stack(
@@ -293,7 +303,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Editable::fromNodeProperty($textWithImageNode, 'text'),
                         false
                     ),
-                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme)
+                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme),
+                    $textBlockFigure
                 ]), $identity)
             )
         );
@@ -555,7 +566,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         $icon ?
                             new Tag(
                             'span',
-                            TagVariant::brandColor(),
+                            TagVariant::transparent(),
                             Icon::fromStampedeDataSourceValue(
                                 $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
                                 IconSize::size_3()
@@ -759,7 +770,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             new Tag(
                                 'span',
-                                TagVariant::brandColor(),
+                                TagVariant::transparent(),
                                 Icon::fromStampedeDataSourceValue(
                                     $sectionIntroductionNode->getProperty('icon') ?: 'peopleCulture:faqs',
                                     IconSize::size_4()
