@@ -35,7 +35,7 @@ prototype(Hoerbiger.Shared:Block.Breadcrumb) < prototype(PackageFactory.AtomicFu
                 ]}>
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                 </span>
-                <span class="hidden sm:flex h-[8px] w-[6px] flex justify-center items-center flex-shrink-0 text-neutral-darker translate-y-[-1px]">
+                <span class="sm:flex h-[8px] w-[6px] flex justify-center items-center flex-shrink-0 text-neutral-darker">
                     <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.glue} />
                 </span>
             </Neos.Fusion:Loop>
