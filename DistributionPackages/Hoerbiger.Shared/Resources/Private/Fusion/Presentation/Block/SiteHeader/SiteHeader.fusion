@@ -68,7 +68,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 <div
                                     @if.1={item.subItems}
                                     class={[
-                                        "opacity-0 absolute top-[74px] left-minus-xs p-ch flex z-20",
+                                        "opacity-0 absolute top-[74px] left-minus-xs px-ch pb-ch flex z-20",
                                         "pointer-events-none translate-y-5 duration-500 ease-out group-hover:pointer-events-auto group-hover:opacity-100 group-hover:translate-y-0",
                                         "shadow-submenu bg-light"
                                     ]}
