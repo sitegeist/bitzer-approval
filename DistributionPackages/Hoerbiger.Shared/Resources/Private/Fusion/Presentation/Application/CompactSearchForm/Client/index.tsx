@@ -53,14 +53,13 @@ export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
 
 	return (
 		<div
-			onMouseLeave={close}
 			ref={node}
 			className="w-full h-full relative"
 		>
 			<div
 				onClick={onClick}
 				className={cx(
-					"w-full h-full grid place-items-center z-50 cursor-pointer relative",
+					"w-full h-full grid place-items-center z-40 cursor-pointer relative",
 					isExpanded && !isTooSmallForExpandedView
 						? "text-standard"
 						: "text-light"
@@ -73,7 +72,7 @@ export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
 					<form
 						onSubmit={onSubmit}
 						className={cx(
-							"absolute z-20 top-[25%] bottom-0 right-0 w-[400%] h-[50px] rounded-full",
+							"absolute z-50 top-[25%] bottom-0 right-0 w-[400%] h-[50px] rounded-full",
 							"grid grid-cols-4 bg-light text-standard"
 						)}
 					>
@@ -89,9 +88,10 @@ export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
 						</div>
 						<div
 							onClick={onSubmit}
-							className="w-full h-full cursor-pointer"
+							className="w-full h-full cursor-pointer grid place-items-center text-standard"
 							title={labels["title.submit"] ?? ""}
 						>
+							<StampedeIcon iconName="search" size={1.5}/>
 						</div>
 					</form>
 				)
