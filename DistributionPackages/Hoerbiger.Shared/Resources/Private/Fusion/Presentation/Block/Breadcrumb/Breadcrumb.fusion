@@ -24,7 +24,7 @@ prototype(Hoerbiger.Shared:Block.Breadcrumb) < prototype(PackageFactory.AtomicFu
             <Neos.Fusion:Loop items={presentationObject.links.items}>
                 <span
                     @if.1={iterator.isLast}
-                    class={"flex sm:hidden h-[.5rem] flex-shrink-0 text-neutral-darker rotate-180"}
+                    class={"flex sm:hidden h-[.5rem] flex-shrink-0 text-neutral-darker rotate-180 w-[1rem]"}
                 >
                     <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.compactGlue} />
                 </span>
