@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
         ]}>
             <div @if.1={presentationObject.headline}
                 class={[
-                    "relative md:absolute p-sm z-10 max-w-full md:max-w-[50%]"
+                    "relative md:absolute px-md py-sm sm:p-sm z-10 max-w-full md:max-w-[50%]"
                 ]}
             >
                 <Hoerbiger.Shared:Block.Headline
@@ -88,7 +88,7 @@ prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFus
             <div
                 @if.1={presentationObject.inlineNavigation.items}
                 class={[
-                    "[Slidable.InlineNavigation] relative md:absolute md:top-[110px] lg:top-[150px] md:left-sm pb-sm md:pt-[15px] lg:pt-0"
+                    "[Slidable.InlineNavigation] relative p-sm sm:p-0 md:absolute md:top-[110px] lg:top-[150px] md:left-sm pb-sm md:pt-[15px] lg:pt-0"
                 ]}
             >
                 <Neos.Fusion:Loop items={presentationObject.inlineNavigation.items}>
