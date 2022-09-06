@@ -50,6 +50,19 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
+    public function forLinkToDocumentNavigationOverview(TraversableNodeInterface $document, string $labelContent, ?Theme $theme): Link
+    {
+        $linkTarget = LinkTarget::forNode($document);
+        return new Link(
+            LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+            $this->uriService->getNodeUri($document),
+            $linkTarget,
+            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            Value::fromString($labelContent),
+            null
+        );
+    }
+
     public function forBreadcrumbItem(TraversableNodeInterface $document): Link
     {
         return new Link(
