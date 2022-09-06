@@ -5,3 +5,5 @@ prototype(Neos.Neos:ContentCollection) {
         }
     }
 }
+
+prototype(Hoerbiger.HoerbigerCom:Collection.PrivacyPageContent) < prototype(Neos.Neos:ContentCollection)

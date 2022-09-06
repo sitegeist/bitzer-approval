@@ -23,6 +23,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
+use Hoerbiger\Shared\Presentation\Block\MatomoOptOut\MatomoOptOut;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
@@ -178,6 +179,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forCookieDeclarationNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.ImageWithLink':
                 return $this->forImageWithLink($contentNode, $subgraph, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Collection.PrivacyPageContent':
+                return Content::fromNode($contentNode, 'Neos.Neos:ContentCollection');
+            case 'Hoerbiger.HoerbigerCom:Content.MatomoOptOut':
+                return $this->forMatomoOptOut($subgraph);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -839,6 +844,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ? $link->asContainer()->withContent($figure)
                     : $figure
             ],$identity)
+        );
+    }
+
+    private function forMatomoOptOut(ContentContext $subgraph): SlotInterface
+    {
+        $languages = $subgraph->getDimensions()['language'];
+
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            MatomoOptOut::forLocale(reset($languages))
         );
     }
 }
