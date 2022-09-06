@@ -10,6 +10,9 @@ privilegeTargets:
       matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\WantedNodeController->(register)Action())'
     'Hoerbiger.HoerbigerCom:ContactRequest':
       matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\ContactRequestController->sendAction())'
+  'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
+    'Hoerbiger.HoerbigerCom:Module.MarketingUrls':
+      matcher: 'management/marketingUrls'
 
 roles:
   'Neos.Flow:Everybody':
@@ -22,4 +25,16 @@ roles:
         permission: GRANT
       -
         privilegeTarget: 'Hoerbiger.HoerbigerCom:ContactRequest'
+        permission: GRANT
+
+  'Hoerbiger.Shared:ChiefEditor':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:Module.MarketingUrls'
+        permission: GRANT
+
+  'Neos.Neos:Administrator':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:Module.MarketingUrls'
         permission: GRANT

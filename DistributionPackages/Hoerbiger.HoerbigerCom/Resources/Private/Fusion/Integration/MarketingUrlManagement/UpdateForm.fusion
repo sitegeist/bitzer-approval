@@ -1,0 +1,45 @@
+prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.UpdateForm) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <div class="neos-row-fluid">
+            <legend>Marketing-URL bearbeiten</legend>
+        </div>
+        <form enctype="multipart/form-data" action={updateUri} method="post">
+            <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
+            <div class="neos-row-fluid neos-module-container">
+                <fieldset class="neos-span6">
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="path">Pfad*</label>
+                        <div class="neos-controls neos-controls-row">
+                            <input
+                                readonly
+                                class="neos-span6"
+                                type="text"
+                                id="path"
+                                name="moduleArguments[command][path]"
+                                value={marketingUrl.path}
+                            />
+                        </div>
+                    </div>
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="nodeAggregateIdentifier">Zieldokument*</label>
+                        <div class="neos-controls">
+                            <select
+                                required
+                                class="neos-span6"
+                                id="nodeAggregateIdentifier"
+                                name="moduleArguments[command][nodeAggregateIdentifier]"
+                            >
+                                <Neos.Fusion:Loop items={documentOptions} itemName="documentData">
+                                    <option @if.1={documentData.identifier != String.toString(marketingUrl.nodeAggregateIdentifier)} value={documentData.identifier}>{documentData.label}</option>
+                                    <option @if.1={documentData.identifier == String.toString(marketingUrl.nodeAggregateIdentifier)} value={documentData.identifier} selected>{documentData.label}</option>
+                                </Neos.Fusion:Loop>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="neos-footer">
+                <input type="submit" class="neos-button neos-button-primary" value="Marketing-URL aktualisieren" title="Marketing-URL aktualisieren" />
+            </div>
+        </form>`
+}

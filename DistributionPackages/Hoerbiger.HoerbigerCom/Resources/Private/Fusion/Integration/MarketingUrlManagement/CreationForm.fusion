@@ -1,0 +1,45 @@
+prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.CreationForm) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.FlashMessages />
+        <div class="neos-row-fluid">
+            <legend>Neue Marketing-URL anlegen</legend>
+        </div>
+        <form enctype="multipart/form-data" action={creationUri} method="post">
+            <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
+            <div class="neos-row-fluid neos-module-container">
+                <fieldset class="neos-span6">
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="path">Pfad*</label>
+                        <div class="neos-controls neos-controls-row">
+                            <input
+                                required
+                                placeholder="my-campaign"
+                                class="neos-span6"
+                                type="text"
+                                id="path"
+                                name="moduleArguments[command][path]"
+                            />
+                        </div>
+                    </div>
+                    <div class="neos-control-group">
+                        <label class="neos-control-label" for="nodeAggregateIdentifier">Zieldokument*</label>
+                        <div class="neos-controls">
+                            <select
+                                required
+                                class="neos-span6"
+                                id="nodeAggregateIdentifier"
+                                name="moduleArguments[command][nodeAggregateIdentifier]"
+                            >
+                                <Neos.Fusion:Loop items={documentOptions} itemName="documentData">
+                                    <option value={documentData.identifier}>{documentData.label}</option>
+                                </Neos.Fusion:Loop>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="neos-footer">
+                <input type="submit" class="neos-button neos-button-primary" value="Marketing-URL anlegen" title="Marketing-URL anlegen" />
+            </div>
+        </form>`
+}

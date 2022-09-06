@@ -1,0 +1,10 @@
+include: resource://Neos.Fusion/Private/Fusion/Root.fusion
+include: resource://Hoerbiger.HoerbigerCom/Private/Fusion/Integration/MarketingUrlManagement/Index.fusion
+include: resource://Hoerbiger.HoerbigerCom/Private/Fusion/Integration/MarketingUrlManagement/CreationForm.fusion
+include: resource://Hoerbiger.HoerbigerCom/Private/Fusion/Integration/MarketingUrlManagement/UpdateForm.fusion
+
+Hoerbiger.HoerbigerCom.Application.MarketingUrlManagementController {
+    index = Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.Index
+    creationForm = Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.CreationForm
+    updateForm = Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.UpdateForm
+}

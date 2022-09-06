@@ -1,0 +1,10 @@
+Neos:
+  Neos:
+    modules:
+      management:
+        submodules:
+          marketingUrls:
+            label: 'Marketing-URLs'
+            controller: Hoerbiger\HoerbigerCom\Application\Controller\MarketingUrlManagementController
+            description: 'Ermöglicht die Verwaltung von Marketing-Kurz-URLs, die je nach Browsersprache auf die passende echte URL weiterleiten'
+            icon: 'fas fa-link'

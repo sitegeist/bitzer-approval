@@ -1,0 +1,73 @@
+prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.Index) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.FlashMessages />
+        <div class="neos-row-fluid">
+            <a class="neos-button" title="Klicken um eine neue Marketing-URL anzulegen" href={createUri}>Neue Marketing-URL anlegen</a>
+        </div>
+        <div class="neos-row-fluid">
+            <legend>Marketing-URLs</legend>
+            <table class="neos-table">
+                <thead>
+                <tr>
+                    <th>Pfad</th>
+                    <th>Zieldokument</th>
+                    <th class="neos-pull-right">Aktionen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <Neos.Fusion:Loop items={marketingUrls} itemName="marketingUrl">
+                    <tr>
+                        <td>{marketingUrl.path}</td>
+                        <td>{marketingUrl.label}</td>
+                        <td class="neos-action">
+                            <div class="neos-pull-right">
+                                <a data-neos-toggle="tooltip"
+                                    class="neos-button neos-button-primary"
+                                    title="bearbeiten"
+                                    href={marketingUrl.updateFormUri}
+                                >
+                                    <i class="fas fa-edit icon-white"></i>
+                                </a>
+                                <button class="neos-button neos-button-danger" title="Marketing-URL löschen" data-toggle="modal" href={'#marketingUrl' + marketingUrl.path} data-neos-toggle="tooltip">
+                                    <i class="fas fa-trash-alt icon-white"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </Neos.Fusion:Loop>
+                </tbody>
+            </table>
+            <Neos.Fusion:Loop items={marketingUrls} itemName="marketingUrl">
+                <div class="neos-hide" id={'marketingUrl' + marketingUrl.path}>
+                    <div class="neos-modal-centered">
+                        <div class="neos-modal-content">
+                            <div class="neos-modal-header">
+                                <button type="button" class="neos-close neos-button" data-dismiss="modal"></button>
+                                <div class="neos-header">
+                                    Wollen Sie die Marketing-URL &quot;{marketingUrl.path}&quot; wirklich löschen?
+                                </div>
+                                <div>
+                                    <div class="neos-subheader">
+                                        <p>
+                                            Dieser Vorgang kann nicht rückgängig gemacht werden.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="neos-modal-footer">
+                                <a href="#" class="neos-button" data-dismiss="modal">Abbrechen</a>
+                                <form class="neos-inline" action={deleteUri} method="post">
+                                    <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
+                                    <input type="hidden" name="moduleArguments[command][path]" value={marketingUrl.path} />
+                                    <button type="submit" class="neos-button neos-button-danger" title="Marketing-URL löschen">
+                                        Ja, die Marketing-URL löschen
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </Neos.Fusion:Loop>
+        </div>
+    `
+}

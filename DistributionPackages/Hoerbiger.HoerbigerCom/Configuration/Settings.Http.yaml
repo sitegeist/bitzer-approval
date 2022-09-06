@@ -1,0 +1,7 @@
+Neos:
+  Flow:
+    http:
+      middlewares:
+        marketingUrls:
+          position: 'before dispatch'
+          middleware: Hoerbiger\HoerbigerCom\Application\MarketingUrlMiddleware
