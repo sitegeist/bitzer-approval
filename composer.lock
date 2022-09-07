@@ -2645,7 +2645,7 @@
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.Shared",
-                "reference": "3bdba705c3282b069470ef09c3bc40dda0b0e02b"
+                "reference": "99382328f4ffb203cc44b4247a8ed0ea21dcadac"
             },
             "require": {
                 "flowpack/elasticsearch-contentrepositoryadaptor": "~8.1",
@@ -2673,7 +2673,10 @@
             "type": "neos-hoerbiger",
             "extra": {
                 "neos": {
-                    "package-key": "Hoerbiger.Shared"
+                    "package-key": "Hoerbiger.Shared",
+                    "installer-resource-folders": [
+                        "Resources/Private/Installer/"
+                    ]
                 }
             },
             "autoload": {

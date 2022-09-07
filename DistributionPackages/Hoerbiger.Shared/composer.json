@@ -39,7 +39,10 @@
     },
     "extra": {
         "neos": {
-            "package-key": "Hoerbiger.Shared"
+            "package-key": "Hoerbiger.Shared",
+            "installer-resource-folders": [
+                "Resources/Private/Installer/"
+            ]
         }
     }
 }
