@@ -29,9 +29,13 @@ prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.UpdateForm) < pro
                                 id="nodeAggregateIdentifier"
                                 name="moduleArguments[command][nodeAggregateIdentifier]"
                             >
-                                <Neos.Fusion:Loop items={documentOptions} itemName="documentData">
-                                    <option @if.1={documentData.identifier != String.toString(marketingUrl.nodeAggregateIdentifier)} value={documentData.identifier}>{documentData.label}</option>
-                                    <option @if.1={documentData.identifier == String.toString(marketingUrl.nodeAggregateIdentifier)} value={documentData.identifier} selected>{documentData.label}</option>
+                                <Neos.Fusion:Loop items={documentOptions} itemName="documentOptionsForType" itemKey="type">
+                                    <optgroup label={type}>
+                                        <Neos.Fusion:Loop items={documentOptionsForType} itemName="documentData">
+                                            <option @if.1={documentData.identifier != String.toString(marketingUrl.nodeAggregateIdentifier)} value={documentData.identifier}>{documentData.label}</option>
+                                            <option @if.1={documentData.identifier == String.toString(marketingUrl.nodeAggregateIdentifier)} value={documentData.identifier} selected>{documentData.label}</option>
+                                        </Neos.Fusion:Loop>
+                                    </optgroup>
                                 </Neos.Fusion:Loop>
                             </select>
                         </div>

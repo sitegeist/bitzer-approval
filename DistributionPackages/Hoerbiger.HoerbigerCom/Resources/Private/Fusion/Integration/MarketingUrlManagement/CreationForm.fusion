@@ -30,8 +30,12 @@ prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.CreationForm) < p
                                 id="nodeAggregateIdentifier"
                                 name="moduleArguments[command][nodeAggregateIdentifier]"
                             >
-                                <Neos.Fusion:Loop items={documentOptions} itemName="documentData">
-                                    <option value={documentData.identifier}>{documentData.label}</option>
+                                <Neos.Fusion:Loop items={documentOptions} itemName="documentOptionsForType" itemKey="type">
+                                    <optgroup label={type}>
+                                        <Neos.Fusion:Loop items={documentOptionsForType} itemName="documentData">
+                                            <option value={documentData.identifier}>{documentData.label}</option>
+                                        </Neos.Fusion:Loop>
+                                    </optgroup>
                                 </Neos.Fusion:Loop>
                             </select>
                         </div>

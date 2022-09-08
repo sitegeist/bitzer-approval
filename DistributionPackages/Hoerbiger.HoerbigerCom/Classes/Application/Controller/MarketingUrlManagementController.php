@@ -13,6 +13,7 @@ use Hoerbiger\HoerbigerCom\Domain\MarketingUrl\PathIsAlreadyOccupied;
 use Hoerbiger\HoerbigerCom\Domain\MarketingUrl\PathIsNotYetOccupied;
 use Hoerbiger\HoerbigerCom\Domain\MarketingUrl\RegisterMarketingUrl;
 use Hoerbiger\HoerbigerCom\Domain\MarketingUrl\UpdateMarketingUrl;
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Service\ContextFactoryInterface;
 use Neos\Eel\FlowQuery\FlowQuery;
@@ -180,10 +181,11 @@ class MarketingUrlManagementController extends AbstractModuleController
     }
 
     /**
-     * @return array<array<string,string>>
+     * @return array<string,array<int,array<string,string>>>
      */
     private function findDocumentOptions(): array
     {
+        /** @var array<int,Node> $documents */
         /** @phpstan-ignore-next-line magic method */
         $documents = (new FlowQuery([$this->getSubgraph()->getCurrentSiteNode()]))
             ->find('[instanceof Neos.Neos:Document]')->get();
@@ -193,13 +195,27 @@ class MarketingUrlManagementController extends AbstractModuleController
             => strtolower($a->getLabel()) <=> strtolower($b->getLabel())
         );
 
-        return array_map(
-            fn (NodeInterface $document):array => [
+        $documentOptions = [
+            'Produkte' => [],
+            'Seiten' => [],
+            'Verweise' => []
+        ];
+        foreach ($documents as $document) {
+            if ($document->getNodeType()->isOfType('Neos.Neos:Shortcut')) {
+                $type = 'Verweise';
+            } elseif ($document->getNodeType()->isOfType('Hoerbiger.HoerbigerCom.Catalog:Document.Product')) {
+                $type = 'Produkte';
+            } else {
+                $type = 'Seiten';
+            }
+
+            $documentOptions[$type][] = [
                 'identifier' => $document->getIdentifier(),
                 'label' => $document->getLabel()
-            ],
-            $documents
-        );
+            ];
+        }
+
+        return $documentOptions;
     }
 
     private function getSubgraph(): ContentContext
