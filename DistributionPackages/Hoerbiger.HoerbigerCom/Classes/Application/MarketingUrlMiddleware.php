@@ -53,6 +53,9 @@ class MarketingUrlMiddleware implements MiddlewareInterface
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $marketingUrl = $this->marketingUrlRepository->findByPath(trim($request->getUri()->getPath(), '/'));
+        if (!$marketingUrl && $request->getUri()->getPath() === '/') {
+            $marketingUrl = $this->marketingUrlRepository->findByPath($request->getUri()->getHost());
+        }
         if ($marketingUrl) {
             $languagePresets = $this->contentDimensionPresetSource->getAllPresets()['language']['presets'];
             $preset = null;

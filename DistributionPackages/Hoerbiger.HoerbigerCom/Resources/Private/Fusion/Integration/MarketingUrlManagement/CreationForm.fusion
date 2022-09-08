@@ -9,11 +9,11 @@ prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.CreationForm) < p
             <div class="neos-row-fluid neos-module-container">
                 <fieldset class="neos-span6">
                     <div class="neos-control-group">
-                        <label class="neos-control-label" for="path">Pfad*</label>
+                        <label class="neos-control-label" for="path">Pfad (ohne /) oder Domain*</label>
                         <div class="neos-controls neos-controls-row">
                             <input
                                 required
-                                placeholder="my-campaign"
+                                placeholder="my-campaign oder my-campaign.hoerbiger.com"
                                 class="neos-span6"
                                 type="text"
                                 id="path"

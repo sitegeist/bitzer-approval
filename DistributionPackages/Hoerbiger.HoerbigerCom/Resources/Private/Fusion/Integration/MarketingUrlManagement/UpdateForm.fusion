@@ -8,7 +8,7 @@ prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.UpdateForm) < pro
             <div class="neos-row-fluid neos-module-container">
                 <fieldset class="neos-span6">
                     <div class="neos-control-group">
-                        <label class="neos-control-label" for="path">Pfad*</label>
+                        <label class="neos-control-label" for="path">Pfad oder Domain</label>
                         <div class="neos-controls neos-controls-row">
                             <input
                                 readonly

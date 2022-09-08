@@ -3,5 +3,5 @@ Neos:
     http:
       middlewares:
         marketingUrls:
-          position: 'before dispatch'
+          position: 'before languageDetection'
           middleware: Hoerbiger\HoerbigerCom\Application\MarketingUrlMiddleware
