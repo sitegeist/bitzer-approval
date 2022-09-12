@@ -144,6 +144,13 @@ cd /srv/dockerdata/www-prod
 docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow
 ```
 
+### Promoting users
+To promote users from standard editor role to ChiefEditor (Hoerbiger.Shared:ChiefEditor) run the following command (adjust username to your needs):
+
+```sh
+docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow editor:promote 'HOERBIGER-COM\uext_abc'     
+```
+
 ## Installation
 
 Install dependencies via:
