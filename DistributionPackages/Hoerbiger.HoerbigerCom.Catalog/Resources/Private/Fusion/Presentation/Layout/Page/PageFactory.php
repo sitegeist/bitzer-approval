@@ -107,7 +107,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         ContentContainerVariant::regular(),
                         new Grid(
                             GridVariant::threeColumnsGap(),
-                            Collection::fromIterable((new CardFactory())->forIndustrySolutions($industrySolutions), $identity)
+                            Collection::fromIterable((new CardFactory())->forIndustrySolutions($industrySolutions, $subgraph), $identity)
                         )
                     ),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList'
