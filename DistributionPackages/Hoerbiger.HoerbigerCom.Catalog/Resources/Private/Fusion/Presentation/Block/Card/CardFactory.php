@@ -96,13 +96,23 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     /**
      * @return array<int,NavigationCard>
      */
-    public function forIndustrySolutions(TraversableNodeInterface $industrySolutions): array
+    public function forIndustrySolutions(TraversableNodeInterface $industrySolutions, ContentContext $subgraph): array
     {
         $cards = [];
         foreach ($this->findChildNodesByNodeTypeFilterString(
             $industrySolutions,
-            'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution'
+            'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution,Hoerbiger.HoerbigerCom:Document.Shortcut'
         ) as $industrySolution) {
+            if ($industrySolution->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Document.Shortcut')) {
+                $rawLinkTarget = $industrySolution->getProperty('target');
+                if ($rawLinkTarget) {
+                    /** @var TraversableNodeInterface $industrySolution */
+                    $industrySolution = $subgraph->getNodeByIdentifier(\mb_substr($rawLinkTarget, 7));
+                } else {
+                    continue;
+                }
+            }
+
             $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolution, false);
             $link = (new LinkFactory())->forLinkToDocument($industrySolution, null);
 
