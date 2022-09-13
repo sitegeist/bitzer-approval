@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
@@ -17,6 +18,7 @@ use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\I18n\Service as LocalizationService;
+use Neos\Flow\Mvc\ActionRequest;
 use Neos\Neos\Domain\Service\ContentContext;
 use Neos\Neos\Exception;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -58,13 +60,14 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     public function forDocument(
         TraversableNodeInterface $document,
         TraversableNodeInterface $site,
-        ContentContext $subgraph
+        ContentContext $subgraph,
+        ?ActionRequest $actionRequest = null
     ): SiteHeaderInterface {
         return new SiteHeader(
             $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
             (new CompactSearchFormFactory())->forDocument($site),
-            $this->getLanguageNavigationItems($document, $subgraph),
+            $this->getLanguageNavigationItems($document, $subgraph, $actionRequest),
             new Icon("shared", "chevronDown", IconSize::size_1_5()),
             new Icon("shared", "arrowRight", IconSize::size_1())
         );
@@ -82,7 +85,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
      * @throws \Neos\Flow\Property\Exception
      * @throws \Neos\Flow\Security\Exception
      */
-    protected function getChildNavigationNodes(
+    public function getChildNavigationNodes(
         TraversableNodeInterface $node,
         TraversableNodeInterface $currentDocumentNode,
         int $currentLevel,
@@ -168,11 +171,16 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         return str_starts_with($currentDocument->findNodePath() . '/', $childNodePath);
     }
 
-    protected function getLanguageNavigationItems(TraversableNodeInterface $documentNode, ContentContext $subgraph): NavigationItems
-    {
+    protected function getLanguageNavigationItems(
+        TraversableNodeInterface $documentNode,
+        ContentContext $subgraph,
+        ?ActionRequest $request
+    ): NavigationItems {
         /* Languages */
         $currentLanguageIdentifier = strtoupper(reset($subgraph->getDimensions()['language']));
         $languages = [];
+
+        $queryString = $request ? $request->getHttpRequest()->getServerParams()['QUERY_STRING'] : null;
 
         foreach ($this->contentDimensionPresetSource->getAllPresets()['language']['presets'] as $localeIdentifier => $preset) {
             $contextProperties = $subgraph->getProperties();
@@ -202,9 +210,12 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         $children = [];
 
         foreach ($languages as $language) {
+            /** @var Uri $documentUri */
+            $documentUri = $language[0] ;
+
             $children[] = new NavigationItem(
                 $this->linkFactory->forLanguageMenuItem(
-                    $language[0],
+                    $queryString ? $documentUri->withQuery($queryString): $documentUri,
                     $language[1]
                 ),
                 null,
