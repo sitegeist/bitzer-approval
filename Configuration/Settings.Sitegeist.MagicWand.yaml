@@ -40,6 +40,7 @@ Sitegeist:
       master:
         host: 'hoerbiger'
         port: 22
+        user: uext_tb
         path: '/srv/dockerdata/www-prod/www/hoerbiger_deployer/current'
         flowCommand: 'cd /srv/dockerdata/www-prod && docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow'
         dumpCommand: '"cd /srv/dockerdata/www-prod && docker-compose exec -T db mysqldump"'

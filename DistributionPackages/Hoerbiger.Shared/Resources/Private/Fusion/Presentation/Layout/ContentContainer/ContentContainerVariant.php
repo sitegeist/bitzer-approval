@@ -25,6 +25,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
+    const VARIANT_HALF_WITH = 'halfWidth';
 
     /**
      * @var array<string,self>|self[]
@@ -52,7 +53,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_BLANKY
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
-                && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM) {
+                && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
+                && $string !== self::VARIANT_HALF_WITH) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -121,6 +123,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM);
     }
 
+    public static function halfWidth(): self
+    {
+        return self::from(self::VARIANT_HALF_WITH);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -181,6 +188,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_REGULAR_WITHOUT_BOTTOM;
     }
 
+    public function getIsHalfWidth(): bool
+    {
+        return $this->value === self::VARIANT_HALF_WITH;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -198,7 +210,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_BLANKY),
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
-            self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM)
+            self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM),
+            self::from(self::VARIANT_HALF_WITH)
         ];
     }
 
