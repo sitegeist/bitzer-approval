@@ -2,8 +2,8 @@ Hoerbiger:
   HoerbigerCom:
     HR:
       redirects:
-        '/de/details.html': 'de/open-positions/job-details.html'
-        '/en/details.html': 'en/open-positions/job-details.html'
+        '/de/details.html': '/de/open-positions/job-details.html'
+        '/en/details.html': '/en/open-positions/job-details.html'
         '/de/apply.html': '/de/open-positions/job-application-form.html'
         '/en/apply.html': '/en/open-positions/job-application-form.html'
         '/de/searchagent.html': '/de/open-positions/job-notification.html'
