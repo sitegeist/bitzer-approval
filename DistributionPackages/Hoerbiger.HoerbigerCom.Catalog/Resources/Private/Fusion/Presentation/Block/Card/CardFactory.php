@@ -103,16 +103,6 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $industrySolutions,
             'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution,Hoerbiger.HoerbigerCom:Document.Shortcut'
         ) as $industrySolution) {
-            if ($industrySolution->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Document.Shortcut')) {
-                $rawLinkTarget = $industrySolution->getProperty('target');
-                if ($rawLinkTarget) {
-                    /** @var TraversableNodeInterface $industrySolution */
-                    $industrySolution = $subgraph->getNodeByIdentifier(\mb_substr($rawLinkTarget, 7));
-                } else {
-                    continue;
-                }
-            }
-
             $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolution, false);
             $link = (new LinkFactory())->forLinkToDocument($industrySolution, null);
 
@@ -120,7 +110,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                 HeadlineSize::small(),
                 HeadlineColor::brand(),
                 HeadlineType::div(),
-                Value::fromString($industrySolution->getLabel())
+                Value::fromString($industrySolution->getProperty('preview__headline') ?: $industrySolution->getLabel())
             );
 
             $text = new Text(
