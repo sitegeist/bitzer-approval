@@ -1,0 +1,8 @@
+'Hoerbiger.HoerbigerCom:Mixin.NonEditableUriPathSegment':
+  abstract: true
+  properties:
+    uriPathSegment:
+      ui:
+        inspector:
+          editorOptions:
+            disabled: true
