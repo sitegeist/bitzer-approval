@@ -96,7 +96,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     /**
      * @return array<int,NavigationCard>
      */
-    public function forIndustrySolutions(TraversableNodeInterface $industrySolutions, ContentContext $subgraph): array
+    public function forIndustrySolutions(TraversableNodeInterface $industrySolutions): array
     {
         $cards = [];
         foreach ($this->findChildNodesByNodeTypeFilterString(
