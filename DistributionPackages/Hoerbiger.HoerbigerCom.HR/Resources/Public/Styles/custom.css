@@ -1,14 +1,14 @@
 .SDPTNAMELEVEL1 {
-    display: none;
+	display: none;
 }
 
 #languageSwitchForm {
-    float: right;
-    padding-top: 10px;
+	float: right;
+	padding-top: 10px;
 }
 
 .tlk-fo-context-with-search-criteria .talentlink-fo-page-header {
-    display: none;
+	display: none;
 }
 
 .tlk-apply-components-styling-context .well .apply-sna-main .apply-fast-buttons-wrapper .apply-sna-button-container-linkedin_v2 {
@@ -16,42 +16,42 @@
 }
 
 @media print {
-    .tlk-fo-components-styling-context [data-lumesse-jd-action="apply"],
-    .tlk-fo-components-styling-context #buttonsColumn {
-        display: none !important;
-    }
+	.tlk-fo-components-styling-context [data-lumesse-jd-action="apply"],
+	.tlk-fo-components-styling-context #buttonsColumn {
+		display: none !important;
+	}
 
-    .tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column {
-        display: flex;
-        flex-direction: row;
-    }
+	.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column {
+		display: flex;
+		flex-direction: row;
+	}
 
-    .tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-left-column {
-        flex: 4;
-        margin-right: 35px;
-    }
+	.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-left-column {
+		flex: 4;
+		margin-right: 35px;
+	}
 
-    .tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-content {
-        order: 1;
-    }
+	.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-content {
+		order: 1;
+	}
 
-    .tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-right-column {
-        flex: 1;
-    }
+	.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-right-column {
+		flex: 1;
+	}
 
-    .tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-criteria {
-        order: 2;
-    }
+	.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .job-description-criteria {
+		order: 2;
+	}
 
-    .tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .jdesc-criteria dd,
-    .tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .jdesc-criteria dt {
-        float: none;
-        line-height: 1.7;
-    }
+	.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .jdesc-criteria dd,
+	.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column .jdesc-criteria dt {
+		float: none;
+		line-height: 1.7;
+	}
 
-    .tlk-fo-components-styling-context .tlk-fo-job-details-container h1,
-    .tlk-fo-components-styling-context .tlk-fo-job-details-container h2,
-    .tlk-fo-components-styling-context .tlk-fo-job-details-container h3 {
-        color: #87212E !important;
-    }
+	.tlk-fo-components-styling-context .tlk-fo-job-details-container h1,
+	.tlk-fo-components-styling-context .tlk-fo-job-details-container h2,
+	.tlk-fo-components-styling-context .tlk-fo-job-details-container h3 {
+		color: #87212E !important;
+	}
 }
