@@ -37,6 +37,8 @@ DistributionPackages/*/Resources/Private/**/*.js.fusion
 DistributionPackages/*/Resources/Public/JavaScript/
 DistributionPackages/*/Resources/Public/Styles/
 DistributionPackages/*/Resources/Public/Build/
+!DistributionPackages/Hoerbiger.HoerbigerCom.HR/Resources/Public/Styles/custom.css
+!DistributionPackages/Hoerbiger.HoerbigerCom.HR/Resources/Public/JavaScript/custom.js
 .build/
 
 .idea
