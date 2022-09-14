@@ -10,7 +10,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                 <div
                     class={[
                         "sm:absolute inset-0 z-10",
-                        presentationObject.variant.isfullMediaTextLeft && "sm:pb-[100px]"
+                        presentationObject.variant.isfullMediaTextLeft && "pb-[40px] sm:pb-[100px]"
                     ]}
                     @if.1={presentationObject.mediaBackground}
                 >
