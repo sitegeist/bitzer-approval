@@ -15,8 +15,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
  */
 final class ContentContainer extends AbstractComponentPresentationObject implements ContentContainerInterface
 {
-    const MAX_CONTENT_WIDTH = '1800px';
-
     private ContentContainerVariant $variant;
 
     private SlotInterface $content;

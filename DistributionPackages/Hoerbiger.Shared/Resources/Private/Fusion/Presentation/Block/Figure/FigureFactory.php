@@ -5,8 +5,6 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
  * This file is part of the Hoerbiger.Shared package.
  */
 
-use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
-use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
@@ -75,7 +73,10 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $imageSource,
             true,
             $this->sourceSetProvider->getFullSet(),
-            new QualifiedPresetIdentifiers([]),
+            new QualifiedPresetIdentifiers([
+                '(min-width: 1600px)' => PresetIdentifier::md(),
+                '(min-width: 768px)' => PresetIdentifier::sm()
+            ]),
             '100vw',
             FigureObjectFit::cover(),
             FigureObjectPosition::center(),
@@ -244,9 +245,7 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             false,
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([
-                QualifiedPresetIdentifiers::getMinWidthQualifierForBreakPoint(
-                    ContentContainer::MAX_CONTENT_WIDTH
-                ) => PresetIdentifier::xl()
+                '(min-width: 1800px)' => PresetIdentifier::xl()
             ]),
             '100w',
             null,
