@@ -39,9 +39,11 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         return new Figure(
             $imageSource,
             false,
-            $this->sourceSetProvider->getFullSet(),
+            $this->sourceSetProvider->getSourceSetForPresets([
+                PresetIdentifier::xs()
+            ]),
             new QualifiedPresetIdentifiers([]),
-            '100vw',
+            '100px',
             FigureObjectFit::cover(),
             FigureObjectPosition::center(),
             null
