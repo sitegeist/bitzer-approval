@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
@@ -240,7 +241,11 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $imageSource,
             false,
             $this->sourceSetProvider->getFullSet(),
-            new QualifiedPresetIdentifiers([]),
+            new QualifiedPresetIdentifiers([
+                QualifiedPresetIdentifiers::getMinWidthQualifierForBreakPoint(
+                    ContentContainer::MAX_CONTENT_WIDTH
+                ) => PresetIdentifier::xl()
+            ]),
             '100w',
             null,
             null,

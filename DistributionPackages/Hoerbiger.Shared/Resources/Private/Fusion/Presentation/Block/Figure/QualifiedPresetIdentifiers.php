@@ -34,6 +34,11 @@ final class QualifiedPresetIdentifiers implements \IteratorAggregate, \Countable
         $this->presetIdentifiers = $array;
     }
 
+    public static function getMinWidthQualifierForBreakPoint(string $breakPoint): string
+    {
+        return '(min-width: ' .  $breakPoint . ')';
+    }
+
     /**
      * @return \ArrayIterator<string,PresetIdentifier>|PresetIdentifier[]
      */

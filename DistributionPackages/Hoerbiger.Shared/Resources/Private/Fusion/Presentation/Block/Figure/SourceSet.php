@@ -35,7 +35,7 @@ final class SourceSet
 
     public function getWidth(PresetIdentifier $presetIdentifier): string
     {
-        return $this->thumbnailConfigurations[$presetIdentifier->getValue()]->getWidth() . 'w';
+        return $this->thumbnailConfigurations[$presetIdentifier->getValue()]->getWidth() . 'px';
     }
 
     public function toString(): string
