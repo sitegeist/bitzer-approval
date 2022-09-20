@@ -1,0 +1,38 @@
+'Hoerbiger.HoerbigerCom:Document.CareerRootPage':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
+
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
+          'Hoerbiger.HoerbigerCom:Collection.TabBox': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
+    career:
+      type: 'Hoerbiger.HoerbigerCom:Document.CareerPage'
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
+      'Hoerbiger.HoerbigerCom:Document.CareerPage': true
+  ui:
+    icon: scroll
+    label: 'Karriere'
+  properties:
+    searchType:
+      search:
+        indexing: '${"WebPage"}'

@@ -28,6 +28,9 @@
     career:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerPage'
       position: 128
+    careerroot:
+      type: 'Hoerbiger.HoerbigerCom:Document.CareerRootPage'
+      position: 128
     contact:
       type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
       position: 256
