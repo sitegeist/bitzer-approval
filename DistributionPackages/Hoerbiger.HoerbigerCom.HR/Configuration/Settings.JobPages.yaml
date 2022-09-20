@@ -3,8 +3,8 @@ Hoerbiger:
     HR:
       redirects:
         '/de/karriere/details.html': '/de/karriere/open-positions/job-details.html'
-        '/en/karriere/details.html': '/en/karriere/open-positions/job-details.html'
+        '/en/career/details.html': '/en/career/open-positions/job-details.html'
         '/de/karriere/apply.html': '/de/karriere/open-positions/job-application-form.html'
-        '/en/karriere/apply.html': '/en/karriere/open-positions/job-application-form.html'
+        '/en/career/apply.html': '/en/career/open-positions/job-application-form.html'
         '/de/karriere/searchagent.html': '/de/karriere/open-positions/job-notification.html'
-        '/en/karriere/searchagent.html': '/en/karriere/open-positions/job-notification.html'
+        '/en/career/searchagent.html': '/en/career/open-positions/job-notification.html'
