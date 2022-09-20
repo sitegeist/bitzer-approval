@@ -3,7 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
     'Hoerbiger.Shared:Mixin.Searchable': true
-    #'Hoerbiger.HoerbigerCom:Mixin.NonEditableUriPathSegment': true
+    'Hoerbiger.HoerbigerCom:Mixin.NonEditableUriPathSegment': true
   childNodes:
     job:
       type: 'Hoerbiger.HoerbigerCom.HR:Document.Job'
