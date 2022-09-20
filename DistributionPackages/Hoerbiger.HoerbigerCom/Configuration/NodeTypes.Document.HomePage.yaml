@@ -25,9 +25,6 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Content.ImageWithLink': true
-    career:
-      type: 'Hoerbiger.HoerbigerCom:Document.CareerPage'
-      position: 128
     careerroot:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerRootPage'
       position: 128
