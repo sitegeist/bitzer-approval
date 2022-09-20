@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom:Document.CareerRootPage) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Hoerbiger.Page.forCareerRootPage(site, documentNode, documentNode.context.inBackend, site.context)}
+        }
+    }
+}
