@@ -90,7 +90,10 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $imageSource,
             true,
             $this->sourceSetProvider->getFullSet(),
-            new QualifiedPresetIdentifiers([]),
+            new QualifiedPresetIdentifiers([
+                '(min-width: 1600px)' => PresetIdentifier::lg(),
+                '(min-width: 1024px)' => PresetIdentifier::md()
+            ]),
             '100w',
             FigureObjectFit::cover(),
             FigureObjectPosition::center(),

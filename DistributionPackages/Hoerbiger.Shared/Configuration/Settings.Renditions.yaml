@@ -4,6 +4,9 @@ Neos:
       'xl':
         width: 1820px
         async: true
+      'lg':
+        width: 880px
+        async: true
       'md':
         width: 660px
         async: true
