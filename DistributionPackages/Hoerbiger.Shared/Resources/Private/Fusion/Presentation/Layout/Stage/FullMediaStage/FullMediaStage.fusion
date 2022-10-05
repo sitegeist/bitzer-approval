@@ -24,10 +24,12 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
             </div>
             <div class="relative z-50">
                 <div class={[
-                    "relative sm:absolute order-3 mt-[-30%] sm:mt-0 sm:right-0 overflow-hidden z-10",
+                    "absolute order-3 mt-[-25%] sm:right-0 overflow-hidden z-10",
                     "w-full",
                     presentationObject.variant.isfullMediaTextLeft ? "bottom-0 sm:bottom-[-100px]" : "bottom-0"
-                ]}>
+                ]}
+                >
+
                     <div>
                         <div class="max-w-content-full mx-auto px-md py-contentcontainer">
                             <div class="lg:max-w-[66%] xl:max-w-[40%]">
