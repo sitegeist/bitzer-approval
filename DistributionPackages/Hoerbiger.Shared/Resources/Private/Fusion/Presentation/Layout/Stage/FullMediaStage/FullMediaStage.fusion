@@ -17,17 +17,18 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
                 </div>
                 <div class={[
-                    "hidden sm:flex sm:absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
+                    "flex sm:absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
                     "sm:bg-transparent sm:bg-gradient-to-t",
                     "lg:bg-gradient-to-r"
                 ]}></div>
             </div>
             <div class="relative z-50">
                 <div class={[
-                    "relative sm:absolute order-3 mt-[-30%] sm:mt-0 sm:right-0 overflow-hidden z-10",
+                    "relative sm:absolute order-3 mt-[-35%] offcanvas:mt-[-20%] sm:mt-[-20%] sm:right-0 overflow-hidden z-10",
                     "w-full",
                     presentationObject.variant.isfullMediaTextLeft ? "bottom-0 sm:bottom-[-100px]" : "bottom-0"
-                ]}>
+                ]}
+                >
                     <div>
                         <div class="max-w-content-full mx-auto px-md py-contentcontainer">
                             <div class="lg:max-w-[66%] xl:max-w-[40%]">

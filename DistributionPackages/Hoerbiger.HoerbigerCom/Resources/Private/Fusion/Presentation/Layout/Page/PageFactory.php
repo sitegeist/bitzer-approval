@@ -124,7 +124,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::snugOverlay(),
+                    ContentContainerVariant::regular(),
                     (new SearchFormFactory())->create($subgraph)
                 ),
             ]), $identity)
@@ -137,6 +137,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
+    }
+
+    public function forCareerRootPage(TraversableNodeInterface $site, TraversableNodeInterface $careerRootPage, bool $inBackend, ContentContext $subgraph): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forFullMediaIntroduction($careerRootPage, $subgraph, $inBackend);
+
+        return $this->forDocumentWithIntroduction($site, $careerRootPage, $stage, $subgraph);
     }
 
     public function forPeopleAndCultureWebPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface

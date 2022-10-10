@@ -3,6 +3,5 @@ Hoerbiger:
     HR:
       talentlink:
         src: 'https://emea3.recruitmentplatform.com/apply-app/static/talentportal/release/3-LATEST/talentportal-widgets-wcag.js'
-        #siteTechId: 'QCXFK026203F3VBQB68V77VT4'
-        siteTechId: 'Q6CFK026203F3VB7V8M6G8NZQ'
+        siteTechId: 'QCXFK026203F3VBQB68V77VT4'
         host: 'emea3.recruitmentplatform.com'

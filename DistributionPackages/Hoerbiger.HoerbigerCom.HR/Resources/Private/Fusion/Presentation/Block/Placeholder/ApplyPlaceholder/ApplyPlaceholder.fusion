@@ -2,18 +2,11 @@ prototype(Hoerbiger.HoerbigerCom.HR:Block.Placeholder.ApplyPlaceholder) < protot
     renderer = afx`
         <nav data-talentlink-apply-menu-container></nav>
         <main data-talentlink-apply-root-container></main>
-
-        <!--<script type="text/javascript" src="https://emea3.recruitmentplatform.com/apply-app/static/apply/release/3-LATEST/apply-all-in-one-namespaced.js"
-                data-talentlink-apply
-                data-talentlink-apply-layout="wcag"
-                data-talentlink-apply-host="emea3.recruitmentplatform.com"
-                data-talentlink-apply-config-key="AAAC2wAA-94082335-8a98-49ea-9ed8-746fa63ff698"
-        ></script>-->
         <script type="text/javascript" src="https://emea3.recruitmentplatform.com/apply-app/static/apply/release/3-LATEST/apply-all-in-one-namespaced.js"
                 data-talentlink-apply
                 data-talentlink-apply-layout="wcag"
                 data-talentlink-apply-host="emea3.recruitmentplatform.com"
-                data-talentlink-apply-config-key="AAAQbAAA-b331e2a1-234f-4825-8d36-a24e651b246e"
+                data-talentlink-apply-config-key="AAAC2wAA-94082335-8a98-49ea-9ed8-746fa63ff698"
         ></script>
     `
 }

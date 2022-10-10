@@ -1,0 +1,10 @@
+prototype(Hoerbiger.HoerbigerCom:CacheSegment.TileNavigation) < prototype(Hoerbiger.Shared:CacheSegment) {
+    @cache {
+        entryIdentifier {
+            node = ${node}
+        }
+        entryTags {
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom:Document')}
+        }
+    }
+}

@@ -19,7 +19,7 @@
       search:
         indexing: '${"PeopleAndCulture"}'
 
-'Hoerbiger.HoerbigerCom:Document.HomePage':
+'Hoerbiger.HoerbigerCom:Document.CareerRootPage':
   childNodes:
     joblist:
       type: 'Hoerbiger.HoerbigerCom.HR:Document.JobList'

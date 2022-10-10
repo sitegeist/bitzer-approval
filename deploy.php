@@ -27,13 +27,6 @@ set('composer_options', function() {
     }
 });
 
-set('shared_dirs', array_merge(
-    get('shared_dirs'),
-    [
-        'Web/jobs'
-    ]
-));
-
 // composer
 set('branch', function() {
     switch (input()->getArgument('stage')) {

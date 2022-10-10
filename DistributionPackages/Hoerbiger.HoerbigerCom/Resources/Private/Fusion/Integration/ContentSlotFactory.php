@@ -219,14 +219,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            new Grid(
-                GridVariant::threeColumnsGap(),
-                Collection::fromNodes(
-                    TraversableNodes::fromArray($node->getProperty('documents') ?: []),
-                    function (TraversableNodeInterface $document) use ($inBackend, $theme) {
-                        return $this->cardFactory->forNavigationTile($document, $inBackend, $theme);
-                    }
-                )
+            new CacheSegment(
+                new Grid(
+                    GridVariant::threeColumnsGap(),
+                    Collection::fromNodes(
+                        TraversableNodes::fromArray($node->getProperty('documents') ?: []),
+                        function (TraversableNodeInterface $document) use ($inBackend, $theme) {
+                            return $this->cardFactory->forNavigationTile($document, $inBackend, $theme);
+                        }
+                    )
+                ),
+                'Hoerbiger.HoerbigerCom:CacheSegment.TileNavigation'
             )
         );
     }
