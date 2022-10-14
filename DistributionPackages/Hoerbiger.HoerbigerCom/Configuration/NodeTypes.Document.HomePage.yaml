@@ -64,9 +64,6 @@
           position: 10
 
   properties:
-    headline:
-      validation:
-        'Neos.Neos/Validation/NotEmptyValidator': []
     video__source__desktop:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:
