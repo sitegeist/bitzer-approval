@@ -28,7 +28,7 @@ prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.Index) < prototyp
                                 >
                                     <i class="fas fa-edit icon-white"></i>
                                 </a>
-                                <button class="neos-button neos-button-danger" title="Marketing-URL löschen" data-toggle="modal" href={'#marketingUrl' + marketingUrl.path} data-neos-toggle="tooltip">
+                                <button class="neos-button neos-button-danger" title="Marketing-URL löschen" data-toggle="modal" href={'#marketingUrl' + marketingUrl.identifier} data-neos-toggle="tooltip">
                                     <i class="fas fa-trash-alt icon-white"></i>
                                 </button>
                             </div>
@@ -38,7 +38,7 @@ prototype(Hoerbiger.HoerbigerCom:Module.MarketingUrlManagement.Index) < prototyp
                 </tbody>
             </table>
             <Neos.Fusion:Loop items={marketingUrls} itemName="marketingUrl">
-                <div class="neos-hide" id={'marketingUrl' + marketingUrl.path}>
+                <div class="neos-hide" id={'marketingUrl' + marketingUrl.identifier}>
                     <div class="neos-modal-centered">
                         <div class="neos-modal-content">
                             <div class="neos-modal-header">
