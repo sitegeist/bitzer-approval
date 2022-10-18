@@ -9,6 +9,21 @@ export default ($node: Element): void => {
 		const {labels, ...applicationData} = JSON.parse($node.querySelector("script[data-select=applicationData]")?.textContent ?? "null");
 
 		if (applicationData) {
+			const head = document.getElementsByTagName("head")[0];
+			const insertBefore = head.insertBefore;
+			if (head instanceof HTMLHeadElement) {
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				head.insertBefore = function (newElement, referenceElement) {
+					if (newElement instanceof HTMLLinkElement) {
+						if (newElement.href && newElement.href.indexOf("//fonts.googleapis.com/css?family=") > -1) {
+							return;
+						}
+					}
+					insertBefore.call(head, newElement, referenceElement);
+				};
+			}
+
 			ReactDom.render(
 				React.createElement(
 					Client,
