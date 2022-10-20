@@ -2,32 +2,24 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
 
     renderer = afx`
         <div class={[
-            "[Layout.FullMediaStage (" + presentationObject.variant + ")]",
-            "relative sm:h-0 sm:pt-ratio-2-1",
-            presentationObject.variant.isfullMediaTextLeft && "sm:pb-[100px]"
+            "[Layout.FullMediaStage (" + presentationObject.variant + ")]"
         ]}>
-            <div>
-                <div
-                    class={[
-                        "sm:absolute inset-0 z-10",
-                        presentationObject.variant.isfullMediaTextLeft && "pb-[40px] sm:pb-[100px]"
-                    ]}
+            <div class="relative h-0 pt-ratio-2-1">
+                <div class="absolute inset-0 z-10"
                     @if.1={presentationObject.mediaBackground}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
                 </div>
                 <div class={[
-                    "flex sm:absolute z-20 inset-0 bg-light-contrast/50 from-light-contrast/70 to-transparent",
-                    "sm:bg-transparent sm:bg-gradient-to-t",
+                    "flex absolute z-20 inset-0 from-light-contrast/50 to-transparent",
+                    "bg-transparent bg-gradient-to-t",
                     "lg:bg-gradient-to-r"
                 ]}></div>
             </div>
             <div class="relative z-50">
                 <div class={[
-                    "relative sm:absolute order-3 mt-[-35%] offcanvas:mt-[-20%] sm:mt-[-20%] sm:right-0 overflow-hidden z-10",
-                    "w-full",
-                    presentationObject.variant.isfullMediaTextLeft ? "bottom-0 sm:bottom-[-100px]" : "bottom-0"
-                ]}
+                    "absolute order-3 right-0 overflow-hidden z-10 bottom-0",
+                    "w-full"]}
                 >
                     <div>
                         <div class="max-w-content-full mx-auto px-md py-contentcontainer">
@@ -40,17 +32,20 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
                         </div>
                     </div>
                     <div class="bg-triangle-light"></div>
-                    <div class="relative bg-light">
-                        <div class="max-w-content-full mx-auto px-md py-contentcontainer sm:py-[50px] flex">
-                            <div class="lg:max-w-[66%]">
-                                <Hoerbiger.Shared:Block.Text
-                                    @if.1={presentationObject.text}
-                                    presentationObject={presentationObject.text}
-                                />
-                                <div class="text-light-contrast block sm:flex my-sm sm:mb-0" @if.1={presentationObject.button}>
-                                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />
-                                </div>
-                            </div>
+                </div>
+            </div>
+            <div class="relative bg-light">
+                <div class={[
+                    "max-w-content-full mx-auto px-md py-contentcontainer flex",
+                    presentationObject.variant.isfullMediaTextLeft && "sm:py-[50px]"
+                ]}>
+                    <div class="lg:max-w-[66%]">
+                        <Hoerbiger.Shared:Block.Text
+                            @if.1={presentationObject.text}
+                            presentationObject={presentationObject.text}
+                        />
+                        <div class="text-light-contrast block sm:flex my-sm sm:mb-0" @if.1={presentationObject.button}>
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />
                         </div>
                     </div>
                 </div>
