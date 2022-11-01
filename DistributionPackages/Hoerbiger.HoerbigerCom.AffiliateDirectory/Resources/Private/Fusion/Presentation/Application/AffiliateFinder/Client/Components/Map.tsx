@@ -58,6 +58,11 @@ export const Map = ({state, dispatch, ...props}: MapProps): JSX.Element => {
 	const mostOuterBoundsRef = React.useRef<google.maps.LatLngBounds|null>(null);
 	const mapViewsOfCountries = React.useRef<MapViews>({});
 
+	// google checker (prepare for later)
+	// if (typeof google === "object" && typeof google.maps === "object") {
+	// } else {
+	// }
+
 	const onGoogleApiLoaded = React.useCallback(({map}: {map: google.maps.Map}) => {
 		mapRef.current = map;
 		mapViewsOfCountries.current = initMapViews(props.countries);

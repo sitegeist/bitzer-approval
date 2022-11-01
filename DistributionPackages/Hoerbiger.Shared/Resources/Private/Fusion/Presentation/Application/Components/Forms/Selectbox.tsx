@@ -48,7 +48,12 @@ export const Selectbox = (props: SelectboxProps): JSX.Element => {
 						isOpen && "z-form-field-elevated"
 					)}
 				>
-					<Label label={props.label} isForRequired={Boolean(props.validate)}/>
+					{
+						props.label
+							? <Label label={props.label} isForRequired={Boolean(props.validate)}/>
+							: null
+					}
+
 					<div
 						onClick={toggle}
 						className={cx(

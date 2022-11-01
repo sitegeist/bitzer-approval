@@ -65,15 +65,9 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 
 	return (
 		<div className="flex flex-col space-y-sm">
-			<CountryForm
-				onSubmit={onSubmit}
-				countries={countries.current}
-				currentCountry={state.country}
-				getLabelFor={getLabelFor}
-			/>
 			<div className={cx(
 				"grid",
-				isMapToBeRendered && hasAffiliatesList && "grid-cols-1 xl:grid-cols-affiliates-map-list gap-sm"
+				"grid-cols-1 xl:grid-cols-affiliates-map-list gap-sm"
 			)}>
 				{
 					isMapToBeRendered && (
@@ -99,26 +93,34 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 						</div>
 					)
 				}
-				{
-					hasAffiliatesList && state.country
-						? (
-							<AffiliatesList
-								affiliateGroups={state.country?.affiliateGroups}
-								hasPages={isMapToBeRendered}
-								selectedGeoIdentifier={state.geoIdentifier}
-								onSelectGeoIdentifier={(geoIdentifier: string) => {
-									if (state.country) {
-										dispatch({
-											type: "selectGeoIdentifier",
-											country: state.country,
-											geoIdentifier
-										});
-									}
-								}}
-							/>
-						)
-						: null
-				}
+				<div className="flex flex-col space-y-sm w-full">
+					<CountryForm
+						onSubmit={onSubmit}
+						countries={countries.current}
+						currentCountry={state.country}
+						getLabelFor={getLabelFor}
+					/>
+					{
+						hasAffiliatesList && state.country
+							? (
+								<AffiliatesList
+									affiliateGroups={state.country?.affiliateGroups}
+									hasPages={isMapToBeRendered}
+									selectedGeoIdentifier={state.geoIdentifier}
+									onSelectGeoIdentifier={(geoIdentifier: string) => {
+										if (state.country) {
+											dispatch({
+												type: "selectGeoIdentifier",
+												country: state.country,
+												geoIdentifier
+											});
+										}
+									}}
+								/>
+							)
+							: null
+					}
+				</div>
 			</div>
 		</div>
 	);
