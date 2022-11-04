@@ -45,8 +45,13 @@ export const AffiliatesList = ({affiliateGroups, hasPages, selectedGeoIdentifier
 					? (
 						<div className="flex flex-wrap justify-center">
 							<span
-								className="w-touch h-touch flex items-center justify-center cursor-pointer text-neutral"
-								onClick={() => onSelectGeoIdentifier(Object.keys(affiliateGroups)[currentPage - 1])}
+								className={cx(
+									"w-touch h-touch flex items-center justify-center cursor-pointer text-neutral",
+									(currentPage > 0) ? "text-decorative" : "text-neutral"
+								)}
+								onClick={() => {
+									onSelectGeoIdentifier(Object.keys(affiliateGroups)[currentPage - 1]);
+								}}
 							>
 								<StampedeIcon
 									iconName="chevronLeft"
@@ -76,8 +81,15 @@ export const AffiliatesList = ({affiliateGroups, hasPages, selectedGeoIdentifier
 							}
 
 							<span
-								className="w-touch h-touch flex items-center justify-center cursor-pointer text-decorative"
-								onClick={() => onSelectGeoIdentifier(Object.keys(affiliateGroups)[currentPage + 1])}
+								className={cx(
+									"w-touch h-touch flex items-center justify-center cursor-pointer",
+									(currentPage < Object.keys(affiliateGroups).length - 1) ? "text-decorative" : "text-neutral"
+								)}
+								onClick={() => {
+									if (currentPage < Object.keys(affiliateGroups).length - 1) {
+										onSelectGeoIdentifier(Object.keys(affiliateGroups)[currentPage + 1]);
+									}
+								}}
 							>
 								<StampedeIcon
 									iconName="chevronRight"
