@@ -46,7 +46,7 @@ export const AffiliateCard = ({affiliates}: AffiliateCardProps): JSX.Element => 
 									<StampedeIcon
 										iconName="phone"
 									/>
-									{affiliate.telephone}1111
+									{affiliate.telephone}
 								</a>
 								: null
 						}
