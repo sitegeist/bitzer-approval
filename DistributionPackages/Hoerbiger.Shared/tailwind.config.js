@@ -2,6 +2,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 const plugin = require('tailwindcss/plugin');
 const selectorParser = require('postcss-selector-parser');
 const { lineHeight } = require('tailwindcss/defaultTheme');
+const { reduceEachLeadingCommentRange } = require('typescript');
 
 const MAX_CONTENT_WIDTH = '1800px';
 const MIN_TOUCH = '48px';
@@ -157,8 +158,7 @@ module.exports = {
 						fontSize: '1.25rem',
 						lineHeight: 1.6,
 						strong: {
-							color: theme('colors.light.contrast'),
-							fontFamily: theme('fontFamily.sans-bold'),
+							fontFamily: theme('fontFamily.sans-bold')
 						},
 						a: {
 							color: theme('colors.brand.DEFAULT'),
@@ -171,6 +171,9 @@ module.exports = {
 						},
 						p: {
 							marginTop: 0,
+						},
+						'ol > li > :first-child': {
+							margin: 0
 						}
 					},
 				},
