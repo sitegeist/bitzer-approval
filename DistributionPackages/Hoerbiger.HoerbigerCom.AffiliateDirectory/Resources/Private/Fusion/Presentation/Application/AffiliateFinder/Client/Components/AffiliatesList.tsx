@@ -3,6 +3,7 @@ import cx from "classnames";
 
 import {AffiliateGroups} from "../Definitions";
 import {AffiliateCard} from "./AffiliateCard";
+import {StampedeIcon} from "@hoerbiger/shared/Resources/Private/Fusion/Presentation/Application/Components";
 
 type AffiliatesListProps = {
 	affiliateGroups: AffiliateGroups;
@@ -43,6 +44,21 @@ export const AffiliatesList = ({affiliateGroups, hasPages, selectedGeoIdentifier
 				hasPages && Object.keys(affiliateGroups).length > 1
 					? (
 						<div className="flex flex-wrap justify-center">
+							<span
+								className={cx(
+									"w-touch h-touch flex items-center justify-center cursor-pointer text-neutral",
+									(currentPage > 0) ? "text-decorative" : "text-neutral"
+								)}
+								onClick={() => {
+									onSelectGeoIdentifier(Object.keys(affiliateGroups)[currentPage - 1]);
+								}}
+							>
+								<StampedeIcon
+									iconName="chevronLeft"
+									size={1.5}
+								/>
+							</span>
+
 							{
 								Array.from({length: Object.keys(affiliateGroups).length}, (v, i) => i)
 									.map(page => (
@@ -52,17 +68,34 @@ export const AffiliatesList = ({affiliateGroups, hasPages, selectedGeoIdentifier
 											className="w-touch h-touch flex items-center justify-center cursor-pointer"
 										>
 											<span className={cx(
-												"w-[55%] h-[55%] rounded-full relative",
-												currentPage === page ? "bg-decorative" : "bg-neutral"
+												"w-[40%] h-[40%] rounded-full relative",
+												currentPage === page ? "bg-brand" : "bg-neutral"
 											)}>
 												<span className={cx(
 													"bg-light w-2 h-2 rounded-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2",
-													currentPage === page ? "opacity-1" : "opacity-0",
+													currentPage === page ? "opacity-0" : "opacity-0",
 												)}></span>
 											</span>
 										</span>
 									))
 							}
+
+							<span
+								className={cx(
+									"w-touch h-touch flex items-center justify-center cursor-pointer",
+									(currentPage < Object.keys(affiliateGroups).length - 1) ? "text-decorative" : "text-neutral"
+								)}
+								onClick={() => {
+									if (currentPage < Object.keys(affiliateGroups).length - 1) {
+										onSelectGeoIdentifier(Object.keys(affiliateGroups)[currentPage + 1]);
+									}
+								}}
+							>
+								<StampedeIcon
+									iconName="chevronRight"
+									size={1.5}
+								/>
+							</span>
 						</div>
 					)
 					: null

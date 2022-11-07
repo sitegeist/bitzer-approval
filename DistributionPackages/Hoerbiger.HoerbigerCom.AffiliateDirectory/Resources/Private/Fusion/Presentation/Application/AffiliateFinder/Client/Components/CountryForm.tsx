@@ -34,7 +34,7 @@ export const CountryForm = ({onSubmit, countries, currentCountry, getLabelFor}: 
 						<div className="w-full max-w-[400px]">
 							<Selectbox
 								name="activeCountry"
-								label={getLabelFor("label.addressCountry")}
+								label={""}
 								initialValue={currentCountry?.name ?? ""}
 								options={[
 									{key: "", value: getLabelFor("input.activeCountry.all")},
