@@ -59,13 +59,16 @@ class MarketingUrlMiddleware implements MiddlewareInterface
         if ($marketingUrl) {
             $languagePresets = $this->contentDimensionPresetSource->getAllPresets()['language']['presets'];
             $preset = null;
+            $serverParams = $request->getServerParams();
 
-            foreach (BrowserLanguages::fromHttpHeader(
-                $request->getServerParams()['HTTP_ACCEPT_LANGUAGE']
-            ) as $browserLocale) {
-                if (isset($languagePresets[$browserLocale])) {
-                    $preset = $languagePresets[$browserLocale];
-                    break;
+            if (isset($serverParams['HTTP_ACCEPT_LANGUAGE'])) {
+                foreach (BrowserLanguages::fromHttpHeader(
+                    $serverParams['HTTP_ACCEPT_LANGUAGE']
+                ) as $browserLocale) {
+                    if (isset($languagePresets[$browserLocale])) {
+                        $preset = $languagePresets[$browserLocale];
+                        break;
+                    }
                 }
             }
 
