@@ -1,0 +1,17 @@
+privilegeTargets:
+
+  'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
+    'Hoerbiger.HoerbigerCom.AffiliateDirectory:AffiliateManagement':
+      matcher: 'management/affiliateManagement'
+
+roles:
+  'Neos.Neos:Administrator':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom.AffiliateDirectory:AffiliateManagement'
+        permission: GRANT
+  'Hoerbiger.Shared:ChiefEditor':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom.AffiliateDirectory:AffiliateManagement'
+        permission: GRANT

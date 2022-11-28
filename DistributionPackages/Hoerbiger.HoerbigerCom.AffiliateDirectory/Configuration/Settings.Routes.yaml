@@ -1,0 +1,6 @@
+Neos:
+  Flow:
+    mvc:
+      routes:
+        'Hoerbiger.HoerbigerCom.AffiliateDirectory':
+          position: 'before Neos.Neos'
