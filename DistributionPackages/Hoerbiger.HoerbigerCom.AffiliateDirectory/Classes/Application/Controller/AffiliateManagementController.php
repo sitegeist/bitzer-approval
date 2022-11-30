@@ -9,6 +9,7 @@ use Neos\Fusion\View\FusionView;
 use Neos\Http\Factories\FlowUploadedFile;
 use Neos\Neos\Controller\Module\AbstractModuleController;
 use Neos\Error\Messages as Error;
+use Neos\Neos\Fusion\Cache\ContentCacheFlusher;
 
 final class AffiliateManagementController extends AbstractModuleController
 {
@@ -17,6 +18,12 @@ final class AffiliateManagementController extends AbstractModuleController
      * @var SecurityContext
      */
     protected $securityContext;
+
+    /**
+     * @Flow\Inject
+     * @var ContentCacheFlusher
+     */
+    protected $contentCacheFlusher;
 
     /**
      * @Flow\InjectConfiguration(path="affiliateFinder.datasetPath")
@@ -66,6 +73,10 @@ final class AffiliateManagementController extends AbstractModuleController
             $this->saveUpload($file);
             $this->addFlashMessage(
                 'Datei mit wurde erfolgreich hochgeladen.'
+            );
+
+            $this->contentCacheFlusher->registerChangeOnNodeType(
+                'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder'
             );
         } else {
             $this->addFlashMessage(
