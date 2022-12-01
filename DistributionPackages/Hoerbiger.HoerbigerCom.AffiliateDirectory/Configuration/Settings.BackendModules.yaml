@@ -1,0 +1,10 @@
+Neos:
+  Neos:
+    modules:
+      'management':
+        submodules:
+          'affiliateManagement':
+            label: 'Standortverzeichnis'
+            controller: 'Hoerbiger\HoerbigerCom\AffiliateDirectory\Application\Controller\AffiliateManagementController'
+            description: 'Das Verwaltungsmodul für Standorte von Hoerbiger'
+            icon: 'fas fa-map-pin'

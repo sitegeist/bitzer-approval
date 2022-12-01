@@ -1,0 +1,7 @@
+include: resource://Neos.Fusion/Private/Fusion/Root.fusion
+include: *.fusion
+
+Hoerbiger.HoerbigerCom.AffiliateDirectory.Application.AffiliateManagementController {
+    index = Hoerbiger.HoerbigerCom.AffiliateDirectory:Module.AffiliateManagement.Index
+    affiliateUploadForm = Hoerbiger.Hoerbigercom.AffiliateDirectory:Module.AffiliateManagement.AffiliateUploadForm
+}

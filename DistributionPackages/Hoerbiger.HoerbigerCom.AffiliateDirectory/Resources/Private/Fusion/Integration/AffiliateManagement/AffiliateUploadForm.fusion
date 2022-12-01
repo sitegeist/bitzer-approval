@@ -1,0 +1,16 @@
+prototype(Hoerbiger.Hoerbigercom.AffiliateDirectory:Module.AffiliateManagement.AffiliateUploadForm) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <Hoerbier.HoerbigerCom.AffiliateDirectory:Module.AffiliateManagement.FlashMessages />
+        <form enctype="multipart/form-data" method="post" action={uploadAffiliateDataUri}>
+            <div class="neos-row-fluid">
+                <div style="display: none">
+                    <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
+                </div>
+                <input required="required" id="resource" type="file" name="moduleArguments[command][file]" />
+            </div>
+            <div class="neos-footer">
+                <input type="submit" class="neos-button neos-button-primary" value="Aktualisieren" title="Aktualisieren">Aktualisieren</input>
+            </div>
+        </form>
+    `
+}
