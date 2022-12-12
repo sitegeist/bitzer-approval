@@ -28,7 +28,8 @@
         "sitegeist/stampede": "^1.1",
         "sitegeist/inspectorgadget": "*",
         "sitegeist/bitzer-approval": "*",
-        "sitegeist/lostintranslation": "^1.0"
+        "sitegeist/lostintranslation": "^1.0",
+        "flownative/workspace-preview": "^2.0"
     },
     "autoload": {
         "psr-4": {

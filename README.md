@@ -103,6 +103,15 @@ sudo openfortivpn -c /etc/openfortivpn/hoerbiger
 
 Keep the tab open for keeping the connection alive.
 
+Additionally, when connecting to the servers via SSH, you might have to run
+
+```
+systemctl restart systemd-networkd.service
+systemctl restart systemd-resolved.service
+```
+
+again after each system start.
+
 ### Deployment
 
 Deployment must be done manually as the deployment server cannot connect to the target servers.
@@ -181,7 +190,7 @@ Host hoerbiger
     HostName 172.20.245.101
     User $VPN_USER
 ```
-The VPN user must also be added to the magicwand configuration so in the Configuration/Development/Settings.Sitegeist.MagicWand.yaml:
+The VPN user must also be added to the MagicWand configuration so in the Configuration/Settings.Sitegeist.MagicWand.yaml:
 
 ```sh
 Sitegeist:

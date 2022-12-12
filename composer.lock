@@ -1976,6 +1976,113 @@
             "time": "2021-12-25T01:21:49+00:00"
         },
         {
+            "name": "flownative/token-authentication",
+            "version": "2.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flownative/flow-token-auth.git",
+                "reference": "2f498a09d064c7081b19551a5c2962c8a49215ba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flownative/flow-token-auth/zipball/2f498a09d064c7081b19551a5c2962c8a49215ba",
+                "reference": "2f498a09d064c7081b19551a5c2962c8a49215ba",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "neos/flow": "^5.0 || ^6.0 || ^7.0 || ^8.0"
+            },
+            "type": "neos-package",
+            "autoload": {
+                "psr-4": {
+                    "Flownative\\TokenAuthentication\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Müller",
+                    "homepage": "http://about.me/kitsunet"
+                }
+            ],
+            "description": "General purpose token authentication.",
+            "homepage": "http://github.com/flownative/flow-token-auth",
+            "support": {
+                "issues": "https://github.com/flownative/flow-token-auth/issues",
+                "source": "https://github.com/flownative/flow-token-auth/tree/2.3.1"
+            },
+            "time": "2022-07-26T11:05:21+00:00"
+        },
+        {
+            "name": "flownative/workspace-preview",
+            "version": "v2.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/flownative/neos-workspace-preview.git",
+                "reference": "4bd4cd59c8025fe585b3bbf13c96e570805587eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/flownative/neos-workspace-preview/zipball/4bd4cd59c8025fe585b3bbf13c96e570805587eb",
+                "reference": "4bd4cd59c8025fe585b3bbf13c96e570805587eb",
+                "shasum": ""
+            },
+            "require": {
+                "flownative/token-authentication": "^2.2.1",
+                "neos/neos": "^5.3 || ^7.0 || ^8.0"
+            },
+            "type": "neos-package",
+            "extra": {
+                "applied-flow-migrations": [
+                    "TYPO3.Form-20160601101500",
+                    "Neos.Twitter.Bootstrap-20161124204912",
+                    "Neos.Form-20161124205254",
+                    "Neos.Party-20161124225257",
+                    "Neos.Imagine-20161124231742",
+                    "Neos.SwiftMailer-20161130105617",
+                    "Neos.ContentRepository.Search-20161210231100",
+                    "Neos.Seo-20170127154600",
+                    "Neos.Flow-20180415105700",
+                    "Neos.Neos-20180907103800",
+                    "Neos.Neos.Ui-20190319094900",
+                    "Neos.Flow-20190425144900",
+                    "Neos.Flow-20190515215000",
+                    "Flowpack.ElasticSearch.ContentRepositoryAdaptor-20200513223401",
+                    "Neos.Flow-20200813181400",
+                    "Neos.Flow-20201003165200",
+                    "Neos.Flow-20201109224100",
+                    "Neos.Flow-20201205172733",
+                    "Neos.Flow-20201207104500"
+                ]
+            },
+            "autoload": {
+                "psr-4": {
+                    "Flownative\\WorkspacePreview\\": "Classes/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Christian Müller",
+                    "homepage": "http://about.me/kitsunet"
+                }
+            ],
+            "description": "Generate links to preview workspaces.",
+            "homepage": "http://github.com/flownative/neos-workspace-preview",
+            "support": {
+                "issues": "https://github.com/flownative/neos-workspace-preview/issues",
+                "source": "https://github.com/flownative/neos-workspace-preview/tree/v2.1.2"
+            },
+            "time": "2022-06-02T07:01:08+00:00"
+        },
+        {
             "name": "flowpack/elasticsearch",
             "version": "5.0.5",
             "source": {
@@ -2741,9 +2848,10 @@
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.Shared",
-                "reference": "3bdba705c3282b069470ef09c3bc40dda0b0e02b"
+                "reference": "970156f631bd18d3a89dcde1a80a8f23298b9f33"
             },
             "require": {
+                "flownative/workspace-preview": "^2.0",
                 "flowpack/elasticsearch-contentrepositoryadaptor": "~8.1",
                 "flowpack/nodetemplates": "^1.3",
                 "neos/content-repository-dimensionspace": "1.0.x-dev",

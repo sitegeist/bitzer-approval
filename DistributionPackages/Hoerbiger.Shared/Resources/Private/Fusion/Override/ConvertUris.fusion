@@ -1,0 +1,4 @@
+# overdidden because of the requrements in the flownative/workspace-preview package
+prototype(Neos.Neos:ConvertUris) {
+    @class = 'Flownative\\WorkspacePreview\\Fusion\\ConvertUrisImplementation'
+}
