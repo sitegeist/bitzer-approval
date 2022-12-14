@@ -1,0 +1,26 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product.Compression) {
+    renderer {
+        stylesheets.miniCalculator = Neos.Fusion:Tag {
+            tagName = 'link'
+            attributes.rel = 'stylesheet'
+            attributes.href = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/Styles/miniCalculator.css'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+        renderer.head.javascripts {
+            1 = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>'
+            2 = '<script src="https://cdn.amcharts.com/lib/5/index.js"></script>'
+            3 = '<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>'
+            4 = '<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>'
+        }
+        bodyScripts.miniCalculator = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.type = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/miniCalculator.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+    }
+}

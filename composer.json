@@ -21,6 +21,7 @@
         "hoerbiger/hoerbigercom-pressarchive": "*",
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "hoerbiger/hoerbigercom-affiliatedirectory": "*",
+        "hoerbiger/hoerbigercom-catalog-calculator": "*",
         "hoerbiger/hoerbigercom-hr": "*",
         "internezzo/childreload": "^1.0"
     },

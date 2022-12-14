@@ -1,0 +1,121 @@
+<html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="miniCalculator.css" /> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+        <script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+        <!-- <script src="miniCalculator.js"></script>  -->
+       
+        
+        <title>Mini Calculator</title>
+        <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&family=Roboto:wght@300;500&display=swap" rel="stylesheet">   -->
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Open+Sans:wght@300&family=Roboto:wght@300;500&display=swap" rel="stylesheet">
+
+    </head>
+    <body>
+    <header></header>
+
+    <div class="main">
+        <div class="left">
+            <div class="title"> Calculate your improvement potential</div>
+           <div class="table_main" style="display: flex;width: 900px;">
+            <div class="table" style="display: flex;overflow: auto;
+            white-space: nowrap; padding-bottom: 10px; width:max-content"  >
+                <div class="column1">
+                    <div style="background-color: #E1E5EB; height:50px;border-radius: 2px 2px 0px 0px;"></div>
+                    <div class="heading_div" style="display: flex;">
+                        <div style="width: 280px;"> <span class="table_heading">Unit Tag</span> </div>
+                        <img src="images/info-solid-icon.svg" style="height:22px;width: 18px;margin-top:13px;margin-left: 2px;color: #1B365D;" alt="info"/>
+                    </div>
+                    <div class="heading_div" style="display: flex;">
+                        <div style="width: 280px;"> <span class="table_heading">Tag Indicator</span> </div>
+                        <img src="images/info-solid-icon.svg" style="height:22px;width: 18px;margin-top:13px;margin-left: 2px;"/>
+                    </div>
+                    <div class="heading_div" style="display: flex;">
+                        <div style="width: 280px;"> <span class="table_heading">Driver Power</span> </div>
+                        <img src="images/info-solid-icon.svg" style="height:22px;width: 18px;margin-top:13px;margin-left: 2px;"/>
+                    </div>
+                    <div class="heading_div" style="display: flex;">
+                        <div style="width: 280px;"> <span class="table_heading">Load Required</span> </div>
+                        <img src="images/info-solid-icon.svg" style="height:22px;width: 18px;margin-top:13px;margin-left: 2px;"/>
+                    </div>
+                    <div class="heading_div" style="display: flex;">
+                        <div style="width: 280px;"> <span class="table_heading">Corrective Maintenance Interventions</span> </div>
+                        <img src="images/info-solid-icon.svg" style="height:22px;width: 18px;margin-top:13px;margin-left: 2px;"/>
+                    </div>
+                    <div class="heading_div"  style="display: flex;">
+                        <div style="width: 280px;"> <span class="table_heading">Planned Maintenance Interval</span> </div>
+                        <img src="images/info-solid-icon.svg" style="height:22px;width: 18px;margin-top:13px;margin-left: 2px;"/>
+                    </div>
+                    <div class="heading_div"  style="display: flex;">
+                        <div style="width: 280px;"> <span class="table_heading">Operating Hours</span> </div>
+                        <img src="images/info-solid-icon.svg" style="height:22px;width: 18px;margin-top:13px;margin-left: 2px;"/>
+                    </div>
+                </div>
+            
+                <div class="divToCopy">
+                <div class="column copyContainer" >
+                    <div style="background-color: #E1E5EB; height:50px; display: flex; justify-content: center; ">
+                            <span style="margin-top: 15px;font-size: 13px;color: #1B365D;">Compressor <span class="myText">1</span></span>
+                    </div>
+                    <div class="input_heading">
+                        <input class="input_box1" placeholder="C-0101"/>
+                    </div>
+                    <div class="input_heading">
+                        <input class="input_box2" placeholder="e.g. A"/>
+                    </div>
+                    <div class="input_heading">
+                        <input type="text" class="input_box2" placeholder="e.g. 1000"/>
+                    </div>
+                    <div class="input_heading">
+                        <input class="input_box1" placeholder="75%"/>
+                    </div>
+                    <div class="input_heading">
+                        <input type="text" class="input_box1" placeholder="1"/>
+                    </div>
+                    <div class="input_heading">
+                        <input type="text" class="input_box1" placeholder="3"/>
+                    </div>
+                    <div class="input_heading">
+                        <input type="text" class="input_box2" placeholder="e.g. 7000"/>
+                    </div>
+                </div>
+                </div>    
+            </div>
+            <div id="add" style="display: flex;">
+                <img id="ad" class="add_btn" src="images/add_button.png" alt="add button" style="position: relative;"/>
+            </div>
+           </div>
+
+            <div style="display: flex; margin-top: 30px;">
+                <p class="index1" style="background-color:  #E1E5EB;"></p>
+                <p style="color: #676C73; font-size: 15px;">Industry Standard</p>
+                <p class="index2" style="background-color: #fff; border:#000 solid 2px"></p>
+                <p style="color: #676C73; font-size: 15px;">Manual Input</p>
+                <button id="btn">Recalculate</button>
+            </div>
+                <p class="info">Smallprint: Calculations are based in xyz and provide an overview of xyz. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo, enim? Tempora, recusandae? Nobis expedita possimus earum facere? Blanditiis maxime assumenda facilis perferendis, quod numquam, qui iusto cumque quidem molestias magni. Lorem, ipsum dolor sit amet consectetur adipisicing elit. Adipisci voluptate quos, ea alias deleniti, nemo aspernatur sequi, magnam commodi blanditiis saepe? Odit voluptatem, aperiam totam placeat aliquid itaque vero corporis!</p>
+            </div>
+
+        <div class="right">
+            
+            <div id="graph_container" style="display: none;"></div>
+        </div>
+    </div>
+    <!--  -->
+    <div class="footer">
+        <p class="footer_text" style="padding-left: 40px;">&copy;HOERBIGER</p>
+        <p class="footer_text" style="padding-left: 10px; padding-right: 10px; color: #B5BBC2;">|</p>
+        <p class="footer_text" style="color: #B5BBC2; font-weight: 500;">Version : 1.5 / HVCLibs:2.1.4</p>
+    </div>
+
+    </body>
+    <script src="miniCalculator.js"></script>
+    
+</html>
