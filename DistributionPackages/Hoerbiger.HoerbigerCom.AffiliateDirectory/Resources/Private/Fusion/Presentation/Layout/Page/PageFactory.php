@@ -73,12 +73,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     new Stack(
                         StackVariant::xsStretch(),
                         Collection::fromIterable(array_filter([
-                            $inBackend || $affiliateFinder->getProperty('headline')
+                            $inBackend || $affiliateFinder->getProperty('applicationHeadline')
                                 ? new Headline(
                                     HeadlineSize::large(),
                                     HeadlineColor::brand(),
                                     HeadlineType::h2(),
-                                    Editable::fromNodeProperty($affiliateFinder, 'headline')
+                                    Editable::fromNodeProperty($affiliateFinder, 'applicationHeadline')
                                 )
                                 : null,
                             $inBackend || $affiliateFinder->getProperty('text')
