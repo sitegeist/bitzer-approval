@@ -39,6 +39,8 @@ DistributionPackages/*/Resources/Public/Styles/
 DistributionPackages/*/Resources/Public/Build/
 !DistributionPackages/Hoerbiger.HoerbigerCom.HR/Resources/Public/Styles/custom.css
 !DistributionPackages/Hoerbiger.HoerbigerCom.HR/Resources/Public/JavaScript/custom.js
+!DistributionPackages/Hoerbiger.HoerbigerCom.Catalog.Calculator/Resources/Public/Styles/miniCalculator.css
+!DistributionPackages/Hoerbiger.HoerbigerCom.Catalog.Calculator/Resources/Public/JavaScript/miniCalculator.js
 .build/
 
 .idea

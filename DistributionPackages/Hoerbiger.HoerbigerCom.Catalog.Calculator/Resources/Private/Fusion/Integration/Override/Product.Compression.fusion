@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product.Compression) {
+prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product) {
     renderer {
         stylesheets.miniCalculator = Neos.Fusion:Tag {
             tagName = 'link'

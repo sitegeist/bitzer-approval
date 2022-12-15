@@ -9,6 +9,8 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Calculator\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\Catalog\Calculator\Presentation\Application\MiniCalculator\MiniCalculatorFactory;
+use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
+use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -41,6 +43,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forMiniCalculatorNode(): SlotInterface
     {
-        return $this->miniCalculatorFactory->create();
+        return new ContentContainer(
+            ContentContainerVariant::regular(),
+            $this->miniCalculatorFactory->create()
+        );
     }
 }
