@@ -55,9 +55,6 @@ export const Client = (props: ApplicationData): JSX.Element => {
 						<Label label={props.labels["form.content.fillRequiredFields"] ?? ""}/>
 					</div>
 					<div className={cx("w-full grid grid-cols-1 md:grid-cols-2 gap-md md:gap-x-sm md:gap-y-ch")}>
-						<Selectbox {...getFieldConfigFor("customerGroup")} />
-						<Selectbox {...getFieldConfigFor("applicationWorld")} />
-
 						<Selectbox {...getFieldConfigFor("salutation")} />
 						<div className="hidden md:block" />
 
