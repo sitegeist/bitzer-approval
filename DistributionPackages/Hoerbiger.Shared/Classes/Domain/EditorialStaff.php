@@ -80,7 +80,7 @@ final class EditorialStaff
             throw new \InvalidArgumentException('Can\'t find editor with account ' . $accountId);
         }
 
-        $accounts = $editor->getAccounts();
+        $accounts = $editor->getAccounts()->getValues();
         $primaryAccount = reset($accounts);
         /** @var Account $primaryAccount */
 
@@ -111,7 +111,7 @@ final class EditorialStaff
             throw new \InvalidArgumentException('Can\'t find editor with account ' . $accountId);
         }
 
-        $accounts = $editor->getAccounts();
+        $accounts = $editor->getAccounts()->getValues();
         $primaryAccount = reset($accounts);
         /** @var Account $primaryAccount */
 

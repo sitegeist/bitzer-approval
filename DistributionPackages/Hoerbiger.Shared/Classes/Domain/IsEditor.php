@@ -21,7 +21,7 @@ final class IsEditor
         if (!$user) {
             return false;
         }
-        $accounts = $user->getAccounts();
+        $accounts = $user->getAccounts()->getValues();
         $primaryAccount = reset($accounts) ?: null;
 
         return $primaryAccount instanceof Account

@@ -51,7 +51,7 @@ class EditorManagementController extends AbstractModuleController
         $editors = [];
         $chiefEditors = [];
         foreach ($this->editorialStaff->findEditors() as $user) {
-            $accounts = $user->getAccounts();
+            $accounts = $user->getAccounts()->getValues();
             $primaryAccount = reset($accounts);
             /** @var Account $primaryAccount */
             if ($primaryAccount->hasRole($chiefEditorRole)) {
