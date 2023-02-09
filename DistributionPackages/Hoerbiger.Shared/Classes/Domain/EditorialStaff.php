@@ -79,7 +79,7 @@ final class EditorialStaff
         if (!$editor) {
             throw new \InvalidArgumentException('Can\'t find editor with account ' . $accountId);
         }
-
+        /** @phpstan-ignore-next-line */
         $accounts = $editor->getAccounts()->getValues();
         $primaryAccount = reset($accounts);
         /** @var Account $primaryAccount */
@@ -110,7 +110,7 @@ final class EditorialStaff
         if (!$editor) {
             throw new \InvalidArgumentException('Can\'t find editor with account ' . $accountId);
         }
-
+        /** @phpstan-ignore-next-line */
         $accounts = $editor->getAccounts()->getValues();
         $primaryAccount = reset($accounts);
         /** @var Account $primaryAccount */

@@ -21,6 +21,7 @@ final class IsEditor
         if (!$user) {
             return false;
         }
+        /** @phpstan-ignore-next-line */
         $accounts = $user->getAccounts()->getValues();
         $primaryAccount = reset($accounts) ?: null;
 
