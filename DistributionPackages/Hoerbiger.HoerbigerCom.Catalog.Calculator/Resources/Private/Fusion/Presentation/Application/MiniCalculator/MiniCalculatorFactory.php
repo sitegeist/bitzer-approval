@@ -25,7 +25,8 @@ final class MiniCalculatorFactory extends AbstractComponentPresentationObjectFac
             . 'Fusion/Presentation/Application/MiniCalculator/miniCalculator.html'
         ) ?: '';
 
-        $start = \mb_strpos($content, '<body>') + 6;
+        $body = '<body class="miniCalculator_body">';
+        $start = \mb_strpos($content, $body) + \mb_strlen($body);
         $end = \mb_strrpos($content, '</body>');
         $content = \mb_substr($content, $start, $end - $start);
 

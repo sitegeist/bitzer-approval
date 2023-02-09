@@ -8,19 +8,72 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product) {
                 @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
             }
         }
-        renderer.head.javascripts {
-            1 = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>'
-            2 = '<script src="https://cdn.amcharts.com/lib/5/index.js"></script>'
-            3 = '<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>'
-            4 = '<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>'
-        }
-        bodyScripts.miniCalculator = Neos.Fusion:Tag {
-            tagName = 'script'
-            attributes.type = 'application/javascript'
-            attributes.src = Neos.Fusion:ResourceUri {
-                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/miniCalculator.js'
+        stylesheets.dialog = Neos.Fusion:Tag {
+            tagName = 'link'
+            attributes.rel = 'stylesheet'
+            attributes.href = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/Styles/dialog.css'
                 @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
             }
         }
+
+        renderer.head.javascripts.JqueryMin = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.rel = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/jquery.min.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+        renderer.head.javascripts.Animated = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.rel = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/Animated.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+        renderer.head.javascripts.dialog = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.rel = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/dialog.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+        renderer.head.javascripts.index = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.rel = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/index.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+        renderer.head.javascripts.Utility = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.rel = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/Utility.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+        renderer.head.javascripts.xy = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.rel = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/xy.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+
+        //renderer.bodyScripts.miniCalculator = ${'<script type="application/javascript" src="https://hoerbiger.ddev.site/_Resources/Static/Packages/Hoerbiger.HoerbigerCom.Catalog.Calculator/JavaScript/miniCalculator.js?cb='+SitegeistKlarSchiffCacheBuster.get()}
+        //Neos.Fusion:Tag {
+        //    tagName = 'script'
+        //    attributes.type = 'application/javascript'
+        //    attributes.src = Neos.Fusion:ResourceUri {
+        //        path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/miniCalculator.js'
+        //        @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+        //    }
+        //}
     }
 }
