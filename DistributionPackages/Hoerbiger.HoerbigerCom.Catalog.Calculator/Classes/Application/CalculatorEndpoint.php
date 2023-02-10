@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Calculator\Application;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Response;
 use Hoerbiger\HoerbigerCom\Catalog\Calculator\Domain\Constants\APIConstants;
 use Hoerbiger\HoerbigerCom\Catalog\Calculator\Domain\Services\CalculatorService;
 use Hoerbiger\HoerbigerCom\Catalog\Calculator\Domain\Services\UtilityService;
@@ -33,24 +34,23 @@ class CalculatorEndpoint implements MiddlewareInterface
                 try {
                     $data = UtilityService::createMap($data);
                     $ResponseData = CalculatorService::calculate($data);
-
                     if (!empty($ResponseData)) {
-                        echo UtilityService::deliveryResponse(200, APIConstants::SUCCESSTEXT, $ResponseData);
+                        $code = 200;
+                        $body = UtilityService::deliveryResponse(200, APIConstants::SUCCESSTEXT, $ResponseData);
                     } else {
-                        echo UtilityService::deliveryResponse(200, APIConstants::EXCEPTIONMESSAGERESPONSE, $ResponseData);
+                        $code = 200;
+                        $body = UtilityService::deliveryResponse(200, APIConstants::EXCEPTIONMESSAGERESPONSE, $ResponseData);
                     }
                 } catch (\Exception $e) {
-                    echo UtilityService::deliveryResponse(500, APIConstants::EXCEPTIONMESSAGERESPONSE, $e);
+                    $code = 500;
+                    $body = UtilityService::deliveryResponse(500, APIConstants::EXCEPTIONMESSAGERESPONSE, $e);
                 }
-
             } else {
-                echo UtilityService::deliveryResponse(400, APIConstants::BADREQUESTTEXT, $ValidationResponse->get_response());
+                $code = 400;
+                $body = UtilityService::deliveryResponse(400, APIConstants::BADREQUESTTEXT, $ValidationResponse->get_response());
             }
-        } else {
-
-            echo UtilityService::deliveryResponse(400, APIConstants::INVALIDREQUESTTEXT, null);
+            return new Response($code, ['content-type' => 'application/json'], $body);
         }
-
         return $handler->handle($request);
     }
 }

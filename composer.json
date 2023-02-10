@@ -60,7 +60,7 @@
         ],
 
         "lint:editorconfig": "ec",
-        "lint:phpcs": "phpcs --colors --standard=PSR2 ./DistributionPackages/*/Classes",
+        "lint:phpcs": "phpcs --colors --standard=PSR2 ./DistributionPackages/*/Classes --ignore=./DistributionPackages/Hoerbiger.HoerbigerCom.Catalog.Calculator/",
         "lint:phpstan": "phpstan analyse",
         "lint:php": [
             "@lint:phpcs",

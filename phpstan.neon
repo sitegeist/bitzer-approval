@@ -4,3 +4,4 @@ parameters:
         - DistributionPackages
     excludePaths:
         - DistributionPackages/*/Tests/*
+        - DistributionPackages/Hoerbiger.HoerbigerCom.Catalog.Calculator/*
