@@ -4,10 +4,6 @@ prototype(Hoerbiger.HoerbigerCom:Email.ContactRequest.ProviderNotification) < pr
         <dl>
             <dt>Sprache</dt>
             <dd>{language}</dd>
-            <dt @if.1={customerGroup}>Kontaktart</dt>
-            <dd @if.1={customerGroup}>{customerGroup}</dd>
-            <dt @if.1={applicationWorld}>Anwendungswelt</dt>
-            <dd @if.1={applicationWorld}>{applicationWorld}</dd>
             <dt>Anrede</dt>
             <dd>{salutation}</dd>
             <dt>Vorname</dt>
