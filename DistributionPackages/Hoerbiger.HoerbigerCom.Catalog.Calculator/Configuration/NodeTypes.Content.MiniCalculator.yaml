@@ -11,3 +11,10 @@
       constraints:
         nodeTypes:
           'Hoerbiger.HoerbigerCom.Catalog.Calculator:Content.MiniCalculator': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory.Compression':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.Catalog.Calculator:Content.MiniCalculator': true

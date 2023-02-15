@@ -1,0 +1,3 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory.Compression) < prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product) {
+
+}
