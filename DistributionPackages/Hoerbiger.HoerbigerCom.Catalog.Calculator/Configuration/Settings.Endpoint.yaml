@@ -1,0 +1,7 @@
+Neos:
+  Flow:
+    http:
+      middlewares:
+        calculator:
+          position: 'before dispatch'
+          middleware: Hoerbiger\HoerbigerCom\Catalog\Calculator\Application\CalculatorEndpoint

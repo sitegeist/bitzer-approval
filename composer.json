@@ -21,6 +21,7 @@
         "hoerbiger/hoerbigercom-pressarchive": "*",
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "hoerbiger/hoerbigercom-affiliatedirectory": "*",
+        "hoerbiger/hoerbigercom-catalog-calculator": "*",
         "hoerbiger/hoerbigercom-hr": "*",
         "internezzo/childreload": "^1.0"
     },
@@ -59,7 +60,7 @@
         ],
 
         "lint:editorconfig": "ec",
-        "lint:phpcs": "phpcs --colors --standard=PSR2 ./DistributionPackages/*/Classes",
+        "lint:phpcs": "phpcs --colors --standard=PSR2 ./DistributionPackages/*/Classes --ignore=./DistributionPackages/Hoerbiger.HoerbigerCom.Catalog.Calculator/",
         "lint:phpstan": "phpstan analyse",
         "lint:php": [
             "@lint:phpcs",

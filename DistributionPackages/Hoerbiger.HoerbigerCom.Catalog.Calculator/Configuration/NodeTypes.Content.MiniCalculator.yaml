@@ -1,0 +1,27 @@
+'Hoerbiger.HoerbigerCom.Catalog.Calculator:Content.MiniCalculator':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    icon: 'calculator'
+    label: 'Mini-Rechner'
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.Catalog.Calculator:Content.MiniCalculator': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.ProductCategory.Compression':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.Catalog.Calculator:Content.MiniCalculator': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.Product.Compression':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.Catalog.Calculator:Content.MiniCalculator': true
