@@ -30,7 +30,9 @@ const minOperatingHours = 0;
 const maxOperatingHours = 8760;
 
 $(document).ready(function () {
-  CalculateOpexAndSavingsBasedOnCompressors();
+  if($(".miniCalculator_body").length) {
+      CalculateOpexAndSavingsBasedOnCompressors();
+  }
 });
 
 $("#ad").on("click", function () {
