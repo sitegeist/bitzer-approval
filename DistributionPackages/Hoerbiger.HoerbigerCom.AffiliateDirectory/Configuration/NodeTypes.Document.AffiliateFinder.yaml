@@ -11,6 +11,20 @@
     searchType:
       search:
         indexing: '${"WebPage"}'
+    applicationHeadline:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
+
+
+
 
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   childNodes:
