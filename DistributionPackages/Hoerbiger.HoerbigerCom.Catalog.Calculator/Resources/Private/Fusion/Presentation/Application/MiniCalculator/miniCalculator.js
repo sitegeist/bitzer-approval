@@ -30,7 +30,7 @@ const minOperatingHours = 0;
 const maxOperatingHours = 8760;
 
 $(document).ready(function () {
-  if($(".miniCalculator_body").length) {
+  if($(".miniCalculator_main").length) {
       CalculateOpexAndSavingsBasedOnCompressors();
   }
 });
@@ -594,10 +594,15 @@ function ChangeSortingOrder() {
             parseFloat(a.percentageSavings) - parseFloat(b.percentageSavings)
         );
       }
-      $('#sortImg').attr('src', 'images/ASC.svg').css('transform','rotate(90deg)').css('margin','0.5rem 0.2rem 0rem 0.2rem');
+      $('#sortImg').parent().html('<svg id="sortImg" class="sortCol" width="32px" height="21.4px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n' +
+          '    <g fill="#FFFFFF">\n' +
+          '        <path d="m 9.5 14 c 0.277344 0 0.5 -0.222656 0.5 -0.5 v -1 c 0 -0.277344 -0.222656 -0.5 -0.5 -0.5 h -5 c -0.277344 0 -0.5 0.222656 -0.5 0.5 v 1 c 0 0.277344 0.222656 0.5 0.5 0.5 z m 0 -3 c 0.277344 0 0.5 -0.222656 0.5 -0.5 v -1 c 0 -0.277344 -0.222656 -0.5 -0.5 -0.5 h -7 c -0.277344 0 -0.5 0.222656 -0.5 0.5 v 1 c 0 0.277344 0.222656 0.5 0.5 0.5 z m 0 -3 c 0.277344 0 0.5 -0.222656 0.5 -0.5 v -1 c 0 -0.277344 -0.222656 -0.5 -0.5 -0.5 h -9 c -0.277344 0 -0.5 0.222656 -0.5 0.5 v 1 c 0 0.277344 0.222656 0.5 0.5 0.5 z m 0 0"/>\n' +
+          '        <path d="m 13 16 c 0.550781 0 1 -0.449219 1 -1 v -11 h 2 v -1 h -0.007812 c 0.003906 -0.265625 -0.101563 -0.519531 -0.285157 -0.707031 l -2 -2 c -0.390625 -0.3906252 -1.023437 -0.3906252 -1.414062 0 l -2 2 c -0.183594 0.1875 -0.289063 0.441406 -0.289063 0.707031 h -0.003906 v 1 h 2 v 11 c 0 0.550781 0.449219 1 1 1 z m 0 0"/>\n' +
+          '    </g>\n' +
+          '</svg>').css('transform','rotate(90deg)').css('margin','0.5rem 0.2rem 0rem 0.2rem').css('position','relative');
       sortOrder = "desc";
       break;
-    case "desc":
+  case "desc":
       if (parseInt(currentSelection) == 0) {
         data.sort(
           (a, b) => parseFloat(b.percentageOpex) - parseFloat(a.percentageOpex)
@@ -609,7 +614,12 @@ function ChangeSortingOrder() {
         );
       }
       sortOrder = "asc";
-      $('#sortImg').attr('src', 'images/DESC.svg').css('transform','rotate(-90deg)').css('margin','0.5rem 0.2rem 0rem 0.2rem');
+      $('#sortImg').parent().html('<svg id="sortImg" class="sortCol"  width="32px" height="21.4px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">\n' +
+          '    <g fill="#FFFFFF">\n' +
+          '        <path d="m 3 0 c -0.550781 0 -1 0.449219 -1 1 v 11 h -2 v 1 h 0.0078125 c -0.00390625 0.265625 0.1015625 0.519531 0.2851565 0.707031 l 2 2 c 0.390625 0.390625 1.023437 0.390625 1.414062 0 l 2 -2 c 0.183594 -0.1875 0.289063 -0.441406 0.289063 -0.707031 h 0.003906 v -1 h -2 v -11 c 0 -0.550781 -0.449219 -1 -1 -1 z m 0 0"/>\n' +
+          '        <path d="m 6.5 10 c -0.277344 0 -0.5 -0.222656 -0.5 -0.5 v -1 c 0 -0.277344 0.222656 -0.5 0.5 -0.5 h 5 c 0.277344 0 0.5 0.222656 0.5 0.5 v 1 c 0 0.277344 -0.222656 0.5 -0.5 0.5 z m 0 -3 c -0.277344 0 -0.5 -0.222656 -0.5 -0.5 v -1 c 0 -0.277344 0.222656 -0.5 0.5 -0.5 h 7 c 0.277344 0 0.5 0.222656 0.5 0.5 v 1 c 0 0.277344 -0.222656 0.5 -0.5 0.5 z m 0 -3 c -0.277344 0 -0.5 -0.222656 -0.5 -0.5 v -1 c 0 -0.277344 0.222656 -0.5 0.5 -0.5 h 9 c 0.277344 0 0.5 0.222656 0.5 0.5 v 1 c 0 0.277344 -0.222656 0.5 -0.5 0.5 z m 0 0"/>\n' +
+          '    </g>\n' +
+          '</svg>').css('transform','rotate(-90deg)').css('margin','0.5rem 0.2rem 0rem 0.2rem').css('position','relative');
       break;
   }
 

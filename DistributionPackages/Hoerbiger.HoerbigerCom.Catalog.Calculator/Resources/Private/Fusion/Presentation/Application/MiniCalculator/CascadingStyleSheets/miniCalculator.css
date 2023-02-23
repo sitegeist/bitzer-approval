@@ -17,11 +17,15 @@
     margin: 0;
 }
 
-::placeholder { 
+::placeholder {
     color:    #D3D3D3;
 }
 
-:root { font-family: 'Inter' }
+.miniCalculator_main {
+    display: flex;
+    width: 100%;
+    font-family: 'Inter'
+}
 
 .miniCalculator_body {
     background-color: #F8F8F8;
@@ -105,7 +109,7 @@ textarea:focus, input:focus{
     white-space: -pre-wrap;
     white-space: -o-pre-wrap;
     -webkit-hyphens:none;
-    -moz-hyphens: none; 
+    -moz-hyphens: none;
     hyphens: none;
     word-wrap: break-word;
     text-align: left;
@@ -247,7 +251,7 @@ textarea:focus, input:focus{
 .miniCalculator_newCompressor_div{
     height:2.5rem;
     background-color: #E1E5EB;
-    justify-content:center; 
+    justify-content:center;
     display:flex;
 }
 
@@ -260,9 +264,9 @@ textarea:focus, input:focus{
 }
 
 .miniCalculator_compressor_div{
-    background-color: #E1E5EB; 
-    height:4rem; 
-    display: flex; 
+    background-color: #E1E5EB;
+    height:4rem;
+    display: flex;
     justify-content: center;
 }
 
@@ -313,7 +317,7 @@ textarea:focus, input:focus{
     animation: spin 2s linear infinite;
     left: 48%;
     top: 44%;
-   
+
 }
 
 .sortingROw{
@@ -842,7 +846,7 @@ option:focus{
             margin-top: 2rem;
             justify-content: center;
         }
-    
+
         .sortingROw {
             margin-top: 2rem;
             margin-left: 0.7rem;
@@ -989,10 +993,10 @@ option:focus{
         margin-left: 2.125rem;
         margin-right: 1.5rem;
     }
-    
+
     .miniCalculator_index1_title,.miniCalculator_index2_title{
             margin-top: 1.5rem;
-        
+
     }
 
         .miniCalculator_index1 {
@@ -1001,7 +1005,7 @@ option:focus{
 }
 
 @media (min-width: 1025px) and (max-width:1180px) and (orientation: landscape){
-    
+
     .miniCalculator_main {
         display: flex;
         width: 100vw;
@@ -1135,7 +1139,7 @@ option:focus{
     .miniCalculator_heading_div {
         height: 4.0rem;
     }
-    
+
     .sortingROw{
         margin-top: 2.1rem;
     }

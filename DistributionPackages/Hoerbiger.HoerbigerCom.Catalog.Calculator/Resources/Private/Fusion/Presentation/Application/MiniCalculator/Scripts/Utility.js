@@ -125,7 +125,16 @@ function GetCompressor(count) {
   <div class="miniCalculator_column2 copyContainer" >
       <div style="display: inline; justify-content: center; ">
           <div class="miniCalculator_newCompressor_div"><span class="miniCalculator_compressor_title">Compressor <span class="myText">${count}</span></span></div>
-          <div class="miniCalculator_subtract_div"><img class="miniCalculator_sub_btn" src="images/Negative.svg" alt="add button"/></div>
+          <div class="miniCalculator_subtract_div"><svg class="miniCalculator_sub_btn" src="images/Negative.svg" alt="add button" fill="#1B365D" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+\t viewBox="0 0 300.003 300.003" xml:space="preserve">
+<g>
+\t<g>
+\t\t<path d="M150.001,0c-82.843,0-150,67.159-150,150c0,82.838,67.157,150.003,150,150.003c82.838,0,150-67.165,150-150.003
+\t\t\tC300.001,67.159,232.838,0,150.001,0z M197.218,166.283H92.41c-8.416,0-15.238-6.821-15.238-15.238s6.821-15.238,15.238-15.238
+\t\t\tH197.22c8.416,0,15.238,6.821,15.238,15.238S205.634,166.283,197.218,166.283z"/>
+\t</g>
+</g>
+</svg></div>
       </div>
       <div class="miniCalculator_input_heading">
           <input class="miniCalculator_input_box2 UnitTag" value="C-101" placeholder="C-101" name="unitTag" maxlength="20" />
