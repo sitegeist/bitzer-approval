@@ -16,7 +16,7 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product) {
                 @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
             }
         }
-        stylesheets.dialog = Neos.Fusion:Tag {
+        stylesheets.select = Neos.Fusion:Tag {
             tagName = 'link'
             attributes.rel = 'stylesheet'
             attributes.href = Neos.Fusion:ResourceUri {
