@@ -24,7 +24,10 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
     renderer = afx`
         <div class={["[Block.SiteHeader(" + presentationObject.variant + ")]"]}>
-            <div class="h-[100px]"></div>
+            <div
+                class="h-[100px]"
+                @if.1={presentationObject.variant.value == 'regular'}
+            ></div>
             <header class="w-full z-header fixed top-0">
                 <div
                     class={[
