@@ -6,15 +6,6 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
             "[Block.SiteFooter]",
             "w-full max-w-screen flex-flex-col items-stretch z-[0]"
         ]}>
-            <div class="bg-triangle" @if.1={presentationObject.contactFormLink}></div>
-            <div
-                @if.1={presentationObject.contactFormLink}
-                class="bg-standard"
-            >
-                <div class="mx-auto max-w-content-full px-md py-md sm:py-sm bg-standard">
-                    <Hoerbiger.Shared:Block.ContactFormLink presentationObject={presentationObject.contactFormLink} />
-                </div>
-            </div>
             <div class="bg-standard border border-t-2 border-t-light font-sans-bold">
                 <div class="mx-auto max-w-content-full px-md py-sm">
                     <div class={[
