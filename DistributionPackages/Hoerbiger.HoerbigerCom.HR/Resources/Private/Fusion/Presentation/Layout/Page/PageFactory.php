@@ -63,16 +63,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new scrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $this->placeholderFactory->forJobList()
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
                 )
             ]), $identity)
         );
@@ -149,11 +149,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument($document, $site, $subGraph, $request),
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
+                $content,
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb
-                ),
-                $content
+                )
             ]), $identity)
         );
     }

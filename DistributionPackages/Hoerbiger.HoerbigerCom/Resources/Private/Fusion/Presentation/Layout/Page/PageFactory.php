@@ -116,10 +116,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
@@ -127,6 +123,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::regular(),
                     (new SearchFormFactory())->create($subgraph)
                 ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }
@@ -177,10 +177,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
@@ -194,6 +190,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonsuccess')), 'Hoerbiger.HoerbigerCom:ContentSlot'),
                         Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonfail')), 'Hoerbiger.HoerbigerCom:ContentSlot')
                     )
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
                 )
             ]), $identity)
         );
@@ -251,14 +251,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new scrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }

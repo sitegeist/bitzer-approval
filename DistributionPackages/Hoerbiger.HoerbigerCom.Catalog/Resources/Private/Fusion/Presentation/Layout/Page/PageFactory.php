@@ -95,10 +95,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
@@ -113,6 +109,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList'
                 ),
                 Content::fromNode($industrySolutions->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }
@@ -138,10 +138,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
@@ -150,6 +146,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $this->productListFactory->forIndustrySolution($industrySolution, $subgraph, $inBackend),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList'
                 ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }
@@ -172,14 +172,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
-                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }

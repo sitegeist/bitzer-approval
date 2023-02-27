@@ -61,10 +61,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
@@ -91,6 +87,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                             $application
                         ]), $identity)
                     )
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
                 )
             ]), $identity)
         );

@@ -71,10 +71,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
                 ),
@@ -84,6 +80,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         $this->articleOverviewFactory->forMagazine($magazine),
                         'Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList'
                     )
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
                 )
             ]), $identity)
         );
@@ -116,14 +116,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
                     ContentContainerVariant::regularStageAfterBreadcrumb(),
                     $introSection
                 ),
-                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }
