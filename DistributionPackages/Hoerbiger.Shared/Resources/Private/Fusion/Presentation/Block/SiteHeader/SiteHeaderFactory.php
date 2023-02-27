@@ -63,7 +63,18 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         ContentContext $subgraph,
         ?ActionRequest $actionRequest = null
     ): SiteHeaderInterface {
+        switch ($document->getNodeType()->getName()) {
+            case 'Hoerbiger.HoerbigerCom:Document.HomePage':
+                $siteHeaderVariant = SiteHeaderVariant::VARIANT_TRANSPARENT;
+                break;
+            default:
+                $siteHeaderVariant = SiteHeaderVariant::VARIANT_REGULAR;
+        }
+
         return new SiteHeader(
+            SiteHeaderVariant::from(
+                $siteHeaderVariant
+            ),
             $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
             (new CompactSearchFormFactory())->forDocument($site),

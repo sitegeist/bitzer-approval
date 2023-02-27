@@ -17,6 +17,8 @@ use Psr\Http\Message\UriInterface;
  */
 final class SiteHeader extends AbstractComponentPresentationObject implements SiteHeaderInterface
 {
+    private SiteHeaderVariant $variant;
+
     private UriInterface $siteUri;
 
     private ?NavigationItems $mainNavigation;
@@ -30,6 +32,7 @@ final class SiteHeader extends AbstractComponentPresentationObject implements Si
     private Icon $subLevelIcon;
 
     public function __construct(
+        SiteHeaderVariant $variant,
         UriInterface $siteUri,
         ?NavigationItems $mainNavigation,
         SlotInterface $search,
@@ -37,12 +40,18 @@ final class SiteHeader extends AbstractComponentPresentationObject implements Si
         Icon $rootLevelIcon,
         Icon $subLevelIcon
     ) {
+        $this->variant = $variant;
         $this->siteUri = $siteUri;
         $this->mainNavigation = $mainNavigation;
         $this->search = $search;
         $this->languageNavigation = $languageNavigation;
         $this->rootLevelIcon = $rootLevelIcon;
         $this->subLevelIcon = $subLevelIcon;
+    }
+
+    public function getVariant(): SiteHeaderVariant
+    {
+        return $this->variant;
     }
 
     public function getSiteUri(): UriInterface
