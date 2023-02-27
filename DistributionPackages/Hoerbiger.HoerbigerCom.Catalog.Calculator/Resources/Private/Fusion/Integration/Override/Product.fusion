@@ -16,6 +16,14 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product) {
                 @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
             }
         }
+        stylesheets.select = Neos.Fusion:Tag {
+            tagName = 'link'
+            attributes.rel = 'stylesheet'
+            attributes.href = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/Styles/select.css'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
 
         renderer.head.javascripts.JqueryMin = Neos.Fusion:Tag {
             tagName = 'script'
@@ -71,6 +79,14 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:Document.Product) {
             attributes.type = 'application/javascript'
             attributes.src = Neos.Fusion:ResourceUri {
                 path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/miniCalculator.js'
+                @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
+            }
+        }
+        bodyScripts.select = Neos.Fusion:Tag {
+            tagName = 'script'
+            attributes.type = 'application/javascript'
+            attributes.src = Neos.Fusion:ResourceUri {
+                path = 'resource://Hoerbiger.HoerbigerCom.Catalog.Calculator/Public/JavaScript/select.js'
                 @process.addCacheBuster = ${value + '?cb=' + SitegeistKlarSchiffCacheBuster.get()}
             }
         }

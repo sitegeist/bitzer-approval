@@ -210,7 +210,7 @@ class CalculatorService
 
     public static function compressorName($REQUEST)
     {
-        $unitTag = $REQUEST[ 0 ]->get_unitTag() . " CalculatorService";
+        $unitTag = $REQUEST[ 0 ]->get_unitTag() . " ";
         $subString = "";
         $tagIndicator = [];
         if ( count($REQUEST) > 1 ) {
