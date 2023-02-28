@@ -1,8 +1,3 @@
-@font-face {
-    font-family: 'Inter';
-    src: url(../Fonts/Inter-Regular.ttf) format("truetype");
-}
-
 .small-input {
     -moz-appearance: textfield;
 }
@@ -24,7 +19,6 @@
 .miniCalculator_main,.miniCalculator_info {
     display: flex;
     width: 100%;
-    font-family: 'Inter'
 }
 
 .miniCalculator_body {
@@ -148,7 +142,6 @@ textarea:focus, input:focus{
     font-weight: 500;
     font-size: 0.875rem;
     line-height: 1.0625rem;
-    font-family: 'Inter';
 }
 
 .numberInput{
@@ -228,7 +221,6 @@ textarea:focus, input:focus{
     line-height: 0.9375rem;
     letter-spacing: 0.02em;
     margin-top: 13px;
-    font-family: 'Inter';
     cursor: pointer;
 }
 
