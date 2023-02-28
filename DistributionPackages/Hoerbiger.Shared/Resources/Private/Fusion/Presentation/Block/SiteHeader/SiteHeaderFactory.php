@@ -100,8 +100,8 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $node,
         TraversableNodeInterface $currentDocumentNode,
         int $currentLevel,
-        int $maxDepth = 2,
-        int $maxItemsPerColumn = 7
+        int $maxDepth = 3,
+        int $maxItemsPerColumn = 5
     ): ?NavigationItems {
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
             'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv'
