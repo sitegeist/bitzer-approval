@@ -48,6 +48,7 @@ module.exports = {
 
 			light: {
 				DEFAULT: '#fff',
+				contrastTransparent: 'rgba(0, 0, 0, .5)',
 				contrast: 'rgba(0, 0, 0, .85)',
 			},
 			neutral: {

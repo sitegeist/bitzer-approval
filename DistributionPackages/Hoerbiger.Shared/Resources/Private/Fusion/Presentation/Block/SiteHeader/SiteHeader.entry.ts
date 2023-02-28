@@ -1,5 +1,37 @@
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
+		const header = $node.querySelector("header") as HTMLElement;
+		const headerVariant = $node.dataset.siteHeaderVariant ?? "regular";
+
+		// scroll Verhalten
+		if (headerVariant === "transparent") {
+			const activeLinks = header.querySelector("[data-active-main-link]") as HTMLElement;
+
+			// ... wenn page nicht oben beginnt
+			if (window.scrollY > 0) {
+				header.classList.add("bg-light");
+				header.classList.add("text-light-contrastTransparent");
+				header.classList.remove("text-light");
+				activeLinks.classList.add("text-neutral-contrast");
+			}
+
+			window.addEventListener("scroll", (e) => {
+				const offset = window.scrollY;
+
+				if (offset > 100) {
+					header.classList.add("bg-light");
+					header.classList.add("text-light-contrastTransparent");
+					header.classList.remove("text-light");
+					activeLinks.classList.add("text-neutral-contrast");
+				} else if (offset === 0) {
+					header.classList.remove("bg-light");
+					header.classList.remove("text-light-contrastTransparent");
+					header.classList.add("text-light");
+					activeLinks.classList.remove("text-neutral-contrast");
+				}
+			});
+		}
+
 		/* Handle hover-flyouts on touch-devices. */
 		Array.from($node.querySelectorAll("[data-touch-hover]")).forEach($link => {
 			$link
