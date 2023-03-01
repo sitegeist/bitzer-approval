@@ -56,6 +56,7 @@ final class Messenger
 
     /**
      * @Flow\InjectConfiguration(path="providerNotification.recipient")
+     * @var array<string,string>
      */
     protected $providerRecipient;
 
