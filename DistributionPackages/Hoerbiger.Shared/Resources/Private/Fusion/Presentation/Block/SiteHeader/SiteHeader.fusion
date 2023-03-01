@@ -30,12 +30,12 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
             data-site-header-variant={presentationObject.variant}
         >
             <div
-                class="h-[100px]"
+                class="h-header"
                 @if.1={presentationObject.variant.value == 'regular'}
             ></div>
             <header
                 class={[
-                    "w-full z-header fixed top-0 h-[100px]",
+                    "w-full z-header fixed top-0 h-header",
                     (presentationObject.variant.value == 'regular') && "text-light-contrastTransparent bg-light",
                     (presentationObject.variant.value == 'transparent') && "text-light hover:text-light-contrastTransparent hover:bg-light"
                 ]}
@@ -48,7 +48,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                     ]}
                 >
                     <!-- HOMELINK + LOGO -->
-                    <div class="w-xl translate-y-[5px]">
+                    <div class="w-xl">
                     <a
                         class="contents w-[200px]"
                         id="logoLink"
@@ -61,11 +61,11 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                     </a>
                     </div>
 
-                    <nav class="flex items-center justify-end space-x-xs w-full">
+                    <nav class="flex items-center justify-end space-x-xs w-full h-full">
                         <!-- MAINNAVIGATION -->
-                        <div class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-sm">
+                        <div class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-sm h-full">
                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
-                                <div class="group z-10 hover:z-20">
+                                <div class="group z-10 hover:z-20 flex">
                                     <div class="grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
                                         <div
                                             data-touch-hover="1"
@@ -87,7 +87,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <div
                                         @if.1={item.subItems}
                                         class={[
-                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full pl-sm",
+                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full pl-sm top-header",
                                             "group-hover:block",
                                             "pointer-events-none duration-500 ease-out group-hover:pointer-events-auto",
                                             "bg-light"
@@ -123,60 +123,56 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         <div class="flex items-center space-x-2 z-30">
 
                             <!-- LANGUAGES -->
-                            <div class="hidden menuToggle:flex w-touch h-full relative z-10">
-                                <div class="inset-0 grid grid-col-1 gap-2">
-                                    <div class="group relative z-50">
-                                        <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
-                                            <div class={[
-                                                "flex items-center justify-center font-sans-bold text-center"
-                                            ]}
-                                                @if={item.isActive}
-                                            >
-                                                <span @if.1={item.isActive}>
-                                                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                                                        presentationObject={item.link.content}
-                                                    />
-                                                </span>
-                                            </div>
-                                            <div class="hidden group-hover:block z-50 absolute" @if.1={item.isActive}>
-                                                <Neos.Fusion:Loop
-                                                    itemName="inactiveItem"
-                                                    items={presentationObject.languageNavigation}
-                                                    @if.1={item.isActive}
+                            <div class="hidden menuToggle:flex w-touch h-full z-10 ">
+                                <div class="">
+                                    <div class="grid grid-col-1 gap-2 absolute">
+                                        <div class="absolute group z-50 hover:border p-ch hover:bg-light -top-[21px]">
+                                            <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
+                                                <div class={[
+                                                    "flex items-center justify-center font-sans-bold text-center cursor-pointer group-hover:border-b"
+                                                ]}
+                                                    @if={item.isActive}
                                                 >
-                                                    <div class={[
-                                                        "flex items-center justify-center font-sans-bold text-center top-full",
-                                                        "text-neutral  hover:text-standard"
-                                                    ]}
-                                                        @if.1={!inactiveItem.isActive}
+                                                    <span @if.1={item.isActive}>
+                                                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                                                            presentationObject={item.link.content}
+                                                        />
+                                                    </span>
+                                                    <Neos.Fusion:Augmenter class="group-hover:rotate-180">
+                                                        <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.rootLevelIcon}/>
+                                                    </Neos.Fusion:Augmenter>
+                                                </div>
+                                                <div class="hidden group-hover:block z-50" @if.1={item.isActive}>
+                                                    <Neos.Fusion:Loop
+                                                        itemName="inactiveItem"
+                                                        items={presentationObject.languageNavigation}
+                                                        @if.1={item.isActive}
                                                     >
-                                                        <Neos.Fusion:Augmenter
-                                                            class="w-full h-full flex items-center justify-center"
-                                                        >
-                                                            <Hoerbiger.Shared:Block.Link presentationObject={inactiveItem.link}/>
-                                                        </Neos.Fusion:Augmenter>
-                                                    </div>
-                                                    <div class={[
-                                                        "flex items-center justify-center font-sans-bold text-center top-full",
-                                                        "text-neutral  hover:text-standard"
-                                                    ]}
-                                                        @if.1={!inactiveItem.isActive}
-                                                    >
-                                                        <Neos.Fusion:Augmenter
-                                                            class="w-full h-full flex items-center justify-center"
-                                                        >
-                                                            <Hoerbiger.Shared:Block.Link presentationObject={inactiveItem.link}/>
-                                                        </Neos.Fusion:Augmenter>
-                                                    </div>
-                                                </Neos.Fusion:Loop>
-                                            </div>
-                                        </Neos.Fusion:Loop>
+                                                        <div class="border-b" >
+                                                            <div class={[
+                                                                "flex items-center justify-center font-sans-bold text-center top-full",
+                                                                "text-neutral  hover:text-standard w-fit"
+                                                            ]}
+                                                                @if.1={!inactiveItem.isActive}
+                                                            >
+                                                                <Neos.Fusion:Augmenter
+                                                                    class="w-full h-full flex items-center justify-center"
+                                                                >
+                                                                    <Hoerbiger.Shared:Block.Link presentationObject={inactiveItem.link}/>
+                                                                </Neos.Fusion:Augmenter>
+                                                            </div>
+                                                        </div>
+                                                    </Neos.Fusion:Loop>
+                                                </div>
+
+                                            </Neos.Fusion:Loop>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
 
-                             <!-- SEARCH -->
-                                <Neos.Fusion:Augmenter class="z-20 w-touch h-touch grid place-items-center">
+                            <!-- SEARCH -->
+                            <Neos.Fusion:Augmenter class="z-20 w-touch h-touch grid place-items-center">
                                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                                     @if.1={presentationObject.search}
                                     presentationObject={presentationObject.search}
@@ -214,7 +210,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                 href="/"
                                                 target="_self"
                                             >
-                                                <!-- <img
+                                                <img
                                                     id="logo"
                                                     width="158"
                                                     height="55"
@@ -222,9 +218,9 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                     class="h-full max-w-[40vw] sm:max-w-[60vw] my-3"
                                                     src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_white.svg')}
                                                     {...props.logo}
-                                                /> -->
+                                                />
                                             </a>
-                                            <div class="flex w-touch h-touch sm:w-[100px] sm:h-[100px]">
+                                            <div class="flex w-touch h-touch sm:w-[100px] sm:h-[100px] relative z-50">
                                                 <a href="#" class="absolute inset-0 text-light flex justify-center items-center font-thin p-[0.5em]">
                                                     <div class="w-[2em] h-[2em]">
                                                     <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
