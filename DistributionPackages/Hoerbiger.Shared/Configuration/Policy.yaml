@@ -1,4 +1,14 @@
+privilegeTargets:
+  'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
+    'Hoerbiger.Shared:Module.Editors':
+      matcher: 'administration/editors'
+
 roles:
+  'Neos.Neos:Administrator':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.Shared:Module.Editors'
+        permission: GRANT
   'Neos.Neos:RestrictedEditor':
     label: 'Redakteur'
   'Hoerbiger.Shared:ChiefEditor':

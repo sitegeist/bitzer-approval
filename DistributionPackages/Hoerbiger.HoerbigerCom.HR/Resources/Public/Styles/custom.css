@@ -15,6 +15,11 @@
 	margin-bottom: 0px !important;
 }
 
+.tlk-fo-components-styling-context.tlk-fo-components-context-details .job-description-two-column ul{
+	list-style: disc;
+	margin-left: 25px;
+}
+
 @media (min-width: 1020px) {
 	body.tlk-apply-standalone .tlk-apply-components-styling-context[data-talentlink-apply-menu-container] .lumesse-menu-sidebar {
 		top: 200px !important;

@@ -1,0 +1,5 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog.Calculator:Application.MiniCalculator) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Catalog\\Calculator\\Presentation\\Application\\MiniCalculator\\MiniCalculatorInterface'
+
+    renderer = ${presentationObject.content}
+}

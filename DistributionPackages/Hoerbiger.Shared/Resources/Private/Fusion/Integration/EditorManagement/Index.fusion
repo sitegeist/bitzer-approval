@@ -1,0 +1,67 @@
+prototype(Hoerbiger.Shared:Module.EditorManagement.Index) < prototype(Neos.Fusion:Component) {
+    renderer = afx`
+        <Hoerbiger.Shared:Module.EditorManagement.FlashMessages />
+        <div class="neos-row-fluid">
+            <legend>Chefredakteure</legend>
+            <table class="neos-table">
+                <thead>
+                <tr>
+                    <th>Benutzername</th>
+                    <th>Name</th>
+                    <th class="neos-pull-right">Aktionen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <Neos.Fusion:Loop items={chiefEditors} itemName="editor">
+                    <tr>
+                        <td>{editor.username}</td>
+                        <td>{editor.name}</td>
+                        <td class="neos-action">
+                            <div class="neos-pull-right">
+                                <form class="neos-inline" action={demoteUri} method="post">
+                                    <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
+                                    <input type="hidden" name="moduleArguments[accountId]" value={editor.username} />
+                                    <button type="submit" class="neos-button" title="Redakteur zurückstufen">
+                                        <i class="fas fa-angle-double-down icon-white"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </Neos.Fusion:Loop>
+                </tbody>
+            </table>
+        </div>
+        <div class="neos-row-fluid">
+            <legend>Redakteure</legend>
+            <table class="neos-table">
+                <thead>
+                <tr>
+                    <th>Benutzername</th>
+                    <th>Name</th>
+                    <th class="neos-pull-right">Aktionen</th>
+                </tr>
+                </thead>
+                <tbody>
+                <Neos.Fusion:Loop items={editors} itemName="editor">
+                    <tr>
+                        <td>{editor.username}</td>
+                        <td>{editor.name}</td>
+                        <td class="neos-action">
+                            <div class="neos-pull-right">
+                                <form class="neos-inline" action={promoteUri} method="post">
+                                    <input type="hidden" name="__csrfToken" value={csrfProtectionToken} />
+                                    <input type="hidden" name="moduleArguments[accountId]" value={editor.username} />
+                                    <button type="submit" class="neos-button" title="Redakteur befördern">
+                                        <i class="fas fa-angle-double-up icon-white"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                </Neos.Fusion:Loop>
+                </tbody>
+            </table>
+        </div>
+    `
+}

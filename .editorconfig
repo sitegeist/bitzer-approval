@@ -34,3 +34,11 @@ indent_size = 2
 
 [ssh-config.txt]
 indent_size = 2
+
+[**/Hoerbiger.HoerbigerCom.Catalog.Calculator/**]
+charset = unset
+end_of_line = unset
+insert_final_newline = unset
+trim_trailing_whitespace = unset
+indent_style = unset
+indent_size = unset

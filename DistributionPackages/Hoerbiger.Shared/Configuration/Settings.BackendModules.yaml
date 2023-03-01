@@ -1,0 +1,10 @@
+Neos:
+  Neos:
+    modules:
+      administration:
+        submodules:
+          editors:
+            label: 'Redaktion'
+            controller: Hoerbiger\Shared\Application\Controller\EditorManagementController
+            description: 'Ermöglicht die Verwaltung von Redakteuren'
+            icon: 'fas fa-users'

@@ -1,0 +1,4 @@
+Neos:
+  Fusion:
+    defaultContext:
+      Catalog.Calculator.ContentSlot: Hoerbiger\HoerbigerCom\Catalog\Calculator\Integration\ContentSlotFactory

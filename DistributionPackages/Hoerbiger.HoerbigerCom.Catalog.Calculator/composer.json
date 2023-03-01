@@ -1,0 +1,19 @@
+{
+    "name": "hoerbiger/hoerbigercom-catalog-calculator",
+    "type": "neos-hoerbiger",
+    "require": {
+        "hoerbiger/hoerbigercom-catalog": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hoerbiger\\HoerbigerCom\\Catalog\\Calculator\\": "Classes/",
+            "Hoerbiger\\HoerbigerCom\\Catalog\\Calculator\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+            "Hoerbiger\\HoerbigerCom\\Catalog\\Calculator\\Integration\\": "Resources/Private/Fusion/Integration/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Hoerbiger.HoerbigerCom.Catalog.Calculator"
+        }
+    }
+}
