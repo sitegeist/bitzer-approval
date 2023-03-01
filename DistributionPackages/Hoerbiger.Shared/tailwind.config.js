@@ -73,6 +73,9 @@ module.exports = {
 				DEFAULT: 'transparent',
 				contrast: '#fff',
 			},
+			warning: {
+				DEFAULT: '#FF2424'
+			},
 			excite: {
 				DEFAULT: '#A89379',
 				contrast: '#fff'
@@ -397,6 +400,15 @@ module.exports = {
 					'height': (Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw',
 					'border-width': `0 0 ${(Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
 					'border-color': `transparent transparent #FFFFFF transparent`,
+				},
+				'.bg-header': {
+					'background': 'white',
+					'color': 'rgba(0, 0, 0, .5)',
+					'transition': 'background-color .5s'
+				},
+				'.bg-header-transparent': {
+					'background': 'transparent',
+					'color': 'white',
 				}
 			}, ['responsive']);
 		}),

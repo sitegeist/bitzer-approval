@@ -15,15 +15,15 @@ prototype(Hoerbiger.Shared:Application.CompactSearchForm) < prototype(PackageFac
             data-labels={presentationObject.labels}
             class={[
                 "[Application.CompactSearchForm]",
-                "bg-standard w-[100px] h-[100px] relative"
+                "relative"
             ]}
         >
-            <div class="absolute inset-0 flex items-center justify-center text-neutral z-10">
+            <div class="absolute flex items-center justify-center text-neutral z-10">
                 <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.searchIcon}/>
             </div>
             <div
                 data-select="applicationRoot"
-                class="absolute inset-0 z-20"
+                class="absolute z-20"
             >
             </div>
         </div>
