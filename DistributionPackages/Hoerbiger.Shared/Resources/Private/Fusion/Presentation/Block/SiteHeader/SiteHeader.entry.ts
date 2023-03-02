@@ -1,7 +1,34 @@
+import * as React from "react";
+import * as ReactDom from "react-dom";
+
+import {Client} from "./Client";
+
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
 		const header = $node.querySelector("header") as HTMLElement;
 		const headerVariant = $node.dataset.siteHeaderVariant ?? "regular";
+
+		// compactSearch
+		const compactSearchRoot = $node.querySelector("[data-compact-search=root]") as HTMLElement;
+		const compactSearchTargetUri = compactSearchRoot.dataset.targetUri ?? "";
+		const labels = JSON.parse(compactSearchRoot.dataset.labels ?? "{}");
+		const disableItems = $node.querySelectorAll("[data-search=visible]") as NodeListOf<HTMLElement>;
+
+		console.log(disableItems);
+
+		if (compactSearchRoot instanceof HTMLElement && compactSearchTargetUri) {
+			ReactDom.render(
+				React.createElement(
+					Client,
+					{
+						targetUri: compactSearchTargetUri,
+						labels,
+						disableItems
+					}
+				),
+				compactSearchRoot
+			);
+		}
 
 		// scroll Verhalten
 		if (headerVariant === "transparent") {

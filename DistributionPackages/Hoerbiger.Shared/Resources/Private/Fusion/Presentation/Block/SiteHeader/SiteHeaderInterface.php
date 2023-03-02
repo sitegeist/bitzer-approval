@@ -6,9 +6,9 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconInterface;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Psr\Http\Message\UriInterface;
 
 interface SiteHeaderInterface extends ComponentPresentationObjectInterface
@@ -17,11 +17,15 @@ interface SiteHeaderInterface extends ComponentPresentationObjectInterface
 
     public function getMainNavigation(): ?NavigationItems;
 
-    public function getSearch(): SlotInterface;
-
     public function getLanguageNavigation(): NavigationItems;
 
     public function getRootLevelIcon(): Icon;
 
     public function getSubLevelIcon(): Icon;
+
+    public function getSearchTargetUri(): UriInterface;
+
+    public function getSearchIcon(): IconInterface;
+
+    public function getLabels(): string;
 }

@@ -6,9 +6,9 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconInterface;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use Psr\Http\Message\UriInterface;
 
@@ -23,30 +23,39 @@ final class SiteHeader extends AbstractComponentPresentationObject implements Si
 
     private ?NavigationItems $mainNavigation;
 
-    private SlotInterface $search;
-
     private NavigationItems $languageNavigation;
 
     private Icon $rootLevelIcon;
 
     private Icon $subLevelIcon;
 
+    private UriInterface $searchTargetUri;
+
+    private IconInterface $searchIcon;
+
+    private string $labels;
+
     public function __construct(
         SiteHeaderVariant $variant,
         UriInterface $siteUri,
         ?NavigationItems $mainNavigation,
-        SlotInterface $search,
         NavigationItems $languageNavigation,
         Icon $rootLevelIcon,
-        Icon $subLevelIcon
+        Icon $subLevelIcon,
+        UriInterface $searchTargetUri,
+        IconInterface $searchIcon,
+        string $labels
     ) {
         $this->variant = $variant;
         $this->siteUri = $siteUri;
         $this->mainNavigation = $mainNavigation;
-        $this->search = $search;
         $this->languageNavigation = $languageNavigation;
         $this->rootLevelIcon = $rootLevelIcon;
         $this->subLevelIcon = $subLevelIcon;
+        $this->searchTargetUri = $searchTargetUri;
+        $this->searchIcon = $searchIcon;
+        $this->labels = $labels;
+
     }
 
     public function getVariant(): SiteHeaderVariant
@@ -64,11 +73,6 @@ final class SiteHeader extends AbstractComponentPresentationObject implements Si
         return $this->mainNavigation;
     }
 
-    public function getSearch(): SlotInterface
-    {
-        return $this->search;
-    }
-
     public function getLanguageNavigation(): NavigationItems
     {
         return $this->languageNavigation;
@@ -83,4 +87,20 @@ final class SiteHeader extends AbstractComponentPresentationObject implements Si
     {
         return $this->subLevelIcon;
     }
+
+    public function getSearchTargetUri(): UriInterface
+    {
+        return $this->searchTargetUri;
+    }
+
+    public function getSearchIcon(): IconInterface
+    {
+        return $this->searchIcon;
+    }
+
+    public function getLabels(): string
+    {
+        return $this->labels;
+    }
+
 }

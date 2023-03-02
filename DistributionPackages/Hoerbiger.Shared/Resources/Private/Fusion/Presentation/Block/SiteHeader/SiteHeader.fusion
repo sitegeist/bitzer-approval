@@ -173,12 +173,25 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
                             <!-- SEARCH -->
                             <Neos.Fusion:Augmenter class="z-20 w-touch h-touch grid place-items-center">
-                                <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                                    @if.1={presentationObject.search}
-                                    presentationObject={presentationObject.search}
-                                />
+                                <div
+                                    data-compact-search="root"
+                                    data-target-uri={presentationObject.searchTargetUri}
+                                    data-labels={presentationObject.labels}
+                                    class={[
+                                        "[Application.CompactSearchForm]",
+                                        "relative"
+                                    ]}
+                                >
+                                    <div class="absolute flex items-center justify-center text-neutral z-10">
+                                        <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.searchIcon}/>
+                                    </div>
+                                    <div
+                                        data-select="applicationRoot"
+                                        class="absolute z-20"
+                                    >
+                                    </div>
+                                </div>
                             </Neos.Fusion:Augmenter>
-
 
                             <!-- OFFCANVAS -->
                             <div
