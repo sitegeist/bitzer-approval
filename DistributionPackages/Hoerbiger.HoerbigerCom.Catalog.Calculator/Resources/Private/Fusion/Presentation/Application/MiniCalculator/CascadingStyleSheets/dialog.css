@@ -54,7 +54,6 @@
     box-shadow: 0 0.125rem 0.188rem #00000026;
     border-radius: 2px;
     cursor: pointer;
-    font-family: 'Inter';
 }
 
 .dialog>.dialog_btns {
@@ -65,7 +64,6 @@
 .dialog_body {
     margin-left: 15px;
     margin-right: 15px;
-    font-family: 'Inter';
     padding-top: 25px !important;
     text-align: left !important;
     font-size: .875rem;
@@ -75,7 +73,6 @@
 }
 
 .dialog>.dialog_title {
-    font-family: 'Inter';
     font-weight: 700;
     font-size: .875rem;
     color: #2d3033 !important;
