@@ -63,7 +63,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
                     <nav class="flex items-center justify-end space-x-xs w-full h-full">
                         <!-- MAINNAVIGATION -->
-                        <div class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-sm h-full">
+                        <div class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-xl h-full">
                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                                 <div class="group z-10 hover:z-20 flex">
                                     <div class="grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
@@ -87,14 +87,14 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <div
                                         @if.1={item.subItems}
                                         class={[
-                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full pl-sm top-header",
+                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full pl-xl top-header",
                                             "group-hover:block",
                                             "pointer-events-none duration-500 ease-out group-hover:pointer-events-auto",
                                             "bg-light"
                                         ]}
                                     >
                                         <div class="max-w-content-full mx-auto">
-                                            <div class="grid grid-cols-3 pl-2xl my-sm">
+                                            <div class="grid grid-cols-3 pl-3xl my-sm">
                                                 <Neos.Fusion:Loop items={item.subItems} itemKey={"columnKey"}>
                                                         <div>
                                                             <Neos.Fusion:Loop items={item.subItems}>

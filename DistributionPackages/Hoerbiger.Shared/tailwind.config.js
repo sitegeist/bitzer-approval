@@ -22,6 +22,7 @@ const SPACES = {
 	lg: `calc(3 * ${SPACE_SM})`,
 	xl: `calc(4 * ${SPACE_SM})`,
 	'2xl': `calc(6 * ${SPACE_SM})`,
+	'3xl': `calc(8 * ${SPACE_SM})`,
 	'minus-ch-xs': `-.62ch`,
 	'minus-ch': `-1ch`,
 	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
