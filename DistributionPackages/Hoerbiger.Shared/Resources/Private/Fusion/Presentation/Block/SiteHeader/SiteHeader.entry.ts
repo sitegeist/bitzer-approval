@@ -14,8 +14,6 @@ export default ($node: Element): void => {
 		const labels = JSON.parse(compactSearchRoot.dataset.labels ?? "{}");
 		const disableItems = $node.querySelectorAll("[data-search=visible]") as NodeListOf<HTMLElement>;
 
-		console.log(disableItems);
-
 		if (compactSearchRoot instanceof HTMLElement && compactSearchTargetUri) {
 			ReactDom.render(
 				React.createElement(

@@ -63,7 +63,10 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
 
                     <nav class="flex items-center justify-end space-x-xs w-full h-full">
                         <!-- MAINNAVIGATION -->
-                        <div class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-xl h-full">
+                        <div
+                            class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-xl h-full"
+                            data-search="visible"
+                        >
                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                                 <div class="group z-10 hover:z-20 flex">
                                     <div class="grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
@@ -123,7 +126,10 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         <div class="flex items-center space-x-2 z-30">
 
                             <!-- LANGUAGES -->
-                            <div class="hidden menuToggle:flex w-touch h-full z-10 ">
+                            <div
+                                class="hidden menuToggle:flex w-touch h-full z-10 "
+                                data-search="visible"
+                            >
                                 <div class="">
                                     <div class="grid grid-col-1 gap-2 absolute">
                                         <div class="absolute group z-50 hover:border p-ch hover:bg-light -top-[21px]">
