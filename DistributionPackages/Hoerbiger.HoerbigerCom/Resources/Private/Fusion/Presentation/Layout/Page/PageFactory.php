@@ -78,12 +78,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
                 // @TODO REMOVE old stage
-                $videoStage
-                    ? new ContentContainer(
-                        ContentContainerVariant::blank(),
-                        $videoStage
-                    )
-                    : null,
+//                $videoStage
+//                    ? new ContentContainer(
+//                        ContentContainerVariant::blank(),
+//                        $videoStage
+//                    )
+//                    : null,
                 Content::fromNode(
                     $homepage->findNamedChildNode(NodeName::fromString('stage')),
                     'Hoerbiger.HoerbigerCom:ContentSlot'

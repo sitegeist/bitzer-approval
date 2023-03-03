@@ -26,6 +26,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
     const VARIANT_HALF_WITH = 'halfWidth';
+    const VARIANT_FULL_VIEW_HEIGHT = 'fullViewHeight';
 
     /**
      * @var array<string,self>|self[]
@@ -50,6 +51,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULARSM
                 && $string !== self::VARIANT_REGULARX
                 && $string !== self::VARIANT_BLANK
+                && $string !== self::VARIANT_FULL_VIEW_HEIGHT
                 && $string !== self::VARIANT_BLANKY
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
@@ -101,6 +103,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function blank(): self
     {
         return self::from(self::VARIANT_BLANK);
+    }
+
+    public static function fullViewHeight(): self
+    {
+        return self::from(self::VARIANT_FULL_VIEW_HEIGHT);
     }
 
     public static function blankY(): self
@@ -168,6 +175,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BLANK;
     }
 
+    public function getIsFullViewHeight(): bool
+    {
+        return $this->value === self::VARIANT_FULL_VIEW_HEIGHT;
+    }
+
     public function getIsBlankY(): bool
     {
         return $this->value === self::VARIANT_BLANKY;
@@ -207,6 +219,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_REGULARSM),
             self::from(self::VARIANT_REGULARX),
             self::from(self::VARIANT_BLANK),
+            self::from(self::VARIANT_FULL_VIEW_HEIGHT),
             self::from(self::VARIANT_BLANKY),
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),

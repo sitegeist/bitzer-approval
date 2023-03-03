@@ -873,7 +873,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     private function forHeaderVideoStage(TraversableNodeInterface $videoStageNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         return new ContentContainer(
-            ContentContainerVariant::blank(),
+            ContentContainerVariant::fullViewHeight(),
             new HeaderVideoStage(
                 Collection::fromNodes(
                     $videoStageNode->findChildNodes(),
@@ -892,9 +892,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             throw new \InvalidArgumentException('Property "image" is required for content element image.');
         }
 
-        $figure = $this->figureFactory->forFullWidthImage(
-            $imageSource,
-            Editable::fromNodeProperty($sliderItemNode, 'image__caption')
+        $figure = $this->figureFactory->forPartialEclipse(
+            $imageSource
         );
 
         return new SliderItem(

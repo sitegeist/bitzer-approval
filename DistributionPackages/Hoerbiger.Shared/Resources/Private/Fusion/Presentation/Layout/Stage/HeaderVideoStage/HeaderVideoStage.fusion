@@ -3,14 +3,13 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage) < prototype(PackageFac
 
     renderer = afx`
         <div class={[
-            "[Layout.Stage.HeaderVideoStage]"
+            "[Layout.Stage.HeaderVideoStage]",
+            "h-screen"
         ]}>
-            HEADER-VIDEO-STAGE
-
-            <div class="overflow-hidden w-full">
+            <div class="overflow-hidden w-full h-screen">
                 <div
                     data-select="slider"
-                    class="slider flex"
+                    class="slider flex h-screen"
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot
                         presentationObject={presentationObject.slides}

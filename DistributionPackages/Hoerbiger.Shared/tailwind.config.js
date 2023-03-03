@@ -420,7 +420,7 @@ module.exports = {
 					'transition': 'background-color .5s'
 				},
 				'.bg-header-transparent': {
-					'background': 'transparent',
+					'background': 'linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.937255) 6.08%, rgba(0, 0, 0, 0.866667) 12.31%, rgba(0, 0, 0, 0.788235) 18.7%, rgba(0, 0, 0, 0.705882) 25.25%, rgba(0, 0, 0, 0.623529) 31.96%, rgba(0, 0, 0, 0.541176) 38.83%, rgba(0, 0, 0, 0.454902) 45.88%, rgba(0, 0, 0, 0.372549) 53.08%, rgba(0, 0, 0, 0.294118) 60.46%, rgba(0, 0, 0, 0.219608) 68.02%, rgba(0, 0, 0, 0.152941) 75.75%, rgba(0, 0, 0, 0.0901961) 83.65%, rgba(0, 0, 0, 0.0392157) 91.73%, rgba(0, 0, 0, 0.0001) 100%)',
 					'color': 'white',
 				},
 			}, ['responsive']);

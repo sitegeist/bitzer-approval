@@ -37,10 +37,9 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                 class={[
                     "w-full z-header fixed top-0 h-header",
                     (presentationObject.variant.value == 'regular') && "text-light-contrastTransparent bg-light",
-                    (presentationObject.variant.value == 'transparent') && "text-light hover:text-light-contrastTransparent hover:bg-light"
+                    (presentationObject.variant.value == 'transparent') && "text-light hover:text-light-contrastTransparent hover:bg-light hover:bg-none"
                 ]}
             >
-
                 <div
                     class={[
                         "max-w-content-full mx-auto px-md flex ",

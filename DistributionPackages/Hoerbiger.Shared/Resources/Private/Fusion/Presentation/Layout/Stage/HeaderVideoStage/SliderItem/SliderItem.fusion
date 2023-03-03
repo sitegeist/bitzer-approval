@@ -4,15 +4,15 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage.SliderItem) < prototype
     renderer = afx`
         <div class={[
             "[Layout.Stage.HeaderVideoStage.SliderItem]",
-            "w-full h-full",
+            "w-full h-screen",
             "keen-slider__slide data-keen-slider-pe w-full min-w-full"
         ]}>
-            <div>
-                <div class="relative">
-                    <div class="hidden sm:flex">
+            <div class="h-full">
+                <div class="relative h-full">
+                    <div class="hidden sm:flex h-full">
                         <Hoerbiger.Shared:Block.Video presentationObject={presentationObject.video}/>
                     </div>
-                    <div class="flex sm:hidden">
+                    <div class="flex sm:hidden h-full">
                         <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure}/>
                     </div>
                     <div class="absolute inset-0 w-full h-full bg-sliderItem"></div>
