@@ -11,16 +11,12 @@ use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\Slidab
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
-use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTopFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
-use Hoerbiger\Shared\Presentation\Block\ThumbnailList\ThumbnailListFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
-use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
-use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -81,12 +77,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ScrollToTop(),
+                // @TODO REMOVE old stage
                 $videoStage
                     ? new ContentContainer(
                         ContentContainerVariant::blank(),
                         $videoStage
                     )
                     : null,
+                Content::fromNode(
+                    $homepage->findNamedChildNode(NodeName::fromString('stage')),
+                    'Hoerbiger.HoerbigerCom:ContentSlot'
+                ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity)
         );

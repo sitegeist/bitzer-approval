@@ -55,6 +55,8 @@ use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\HeaderVideoStage;
+use Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\SliderItem\SliderItem;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
@@ -183,6 +185,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return Content::fromNode($contentNode, 'Neos.Neos:ContentCollection');
             case 'Hoerbiger.HoerbigerCom:Content.MatomoOptOut':
                 return $this->forMatomoOptOut($subgraph);
+            case 'Hoerbiger.HoerbigerCom:Collection.HeaderVideoStage':
+                return $this->forHeaderVideoStage($contentNode, $subgraph, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.HeaderVideoStage.SliderItem':
+                return $this->forHeaderVideoStageSliderItem($contentNode, $subgraph, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -861,6 +867,53 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             MatomoOptOut::forLocale(reset($languages))
+        );
+    }
+
+    private function forHeaderVideoStage(TraversableNodeInterface $videoStageNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::blank(),
+            new HeaderVideoStage(
+                Collection::fromNodes(
+                    $videoStageNode->findChildNodes(),
+                    function (TraversableNodeInterface $sliderItem): Content {
+                        return Content::fromNode($sliderItem, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                    }
+                )
+            ),
+        );
+    }
+
+    private function forHeaderVideoStageSliderItem(TraversableNodeInterface $sliderItemNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($sliderItemNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element image.');
+        }
+
+        $figure = $this->figureFactory->forFullWidthImage(
+            $imageSource,
+            Editable::fromNodeProperty($sliderItemNode, 'image__caption')
+        );
+
+        return new SliderItem(
+            $sliderItemNode->getProperty("headline") || $inBackend
+                ? new Headline(
+                    HeadlineSize::medium(),
+                    HeadlineColor::brand(),
+                    HeadlineType::div(),
+                    Editable::fromNodeProperty($sliderItemNode, "headline")
+                )
+                : null,
+            new Text(
+                TextVariant::default(),
+                Editable::fromNodeProperty($sliderItemNode, "text"),
+                false
+            ),
+            $figure,
+            $this->videoFactory->forSliderVideo($sliderItemNode, $inBackend, Theme::slider()),
+            null
         );
     }
 }

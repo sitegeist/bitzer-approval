@@ -1,0 +1,22 @@
+prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\HeaderVideoStage\\HeaderVideoStageInterface'
+
+    renderer = afx`
+        <div class={[
+            "[Layout.Stage.HeaderVideoStage]"
+        ]}>
+            HEADER-VIDEO-STAGE
+
+            <div class="overflow-hidden w-full">
+                <div
+                    data-select="slider"
+                    class="slider flex"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.slides}
+                    />
+                </div>
+            </div>
+        </div>
+    `
+}

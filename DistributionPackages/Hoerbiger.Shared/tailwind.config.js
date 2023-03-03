@@ -385,6 +385,10 @@ module.exports = {
 				...SPACES,
 				header: HEADER_HEIGHT,
 			},
+
+			backgroundImage: {
+				'sliderItem': 'linear-gradient(17.54deg, #000000 -7.11%, rgba(0, 0, 0, 0.0001) 47.28%);'
+			}
 		},
 	},
 	variants: {

@@ -6,6 +6,8 @@
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
   childNodes:
+    stage:
+      type: 'Hoerbiger.HoerbigerCom:Collection.HeaderVideoStage'
     main:
       type: 'Neos.Neos:ContentCollection'
       constraints:
