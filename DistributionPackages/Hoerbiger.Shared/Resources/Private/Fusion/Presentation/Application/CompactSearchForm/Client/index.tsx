@@ -82,7 +82,7 @@ export const Client = ({targetUri, labels}: ClientProps): JSX.Element => {
 								autoFocus
 								value={query}
 								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value)}
-								className="border-none w-[80%] mx-auto focus:outline-none text-standard font-bold"
+								className="border-none w-[80%] focus:outline-none text-standard font-bold"
 								placeholder={labels["placeholder.searchInput"] ?? ""}
 							/>
 						</div>

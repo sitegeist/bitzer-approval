@@ -1,4 +1,4 @@
 id,description,de,en
 label_overview,OverViewNavigationLabel,Überblick,Overview
-placeholder.searchInput,Placeholder Search Input,Enter search term,Suchbegriff eingeben
-title.submit,Title Submit,Search now,Jetzt suchen
+placeholder.searchInput,Placeholder Search Input,Suchbegriff eingeben,Enter search term
+title.submit,Title Submit,Jetzt suchen,Search now

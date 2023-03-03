@@ -418,7 +418,7 @@ module.exports = {
 				'.bg-header-transparent': {
 					'background': 'transparent',
 					'color': 'white',
-				}
+				},
 			}, ['responsive']);
 		}),
 		plugin(({addVariant, e}) => {

@@ -69,20 +69,17 @@ export const Client = ({targetUri, labels, disableItems}: ClientProps): JSX.Elem
 				onClick={onClick}
 				className={cx(
 					"w-full h-full grid place-items-center z-40 cursor-pointer relative",
-					isExpanded && !isTooSmallForExpandedView
-						? "text-standard"
-						: "text-light"
 				)}
 			>
-				<StampedeIcon iconName="search" size={1.5}/>
+				<StampedeIcon iconName="search" className="translate-x-[50px]" size={1.5}/>
 			</div>
 			{
 				(isExpanded && !isTooSmallForExpandedView) && (
 					<form
 						onSubmit={onSubmit}
 						className={cx(
-							"absolute z-50 top-[25%] bottom-0 right-0 w-[400%] h-[50px] rounded-full",
-							"grid grid-cols-4 bg-light text-standard"
+							"absolute z-50 border-b bottom-0 right-0 w-[1000%] h-[50px]",
+							"grid grid-cols-4"
 						)}
 					>
 						<div className="col-span-3 flex items-center">
@@ -91,16 +88,15 @@ export const Client = ({targetUri, labels, disableItems}: ClientProps): JSX.Elem
 								autoFocus
 								value={query}
 								onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.currentTarget.value)}
-								className="border-none w-[80%] mx-auto focus:outline-none text-standard font-bold"
+								className="border-none w-[80%] focus:outline-none text-neutral-contrast font-bold bg-transparent"
 								placeholder={labels["placeholder.searchInput"] ?? ""}
 							/>
 						</div>
 						<div
 							onClick={onSubmit}
-							className="w-full h-full cursor-pointer grid place-items-center text-standard"
+							className="w-full h-full cursor-pointer grid place-items-center text-light translate-x-[42px]"
 							title={labels["title.submit"] ?? ""}
 						>
-							<StampedeIcon iconName="search" size={1.5}/>
 						</div>
 					</form>
 				)

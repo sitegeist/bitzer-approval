@@ -64,7 +64,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                     <nav class="flex items-center justify-end space-x-xs w-full h-full">
                         <!-- MAINNAVIGATION -->
                         <div
-                            class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-xl h-full"
+                            class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-lg h-full"
                             data-search="visible"
                         >
                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
@@ -90,7 +90,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <div
                                         @if.1={item.subItems}
                                         class={[
-                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full pl-xl top-header",
+                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full pl-sm top-header",
                                             "group-hover:block",
                                             "pointer-events-none duration-500 ease-out group-hover:pointer-events-auto",
                                             "bg-light"
@@ -184,13 +184,9 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     data-target-uri={presentationObject.searchTargetUri}
                                     data-labels={presentationObject.labels}
                                     class={[
-                                        "[Application.CompactSearchForm]",
-                                        "relative"
+                                        "[Application.CompactSearchForm]"
                                     ]}
                                 >
-                                    <div class="absolute flex items-center justify-center text-neutral z-10">
-                                        <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.searchIcon}/>
-                                    </div>
                                     <div
                                         data-select="applicationRoot"
                                         class="absolute z-20"
