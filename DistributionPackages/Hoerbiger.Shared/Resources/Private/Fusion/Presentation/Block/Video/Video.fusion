@@ -15,18 +15,19 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
             "[Block.Video (" + presentationObject.variant.value + ")]",
             "flex justify-center items-center relative",
             presentationObject.caption && "pb-touch",
-            (presentationObject.variant.value == 'slider') && "w-full"
+            (presentationObject.variant.value == 'slider') && "w-full h-full"
         ]}>
             <div
                 class={[
                     "relative mx-auto",
-                    (presentationObject.variant.value == 'slider') && "w-full"
+                    (presentationObject.variant.value == 'slider') && "w-full h-full"
                 ]}
             >
                 <video
                     class={[
-                        "max-h-[70vh] mx-auto relative",
-                        (presentationObject.variant.value == 'slider') && "w-full"
+                        "mx-auto relative",
+                        (!presentationObject.variant.value == 'slider') && "max-h-[70vh]",
+                        (presentationObject.variant.value == 'slider') && "w-full h-full object-cover"
                     ]}
                     controls controls.@if.1={presentationObject.variant.value != 'slider'}
                     autoplay autoplay.@if.1={presentationObject.variant.value == 'slider'}

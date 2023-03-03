@@ -9,10 +9,10 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage.SliderItem) < prototype
         ]}>
             <div class="h-full">
                 <div class="relative h-full">
-                    <div class="hidden sm:flex h-full">
+                    <div class="hidden md:flex h-full">
                         <Hoerbiger.Shared:Block.Video presentationObject={presentationObject.video}/>
                     </div>
-                    <div class="flex sm:hidden h-full">
+                    <div class="flex md:hidden h-full">
                         <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure}/>
                     </div>
                     <div class="absolute inset-0 w-full h-full bg-sliderItem"></div>
