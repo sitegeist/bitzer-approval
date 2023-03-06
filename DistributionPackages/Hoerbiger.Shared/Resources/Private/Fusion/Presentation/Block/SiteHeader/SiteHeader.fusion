@@ -105,7 +105,8 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                                     @if.1={!(itemKey == 0 && columnKey == 0)}
                                                                     class={[
                                                                         "grid gap-x-ch-xs grid-cols-2-icon-1fr items-center",
-                                                                        "[&_span]:hover:text-warning text-light-contrast"
+                                                                        "[&_span]:hover:text-warning text-light-contrast",
+                                                                        (item.isActive) && "[&_span]:text-warning"
                                                                     ]}
                                                                 >
                                                                 <span>
