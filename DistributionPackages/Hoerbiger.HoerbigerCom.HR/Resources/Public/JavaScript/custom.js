@@ -4,9 +4,10 @@ talentlink_talentportal.TalentPortalEventBus.subscribe("jobs-list", "rendered", 
 	var url = 'https://emea3.recruitmentplatform.com/apply-app/pages/application-form';
 
 	if(gaCustomLink !== '') {
-		$('#lumesse-general-application-wrapper .btn').attr("href", url + gaCustomLink);
+		document.querySelector('#lumesse-general-application-wrapper .btn').href = url + gaCustomLink;
 	}
 });
+
 talentlink_talentportal.TalentPortalEventBus.subscribe("job-detail", "rendered", function (resp) {
 	var obs=resp.data.SDPTNAMELEVEL1;
 
