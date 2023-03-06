@@ -80,7 +80,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                         >
                                             <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
                                         </div>
-                                        <div class="group-hover:-rotate-180 origin-center duration-500 w-max m-[10px]">
+                                        <div class="group-hover:-rotate-180 origin-center duration-500 w-max m-[10px] translate-y-[2px]">
                                             <Hoerbiger.Shared:Block.Icon
                                                 @if.1={item.subItems}
                                                 presentationObject={presentationObject.rootLevelIcon}
