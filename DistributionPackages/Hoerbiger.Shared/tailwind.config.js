@@ -420,7 +420,7 @@ module.exports = {
 					'transition': 'background-color .5s'
 				},
 				'.bg-header-transparent': {
-					'background': ' linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 58.33%, rgba(69, 69, 69, 0) 100%)',
+					'background': 'linear-gradient(180deg, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0.25) 58.33%, rgba(69, 69, 69, 0) 100%)',
 					'color': 'white',
 				},
 			}, ['responsive']);
