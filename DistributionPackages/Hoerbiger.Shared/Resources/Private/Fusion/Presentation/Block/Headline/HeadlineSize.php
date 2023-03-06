@@ -18,6 +18,7 @@ final class HeadlineSize implements PseudoEnumInterface
     const SIZE_LARGE = 'large';
     const SIZE_LARGE_CENTERED = 'largeCentered';
     const SIZE_MEDIUM = 'medium';
+    const SIZE_MEDIUM_ITALIC = 'mediumItalic';
     const SIZE_SMALL = 'small';
     const SIZE_TILE = 'tile';
     const SIZE_TINY = 'tiny';
@@ -42,6 +43,7 @@ final class HeadlineSize implements PseudoEnumInterface
                 && $string !== self::SIZE_LARGE
                 && $string !== self::SIZE_LARGE_CENTERED
                 && $string !== self::SIZE_MEDIUM
+                && $string !== self::SIZE_MEDIUM_ITALIC
                 && $string !== self::SIZE_SMALL
                 && $string !== self::SIZE_TILE
                 && $string !== self::SIZE_TINY
@@ -77,6 +79,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function medium(): self
     {
         return self::from(self::SIZE_MEDIUM);
+    }
+
+    public static function mediumItalic(): self
+    {
+        return self::from(self::SIZE_MEDIUM_ITALIC);
     }
 
     public static function small(): self
@@ -119,6 +126,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return $this->value === self::SIZE_MEDIUM;
     }
 
+    public function getIsMediumItalic(): bool
+    {
+        return $this->value === self::SIZE_MEDIUM_ITALIC;
+    }
+
     public function getIsSmall(): bool
     {
         return $this->value === self::SIZE_SMALL;
@@ -145,6 +157,7 @@ final class HeadlineSize implements PseudoEnumInterface
             self::from(self::SIZE_LARGE),
             self::from(self::SIZE_LARGE_CENTERED),
             self::from(self::SIZE_MEDIUM),
+            self::from(self::SIZE_MEDIUM_ITALIC),
             self::from(self::SIZE_SMALL),
             self::from(self::SIZE_TILE),
             self::from(self::SIZE_TINY)

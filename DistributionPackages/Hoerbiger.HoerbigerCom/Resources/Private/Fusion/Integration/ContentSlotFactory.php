@@ -906,7 +906,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new SliderItem(
             $sliderItemNode->getProperty("headline") || $inBackend
                 ? new Headline(
-                    HeadlineSize::medium(),
+                    HeadlineSize::mediumItalic(),
                     HeadlineColor::white(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($sliderItemNode, "headline")
