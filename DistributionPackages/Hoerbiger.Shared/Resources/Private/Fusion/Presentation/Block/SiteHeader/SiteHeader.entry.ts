@@ -41,7 +41,7 @@ export default ($node: Element): void => {
 				header.classList.add("bg-header");
 				header.classList.remove("[&_input]:text-light");
 				header.classList.remove("bg-header-transparent");
-				activeLinks.classList.add("text-neutral-contrast");
+				activeLinks?.classList.add("text-neutral-contrast");
 			}
 
 			window.addEventListener("scroll", (e) => {
