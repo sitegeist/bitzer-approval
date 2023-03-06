@@ -7,11 +7,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\SliderItem
 
 use Hoerbiger\Shared\Presentation\Block\Figure\Figure;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
-use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Video\Video;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
  * @Flow\Proxy(false)
@@ -20,26 +19,22 @@ final class SliderItem extends AbstractComponentPresentationObject implements Sl
 {
     private ?Headline $headline;
 
-    private ?Text $text;
+    private ?SlotInterface $text;
 
     private Figure $figure;
 
     private Video $video;
 
-    private ?Link $link;
-
     public function __construct(
         ?Headline $headline,
-        ?Text $text,
+        ?SlotInterface $text,
         Figure $figure,
-        Video $video,
-        ?Link $link
+        Video $video
     ) {
         $this->headline = $headline;
         $this->text = $text;
         $this->figure = $figure;
         $this->video = $video;
-        $this->link = $link;
     }
 
     public function getHeadline(): ?Headline
@@ -47,7 +42,7 @@ final class SliderItem extends AbstractComponentPresentationObject implements Sl
         return $this->headline;
     }
 
-    public function getText(): ?Text
+    public function getText(): ?SlotInterface
     {
         return $this->text;
     }
@@ -60,10 +55,5 @@ final class SliderItem extends AbstractComponentPresentationObject implements Sl
     public function getVideo(): Video
     {
         return $this->video;
-    }
-
-    public function getLink(): ?Link
-    {
-        return $this->link;
     }
 }

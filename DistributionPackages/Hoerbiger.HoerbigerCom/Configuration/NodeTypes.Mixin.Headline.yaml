@@ -3,7 +3,7 @@
   properties:
     headline:
       options:
-        preset: 'rte.plain'
+        preset: 'rte.plainWithStrong'
       ui:
         inline:
           editorOptions:

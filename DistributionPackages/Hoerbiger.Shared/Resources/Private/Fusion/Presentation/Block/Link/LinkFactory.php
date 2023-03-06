@@ -16,6 +16,7 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Psr\Http\Message\UriInterface;
 
@@ -142,5 +143,25 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         }
 
         return null;
+    }
+
+    public function forLinkWithContent(
+        TraversableNodeInterface $node,
+        ContentContext $subgraph,
+        SlotInterface $content
+    ): ?Link
+    {
+        $href = $this->resolveRawLinkTargetUri($node->getProperty('link__target'), $subgraph);
+        $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
+        return $href
+            ? new Link(
+                LinkVariant::noStyles(),
+                $href,
+                $linkTarget,
+                $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+                $content,
+                null
+            )
+            : null;
     }
 }

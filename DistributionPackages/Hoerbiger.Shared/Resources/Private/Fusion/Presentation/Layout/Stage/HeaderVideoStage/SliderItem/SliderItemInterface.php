@@ -7,20 +7,17 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\SliderItem
 
 use Hoerbiger\Shared\Presentation\Block\Figure\Figure;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
-use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Video\Video;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 interface SliderItemInterface extends ComponentPresentationObjectInterface
 {
     public function getHeadline(): ?Headline;
 
-    public function getText(): ?Text;
+    public function getText(): ?SlotInterface;
 
     public function getFigure(): Figure;
 
     public function getVideo(): Video;
-
-    public function getLink(): ?Link;
 }

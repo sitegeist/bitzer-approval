@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
@@ -896,23 +897,26 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             $imageSource
         );
 
+        $text = new Text(
+            TextVariant::brandContrast(),
+            Editable::fromNodeProperty($sliderItemNode, "text"),
+            false
+        );
+
         return new SliderItem(
             $sliderItemNode->getProperty("headline") || $inBackend
                 ? new Headline(
                     HeadlineSize::medium(),
-                    HeadlineColor::brand(),
+                    HeadlineColor::white(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($sliderItemNode, "headline")
                 )
                 : null,
-            new Text(
-                TextVariant::default(),
-                Editable::fromNodeProperty($sliderItemNode, "text"),
-                false
-            ),
+            $sliderItemNode->getProperty("link__target")
+                ? (new LinkFactory())->forLinkWithContent($sliderItemNode, $subgraph, $text)
+                : $text,
             $figure,
-            $this->videoFactory->forSliderVideo($sliderItemNode, $inBackend, Theme::slider()),
-            null
+            $this->videoFactory->forSliderVideo($sliderItemNode, $inBackend, Theme::slider())
         );
     }
 }
