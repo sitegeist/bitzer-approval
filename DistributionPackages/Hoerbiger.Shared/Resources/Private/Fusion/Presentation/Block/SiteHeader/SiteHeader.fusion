@@ -17,7 +17,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
             languageNavigation = '- Add Slot Content -'
             rootLevelIcon {
                 collectionName = 'shared'
-                iconName = 'chevronDown'
+                iconName = 'navi-chevron'
             }
         }
     }
@@ -74,12 +74,13 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                             data-active-main-link="1"
                                             data-active-main-link.@if.1={item.isActive}
                                             class={[
+                                                "hover:text-neutral-contrast",
                                                 (presentationObject.variant.value == 'regular' && item.isActive) && "text-neutral-contrast"
                                             ]}
                                         >
                                             <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
                                         </div>
-                                        <div class="group-hover:-rotate-180 origin-center duration-500 w-max">
+                                        <div class="group-hover:-rotate-180 origin-center duration-500 w-max m-[10px]">
                                             <Hoerbiger.Shared:Block.Icon
                                                 @if.1={item.subItems}
                                                 presentationObject={presentationObject.rootLevelIcon}
@@ -143,7 +144,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                             presentationObject={item.link.content}
                                                         />
                                                     </span>
-                                                    <Neos.Fusion:Augmenter class="group-hover:rotate-180">
+                                                    <Neos.Fusion:Augmenter class="group-hover:rotate-180 m-[10px]">
                                                         <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.rootLevelIcon}/>
                                                     </Neos.Fusion:Augmenter>
                                                 </div>
