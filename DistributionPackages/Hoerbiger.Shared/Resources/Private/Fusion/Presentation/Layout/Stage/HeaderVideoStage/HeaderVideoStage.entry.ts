@@ -42,7 +42,7 @@ export default ($node: Element): void => {
 					defaultAnimation: {
 						duration: 1
 					},
-					detailsChanged: (instance) => {
+					slideChanged: (instance) => {
 						const currentSlide = instance.slides[instance.track.details.rel];
 						if (currentSlide instanceof HTMLElement) {
 							const video = currentSlide.querySelector("video") as HTMLVideoElement;
