@@ -1,6 +1,6 @@
 <?php
 declare(strict_types=1);
-namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview;
+namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press;
 
 /*
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.

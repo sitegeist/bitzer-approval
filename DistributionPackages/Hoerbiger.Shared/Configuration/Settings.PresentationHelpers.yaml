@@ -36,3 +36,4 @@ Neos:
       Shared.PeopleStory: Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStoryFactory
       Shared.SvgImage: Hoerbiger\Shared\Presentation\Block\SvgImage\SvgImageFactory
       Shared.ScrollToTop: Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTopFactory
+      Shared.MetaHeadline: Hoerbiger\Shared\Presentation\Block\MetaHeadline\MetaHeadlineFactory

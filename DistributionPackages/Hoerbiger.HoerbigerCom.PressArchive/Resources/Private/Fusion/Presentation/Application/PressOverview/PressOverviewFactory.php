@@ -6,6 +6,8 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOver
  */
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariant;
+use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariantIsInvalid;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
