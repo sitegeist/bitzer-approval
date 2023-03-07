@@ -43,11 +43,11 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                 <div
                     class={[
                         "max-w-content-full mx-auto px-md flex ",
-                        "flex items-center justify-between h-full "
+                        "flex items-center justify-between h-full"
                     ]}
                 >
                     <!-- HOMELINK + LOGO -->
-                    <div class="w-[170px] flex-shrink-0">
+                    <div class="w-[170px] flex-shrink-0 absolute ">
                         <a
                             class="contents w-[200px]"
                             id="logoLink"
@@ -63,7 +63,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                     <nav class="flex items-center justify-end space-x-xs w-full h-full">
                         <!-- MAINNAVIGATION -->
                         <div
-                            class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full pl-lg h-full"
+                            class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full h-full ml-2xl"
                             data-search="visible"
                         >
                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
@@ -90,14 +90,14 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <div
                                         @if.1={item.subItems}
                                         class={[
-                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full pl-sm top-header",
+                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full top-header",
                                             "group-hover:block",
                                             "pointer-events-none duration-500 ease-out group-hover:pointer-events-auto",
                                             "bg-light"
                                         ]}
                                     >
-                                        <div class="max-w-content-full mx-auto">
-                                            <div class="grid grid-cols-3 pl-3xl my-sm">
+                                        <div class="max-w-content-full pl-3xl mx-auto">
+                                            <div class="grid grid-cols-3 my-sm max-w-content-full">
                                                 <Neos.Fusion:Loop items={item.subItems} itemKey={"columnKey"}>
                                                         <div>
                                                             <Neos.Fusion:Loop items={item.subItems}>
@@ -218,7 +218,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 ]}>
 
                                     <div class="bg-standard">
-                                        <div class="max-w-content-full mx-auto pl-md flex items-center justify-between sm:h-[100px]">
+                                        <div class="max-w-content-full mx-auto flex items-center justify-between sm:h-[100px]">
                                             <!-- HOMELINK + LOGO -->
                                             <a
                                                 class="contents"
