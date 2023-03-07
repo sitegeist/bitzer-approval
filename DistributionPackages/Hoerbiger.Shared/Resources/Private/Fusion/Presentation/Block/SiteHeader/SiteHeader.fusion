@@ -109,10 +109,10 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                                         (item.isActive) && "[&_span]:text-warning"
                                                                     ]}
                                                                 >
-                                                                <span>
-                                                                    <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.subLevelIcon}/>
-                                                                </span>
-                                                                <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
+                                                                    <span>
+                                                                        <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.subLevelIcon}/>
+                                                                    </span>
+                                                                    <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
                                                                 </div>
                                                             </Neos.Fusion:Loop>
                                                         </div>
