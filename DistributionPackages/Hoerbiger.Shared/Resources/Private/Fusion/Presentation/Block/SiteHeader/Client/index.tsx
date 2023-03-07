@@ -31,6 +31,9 @@ export const Client = ({targetUri, labels, disableItems}: ClientProps): JSX.Elem
 				url.searchParams.append("searchTerm", query);
 			}
 
+			disableItems.forEach((element) => {
+				element.classList.add("menuToggle:flex");
+			});
 			close();
 			window.location.href = url.toString();
 		}
