@@ -133,10 +133,10 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             >
                                 <div class="">
                                     <div class="grid grid-col-1 gap-2 absolute">
-                                        <div class="absolute group z-50 hover:border p-ch hover:bg-light -top-[21px]">
+                                        <div class="absolute group z-50 p-ch hover:bg-light -top-[21px]">
                                             <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                                 <div class={[
-                                                    "flex items-center justify-center font-sans-bold text-center cursor-pointer group-hover:border-b"
+                                                    "flex items-center justify-center font-sans-bold text-center cursor-pointer px-[30px]  "
                                                 ]}
                                                     @if={item.isActive}
                                                 >
@@ -149,13 +149,13 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                         <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.rootLevelIcon}/>
                                                     </Neos.Fusion:Augmenter>
                                                 </div>
-                                                <div class="hidden group-hover:block z-50" @if.1={item.isActive}>
+                                                <div class="hidden group-hover:block z-50 border-b border-t px-[30px]" @if.1={item.isActive}>
                                                     <Neos.Fusion:Loop
                                                         itemName="inactiveItem"
                                                         items={presentationObject.languageNavigation}
                                                         @if.1={item.isActive}
                                                     >
-                                                        <div class="border-b" >
+                                                        <div class="" >
                                                             <div class={[
                                                                 "flex items-center justify-center font-sans-bold text-center top-full",
                                                                 "text-neutral  hover:text-standard w-fit"
