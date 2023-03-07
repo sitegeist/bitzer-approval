@@ -15,11 +15,14 @@ interface NeosUiNodeEvent extends Event {
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
 		const slider = $node.querySelector("[data-select='slider']");
-		const DURATION = 6000;
+		const DURATION = 8000;
 		let timeout = 0;
 		const isInNeosBackend = ("neos" in window);
 
 		const jumpToNextContainer = $node.querySelector("[data-jump-to-end]") as HTMLElement;
+		const textAnimationItems = $node.querySelectorAll("[data-fade-in-container]") as NodeListOf<HTMLElement>;
+
+		doAnimations(textAnimationItems, 0);
 
 		if (slider instanceof HTMLElement) {
 			jumpToNextContainer.addEventListener("click", () => {
@@ -47,6 +50,8 @@ export default ($node: Element): void => {
 							video.pause();
 							video.load();
 							video.play();
+
+							doAnimations(textAnimationItems, instance.track.details.rel);
 						}
 
 						if (!isInNeosBackend) {
@@ -90,4 +95,10 @@ export default ($node: Element): void => {
 		}
 
 	}
+};
+
+export const doAnimations = (animationItems: NodeListOf<HTMLElement>, active: number): void => {
+	animationItems.forEach((slide, index) => {
+		slide.classList.toggle("fade-in-text", active === index);
+	});
 };
