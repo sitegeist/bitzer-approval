@@ -30,24 +30,29 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
             data-site-header-variant={presentationObject.variant}
         >
             <div
+                class="bg-header-transparent h-[200px] absolute top-0 w-full z-[60]"
+                @if.1={(presentationObject.variant.value == 'transparent')}
+            >
+            </div>
+            <div
                 class="h-header"
                 @if.1={presentationObject.variant.value == 'regular'}
             ></div>
             <header
                 class={[
-                    "w-full z-header fixed top-0 h-header",
+                    "w-full fixed z-header top-0 h-header",
                     (presentationObject.variant.value == 'regular') && "text-light-contrastTransparent bg-light",
-                    (presentationObject.variant.value == 'transparent') && "text-light hover:text-light-contrastTransparent hover:bg-light hover:bg-none"
+                    (presentationObject.variant.value == 'transparent') && "text-light navMain"
                 ]}
             >
                 <div
                     class={[
                         "max-w-content-full mx-auto px-md flex ",
-                        "flex items-center justify-between h-full"
+                        "flex items-center justify-between h-full hover:z-[-1]"
                     ]}
                 >
                     <!-- HOMELINK + LOGO -->
-                    <div class="w-[170px] flex-shrink-0 absolute ">
+                    <div class="w-[170px] flex-shrink-0">
                         <a
                             class="contents w-[200px]"
                             id="logoLink"
@@ -60,14 +65,19 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </a>
                     </div>
 
-                    <nav class="flex items-center justify-end space-x-xs w-full h-full">
+                    <nav class="flex items-center justify-end w-full h-full">
                         <!-- MAINNAVIGATION -->
                         <div
-                            class="hidden menuToggle:flex space-x-xs font-sans-bold z-20 hover:z-50 w-full h-full ml-2xl"
+                            class="hidden menuToggle:flex font-sans-bold w-full h-full justify-center pl-3ch"
                             data-search="visible"
                         >
                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
-                                <div class="group z-10 hover:z-20 flex">
+                                <div
+                                    class={[
+                                        "group flex navItem",
+                                        !iterator.isLast && "pr-xs"
+                                    ]}
+                                >
                                     <div class="grid gap-x-ch-xs grid-cols-2-1fr-icon items-center leading-tight">
                                         <div
                                             data-touch-hover="1"
@@ -90,14 +100,20 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     <div
                                         @if.1={item.subItems}
                                         class={[
-                                            "hidden absolute left-0 px-1/2 pb-ch z-20 w-full top-header",
-                                            "group-hover:block",
+                                            "h-[0px] overflow-hidden absolute left-0 w-full top-0 z-[-1]",
+                                            "group-hover:h-nav",
                                             "pointer-events-none duration-500 ease-out group-hover:pointer-events-auto",
                                             "bg-light"
                                         ]}
                                     >
-                                        <div class="max-w-content-full pl-3xl mx-auto">
-                                            <div class="grid grid-cols-3 my-sm max-w-content-full">
+                                        <div class="h-header">
+                                        </div>
+                                        <div class="w-fit mx-auto">
+                                            <div class={[
+                                                "grid my-sm gap-lg",
+                                                (Array.length(item.subItems) == 2)  && "grid-cols-2",
+                                                (Array.length(item.subItems) == 3) && "grid-cols-3"
+                                            ]}>
                                                 <Neos.Fusion:Loop items={item.subItems} itemKey={"columnKey"}>
                                                         <div>
                                                             <Neos.Fusion:Loop items={item.subItems}>
@@ -124,7 +140,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             </Neos.Fusion:Loop>
                         </div>
 
-                        <div class="flex items-center space-x-2 z-30">
+                        <div class="flex items-center z-30">
 
                             <!-- LANGUAGES -->
                             <div
@@ -132,7 +148,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                 data-search="visible"
                             >
                                 <div class="">
-                                    <div class="grid grid-col-1 gap-2 absolute">
+                                    <div class="grid grid-col-1 gap-2 absolute hover:text-light-contrastTransparent">
                                         <div class="absolute group z-50 p-ch hover:bg-light -top-[28px]">
                                             <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                                 <div class={[

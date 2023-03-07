@@ -33,14 +33,14 @@ export default ($node: Element): void => {
 		// scroll Verhalten
 		if (headerVariant === "transparent") {
 			const activeLinks = header.querySelector("[data-active-main-link]") as HTMLElement;
-			header.classList.add("bg-header-transparent");
+			//header.classList.add("bg-header-transparent");
 			header.classList.add("[&_input]:text-light");
-			header.classList.add("[&_input]:hover:text-neutral-contrast");
+			//header.classList.add("[&_input]:hover:text-neutral-contrast");
 			// ... wenn page nicht oben beginnt
 			if (window.scrollY > 0) {
 				header.classList.add("bg-header");
 				header.classList.remove("[&_input]:text-light");
-				header.classList.remove("bg-header-transparent");
+				//header.classList.remove("bg-header-transparent");
 				activeLinks?.classList.add("text-neutral-contrast");
 			}
 
@@ -50,10 +50,10 @@ export default ($node: Element): void => {
 				if (offset > 100) {
 					header.classList.add("bg-header");
 					header.classList.remove("[&_input]:text-light");
-					header.classList.remove("bg-header-transparent");
+					//header.classList.remove("bg-header-transparent");
 					activeLinks?.classList.add("text-neutral-contrast");
 				} else if (offset === 0) {
-					header.classList.add("bg-header-transparent");
+					//header.classList.add("bg-header-transparent");
 					header.classList.remove("bg-header");
 					header.classList.add("[&_input]:text-light");
 					activeLinks?.classList.remove("text-neutral-contrast");
@@ -107,6 +107,19 @@ export default ($node: Element): void => {
 			});
 
 		});
+
+		const navMain = $node.querySelector(".navMain") as HTMLElement;
+		const navItems = $node.querySelectorAll(".navItem") as NodeListOf<HTMLElement>;
+
+		navItems.forEach(item => {
+			item.addEventListener('mouseenter', () => {
+				navMain.classList.add('text-light-contrastTransparent');
+			})
+
+			item.addEventListener('mouseleave', () => {
+				navMain.classList.remove('text-light-contrastTransparent');
+			})
+		})
 	}
 };
 
