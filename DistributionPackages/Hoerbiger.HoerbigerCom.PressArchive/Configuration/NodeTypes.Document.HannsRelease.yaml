@@ -1,0 +1,51 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.DummyText': true
+          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
+  ui:
+    icon: header
+    label: 'HANNS'
+    inspector:
+      groups:
+        magazin:
+          label: 'Magazine'
+          icon: 'file-invoice'
+          position: 'before image'
+  properties:
+    datePublished:
+      type: DateTime
+      ui:
+        label: 'Publikationsdatum'
+        inspector:
+          group: magazin
+    edition:
+      type: string
+      ui:
+        label: 'Ausgabe'
+        reloadIfChanged: true
+        inspector:
+          group: magazin
+    searchType:
+      search:
+        indexing: '${"PressRelease"}'

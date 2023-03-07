@@ -175,6 +175,22 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage);
     }
 
+    public function forYearbookRelease(TraversableNodeInterface $site, TraversableNodeInterface $yearbookRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($yearbookRelease, $inBackend);
+
+        return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage);
+    }
+
+    public function forHannsRelease(TraversableNodeInterface $site, TraversableNodeInterface $hannsRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($hannsRelease, $inBackend);
+
+        return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage);
+    }
+
     public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, ContentContext $subgraph, SlotInterface $stage): PageInterface
     {
         $identity = function (SlotInterface $slot) {
