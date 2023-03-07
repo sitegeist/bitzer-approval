@@ -900,7 +900,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $text = new Grid(
             GridVariant::iconLeft(),
             Collection::fromIterable([
-                new Icon('shared', 'arrowRight', IconSize::size_1_5()),
+                new Tag(
+                    'div',
+                    TagVariant::from('heightFull'),
+                    new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                ),
                 new Text(
                     TextVariant::brandContrastBold(),
                     Editable::fromNodeProperty($sliderItemNode, "text"),
