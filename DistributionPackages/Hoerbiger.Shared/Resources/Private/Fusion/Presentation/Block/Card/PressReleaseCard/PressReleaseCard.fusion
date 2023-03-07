@@ -10,6 +10,12 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                     presentationObject={presentationObject.subheader}
                 />
             </div>
+            <div class="uppercase text-xs font-sans-bold">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    @if.1={presentationObject.datePublished}
+                    presentationObject={presentationObject.datePublished}
+                />
+            </div>
             <div class="text-2xl md:text-4xl font-sans-bold">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     @if.1={presentationObject.header}

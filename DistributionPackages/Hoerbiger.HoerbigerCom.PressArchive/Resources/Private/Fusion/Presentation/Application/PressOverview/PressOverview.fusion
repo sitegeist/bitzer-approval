@@ -1,0 +1,18 @@
+prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.PressOverview) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\PressArchive\\Presentation\\Application\\PressOverview\\PressOverviewInterface'
+
+    @styleguide {
+        title = 'PressOverview'
+
+        props {
+            metaCard = '- Add Slot Content -'
+            cards = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`<dl>
+        <div>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.cards} />
+        </div>
+    </dl>`
+}

@@ -3,3 +3,4 @@ Neos:
     defaultContext:
       PressArchive.Page: Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page\PageFactory
       PressArchive.ContentSlot: Hoerbiger\HoerbigerCom\PressArchive\Integration\ContentSlotFactory
+      PressArchive.PressOverview: Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverviewFactory

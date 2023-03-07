@@ -1,7 +1,7 @@
 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressArchive':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
     'Hoerbiger.Shared:Mixin.Searchable': true
   constraints:
     nodeTypes:
