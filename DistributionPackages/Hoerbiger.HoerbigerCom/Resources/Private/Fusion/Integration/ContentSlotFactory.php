@@ -920,7 +920,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     Editable::fromNodeProperty($sliderItemNode, "headline")
                 )
                 : null,
-            $sliderItemNode->getProperty("link__target")
+            $sliderItemNode->getProperty("link__target") && !$inBackend
                 ? (new LinkFactory())->forLinkWithContent($sliderItemNode, $subgraph, $text)
                 : $text,
             $figure,

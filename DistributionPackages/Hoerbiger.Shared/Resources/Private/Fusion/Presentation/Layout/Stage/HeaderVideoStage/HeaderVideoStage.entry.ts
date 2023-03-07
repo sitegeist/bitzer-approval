@@ -38,7 +38,7 @@ export default ($node: Element): void => {
 				slider,
 				{
 					loop: true,
-					drag: (!isInNeosBackend),
+					drag: false,
 					defaultAnimation: {
 						duration: 1
 					},
@@ -63,6 +63,13 @@ export default ($node: Element): void => {
 					}
 				},
 			);
+
+			if (!isInNeosBackend) {
+				if (timeout) {
+					window.clearTimeout(timeout);
+				}
+				timeout = window.setTimeout(keenSlider.next, DURATION);
+			}
 
 			if (isInNeosBackend) {
 				slider.setAttribute("data-__neos-insertion-anchor", "");
