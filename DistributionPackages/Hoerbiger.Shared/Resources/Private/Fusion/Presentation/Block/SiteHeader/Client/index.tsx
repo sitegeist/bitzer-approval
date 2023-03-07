@@ -3,7 +3,6 @@ import {useMediaQuery} from "beautiful-react-hooks";
 import cx from "classnames";
 
 import {StampedeIcon} from "../../../Application/Components";
-import {useHandlerOnOuterClick} from "../../../Application/Utils/Hooks";
 
 type ClientProps = {
 	targetUri: string;
@@ -14,12 +13,12 @@ type ClientProps = {
 }
 export const Client = ({targetUri, labels, disableItems}: ClientProps): JSX.Element => {
 	const isTooSmallForExpandedView = useMediaQuery("(max-width: 780px)");
-	const [isExpanded, setIsExpandend] = React.useState(false);
+	const [isExpanded, setIsExpanded] = React.useState(false);
 	const isRedirecting = React.useRef(false);
 	const [query, setQuery] = React.useState("");
 
-	const close = () => setIsExpandend(false);
-	const node = useHandlerOnOuterClick(close);
+	const close = () => setIsExpanded(false);
+	const node = useHandlerOnOuterClick(close, disableItems);
 
 	const redirectToSearchPage = () => {
 		if (!isRedirecting.current) {
@@ -56,7 +55,7 @@ export const Client = ({targetUri, labels, disableItems}: ClientProps): JSX.Elem
 		isTooSmallForExpandedView
 			? redirectToSearchPage
 			: () => {
-				setIsExpandend(state => !state);
+				setIsExpanded(state => !state);
 				disableItems.forEach((element) => {
 					element.classList.remove("menuToggle:flex");
 				});
@@ -106,4 +105,30 @@ export const Client = ({targetUri, labels, disableItems}: ClientProps): JSX.Elem
 			}
 		</div>
 	);
+};
+
+export const useHandlerOnOuterClick = (handler: () => void, disableItems: NodeListOf<HTMLElement>): React.RefObject<HTMLDivElement> => {
+	const node = React.useRef(null);
+
+	const handleClick = (e: MouseEvent) => {
+		const $node = node.current as HTMLElement|null;
+
+		if ($node !== null && !$node.contains(e.target as HTMLElement)) {
+			handler();
+
+			disableItems.forEach((element) => {
+				element.classList.add("menuToggle:flex");
+			});
+		}
+	};
+
+	React.useEffect(() => {
+		document.addEventListener("mousedown", handleClick);
+
+		return () => {
+			document.removeEventListener("mousedown", handleClick);
+		};
+	}, []);
+
+	return node;
 };
