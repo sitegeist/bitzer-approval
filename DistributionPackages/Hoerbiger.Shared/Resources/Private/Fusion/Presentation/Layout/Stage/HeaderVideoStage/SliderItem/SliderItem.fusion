@@ -2,11 +2,14 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage.SliderItem) < prototype
     @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\HeaderVideoStage\\SliderItem\\SliderItemInterface'
 
     renderer = afx`
-        <div class={[
-            "[Layout.Stage.HeaderVideoStage.SliderItem]",
-            "w-full h-screen",
-            "keen-slider__slide data-keen-slider-pe w-full min-w-full"
-        ]}>
+        <div
+            data-slider-slide
+            class={[
+                "[Layout.Stage.HeaderVideoStage.SliderItem]",
+                "keen-slider__slide data-keen-slider-pe",
+                "w-full min-w-full h-screen"
+            ]}
+        >
             <div class="h-full">
                 <div class="relative h-full">
                     <div class="hidden md:flex h-full">
