@@ -19,7 +19,18 @@ export default ($node: Element): void => {
 		let timeout = 0;
 		const isInNeosBackend = ("neos" in window);
 
+		const jumpToNextContainer = $node.querySelector("[data-jump-to-end]") as HTMLElement;
+
 		if (slider instanceof HTMLElement) {
+			jumpToNextContainer.addEventListener("click", () => {
+				const scrollPositionY = $node.offsetHeight;
+
+				const header = document.querySelector("header") as HTMLElement;
+				const headerHeight = header?.offsetHeight ?? 0;
+
+				window.scrollTo({ top: scrollPositionY - headerHeight, left: 0, behavior: "smooth" });
+			});
+
 			const keenSlider = new KeenSlider(
 				slider,
 				{
@@ -31,10 +42,7 @@ export default ($node: Element): void => {
 					detailsChanged: (instance) => {
 						const currentSlide = instance.slides[instance.track.details.rel];
 						if (currentSlide instanceof HTMLElement) {
-							console.log(currentSlide, "currentSlide");
 							const video = currentSlide.querySelector("video") as HTMLVideoElement;
-							console.log(video, "video");
-							console.log(video.currentTime, "video.currentTime");
 
 							video.pause();
 							video.load();

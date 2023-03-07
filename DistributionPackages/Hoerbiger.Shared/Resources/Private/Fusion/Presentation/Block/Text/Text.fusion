@@ -22,6 +22,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.isDefault && "prose-brand",
             presentationObject.variant.isCentered && "prose-brand-contrast font-sans-regular",
             presentationObject.variant.isBrandContrast && "prose-brand-contrast",
+            presentationObject.variant.isBrandContrastBold && "prose-brand-contrast font-sans-bold text-lg",
             presentationObject.variant.isNeutralContrast && "prose-neutral-contrast",
             presentationObject.variant.isDecorativeContrast && "prose-decorative-contrast",
             presentationObject.variant.isTransparentContrast && "prose-transparent-contrast",

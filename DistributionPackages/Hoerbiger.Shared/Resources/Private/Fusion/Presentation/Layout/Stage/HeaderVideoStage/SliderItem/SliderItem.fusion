@@ -20,7 +20,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage.SliderItem) < prototype
                     </div>
                     <div class="absolute inset-0 w-full h-full bg-sliderItem"></div>
 
-                    <div class="absolute bottom-0 left-0 pl-lg pb-md w-full space-y-sm">
+                    <div class="absolute bottom-0 left-0 pl-lg pb-md w-full space-y-sm [&_svg]:text-light">
                         <div class="flex space-y-xs flex-col">
                             <Hoerbiger.Shared:Block.Headline
                                 @if.1={presentationObject.headline}

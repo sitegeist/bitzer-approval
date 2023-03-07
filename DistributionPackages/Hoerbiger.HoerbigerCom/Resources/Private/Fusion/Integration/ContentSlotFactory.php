@@ -897,10 +897,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             $imageSource
         );
 
-        $text = new Text(
-            TextVariant::brandContrast(),
-            Editable::fromNodeProperty($sliderItemNode, "text"),
-            false
+        $text = new Grid(
+            GridVariant::iconLeft(),
+            Collection::fromIterable([
+                new Icon('shared', 'arrowRight', IconSize::size_1_5()),
+                new Text(
+                    TextVariant::brandContrastBold(),
+                    Editable::fromNodeProperty($sliderItemNode, "text"),
+                    false
+                )
+            ], function (SlotInterface $slot) {
+                return $slot;
+            })
         );
 
         return new SliderItem(
