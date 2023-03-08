@@ -77,9 +77,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
             ),
-            $inBackend || $pressRelease->getProperty('alternativeHeadline')
-                ? Editable::fromNodeProperty($pressRelease, 'alternativeHeadline')
-                : null,
+            null,
             !$pressVariant->getIsNews()
                 ? new Text(
                     TextVariant::lightContrast(),
