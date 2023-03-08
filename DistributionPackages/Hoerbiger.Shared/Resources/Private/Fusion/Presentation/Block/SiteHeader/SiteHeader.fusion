@@ -110,7 +110,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                         <div class="w-fit mx-auto">
                                             <div class={[
                                                 "grid my-sm gap-lg",
-                                                (Array.length(item.subItems) == 2)  && "grid-cols-2",
+                                                (Array.length(item.subItems) == 2) && "grid-cols-2",
                                                 (Array.length(item.subItems) == 3) && "grid-cols-3"
                                             ]}>
                                                 <Neos.Fusion:Loop items={item.subItems} itemKey={"columnKey"}>
@@ -164,21 +164,24 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                         <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.rootLevelIcon}/>
                                                     </Neos.Fusion:Augmenter>
                                                 </div>
-                                                <div class="hidden group-hover:block z-50 border-t px-ch py-[6px]" @if.1={item.isActive}>
+                                                <div class="hidden group-hover:block z-50" @if.1={item.isActive}>
                                                     <Neos.Fusion:Loop
                                                         itemName="inactiveItem"
                                                         items={presentationObject.languageNavigation}
                                                         @if.1={item.isActive}
                                                     >
-                                                        <div class="" >
-                                                            <div class={[
-                                                                "flex items-center justify-center font-sans-bold text-center top-full",
-                                                                "text-neutral  hover:text-standard w-fit"
-                                                            ]}
-                                                                @if.1={!inactiveItem.isActive}
+                                                        <div
+                                                            class="border-t px-ch py-[6px]"
+                                                            @if.1={!inactiveItem.isActive}
+                                                        >
+                                                            <div
+                                                                class={[
+                                                                    "flex items-center justify-center font-sans-bold text-center top-full",
+                                                                    "text-neutral hover:text-standard w-full"
+                                                                ]}
                                                             >
                                                                 <Neos.Fusion:Augmenter
-                                                                    class="w-full h-full flex items-center justify-center"
+                                                                    class="w-full h-full flex items-center justify-start"
                                                                 >
                                                                     <Hoerbiger.Shared:Block.Link presentationObject={inactiveItem.link}/>
                                                                 </Neos.Fusion:Augmenter>
@@ -186,7 +189,6 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                         </div>
                                                     </Neos.Fusion:Loop>
                                                 </div>
-
                                             </Neos.Fusion:Loop>
                                         </div>
                                     </div>
@@ -214,7 +216,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             <!-- OFFCANVAS -->
                             <div
                                 id="offcanvas"
-                                class="flex menuToggle:hidden  w-touch h-touch sm:w-[100px] sm:h-[100px] relative group z-30"
+                                class="flex menuToggle:hidden w-touch h-touch sm:w-[100px] sm:h-[100px] relative group z-30"
                             >
                                 <a
                                     href="#offcanvas"
@@ -320,7 +322,6 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </div>
                     </nav>
                 </div>
-
             </header>
         </div>
     `
