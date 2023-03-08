@@ -22,7 +22,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage.SliderItem) < prototype
 
                     <div
                         data-fade-in-container
-                        class="absolute bottom-0 left-0 px-lg pb-2xl md:pb-md w-full space-y-sm [&_svg]:text-light fade-in-text"
+                        class="absolute bottom-0 left-0 px-lg pb-2xl md:pb-lg w-full space-y-sm [&_svg]:text-light animate-fade-in-text"
                     >
                         <div class="flex space-y-lg md:space-y-xs flex-col">
                             <Hoerbiger.Shared:Block.Headline

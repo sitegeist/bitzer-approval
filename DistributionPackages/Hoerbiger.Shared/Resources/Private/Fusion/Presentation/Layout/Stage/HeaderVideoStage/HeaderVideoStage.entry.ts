@@ -106,6 +106,6 @@ export default ($node: Element): void => {
 
 export const doAnimations = (animationItems: NodeListOf<HTMLElement>, active: number): void => {
 	animationItems.forEach((slide, index) => {
-		slide.classList.toggle("fade-in-text", active === index);
+		slide.classList.toggle("animate-fade-in-text-translate", active === index);
 	});
 };

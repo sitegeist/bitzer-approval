@@ -27,6 +27,7 @@ final class HeadlineColor implements PseudoEnumInterface
     const COLOR_LITE = 'lite';
     const COLOR_LITE_CONTRAST = 'liteContrast';
     const COLOR_SERVICE_CONTRAST = 'serviceContrast';
+    const COLOR_NEUTRAL_CONTRAST = 'neutralContrast';
 
     /**
      * @var array<string,self>|self[]
@@ -54,6 +55,7 @@ final class HeadlineColor implements PseudoEnumInterface
                 && $string !== self::COLOR_LITE
                 && $string !== self::COLOR_LITE_CONTRAST
                 && $string !== self::COLOR_SERVICE_CONTRAST
+                && $string !== self::COLOR_NEUTRAL_CONTRAST
             ) {
                 throw HeadlineColorIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -128,6 +130,11 @@ final class HeadlineColor implements PseudoEnumInterface
         return self::from(self::COLOR_SERVICE_CONTRAST);
     }
 
+    public static function neutralContrast(): self
+    {
+        return self::from(self::COLOR_NEUTRAL_CONTRAST);
+    }
+
     public function getIsBrand(): bool
     {
         return $this->value === self::COLOR_BRAND;
@@ -178,6 +185,11 @@ final class HeadlineColor implements PseudoEnumInterface
         return $this->value === self::COLOR_SERVICE_CONTRAST;
     }
 
+    public function getIsNeutralContrast(): bool
+    {
+        return $this->value === self::COLOR_NEUTRAL_CONTRAST;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -193,7 +205,8 @@ final class HeadlineColor implements PseudoEnumInterface
             self::from(self::COLOR_EXPERIENCE_CONTRAST),
             self::from(self::COLOR_LITE),
             self::from(self::COLOR_LITE_CONTRAST),
-            self::from(self::COLOR_SERVICE_CONTRAST)
+            self::from(self::COLOR_SERVICE_CONTRAST),
+            self::from(self::COLOR_NEUTRAL_CONTRAST)
         ];
     }
 

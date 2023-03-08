@@ -69,6 +69,13 @@
     headline:
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': []
+    teaser_text_headline:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
     video__source__desktop:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:

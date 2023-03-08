@@ -27,6 +27,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
     const VARIANT_HALF_WITH = 'halfWidth';
     const VARIANT_FULL_VIEW_HEIGHT = 'fullViewHeight';
+    const VARIANT_SMALL_TEXT = 'smallText';
 
     /**
      * @var array<string,self>|self[]
@@ -56,7 +57,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
-                && $string !== self::VARIANT_HALF_WITH) {
+                && $string !== self::VARIANT_HALF_WITH
+                && $string !== self::VARIANT_SMALL_TEXT) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -135,6 +137,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_HALF_WITH);
     }
 
+    public static function smallText(): self
+    {
+        return self::from(self::VARIANT_SMALL_TEXT);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -205,6 +212,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_HALF_WITH;
     }
 
+    public function getIsSmallText(): bool
+    {
+        return $this->value === self::VARIANT_SMALL_TEXT;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -224,7 +236,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM),
-            self::from(self::VARIANT_HALF_WITH)
+            self::from(self::VARIANT_HALF_WITH),
+            self::from(self::VARIANT_SMALL_TEXT)
         ];
     }
 

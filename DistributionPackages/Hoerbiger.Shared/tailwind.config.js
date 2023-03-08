@@ -10,6 +10,7 @@ const MIN_TOUCH = '48px';
 const OFFCANVAS_WIDTH = '340px';
 const HEADER_HEIGHT = 127;
 const NAV_HEIGHT = `${HEADER_HEIGHT + 340}px`;
+const HOMEPAGE_TEASER_TEXT_WIDTH = '800px';
 
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
@@ -61,6 +62,7 @@ module.exports = {
 				darker: '#8F8F8F',
 				contrast: 'rgba(0, 0, 0, .85)',
 				transparent: 'rgba(240, 240, 240, .95)',
+				grey: '#8E969D'
 			},
 			standard: {
 				DEFAULT: '#1B365D'
@@ -130,6 +132,10 @@ module.exports = {
 			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
 			'serif-regular': ['Times New Roman', 'Times', 'serif'],
+			// @TODO ... korrekt Schrift fehlt noch, erst einmal nur DUMMY
+			'fira-pro-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
+			'fira-pro-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
+			'fira-pro-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
 		},
 
 		screens: {
@@ -296,6 +302,7 @@ module.exports = {
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
 				touch: MIN_TOUCH,
+				'small-text': `min(${HOMEPAGE_TEASER_TEXT_WIDTH}, 100vw)`,
 			},
 
 			width: {
@@ -334,10 +341,6 @@ module.exports = {
 			},
 
 			gap: {
-				...SPACES,
-			},
-
-			inset: {
 				...SPACES,
 			},
 
@@ -391,6 +394,62 @@ module.exports = {
 
 			backgroundImage: {
 				'sliderItem': 'linear-gradient(17.54deg, #000000 -7.11%, rgba(0, 0, 0, 0.0001) 47.28%);'
+			},
+
+			animation: {
+				'fade-in-text': 'fadeIn 3s',
+				'fade-out-text': 'fadeOut 3s',
+				'fade-in-text-translate': 'fadeInWithTranslate 3s',
+				'fade-out-text-translate': 'fadeOutWithTranslate 3s',
+			},
+
+			keyframes: {
+				'fadeIn': {
+					'0%': {
+						opacity: 0,
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'100%': {
+						opacity: 1
+					}
+				},
+				'fadeOut': {
+					'100%': {
+						opacity: 0,
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'0%': {
+						opacity: 1
+					}
+				},
+				'fadeInWithTranslate': {
+					'0%': {
+						opacity: 0,
+						transform: 'translateX(-50px)'
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'100%': {
+						opacity: 1,
+					}
+				},
+				'fadeOutWithTranslate': {
+					'100%': {
+						opacity: 0,
+						transform: 'translateX(-50px)'
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'00%': {
+						opacity: 1
+					}
+				}
 			}
 		},
 	},
