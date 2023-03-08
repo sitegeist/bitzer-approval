@@ -10,19 +10,9 @@
       constraints:
         nodeTypes:
           '*': false
-          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
-          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
-          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
-          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
-          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
           'Hoerbiger.HoerbigerCom:Content.Image': true
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
-          'Hoerbiger.HoerbigerCom:Content.Text': true
-          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-          'Hoerbiger.HoerbigerCom:Content.DummyText': true
-          'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
-          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
-          'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithMetaText': true
   ui:
     icon: header
     label: 'HANNS'

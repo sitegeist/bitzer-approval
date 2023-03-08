@@ -124,6 +124,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forTileNavigation($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
                 return $this->forTextNode($contentNode, $subgraph, $inBackend, $theme);
+            case 'Hoerbiger.HoerbigerCom:Content.TextWithMetaText':
+                return $this->forTextWithMetaTextNode($contentNode, $subgraph, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
                 return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
@@ -268,6 +270,52 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
                         : null
                 ]), $identity)
+            )
+        );
+    }
+
+    public function forTextWithMetaTextNode(TraversableNodeInterface $textWithMetaTextNode, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::tight(),
+            new Grid(
+                GridVariant::twoColumns(),
+                Collection::fromIterable([
+                    new ContentContainer(
+                        ContentContainerVariant::regular(),
+                        $inBackend || $textWithMetaTextNode->getProperty('meta_text')
+                            ? new Text(
+                                TextVariant::lightContrast(),
+                                Editable::fromNodeProperty($textWithMetaTextNode, 'meta_text'),
+                                false
+                            )
+                            : Value::fromString('')
+                    ),
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $textWithMetaTextNode->getProperty('headline')
+                                ? new Headline(
+                                    HeadlineSize::large(),
+                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                                    HeadlineType::h2(),
+                                    Editable::fromNodeProperty($textWithMetaTextNode, 'headline')
+                            )
+                                : null,
+                            $inBackend || $textWithMetaTextNode->getProperty('text')
+                                ? new Text(
+                                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
+                                    Editable::fromNodeProperty($textWithMetaTextNode, 'text'),
+                                    false
+                            )
+                                : null
+                        ]), $identity)
+                    )]
+                )
             )
         );
     }
