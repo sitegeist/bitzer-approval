@@ -85,7 +85,9 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
 
                 $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
 
-                $figure = $imageSource && !$pressVariant->getIsNews()
+                $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
+
+                $figure = $imageSource && $showImage
                     ? $this->figureFactory->forPressReleaseCard($imageSource)
                     : null;
 

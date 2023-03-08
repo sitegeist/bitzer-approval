@@ -56,6 +56,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
         $datePublished = $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime();
 
+        $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
+
         return new StackStage(
             StageVariant::stack(),
             new MetaHeadline(
@@ -85,7 +87,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                     false
                 )
                 : null,
-            $imageSource
+            $imageSource && $showImage
                 ? $this->figureFactory->forStackStage($imageSource)
                 : null,
             null
