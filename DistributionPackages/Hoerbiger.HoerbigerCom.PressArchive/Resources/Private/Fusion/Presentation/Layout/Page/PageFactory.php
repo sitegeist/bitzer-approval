@@ -136,14 +136,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 array_filter([
                     new ScrollToTop(),
                     new ContentContainer(
-                        ContentContainerVariant::regularX(),
-                        $breadcrumb
-                    ),
-                    new ContentContainer(
                         ContentContainerVariant::regularStageAfterBreadcrumb(),
                         $stage
                     ),
-                    Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                    Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+                    new ContentContainer(
+                        ContentContainerVariant::regularX(),
+                        $breadcrumb
+                    ),
                 ]),
                 $identity
             )
