@@ -9,11 +9,14 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverviewFactory;
+use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariant;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
+use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
@@ -117,7 +120,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, ContentContext $subgraph, SlotInterface $stage): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, Node $document, ContentContext $subgraph, SlotInterface $stage): PageInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -125,6 +128,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
+
+        $pageVariant = PressVariant::fromNode($document);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -139,6 +144,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         ContentContainerVariant::regularStageAfterBreadcrumb(),
                         $stage
                     ),
+                    ! $pageVariant->getIsNews()
+                        ? new ContentContainer(
+                            ContentContainerVariant::regular(),
+                            new Separator(SeparatorVariant::bold())
+                        )
+                        : null,
                     Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
                     new ContentContainer(
                         ContentContainerVariant::regularX(),
