@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press;
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.
  */
 
+use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
@@ -43,6 +44,28 @@ final class PressVariant implements PseudoEnumInterface
         }
 
         return self::$instances[$string];
+    }
+
+    public static function fromNode(NodeInterface $node): self
+    {
+        $pressVariant = self::from('news');
+
+        switch ((string)$node->getNodeType()) {
+            case 'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease':
+                $pressVariant = self::from('hanns');
+                break;
+            case 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease':
+                $pressVariant = self::from('yearbook');
+                break;
+            case 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease':
+                $pressVariant = self::from('news');
+                break;
+            default:
+                throw new \Exception((string)$node->getNodeType() . ' is not a press release page!', );
+        }
+
+        return $pressVariant;
+
     }
 
     public static function news(): self

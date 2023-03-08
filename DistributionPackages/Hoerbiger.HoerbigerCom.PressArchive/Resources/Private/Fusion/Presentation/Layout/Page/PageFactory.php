@@ -22,6 +22,7 @@ use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
@@ -92,7 +93,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forPressRelease(TraversableNodeInterface $site, TraversableNodeInterface $pressRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forPressRelease(TraversableNodeInterface $site, Node $pressRelease, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
@@ -100,7 +101,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage);
     }
 
-    public function forYearbookRelease(TraversableNodeInterface $site, TraversableNodeInterface $yearbookRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forYearbookRelease(TraversableNodeInterface $site, Node $yearbookRelease, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($yearbookRelease, $inBackend);
@@ -108,7 +109,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage);
     }
 
-    public function forHannsRelease(TraversableNodeInterface $site, TraversableNodeInterface $hannsRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forHannsRelease(TraversableNodeInterface $site, Node $hannsRelease, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
         $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($hannsRelease, $inBackend);

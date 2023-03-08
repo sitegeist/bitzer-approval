@@ -81,22 +81,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
         $pressReleaseCards = array_map(
             function (Node $pressRelease) use ($inBackend, $labels): Link
             {
-                /** @var PressReleaseCardVariant $pressVariant */
-                $pressVariant = PressVariant::from('news');
-
-                switch ((string)$pressRelease->getNodeType()) {
-                    case 'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease':
-                        $pressVariant = PressVariant::from('hanns');
-                        break;
-                    case 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease':
-                        $pressVariant = PressVariant::from('yearbook');
-                        break;
-                    case 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease':
-                        $pressVariant = PressVariant::from('news');
-                        break;
-                    default:
-                        throw PressVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants((string)$pressRelease->getNodeType());
-                }
+                $pressVariant = PressVariant::fromNode($pressRelease);
 
                 $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
 
