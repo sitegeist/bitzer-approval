@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Stage\StageFactory as CatalogStageFactory;
+use Hoerbiger\Shared\Domain\Sailor;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
@@ -162,6 +163,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
+
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(

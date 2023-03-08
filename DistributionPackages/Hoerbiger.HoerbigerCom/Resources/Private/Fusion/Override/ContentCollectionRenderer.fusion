@@ -2,4 +2,9 @@ prototype(Neos.Neos:ContentCollectionRenderer) {
     itemRenderer {
         default.type = ${String.split(q(node).property('_nodeType.name'), ':')[0] + ':ContentSlot'}
     }
+
+    itemRenderer.@process.addAnchor = Neos.Fusion:Augmenter {
+        id = ${q(node).property('anchorID')}
+    }
+    itemRenderer.@process.addAnchor.@if.hasAnchor = ${q(node).property('anchorID')}
 }

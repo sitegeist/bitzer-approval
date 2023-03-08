@@ -8,16 +8,24 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
+use Hoerbiger\Shared\Domain\Anchor;
+use Hoerbiger\Shared\Domain\Sailor;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -84,6 +92,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ? $this->slidableFactory->forApplicationWorld($applicationWorld, $inBackend)
             : $this->stageFactory->forApplicationWorld($applicationWorld, $inBackend);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($applicationWorld);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $applicationWorld,
@@ -91,6 +101,23 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => new Link(
+                                LinkVariant::label(),
+                                new Uri('#' . $anchor->getIdentifier()),
+                                LinkTarget::self(),
+                                null,
+                                Value::fromString($anchor->getLabel()),
+                                null
+                            ),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new scrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),

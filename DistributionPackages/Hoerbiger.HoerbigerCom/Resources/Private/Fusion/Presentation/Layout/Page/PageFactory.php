@@ -5,11 +5,19 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchFormFactory;
+use Hoerbiger\Shared\Domain\Anchor;
+use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTopFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
@@ -28,6 +36,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -242,6 +251,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
@@ -249,6 +260,23 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => new Link(
+                                LinkVariant::label(),
+                                new Uri('#' . $anchor->getIdentifier()),
+                                LinkTarget::self(),
+                                null,
+                                Value::fromString($anchor->getLabel()),
+                                null
+                            ),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new scrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),

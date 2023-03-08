@@ -2,3 +2,18 @@
   abstract: true
   superTypes:
     'Neos.Neos:Content': true
+  ui:
+    inspector:
+      groups:
+        anchor:
+          label: 'Anker'
+          icon: 'anchor'
+          position: start 0
+  properties:
+    anchorID:
+      type: string
+      ui:
+        label: 'Anker-Bezeichnung'
+        reloadPageIfChanged: true
+        inspector:
+          group: 'anchor'

@@ -5,8 +5,10 @@ namespace Hoerbiger\Shared;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Application\PublishWatch;
 use Hoerbiger\Shared\Infrastructure\AssetIndexingManager;
 use Hoerbiger\Shared\Infrastructure\AssetMetadataManager;
+use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\Flow\Configuration\ConfigurationManager;
 use Neos\Flow\Core\Booting\Sequence;
 use Neos\Flow\Core\Booting\Step;
@@ -28,6 +30,13 @@ class Package extends BasePackage
                     $package->registerAssetIndexingSlots($bootstrap);
                 }
             }
+        );
+
+        $dispatcher->connect(
+            Workspace::class,
+            'beforeNodePublishing',
+            PublishWatch::class,
+            'watchForRedundantContentElementIdentifier'
         );
     }
 

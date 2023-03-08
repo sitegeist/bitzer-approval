@@ -5,9 +5,17 @@ namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.AffiliateDirectory package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\AffiliateFinderFactory;
+use Hoerbiger\Shared\Domain\Anchor;
+use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -28,6 +36,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -56,9 +65,28 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $application */
         $application = (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0]);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($affiliateFinder);
+
         return new Page(
             $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                                => new Link(
+                                    LinkVariant::label(),
+                                    new Uri('#' . $anchor->getIdentifier()),
+                                    LinkTarget::self(),
+                                    null,
+                                    Value::fromString($anchor->getLabel()),
+                                    null
+                            ),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
