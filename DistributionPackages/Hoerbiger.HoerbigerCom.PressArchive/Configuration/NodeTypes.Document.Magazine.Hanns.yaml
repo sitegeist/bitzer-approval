@@ -3,6 +3,7 @@
     'Neos.Neos:Shortcut': true
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
 
   constraints:
     nodeTypes:
@@ -15,4 +16,10 @@
     targetMode:
       type: string
       defaultValue: 'firstChildNode'
+      ui: ~
+    link__target:
+      ui:
+        inspector:
+          group: 'preview'
+    link__label:
       ui: ~

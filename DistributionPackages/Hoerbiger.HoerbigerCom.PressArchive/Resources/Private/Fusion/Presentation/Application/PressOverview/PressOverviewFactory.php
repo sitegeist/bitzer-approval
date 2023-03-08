@@ -7,13 +7,13 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOver
 
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariant;
-use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariantIsInvalid;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
@@ -24,6 +24,7 @@ use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
@@ -55,8 +56,15 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
      */
     protected $formattedDateFactory;
 
+    /**
+     * @Flow\Inject
+     * @var LinkFactory
+     */
+    protected $linkFacotry;
+
     public function forOverviewPage(
         TraversableNodeInterface $overviewPage,
+        ContentContext $subgraph,
         bool $inBackend
     ): SlotInterface
     {
@@ -150,7 +158,10 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
 
         $hansMetaCard = new Link(
             LinkVariant::container(),
-            new Uri('#'),
+            $this->linkFacotry->resolveRawLinkTargetUri(
+                $hannsMagazine->getProperty('link__target'),
+                $subgraph
+            ) ?: new Uri('#'),
             LinkTarget::self(),
             null,
             new PressReleaseCard(

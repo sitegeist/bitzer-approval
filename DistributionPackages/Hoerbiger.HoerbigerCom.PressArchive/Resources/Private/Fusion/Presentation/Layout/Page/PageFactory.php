@@ -81,6 +81,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     new CacheSegment(
                         (new PressOverviewFactory())->forOverviewPage(
                             $overviewPage,
+                            $subgraph,
                             $inBackend
                         ),
                         'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
