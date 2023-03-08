@@ -74,7 +74,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                                 <div
                                     class={[
-                                        "group flex navItem",
+                                        "group flex navItem hover:text-neutral-contrast",
                                         !iterator.isLast && "pr-xs"
                                     ]}
                                 >
@@ -84,7 +84,6 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                             data-active-main-link="1"
                                             data-active-main-link.@if.1={item.isActive}
                                             class={[
-                                                "hover:text-neutral-contrast",
                                                 (presentationObject.variant.value == 'regular' && item.isActive) && "text-neutral-contrast"
                                             ]}
                                         >
@@ -165,7 +164,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                         <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.rootLevelIcon}/>
                                                     </Neos.Fusion:Augmenter>
                                                 </div>
-                                                <div class="hidden group-hover:block z-50 border-b border-t px-ch py-[6px]" @if.1={item.isActive}>
+                                                <div class="hidden group-hover:block z-50 border-t px-ch py-[6px]" @if.1={item.isActive}>
                                                     <Neos.Fusion:Loop
                                                         itemName="inactiveItem"
                                                         items={presentationObject.languageNavigation}
