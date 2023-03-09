@@ -9,8 +9,16 @@ prototype(Hoerbiger.Shared:Block.Separator) < prototype(PackageFactory.AtomicFus
         }
     }
 
-    renderer = afx`<dl>
-        <dt>variant:</dt>
-        <dd>{presentationObject.variant}</dd>
-    </dl>`
+    renderer = afx`
+        <div
+            class={[
+                "[Block.Separator ( " + presentationObject.variant + ")]",
+                presentationObject.variant.value == "fullWidthWithContent" && "w-full border-t-[1px] border-service-border"
+            ]}
+        >
+            <div class="w-full" @if.1={presentationObject.content}>
+                <span>{presentationObject.content}</span>
+            </div>
+        </div>
+    `
 }
