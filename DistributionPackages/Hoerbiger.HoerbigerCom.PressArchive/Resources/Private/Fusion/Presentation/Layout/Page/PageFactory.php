@@ -37,6 +37,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 /**
  * @Flow\Scope("singleton")
@@ -84,6 +85,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                     HeadlineColor::text(),
                                     HeadlineType::h1(),
                                     Editable::fromNodeProperty($overviewPage, 'headline')
+                                ),
+                                new Separator(
+                                    SeparatorVariant::fullWidthWithContent(),
+                                    Value::fromString("Stories filter")
                                 ),
                                 new CacheSegment(
                                     (new PressOverviewFactory())->forOverviewPage(
@@ -158,7 +163,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ! $pageVariant->getIsNews()
                         ? new ContentContainer(
                             ContentContainerVariant::regular(),
-                            new Separator(SeparatorVariant::bold())
+                            new Separator(
+                                SeparatorVariant::bold(),
+                                null
+                            ),
                         )
                         : null,
                     Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),

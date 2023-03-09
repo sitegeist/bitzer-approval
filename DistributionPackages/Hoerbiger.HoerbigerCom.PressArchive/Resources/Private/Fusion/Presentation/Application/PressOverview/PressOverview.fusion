@@ -18,11 +18,8 @@ prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.PressOverview) < proto
         >
             <div
                 data-grid="filters"
-                class="w-full border-t-[1px] border-service-border pb-sm flex flex-col space-y-xs"
+                class="w-full pb-sm flex flex-col space-y-xs"
             >
-                <div class="w-full">
-                    <span>{presentationObject.labels['label.filterStories']}</span>
-                </div>
                 <div class="w-full flex space-x-xs items-center">
                     <span
                         data-filter-item="news"
