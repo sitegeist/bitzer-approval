@@ -269,6 +269,7 @@ module.exports = {
 				'2-icon-1fr': '1.2em 1fr',
 				'affiliates-map-list': '70% 1fr',
 				'people-story': '25% 1fr',
+				'2-33-auto': '33% auto',
 			},
 
 			gridTemplateRows: {
@@ -408,6 +409,12 @@ module.exports = {
 					'display': 'grid',
 					'grid-gap': '50px',
 					'grid-template-columns': 'repeat(3, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.press-overview-top-news-grid': {
+					'display': 'grid',
+					'grid-gap': '50px',
+					'grid-template-columns': 'repeat(4, 1fr)',
 					'grid-auto-rows': '1px',
 				},
 				'.press-overview-grid-tablet': {

@@ -199,6 +199,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
         array_splice($pressReleaseCards, 2, 0 , '');
         $pressReleaseCards[2] = $hansMetaCard;
         return new PressOverview(
+            PressOverviewVariant::regular(),
             $labels,
             Collection::fromIterable(
                 $pressReleaseCards

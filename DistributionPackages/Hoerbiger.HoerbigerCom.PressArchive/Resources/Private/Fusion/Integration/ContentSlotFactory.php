@@ -6,6 +6,7 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Integration;
  */
 
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverview;
+use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverviewVariant;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariant;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
@@ -208,7 +209,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         $pressReleases = Collection::fromNodes(
             TraversableNodes::fromArray(
-                array_slice($topNewsNode->getProperty('news'), 0, 8, true)
+                array_slice($topNewsNode->getProperty('news') ?: [], 0, 8, true)
                     ?: []
             ),
             function(Node $pressRelease) use($inBackend){
@@ -274,7 +275,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
                     ),
                     new Grid(
-                        GridVariant::twoColumnsNoGap(),
+                        GridVariant::twoColumnsThirdAutoGap(),
                         Collection::fromIterable([
                             new Stack(
                                 StackVariant::sm(),
@@ -287,6 +288,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 )
                             ),
                             new PressOverview(
+                                PressOverviewVariant::topNews(),
                                 [],
                                 $pressReleases
                             )

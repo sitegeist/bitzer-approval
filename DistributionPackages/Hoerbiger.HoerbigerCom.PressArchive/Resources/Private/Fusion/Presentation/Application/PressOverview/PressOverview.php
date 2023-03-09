@@ -14,6 +14,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
  */
 final class PressOverview extends AbstractComponentPresentationObject implements PressOverviewInterface
 {
+    private PressOverviewVariant $variant;
+
     private SlotInterface $cards;
 
     /**
@@ -26,12 +28,20 @@ final class PressOverview extends AbstractComponentPresentationObject implements
      * @param array<string,string> $labels
      */
     public function __construct(
+        PressOverviewVariant $variant,
         array $labels,
         SlotInterface $cards
     ) {
+        $this->variant = $variant;
         $this->labels = $labels;
         $this->cards = $cards;
     }
+
+    public function getVariant(): PressOverviewVariant
+    {
+        return $this->variant;
+    }
+
     public function getCards(): SlotInterface
     {
         return $this->cards;

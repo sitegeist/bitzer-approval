@@ -13,12 +13,13 @@ prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.PressOverview) < proto
     renderer = afx`
         <div
             class={[
-                "[Application.PressOverview]"
+                "[Application.PressOverview (" + presentationObject.variant.value + ")]"
             ]}
         >
             <div
                 data-grid="filters"
                 class="w-full pb-sm flex flex-col space-y-xs"
+                @if.i={presentationObject.variant.value == 'regular'}
             >
                 <div class="w-full flex space-x-xs items-center">
                     <span
@@ -56,7 +57,11 @@ prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.PressOverview) < proto
 
             <div
                 data-grid="cards"
-                class="press-overview-grid-mobile md:press-overview-grid-tablet lg:press-overview-grid"
+                class={[
+                    "press-overview-grid-mobile md:press-overview-grid-tablet",
+                    presentationObject.variant.value == 'regular' && "lg:press-overview-grid",
+                    presentationObject.variant.value == 'topNews' && "lg:press-overview-top-news-grid"
+                ]}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.cards} />
             </div>
