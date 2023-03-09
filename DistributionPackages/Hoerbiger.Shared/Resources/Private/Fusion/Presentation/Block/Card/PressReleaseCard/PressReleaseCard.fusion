@@ -5,51 +5,62 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
             data-card-type={presentationObject.variant.value}
             class={[
                 "[Block.Card.PressReleaseCard (" + presentationObject.variant.value+ ")]",
-                "flex flex-col space-y-ch justify-between",
+                "flex flex-col space-y-[10px] justify-between",
                 presentationObject.variant.value == 'meta' && 'bg-hanns p-xs relative',
                 presentationObject.variant.value == 'hanns' && 'bg-hanns p-xs relative'
             ]}
         >
-            <div @if.1={presentationObject.media}>
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                    presentationObject={presentationObject.media}
-                />
-            </div>
-            <div @if.1={!presentationObject.media && presentationObject.variant.value == 'news'}>
-                <div class="border-t-[1px] border-service-border"></div>
-            </div>
+            <div class="flex flex-col space-y-[10px] justify-between">
+                <div
+                    @if.1={presentationObject.media}
+                    class="pb-[5px]"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.media}
+                    />
+                </div>
+                <div @if.1={!presentationObject.media && presentationObject.variant.value == 'news'}>
+                    <div class="border-t-[1px] border-service-border"></div>
+                </div>
 
-            <div
-                class="uppercase text-xs font-sans-bold text-service-red"
-                @if.1={presentationObject.subheader}
-            >
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                    presentationObject={presentationObject.subheader}
-                />
-            </div>
-            <div>
                 <div
-                    class="uppercase text-xs text-service-lightGrey"
-                    @if.1={presentationObject.datePublished}
+                    class="uppercase text-xs font-sans-bold text-service-red"
+                    @if.1={presentationObject.subheader}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                        presentationObject={presentationObject.datePublished}
+                        presentationObject={presentationObject.subheader}
                     />
+                </div>
+                <div>
+                    <div
+                        class="uppercase text-xs text-service-lightGrey font-sans-bold"
+                        @if.1={presentationObject.datePublished}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.datePublished}
+                        />
+                    </div>
+                    <div
+                        class={[
+                            "font-sans-bold",
+                            (presentationObject.variant.value == 'news') && "text-xl",
+                            (presentationObject.variant.value == 'yearbook') && "text-2xl",
+                            (presentationObject.variant.value == 'hanns') && "text-2xl",
+                            (presentationObject.variant.value == 'meta') && "text-sm"
+                        ]}
+                        @if.1={presentationObject.header}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.header}
+                        />
+                    </div>
                 </div>
                 <div
-                    class="text-2xl font-sans-bold"
-                    @if.1={presentationObject.header}
+                    class=""
+                    @if.1={presentationObject.supportingText}
                 >
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                        presentationObject={presentationObject.header}
-                    />
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
                 </div>
-            </div>
-            <div
-                class=""
-                @if.1={presentationObject.supportingText}
-            >
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
             </div>
             <div
                 class=""
