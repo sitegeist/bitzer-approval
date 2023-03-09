@@ -1,5 +1,6 @@
 id,description,en,de
 label.filterStories,filter stories,Filter stories,Stories filtern
+label.resetFilters,reset filters,Reset filters,Filter zurücksetzen
 label.filter.yearbook,yearbook,Yearbook,Jahrbuch
 label.filter.hanns,hanns,HANNS.,HANNS.
 label.filter.news,news,News,News

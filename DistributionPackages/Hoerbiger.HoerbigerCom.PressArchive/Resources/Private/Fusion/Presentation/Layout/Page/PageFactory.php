@@ -25,6 +25,8 @@ use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -72,19 +74,27 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(
                 array_filter([
                     new ScrollToTop(),
-                    new Headline(
-                        HeadlineSize::superLarge(),
-                        HeadlineColor::brand(),
-                        HeadlineType::h1(),
-                        Editable::fromNodeProperty($overviewPage, 'headline')
-                    ),
-                    new CacheSegment(
-                        (new PressOverviewFactory())->forOverviewPage(
-                            $overviewPage,
-                            $subgraph,
-                            $inBackend
-                        ),
-                        'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
+                    new ContentContainer(
+                        ContentContainerVariant::regular(),
+                        new Stack(
+                            StackVariant::sm(),
+                            Collection::fromIterable(array_filter([
+                                new Headline(
+                                    HeadlineSize::superLarge(),
+                                    HeadlineColor::text(),
+                                    HeadlineType::h1(),
+                                    Editable::fromNodeProperty($overviewPage, 'headline')
+                                ),
+                                new CacheSegment(
+                                    (new PressOverviewFactory())->forOverviewPage(
+                                        $overviewPage,
+                                        $subgraph,
+                                        $inBackend
+                                    ),
+                                    'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
+                                )
+                            ]))
+                        )
                     ),
                     new ContentContainer(
                         ContentContainerVariant::regularX(),

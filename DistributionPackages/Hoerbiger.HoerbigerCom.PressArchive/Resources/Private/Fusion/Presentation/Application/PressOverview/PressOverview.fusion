@@ -10,9 +10,59 @@ prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.PressOverview) < proto
         }
     }
 
-    renderer = afx`<dl>
-        <div>
-            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.cards} />
+    renderer = afx`
+        <div
+            class={[
+                "[Application.PressOverview]"
+            ]}
+        >
+            <div
+                data-grid="filters"
+                class="w-full border-t-[1px] border-service-border pb-sm flex flex-col space-y-xs"
+            >
+                <div class="w-full">
+                    <span>{presentationObject.labels['label.filterStories']}</span>
+                </div>
+                <div class="w-full flex space-x-xs items-center">
+                    <span
+                        data-filter-item="news"
+                        class="border-[1px] border-service-border px-xs py-ch font-sans-bold text-sm cursor-pointer"
+                    >
+                        {presentationObject.labels['label.filter.news']}
+                    </span>
+                    <span
+                        data-filter-item="yearbook"
+                        class="border-[1px] border-service-border px-xs py-ch font-sans-bold text-sm cursor-pointer"
+                    >
+                        {presentationObject.labels['label.filter.yearbook']}
+                    </span>
+                    <span
+                        data-filter-item="hanns"
+                        class="border-[1px] border-service-border px-xs py-ch font-sans-bold text-sm cursor-pointer"
+                    >
+                        {presentationObject.labels['label.filter.hanns']}
+                    </span>
+                    <span
+                        data-reset-item="reset"
+                        class="hidden font-sans-bold text-sm space-x-[5px] cursor-pointer flex items-center"
+                    >
+                        <span>
+                            <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M1.5 1.5L9.5 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                                <path d="M9.5 1.5L1.5 9.5" stroke="currentColor" stroke-width="2" stroke-linecap="square"/>
+                            </svg>
+                        </span>
+                        <span>{presentationObject.labels['label.resetFilters']}</span>
+                    </span>
+                </div>
+            </div>
+
+            <div
+                data-grid="cards"
+                class="press-overview-grid-mobile md:press-overview-grid-tablet lg:press-overview-grid"
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.cards} />
+            </div>
         </div>
-    </dl>`
+    `
 }

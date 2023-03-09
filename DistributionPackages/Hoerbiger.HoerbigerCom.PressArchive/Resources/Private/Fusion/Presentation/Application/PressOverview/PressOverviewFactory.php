@@ -12,10 +12,14 @@ use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\Shared\Presentation\Block\Card\PressReleaseCard\PressReleaseCard;
@@ -99,7 +103,6 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                     ? $this->figureFactory->forPressReleaseCard($imageSource)
                     : null;
 
-
                 $datePublished = $this->formattedDateFactory->createFullDate(
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
                 );
@@ -121,7 +124,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                         ),
                         Value::fromString(
                             $labels['label.filter.' . $pressVariant->getValue()]
-                            . $pressRelease->getProperty('edition') ?: ''
+                            . ' ' . $pressRelease->getProperty('edition')
                         ),
                         Value::fromString(
                             $pressRelease->getProperty('preview__description')
@@ -130,8 +133,14 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                         ),
                         new Button(
                             ButtonType::regular(),
-                            ButtonVariant::cta(),
-                            Value::fromString($this->getLabel('list.learnMore')),
+                            ButtonVariant::contrast(),
+                            new Grid(
+                                GridVariant::iconLeft(),
+                                Collection::fromIterable(array_filter([
+                                    new Icon('shared', 'arrowRight', IconSize::size_1_5()),
+                                    Value::fromString($this->getLabel('list.learnMore'))
+                                ]))
+                            ),
                             null,
                             null,
                             null
@@ -142,8 +151,6 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
             },
             $pressReleases
         );
-
-
 
         $hannsMagazine = $overviewPage->findNamedChildNode(NodeName::fromString('hanns'));
 
@@ -173,8 +180,14 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                 Value::fromString($hannsMagazine->getProperty('preview__description') ?: ''),
                 new Button(
                     ButtonType::regular(),
-                    ButtonVariant::cta(),
-                    Value::fromString($labels['label.button.getNewestRelease']),
+                    ButtonVariant::contrast(),
+                    new Grid(
+                        GridVariant::iconLeft(),
+                        Collection::fromIterable(array_filter([
+                            new Icon('shared', 'arrowRight', IconSize::size_1_5()),
+                            Value::fromString($labels['label.button.getNewestRelease'])
+                        ]))
+                    ),
                     null,
                     null,
                     null
