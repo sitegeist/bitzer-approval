@@ -207,14 +207,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                             AnchorNavigationVariant::regular(),
                             array_map(
                                 fn(Anchor $anchor): Link
-                                    => new Link(
-                                        LinkVariant::label(),
-                                        new Uri('#' . $anchor->getIdentifier()),
-                                        LinkTarget::self(),
-                                        null,
-                                        Value::fromString($anchor->getLabel()),
-                                        null
-                                ),
+                                    => (new LinkFactory())->forAnchor($anchor),
                                 $anchors
                             )
                         )

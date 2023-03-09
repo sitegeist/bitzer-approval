@@ -24,8 +24,7 @@ use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -106,14 +105,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         AnchorNavigationVariant::regular(),
                         array_map(
                             fn(Anchor $anchor): Link
-                                => new Link(
-                                    LinkVariant::label(),
-                                    new Uri('#' . $anchor->getIdentifier()),
-                                    LinkTarget::self(),
-                                    null,
-                                    Value::fromString($anchor->getLabel()),
-                                    null
-                            ),
+                                => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
                     )
