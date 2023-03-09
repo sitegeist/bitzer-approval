@@ -22,6 +22,12 @@ class Sailor
     protected $nodeTypeConstraintFactory;
 
     /**
+     * @Flow\Inject
+     * @var AnchorFactory
+     */
+    protected $anchorFactory;
+
+    /**
      * @return array<int,Anchor>
      */
     public function findAvailableNeighbouringAnchors(NodeInterface $contentNode): array
@@ -62,17 +68,9 @@ class Sailor
     {
         $anchors = [];
         foreach ($contentCollectionNode->findChildNodes() as $contentNode) {
-            $anchorID = $contentNode->getProperty('anchorID');
-            // TBD
-            if ($anchorID) {
-                $anchors[] = new Anchor(
-                    str_replace(
-                        [' ' ],
-                        '',
-                        strip_tags($anchorID)
-                    ),
-                    $anchorID
-                );
+            $anchorLabel = $contentNode->getProperty('anchorLabel');
+            if ($anchorLabel) {
+                $anchors[] = $this->anchorFactory->fromAnchorLabel($anchorLabel);
             }
         }
         return $anchors;
@@ -98,12 +96,5 @@ class Sailor
         }
 
         return $firstLevelContentCollections;
-    }
-
-    private function cleanString(string $string): ?string
-    {
-        $string = str_replace(' ', '-', $string);
-
-        return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
     }
 }

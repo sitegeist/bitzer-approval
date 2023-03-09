@@ -37,3 +37,4 @@ Neos:
       Shared.SvgImage: Hoerbiger\Shared\Presentation\Block\SvgImage\SvgImageFactory
       Shared.ScrollToTop: Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTopFactory
       Shared.AnchorNavigation: Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationFactory
+      Shared.Anchor: Hoerbiger\Shared\Domain\AnchorFactory

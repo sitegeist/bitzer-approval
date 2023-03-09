@@ -65,28 +65,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $application */
         $application = (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0]);
 
-        $anchors = (new Sailor())->findAvailableAnchorsForDocument($affiliateFinder);
-
         return new Page(
             $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
             Collection::fromIterable(array_filter([
-                count($anchors) > 0
-                    ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
-                        array_map(
-                            fn(Anchor $anchor): Link
-                                => new Link(
-                                    LinkVariant::label(),
-                                    new Uri('#' . $anchor->getIdentifier()),
-                                    LinkTarget::self(),
-                                    null,
-                                    Value::fromString($anchor->getLabel()),
-                                    null
-                            ),
-                            $anchors
-                        )
-                    )
-                    : null,
                 new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),

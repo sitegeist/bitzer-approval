@@ -8,9 +8,17 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
+use Hoerbiger\Shared\Domain\Anchor;
+use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\PressReleaseCard\PressReleaseCard;
@@ -184,6 +192,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
@@ -192,6 +202,23 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(
                 array_filter([
+                    count($anchors) > 0
+                        ? new AnchorNavigation(
+                            AnchorNavigationVariant::regular(),
+                            array_map(
+                                fn(Anchor $anchor): Link
+                                    => new Link(
+                                        LinkVariant::label(),
+                                        new Uri('#' . $anchor->getIdentifier()),
+                                        LinkTarget::self(),
+                                        null,
+                                        Value::fromString($anchor->getLabel()),
+                                        null
+                                ),
+                                $anchors
+                            )
+                        )
+                        : null,
                     new ScrollToTop(),
                     new ContentContainer(
                         ContentContainerVariant::regularX(),

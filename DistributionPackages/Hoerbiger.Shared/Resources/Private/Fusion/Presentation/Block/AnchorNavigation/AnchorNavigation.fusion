@@ -10,12 +10,11 @@ prototype(Hoerbiger.Shared:Block.AnchorNavigation) < prototype(PackageFactory.At
         }
     }
 
-    renderer = afx`<dl>
+    renderer = afx`<dl class="[AnchorNavigation]">
         <dt>variant:</dt>
         <dd>{presentationObject.variant}</dd>
-        <dt>anchors:</dt>
-        <dd>
-            <div>Anker Platzhalter</div>>
-        </dd>
+        <Neos.Fusion:Loop items={presentationObject.anchors} itemName="anchor">
+            <Hoerbiger.Shared:Block.Link presentationObject={anchor} />
+        </Neos.Fusion:Loop>
     </dl>`
 }

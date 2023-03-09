@@ -4,7 +4,7 @@ prototype(Neos.Neos:ContentCollectionRenderer) {
     }
 
     itemRenderer.@process.addAnchor = Neos.Fusion:Augmenter {
-        id = ${q(node).property('anchorID')}
+        id = ${Shared.Anchor.extractReadableIdentifierFromLabel(q(node).property('anchorLabel'))}
     }
-    itemRenderer.@process.addAnchor.@if.hasAnchor = ${q(node).property('anchorID')}
+    itemRenderer.@process.addAnchor.@if.hasAnchor = ${q(node).property('anchorLabel')}
 }

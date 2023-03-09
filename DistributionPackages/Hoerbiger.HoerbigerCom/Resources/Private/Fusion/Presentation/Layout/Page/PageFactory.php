@@ -82,6 +82,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
         $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage, $inBackend);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($homepage);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $homepage,
@@ -89,6 +91,23 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                                => new Link(
+                                    LinkVariant::label(),
+                                    new Uri('#' . $anchor->getIdentifier()),
+                                    LinkTarget::self(),
+                                    null,
+                                    Value::fromString($anchor->getLabel()),
+                                    null
+                            ),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ScrollToTop(),
                 $videoStage
                     ? new ContentContainer(
@@ -177,6 +196,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($contactPage, $subgraph);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($contactPage);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $contactPage,
@@ -184,6 +205,23 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                                => new Link(
+                                    LinkVariant::label(),
+                                    new Uri('#' . $anchor->getIdentifier()),
+                                    LinkTarget::self(),
+                                    null,
+                                    Value::fromString($anchor->getLabel()),
+                                    null
+                            ),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
@@ -225,6 +263,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forFullMediaIntroduction($notFoundPage, $subgraph, $inBackend);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($notFoundPage);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $notFoundPage,
@@ -232,6 +272,23 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                                => new Link(
+                                    LinkVariant::label(),
+                                    new Uri('#' . $anchor->getIdentifier()),
+                                    LinkTarget::self(),
+                                    null,
+                                    Value::fromString($anchor->getLabel()),
+                                    null
+                            ),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularSm(),

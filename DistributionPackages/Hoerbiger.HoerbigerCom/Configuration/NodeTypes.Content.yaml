@@ -10,7 +10,7 @@
           icon: 'anchor'
           position: start 0
   properties:
-    anchorID:
+    anchorLabel:
       type: string
       ui:
         label: 'Anker-Bezeichnung'
