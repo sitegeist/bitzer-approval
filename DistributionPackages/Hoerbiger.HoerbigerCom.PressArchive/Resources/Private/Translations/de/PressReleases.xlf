@@ -10,6 +10,10 @@
                 <source>See all news</source>
                 <target>Alle News ansehen</target>
             </trans-unit>
+            <trans-unit id="list.seeOverview" xml:space="preserve">
+                <source>an overview from all stories </source>
+                <target>alle Stories im Überblick</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

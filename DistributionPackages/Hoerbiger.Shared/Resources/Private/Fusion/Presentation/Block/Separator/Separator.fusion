@@ -17,7 +17,9 @@ prototype(Hoerbiger.Shared:Block.Separator) < prototype(PackageFactory.AtomicFus
             ]}
         >
             <div class="w-full" @if.1={presentationObject.content}>
-                <span>{presentationObject.content}</span>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.content}
+                />
             </div>
         </div>
     `

@@ -1,0 +1,65 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Content.TopNews':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+  ui:
+    label: 'Top News'
+    icon: star
+    inspector:
+      groups:
+        news:
+          label: 'News'
+          icon: 'star'
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plain'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+    news:
+      type: references
+      ui:
+        label: 'Top News'
+        reloadIfChanged: true
+        inspector:
+          group: 'news'
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease'
+              - 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease'
+              - 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease'
+
+
+'Hoerbiger.HoerbigerCom:Document.HomePage':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.TopNews': true
+
+'Hoerbiger.HoerbigerCom:Document.WebPage':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.TopNews': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.TopNews': true
+
+'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.TopNews': true
