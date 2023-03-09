@@ -39,6 +39,14 @@
         label: 'Publikationsdatum'
         inspector:
           group: release
+    showImage:
+      type: boolean
+      defaultValue: true
+      ui:
+        label: 'Bild anzeigen'
+        reloadPageIfChanged: true
+        inspector:
+          group: image
     image:
       validation: ~
     image__alt:

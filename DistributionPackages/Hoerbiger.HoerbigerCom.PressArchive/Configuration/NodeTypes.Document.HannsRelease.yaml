@@ -1,0 +1,41 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithMetaText': true
+  ui:
+    icon: header
+    label: 'HANNS'
+    inspector:
+      groups:
+        magazin:
+          label: 'Magazine'
+          icon: 'file-invoice'
+          position: 'before image'
+  properties:
+    datePublished:
+      type: DateTime
+      ui:
+        label: 'Publikationsdatum'
+        inspector:
+          group: magazin
+    edition:
+      type: string
+      ui:
+        label: 'Ausgabe'
+        reloadIfChanged: true
+        inspector:
+          group: magazin
+    searchType:
+      search:
+        indexing: '${"PressRelease"}'

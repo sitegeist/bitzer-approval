@@ -67,6 +67,25 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
+    public function forPressReleaseCard(ImageSourceHelperInterface $imageSource): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getSourceSetForPresets([
+                PresetIdentifier::sm(),
+                PresetIdentifier::xs()
+            ]),
+            new QualifiedPresetIdentifiers([
+                '(min-width: 768px)' => PresetIdentifier::sm()
+            ]),
+            '100vw',
+            FigureObjectFit::cover(),
+            FigureObjectPosition::center(),
+            null
+        );
+    }
+
     public function forNavigationCard(ImageSourceHelperInterface $imageSource): Figure
     {
         return new Figure(

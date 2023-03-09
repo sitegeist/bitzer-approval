@@ -1,0 +1,16 @@
+prototype(Hoerbiger.Shared:Block.Separator) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Separator\\SeparatorInterface'
+
+    @styleguide {
+        title = 'Separator'
+
+        props {
+            variant = 'regular'
+        }
+    }
+
+    renderer = afx`<dl>
+        <dt>variant:</dt>
+        <dd>{presentationObject.variant}</dd>
+    </dl>`
+}

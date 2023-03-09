@@ -6,6 +6,8 @@ prototype(Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList) < p
         entryTags {
             1 = ${Neos.Caching.nodeTypeTag('Neos.Neos:Document', documentNode)}
             2 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease')}
+            3 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease')}
+            4 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease')}
         }
     }
 }
