@@ -12,13 +12,13 @@ prototype(Hoerbiger.Shared:Block.AnchorNavigation) < prototype(PackageFactory.At
 
     renderer = afx`
         <div class="[AnchorNavigation] relative">
-            <div class="anchorNav h-[80vh] flex flex-col absolute p-[10px] left-0 top-xl z-50 gap-xs overflow-hidden font-sans-regular text-xl">
+            <div class="anchorNav h-[80vh] flex flex-col absolute p-[10px] left-0 top-[15vh] z-50 gap-xs overflow-hidden font-sans-regular text-xl">
                 <Neos.Fusion:Loop
                     items={presentationObject.anchors}
                     itemName="anchor"
                 >
                     <div
-                        class="vertical-lr flex flex-col gap-1 anchorItem"
+                        class="vertical-lr flex flex-col gap-1 anchorItem max-h-[12vh]"
                         @if.1={itemKey<6}
                     >
                         <Neos.Fusion:Augmenter class="itemLink rotate-180 truncate">
