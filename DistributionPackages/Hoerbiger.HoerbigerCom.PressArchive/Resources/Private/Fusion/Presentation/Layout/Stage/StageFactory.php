@@ -16,6 +16,8 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\MetaHeadline\MetaHeadline;
 use Hoerbiger\Shared\Presentation\Block\MetaHeadline\MetaHeadlineVariant;
+use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
+use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StackStage\StackStage;
@@ -59,21 +61,26 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
 
         return new StackStage(
-            StageVariant::stack(),
-            new MetaHeadline(
-                MetaHeadlineVariant::regular(),
-                Value::fromString($labels['label.' . $pressVariant->getValue()]),
-                Value::fromString($pressVariant->getIsNews()
-                    ? '_' . $this->formattedDateFactory->createFullDate($datePublished)
-                    : 'Compression_'
-                ),
-                !$pressVariant->getIsNews()
-                    ? Value::fromString($pressRelease->getProperty('edition') ?: '')
-                    : null
+            $pressVariant->getIsNews()
+                ? StageVariant::press()
+                : StageVariant::pressLarge(),
+            new Separator(
+                SeparatorVariant::fullWidthWithContent(),
+                new MetaHeadline(
+                    MetaHeadlineVariant::regular(),
+                    Value::fromString($labels['label.' . $pressVariant->getValue()]),
+                    Value::fromString($pressVariant->getIsNews()
+                        ? '_' . $this->formattedDateFactory->createFullDate($datePublished)
+                        : 'Compression_'
+                    ),
+                    !$pressVariant->getIsNews()
+                        ? Value::fromString($pressRelease->getProperty('edition') ?: '')
+                        : null
+                )
             ),
             new Headline(
-                HeadlineSize::superLarge(),
-                HeadlineColor::brand(),
+                HeadlineSize::large(),
+                HeadlineColor::text(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
             ),

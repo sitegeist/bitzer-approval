@@ -169,7 +169,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                             ),
                         )
                         : null,
-                    Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+                    new ContentContainer(
+                        ContentContainerVariant::press(),
+                        Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                    )   ,
                     new ContentContainer(
                         ContentContainerVariant::regularX(),
                         $breadcrumb

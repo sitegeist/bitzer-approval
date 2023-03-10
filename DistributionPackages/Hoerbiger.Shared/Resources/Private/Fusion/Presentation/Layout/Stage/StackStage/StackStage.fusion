@@ -14,7 +14,10 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
                 @if.1={presentationObject.headline}
                 presentationObject={presentationObject.headline}
             />
-            <hr class="text-neutral mt-sm mb-xs"/>
+            <hr
+                @if.1={presentationObject.variant.value != 'press' && presentationObject.variant.value != 'pressLarge'}
+                class="text-neutral mt-sm mb-xs"
+            />
             <div
                 class="text-xl font-sans-bold pb-xs"
                 @if.1={presentationObject.subheadline}
@@ -22,14 +25,29 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheadline}/>
             </div>
             <Hoerbiger.Shared:Block.Text
-                @if.1={presentationObject.text}
+                @if.1={presentationObject.text && presentationObject.variant.value != 'press' && presentationObject.variant.value != 'pressLarge'}
                 presentationObject={presentationObject.text}
             />
-            <div
-                @if.1={presentationObject.media}
-                class="mt-sm"
-            >
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
+            <div class="relative">
+                <div
+                    @if.1={presentationObject.media}
+                    class={[
+                        "mt-sm",
+                        presentationObject.variant.value == 'press' && "max-w-[1000px] mx-auto",
+                        presentationObject.variant.value == 'press' && "max-w-full mx-auto"
+                    ]}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
+                </div>
+                <div
+                    class="absolute bottom-0 left-md bg-light p-md translate-y-[50%]"
+                    @if.1={presentationObject.variant.value == 'pressLarge'}
+                >
+                    <Hoerbiger.Shared:Block.Text
+                        @if.1={presentationObject.text}
+                        presentationObject={presentationObject.text}
+                    />
+                </div>
             </div>
         </div>
     `
