@@ -5,10 +5,12 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.
  */
 
+use Neos\Flow\Annotations as Flow;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverview;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverviewVariant;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariant;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
@@ -60,6 +62,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     private FormattedDateFactory $formattedDateFactory;
 
     private LinkFactory $linkFactory;
+
+    /**
+     * @Flow\Inject
+     * @var CsvPOTranslator
+     */
+    protected $csvPOTranslator;
 
     public function __construct(
         ImageSourceFactory $imageSourceFactory,
@@ -207,12 +215,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             null
         );
 
+        $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
+
         $pressReleases = Collection::fromNodes(
             TraversableNodes::fromArray(
                 array_slice($topNewsNode->getProperty('news') ?: [], 0, 8, true)
                     ?: []
             ),
-            function(Node $pressRelease) use($inBackend){
+            function(Node $pressRelease) use($inBackend, $labels){
                 $pressVariant = PressVariant::fromNode($pressRelease);
 
                 $datePublished = $this->formattedDateFactory->createFullDate(
@@ -240,7 +250,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     ?: $pressRelease->getProperty('headline')
                                     ?: ''
                             ),
-                            null,
+                            Value::fromString(
+                                $labels['label.filter.' . $pressVariant->getValue()]
+                                . ' ' . $pressRelease->getProperty('edition')
+                            ),
                             Value::fromString(
                                 $pressRelease->getProperty('preview__description')
                                     ?: $pressRelease->getProperty('abstract')
@@ -281,7 +294,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 StackVariant::sm(),
                                 Collection::fromIterable(array_filter([
                                     $inBackend || $topNewsNode->getProperty('headline')
-                                        ? Editable::fromNodeProperty($topNewsNode, 'headline')
+                                        ? new Headline(
+                                            HeadlineSize::superLarge(),
+                                            HeadlineColor::text(),
+                                            HeadlineType::h2(),
+                                            Editable::fromNodeProperty($topNewsNode, 'headline')
+                                        )
                                         : null,
                                         $overViewButton
                                     ])
