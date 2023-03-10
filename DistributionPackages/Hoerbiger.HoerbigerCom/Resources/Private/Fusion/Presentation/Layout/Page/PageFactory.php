@@ -84,6 +84,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ScrollToTop(),
+                $videoStage
+                    ? new ContentContainer(
+                        ContentContainerVariant::blank(),
+                        $videoStage
+                    )
+                    : null,
                 count($anchors) > 0
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::regular(),
@@ -92,13 +99,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                 => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
-                    )
-                    : null,
-                new ScrollToTop(),
-                $videoStage
-                    ? new ContentContainer(
-                        ContentContainerVariant::blank(),
-                        $videoStage
                     )
                     : null,
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))

@@ -399,6 +399,9 @@ module.exports = {
 					'height': (Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw',
 					'border-width': `0 0 ${(Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
 					'border-color': `transparent transparent #FFFFFF transparent`,
+				},
+				'.vertical-lr': {
+					'writing-mode': 'vertical-lr'
 				}
 			}, ['responsive']);
 		}),
