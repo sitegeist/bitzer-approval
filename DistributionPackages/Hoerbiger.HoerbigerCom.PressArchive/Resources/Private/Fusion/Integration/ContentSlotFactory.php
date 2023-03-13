@@ -208,13 +208,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         $pressReleases = Collection::fromNodes(
             TraversableNodes::fromArray(
-                array_slice($topNewsNode->getProperty('news'), 0, 8, true)
-                    ?: []
+                $topNewsNode->getProperty('news') ? array_slice($topNewsNode->getProperty('news'), 0, 8, true)
+                    : []
             ),
             function(Node $pressRelease) use($inBackend){
                 $pressVariant = PressVariant::fromNode($pressRelease);
 
-                $datePublished = $this->formattedDateFactory->createFullDate(
+                $datePublished = $this->formattedDateFactory->createReducedYearDate(
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
                 );
 
