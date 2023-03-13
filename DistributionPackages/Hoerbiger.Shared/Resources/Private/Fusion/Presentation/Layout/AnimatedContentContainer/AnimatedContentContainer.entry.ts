@@ -2,7 +2,7 @@ export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
 		const visibleClass = $node.dataset.animationIn ?? "";
 		const invisibleClass = $node.dataset.animationOut ?? "";
-
+		const fadeOutOffset = 400;
 		let isVisible = false;
 
 		// Page load not on Top
@@ -17,7 +17,7 @@ export default ($node: Element): void => {
 			const position = $node.getBoundingClientRect();
 
 			// remove from page
-			if (position.bottom > window.innerHeight) {
+			if (position.bottom > (window.innerHeight - fadeOutOffset)) {
 				if (isVisible) {
 					isVisible = false;
 					animateElement(visibleClass, invisibleClass, isVisible, $node);
