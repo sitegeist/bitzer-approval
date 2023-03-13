@@ -17,8 +17,12 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
 use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
+use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
 use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
@@ -147,6 +151,19 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
         $pageVariant = PressVariant::fromNode($document);
 
+        $content = $pageVariant->getIsNews()
+            ? new ContentContainer(
+                ContentContainerVariant::press(),
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+            )
+            : new ContentContainer(
+                ContentContainerVariant::regular(),
+                new ContentContainer(
+                    ContentContainerVariant::press(),
+                    Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                )
+            );
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
@@ -162,17 +179,30 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ),
                     ! $pageVariant->getIsNews()
                         ? new ContentContainer(
-                            ContentContainerVariant::regular(),
-                            new Separator(
-                                SeparatorVariant::bold(),
-                                null
-                            ),
+                            ContentContainerVariant::regularX(),
+                            new ContentContainer(
+                                ContentContainerVariant::press(),
+                                new ContentContainer(
+                                    ContentContainerVariant::pressLeftBlank(),
+                                    new Grid(
+                                        GridVariant::twoColumnsPress(),
+                                        Collection::fromIterable(array_filter([
+                                            new Text(
+                                                TextVariant::default(),
+                                                Value::fromString(''),
+                                                false
+                                            ),
+                                            new Separator(
+                                                SeparatorVariant::bold(),
+                                                null
+                                            )
+                                        ]))
+                                    )
+                                ),
+                            )
                         )
                         : null,
-                    new ContentContainer(
-                        ContentContainerVariant::press(),
-                        Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
-                    )   ,
+                    $content,
                     new ContentContainer(
                         ContentContainerVariant::regularX(),
                         $breadcrumb

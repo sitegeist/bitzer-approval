@@ -1,7 +1,7 @@
 prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
     renderer = afx`
         <div class={[
-            "[Layout.StackStage]",
+            "[Layout.StackStage (" + presentationObject.variant.value + ")]",
             "relative w-full flex flex-col pt-sm"
         ]}>
             <div
@@ -28,25 +28,35 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
                 @if.1={presentationObject.text && presentationObject.variant.value != 'press' && presentationObject.variant.value != 'pressLarge'}
                 presentationObject={presentationObject.text}
             />
-            <div class="relative">
+            <div
+                class={[
+                        "mt-sm",
+                        presentationObject.variant.value == 'press' && "w-[1050px] mx-auto",
+                        presentationObject.variant.value == 'pressLarge' && "w-[1600px] mx-auto"
+                    ]}
+            >
                 <div
                     @if.1={presentationObject.media}
-                    class={[
-                        "mt-sm",
-                        presentationObject.variant.value == 'press' && "max-w-[1000px] mx-auto",
-                        presentationObject.variant.value == 'press' && "max-w-full mx-auto"
-                    ]}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
                 </div>
                 <div
-                    class="absolute bottom-0 left-md bg-light p-md translate-y-[50%]"
-                    @if.1={presentationObject.variant.value == 'pressLarge'}
+                    class={[
+                        "bg-stage-press  translate-y-[-50px]",
+                        presentationObject.variant.value == 'press' && "w-2/3",
+                        presentationObject.variant.value == 'pressLarge' && "ml-[50px] w-1/2"
+                    ]}
+                    @if.1={presentationObject.text}
                 >
-                    <Hoerbiger.Shared:Block.Text
-                        @if.1={presentationObject.text}
-                        presentationObject={presentationObject.text}
-                    />
+                    <div class={[
+                        "pt-xs pr-xs",
+                        presentationObject.variant.value == 'press' && "pl-0",
+                        presentationObject.variant.value == 'pressLarge' && "pl-xs"
+                    ]}>
+                        <Hoerbiger.Shared:Block.Text
+                            presentationObject={presentationObject.text}
+                        />
+                    </div>
                 </div>
             </div>
         </div>

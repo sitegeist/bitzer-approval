@@ -431,6 +431,9 @@ module.exports = {
 				},
 				'.bg-hanns': {
 					'background': 'linear-gradient(90deg, #F1F0EE 35.34%, rgba(241, 240, 238, 0.968) 79.74%, rgba(241, 240, 238, 0.93) 99.97%)',
+				},
+				'.bg-stage-press': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
 				}
 			}, ['responsive']);
 		}),

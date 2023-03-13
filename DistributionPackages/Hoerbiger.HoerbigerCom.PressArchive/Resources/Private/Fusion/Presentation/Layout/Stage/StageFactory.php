@@ -61,7 +61,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
 
         return new StackStage(
-            $pressVariant->getIsNews()
+            $pressVariant->getIsNews() || $pressVariant->getIsHanns()
                 ? StageVariant::press()
                 : StageVariant::pressLarge(),
             new Separator(
@@ -86,11 +86,13 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ),
             null,
             !$pressVariant->getIsNews()
-                ? new Text(
-                    TextVariant::lightContrast(),
-                    Editable::fromNodeProperty($pressRelease, 'abstract'),
-                    false
-                )
+                ? $pressRelease->getProperty('abstract') || $inBackend
+                    ? new Text(
+                        TextVariant::lightContrast(),
+                        Editable::fromNodeProperty($pressRelease, 'abstract'),
+                        false
+                    )
+                    : null
                 : null,
             $imageSource && $showImage
                 ? $this->figureFactory->forStackStage($imageSource)

@@ -27,6 +27,9 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
     const VARIANT_HALF_WITH = 'halfWidth';
     const VARIANT_PRESS = 'press';
+    const VARIANT_PRESS_LEFT = 'pressLeft';
+    const VARIANT_PRESS_LEFT_BLANK = 'pressLeftBlank';
+    const VARIANT_Y_CENTERED = 'yCentered';
 
     /**
      * @var array<string,self>|self[]
@@ -56,7 +59,10 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
                 && $string !== self::VARIANT_HALF_WITH
-                && $string !== self::VARIANT_PRESS) {
+                && $string !== self::VARIANT_PRESS
+                && $string !== self::VARIANT_PRESS_LEFT
+                && $string !== self::VARIANT_PRESS_LEFT_BLANK
+                && $string !== self::VARIANT_Y_CENTERED) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -135,6 +141,21 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_PRESS);
     }
 
+    public static function pressLeft(): self
+    {
+        return self::from(self::VARIANT_PRESS_LEFT);
+    }
+
+    public static function pressLeftBlank(): self
+    {
+        return self::from(self::VARIANT_PRESS_LEFT_BLANK);
+    }
+
+    public static function yCentered(): self
+    {
+        return self::from(self::VARIANT_Y_CENTERED);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -199,9 +220,25 @@ final class ContentContainerVariant implements PseudoEnumInterface
     {
         return $this->value === self::VARIANT_HALF_WITH;
     }
+
     public function getIsPress(): bool
     {
         return $this->value === self::VARIANT_PRESS;
+    }
+
+    public function getIsPressLeft(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_LEFT;
+    }
+
+    public function getIsPressLeftBlank(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_LEFT_BLANK;
+    }
+
+    public function getIsYCentered(): bool
+    {
+        return $this->value === self::VARIANT_Y_CENTERED;
     }
 
     /**
@@ -223,7 +260,10 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM),
             self::from(self::VARIANT_HALF_WITH),
-            self::from(self::VARIANT_PRESS)
+            self::from(self::VARIANT_PRESS),
+            self::from(self::VARIANT_PRESS_LEFT),
+            self::from(self::VARIANT_PRESS_LEFT_BLANK),
+            self::from(self::VARIANT_Y_CENTERED)
         ];
     }
 

@@ -30,6 +30,7 @@ final class TextVariant implements PseudoEnumInterface
     const VARIANT_LITE = 'lite';
     const VARIANT_LITE_CONTRAST = 'liteContrast';
     const VARIANT_SERVICE_CONTRAST = 'serviceContrast';
+    const VARIANT_SERVICE_RED = 'serviceRed';
 
     /**
      * @var array<string,self>|self[]
@@ -60,6 +61,7 @@ final class TextVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_LITE
                 && $string !== self::VARIANT_LITE_CONTRAST
                 && $string !== self::VARIANT_SERVICE_CONTRAST
+                && $string !== self::VARIANT_SERVICE_RED
             ) {
                 throw TextVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -150,6 +152,11 @@ final class TextVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_SERVICE_CONTRAST);
     }
 
+    public static function serviceRed(): self
+    {
+        return self::from(self::VARIANT_SERVICE_RED);
+    }
+
     public function getIsDefault(): bool
     {
         return $this->value === self::VARIANT_DEFAULT;
@@ -215,6 +222,11 @@ final class TextVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_SERVICE_CONTRAST;
     }
 
+    public function getIsServiceRed(): bool
+    {
+        return $this->value === self::VARIANT_SERVICE_RED;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -233,7 +245,8 @@ final class TextVariant implements PseudoEnumInterface
             self::from(self::VARIANT_EXPERIENCE_CONTRAST),
             self::from(self::VARIANT_LITE),
             self::from(self::VARIANT_LITE_CONTRAST),
-            self::from(self::VARIANT_SERVICE_CONTRAST)
+            self::from(self::VARIANT_SERVICE_CONTRAST),
+            self::from(self::VARIANT_SERVICE_RED)
         ];
     }
 

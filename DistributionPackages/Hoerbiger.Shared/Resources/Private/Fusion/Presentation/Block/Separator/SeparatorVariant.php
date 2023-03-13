@@ -15,6 +15,7 @@ final class SeparatorVariant implements PseudoEnumInterface
 {
     const VARIANT_REGULAR = 'regular';
     const VARIANT_BOLD = 'bold';
+    const VARIANT_BOLD_RED = 'boldRed';
     const VARIANT_FULL_WIDTH_WITH_CONTENT = 'fullWidthWithContent';
 
     /**
@@ -34,6 +35,7 @@ final class SeparatorVariant implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_REGULAR
                 && $string !== self::VARIANT_BOLD
+                && $string !== self::VARIANT_BOLD_RED
                 && $string !== self::VARIANT_FULL_WIDTH_WITH_CONTENT
             ) {
                 throw SeparatorVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
@@ -54,6 +56,11 @@ final class SeparatorVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_BOLD);
     }
 
+    public static function boldRed(): self
+    {
+        return self::from(self::VARIANT_BOLD_RED);
+    }
+
     public static function fullWidthWithContent(): self
     {
         return self::from(self::VARIANT_FULL_WIDTH_WITH_CONTENT);
@@ -69,6 +76,11 @@ final class SeparatorVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BOLD;
     }
 
+    public function getIsBoldRed(): bool
+    {
+        return $this->value === self::VARIANT_BOLD_RED;
+    }
+
     public function getIsFullWidthWithContent(): bool
     {
         return $this->value === self::VARIANT_FULL_WIDTH_WITH_CONTENT;
@@ -82,6 +94,7 @@ final class SeparatorVariant implements PseudoEnumInterface
         return [
             self::from(self::VARIANT_REGULAR),
             self::from(self::VARIANT_BOLD),
+            self::from(self::VARIANT_BOLD_RED),
             self::from(self::VARIANT_FULL_WIDTH_WITH_CONTENT)
         ];
     }

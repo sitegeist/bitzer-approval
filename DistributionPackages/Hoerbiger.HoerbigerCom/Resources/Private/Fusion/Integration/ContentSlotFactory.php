@@ -24,6 +24,8 @@ use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\MatomoOptOut\MatomoOptOut;
+use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
+use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
@@ -281,17 +283,26 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         };
 
         return new ContentContainer(
-            ContentContainerVariant::tight(),
+            ContentContainerVariant::pressLeft(),
             new Grid(
-                GridVariant::twoColumns(),
+                GridVariant::twoColumnsPress(),
                 Collection::fromIterable([
                     new ContentContainer(
-                        ContentContainerVariant::regular(),
+                        ContentContainerVariant::yCentered(),
                         $inBackend || $textWithMetaTextNode->getProperty('meta_text')
-                            ? new Text(
-                                TextVariant::lightContrast(),
-                                Editable::fromNodeProperty($textWithMetaTextNode, 'meta_text'),
-                                false
+                            ? new Stack(
+                                StackVariant::xs(),
+                                Collection::fromIterable(array_filter([
+                                    new Separator(
+                                        SeparatorVariant::boldRed(),
+                                        null
+                                    ),
+                                    new Text(
+                                        TextVariant::serviceRed(),
+                                        Editable::fromNodeProperty($textWithMetaTextNode, 'meta_text'),
+                                        false
+                                    )
+                                ]))
                             )
                             : Value::fromString('')
                     ),
