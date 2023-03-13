@@ -70,7 +70,7 @@ export const Client = ({targetUri, labels, disableItems}: ClientProps): JSX.Elem
 			<div
 				onClick={onClick}
 				className={cx(
-					"w-full h-full grid place-items-center z-40 cursor-pointer relative md:translate-x-[50px]",
+					"w-full h-full grid place-items-center z-40 cursor-pointer relative menuToggle:translate-x-[50px]",
 				)}
 			>
 				<StampedeIcon iconName="search"  size={1.5}/>
