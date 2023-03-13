@@ -1,8 +1,12 @@
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
-		const anch = $node.querySelector('.anchorNav') as HTMLElement
+		const anch = $node.querySelector(".anchorNav") as HTMLElement;
+		const anchPos = $node.querySelector(".anchorPos") as HTMLElement;
+		const neosContentCollection = document.querySelector("main .neos-contentcollection");
+
+		anchPos.style.height = `${neosContentCollection?.getBoundingClientRect().height}px`;
 		let isVisible = false
-		window.addEventListener('scroll', () => {
+		window.addEventListener("scroll", () => {
 			const position = $node.getBoundingClientRect();
 
 			if (position.bottom > window.innerHeight) {
@@ -28,36 +32,79 @@ export default ($node: Element): void => {
 					anch.classList.add("absolute");
 				}
 			}
+
 		})
 
 		const anchorItems = $node.querySelectorAll(".anchorItem") as NodeListOf<HTMLElement>;
 
 		anchorItems.forEach((item , index) => {
-			const progressBar = item.querySelector('.animate-progress-nav') as HTMLElement;
+			const progressBar = item.querySelector(".animate-progress-nav") as HTMLElement;
 			progressBar.style.animationDelay=`calc(var(--itemProgress${index}) * -1s)`;
 		});
 
-		window.addEventListener('scroll', () => {
+		window.addEventListener("scroll", () => {
 			anchorItems.forEach((item , index) => {
 				const ref = item.querySelector(".itemLink")?.getAttribute("href")?.substring(1) as string;
 				const refEl = document.getElementById(ref) as HTMLElement;
 
-				document.body.style.setProperty('--itemProgress' + index, getPercentOfView(refEl, 200));
+				document.body.style.setProperty("--itemProgress" + index, getViewPercentage(refEl));
 			});
+
+			if(anchPos.getBoundingClientRect().bottom <= window.innerHeight) {
+				anch.classList.remove("nav-top-inset");
+				anch.classList.add("nav-bot-inset");
+				anch.classList.remove("fixed");
+				anch.classList.add("absolute");
+			} else if (anchPos.getBoundingClientRect().top <= 0) {
+				anch.classList.add("nav-top-inset");
+				anch.classList.remove("nav-bot-inset");
+				anch.classList.add("fixed");
+				anch.classList.remove("absolute");
+			}
 		});
+
+		window.addEventListener("resize", () => {
+			anchPos.style.height = `${neosContentCollection?.getBoundingClientRect().height}px`;
+		})
 	}
 
-	function getPercentOfView(element:HTMLElement, topDelay = 0): string {
-		const viewportHeight = window.innerHeight;
-		const scrollTop = window.scrollY;
-		const elementOffsetTop = element.offsetTop - topDelay;
-		const elementHeight = element.offsetHeight;
+	function getViewPercentage(element: HTMLElement): string {
+		const viewport = {
+			top: window.pageYOffset,
+			bottom: window.pageYOffset + window.innerHeight
+		};
+		const elementBoundingRect = element.getBoundingClientRect();
+		const elementPos = {
+			top: elementBoundingRect.y + window.pageYOffset,
+			bottom: elementBoundingRect.y + elementBoundingRect.height + window.pageYOffset
+		};
+		const elementHeight = elementBoundingRect.height;
+		let elementHeightInView = elementHeight;
 
-		const distance = scrollTop + viewportHeight - elementOffsetTop;
-		const percentage = Math.round(
-			distance / ((viewportHeight + elementHeight) / 100)
-		);
+		//ELEMENT NOT IN VIEWPORT
+		if (viewport.top > elementPos.bottom || viewport.bottom < elementPos.top) {
+			return "0";
+		}
 
-		return ((Math.min(100, Math.max(0, percentage)) / 100).toString());
+		// ELEMENT COMPLETELY IN VIEWPORT
+		if (viewport.top < elementPos.top && viewport.bottom > elementPos.bottom) {
+			elementHeightInView = elementHeightInView - (elementPos.bottom - viewport.bottom);
+		}
+
+		// Element BIGGER THAN VIEWPORT
+		if (elementPos.top < viewport.top && elementPos.bottom > viewport.bottom) {
+			return "0.9999";
+		}
+
+		if (elementPos.top < viewport.top) {
+			return "0.9999";
+		}
+
+		if (elementPos.bottom > viewport.bottom) {
+			elementHeightInView = elementHeightInView - (elementPos.bottom - viewport.bottom);
+		}
+
+		const percentageInView = (elementHeightInView / window.innerHeight);
+		return percentageInView.toString();
 	}
 }

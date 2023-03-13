@@ -90,7 +90,8 @@ module.exports = {
 			service: {
 				DEFAULT: '#D9D9D9',
 				contrast: 'rgba(0, 0, 0, .85)',
-				darker: '#8A9199'
+				darker: '#8A9199',
+				red: '#FF2424'
 			},
 			default: {
 				DEFAULT: '#075289',
@@ -402,6 +403,12 @@ module.exports = {
 				},
 				'.vertical-lr': {
 					'writing-mode': 'vertical-lr'
+				},
+				'.nav-top-inset' : {
+					'top': '15vh'
+				},
+				'.nav-bot-inset' : {
+					'bottom': '15vh'
 				}
 			}, ['responsive']);
 		}),

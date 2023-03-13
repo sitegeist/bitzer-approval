@@ -12,21 +12,23 @@ prototype(Hoerbiger.Shared:Block.AnchorNavigation) < prototype(PackageFactory.At
 
     renderer = afx`
         <div class="[AnchorNavigation] relative">
-            <div class="anchorNav h-[80vh] flex flex-col absolute p-[10px] left-0 top-[15vh] z-50 gap-xs overflow-hidden font-sans-regular text-xl">
-                <Neos.Fusion:Loop
-                    items={presentationObject.anchors}
-                    itemName="anchor"
-                >
-                    <div
-                        class="vertical-lr flex flex-col gap-1 anchorItem max-h-[12vh]"
-                        @if.1={itemKey<6}
+            <div class="absolute anchorPos">
+                <div class="anchorNav flex flex-col absolute p-[10px] left-0 nav-top-inset z-50 gap-xs overflow-hidden font-sans-regular text-xl">
+                    <Neos.Fusion:Loop
+                        items={presentationObject.anchors}
+                        itemName="anchor"
                     >
-                        <Neos.Fusion:Augmenter class="itemLink rotate-180 truncate">
-                            <Hoerbiger.Shared:Block.Link presentationObject={anchor} />
-                        </Neos.Fusion:Augmenter>
-                        <div class="w-[2px] bg-[red] h-0 animate-progress-nav"></div>
-                    </div>
-                </Neos.Fusion:Loop>
+                        <div
+                            class="vertical-lr flex flex-col gap-1 anchorItem max-h-[12vh]"
+                            @if.1={itemKey<6}
+                        >
+                            <Neos.Fusion:Augmenter class="itemLink rotate-180 truncate">
+                                <Hoerbiger.Shared:Block.Link presentationObject={anchor} />
+                            </Neos.Fusion:Augmenter>
+                            <div class="w-[2px] bg-service-red h-0 animate-progress-nav"></div>
+                        </div>
+                    </Neos.Fusion:Loop>
+                </div>
             </div>
         </div>
     `
