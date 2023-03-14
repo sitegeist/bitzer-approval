@@ -100,7 +100,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new Stack(
                     StackVariant::sm(),
                     Collection::fromIterable(array_filter([
-                        new ScrollToTop(),
                         new Headline(
                             HeadlineSize::medium(),
                             HeadlineColor::text(),
@@ -148,7 +147,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(
                 array_filter([
-                    new ScrollToTop(),
                     new ContentContainer(
                         ContentContainerVariant::stageAfterBreadcrumb(),
                         $stage
@@ -192,7 +190,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(
                 array_filter([
-                    new ScrollToTop(),
                     new ContentContainer(
                         ContentContainerVariant::regularStageAfterBreadcrumb(),
                         $stage
