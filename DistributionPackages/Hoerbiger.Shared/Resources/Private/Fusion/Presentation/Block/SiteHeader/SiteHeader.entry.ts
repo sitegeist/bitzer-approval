@@ -106,13 +106,13 @@ export default ($node: Element): void => {
 		const navMain = $node.querySelector(".navMain") as HTMLElement;
 		const navItems = $node.querySelectorAll(".navItem") as NodeListOf<HTMLElement>;
 
-		navItems.forEach(item => {
+		navItems?.forEach(item => {
 			item.addEventListener('mouseenter', () => {
-				navMain.classList.add('text-light-contrastTransparent');
+				navMain?.classList.add('text-light-contrastTransparent');
 			})
 
 			item.addEventListener('mouseleave', () => {
-				navMain.classList.remove('text-light-contrastTransparent');
+				navMain?.classList.remove('text-light-contrastTransparent');
 			})
 		})
 	}
