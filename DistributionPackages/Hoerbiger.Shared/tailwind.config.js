@@ -58,6 +58,7 @@ module.exports = {
 				lighter: '#F0F0F0',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
+				darkest: '#4E4E4E',
 				contrast: 'rgba(0, 0, 0, .85)',
 				transparent: 'rgba(240, 240, 240, .95)',
 			},

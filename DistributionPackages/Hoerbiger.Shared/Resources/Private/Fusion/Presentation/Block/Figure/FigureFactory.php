@@ -270,7 +270,7 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
                 '(min-width: 1800px)' => PresetIdentifier::xl()
             ]),
             '100w',
-            null,
+            FigureObjectFit::cover(),
             null,
             null
         );
