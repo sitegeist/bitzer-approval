@@ -10,7 +10,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
                 <div class="mx-auto max-w-content-full px-md py-sm">
                     <div
                         data-scrollToTop="scroll"
-                        class="w-full flex justify-center mb-sm"
+                        class="w-full flex justify-center mb-sm cursor-pointer"
                     >
                         <svg width="31" height="17" viewBox="0 0 31 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M1.35786 16.0357L15.5 1.89355L29.6421 16.0357" stroke="white" stroke-width="2"/>
