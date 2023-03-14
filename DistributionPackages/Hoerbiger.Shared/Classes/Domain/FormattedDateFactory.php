@@ -41,4 +41,26 @@ final class FormattedDateFactory extends AbstractComponentPresentationObjectFact
                 return $dateTime->format('F dS, Y');
         }
     }
+    public function createReducedYearDate(\DateTimeInterface $dateTime): string
+    {
+
+        switch ($this->localizationService->getConfiguration()->getCurrentLocale()->getLanguage()) {
+            case 'de':
+                $fullDateParts = $this->datetimeFormatter->formatDateTimeWithCustomPattern(
+                    $dateTime,
+                    'dd. MMMM yy',
+                    $this->localizationService->getConfiguration()->getCurrentLocale()
+                );
+                break;
+            case 'en':
+            default:
+                $fullDateParts = $dateTime->format('F dS, yy');
+                break;
+        }
+        $fullDateParts = explode(' ', $fullDateParts);
+        $fullDateParts[ 2 ] = "'" . $fullDateParts[ 2 ];
+
+        $implode = implode(' ', $fullDateParts);
+        return $implode;
+    }
 }
