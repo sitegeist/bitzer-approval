@@ -23,6 +23,9 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             superLarge = "font-sans-regular text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
             superLarge.@if.1 = ${presentationObject.size.isSuperLarge}
 
+            superLargeLight = "font-sans-light text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
+            superLargeLight.@if.1 = ${presentationObject.size.isSuperLargeLight}
+
             large = "font-sans-regular text-3xl sm:text-4xl lg:text-largeHeadline lg:leading-largeHeadline"
             large.@if.1 = ${presentationObject.size.isLarge}
 

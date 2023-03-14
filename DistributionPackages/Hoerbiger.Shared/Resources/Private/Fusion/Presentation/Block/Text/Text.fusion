@@ -29,7 +29,8 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.isExcite && "prose-excite",
             presentationObject.variant.isExperience && "prose.experience",
             presentationObject.variant.isServiceContrast && "prose-service",
-            presentationObject.variant.isServiceRed && "text-service-red font-sans-bold text-[16px] text-center"
+            presentationObject.variant.isServiceRed && "text-service-red font-sans-bold text-[16px] text-center",
+            presentationObject.variant.isSm && "text-sm"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

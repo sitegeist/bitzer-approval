@@ -42,8 +42,9 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                     </div>
                     <div
                         class={[
-                            "font-sans-bold",
-                            (presentationObject.variant.value == 'news') && "text-xl",
+                            "",
+                            (presentationObject.variant.value == 'news') && "font-sans-bold text-sm",
+                            (presentationObject.variant.value == 'topNews') && "text-2xl",
                             (presentationObject.variant.value == 'yearbook') && "text-2xl",
                             (presentationObject.variant.value == 'hanns') && "text-2xl",
                             (presentationObject.variant.value == 'meta') && "text-sm"

@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class HeadlineSize implements PseudoEnumInterface
 {
     const SIZE_SUPER_LARGE = 'superLarge';
+    const SIZE_SUPER_LARGE_LIGHT = 'superLargeLight';
     const SIZE_EXTRA_LARGE = 'extraLarge';
     const SIZE_LARGE = 'large';
     const SIZE_LARGE_CENTERED = 'largeCentered';
@@ -38,6 +39,7 @@ final class HeadlineSize implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::SIZE_SUPER_LARGE
+                && $string !== self::SIZE_SUPER_LARGE_LIGHT
                 && $string !== self::SIZE_EXTRA_LARGE
                 && $string !== self::SIZE_LARGE
                 && $string !== self::SIZE_LARGE_CENTERED
@@ -57,6 +59,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function superLarge(): self
     {
         return self::from(self::SIZE_SUPER_LARGE);
+    }
+
+    public static function superLargeLight(): self
+    {
+        return self::from(self::SIZE_SUPER_LARGE_LIGHT);
     }
 
     public static function extraLarge(): self
@@ -109,6 +116,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return $this->value === self::SIZE_SUPER_LARGE;
     }
 
+    public function getIsSuperLargeLight(): bool
+    {
+        return $this->value === self::SIZE_SUPER_LARGE_LIGHT;
+    }
+
     public function getIsLargeCentered(): bool
     {
         return $this->value === self::SIZE_LARGE_CENTERED;
@@ -142,6 +154,7 @@ final class HeadlineSize implements PseudoEnumInterface
         return [
             self::from(self::SIZE_EXTRA_LARGE),
             self::from(self::SIZE_SUPER_LARGE),
+            self::from(self::SIZE_SUPER_LARGE_LIGHT),
             self::from(self::SIZE_LARGE),
             self::from(self::SIZE_LARGE_CENTERED),
             self::from(self::SIZE_MEDIUM),

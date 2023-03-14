@@ -204,7 +204,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     ): SlotInterface
     {
         $overViewButton = new Button(
-            ButtonType::regular(),
+            ButtonType::link(),
             ButtonVariant::contrast(),
             new Grid(
                 GridVariant::iconLeft(),
@@ -245,7 +245,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->linkFactory->forLinkToDocument($pressRelease, null)
                     ->asPlainLabel()->withContent(
                         new PressReleaseCard(
-                            PressReleaseCardVariant::news(),
+                            $pressVariant->getIsNews()
+                                ? PressReleaseCardVariant::news()
+                                : PressReleaseCardVariant::topNews(),
                             $pressVariant->getIsNews()
                                 ? Value::fromString($datePublished ?: '')
                                 : null,
@@ -270,8 +272,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 new Grid(
                                     GridVariant::iconLeft(),
                                     Collection::fromIterable(array_filter([
-                                        new Icon('shared', 'arrowRight', IconSize::size_1_5()),
-                                        Value::fromString($this->getLabel('list.learnMore'))
+                                        new Icon('shared', 'arrowRight', IconSize::size_1()),
+                                        new Text(
+                                            TextVariant::sm(),
+                                            Value::fromString($this->getLabel('list.learnMore')),
+                                            false
+                                        )
                                     ]))
                                 ),
                                 null,
@@ -300,7 +306,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 Collection::fromIterable(array_filter([
                                     $inBackend || $topNewsNode->getProperty('headline')
                                         ? new Headline(
-                                            HeadlineSize::superLarge(),
+                                            HeadlineSize::superLargeLight(),
                                             HeadlineColor::text(),
                                             HeadlineType::h2(),
                                             Editable::fromNodeProperty($topNewsNode, 'headline')
