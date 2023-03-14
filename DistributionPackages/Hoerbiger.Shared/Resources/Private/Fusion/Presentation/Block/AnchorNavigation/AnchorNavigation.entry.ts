@@ -2,9 +2,9 @@ export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
 		const anch = $node.querySelector(".anchorNav") as HTMLElement;
 		const anchPos = $node.querySelector(".anchorPos") as HTMLElement;
-		const neosContentCollection = document.querySelector("main .neos-contentcollection");
+		const main = document.querySelector("main") as HTMLElement;
 
-		anchPos.style.height = `${neosContentCollection?.getBoundingClientRect().height}px`;
+		anchPos.style.height = `${main?.getBoundingClientRect().height - window.innerHeight}px`;
 		let isVisible = false
 		window.addEventListener("scroll", () => {
 			const position = $node.getBoundingClientRect();
@@ -64,7 +64,7 @@ export default ($node: Element): void => {
 		});
 
 		window.addEventListener("resize", () => {
-			anchPos.style.height = `${neosContentCollection?.getBoundingClientRect().height}px`;
+			anchPos.style.height = `${main?.getBoundingClientRect().height - window.innerHeight}px`;
 		})
 	}
 
