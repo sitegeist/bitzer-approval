@@ -131,7 +131,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
                 return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
-                return $this->forImageNode($contentNode, $inBackend);
+                return $this->forImageNode($documentNode, $contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.MostWanted':
                 return $this->forMostWantedNode($contentNode, $inBackend, $subgraph, $site);
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
@@ -395,19 +395,37 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forImageNode(TraversableNodeInterface $imageNode, bool $inBackend): SlotInterface
+    public function forImageNode(
+        TraversableNodeInterface $documentNode,
+        TraversableNodeInterface $imageNode,
+        bool $inBackend
+    ): SlotInterface
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($imageNode, $inBackend);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Property "image" is required for content element image.');
         }
 
+        $containerVariant = ContentContainerVariant::regular();
+        $image = $this->figureFactory->forFullWidthImage(
+            $imageSource,
+            Editable::fromNodeProperty($imageNode, 'image__caption')
+        );
+
+        if (
+            $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease' ||
+            $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease' ||
+            $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease'
+        ) {
+            $containerVariant = ContentContainerVariant::pressImage();
+            $image = $this->figureFactory->forSlideStageIcon(
+                $imageSource
+            );
+        }
+
         return new ContentContainer(
-            ContentContainerVariant::regular(),
-            $this->figureFactory->forFullWidthImage(
-                $imageSource,
-                Editable::fromNodeProperty($imageNode, 'image__caption')
-            )
+            $containerVariant,
+            $image
         );
     }
 

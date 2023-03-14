@@ -32,6 +32,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_PRESS_LEFT = 'pressLeft';
     const VARIANT_PRESS_LEFT_BLANK = 'pressLeftBlank';
     const VARIANT_Y_CENTERED = 'yCentered';
+    const VARIANT_PRESS_IMAGE = 'pressImage';
 
     /**
      * @var array<string,self>|self[]
@@ -66,7 +67,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_PRESS_SMALL
                 && $string !== self::VARIANT_PRESS_LEFT
                 && $string !== self::VARIANT_PRESS_LEFT_BLANK
-                && $string !== self::VARIANT_Y_CENTERED) {
+                && $string !== self::VARIANT_Y_CENTERED
+                && $string !== self::VARIANT_PRESS_IMAGE) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -170,6 +172,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_Y_CENTERED);
     }
 
+    public static function pressImage(): self
+    {
+        return self::from(self::VARIANT_PRESS_IMAGE);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -265,6 +272,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_Y_CENTERED;
     }
 
+    public function getIsPressImage(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_IMAGE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -289,7 +301,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_PRESS_LEFT),
             self::from(self::VARIANT_PRESS_SMALL),
             self::from(self::VARIANT_PRESS_LEFT_BLANK),
-            self::from(self::VARIANT_Y_CENTERED)
+            self::from(self::VARIANT_Y_CENTERED),
+            self::from(self::VARIANT_PRESS_IMAGE)
         ];
     }
 
