@@ -47,13 +47,13 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ? ProductClass::from($documentNode->getProperty('productClass'))
             : null;
         $theme = $productClass ? $productClass->toTheme() : null;
-        $media = $productClass && !$productClass->getIsDefault()
-            ? new SvgImage(
-                $this->resolveProductClassImageUri($productClass),
-                $productClass->getLabel(),
-                $productClass->getLabel()
-            )
-            : null;
+//        $media = $productClass && !$productClass->getIsDefault()
+//            ? new SvgImage(
+//                $this->resolveProductClassImageUri($productClass),
+//                $productClass->getLabel(),
+//                $productClass->getLabel()
+//            )
+//            : null;
 
         $backgroundImageSource = $this->imageSourceFactory->forImageMixin($documentNode, $inBackend);
         if (!$backgroundImageSource) {
@@ -83,7 +83,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 Editable::fromNodeProperty($documentNode, 'abstract'),
                 false
             ),
-            $media,
+            null,
             $background
         );
     }
