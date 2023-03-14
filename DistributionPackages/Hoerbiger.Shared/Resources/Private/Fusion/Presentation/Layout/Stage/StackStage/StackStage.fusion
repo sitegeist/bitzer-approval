@@ -37,6 +37,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
             >
                 <div
                     @if.1={presentationObject.media}
+                    class="w-full"
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
                 </div>

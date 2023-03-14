@@ -1,0 +1,15 @@
+'Hoerbiger.HoerbigerCom:Content.NewsQuotation':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Quotation': true
+  ui:
+    icon: comment-alt
+    label: 'News-zitat'
+  properties:
+    division:
+        options:
+          preset: 'rte.plain'
+        ui:
+          inline:
+            editorOptions:
+              placeholder: 'Bitte Abteilung eingeben'

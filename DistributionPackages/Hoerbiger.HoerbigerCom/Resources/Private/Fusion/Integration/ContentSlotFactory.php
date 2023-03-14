@@ -38,6 +38,8 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\NewsQuotation\NewsQuotation;
+use Hoerbiger\Shared\Presentation\Block\NewsQuotation\NewsQuotationVariant;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
@@ -136,6 +138,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forMostWantedNode($contentNode, $inBackend, $subgraph, $site);
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
                 return $this->forQuotationNode($contentNode, $theme);
+            case 'Hoerbiger.HoerbigerCom:Content.NewsQuotation':
+                return $this->forNewsQuotationNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Square':
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait':
@@ -503,6 +507,19 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 QuotationVariant::tryFromTheme($theme),
                 Editable::fromNodeProperty($quotationNode, 'text'),
                 Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+            )
+        );
+    }
+
+    public function forNewsQuotationNode(TraversableNodeInterface $NewsquotationNode, ?Theme $theme): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::press(),
+            new NewsQuotation(
+                NewsQuotationVariant::tryFromTheme($theme),
+                Editable::fromNodeProperty($NewsquotationNode, 'text'),
+                Editable::fromNodeProperty($NewsquotationNode, 'spokenByCharacter'),
+                Editable::fromNodeProperty($NewsquotationNode, 'division')
             )
         );
     }

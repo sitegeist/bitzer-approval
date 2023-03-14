@@ -11,7 +11,7 @@
         nodeTypes:
           '*': false
           'Hoerbiger.HoerbigerCom:Content.Image': true
-          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.NewsQuotation': true
           'Hoerbiger.HoerbigerCom:Content.TextWithMetaText': true
   ui:
     icon: header
