@@ -174,7 +174,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 array_filter([
                     new ScrollToTop(),
                     new ContentContainer(
-                        ContentContainerVariant::regularStageAfterBreadcrumb(),
+                        ContentContainerVariant::stackStage(),
                         $stage
                     ),
                     ! $pageVariant->getIsNews()

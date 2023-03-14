@@ -24,6 +24,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_BLANKY = 'blankY';
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
+    const VARIANT_STACKSTAGE = 'stackStage';
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
     const VARIANT_HALF_WITH = 'halfWidth';
     const VARIANT_PRESS = 'press';
@@ -59,6 +60,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
+                && $string !== self::VARIANT_STACKSTAGE
                 && $string !== self::VARIANT_HALF_WITH
                 && $string !== self::VARIANT_PRESS
                 && $string !== self::VARIANT_PRESS_SMALL
@@ -126,6 +128,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function regularStageAfterBreadcrumb(): self
     {
         return self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB);
+    }
+
+    public static function stackStage(): self
+    {
+        return self::from(self::VARIANT_STACKSTAGE);
     }
 
     public static function regularWithoutBottom(): self
@@ -218,6 +225,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_REGULARSTAGEAFTERBREADCRUMB;
     }
 
+    public function getIsStackStage(): bool
+    {
+        return $this->value === self::VARIANT_STACKSTAGE;
+    }
+
     public function getIsRegularWithoutBottom(): bool
     {
         return $this->value === self::VARIANT_REGULAR_WITHOUT_BOTTOM;
@@ -271,6 +283,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM),
+            self::from(self::VARIANT_STACKSTAGE),
             self::from(self::VARIANT_HALF_WITH),
             self::from(self::VARIANT_PRESS),
             self::from(self::VARIANT_PRESS_LEFT),

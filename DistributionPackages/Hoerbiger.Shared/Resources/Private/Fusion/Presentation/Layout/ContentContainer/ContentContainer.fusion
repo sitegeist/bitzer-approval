@@ -27,6 +27,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isRegularX && "max-w-content-full mx-auto px-md bg-light",
                 presentationObject.variant.isStageAfterBreadcrumb && "max-w-content-full mx-auto p-md sm:p-sm py-0 sm:py-0 bg-light",
                 presentationObject.variant.isRegularStageAfterBreadcrumb && "max-w-content-full mx-auto px-md pb-contentcontainer pt-0 bg-light",
+                presentationObject.variant.isStackStage && "max-w-content-full mx-auto px-md py-0 bg-light",
                 presentationObject.variant.isBlank && "w-full",
                 presentationObject.variant.isBlankY && "w-full py-contentcontainer",
                 presentationObject.variant.isHalfWidth && "border-brand w-full sm:max-w-[50%]",
