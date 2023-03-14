@@ -69,7 +69,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
@@ -114,7 +113,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularStageAfterBreadcrumb(),
                     $introSection

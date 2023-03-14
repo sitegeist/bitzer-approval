@@ -59,7 +59,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return new Page(
             $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
             Collection::fromIterable(array_filter([
-                new ScrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage
