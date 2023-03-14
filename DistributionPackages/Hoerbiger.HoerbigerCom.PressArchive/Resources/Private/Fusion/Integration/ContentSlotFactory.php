@@ -246,7 +246,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ->asPlainLabel()->withContent(
                         new PressReleaseCard(
                             $pressVariant->getIsNews()
-                                ? PressReleaseCardVariant::news()
+                                ? PressReleaseCardVariant::top()
                                 : PressReleaseCardVariant::topNews(),
                             $pressVariant->getIsNews()
                                 ? Value::fromString($datePublished ?: '')

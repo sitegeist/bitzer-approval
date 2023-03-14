@@ -15,6 +15,7 @@ final class PressReleaseCardVariant implements PseudoEnumInterface
 {
     const VARIANT_META = 'meta';
     const VARIANT_NEWS = 'news';
+    const VARIANT_TOP = 'top';
     const VARIANT_TOP_NEWS = 'topNews';
     const VARIANT_HANNS = 'hanns';
     const VARIANT_YEARBOOK = 'yearbook';
@@ -36,6 +37,7 @@ final class PressReleaseCardVariant implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_META
                 && $string !== self::VARIANT_NEWS
+                && $string !== self::VARIANT_TOP
                 && $string !== self::VARIANT_TOP_NEWS
                 && $string !== self::VARIANT_HANNS
                 && $string !== self::VARIANT_YEARBOOK) {
@@ -55,6 +57,11 @@ final class PressReleaseCardVariant implements PseudoEnumInterface
     public static function news(): self
     {
         return self::from(self::VARIANT_NEWS);
+    }
+
+    public static function top(): self
+    {
+        return self::from(self::VARIANT_TOP);
     }
 
     public static function topNews(): self
@@ -82,6 +89,10 @@ final class PressReleaseCardVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_NEWS;
     }
 
+    public function getIsTop(): bool
+    {
+        return $this->value === self::VARIANT_TOP;
+    }
     public function getIsTopNews(): bool
     {
         return $this->value === self::VARIANT_TOP_NEWS;
@@ -105,6 +116,7 @@ final class PressReleaseCardVariant implements PseudoEnumInterface
         return [
             self::from(self::VARIANT_META),
             self::from(self::VARIANT_NEWS),
+            self::from(self::VARIANT_TOP),
             self::from(self::VARIANT_TOP_NEWS),
             self::from(self::VARIANT_HANNS),
             self::from(self::VARIANT_YEARBOOK)
