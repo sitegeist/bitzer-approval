@@ -27,6 +27,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
     const VARIANT_HALF_WITH = 'halfWidth';
     const VARIANT_PRESS = 'press';
+    const VARIANT_PRESS_SMALL = 'pressSmall';
     const VARIANT_PRESS_LEFT = 'pressLeft';
     const VARIANT_PRESS_LEFT_BLANK = 'pressLeftBlank';
     const VARIANT_Y_CENTERED = 'yCentered';
@@ -60,6 +61,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
                 && $string !== self::VARIANT_HALF_WITH
                 && $string !== self::VARIANT_PRESS
+                && $string !== self::VARIANT_PRESS_SMALL
                 && $string !== self::VARIANT_PRESS_LEFT
                 && $string !== self::VARIANT_PRESS_LEFT_BLANK
                 && $string !== self::VARIANT_Y_CENTERED) {
@@ -139,6 +141,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function press(): self
     {
         return self::from(self::VARIANT_PRESS);
+    }
+
+    public static function pressSmall(): self
+    {
+        return self::from(self::VARIANT_PRESS_SMALL);
     }
 
     public static function pressLeft(): self
@@ -226,6 +233,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_PRESS;
     }
 
+    public function getIsPressSmall(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_SMALL;
+    }
+
     public function getIsPressLeft(): bool
     {
         return $this->value === self::VARIANT_PRESS_LEFT;
@@ -262,6 +274,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_HALF_WITH),
             self::from(self::VARIANT_PRESS),
             self::from(self::VARIANT_PRESS_LEFT),
+            self::from(self::VARIANT_PRESS_SMALL),
             self::from(self::VARIANT_PRESS_LEFT_BLANK),
             self::from(self::VARIANT_Y_CENTERED)
         ];

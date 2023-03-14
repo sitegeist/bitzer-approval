@@ -31,6 +31,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isBlankY && "w-full py-contentcontainer",
                 presentationObject.variant.isHalfWidth && "border-brand w-full sm:max-w-[50%]",
                 presentationObject.variant.isPress && "max-w-[1050px] mx-auto bg-light",
+                presentationObject.variant.isPressSmall && "max-w-[800px] mx-auto bg-light",
                 presentationObject.variant.isPressLeft && "max-w-[800px] pb-sm",
                 presentationObject.variant.isPressLeftBlank && "max-w-[800px]",
                 presentationObject.variant.isYCentered && "w-full h-full flex items-center"

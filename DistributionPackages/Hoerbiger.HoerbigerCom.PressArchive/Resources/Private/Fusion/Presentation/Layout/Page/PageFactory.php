@@ -153,7 +153,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
         $content = $pageVariant->getIsNews()
             ? new ContentContainer(
-                ContentContainerVariant::press(),
+                ContentContainerVariant::pressSmall(),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             )
             : new ContentContainer(

@@ -79,7 +79,9 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 )
             ),
             new Headline(
-                HeadlineSize::large(),
+                $pressVariant->getIsNews()
+                    ? HeadlineSize::tile()
+                    : HeadlineSize::large(),
                 HeadlineColor::text(),
                 HeadlineType::h1(),
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
