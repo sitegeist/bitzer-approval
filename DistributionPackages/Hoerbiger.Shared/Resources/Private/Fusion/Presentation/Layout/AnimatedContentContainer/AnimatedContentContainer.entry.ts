@@ -4,6 +4,8 @@ export default ($node: Element): void => {
 		const invisibleClass = $node.dataset.animationOut ?? "";
 		const fadeOutOffset = 400;
 		let isVisible = false;
+		let lastScrollPosition = 0;
+		let isScrollUp = false;
 
 		// Page load not on Top
 		const position = $node.getBoundingClientRect();
@@ -14,20 +16,24 @@ export default ($node: Element): void => {
 
 		// EventListener
 		window.addEventListener("scroll", function() {
+			const scrollPosition = window.scrollY || document.documentElement.scrollTop;
 			const position = $node.getBoundingClientRect();
 
+			isScrollUp = scrollPosition <= lastScrollPosition;
+			lastScrollPosition = scrollPosition <= 0 ? 0 : scrollPosition;
+
 			// remove from page
-			if (position.bottom > (window.innerHeight - fadeOutOffset)) {
+			if (isScrollUp && position.bottom > (window.innerHeight - fadeOutOffset)) {
 				if (isVisible) {
 					isVisible = false;
 					animateElement(visibleClass, invisibleClass, isVisible, $node);
+					return;
 				}
-				return;
 			}
 
 			if (!isVisible) {
 				// checking whether fully visible
-				if (position.top >= 0 && position.bottom <= window.innerHeight) {
+				if (!isScrollUp && position.top >= 0 && position.bottom <= window.innerHeight) {
 					isVisible = true;
 					animateElement(visibleClass, invisibleClass, isVisible, $node);
 				}
@@ -47,6 +53,6 @@ export const animateElement = (
 	container: HTMLElement
 ) => {
 	visibleClass && container.classList.toggle(visibleClass, show);
-	container.classList.toggle("opacity-0", false);
+	container.classList.toggle("opacity-0", !show);
 	invisibleClass && container.classList.toggle(invisibleClass, !show);
 };
