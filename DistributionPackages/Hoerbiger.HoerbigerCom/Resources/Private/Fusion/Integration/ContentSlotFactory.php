@@ -295,7 +295,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         ContentContainerVariant::yCentered(),
                         $inBackend || $textWithMetaTextNode->getProperty('meta_text')
                             ? new Stack(
-                                StackVariant::xs(),
+                                StackVariant::metaPress(),
                                 Collection::fromIterable(array_filter([
                                     new Separator(
                                         SeparatorVariant::boldRed(),
