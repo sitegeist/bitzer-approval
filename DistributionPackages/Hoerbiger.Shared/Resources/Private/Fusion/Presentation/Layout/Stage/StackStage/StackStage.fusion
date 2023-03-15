@@ -2,10 +2,10 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={[
             "[Layout.StackStage (" + presentationObject.variant.value + ")]",
-            "relative w-full flex flex-col pt-sm"
+            "relative w-full flex flex-col pt-sm space-y-[40px]"
         ]}>
             <div
-                class="uppercase font-sans-bold pb-ch"
+                class="uppercase font-sans-bold"
                 @if.1={presentationObject.metaline}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.metaline}/>
@@ -37,20 +37,20 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
             >
                 <div
                     @if.1={presentationObject.media}
-                    class="w-full"
+                    class="w-full pt-[5px]"
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
                 </div>
                 <div
                     class={[
-                        "bg-stage-press  translate-y-[-50px]",
-                        presentationObject.variant.value == 'press' && "w-2/3",
-                        presentationObject.variant.value == 'pressLarge' && "ml-[50px] w-1/2"
+                        "bg-stage-press",
+                        presentationObject.variant.value == 'press' && "w-2/3 translate-y-[-70px]",
+                        presentationObject.variant.value == 'pressLarge' && "ml-[110px] w-1/2 translate-y-[-140px]"
                     ]}
                     @if.1={presentationObject.text}
                 >
                     <div class={[
-                        "pt-xs pr-xs",
+                        "pt-xs pr-xs font-sans-bold",
                         presentationObject.variant.value == 'press' && "pl-0",
                         presentationObject.variant.value == 'pressLarge' && "pl-xs"
                     ]}>

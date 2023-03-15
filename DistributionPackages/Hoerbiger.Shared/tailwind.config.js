@@ -352,6 +352,7 @@ module.exports = {
 				'6xl': ['3.75rem', {
 					lineHeight: '1.3em',
 				}],
+				'space14': '14px',
 			},
 
 			boxShadow: {
