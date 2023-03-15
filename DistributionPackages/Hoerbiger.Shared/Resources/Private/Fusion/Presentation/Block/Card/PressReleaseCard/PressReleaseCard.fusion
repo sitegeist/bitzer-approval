@@ -44,7 +44,7 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                         class={[
                             (presentationObject.variant.value == 'news') && "font-sans-bold text-xl",
                             (presentationObject.variant.value == 'top') && "font-sans-bold text-sm",
-                            (presentationObject.variant.value == 'topNews') && "text-2xl",
+                            (presentationObject.variant.value == 'topNews') && "text-lg",
                             (presentationObject.variant.value == 'yearbook') && "text-2xl",
                             (presentationObject.variant.value == 'hanns') && "text-2xl",
                             (presentationObject.variant.value == 'meta') && "text-sm"
