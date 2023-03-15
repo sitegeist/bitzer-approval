@@ -18,7 +18,7 @@ prototype(Hoerbiger.Shared:Block.Separator) < prototype(PackageFactory.AtomicFus
                 presentationObject.variant.value == "fullWidthWithContent" && "w-full border-t-[1px] border-service-border"
             ]}
         >
-            <div class="w-full" @if.1={presentationObject.content}>
+            <div class="w-full text-space14 leading-5 pt-ch [&_strong]:font-sans-bold" @if.1={presentationObject.content}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     presentationObject={presentationObject.content}
                 />
