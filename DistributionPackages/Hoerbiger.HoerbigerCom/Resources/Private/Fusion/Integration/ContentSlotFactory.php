@@ -515,11 +515,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         return new ContentContainer(
             ContentContainerVariant::press(),
-            new NewsQuotation(
-                NewsQuotationVariant::tryFromTheme($theme),
-                Editable::fromNodeProperty($NewsquotationNode, 'text'),
-                Editable::fromNodeProperty($NewsquotationNode, 'spokenByCharacter'),
-                Editable::fromNodeProperty($NewsquotationNode, 'division')
+            new ContentContainer(
+                ContentContainerVariant::blankY(),
+                new NewsQuotation(
+                    NewsQuotationVariant::tryFromTheme($theme),
+                    Editable::fromNodeProperty($NewsquotationNode, 'text'),
+                    Editable::fromNodeProperty($NewsquotationNode, 'spokenByCharacter'),
+                    Editable::fromNodeProperty($NewsquotationNode, 'division')
+                )
             )
         );
     }
