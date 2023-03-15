@@ -80,7 +80,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ),
             new Headline(
                 $pressVariant->getIsNews()
-                    ? HeadlineSize::tile()
+                    ? HeadlineSize::tiny()
                     : HeadlineSize::large(),
                 HeadlineColor::text(),
                 HeadlineType::h1(),
