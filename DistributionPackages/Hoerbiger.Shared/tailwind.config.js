@@ -271,6 +271,7 @@ module.exports = {
 				'affiliates-map-list': '70% 1fr',
 				'people-story': '25% 1fr',
 				'2-33-auto': '33% auto',
+				'2-160-auto': '160px auto',
 			},
 
 			gridTemplateRows: {
