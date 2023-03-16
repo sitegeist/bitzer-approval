@@ -45,7 +45,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
                     class={[
                         "bg-stage-press",
                         presentationObject.variant.value == 'press' && "w-2/3 translate-y-[-70px]",
-                        presentationObject.variant.value == 'pressLarge' && "ml-[110px] w-1/2 translate-y-[-140px]"
+                        presentationObject.variant.value == 'pressLarge' && "ml-[110px] w-1/2 translate-y-[-140px] min-h-[140px]"
                     ]}
                     @if.1={presentationObject.text}
                 >
