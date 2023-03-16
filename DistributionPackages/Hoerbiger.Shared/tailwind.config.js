@@ -8,6 +8,9 @@ const MAX_CONTENT_WIDTH = '1800px';
 const MIN_TOUCH = '48px';
 
 const OFFCANVAS_WIDTH = '340px';
+const HEADER_HEIGHT = 127;
+const NAV_HEIGHT = `${HEADER_HEIGHT + 340}px`;
+const HOMEPAGE_TEASER_TEXT_WIDTH = '800px';
 
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
@@ -303,6 +306,8 @@ module.exports = {
 			height: {
 				...SPACES,
 				touch: MIN_TOUCH,
+				header: HEADER_HEIGHT + 'px',
+				nav: NAV_HEIGHT
 			},
 
 			space: {
@@ -333,6 +338,7 @@ module.exports = {
 
 			inset: {
 				...SPACES,
+				revertHeaderOffset: -HEADER_HEIGHT + 'px'
 			},
 
 			borderRadius: {
