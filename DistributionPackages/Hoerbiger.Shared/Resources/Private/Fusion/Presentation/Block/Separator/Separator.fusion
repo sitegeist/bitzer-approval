@@ -14,11 +14,16 @@ prototype(Hoerbiger.Shared:Block.Separator) < prototype(PackageFactory.AtomicFus
             class={[
                 "[Block.Separator ( " + presentationObject.variant + ")]",
                 presentationObject.variant.value == "boldRed" && "w-full border-t-8 border-service-red",
-                presentationObject.variant.value == "bold" && "w-full border-t-[12px] border-service-border w-1/3",
+                presentationObject.variant.value == "bold" && "border-t-[12px] border-service-border w-1/3",
                 presentationObject.variant.value == "fullWidthWithContent" && "w-full border-t-[1px] border-service-border"
             ]}
         >
-            <div class="w-full text-space14 leading-5 pt-ch [&_strong]:font-sans-bold" @if.1={presentationObject.content}>
+            <div class={[
+                "text-space14 leading-5 pt-ch [&_strong]:font-sans-bold",
+                presentationObject.variant.value == "boldRed" && "w-full"
+            ]}
+                @if.1={presentationObject.content}
+            >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     presentationObject={presentationObject.content}
                 />
