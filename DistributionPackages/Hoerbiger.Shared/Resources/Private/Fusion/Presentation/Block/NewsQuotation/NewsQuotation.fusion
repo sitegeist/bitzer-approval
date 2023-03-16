@@ -19,7 +19,7 @@ prototype(Hoerbiger.Shared:Block.NewsQuotation) < prototype(PackageFactory.Atomi
                 "flex flex-col sm:w-1/2"
             ]}>
                 <div class={[
-                    "font-serif-regular italic leading-tight text-3xl text-neutral-darkest"
+                    "font-serif-light italic leading-tight text-3xl text-neutral-darkest"
                 ]}>
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
                 </div>
