@@ -270,7 +270,7 @@ module.exports = {
 				'2-icon-1fr': '1.2em 1fr',
 				'affiliates-map-list': '70% 1fr',
 				'people-story': '25% 1fr',
-				'2-33-auto': '33% auto',
+				'2-33-auto': '30% 1fr',
 				'2-160-auto': '160px auto',
 			},
 
@@ -437,6 +437,9 @@ module.exports = {
 				},
 				'.bg-stage-press': {
 					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
+				},
+				'.card-hyphens': {
+					' hyphens': 'auto',
 				}
 			}, ['responsive']);
 		}),
