@@ -292,23 +292,26 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::twoColumnsPress(),
                 Collection::fromIterable([
                     new ContentContainer(
-                        ContentContainerVariant::yCentered(),
-                        $inBackend || $textWithMetaTextNode->getProperty('meta_text')
-                            ? new Stack(
-                                StackVariant::metaPress(),
-                                Collection::fromIterable(array_filter([
-                                    new Separator(
-                                        SeparatorVariant::boldRed(),
-                                        null
-                                    ),
-                                    new Text(
-                                        TextVariant::serviceRed(),
-                                        Editable::fromNodeProperty($textWithMetaTextNode, 'meta_text'),
-                                        false
-                                    )
-                                ]))
-                            )
-                            : Value::fromString('')
+                        ContentContainerVariant::visibleMd(),
+                        new ContentContainer(
+                            ContentContainerVariant::yCentered(),
+                            $inBackend || $textWithMetaTextNode->getProperty('meta_text')
+                                ? new Stack(
+                                    StackVariant::metaPress(),
+                                    Collection::fromIterable(array_filter([
+                                        new Separator(
+                                            SeparatorVariant::boldRed(),
+                                            null
+                                        ),
+                                        new Text(
+                                            TextVariant::serviceRed(),
+                                            Editable::fromNodeProperty($textWithMetaTextNode, 'meta_text'),
+                                            false
+                                        )
+                                    ]))
+                                )
+                                : Value::fromString('')
+                        )
                     ),
                     new Stack(
                         StackVariant::xs(),

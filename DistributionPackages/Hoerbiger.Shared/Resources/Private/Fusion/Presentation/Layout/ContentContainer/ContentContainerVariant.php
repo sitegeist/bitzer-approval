@@ -33,6 +33,9 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_PRESS_LEFT_BLANK = 'pressLeftBlank';
     const VARIANT_Y_CENTERED = 'yCentered';
     const VARIANT_PRESS_IMAGE = 'pressImage';
+    const VARIANT_VISIBLE_SM = 'visibleSm';
+    const VARIANT_VISIBLE_MD = 'visibleMd';
+    const VARIANT_VISIBLE_LG = 'visibleLg';
 
     /**
      * @var array<string,self>|self[]
@@ -68,6 +71,9 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_PRESS_LEFT
                 && $string !== self::VARIANT_PRESS_LEFT_BLANK
                 && $string !== self::VARIANT_Y_CENTERED
+                && $string !== self::VARIANT_VISIBLE_SM
+                && $string !== self::VARIANT_VISIBLE_MD
+                && $string !== self::VARIANT_VISIBLE_LG
                 && $string !== self::VARIANT_PRESS_IMAGE) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -170,6 +176,21 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function yCentered(): self
     {
         return self::from(self::VARIANT_Y_CENTERED);
+    }
+
+    public static function visibleSm(): self
+    {
+        return self::from(self::VARIANT_VISIBLE_SM);
+    }
+
+    public static function visibleMd(): self
+    {
+        return self::from(self::VARIANT_VISIBLE_MD);
+    }
+
+    public static function visibleLg(): self
+    {
+        return self::from(self::VARIANT_VISIBLE_LG);
     }
 
     public static function pressImage(): self
@@ -277,6 +298,21 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_PRESS_IMAGE;
     }
 
+    public function getIsVisibleSm(): bool
+    {
+        return $this->value === self::VARIANT_VISIBLE_SM;
+    }
+
+    public function getIsVisibleMd(): bool
+    {
+        return $this->value === self::VARIANT_VISIBLE_MD;
+    }
+
+    public function getIsVisibleLg(): bool
+    {
+        return $this->value === self::VARIANT_VISIBLE_LG;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -302,7 +338,10 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_PRESS_SMALL),
             self::from(self::VARIANT_PRESS_LEFT_BLANK),
             self::from(self::VARIANT_Y_CENTERED),
-            self::from(self::VARIANT_PRESS_IMAGE)
+            self::from(self::VARIANT_PRESS_IMAGE),
+            self::from(self::VARIANT_VISIBLE_SM),
+            self::from(self::VARIANT_VISIBLE_MD),
+            self::from(self::VARIANT_VISIBLE_LG)
         ];
     }
 
