@@ -408,21 +408,21 @@ module.exports = {
 					'border-width': `0 0 ${(Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
 					'border-color': `transparent transparent #FFFFFF transparent`,
 				},
-				'.press-overview-grid': {
-					'display': 'grid',
-					'grid-gap': '50px',
-					'grid-template-columns': 'repeat(3, 1fr)',
-					'grid-auto-rows': '1px',
-				},
 				'.press-overview-top-news-grid': {
 					'display': 'grid',
 					'grid-gap': '50px',
 					'grid-template-columns': 'repeat(4, 1fr)',
 					'grid-auto-rows': '1px',
 				},
+				'.press-overview-grid': {
+					'display': 'grid',
+					'grid-gap': '24px',
+					'grid-template-columns': 'repeat(3, 1fr)',
+					'grid-auto-rows': '1px',
+				},
 				'.press-overview-grid-tablet': {
 					'display': 'grid',
-					'grid-gap': '50px',
+					'grid-gap': '16px',
 					'grid-template-columns': 'repeat(2, 1fr)',
 					'grid-auto-rows': '1px',
 				},
