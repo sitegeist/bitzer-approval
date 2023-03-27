@@ -35,11 +35,14 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
                 base = "px-8 rounded-full cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch"
                 text = "font-semibold"
 
-                cta = "bg-brand text-brand-contrast font-sans-bold"
+                cta = "bg-brand text-brand-contrast font-sans-bold text-brand"
                 cta.@if.1 = ${presentationObject.variant.isCta}
 
                 ctaContrast = "bg-light text-standard font-sans-bold"
                 ctaContrast.@if.1 = ${presentationObject.variant.isCtaContrast}
+
+                plain = "bg-light text-standard font-sans-bold px-0"
+                plain.@if.1 = ${presentationObject.variant.isPlain}
             }
 
             href = ${presentationObject.href}

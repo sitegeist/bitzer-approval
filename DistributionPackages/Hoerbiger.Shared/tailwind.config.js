@@ -486,6 +486,9 @@ module.exports = {
 					'mix-blend-mode': 'normal',
 					'opacity': '0.6'
 				},
+				'.bg-nav-card': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
+				},
 			}, ['responsive']);
 		}),
 		plugin(({addVariant, e}) => {

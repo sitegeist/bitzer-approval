@@ -4,12 +4,15 @@ prototype(Hoerbiger.Shared:Block.Card.NavigationCard) < prototype(Hoerbiger.Shar
             "[Block.Card.NavigationCard]",
             "flex flex-col"
         ]}>
-            <div class="w-full h-0 pt-ratio-5-4 relative z-30">
+            <div class="w-full h-0 pt-ratio-16-10 relative z-30">
                 <div class="absolute inset-0">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
                 </div>
             </div>
-            <div class="flex-grow flex flex-col space-y-xs p-md sm:p-xs mx-sm mt-minus-sm bg-light z-50 border border-neutral-lighter shadow-textbox">
+            <div class={[
+                "flex-grow flex flex-col space-y-xs p-md sm:p-xs mx-sm mt-minus-md bg-light z-50",
+                "border border-neutral-lighter shadow-textbox bg-nav-card"
+            ]}>
                 <div
                     @if.1={presentationObject.subheader}
                     class="uppercase font-sans-bold text-base"
