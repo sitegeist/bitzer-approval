@@ -42,7 +42,6 @@ class AffiliateRepository
         }
         $countryLabelKey = ($locale === 'de' ? 'country_label_DE' : 'country_label_EN');
 
-
         foreach ($dataSet->getActiveSheet()->getRowIterator(12) as $row) {
             $legalNameCell = $row->getCellIterator($columnsByKey['company'])->current();
             $postalCodeCell = $row->getCellIterator($columnsByKey['zipcode'])->current();
@@ -76,13 +75,13 @@ class AffiliateRepository
 
             $affiliates[] = new Affiliate(
                 (string)$row->getRowIndex(),
-                $legalNameCell->getValue(),
-                $streetAddressCell->getValue(),
-                $postalCodeCell->getValue(),
-                $addressLocalityCell->getValue(),
-                $addressCountryCell->getValue(),
-                $emailCell->getValue(),
-                $telephoneCell->getValue(),
+                (string)$legalNameCell->getValue(),
+                (string)$streetAddressCell->getValue(),
+                (string)$postalCodeCell->getValue(),
+                (string)$addressLocalityCell->getValue(),
+                (string)$addressCountryCell->getValue(),
+                (string)$emailCell->getValue(),
+                (string)$telephoneCell->getValue(),
                 $coordinates->getLatitude(),
                 $coordinates->getLongitude()
             );
