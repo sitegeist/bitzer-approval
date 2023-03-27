@@ -31,7 +31,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
             <div
                 class={[
                         "mt-sm",
-                        presentationObject.variant.value == 'press' && "w-[1050px] mx-auto",
+                        presentationObject.variant.value == 'press' && "max-w-[1050px] mx-auto",
                         presentationObject.variant.value == 'pressLarge' && "w-[1600px] mx-auto"
                     ]}
             >

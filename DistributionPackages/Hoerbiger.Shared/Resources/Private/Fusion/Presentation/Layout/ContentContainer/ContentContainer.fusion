@@ -36,7 +36,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isPressLeft && "max-w-[800px] pb-sm",
                 presentationObject.variant.isPressLeftBlank && "max-w-[800px]",
                 presentationObject.variant.isYCentered && "w-full h-full flex items-center",
-                presentationObject.variant.isPressImage && "w-full h-[600px] mx-auto px-md py-contentcontainer"
+                presentationObject.variant.isPressImage && "w-full md:h-[600px] mx-auto px-md py-contentcontainer"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </div>
