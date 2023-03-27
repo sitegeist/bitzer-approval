@@ -57,7 +57,11 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                     </div>
                 </div>
                 <div
-                    class="card-hyphens"
+                    class={[
+                        "card-hyphens",
+                        presentationObject.variant.value == 'top' && "text-[14px]",
+                        presentationObject.variant.value == 'topNews' && "text-[14px]"
+                    ]}
                     @if.1={presentationObject.supportingText}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
