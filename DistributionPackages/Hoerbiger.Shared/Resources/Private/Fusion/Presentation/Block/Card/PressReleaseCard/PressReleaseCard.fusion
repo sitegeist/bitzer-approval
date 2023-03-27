@@ -19,7 +19,7 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                         presentationObject={presentationObject.media}
                     />
                 </div>
-                <div @if.1={!presentationObject.media && presentationObject.variant.value == 'news'}>
+                <div @if.1={!presentationObject.media && (presentationObject.variant.value == 'news' || presentationObject.variant.value == 'top')}>
                     <div class="border-t-[1px] border-service-border"></div>
                 </div>
 
