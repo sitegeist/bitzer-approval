@@ -54,6 +54,12 @@ final class Messenger
      */
     protected $countryDirectory;
 
+    /**
+     * @Flow\InjectConfiguration(path="providerNotification.recipient")
+     * @var array<string,string>
+     */
+    protected $providerRecipient;
+
     public function sendProviderNotification(SendContactRequest $command): void
     {
         $view = new FusionView();
@@ -155,7 +161,7 @@ final class Messenger
     private function resolveProviderRecipient(SendContactRequest $command): array
     {
         return [
-            'info@hoerbiger.com' => 'Hoerbiger'
+            $this->providerRecipient['mail'] => $this->providerRecipient['name'],
         ];
     }
 

@@ -1,0 +1,6 @@
+Hoerbiger:
+  HoerbigerCom:
+    providerNotification:
+      recipient:
+        name: ''
+        mail: ''
