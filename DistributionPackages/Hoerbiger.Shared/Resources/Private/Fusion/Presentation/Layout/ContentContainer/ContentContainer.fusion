@@ -36,7 +36,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isPressLeft && "max-w-[800px] pb-sm",
                 presentationObject.variant.isPressLeftBlank && "max-w-[800px]",
                 presentationObject.variant.isYCentered && "w-full h-full flex items-center",
-                presentationObject.variant.isPressImage && "w-full md:h-[600px] mx-auto px-md py-contentcontainer",
+                presentationObject.variant.isPressImage && "w-full md:h-[600px] mx-auto px-0 md:px-md py-contentcontainer",
                 presentationObject.variant.isVisibleSm && "hidden sm:block",
                 presentationObject.variant.isVisibleMd && "hidden md:block",
                 presentationObject.variant.isVisibleLg && "hidden lg:block"
