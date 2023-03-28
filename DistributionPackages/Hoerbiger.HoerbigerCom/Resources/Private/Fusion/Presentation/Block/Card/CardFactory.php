@@ -92,7 +92,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($headlineProperty) {
             $headline = new Headline(
-                HeadlineSize::verySmall(),
+                HeadlineSize::verySmallRegular(),
                 HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
                 HeadlineType::div(),
                 Value::fromString($headlineProperty)

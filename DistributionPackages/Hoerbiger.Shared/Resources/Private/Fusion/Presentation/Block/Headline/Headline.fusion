@@ -47,6 +47,9 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             verySmall = "font-sans-bold text-lg"
             verySmall.@if.1 = ${presentationObject.size.isVerySmall}
 
+            verySmallRegular = "text-[20px]"
+            verySmallRegular.@if.1 = ${presentationObject.size.isVerySmallRegular}
+
             colorBrand = "text-brand"
             colorBrand.@if.1 = ${presentationObject.color.isBrand}
 

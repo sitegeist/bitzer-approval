@@ -21,6 +21,7 @@ final class HeadlineSize implements PseudoEnumInterface
     const SIZE_MEDIUM_ITALIC = 'mediumItalic';
     const SIZE_SMALL = 'small';
     const SIZE_VERY_SMALL = 'verySmall';
+    const SIZE_VERY_SMALL_REGULAR = 'verySmallRegular';
     const SIZE_TILE = 'tile';
     const SIZE_TINY = 'tiny';
 
@@ -47,6 +48,7 @@ final class HeadlineSize implements PseudoEnumInterface
                 && $string !== self::SIZE_MEDIUM_ITALIC
                 && $string !== self::SIZE_SMALL
                 && $string !== self::SIZE_VERY_SMALL
+                && $string !== self::SIZE_VERY_SMALL_REGULAR
                 && $string !== self::SIZE_TILE
                 && $string !== self::SIZE_TINY
                 ) {
@@ -96,6 +98,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function verySmall(): self
     {
         return self::from(self::SIZE_VERY_SMALL);
+    }
+
+    public static function verySmallRegular(): self
+    {
+        return self::from(self::SIZE_VERY_SMALL_REGULAR);
     }
 
     public static function tile(): self
@@ -148,6 +155,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return $this->value === self::SIZE_VERY_SMALL;
     }
 
+    public function getIsVerySmallRegular(): bool
+    {
+        return $this->value === self::SIZE_VERY_SMALL_REGULAR;
+    }
+
     public function getIsTile(): bool
     {
         return $this->value === self::SIZE_TILE;
@@ -172,6 +184,7 @@ final class HeadlineSize implements PseudoEnumInterface
             self::from(self::SIZE_MEDIUM_ITALIC),
             self::from(self::SIZE_SMALL),
             self::from(self::SIZE_VERY_SMALL),
+            self::from(self::SIZE_VERY_SMALL_REGULAR),
             self::from(self::SIZE_TILE),
             self::from(self::SIZE_TINY)
         ];

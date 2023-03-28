@@ -153,6 +153,7 @@ module.exports = {
 		fontSize: {
 			'largeHeadline': '42px',
 			'extraLarge': '72px',
+			'small': '16px',
 			...defaultTheme.fontSize
 		},
 
