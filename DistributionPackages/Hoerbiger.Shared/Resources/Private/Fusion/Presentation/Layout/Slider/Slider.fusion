@@ -58,8 +58,8 @@ prototype(Hoerbiger.Shared:Layout.Slider) < prototype(PackageFactory.AtomicFusio
                     <div class="bg-transparent z-20">
                         <div
                             class={[
-                                "w-full text-[234px] lg:text-[284px] leading-[100%] pl-0 pr-sm py-0",
-                                "hidden md:block translate-y-[-40px] lg:translate-y-[-50px]"
+                                "w-full text-[180px] 2xl:text-[284px] leading-[100%] pl-0 pr-sm py-0",
+                                "hidden md:block translate-y-[-40px] 2xl:translate-y-[-50px]"
                             ]}
                             data-slide-counter
                         >
