@@ -109,12 +109,23 @@ export default ($node: Element): void => {
 		navItems?.forEach(item => {
 			item.addEventListener('mouseenter', () => {
 				navMain?.classList.add('text-light-contrastTransparent');
-			})
+			});
 
 			item.addEventListener('mouseleave', () => {
 				navMain?.classList.remove('text-light-contrastTransparent');
-			})
-		})
+			});
+		});
+
+		// handle mobile navigation items
+
+		const mobileNavItems = $node.querySelectorAll("[data-menu-item]") as NodeListOf<HTMLElement>;
+		mobileNavItems?.forEach(item => {
+			item.addEventListener("click", () => {
+				item.classList.toggle("text-[red]");
+				item.classList.toggle("border-b");
+				item.querySelector("div")?.classList.toggle("rotate-180");
+			});
+		});
 	}
 };
 

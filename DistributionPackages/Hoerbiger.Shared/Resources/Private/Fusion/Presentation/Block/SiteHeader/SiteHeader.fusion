@@ -231,11 +231,11 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     fixed top-0 h-screen overflow-y-auto w-full -right-full",
                                     "offcanvas:right-offcanvas",
                                     "group-target:right-0 transition-right duration-500",
-                                    "bg-neutral-transparent text-light-contrast flex flex-col space-y-xs uppercase "
+                                    "bg-light text-light-contrast flex flex-col space-y-xs"
                                 ]}>
 
-                                    <div class="bg-standard">
-                                        <div class="max-w-content-full mx-auto flex items-center justify-between sm:h-[100px]">
+                                    <div>
+                                        <div class="max-w-content-full p-md mx-auto flex items-center justify-between">
                                             <!-- HOMELINK + LOGO -->
                                             <a
                                                 class="contents"
@@ -245,53 +245,52 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                             >
                                                 <img
                                                     id="logo"
-                                                    width="158"
+                                                    width="135"
                                                     height="55"
                                                     alt="Logo Hoerbiger"
-                                                    class="h-full max-w-[40vw] sm:max-w-[60vw] my-3"
-                                                    src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_white.svg')}
+                                                    class="h-full max-w-[40vw] sm:max-w-[60vw] pb-xs"
+                                                    src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/logo_grey.svg')}
                                                     {...props.logo}
                                                 />
                                             </a>
-                                            <div class="flex w-touch h-touch sm:w-[100px] sm:h-[100px] relative z-50">
+                                            <div class="flex w-md relative z-50">
                                                 <a href="#" class="absolute inset-0 text-light flex justify-center items-center font-thin p-[0.5em]">
-                                                    <div class="w-[2em] h-[2em]">
-                                                    <svg class="fill-current w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="none" d="M0 0h24v24H0z"></path><path d="M12 10.586l4.95-4.95 1.414 1.414-4.95 4.95 4.95 4.95-1.414 1.414-4.95-4.95-4.95 4.95-1.414-1.414 4.95-4.95-4.95-4.95L7.05 5.636z"></path></svg>
+                                                    <div class="">
+                                                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <rect x="2.34119" y="0.686279" width="30" height="2" transform="rotate(45 2.34119 0.686279)" fill="black"/>
+                                                            <rect width="30" height="2" transform="matrix(-0.707107 0.707107 0.707107 0.707107 22.1401 0.686279)" fill="black"/>
+                                                        </svg>
                                                     </div>
                                                 </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class={["p-md h-full "]}>
-                                        <div class="flex flex-col h-full space-y-ch ">
+                                    <div class="p-md h-full flex flex-col justify-between">
+                                        <div class="flex flex-col h-full space-y-ch justify-between ">
 
-                                            <nav class="flex flex-col font-sans-bold text-[20px]">
+                                            <nav class="flex flex-col text-[20px] space-y-sm">
                                                 <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
                                                     <div>
                                                         <div class="min-h-touch" data-accordion="nav-accordion">
-                                                            <Neos.Fusion:Augmenter class="justify-end text-right">
-                                                                <div class="flex">
-                                                                    <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
-                                                                        <img
-                                                                            class="w-[30px] h-[30px] object-contain rounded-full translate-y-[10px] ml-ch"
-                                                                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/chevronDownStandard.svg')}
-                                                                            data-accimage="nav-image"
-                                                                        />
+                                                            <div class="flex items-center" data-menu-item="menu-item">
+                                                                <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
+                                                                <div class="w-md h-md ml-sm grid place-items-center translate-y-[3px] transition">
+                                                                    <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="M13.3751 2.05781C13.5412 1.87954 13.5412 1.5636 13.3757 1.38406L12.3411 0.276545C12.2074 0.130007 12.0136 0.130007 11.8759 0.279376L7.526 4.99737L6.99503 5.57327L6.46407 4.99737L2.11158 0.276545C1.97791 0.130007 1.78414 0.130007 1.64642 0.279372L0.624025 1.38829C0.4579 1.56656 0.4579 1.8825 0.626637 2.06552L6.76343 8.72163C6.90134 8.87121 7.09513 8.87078 7.23568 8.71674L13.3751 2.05781Z" fill="#FF2424"/>
+                                                                    </svg>
                                                                 </div>
-                                                            </Neos.Fusion:Augmenter>
+                                                            </div>
                                                         </div>
                                                         <div data-accitem="sub-nav" @if.1={item.subItems} class="hidden text-[16px]">
                                                             <Neos.Fusion:Loop @if.1={item.subItems} items={item.subItems}>
                                                                 <Neos.Fusion:Loop items={item.subItems}>
-                                                                    <div class="min-h-touch ml-xs">
-                                                                        <Neos.Fusion:Augmenter class="justify-end flex items-center text-right pr-[8px]">
-                                                                            <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
-                                                                            <img
-                                                                                class="w-[18px] ml-[16px]"
-                                                                                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/subMenuArrow.svg')}
-                                                                                data-accimage="nav-image"
-                                                                            />
-                                                                        </Neos.Fusion:Augmenter>
+                                                                    <div class="min-h-touch flex space-y-xs items-center">
+                                                                        <img
+                                                                            class="w-[18px] mr-sm pt-xs"
+                                                                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/subMenuArrow.svg')}
+                                                                            data-accimage="nav-image"
+                                                                        />
+                                                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link} />
                                                                     </div>
                                                                 </Neos.Fusion:Loop>
                                                             </Neos.Fusion:Loop>
@@ -299,20 +298,19 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                                     </div>
                                                 </Neos.Fusion:Loop>
                                             </nav>
-                                            <nav class="flex font-sans-bold justify-between space-x-sm mb-sm pt-md">
+                                            <nav class="font-sans-bold justify-between space-x-sm mb-sm pt-md border-t mt-[50px]">
                                                 <Neos.Fusion:Loop items={presentationObject.languageNavigation}>
                                                     <Neos.Fusion:Augmenter
                                                         @if.1={!item.isActive}
-                                                        class="bg-light min-h-touch min-w-touch flex items-center justify-center text-center text-light-contrast px-[50px] rounded-full w-1/2"
+                                                        class=""
                                                     >
-                                                        <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
+                                                        <div class="flex items-center space-x-sm">
+                                                            <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
+                                                            <svg width="14" height="9" viewBox="0 0 14 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                <path d="M13.3751 2.05781C13.5412 1.87954 13.5412 1.5636 13.3757 1.38406L12.3411 0.276545C12.2074 0.130007 12.0136 0.130007 11.8759 0.279376L7.526 4.99737L6.99503 5.57327L6.46407 4.99737L2.11158 0.276545C1.97791 0.130007 1.78414 0.130007 1.64642 0.279372L0.624025 1.38829C0.4579 1.56656 0.4579 1.8825 0.626637 2.06552L6.76343 8.72163C6.90134 8.87121 7.09513 8.87078 7.23568 8.71674L13.3751 2.05781Z" fill="#FF2424"/>
+                                                            </svg>
+                                                        </div>
                                                     </Neos.Fusion:Augmenter>
-                                                    <div
-                                                        @if.1={item.isActive}
-                                                        class="bg-standard min-h-touch min-w-touch flex items-center justify-center text-center text-light px-[50px] rounded-full w-1/2"
-                                                    >
-                                                        {item.link.content}
-                                                    </div>
                                                 </Neos.Fusion:Loop>
                                             </nav>
                                         </div>
