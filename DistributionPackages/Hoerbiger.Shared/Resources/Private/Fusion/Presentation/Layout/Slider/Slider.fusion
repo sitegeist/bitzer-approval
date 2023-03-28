@@ -83,7 +83,7 @@ prototype(Hoerbiger.Shared:Layout.Slider) < prototype(PackageFactory.AtomicFusio
                         </div>
                     </div>
                 </div>
-                <div class="flex h-full w-full">
+                <div class="h-full w-full overflow-hidden">
                     <div
                         class="w-full flex overflow-hidden h-full"
                         data-select="slider"
