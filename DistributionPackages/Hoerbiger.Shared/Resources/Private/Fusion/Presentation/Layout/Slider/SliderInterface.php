@@ -14,13 +14,7 @@ interface SliderInterface extends ComponentPresentationObjectInterface
 
     public function getSlides(): SlotInterface;
 
-    public function getThumbs(): ?SlotInterface;
-
     public function getInlineNavigation(): ?SlotInterface;
 
-    public function getDots(): ?SlotInterface;
-
     public function getHeadline(): ?SlotInterface;
-
-    public function getIsApplicationWorld(): ?bool;
 }

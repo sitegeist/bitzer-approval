@@ -10,73 +10,90 @@ prototype(Hoerbiger.Shared:Layout.Slider) < prototype(PackageFactory.AtomicFusio
         }
     }
 
-    thumbnailListClass = ${presentationObject.IsApplicationWorld
-    ? [
-        'absolute md:bottom-[20px] left-0 right-0 top-0 flex overflow-hidden md:space-x-xs mt-xs mx-xs md:mx-auto ',
-        'md:w-[90%] md:justify-around'
-    ]
-    :
-        'absolute top-0 left-0 right-0 flex overflow-hidden space-x-xs mt-xs mx-xs md:relative md:mx-0 md:w-full md:justify-between'
-    }
-
     renderer = afx`
         <div class={[
             "[Layout.Slider] w-full relative flex flex-col"
         ]}>
-            <div @if.1={presentationObject.headline}
-                class={[
-                    "px-md py-sm sm:p-sm z-10 max-w-full bg-[blue]"
-                ]}
-            >
-                <Hoerbiger.Shared:Block.Headline
-                    @if.1={presentationObject.headline}
-                    presentationObject={presentationObject.headline}
-                />
+
+            <div class="[Block.Separator ( fullWidthWithContent)] w-full border-t-[1px] border-service-border">
             </div>
 
-            <div class="flex flex-row">
+            <div
+                @if.1={presentationObject.headline}
+                class={[
+                    "w-full border-t-[1px] border-service-border pb-[50px]"
+                ]}
+            >
+                <div class="text-[14px] leading-5 pt-ch [&amp;_strong]:font-sans-bold">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.headline}
+                        />
+                </div>
+            </div>
+
+            <div
+                class={[
+                    "flex flex-col md:grid md:grid-cols-tabs md:overflow-hidden h-full items-stretch md:gap-md"
+                ]}
+            >
                 <div
                     class={[
-                        "flex bg-[red] w-[30%]"
+                        "flex flex-col w-full h-auto relative"
                     ]}
                 >
-                    <div class="w-full h-[10px] relative overflow-hidden">
-                        <div
-                            data-select="progress"
-                            class="absolute left-0 top-0 bottom-0 bg-brand"
-                        ></div>
-                    </div>
-
                     <div
-                        @if.1={presentationObject.inlineNavigation.items}
                         class={[
-                            "[Slider.InlineNavigation] relative p-sm sm:p-0 md:absolute md:top-[110px] lg:top-[150px] md:left-sm pb-sm md:pt-[15px] lg:pt-0"
+                            "absolute top-0 left-0 md:w-full h-full z-10 overflow-hidden",
+                            "grid grid-cols-2-slider-bubbles gap-xs"
                         ]}
                     >
-                        <Neos.Fusion:Loop items={presentationObject.inlineNavigation.items}>
-                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
-                        </Neos.Fusion:Loop>
+                        <div class="bubble">&nbsp;</div>
+                        <div class="bubble">&nbsp;</div>
+                        <div class="bubble">&nbsp;</div>
+                        <div class="bubble">&nbsp;</div>
+                        <div class="bubble">&nbsp;</div>
+                        <div class="bubble">&nbsp;</div>
+                    </div>
+
+                    <div class="bg-transparent z-20">
+                        <div
+                            class={[
+                                "w-full text-[234px] lg:text-[284px] leading-[100%] pl-0 pr-sm py-0",
+                                "hidden md:block translate-y-[-40px] lg:translate-y-[-50px]"
+                            ]}
+                            data-slide-counter
+                        >
+                            1
+                        </div>
+
+                        <div
+                            @if.1={presentationObject.inlineNavigation.items}
+                            class={[
+                                "[Slider.InlineNavigation] px-0 pt-0 pb-sm md:pr-sm md:pl-0 md:py-0"
+                            ]}
+                        >
+                            <Neos.Fusion:Loop items={presentationObject.inlineNavigation.items}>
+                                <div
+                                    data-slider="inlineNavigationItem"
+                                    data-item-index={iterator.index}
+                                >
+                                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
+                                </div>
+                            </Neos.Fusion:Loop>
+                        </div>
                     </div>
                 </div>
-                <div
-                    class={[
-                        "bg-[yellow] w-[70%]",
-                        "flex "
-                    ]}
-                >
+                <div class="flex h-full w-full">
                     <div
-                        class="w-full flex overflow-hidden relative"
+                        class="w-full flex overflow-hidden h-full"
                         data-select="slider"
-                        data-Slider-variant={presentationObject.variant}
-                        data-is-application-world={presentationObject.IsApplicationWorld ? "true" : null}
                     >
                         <Neos.Fusion:Loop items={presentationObject.slides.items}>
                             <div
                                 class={[
-                                "keen-slider__slide data-keen-slider-pe w-full min-w-full",
-                                !presentationObject.variant.isApplicationWorld && "max-h-[70vh]",
-                                presentationObject.variant.isApplicationWorld && "max-h-[664px]"
-                        ]}>
+                                    "keen-slider__slide data-keen-slider-pe w-full min-w-full h-full"
+                                ]}
+                            >
                                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                             </div>
                         </Neos.Fusion:Loop>

@@ -19,32 +19,20 @@ final class Slider extends AbstractComponentPresentationObject implements Slider
 
     private SlotInterface $slides;
 
-    private ?SlotInterface $thumbs;
-
     private ?SlotInterface $inlineNavigation;
 
-    private ?SlotInterface $dots;
-
     private ?SlotInterface $headline;
-
-    private ?bool $isApplicationWorld;
 
     public function __construct(
         SliderVariant $variant,
         SlotInterface $slides,
-        ?SlotInterface $thumbs,
         ?SlotInterface $inlineNavigation = null,
-        ?SlotInterface $dots = null,
-        ?SlotInterface $headline = null,
-        ?bool $isApplicationWorld = false
+        ?SlotInterface $headline = null
     ) {
         $this->variant = $variant;
         $this->slides = $slides;
-        $this->thumbs = $thumbs;
         $this->inlineNavigation = $inlineNavigation;
-        $this->dots = $dots;
         $this->headline = $headline;
-        $this->isApplicationWorld = $isApplicationWorld;
     }
 
     public function getVariant(): SliderVariant
@@ -57,28 +45,13 @@ final class Slider extends AbstractComponentPresentationObject implements Slider
         return $this->slides;
     }
 
-    public function getThumbs(): ?SlotInterface
-    {
-        return $this->thumbs;
-    }
-
     public function getInlineNavigation(): ?SlotInterface
     {
         return $this->inlineNavigation;
     }
 
-    public function getDots(): ?SlotInterface
-    {
-        return $this->dots;
-    }
-
     public function getHeadline(): ?SlotInterface
     {
         return $this->headline;
-    }
-
-    public function getIsApplicationWorld(): ?bool
-    {
-        return $this->isApplicationWorld;
     }
 }

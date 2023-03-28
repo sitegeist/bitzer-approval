@@ -96,3 +96,52 @@ details summary::-webkit-details-marker {
 	font-style: normal;
 }
 
+.bubble {
+	width: 100%;
+	animation: fading 10s infinite ease-in;
+	border-radius: 100%;
+	background: #999;
+	opacity:0.1;
+	aspect-ratio: 1;
+}
+
+.bubble:nth-child(1)
+{
+	visibility: hidden;
+}
+.bubble:nth-child(3)
+{
+	animation-delay: 3s;
+}
+.bubble:nth-child(4)
+{
+	animation-delay: 6s;
+}
+.bubble:nth-child(5)
+{
+	animation-delay: 9s;
+}
+.bubble:nth-child(6)
+{
+	animation-delay: 12s;
+}
+
+@keyframes fading {
+	0% {
+		opacity:.1;
+	}
+	50% {
+		opacity:.4;
+	}
+	95.5% {
+		opacity:.1;
+	}
+}
+
+@media (max-width: 768px) {
+	.bubble {
+		height: 70px;
+		width: 70px;
+		aspect-ratio: auto;
+	}
+}

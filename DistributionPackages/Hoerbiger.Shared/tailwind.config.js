@@ -99,6 +99,11 @@ module.exports = {
 				contrast: 'rgba(0, 0, 0, .85)',
 				darker: '#8A9199'
 			},
+			slider: {
+				grey: '#999999',
+				lightGrey: '#8E969D',
+				red: '#FF2424'
+			},
 			default: {
 				DEFAULT: '#075289',
 				contrast: '#fff'
@@ -277,6 +282,7 @@ module.exports = {
 				'2-icon-1fr': '1.2em 1fr',
 				'affiliates-map-list': '70% 1fr',
 				'people-story': '25% 1fr',
+				'2-slider-bubbles': '1fr 1fr'
 			},
 
 			gridTemplateRows: {
@@ -451,6 +457,10 @@ module.exports = {
 						opacity: 1
 					}
 				}
+			},
+
+			aspectRatio: {
+				'5/3': '5 / 3',
 			}
 		},
 	},
