@@ -43,7 +43,7 @@ prototype(Hoerbiger.Shared:Layout.Slider) < prototype(PackageFactory.AtomicFusio
                 >
                     <div
                         class={[
-                            "absolute top-0 left-0 md:w-full h-full z-10 overflow-hidden",
+                            "absolute top-0 left-0 md:w-full z-10 overflow-hidden",
                             "grid grid-cols-2-slider-bubbles gap-xs"
                         ]}
                     >
