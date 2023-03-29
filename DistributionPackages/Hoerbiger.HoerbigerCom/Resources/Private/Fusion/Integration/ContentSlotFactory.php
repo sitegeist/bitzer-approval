@@ -287,7 +287,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         };
 
         return new ContentContainer(
-            ContentContainerVariant::pressLeft(),
+            ContentContainerVariant::pressLeftBlank(),
             new Grid(
                 GridVariant::twoColumnsPress(),
                 Collection::fromIterable([
