@@ -14,7 +14,8 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
         <div class={[
             "[Layout.ContentContainer (" + presentationObject.variant + ")]",
             "w-full",
-            presentationObject.variant.isRegularNeutral && "bg-neutral-lighter"
+            presentationObject.variant.isRegularNeutral && "bg-neutral-lighter",
+            presentationObject.variant.isYCentered && "h-full"
         ]}>
             <div class={[
                 presentationObject.variant.isRegular && "max-w-content-full mx-auto px-md py-contentcontainer bg-light",
@@ -37,9 +38,9 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isPressLeftBlank && "max-w-[800px]",
                 presentationObject.variant.isYCentered && "w-full h-full flex items-center",
                 presentationObject.variant.isPressImage && "w-full md:h-[600px] mx-auto px-0 md:px-md py-contentcontainer",
-                presentationObject.variant.isVisibleSm && "hidden sm:block",
-                presentationObject.variant.isVisibleMd && "hidden md:block",
-                presentationObject.variant.isVisibleLg && "hidden lg:block"
+                presentationObject.variant.isVisibleSm && "hidden sm:block w-full h-full",
+                presentationObject.variant.isVisibleMd && "hidden md:block w-full h-full",
+                presentationObject.variant.isVisibleLg && "hidden lg:block w-full h-full"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </div>
