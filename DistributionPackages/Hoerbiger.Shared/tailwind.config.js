@@ -282,7 +282,8 @@ module.exports = {
 				'2-icon-1fr': '1.2em 1fr',
 				'affiliates-map-list': '70% 1fr',
 				'people-story': '25% 1fr',
-				'2-slider-bubbles': '1fr 1fr'
+				'2-slider-bubbles': '1fr 1fr',
+				'slider-tabs': 'clamp(200px, 35%, 430px) 1fr',
 			},
 
 			gridTemplateRows: {

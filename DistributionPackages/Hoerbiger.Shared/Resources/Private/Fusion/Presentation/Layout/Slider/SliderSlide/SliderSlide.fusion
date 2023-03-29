@@ -27,7 +27,7 @@ prototype(Hoerbiger.Shared:Layout.Slider.SliderSlide) < prototype(PackageFactory
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
             </div>
 
-            <div class="flex flex-col py-sm">
+            <div class="flex flex-col pt-sm">
                 <div
                     class="uppercase text-[16px] font-sans-bold text-slider-red pb-[4px]"
                     @if.1={presentationObject.headline}
