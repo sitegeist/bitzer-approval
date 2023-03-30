@@ -2,10 +2,13 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage) < prototype(PackageFac
     @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\HeaderVideoStage\\HeaderVideoStageInterface'
 
     renderer = afx`
-        <div class={[
-            "[Layout.Stage.HeaderVideoStage]",
-            "h-screen relative"
-        ]}>
+        <div
+            class={[
+                "[Layout.Stage.HeaderVideoStage]",
+                "h-screen relative"
+            ]}
+            data-element-height="videoStage"
+        >
             <div class="overflow-hidden w-full h-screen">
                 <div
                     data-select="slider"
