@@ -3,12 +3,12 @@ export default ($node: Element): void => {
 		const anchorNav = $node.querySelector("[data-anchor-nav]") as HTMLElement;
 		const anchorPos = $node.querySelector("[data-anchor-pos]") as HTMLElement;
 		const main = document.querySelector("main") as HTMLElement;
-		const neosContentCollection = document.querySelectorAll(".neos-contentcollection") as NodeListOf<HTMLElement>;
-		let height = 0;
+		const elementItems = document.querySelectorAll("[data-element-height]") as NodeListOf<HTMLElement>;
+		let height = document.querySelector("main")?.getBoundingClientRect().height ?? 0;
 		let isVisible = false;
 
-		neosContentCollection.forEach((content) => {
-			height += content.getBoundingClientRect().height;
+		elementItems.forEach((content) => {
+			height -= content.getBoundingClientRect().height;
 		});
 
 		anchorPos.style.height = `${height}px`;
