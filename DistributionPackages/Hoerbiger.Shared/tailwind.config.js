@@ -411,10 +411,10 @@ module.exports = {
 					'writing-mode': 'vertical-lr'
 				},
 				'.nav-top-inset' : {
-					'top': '15vh'
+					'top': '0'
 				},
 				'.nav-bot-inset' : {
-					'bottom': '15vh'
+					'bottom': '0'
 				}
 			}, ['responsive']);
 		}),

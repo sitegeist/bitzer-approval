@@ -1,11 +1,18 @@
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
-		const anch = $node.querySelector(".anchorNav") as HTMLElement;
-		const anchPos = $node.querySelector(".anchorPos") as HTMLElement;
+		const anchorNav = $node.querySelector("[data-anchor-nav]") as HTMLElement;
+		const anchorPos = $node.querySelector("[data-anchor-pos]") as HTMLElement;
 		const main = document.querySelector("main") as HTMLElement;
+		const neosContentCollection = document.querySelectorAll(".neos-contentcollection") as NodeListOf<HTMLElement>;
+		let height = 0;
+		let isVisible = false;
 
-		anchPos.style.height = `${main?.getBoundingClientRect().height - window.innerHeight}px`;
-		let isVisible = false
+		neosContentCollection.forEach((content) => {
+			height += content.getBoundingClientRect().height;
+		});
+
+		anchorPos.style.height = `${height}px`;
+
 		window.addEventListener("scroll", () => {
 			const position = $node.getBoundingClientRect();
 
@@ -19,8 +26,8 @@ export default ($node: Element): void => {
 			if (position.bottom <= 0) {
 				if (isVisible) {
 					isVisible = false;
-					anch.classList.add("fixed");
-					anch.classList.remove("absolute");
+					anchorNav.classList.add("fixed");
+					anchorNav.classList.remove("absolute");
 				}
 				return;
 			}
@@ -28,8 +35,8 @@ export default ($node: Element): void => {
 			if (!isVisible) {
 				if (position.top >= 0 && position.bottom <= window.innerHeight) {
 					isVisible = true;
-					anch.classList.remove("fixed");
-					anch.classList.add("absolute");
+					anchorNav.classList.remove("fixed");
+					anchorNav.classList.add("absolute");
 				}
 			}
 
@@ -50,22 +57,22 @@ export default ($node: Element): void => {
 				document.body.style.setProperty("--itemProgress" + index, getViewPercentage(refEl));
 			});
 
-			if(anchPos.getBoundingClientRect().bottom <= window.innerHeight) {
-				anch.classList.remove("nav-top-inset");
-				anch.classList.add("nav-bot-inset");
-				anch.classList.remove("fixed");
-				anch.classList.add("absolute");
-			} else if (anchPos.getBoundingClientRect().top <= 0) {
-				anch.classList.add("nav-top-inset");
-				anch.classList.remove("nav-bot-inset");
-				anch.classList.add("fixed");
-				anch.classList.remove("absolute");
+			if (anchorPos.getBoundingClientRect().bottom <= window.innerHeight) {
+				anchorNav.classList.remove("nav-top-inset");
+				anchorNav.classList.add("nav-bot-inset");
+				anchorNav.classList.remove("fixed");
+				anchorNav.classList.add("absolute");
+			} else if (anchorPos.getBoundingClientRect().top <= 0) {
+				anchorNav.classList.add("nav-top-inset");
+				anchorNav.classList.remove("nav-bot-inset");
+				anchorNav.classList.add("fixed");
+				anchorNav.classList.remove("absolute");
 			}
 		});
 
 		window.addEventListener("resize", () => {
-			anchPos.style.height = `${main?.getBoundingClientRect().height - window.innerHeight}px`;
-		})
+			anchorPos.style.height = `${main?.getBoundingClientRect().height - window.innerHeight}px`;
+		});
 	}
 
 	function getViewPercentage(element: HTMLElement): string {
@@ -78,8 +85,7 @@ export default ($node: Element): void => {
 			top: elementBoundingRect.y + window.pageYOffset,
 			bottom: elementBoundingRect.y + elementBoundingRect.height + window.pageYOffset
 		};
-		const elementHeight = elementBoundingRect.height;
-		let elementHeightInView = elementHeight;
+		let elementHeightInView = elementBoundingRect.height;
 
 		//ELEMENT NOT IN VIEWPORT
 		if (viewport.top > elementPos.bottom || viewport.bottom < elementPos.top) {
@@ -107,4 +113,4 @@ export default ($node: Element): void => {
 		const percentageInView = (elementHeightInView / window.innerHeight);
 		return percentageInView.toString();
 	}
-}
+};

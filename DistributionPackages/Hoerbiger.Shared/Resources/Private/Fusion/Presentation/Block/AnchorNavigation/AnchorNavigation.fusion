@@ -12,11 +12,13 @@ prototype(Hoerbiger.Shared:Block.AnchorNavigation) < prototype(PackageFactory.At
 
     renderer = afx`
         <div class="[AnchorNavigation] relative hidden lg:block">
-            <div class="absolute anchorPos">
+            <div class="absolute" data-anchor-pos="anchor-pos">
                 <div class={[
-                    "anchorNav flex w-[60px] h-[80vh] flex-col absolute p-[10px]",
+                    "flex w-[60px] h-[100vh] flex-col absolute p-[10px] justify-center",
                     "left-0 nav-top-inset z-50 gap-xs overflow-hidden font-sans-regular text-xl"
-                ]}>
+                ]}
+                    data-anchor-nav="anchor-nav"
+                >
                     <Neos.Fusion:Loop
                         items={presentationObject.anchors}
                         itemName="anchor"
