@@ -178,7 +178,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forWebPage(TraversableNodeInterface $site, TraversableNodeInterface $webPage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($webPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
     }
@@ -292,7 +292,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),

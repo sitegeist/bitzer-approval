@@ -30,6 +30,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isBlank && "w-full",
                 presentationObject.variant.isFullViewHeight && "w-full h-screen",
                 presentationObject.variant.isBlankY && "w-full px-md py-contentcontainer",
+                presentationObject.variant.isBlankBottom && "w-full pb-contentcontainer",
                 presentationObject.variant.isHalfWidth && "border-brand w-full sm:max-w-[50%]",
                 presentationObject.variant.isSmallText && "max-w-small-text mx-auto px-md py-contentcontainer bg-light"
             ]}>

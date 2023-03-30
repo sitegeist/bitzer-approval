@@ -37,6 +37,13 @@
     image:
       options:
         preset: 'image.landscape'
+    metaline:
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Metaline eingeben'
+      options:
+        preset: 'rte.text'
     stage__variant:
       type: 'string'
       defaultValue: 'fullMediaTextLeft'

@@ -22,6 +22,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULARX = 'regularX';
     const VARIANT_BLANK = 'blank';
     const VARIANT_BLANKY = 'blankY';
+    const VARIANT_BLANK_BOTTOM = 'blankBottom';
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
@@ -54,6 +55,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_BLANK
                 && $string !== self::VARIANT_FULL_VIEW_HEIGHT
                 && $string !== self::VARIANT_BLANKY
+                && $string !== self::VARIANT_BLANK_BOTTOM
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
@@ -117,9 +119,19 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_BLANKY);
     }
 
+    public static function blankBottom(): self
+    {
+        return self::from(self::VARIANT_BLANK_BOTTOM);
+    }
+
     public static function stageAfterBreadcrumb(): self
     {
         return self::from(self::VARIANT_STAGEAFTERBREADCRUMB);
+    }
+
+    public static function headerStage(): self
+    {
+        return self::from(self::VARIANT_BLANK_BOTTOM);
     }
 
     public static function regularStageAfterBreadcrumb(): self
@@ -192,6 +204,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BLANKY;
     }
 
+    public function getIsBlankBottom(): bool
+    {
+        return $this->value === self::VARIANT_BLANK_BOTTOM;
+    }
+
     public function getIsStageAfterBreadcrumb(): bool
     {
         return $this->value === self::VARIANT_STAGEAFTERBREADCRUMB;
@@ -233,6 +250,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_BLANK),
             self::from(self::VARIANT_FULL_VIEW_HEIGHT),
             self::from(self::VARIANT_BLANKY),
+            self::from(self::VARIANT_BLANK_BOTTOM),
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM),
