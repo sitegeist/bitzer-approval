@@ -4,16 +4,17 @@ export default ($node: Element): void => {
 		const anchorPos = $node.querySelector("[data-anchor-pos]") as HTMLElement;
 		const main = document.querySelector("main") as HTMLElement;
 		const elementItems = document.querySelectorAll("[data-element-height]") as NodeListOf<HTMLElement>;
-		const height = document.querySelector("main")?.getBoundingClientRect().height ?? 0;
+		let height = document.querySelector("main")?.getBoundingClientRect().height ?? 0;
 		let isVisible = false;
 
 		setAnchorHeight(anchorPos, height, elementItems);
 
 		window.addEventListener("scroll", () => {
 			if (height !== document.querySelector("main")?.getBoundingClientRect().height) {
+				height = document.querySelector("main")?.getBoundingClientRect().height ?? 0;
 				setAnchorHeight(
 					anchorPos,
-					document.querySelector("main")?.getBoundingClientRect().height ?? 0,
+					height,
 					elementItems
 				);
 			}
