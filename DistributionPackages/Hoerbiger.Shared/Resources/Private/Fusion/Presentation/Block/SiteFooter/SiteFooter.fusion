@@ -6,7 +6,7 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
             "[Block.SiteFooter]",
             "w-full max-w-screen flex-flex-col items-stretch z-[0]"
         ]}>
-            <div class="bg-neutral-darkest border border-t-2 border-t-light font-sans-regular">
+            <div class="bg-neutral-footer border border-t-2 border-t-light font-sans-regular">
                 <div class="mx-auto max-w-content-full px-md py-sm">
                     <div
                         data-scrollToTop="scroll"

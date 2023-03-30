@@ -60,7 +60,7 @@ module.exports = {
 				lighter: '#F0F0F0',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
-				darkest: '#0D1622',
+				footer: '#0D1622',
 				contrast: 'rgba(0, 0, 0, .85)',
 				transparent: 'rgba(240, 240, 240, .95)',
 				grey: '#8E969D'
