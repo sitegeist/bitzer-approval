@@ -54,9 +54,9 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
                             </Neos.Fusion:Loop>
                         </ul>
                         <div class="flex col-span-3 xl:col-span-1 items-start justify-center lg:items-start">
-                            <div class="flex justify-center xl:flex-col gap-2 w-[36px] mb-lg">
+                            <div class="flex justify-center xl:flex-col gap-2 scale-[75%] mb-lg lg:mb-0">
                                 <Neos.Fusion:Loop items={presentationObject.socialLinks.items}>
-                                        <Hoerbiger.Shared:Block.Link presentationObject={item}/>
+                                    <Hoerbiger.Shared:Block.Link presentationObject={item}/>
                                 </Neos.Fusion:Loop>
                             </div>
                         </div>
