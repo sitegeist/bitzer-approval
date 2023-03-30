@@ -27,7 +27,7 @@ prototype(Hoerbiger.Shared:Block.AnchorNavigation) < prototype(PackageFactory.At
                             class="vertical-lr flex flex-col gap-1 anchorItem max-h-[12vh]"
                             @if.1={itemKey<6}
                         >
-                            <Neos.Fusion:Augmenter class="itemLink rotate-180 truncate">
+                            <Neos.Fusion:Augmenter class="itemLink rotate-180">
                                 <Hoerbiger.Shared:Block.Link presentationObject={anchor} />
                             </Neos.Fusion:Augmenter>
                             <div class="w-[2px] bg-service-red h-0 animate-progress-nav"></div>
