@@ -4,16 +4,20 @@ export default ($node: Element): void => {
 		const anchorPos = $node.querySelector("[data-anchor-pos]") as HTMLElement;
 		const main = document.querySelector("main") as HTMLElement;
 		const elementItems = document.querySelectorAll("[data-element-height]") as NodeListOf<HTMLElement>;
-		let height = document.querySelector("main")?.getBoundingClientRect().height ?? 0;
+		const height = document.querySelector("main")?.getBoundingClientRect().height ?? 0;
 		let isVisible = false;
 
-		elementItems.forEach((content) => {
-			height -= content.getBoundingClientRect().height;
-		});
-
-		anchorPos.style.height = `${height}px`;
+		setAnchorHeight(anchorPos, height, elementItems);
 
 		window.addEventListener("scroll", () => {
+			if (height !== document.querySelector("main")?.getBoundingClientRect().height) {
+				setAnchorHeight(
+					anchorPos,
+					document.querySelector("main")?.getBoundingClientRect().height ?? 0,
+					elementItems
+				);
+			}
+
 			const position = $node.getBoundingClientRect();
 
 			if (position.bottom > window.innerHeight) {
@@ -40,7 +44,7 @@ export default ($node: Element): void => {
 				}
 			}
 
-		})
+		});
 
 		const anchorItems = $node.querySelectorAll(".anchorItem") as NodeListOf<HTMLElement>;
 
@@ -112,5 +116,13 @@ export default ($node: Element): void => {
 
 		const percentageInView = (elementHeightInView / window.innerHeight);
 		return percentageInView.toString();
+	}
+
+	function setAnchorHeight(anchorPos: HTMLElement, height: number, items: NodeListOf<HTMLElement>) {
+		items.forEach((content) => {
+			height -= content.getBoundingClientRect().height;
+		});
+
+		anchorPos.style.height = `${height}px`;
 	}
 };
