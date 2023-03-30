@@ -1,13 +1,14 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Domain;
 
 use Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\Affiliate;
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\Affiliates;
-use Hoerbiger\Shared\Application\CountryDirectory;
-use Neos\Flow\I18n\Locale;
 use Nezaniel\GeographicLibrary\Application\Service\GeoCodingService;
+use PhpOffice\PhpSpreadsheet\Cell\Cell;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 
@@ -16,12 +17,6 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
  */
 class AffiliateRepository
 {
-    /**
-     * @Flow\Inject
-     * @var CountryDirectory
-     */
-    protected $countryDirectory;
-
     /**
      * @Flow\Inject
      * @var GeoCodingService
@@ -34,56 +29,37 @@ class AffiliateRepository
      */
     protected $dataSetPath;
 
-    public function getCountryLabel(string $countryCode, string $locale): string
-    {
-        return $this->countryDirectory->findCountryName($countryCode, new Locale($locale));
-    }
-
     public function findAffiliates(string $locale): Affiliates
     {
         $dataSet = $this->getDataSet();
 
         $affiliates = [];
+        $columnsByKey = [];
+        foreach ($dataSet->getActiveSheet()->getRowIterator(11)->current()->getCellIterator() as $column => $cell) {
+            if ($cell instanceof Cell) {
+                $columnsByKey[$cell->getValue()] = $column;
+            }
+        }
+        $countryLabelKey = ($locale === 'de' ? 'country_label_DE' : 'country_label_EN');
 
-        foreach ($dataSet->getActiveSheet()->getRowIterator(10) as $row) {
-            $legalName =
-            $postalCode =
-            $addressLocality =
-            $addressCountry =
-            $email =
-            $telephone =
-            $countryCode =
-            $streetAddress = '';
-            foreach ($row->getCellIterator('G') as $columnLabel => $cell) {
-                if (!is_null($cell) && !is_null($cell->getValue())) {
-                    switch ($columnLabel) {
-                        case 'M':
-                            $legalName = $cell->getValue();
-                            break;
-                        case 'L':
-                            $postalCode = (string)$cell->getValue();
-                            break;
-                        case 'N':
-                            $streetAddress = $cell->getValue();
-                            break;
-                        case 'O':
-                            $addressLocality = $cell->getValue();
-                            break;
-                        case 'G':
-                            $addressCountry = $this->getCountryLabel($cell->getValue(), $locale);
-                            $countryCode = $cell->getValue();
-                            break;
-                        case 'P':
-                            $email = $cell->getValue();
-                            break;
-                        case 'Q':
-                            $telephone = $cell->getValue();
-                            break;
-                    }
-                }
+        foreach ($dataSet->getActiveSheet()->getRowIterator(12) as $row) {
+            $legalNameCell = $row->getCellIterator($columnsByKey['company'])->current();
+            $postalCodeCell = $row->getCellIterator($columnsByKey['zipcode'])->current();
+            $addressLocalityCell = $row->getCellIterator($columnsByKey['city'])->current();
+            $addressCountryCell = $row->getCellIterator($columnsByKey[$countryLabelKey])->current();
+            $emailCell = $row->getCellIterator($columnsByKey['email'])->current();
+            $telephoneCell = $row->getCellIterator($columnsByKey['phone'])->current();
+            $countryCodeCell = $row->getCellIterator($columnsByKey['countries_id'])->current();
+            $streetAddressCell = $row->getCellIterator($columnsByKey['street'])->current();
+
+            if (is_null($legalNameCell) || is_null($streetAddressCell) || is_null($postalCodeCell)
+                || is_null($addressLocalityCell) || is_null($addressCountryCell) || is_null($emailCell)
+                || is_null($telephoneCell)) {
+                continue;
             }
 
-            $completeAddress = $streetAddress . ' ' . $postalCode . ' ' . $addressLocality . ' ' . $countryCode;
+            $completeAddress = $streetAddressCell . ' ' . $postalCodeCell
+                . ' ' . $addressLocalityCell . ' ' . $countryCodeCell;
 
             if (empty(trim($completeAddress))) {
                 continue;
@@ -91,7 +67,7 @@ class AffiliateRepository
 
             $coordinates = $this->geoCoder->fetchCoordinatesByAddress($completeAddress);
             if (is_null($coordinates)) {
-                $coordinates = $this->geoCoder->fetchCoordinatesByAddress($legalName);
+                $coordinates = $this->geoCoder->fetchCoordinatesByAddress($legalNameCell->getValue());
             }
             if (is_null($coordinates)) {
                 continue;
@@ -99,13 +75,13 @@ class AffiliateRepository
 
             $affiliates[] = new Affiliate(
                 (string)$row->getRowIndex(),
-                $legalName,
-                $streetAddress,
-                $postalCode,
-                $addressLocality,
-                $addressCountry,
-                $email,
-                $telephone,
+                (string)$legalNameCell->getValue(),
+                (string)$streetAddressCell->getValue(),
+                (string)$postalCodeCell->getValue(),
+                (string)$addressLocalityCell->getValue(),
+                (string)$addressCountryCell->getValue(),
+                (string)$emailCell->getValue(),
+                (string)$telephoneCell->getValue(),
                 $coordinates->getLatitude(),
                 $coordinates->getLongitude()
             );
