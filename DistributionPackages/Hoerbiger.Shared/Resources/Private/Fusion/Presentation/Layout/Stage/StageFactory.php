@@ -86,11 +86,13 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 Editable::fromNodeProperty($node, 'headline')
             ),
             null,
-            new Text(
-                TextVariant::liteContrast(),
-                Editable::fromNodeProperty($node, 'abstract'),
-                false
-            ),
+            $node->getProperty('abstract') || $inBackend
+                ? new Text(
+                    TextVariant::liteContrast(),
+                    Editable::fromNodeProperty($node, 'abstract'),
+                    false
+                )
+                : null,
             null,
             $this->figureFactory->forFullMediaStage($imageSource),
             $button

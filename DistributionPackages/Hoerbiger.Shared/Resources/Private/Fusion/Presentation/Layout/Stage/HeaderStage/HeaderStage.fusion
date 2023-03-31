@@ -4,34 +4,16 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderStage) < prototype(Hoerbiger.Share
         <div class={[
             "[Layout.HeaderStage (" + presentationObject.variant + ")]"
         ]}>
-            <div class="relative h-0 pt-ratio-2-1">
-                <div class="absolute inset-0 z-10"
-                    @if.1={presentationObject.mediaBackground}
-                >
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
-                </div>
-                <div class={[
-                    "flex absolute z-20 inset-0 from-light-contrast/50 to-transparent",
-                    "bg-transparent bg-gradient-to-t",
-                    "lg:bg-gradient-to-r"
-                ]}></div>
-            </div>
-            <div class="relative z-50">
-                <div
-                    class={[
-                        "absolute order-3 right-0 overflow-hidden z-10 bottom-0",
-                        "w-full"
-                    ]}
-                >
-                </div>
+            <div class="h-[40vh] md:h-[80vh]">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
             </div>
             <div>
                 <div class={[
-                    "md:w-[60%] xl:w-[40%] mx-auto px-md py-contentcontainer flex",
-                    "bg-nav-card md:-mt-lg z-20 relative shadow-textbox py-md md:py-sm"
+                    "md:w-[60%] xl:w-[40%] mx-auto p-lg md:p-sm",
+                    "bg-nav-card md:-mt-[100px] z-20 relative shadow-textbox"
                 ]}>
                     <div class="flex flex-col">
-                        <Neos.Fusion:Augmenter class="text-[14px] font-sans-bold text-neutral">
+                        <Neos.Fusion:Augmenter class="text-[14px] font-sans-bold text-neutral mb-ch">
                             <PackageFactory.AtomicFusion.PresentationObjects:Slot
                                 presentationObject={presentationObject.metaline}
                                 @if={presentationObject.metaline}
@@ -41,9 +23,8 @@ prototype(Hoerbiger.Shared:Layout.Stage.HeaderStage) < prototype(Hoerbiger.Share
                             @if.1={presentationObject.headline}
                             presentationObject={presentationObject.headline}
                         />
-                        <div class="mt-xs">
+                        <div class="mt-xs" @if.1={presentationObject.text}>
                             <Hoerbiger.Shared:Block.Text
-                                @if.1={presentationObject.text}
                                 presentationObject={presentationObject.text}
                             />
                         </div>
