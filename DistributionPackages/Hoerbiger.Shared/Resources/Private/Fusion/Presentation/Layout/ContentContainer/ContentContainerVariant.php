@@ -24,8 +24,18 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_BLANKY = 'blankY';
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
+    const VARIANT_STACKSTAGE = 'stackStage';
     const VARIANT_REGULAR_WITHOUT_BOTTOM = 'regularWithoutBottom';
     const VARIANT_HALF_WITH = 'halfWidth';
+    const VARIANT_PRESS = 'press';
+    const VARIANT_PRESS_SMALL = 'pressSmall';
+    const VARIANT_PRESS_LEFT = 'pressLeft';
+    const VARIANT_PRESS_LEFT_BLANK = 'pressLeftBlank';
+    const VARIANT_Y_CENTERED = 'yCentered';
+    const VARIANT_PRESS_IMAGE = 'pressImage';
+    const VARIANT_VISIBLE_SM = 'visibleSm';
+    const VARIANT_VISIBLE_MD = 'visibleMd';
+    const VARIANT_VISIBLE_LG = 'visibleLg';
 
     /**
      * @var array<string,self>|self[]
@@ -54,7 +64,17 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
-                && $string !== self::VARIANT_HALF_WITH) {
+                && $string !== self::VARIANT_STACKSTAGE
+                && $string !== self::VARIANT_HALF_WITH
+                && $string !== self::VARIANT_PRESS
+                && $string !== self::VARIANT_PRESS_SMALL
+                && $string !== self::VARIANT_PRESS_LEFT
+                && $string !== self::VARIANT_PRESS_LEFT_BLANK
+                && $string !== self::VARIANT_Y_CENTERED
+                && $string !== self::VARIANT_VISIBLE_SM
+                && $string !== self::VARIANT_VISIBLE_MD
+                && $string !== self::VARIANT_VISIBLE_LG
+                && $string !== self::VARIANT_PRESS_IMAGE) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -118,6 +138,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB);
     }
 
+    public static function stackStage(): self
+    {
+        return self::from(self::VARIANT_STACKSTAGE);
+    }
+
     public static function regularWithoutBottom(): self
     {
         return self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM);
@@ -126,6 +151,51 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function halfWidth(): self
     {
         return self::from(self::VARIANT_HALF_WITH);
+    }
+
+    public static function press(): self
+    {
+        return self::from(self::VARIANT_PRESS);
+    }
+
+    public static function pressSmall(): self
+    {
+        return self::from(self::VARIANT_PRESS_SMALL);
+    }
+
+    public static function pressLeft(): self
+    {
+        return self::from(self::VARIANT_PRESS_LEFT);
+    }
+
+    public static function pressLeftBlank(): self
+    {
+        return self::from(self::VARIANT_PRESS_LEFT_BLANK);
+    }
+
+    public static function yCentered(): self
+    {
+        return self::from(self::VARIANT_Y_CENTERED);
+    }
+
+    public static function visibleSm(): self
+    {
+        return self::from(self::VARIANT_VISIBLE_SM);
+    }
+
+    public static function visibleMd(): self
+    {
+        return self::from(self::VARIANT_VISIBLE_MD);
+    }
+
+    public static function visibleLg(): self
+    {
+        return self::from(self::VARIANT_VISIBLE_LG);
+    }
+
+    public static function pressImage(): self
+    {
+        return self::from(self::VARIANT_PRESS_IMAGE);
     }
 
     public function getIsRegular(): bool
@@ -183,6 +253,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_REGULARSTAGEAFTERBREADCRUMB;
     }
 
+    public function getIsStackStage(): bool
+    {
+        return $this->value === self::VARIANT_STACKSTAGE;
+    }
+
     public function getIsRegularWithoutBottom(): bool
     {
         return $this->value === self::VARIANT_REGULAR_WITHOUT_BOTTOM;
@@ -191,6 +266,51 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public function getIsHalfWidth(): bool
     {
         return $this->value === self::VARIANT_HALF_WITH;
+    }
+
+    public function getIsPress(): bool
+    {
+        return $this->value === self::VARIANT_PRESS;
+    }
+
+    public function getIsPressSmall(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_SMALL;
+    }
+
+    public function getIsPressLeft(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_LEFT;
+    }
+
+    public function getIsPressLeftBlank(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_LEFT_BLANK;
+    }
+
+    public function getIsYCentered(): bool
+    {
+        return $this->value === self::VARIANT_Y_CENTERED;
+    }
+
+    public function getIsPressImage(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_IMAGE;
+    }
+
+    public function getIsVisibleSm(): bool
+    {
+        return $this->value === self::VARIANT_VISIBLE_SM;
+    }
+
+    public function getIsVisibleMd(): bool
+    {
+        return $this->value === self::VARIANT_VISIBLE_MD;
+    }
+
+    public function getIsVisibleLg(): bool
+    {
+        return $this->value === self::VARIANT_VISIBLE_LG;
     }
 
     /**
@@ -211,7 +331,17 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM),
-            self::from(self::VARIANT_HALF_WITH)
+            self::from(self::VARIANT_STACKSTAGE),
+            self::from(self::VARIANT_HALF_WITH),
+            self::from(self::VARIANT_PRESS),
+            self::from(self::VARIANT_PRESS_LEFT),
+            self::from(self::VARIANT_PRESS_SMALL),
+            self::from(self::VARIANT_PRESS_LEFT_BLANK),
+            self::from(self::VARIANT_Y_CENTERED),
+            self::from(self::VARIANT_PRESS_IMAGE),
+            self::from(self::VARIANT_VISIBLE_SM),
+            self::from(self::VARIANT_VISIBLE_MD),
+            self::from(self::VARIANT_VISIBLE_LG)
         ];
     }
 

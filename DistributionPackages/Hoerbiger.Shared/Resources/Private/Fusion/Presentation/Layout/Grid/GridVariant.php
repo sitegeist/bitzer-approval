@@ -20,6 +20,8 @@ final class GridVariant implements PseudoEnumInterface
     const VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
     const VARIANT_THREECOLUMNSNARROWGAP = 'threeColumnsnNarrowGap';
     const VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
+    const VARIANT_TWOCOLUMNSTHIRDAUTOGAP = 'twoColumnsThirdAutoGap';
+    const VARIANT_TWOCOLUMNSPRESS = 'twoColumnsPress';
     const VARIANT_ICONLEFT = 'iconLeft';
     const VARIANT_ICONRIGHT = 'iconRight';
 
@@ -45,6 +47,8 @@ final class GridVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_THREECOLUMNSGAP
                 && $string !== self::VARIANT_THREECOLUMNSNARROWGAP
                 && $string !== self::VARIANT_TWOCOLUMNSFRMAXGAP
+                && $string !== self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP
+                && $string !== self::VARIANT_TWOCOLUMNSPRESS
                 && $string !== self::VARIANT_ICONLEFT
                 && $string !== self::VARIANT_ICONRIGHT) {
                 throw GridVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
@@ -88,6 +92,16 @@ final class GridVariant implements PseudoEnumInterface
     public static function twoColumnsFrMaxGap(): self
     {
         return self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP);
+    }
+
+    public static function twoColumnsThirdAutoGap(): self
+    {
+        return self::from(self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP);
+    }
+
+    public static function twoColumnsPress(): self
+    {
+        return self::from(self::VARIANT_TWOCOLUMNSPRESS);
     }
 
     public static function iconLeft(): self
@@ -135,6 +149,16 @@ final class GridVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TWOCOLUMNSFRMAXGAP;
     }
 
+    public function getIsTwoColumnsThirdAutoGap(): bool
+    {
+        return $this->value === self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP;
+    }
+
+    public function getIsTwoColumnsPress(): bool
+    {
+        return $this->value === self::VARIANT_TWOCOLUMNSPRESS;
+    }
+
     public function getIsIconLeft(): bool
     {
         return $this->value === self::VARIANT_ICONLEFT;
@@ -158,6 +182,8 @@ final class GridVariant implements PseudoEnumInterface
             self::from(self::VARIANT_THREECOLUMNSGAP),
             self::from(self::VARIANT_THREECOLUMNSNARROWGAP),
             self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP),
+            self::from(self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP),
+            self::from(self::VARIANT_TWOCOLUMNSPRESS),
             self::from(self::VARIANT_ICONLEFT),
             self::from(self::VARIANT_ICONRIGHT)
         ];

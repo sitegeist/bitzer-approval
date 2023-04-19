@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${PressArchive.Page.forYearbookRelease(site, documentNode, documentNode.context, documentNode.context.inBackend)}
+        }
+    }
+}
