@@ -104,8 +104,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         $pressArchive = $site->findNamedChildNode(
             NodeName::fromString('pressarchive')
-        )->findNamedChildNode(
-            NodeName::fromString('press')
         );
 
         $latestPressReleases = $pressArchive->findChildNodes(null, 3);
