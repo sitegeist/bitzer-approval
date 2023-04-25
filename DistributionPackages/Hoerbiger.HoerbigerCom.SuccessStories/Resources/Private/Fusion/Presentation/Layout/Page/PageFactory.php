@@ -52,7 +52,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($magazine, $subgraph, $inBackend);
 
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -69,7 +69,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new ContentContainer(

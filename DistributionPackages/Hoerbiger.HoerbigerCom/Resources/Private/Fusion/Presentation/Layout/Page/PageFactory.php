@@ -59,7 +59,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forCareerPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($careerPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }
@@ -67,7 +67,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forPrivacyPage(TraversableNodeInterface $privacyPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($privacyPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($privacyPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph);
     }
@@ -147,7 +147,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             throw new \InvalidArgumentException('Introduction requires image for property media.');
         }
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($searchResultsPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($searchResultsPage, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($searchResultsPage, $subgraph);
@@ -160,7 +160,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new ContentContainer(
@@ -186,7 +186,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forCareerRootPage(TraversableNodeInterface $site, TraversableNodeInterface $careerRootPage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($careerRootPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($careerRootPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $careerRootPage, $stage, $subgraph);
     }
@@ -207,7 +207,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             return $slot;
         };
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($contactPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($contactPage, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($contactPage, $subgraph);
@@ -220,7 +220,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('main'))),
@@ -245,7 +245,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forChroniclePage(TraversableNodeInterface $site, TraversableNodeInterface $chroniclePage, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($chroniclePage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($chroniclePage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph);
     }
@@ -257,7 +257,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($notFoundPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($notFoundPage, $subgraph, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -267,7 +267,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main')))
