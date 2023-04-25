@@ -37,6 +37,7 @@
       type: DateTime
       ui:
         label: 'Publikationsdatum'
+        reloadPageIfChanged: true
         inspector:
           group: release
     showImage:
