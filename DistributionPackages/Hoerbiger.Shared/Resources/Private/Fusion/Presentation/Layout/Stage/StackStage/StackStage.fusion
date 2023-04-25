@@ -1,11 +1,11 @@
 prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
     renderer = afx`
         <div class={[
-            "[Layout.StackStage]",
-            "relative w-full flex flex-col pt-sm"
+            "[Layout.StackStage (" + presentationObject.variant.value + ")]",
+            "relative w-full flex flex-col pt-sm space-y-[40px]"
         ]}>
             <div
-                class="uppercase font-sans-bold pb-ch"
+                class="uppercase font-sans-bold"
                 @if.1={presentationObject.metaline}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.metaline}/>
@@ -14,7 +14,10 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
                 @if.1={presentationObject.headline}
                 presentationObject={presentationObject.headline}
             />
-            <hr class="text-neutral mt-sm mb-xs"/>
+            <hr
+                @if.1={presentationObject.variant.value != 'press' && presentationObject.variant.value != 'pressLarge'}
+                class="text-neutral mt-sm mb-xs"
+            />
             <div
                 class="text-xl font-sans-bold pb-xs"
                 @if.1={presentationObject.subheadline}
@@ -22,14 +25,40 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.subheadline}/>
             </div>
             <Hoerbiger.Shared:Block.Text
-                @if.1={presentationObject.text}
+                @if.1={presentationObject.text && presentationObject.variant.value != 'press' && presentationObject.variant.value != 'pressLarge'}
                 presentationObject={presentationObject.text}
             />
             <div
-                @if.1={presentationObject.media}
-                class="mt-sm"
+                class={[
+                        "mt-sm",
+                        presentationObject.variant.value == 'press' && "w-full max-w-[1050px] mx-auto",
+                        presentationObject.variant.value == 'pressLarge' && "max-w-[1600px] mx-auto"
+                    ]}
             >
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
+                <div
+                    @if.1={presentationObject.media}
+                    class="w-full pt-[5px]"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
+                </div>
+                <div
+                    class={[
+                        "bg-stage-press",
+                        presentationObject.variant.value == 'press' && "w-full md:w-2/3 md:translate-y-[-70px] pb-sm md:pb-0",
+                        presentationObject.variant.value == 'pressLarge' && "w-full md:w-1/2 md:ml-[110px] md:translate-y-[-140px] md:min-h-[140px] pb-sm md:pb-0"
+                    ]}
+                    @if.1={presentationObject.text}
+                >
+                    <div class={[
+                        "pt-xs pr-xs font-sans-bold",
+                        presentationObject.variant.value == 'press' && "pl-0",
+                        presentationObject.variant.value == 'pressLarge' && "pl-xs"
+                    ]}>
+                        <Hoerbiger.Shared:Block.Text
+                            presentationObject={presentationObject.text}
+                        />
+                    </div>
+                </div>
             </div>
         </div>
     `

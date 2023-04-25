@@ -31,7 +31,6 @@
     line-height: 0.9375rem;
     letter-spacing: 0.02em;
     font-weight: 600;
-    font-family: 'Inter';
     border: none;
 }
 
@@ -59,7 +58,6 @@
     line-height: 0.9375rem;
     letter-spacing: 0.02em;
     font-weight: 600;
-    font-family: 'Inter';
 }
 
 .jq-selectx ul li:hover {

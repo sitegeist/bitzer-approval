@@ -1,0 +1,16 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Press':
+  superTypes:
+    'Neos.Neos:Shortcut': true
+    'Hoerbiger.HoerbigerCom:Document': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease': true
+  ui:
+    icon: folder-open
+    label: 'Pressearchiv'
+  properties:
+    targetMode:
+      type: string
+      defaultValue: 'firstChildNode'
+      ui: ~

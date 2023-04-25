@@ -1,0 +1,25 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Hanns':
+  superTypes:
+    'Neos.Neos:Shortcut': true
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
+
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease': true
+  ui:
+    icon: folder-open
+    label: 'HANNS'
+  properties:
+    targetMode:
+      type: string
+      defaultValue: 'firstChildNode'
+      ui: ~
+    link__target:
+      ui:
+        inspector:
+          group: 'preview'
+    link__label:
+      ui: ~

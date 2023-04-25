@@ -16,7 +16,7 @@
           'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
           'Hoerbiger.HoerbigerCom:Content.Image': true
-          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.NewsQuotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.DummyText': true
@@ -39,6 +39,14 @@
         label: 'Publikationsdatum'
         inspector:
           group: release
+    showImage:
+      type: boolean
+      defaultValue: true
+      ui:
+        label: 'Bild anzeigen'
+        reloadPageIfChanged: true
+        inspector:
+          group: image
     image:
       validation: ~
     image__alt:

@@ -16,6 +16,17 @@ Neos:
                       removeFormat: true
                       sup: true
                       sub: true
+            'plainWithStrong':
+              type: 'string'
+              ui:
+                inlineEditable: true
+                inline:
+                  editorOptions:
+                    hyphens: true
+                    autoparagraph: false
+                    formatting:
+                      strong: true
+                      removeFormat: true
             'text':
               type: 'string'
               ui:

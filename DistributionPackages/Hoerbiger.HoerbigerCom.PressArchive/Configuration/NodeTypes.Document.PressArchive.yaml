@@ -1,11 +1,18 @@
 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressArchive':
   superTypes:
     'Hoerbiger.HoerbigerCom:Document': true
-    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
     'Hoerbiger.Shared:Mixin.Searchable': true
   constraints:
     nodeTypes:
-      'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease': true
+      '*': true
+  childNodes:
+    hanns:
+      type: 'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Hanns'
+    yearbook:
+      type: 'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Yearbook'
+    press:
+      type: 'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Press'
   ui:
     icon: archive
     label: 'Pressearchiv'

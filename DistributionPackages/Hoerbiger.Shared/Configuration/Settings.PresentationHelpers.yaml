@@ -35,3 +35,5 @@ Neos:
       Shared.CompactSearchForm: Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory
       Shared.PeopleStory: Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStoryFactory
       Shared.SvgImage: Hoerbiger\Shared\Presentation\Block\SvgImage\SvgImageFactory
+      Shared.MetaHeadline: Hoerbiger\Shared\Presentation\Block\MetaHeadline\MetaHeadlineFactory
+      Shared.Separator: Hoerbiger\Shared\Presentation\Block\Separator\SeparatorFactory

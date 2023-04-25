@@ -1,0 +1,20 @@
+'Hoerbiger.HoerbigerCom:Content.TextWithMetaText':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+
+  ui:
+    label: 'Einklinker Text'
+    icon: outdent
+  properties:
+    meta_text:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Meta-Text eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text

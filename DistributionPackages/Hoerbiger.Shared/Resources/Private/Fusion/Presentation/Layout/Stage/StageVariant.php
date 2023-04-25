@@ -26,6 +26,8 @@ final class StageVariant implements PseudoEnumInterface
     const VARIANT_LITE = 'lite';
     const VARIANT_SERVICE = 'service';
     const VARIANT_DEFAULT = 'default';
+    const VARIANT_PRESS = 'press';
+    const VARIANT_PRESS_LARGE = 'pressLarge';
 
     /**
      * @var array<string,self>|self[]
@@ -52,6 +54,8 @@ final class StageVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_LITE
                 && $string !== self::VARIANT_SERVICE
                 && $string !== self::VARIANT_DEFAULT
+                && $string !== self::VARIANT_PRESS
+                && $string !== self::VARIANT_PRESS_LARGE
             ) {
                 throw StageVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -114,6 +118,16 @@ final class StageVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_DEFAULT);
     }
 
+    public static function press(): self
+    {
+        return self::from(self::VARIANT_PRESS);
+    }
+
+    public static function pressLarge(): self
+    {
+        return self::from(self::VARIANT_PRESS_LARGE);
+    }
+
     public function getIsFullMediaTextLeft(): bool
     {
         return $this->value === self::VARIANT_FULLMEDIATEXTLEFT;
@@ -159,6 +173,16 @@ final class StageVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_DEFAULT;
     }
 
+    public function getIsPress(): bool
+    {
+        return $this->value === self::VARIANT_PRESS;
+    }
+
+    public function getIsPressLarge(): bool
+    {
+        return $this->value === self::VARIANT_PRESS_LARGE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -173,7 +197,9 @@ final class StageVariant implements PseudoEnumInterface
             self::from(self::VARIANT_EXPERIENCE),
             self::from(self::VARIANT_LITE),
             self::from(self::VARIANT_SERVICE),
-            self::from(self::VARIANT_DEFAULT)
+            self::from(self::VARIANT_DEFAULT),
+            self::from(self::VARIANT_PRESS),
+            self::from(self::VARIANT_PRESS_LARGE)
         ];
     }
 

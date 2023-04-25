@@ -1,0 +1,16 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Yearbook':
+  superTypes:
+    'Neos.Neos:Shortcut': true
+    'Hoerbiger.HoerbigerCom:Document': true
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease': true
+  ui:
+    icon: folder-open
+    label: 'Jahrbuch'
+  properties:
+    targetMode:
+      type: string
+      defaultValue: 'firstChildNode'
+      ui: ~

@@ -13,6 +13,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class ButtonType implements PseudoEnumInterface
 {
+    const TYPE_REGULAR = 'regular';
     const TYPE_LINK = 'link';
 
     /**
@@ -30,7 +31,7 @@ final class ButtonType implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::TYPE_LINK) {
+            if ($string !== self::TYPE_LINK && $string !== self::TYPE_REGULAR) {
                 throw ButtonTypeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -44,9 +45,19 @@ final class ButtonType implements PseudoEnumInterface
         return self::from(self::TYPE_LINK);
     }
 
+    public static function regular(): self
+    {
+        return self::from(self::TYPE_REGULAR);
+    }
+
     public function getIsLink(): bool
     {
         return $this->value === self::TYPE_LINK;
+    }
+
+    public function getIsRegular(): bool
+    {
+        return $this->value === self::TYPE_REGULAR;
     }
 
     /**

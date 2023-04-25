@@ -239,7 +239,6 @@ function GenerateAMChart(data) {
             zoomX: false,
             fontSize: "12px",
             fontWeight: 500,
-            fontFamily: "Inter",
             color: 0xa8a8a8,
         })
     );
@@ -270,7 +269,6 @@ function GenerateAMChart(data) {
     tooltip.label.setAll({
         fill: am5.color(0xffffff),
         fontSize: 12,
-        fontFamily: "Inter",
         fontWeight: 500,
     });
 
@@ -290,7 +288,6 @@ function GenerateAMChart(data) {
     //X axis font
     let xAxisRenderer = xAxis.get("renderer");
     xAxisRenderer.labels.template.setAll({
-        fontFamily: "Inter",
         fontSize: "12px",
         fontWeight: 600,
         fill: am5.color(0x8a9199),
@@ -332,7 +329,6 @@ function GenerateAMChart(data) {
 
     let yRenderer = yAxis.get("renderer");
     yRenderer.labels.template.setAll({
-        fontFamily: "inter",
         fontSize: "12px",
         fontWeight: 600,
         fill: am5.color(0x8a9199),
@@ -389,7 +385,6 @@ function GenerateAMChart(data) {
         tooltip.label.setAll({
             fill: am5.color(0xffffff),
             fontSize: 12,
-            fontFamily: "Inter",
             fontWeight: 500,
         });
         series.set("tooltip", tooltip);
@@ -434,7 +429,6 @@ function GenerateAMChart(data) {
             centerX: am5.percent(50),
             fill: am5.color(0x1b365d),
             marginBottom: 20,
-            fontFamily: "Inter",
         })
     );
     chart.appear(1000, 100);
