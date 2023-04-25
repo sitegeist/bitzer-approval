@@ -44,6 +44,10 @@
             placeholder: 'Bitte Metaline eingeben'
       options:
         preset: 'rte.text'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
     stage__variant:
       type: 'string'
       defaultValue: 'fullMediaTextLeft'
