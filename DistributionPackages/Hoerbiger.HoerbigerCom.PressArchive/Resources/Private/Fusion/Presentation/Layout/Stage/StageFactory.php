@@ -69,12 +69,15 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 new MetaHeadline(
                     MetaHeadlineVariant::regular(),
                     Value::fromString($labels['label.' . $pressVariant->getValue()]),
-                    Value::fromString($pressVariant->getIsNews()
-                        ? '_' . $this->formattedDateFactory->createFullDate($datePublished)
-                        : 'Compression_'
-                    ),
+                    $pressVariant->getIsNews()
+                        ? Value::fromString('_' . $this->formattedDateFactory->createFullDate($datePublished))
+                        : null,
                     !$pressVariant->getIsNews()
-                        ? Value::fromString($pressRelease->getProperty('edition') ?: '')
+                        ? Value::fromString(
+                            $pressRelease->getProperty('edition')
+                                ? '_' .$pressRelease->getProperty('edition')
+                                : ''
+                        )
                         : null
                 )
             ),
