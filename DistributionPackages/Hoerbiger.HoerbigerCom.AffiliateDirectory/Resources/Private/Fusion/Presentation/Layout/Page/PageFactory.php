@@ -50,7 +50,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($affiliateFinder, $subGraph);
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($affiliateFinder, $subGraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($affiliateFinder, $subGraph, $inBackend);
 
         /** @var SlotInterface $application */
         $application = (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0]);
@@ -59,7 +59,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new ContentContainer(
