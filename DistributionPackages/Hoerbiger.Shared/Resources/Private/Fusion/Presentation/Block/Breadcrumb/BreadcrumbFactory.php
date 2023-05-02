@@ -29,7 +29,7 @@ final class BreadcrumbFactory extends AbstractComponentPresentationObjectFactory
             TraversableNodes::fromArray(array_filter(array_map(function ($node) {
                 if ( !in_array($node->getNodeType(), [
                     'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Yearbook',
-                    'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease',
+                    'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Hanns',
                     'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Press',
                 ]) ) {
 
