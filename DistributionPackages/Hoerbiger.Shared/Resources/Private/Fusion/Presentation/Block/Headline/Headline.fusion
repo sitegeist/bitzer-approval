@@ -35,7 +35,7 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             medium = "font-sans-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl"
             medium.@if.1 = ${presentationObject.size.isMedium}
 
-            mediumItalic = "italic uppercase font-sans-light text-2xl sm:text-3xl lg:text-4xl xl:text-5xl [&_strong]:font-sans-bold [&_strong]:not-italic"
+            mediumItalic = "uppercase font-sans-light text-2xl sm:text-3xl lg:text-4xl xl:text-5xl [&_strong]:font-sans-bold"
             mediumItalic.@if.1 = ${presentationObject.size.isMediumItalic}
 
             small = "font-sans-bold text-2xl sm:text-3xl lg:text-4xl xl:text-4xl"
