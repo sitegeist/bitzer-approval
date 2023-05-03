@@ -78,13 +78,17 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
 
         return new HeaderStage(
             StageVariant::from($node->getProperty('stage__variant') ?: StageVariant::VARIANT_FULLMEDIATEXTLEFT),
-            Editable::fromNodeProperty($node, 'metaline'),
-            new Headline(
-                HeadlineSize::verySmallItalic(),
-                HeadlineColor::neutralContrast(),
-                HeadlineType::h1(),
-                Editable::fromNodeProperty($node, 'headline')
-            ),
+            $node->getProperty('metaline') || $inBackend
+                ? Editable::fromNodeProperty($node, 'metaline')
+                : null,
+            $node->getProperty('headline') || $inBackend
+                ? new Headline(
+                    HeadlineSize::verySmallItalic(),
+                    HeadlineColor::neutralContrast(),
+                    HeadlineType::h1(),
+                    Editable::fromNodeProperty($node, 'headline')
+                )
+                : null,
             null,
             $node->getProperty('abstract') || $inBackend
                 ? new Text(
