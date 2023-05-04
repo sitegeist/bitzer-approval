@@ -35,9 +35,6 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
                 base = "cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch"
                 text = "font-semibold"
 
-                default = "px-8"
-                default.@if.1 = ${!presentationObject.variant.isContrast}
-
                 cta = "bg-brand text-brand-contrast font-sans-bold"
                 cta.@if.1 = ${presentationObject.variant.isCta}
 
@@ -51,7 +48,7 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
                 plain.@if.1 = ${presentationObject.variant.isPlain}
 
                 notPlain = "px-8 rounded-full "
-                notPlain.@if.1 = ${!presentationObject.variant.isPlain}
+                notPlain.@if.1 = ${!presentationObject.variant.isPlain && !presentationObject.variant.isContrast}
             }
 
             href = ${presentationObject.href}
