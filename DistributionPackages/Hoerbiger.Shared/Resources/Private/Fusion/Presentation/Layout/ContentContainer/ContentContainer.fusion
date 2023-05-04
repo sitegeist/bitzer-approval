@@ -14,7 +14,8 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
         <div class={[
             "[Layout.ContentContainer (" + presentationObject.variant + ")]",
             "w-full",
-            presentationObject.variant.isRegularNeutral && "bg-neutral-lighter"
+            presentationObject.variant.isRegularNeutral && "bg-neutral-lighter",
+            presentationObject.variant.isYCentered && "h-full"
         ]}>
             <div class={[
                 presentationObject.variant.isRegular && "max-w-content-full mx-auto px-md py-contentcontainer bg-light",
@@ -27,9 +28,22 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.isRegularX && "max-w-content-full mx-auto px-md bg-light",
                 presentationObject.variant.isStageAfterBreadcrumb && "max-w-content-full mx-auto p-md sm:p-sm py-0 sm:py-0 bg-light",
                 presentationObject.variant.isRegularStageAfterBreadcrumb && "max-w-content-full mx-auto px-md pb-contentcontainer pt-0 bg-light",
+                presentationObject.variant.isStackStage && "max-w-content-full mx-auto px-md py-0 bg-light",
                 presentationObject.variant.isBlank && "w-full",
-                presentationObject.variant.isBlankY && "w-full px-md py-contentcontainer",
-                presentationObject.variant.isHalfWidth && "border-brand w-full sm:max-w-[50%]"
+                presentationObject.variant.isFullViewHeight && "w-full h-screen",
+                presentationObject.variant.isBlankY && "w-full py-contentcontainer",
+                presentationObject.variant.isBlankBottom && "w-full pb-contentcontainer",
+                presentationObject.variant.isHalfWidth && "border-brand w-full sm:max-w-[50%]",
+                presentationObject.variant.isPress && "max-w-[1050px] mx-auto bg-light",
+                presentationObject.variant.isPressSmall && "max-w-[800px] mx-auto bg-light",
+                presentationObject.variant.isPressLeft && "max-w-[800px] pb-sm",
+                presentationObject.variant.isPressLeftBlank && "max-w-[800px]",
+                presentationObject.variant.isYCentered && "w-full h-full flex items-center",
+                presentationObject.variant.isPressImage && "w-full md:h-[600px] mx-auto px-0 md:px-md py-contentcontainer",
+                presentationObject.variant.isVisibleSm && "hidden sm:block w-full h-full",
+                presentationObject.variant.isVisibleMd && "hidden md:block w-full h-full",
+                presentationObject.variant.isVisibleLg && "hidden lg:block w-full h-full",
+                presentationObject.variant.isSmallText && "max-w-small-text mx-auto px-md py-contentcontainer bg-light"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </div>

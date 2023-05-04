@@ -8,18 +8,13 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.ApplicationWorlds package.
  */
 
-use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
-use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slider\SliderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
@@ -27,9 +22,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 {
     /**
      * @Flow\Inject
-     * @var SlidableFactory
+     * @var SliderFactory
      */
-    protected $slidableFactory;
+    protected $sliderFactory;
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
@@ -51,7 +46,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             Collection::fromIterable([
-                $this->slidableFactory->forSliderPreviewMixins(
+                $this->sliderFactory->forSliderPreviewMixins(
                     $this->findChildNodesByNodeTypeFilterString(
                         $siteNode,
                         'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'

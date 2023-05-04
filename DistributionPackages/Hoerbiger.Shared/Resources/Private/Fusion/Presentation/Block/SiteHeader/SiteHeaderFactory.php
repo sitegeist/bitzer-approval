@@ -16,6 +16,7 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItem;
 use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use Neos\ContentRepository\Domain\Model\Node;
+use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Flow\Mvc\ActionRequest;
@@ -24,6 +25,7 @@ use Neos\Neos\Exception;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Neos\ContentRepository\Domain\Service\ContentDimensionPresetSourceInterface;
 use Neos\Neos\Domain\Service\ContentContextFactory;
+use Sitegeist\CsvPO\Domain\TranslationLabel;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 use Neos\Flow\Annotations as Flow;
 
@@ -63,13 +65,49 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         ContentContext $subgraph,
         ?ActionRequest $actionRequest = null
     ): SiteHeaderInterface {
+        switch ($document->getNodeType()->getName()) {
+            case 'Hoerbiger.HoerbigerCom:Document.HomePage':
+            case 'Hoerbiger.HoerbigerCom:Document.WebPage':
+            case 'Hoerbiger.HoerbigerCom:Document.CareerPage':
+            case 'Hoerbiger.HoerbigerCom:Document.CareerRootPage':
+            case 'Hoerbiger.HoerbigerCom:Document.Chronicle':
+            case 'Hoerbiger.HoerbigerCom:Document.ContactPage':
+            case 'Hoerbiger.HoerbigerCom:Document.Error.404':
+            case 'Hoerbiger.HoerbigerCom:Document.PrivacyPage':
+            case 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage':
+            case 'Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine':
+            case 'Hoerbiger.HoerbigerCom.HR:Document.JobList':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
+            case 'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder':
+                $siteHeaderVariant = SiteHeaderVariant::VARIANT_TRANSPARENT;
+                break;
+            default:
+                $siteHeaderVariant = SiteHeaderVariant::VARIANT_REGULAR;
+        }
+
+        $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
+            'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv'
+        );
+        $labels = array_map(function (TranslationLabel $label): string {
+            return $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+                $this->localizationService->getConfiguration()->getCurrentLocale()
+            ))->getTranslation() ?: $label->getIdentifier();
+        }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
+
         return new SiteHeader(
+            SiteHeaderVariant::from(
+                $siteHeaderVariant
+            ),
             $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
-            (new CompactSearchFormFactory())->forDocument($site),
             $this->getLanguageNavigationItems($document, $subgraph, $actionRequest),
-            new Icon("shared", "chevronDown", IconSize::size_1_5()),
-            new Icon("shared", "arrowRight", IconSize::size_1())
+            new Icon("shared", "naviChevron", IconSize::size_0_5()),
+            new Icon("shared", "arrowRight", IconSize::size_1()),
+            $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true),
+            new Icon("shared", "search", IconSize::size_1_5()),
+            json_encode($labels) ?: '{}'
         );
     }
 
@@ -89,8 +127,8 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $node,
         TraversableNodeInterface $currentDocumentNode,
         int $currentLevel,
-        int $maxDepth = 2,
-        int $maxItemsPerColumn = 7
+        int $maxDepth = 3,
+        int $maxItemsPerColumn = 5
     ): ?NavigationItems {
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
             'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv'

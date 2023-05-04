@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
@@ -24,6 +25,8 @@ use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\MatomoOptOut\MatomoOptOut;
+use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
+use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
@@ -36,6 +39,8 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\NewsQuotation\NewsQuotation;
+use Hoerbiger\Shared\Presentation\Block\NewsQuotation\NewsQuotationVariant;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
@@ -55,6 +60,8 @@ use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\HeaderVideoStage;
+use Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\SliderItem\SliderItem;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
@@ -124,14 +131,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forTileNavigation($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Text':
                 return $this->forTextNode($contentNode, $subgraph, $inBackend, $theme);
+            case 'Hoerbiger.HoerbigerCom:Content.TextWithMetaText':
+                return $this->forTextWithMetaTextNode($contentNode, $subgraph, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
                 return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.Image':
-                return $this->forImageNode($contentNode, $inBackend);
+                return $this->forImageNode($documentNode, $contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.MostWanted':
                 return $this->forMostWantedNode($contentNode, $inBackend, $subgraph, $site);
             case 'Hoerbiger.HoerbigerCom:Content.Quotation':
                 return $this->forQuotationNode($contentNode, $theme);
+            case 'Hoerbiger.HoerbigerCom:Content.NewsQuotation':
+                return $this->forNewsQuotationNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Square':
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait':
@@ -183,6 +194,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return Content::fromNode($contentNode, 'Neos.Neos:ContentCollection');
             case 'Hoerbiger.HoerbigerCom:Content.MatomoOptOut':
                 return $this->forMatomoOptOut($subgraph);
+            case 'Hoerbiger.HoerbigerCom:Collection.HeaderVideoStage':
+                return $this->forHeaderVideoStage($contentNode, $subgraph, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.HeaderVideoStage.SliderItem':
+                return $this->forHeaderVideoStageSliderItem($contentNode, $subgraph, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -272,6 +287,64 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
+    public function forTextWithMetaTextNode(TraversableNodeInterface $textWithMetaTextNode, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
+    {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        return new ContentContainer(
+            ContentContainerVariant::pressLeftBlank(),
+            new Grid(
+                GridVariant::twoColumnsPress(),
+                Collection::fromIterable([
+                    new ContentContainer(
+                        ContentContainerVariant::visibleMd(),
+                        new ContentContainer(
+                            ContentContainerVariant::yCentered(),
+                            $inBackend || $textWithMetaTextNode->getProperty('meta_text')
+                                ? new Stack(
+                                    StackVariant::metaPress(),
+                                    Collection::fromIterable(array_filter([
+                                        new Separator(
+                                            SeparatorVariant::boldRed(),
+                                            null
+                                        ),
+                                        new Text(
+                                            TextVariant::serviceRed(),
+                                            Editable::fromNodeProperty($textWithMetaTextNode, 'meta_text'),
+                                            false
+                                        )
+                                    ]))
+                                )
+                                : Value::fromString('')
+                        )
+                    ),
+                    new Stack(
+                        StackVariant::xs(),
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $textWithMetaTextNode->getProperty('headline')
+                                ? new Headline(
+                                    HeadlineSize::large(),
+                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                                    HeadlineType::h2(),
+                                    Editable::fromNodeProperty($textWithMetaTextNode, 'headline')
+                            )
+                                : null,
+                            $inBackend || $textWithMetaTextNode->getProperty('text')
+                                ? new Text(
+                                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
+                                    Editable::fromNodeProperty($textWithMetaTextNode, 'text'),
+                                    false
+                            )
+                                : null
+                        ]), $identity)
+                    )]
+                )
+            )
+        );
+    }
+
     public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend, ContentContext $subgraph, ?Theme $theme): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
@@ -336,19 +409,37 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forImageNode(TraversableNodeInterface $imageNode, bool $inBackend): SlotInterface
+    public function forImageNode(
+        TraversableNodeInterface $documentNode,
+        TraversableNodeInterface $imageNode,
+        bool $inBackend
+    ): SlotInterface
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($imageNode, $inBackend);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Property "image" is required for content element image.');
         }
 
+        $containerVariant = ContentContainerVariant::regular();
+        $image = $this->figureFactory->forFullWidthImage(
+            $imageSource,
+            Editable::fromNodeProperty($imageNode, 'image__caption')
+        );
+
+        if (
+            $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease' ||
+            $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease' ||
+            $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease'
+        ) {
+            $containerVariant = ContentContainerVariant::pressImage();
+            $image = $this->figureFactory->forSlideStageIcon(
+                $imageSource
+            );
+        }
+
         return new ContentContainer(
-            ContentContainerVariant::regular(),
-            $this->figureFactory->forFullWidthImage(
-                $imageSource,
-                Editable::fromNodeProperty($imageNode, 'image__caption')
-            )
+            $containerVariant,
+            $image
         );
     }
 
@@ -426,6 +517,22 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 QuotationVariant::tryFromTheme($theme),
                 Editable::fromNodeProperty($quotationNode, 'text'),
                 Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+            )
+        );
+    }
+
+    public function forNewsQuotationNode(TraversableNodeInterface $NewsquotationNode, ?Theme $theme): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::press(),
+            new ContentContainer(
+                ContentContainerVariant::blankY(),
+                new NewsQuotation(
+                    NewsQuotationVariant::tryFromTheme($theme),
+                    Editable::fromNodeProperty($NewsquotationNode, 'text'),
+                    Editable::fromNodeProperty($NewsquotationNode, 'spokenByCharacter'),
+                    Editable::fromNodeProperty($NewsquotationNode, 'division')
+                )
             )
         );
     }
@@ -861,6 +968,67 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             MatomoOptOut::forLocale(reset($languages))
+        );
+    }
+
+    private function forHeaderVideoStage(TraversableNodeInterface $videoStageNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::fullViewHeight(),
+            new HeaderVideoStage(
+                Collection::fromNodes(
+                    $videoStageNode->findChildNodes(),
+                    function (TraversableNodeInterface $sliderItem): Content {
+                        return Content::fromNode($sliderItem, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                    }
+                )
+            ),
+        );
+    }
+
+    private function forHeaderVideoStageSliderItem(TraversableNodeInterface $sliderItemNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($sliderItemNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element image.');
+        }
+
+        $figure = $this->figureFactory->forPartialEclipse(
+            $imageSource
+        );
+
+        $text = new Grid(
+            GridVariant::iconLeft(),
+            Collection::fromIterable([
+                new Tag(
+                    'div',
+                    TagVariant::from('heightFull'),
+                    new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                ),
+                new Text(
+                    TextVariant::brandContrastBold(),
+                    Editable::fromNodeProperty($sliderItemNode, "text"),
+                    false
+                )
+            ], function (SlotInterface $slot) {
+                return $slot;
+            })
+        );
+
+        return new SliderItem(
+            $sliderItemNode->getProperty("headline") || $inBackend
+                ? new Headline(
+                    HeadlineSize::mediumItalic(),
+                    HeadlineColor::white(),
+                    HeadlineType::div(),
+                    Editable::fromNodeProperty($sliderItemNode, "headline")
+                )
+                : null,
+            $sliderItemNode->getProperty("link__target") && !$inBackend
+                ? (new LinkFactory())->forLinkWithContent($sliderItemNode, $subgraph, $text)
+                : $text,
+            $figure,
+            $this->videoFactory->forSliderVideo($sliderItemNode, $inBackend, Theme::slider())
         );
     }
 }

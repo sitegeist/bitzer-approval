@@ -22,6 +22,7 @@ final class VideoVariant implements PseudoEnumInterface
     const VARIANT_EXPERIENCE = 'experience';
     const VARIANT_LITE = 'lite';
     const VARIANT_SERVICE = 'service';
+    const VARIANT_SLIDER = 'slider';
 
     /**
      * @var array<string,self>|self[]
@@ -44,6 +45,7 @@ final class VideoVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_EXPERIENCE
                 && $string !== self::VARIANT_LITE
                 && $string !== self::VARIANT_SERVICE
+                && $string !== self::VARIANT_SLIDER
             ) {
                 throw VideoVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -111,6 +113,11 @@ final class VideoVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_SERVICE;
     }
 
+    public function getIsSlider(): bool
+    {
+        return $this->value === self::VARIANT_SLIDER;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -121,7 +128,8 @@ final class VideoVariant implements PseudoEnumInterface
             self::from(self::VARIANT_EXCITE),
             self::from(self::VARIANT_EXPERIENCE),
             self::from(self::VARIANT_LITE),
-            self::from(self::VARIANT_SERVICE)
+            self::from(self::VARIANT_SERVICE),
+            self::from(self::VARIANT_SLIDER)
         ];
     }
 

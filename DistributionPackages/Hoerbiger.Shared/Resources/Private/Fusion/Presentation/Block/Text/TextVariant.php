@@ -21,7 +21,9 @@ final class TextVariant implements PseudoEnumInterface
     const VARIANT_CENTERED = 'centered';
     const VARIANT_LIGHT_CONTRAST = 'lightContrast';
     const VARIANT_BRAND_CONTRAST = 'brandContrast';
+    const VARIANT_BRAND_CONTRAST_BOLD = 'brandContrastBold';
     const VARIANT_NEUTRAL_CONTRAST = 'neutralContrast';
+    const VARIANT_NEUTRAL_CONTRAST_FIRA_PRO = 'neutralContrastFiraPro';
     const VARIANT_TRANSPARENT_CONTRAST = 'transparentContrast';
     const VARIANT_EXCITE = 'excite';
     const VARIANT_EXCITE_CONTRAST = 'exciteContrast';
@@ -30,6 +32,8 @@ final class TextVariant implements PseudoEnumInterface
     const VARIANT_LITE = 'lite';
     const VARIANT_LITE_CONTRAST = 'liteContrast';
     const VARIANT_SERVICE_CONTRAST = 'serviceContrast';
+    const VARIANT_SERVICE_RED = 'serviceRed';
+    const VARIANT_SM = 'sm';
 
     /**
      * @var array<string,self>|self[]
@@ -51,7 +55,9 @@ final class TextVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_CENTERED
                 && $string !== self::VARIANT_LIGHT_CONTRAST
                 && $string !== self::VARIANT_BRAND_CONTRAST
+                && $string !== self::VARIANT_BRAND_CONTRAST_BOLD
                 && $string !== self::VARIANT_NEUTRAL_CONTRAST
+                && $string !== self::VARIANT_NEUTRAL_CONTRAST_FIRA_PRO
                 && $string !== self::VARIANT_TRANSPARENT_CONTRAST
                 && $string !== self::VARIANT_EXCITE
                 && $string !== self::VARIANT_EXCITE_CONTRAST
@@ -60,6 +66,8 @@ final class TextVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_LITE
                 && $string !== self::VARIANT_LITE_CONTRAST
                 && $string !== self::VARIANT_SERVICE_CONTRAST
+                && $string !== self::VARIANT_SERVICE_RED
+                && $string !== self::VARIANT_SM
             ) {
                 throw TextVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -105,9 +113,19 @@ final class TextVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_BRAND_CONTRAST);
     }
 
+    public static function brandContrastBold(): self
+    {
+        return self::from(self::VARIANT_BRAND_CONTRAST_BOLD);
+    }
+
     public static function neutralContrast(): self
     {
         return self::from(self::VARIANT_NEUTRAL_CONTRAST);
+    }
+
+    public static function neutralContrastFiraPro(): self
+    {
+        return self::from(self::VARIANT_NEUTRAL_CONTRAST_FIRA_PRO);
     }
 
     public static function transparentContrast(): self
@@ -150,6 +168,16 @@ final class TextVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_SERVICE_CONTRAST);
     }
 
+    public static function serviceRed(): self
+    {
+        return self::from(self::VARIANT_SERVICE_RED);
+    }
+
+    public static function sm(): self
+    {
+        return self::from(self::VARIANT_SM);
+    }
+
     public function getIsDefault(): bool
     {
         return $this->value === self::VARIANT_DEFAULT;
@@ -170,9 +198,19 @@ final class TextVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BRAND_CONTRAST;
     }
 
+    public function getIsBrandContrastBold(): bool
+    {
+        return $this->value === self::VARIANT_BRAND_CONTRAST_BOLD;
+    }
+
     public function getIsNeutralContrast(): bool
     {
         return $this->value === self::VARIANT_NEUTRAL_CONTRAST;
+    }
+
+    public function getIsNeutralContrastFiraPro(): bool
+    {
+        return $this->value === self::VARIANT_NEUTRAL_CONTRAST_FIRA_PRO;
     }
 
     public function getIsTransparentContrast(): bool
@@ -215,6 +253,16 @@ final class TextVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_SERVICE_CONTRAST;
     }
 
+    public function getIsServiceRed(): bool
+    {
+        return $this->value === self::VARIANT_SERVICE_RED;
+    }
+
+    public function getIsSm(): bool
+    {
+        return $this->value === self::VARIANT_SM;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -225,7 +273,9 @@ final class TextVariant implements PseudoEnumInterface
             self::from(self::VARIANT_CENTERED),
             self::from(self::VARIANT_LIGHT_CONTRAST),
             self::from(self::VARIANT_BRAND_CONTRAST),
+            self::from(self::VARIANT_BRAND_CONTRAST_BOLD),
             self::from(self::VARIANT_NEUTRAL_CONTRAST),
+            self::from(self::VARIANT_NEUTRAL_CONTRAST_FIRA_PRO),
             self::from(self::VARIANT_TRANSPARENT_CONTRAST),
             self::from(self::VARIANT_EXCITE),
             self::from(self::VARIANT_EXCITE_CONTRAST),
@@ -233,7 +283,9 @@ final class TextVariant implements PseudoEnumInterface
             self::from(self::VARIANT_EXPERIENCE_CONTRAST),
             self::from(self::VARIANT_LITE),
             self::from(self::VARIANT_LITE_CONTRAST),
-            self::from(self::VARIANT_SERVICE_CONTRAST)
+            self::from(self::VARIANT_SERVICE_CONTRAST),
+            self::from(self::VARIANT_SERVICE_RED),
+            self::from(self::VARIANT_SM)
         ];
     }
 

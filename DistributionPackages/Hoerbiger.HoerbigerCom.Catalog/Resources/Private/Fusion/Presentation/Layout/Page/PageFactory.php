@@ -63,7 +63,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($catalog, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($catalog, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $catalog, $stage, $subgraph);
     }
@@ -89,7 +89,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolutions, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($industrySolutions, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolutions, $subgraph);
@@ -108,18 +108,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         AnchorNavigationVariant::regular(),
                         array_map(
                             fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
                     )
                     : null,
-                new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new CacheSegment(
@@ -133,6 +128,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList'
                 ),
                 Content::fromNode($industrySolutions->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }
@@ -144,7 +143,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolution, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($industrySolution, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolution, $subgraph);
@@ -163,18 +162,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         AnchorNavigationVariant::regular(),
                         array_map(
                             fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
                     )
                     : null,
-                new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($industrySolution->findNamedChildNode(NodeName::fromString('main'))),
@@ -182,6 +176,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $this->productListFactory->forIndustrySolution($industrySolution, $subgraph, $inBackend),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList'
                 ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }
@@ -209,21 +207,20 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         AnchorNavigationVariant::regular(),
                         array_map(
                             fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
                     )
                     : null,
-                new ScrollToTop(),
+                new ContentContainer(
+                    ContentContainerVariant::headerStage(),
+                    $stage
+                ),
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
-                    $stage
-                ),
-                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                )
             ]), $identity)
         );
     }

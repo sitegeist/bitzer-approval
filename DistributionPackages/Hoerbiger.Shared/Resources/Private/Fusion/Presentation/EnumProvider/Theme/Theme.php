@@ -18,6 +18,7 @@ final class Theme implements PseudoEnumInterface
     const VALUE_LITE = 'lite';
     const VALUE_SERVICE = 'service';
     const VALUE_DEFAULT = 'default';
+    const VALUE_SLIDER = 'slider';
 
     /**
      * @var array<string,self>|self[]
@@ -38,6 +39,7 @@ final class Theme implements PseudoEnumInterface
                 && $string !== self::VALUE_EXPERIENCE
                 && $string !== self::VALUE_LITE
                 && $string !== self::VALUE_SERVICE
+                && $string !== self::VALUE_SLIDER
                 && $string !== self::VALUE_DEFAULT) {
                 throw ThemeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -67,6 +69,11 @@ final class Theme implements PseudoEnumInterface
         return self::from(self::VALUE_SERVICE);
     }
 
+    public static function slider(): self
+    {
+        return self::from(self::VALUE_SLIDER);
+    }
+
     public static function default(): self
     {
         return self::from(self::VALUE_DEFAULT);
@@ -92,6 +99,11 @@ final class Theme implements PseudoEnumInterface
         return $this->value === self::VALUE_SERVICE;
     }
 
+    public function getIsSlider(): bool
+    {
+        return $this->value === self::VALUE_SLIDER;
+    }
+
     public function getIsDefault(): bool
     {
         return $this->value === self::VALUE_DEFAULT;
@@ -107,6 +119,7 @@ final class Theme implements PseudoEnumInterface
             self::from(self::VALUE_EXPERIENCE),
             self::from(self::VALUE_LITE),
             self::from(self::VALUE_SERVICE),
+            self::from(self::VALUE_SLIDER),
             self::from(self::VALUE_DEFAULT)
         ];
     }

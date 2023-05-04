@@ -1,0 +1,43 @@
+prototype(Hoerbiger.Shared:Block.NewsQuotation) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\NewsQuotation\\NewsQuotationInterface'
+
+    @styleguide {
+        title = 'NewsQuotation'
+
+        props {
+            text = '- Add Slot Content -'
+            spokenByCharacter = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Block.NewsQuotation]",
+            "flex justify-end w-full relative"
+        ]}>
+            <div class={[
+                "flex flex-col sm:w-1/2"
+            ]}>
+                <div class={[
+                    "font-serif-light italic leading-tight text-3xl text-neutral-darkest"
+                ]}>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
+                </div>
+                <div class="w-full flex justify-end pr-md  mt-[30px]">
+                    <div class="flex flex-col">
+                        <div class={[
+                            "font-sans-bold text-service-red"
+                        ]}>
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.spokenByCharacter} />
+                        </div>
+                            <div class={[
+                            "font-sans-bold"
+                        ]}>
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.division} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+}

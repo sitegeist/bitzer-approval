@@ -13,6 +13,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class IconSize implements PseudoEnumInterface
 {
+    const SIZE_SIZE_0_5 = 'size_0_5';
     const SIZE_SIZE_1 = 'size_1';
     const SIZE_SIZE_1_5 = 'size_1_5';
     const SIZE_SIZE_2 = 'size_2';
@@ -36,7 +37,8 @@ final class IconSize implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::SIZE_SIZE_1
+            if ($string !== self::SIZE_SIZE_0_5
+                &&$string !== self::SIZE_SIZE_1
                 && $string !== self::SIZE_SIZE_1_5
                 && $string !== self::SIZE_SIZE_2
                 && $string !== self::SIZE_SIZE_2_5
@@ -49,6 +51,11 @@ final class IconSize implements PseudoEnumInterface
         }
 
         return self::$instances[$string];
+    }
+
+    public static function size_0_5(): self
+    {
+        return self::from(self::SIZE_SIZE_0_5);
     }
 
     public static function size_1(): self
@@ -84,6 +91,11 @@ final class IconSize implements PseudoEnumInterface
     public static function sizeParent(): self
     {
         return self::from(self::SIZE_PARENT);
+    }
+
+    public function getIsSize_0_5(): bool
+    {
+        return $this->value === self::SIZE_SIZE_0_5;
     }
 
     public function getIsSize_1(): bool
@@ -127,6 +139,7 @@ final class IconSize implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::SIZE_SIZE_0_5),
             self::from(self::SIZE_SIZE_1),
             self::from(self::SIZE_SIZE_1_5),
             self::from(self::SIZE_SIZE_2),

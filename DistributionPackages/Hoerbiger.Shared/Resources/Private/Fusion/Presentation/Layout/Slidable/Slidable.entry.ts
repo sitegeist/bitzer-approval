@@ -21,8 +21,10 @@ export default ($node: Element): void => {
 			let updatedAt = 0;
 			let currentSlide = 0;
 
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			// @ts-ignore
 			const onSlideChanged = (instance: KeenSlider) => {
-				currentSlide = instance.details().relativeSlide;
+				currentSlide = instance.track.details.rel;
 				updatedAt = Date.now();
 
 				if ($jumper instanceof NodeList) {
@@ -101,11 +103,12 @@ export default ($node: Element): void => {
 			// Init slider.
 			const keenSlider = new KeenSlider($slidable, {
 				loop: true,
-				controls: false,
-				slidesPerView: 1,
+				drag: false,
 				mode: "snap",
-				duration: duration,
-				slideChanged: onSlideChanged
+				defaultAnimation: {
+					duration: duration,
+				},
+				detailsChanged: onSlideChanged
 			});
 
 			if (keenSlider) {

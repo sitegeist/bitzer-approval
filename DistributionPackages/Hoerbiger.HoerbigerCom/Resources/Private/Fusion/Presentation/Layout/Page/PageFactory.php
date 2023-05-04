@@ -14,10 +14,18 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
+use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\AnimatedContentContainer\AnimatedContentContainer;
+use Hoerbiger\Shared\Presentation\Layout\AnimatedContentContainer\AnimatedContentContainerFactory;
+use Hoerbiger\Shared\Presentation\Layout\AnimatedContentContainer\AnimatedContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -29,6 +37,7 @@ use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
@@ -56,7 +65,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forCareerPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($careerPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }
@@ -64,7 +73,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forPrivacyPage(TraversableNodeInterface $privacyPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($privacyPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($privacyPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph);
     }
@@ -84,23 +93,63 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new ScrollToTop(),
-                $videoStage
-                    ? new ContentContainer(
-                        ContentContainerVariant::blank(),
-                        $videoStage
-                    )
-                    : null,
+                // @TODO REMOVE old stage
+//                $videoStage
+//                    ? new ContentContainer(
+//                        ContentContainerVariant::blank(),
+//                        $videoStage
+//                    )
+//                    : null,
+                Content::fromNode(
+                    $homepage->findNamedChildNode(NodeName::fromString('stage')),
+                    'Hoerbiger.HoerbigerCom:ContentSlot'
+                ),
                 count($anchors) > 0
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::regular(),
                         array_map(
                             fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
                     )
                     : null,
+                new ContentContainer(
+                    ContentContainerVariant::regular(),
+                    new AnimatedContentContainer(
+                        AnimatedContentContainerVariant::fadeAndTranslate(),
+                        new Headline(
+                            HeadlineSize::mediumItalic(),
+                            HeadlineColor::neutralContrast(),
+                            HeadlineType::h1(),
+                            Editable::fromNodeProperty($homepage, 'headline')
+                        ),
+                        AnimatedContentContainerFactory::getClassForVisibleContainer(
+                            AnimatedContentContainerVariant::fadeAndTranslate()
+                        ),
+                        AnimatedContentContainerFactory::getClassForInvisibleContainer(
+                            AnimatedContentContainerVariant::fadeAndTranslate()
+                        ),
+                    )
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::smallText(),
+                    Collection::fromIterable(array_filter([
+                        $homepage->getProperty('teaser_text_headline') || $inBackend
+                            ? new Headline(
+                                HeadlineSize::verySmall(),
+                                HeadlineColor::neutralContrast(),
+                                HeadlineType::div(),
+                                Editable::fromNodeProperty($homepage, 'teaser_text_headline')
+                            )
+                            : null,
+                        new Text(
+                            TextVariant::neutralContrastFiraPro(),
+                            Editable::fromNodeProperty($homepage, "text"),
+                            false
+                        )
+                    ]))
+                ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity)
         );
@@ -116,7 +165,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             throw new \InvalidArgumentException('Introduction requires image for property media.');
         }
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($searchResultsPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($searchResultsPage, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($searchResultsPage, $subgraph);
@@ -128,19 +177,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new ContentContainer(
                     ContentContainerVariant::regular(),
                     (new SearchFormFactory())->create($subgraph)
                 ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }
@@ -148,7 +196,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forWebPage(TraversableNodeInterface $site, TraversableNodeInterface $webPage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($webPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($webPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
     }
@@ -156,7 +204,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forCareerRootPage(TraversableNodeInterface $site, TraversableNodeInterface $careerRootPage, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($careerRootPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($careerRootPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $careerRootPage, $stage, $subgraph);
     }
@@ -177,7 +225,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             return $slot;
         };
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($contactPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($contactPage, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($contactPage, $subgraph);
@@ -196,18 +244,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         AnchorNavigationVariant::regular(),
                         array_map(
                             fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
                     )
                     : null,
-                new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('main'))),
@@ -220,6 +263,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonsuccess')), 'Hoerbiger.HoerbigerCom:ContentSlot'),
                         Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('contactonfail')), 'Hoerbiger.HoerbigerCom:ContentSlot')
                     )
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
                 )
             ]), $identity)
         );
@@ -228,7 +275,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forChroniclePage(TraversableNodeInterface $site, TraversableNodeInterface $chroniclePage, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($chroniclePage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($chroniclePage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph);
     }
@@ -240,7 +287,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($notFoundPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($notFoundPage, $subgraph, $inBackend);
 
         $anchors = (new Sailor())->findAvailableAnchorsForDocument($notFoundPage);
 
@@ -256,14 +303,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         AnchorNavigationVariant::regular(),
                         array_map(
                             fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            => (new LinkFactory())->forAnchor($anchor),
                             $anchors
                         )
                     )
                     : null,
-                new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularSm(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main')))
@@ -299,16 +345,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     )
                     : null,
-                new scrollToTop(),
+                new ContentContainer(
+                    ContentContainerVariant::headerStage(),
+                    $stage
+                ),
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     $breadcrumb
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
-                    $stage
-                ),
-                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                )
             ]), $identity)
         );
     }

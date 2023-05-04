@@ -1,0 +1,22 @@
+prototype(Hoerbiger.Shared:Block.MetaHeadline) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\MetaHeadline\\MetaHeadlineInterface'
+
+    @styleguide {
+        title = 'MetaHeadline'
+
+        props {
+            variant = 'regular'
+            slice1 = '- Add Slot Content -'
+            slice2 = '- Add Slot Content -'
+            slice3 = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.slice1} @if.1={presentationObject.slice1}/>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.slice2} @if.1={presentationObject.slice2}/>
+            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.slice3} @if.1={presentationObject.slice3}/>
+        </div>
+        `
+}

@@ -8,6 +8,9 @@
             <trans-unit id="list.seeAll" xml:space="preserve">
                 <source>See all news</source>
             </trans-unit>
+            <trans-unit id="list.seeOverview" xml:space="preserve">
+                <source>an overview from all stories </source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

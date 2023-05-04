@@ -6,56 +6,55 @@ prototype(Hoerbiger.Shared:Block.SiteFooter) < prototype(PackageFactory.AtomicFu
             "[Block.SiteFooter]",
             "w-full max-w-screen flex-flex-col items-stretch z-[0]"
         ]}>
-            <div class="bg-triangle" @if.1={presentationObject.contactFormLink}></div>
-            <div
-                @if.1={presentationObject.contactFormLink}
-                class="bg-standard"
-            >
-                <div class="mx-auto max-w-content-full px-md py-md sm:py-sm bg-standard">
-                    <Hoerbiger.Shared:Block.ContactFormLink presentationObject={presentationObject.contactFormLink} />
-                </div>
-            </div>
-            <div class="bg-standard border border-t-2 border-t-light font-sans-bold">
+            <div class="bg-neutral-footer border border-t-2 border-t-light font-sans-regular">
                 <div class="mx-auto max-w-content-full px-md py-sm">
+                    <div
+                        data-scrollToTop="scroll"
+                        class="w-full flex justify-center mb-sm cursor-pointer pt-md lg:p-0"
+                    >
+                        <svg width="31" height="17" viewBox="0 0 31 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M1.35786 16.0357L15.5 1.89355L29.6421 16.0357" stroke="white" stroke-width="2"/>
+                        </svg>
+                    </div>
                     <div class={[
-                        "w-full flex flex-col space-y-lg",
-                        "md:space-y-10 lg:space-y-0 lg:grid lg:gap-lg lg:grid-cols-2 xl:grid-cols-5"
+                        "w-full flex flex-col space-y-lg py-0 lg:py-sm",
+                        "md:space-y-10 lg:space-y-0 md:grid sm:grid-cols-3 lg:grid-cols-5 md:gap-x-2xl"
                     ]}>
-                        <div class="hidden col-span-3 xl:col-span-1 xl:flex justify-center items-start">
+                        <div class="hidden col-span-3 md:col-span-1 lg:flex items-start">
                             <a href={presentationObject.siteUri}>
                                 <img
                                     alt="Logo Hoerbiger"
                                     title="Hoerbiger"
-                                    class="max-w-[160px]"
+                                    class="max-w-[160px] md:translate-y-[-30px] block"
                                     width="169"
                                     height="80"
                                     src={presentationObject.logoUri}
                                 />
                             </a>
                         </div>
-                        <ul class="flex flex-col space-y-3 xl:space-y-5">
+                        <ul class="flex flex-col space-y-3 xl:space-y-5 items-center md:items-start">
                             <Neos.Fusion:Loop items={presentationObject.primaryNavigationItems.items}>
                                 <li>
                                     <Hoerbiger.Shared:Block.Link presentationObject={item}/>
                                 </li>
                             </Neos.Fusion:Loop>
                         </ul>
-                        <ul class="flex flex-col space-y-3 xl:space-y-5">
+                        <ul class="flex flex-col space-y-3 xl:space-y-5 items-center md:items-start">
                             <Neos.Fusion:Loop items={presentationObject.secondaryNavigationItems.items}>
                                 <li>
                                     <Hoerbiger.Shared:Block.Link presentationObject={item}/>
                                 </li>
                             </Neos.Fusion:Loop>
                         </ul>
-                        <ul class="flex flex-col space-y-3 xl:space-y-5">
+                        <ul class="flex flex-col space-y-3 xl:space-y-5 items-center md:items-start">
                             <Neos.Fusion:Loop items={presentationObject.tertiaryNavigationItems.items}>
                                 <li>
                                     <Hoerbiger.Shared:Block.Link presentationObject={item}/>
                                 </li>
                             </Neos.Fusion:Loop>
                         </ul>
-                        <div class="flex col-span-3 xl:col-span-1 items-start justify-center">
-                            <div class="flex justify-center xl:flex-col gap-2">
+                        <div class="flex col-span-3 lg:col-span-1 items-start justify-center md:justify-start md:items-start">
+                            <div class="flex justify-center xl:flex-col gap-2 scale-[75%] mb-lg lg:mb-0 translate-x-[-8px]">
                                 <Neos.Fusion:Loop items={presentationObject.socialLinks.items}>
                                     <Hoerbiger.Shared:Block.Link presentationObject={item}/>
                                 </Neos.Fusion:Loop>

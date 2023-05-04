@@ -44,4 +44,20 @@ final class VideoFactory extends AbstractComponentPresentationObjectFactory
             VideoVariant::tryFromTheme($theme)
         );
     }
+
+    public function forSliderVideo(TraversableNodeInterface $videoNode, bool $inBackend, ?Theme $theme): Video
+    {
+        $asset = $videoNode->getProperty('video');
+        $assetUri = $asset ? $this->uriService->getAssetUri($asset) : '';
+        $imageSource = $this->imageSourceFactory->forImageMixin($videoNode, $inBackend);
+
+        return new Video(
+            (string) $assetUri,
+            $imageSource
+                ? $this->figureFactory->forVideoPoster($imageSource)
+                : null,
+            null,
+            VideoVariant::tryFromTheme($theme)
+        );
+    }
 }

@@ -1,0 +1,44 @@
+prototype(Hoerbiger.Shared:Layout.Stage.HeaderStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
+
+    renderer = afx`
+        <div class={[
+            "[Layout.HeaderStage (" + presentationObject.variant + ")]"
+        ]}>
+            <div class="h-[40vh] md:h-[80vh]">
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
+            </div>
+            <div
+                @if.1={presentationObject.metaline || presentationObject.headline || presentationObject.text}
+            >
+                <div class={[
+                    "md:w-[60%] xl:w-[40%] mx-auto p-lg md:p-sm",
+                    "bg-nav-card md:-mt-[100px] z-20 relative shadow-textbox"
+                ]}>
+                    <div class="flex flex-col">
+                        <Neos.Fusion:Augmenter
+                            class="text-[14px] font-sans-bold text-neutral mb-ch"
+                            @if={presentationObject.metaline}
+                        >
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                                presentationObject={presentationObject.metaline}
+                                @if={presentationObject.metaline}
+                            />
+                        </Neos.Fusion:Augmenter>
+                        <Hoerbiger.Shared:Block.Headline
+                            @if.1={presentationObject.headline}
+                            presentationObject={presentationObject.headline}
+                        />
+                        <div class="mt-xs" @if.1={presentationObject.text}>
+                            <Hoerbiger.Shared:Block.Text
+                                presentationObject={presentationObject.text}
+                            />
+                        </div>
+                        <div class="text-light-contrast block sm:flex my-sm sm:mb-0" @if.1={presentationObject.button}>
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+}

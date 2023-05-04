@@ -17,6 +17,7 @@ const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
 const SPACES = {
 	'ch-xs': '.62ch',
 	ch: '1ch',
+	'3ch': '3ch',
 	'2xs': `calc(.4 * ${SPACE_SM})`,
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
@@ -24,6 +25,7 @@ const SPACES = {
 	lg: `calc(3 * ${SPACE_SM})`,
 	xl: `calc(4 * ${SPACE_SM})`,
 	'2xl': `calc(6 * ${SPACE_SM})`,
+	'3xl': `calc(8 * ${SPACE_SM})`,
 	'minus-ch-xs': `-.62ch`,
 	'minus-ch': `-1ch`,
 	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
@@ -37,15 +39,13 @@ const SPACES = {
 const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
 
 module.exports = {
-	mode: 'jit',
-	purge: [
+	content: [
 		'./Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.PressArchive/Resources/Private/Fusion/**/*',
 	],
-
-	darkMode: false,
 	theme: {
 		colors: {
 			current: {
@@ -54,14 +54,18 @@ module.exports = {
 
 			light: {
 				DEFAULT: '#fff',
+				contrastTransparent: 'rgba(0, 0, 0, .5)',
 				contrast: 'rgba(0, 0, 0, .85)',
 			},
 			neutral: {
 				lighter: '#F0F0F0',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
+				darkest: '#4E4E4E',
+				footer: '#0D1622',
 				contrast: 'rgba(0, 0, 0, .85)',
 				transparent: 'rgba(240, 240, 240, .95)',
+				grey: '#8E969D'
 			},
 			standard: {
 				DEFAULT: '#1B365D'
@@ -77,6 +81,9 @@ module.exports = {
 			transparent: {
 				DEFAULT: 'transparent',
 				contrast: '#fff',
+			},
+			warning: {
+				DEFAULT: '#FF2424'
 			},
 			excite: {
 				DEFAULT: '#A89379',
@@ -94,6 +101,13 @@ module.exports = {
 				DEFAULT: '#D9D9D9',
 				contrast: 'rgba(0, 0, 0, .85)',
 				darker: '#8A9199',
+				red: '#FF2424',
+				lightGrey: '#999',
+				border: '#1D1D1B'
+			},
+			slider: {
+				grey: '#999999',
+				lightGrey: '#8E969D',
 				red: '#FF2424'
 			},
 			default: {
@@ -129,6 +143,10 @@ module.exports = {
 			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
 			'serif-regular': ['Times New Roman', 'Times', 'serif'],
+			// @TODO ... korrekt Schrift fehlt noch, erst einmal nur DUMMY
+			'fira-pro-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
+			'fira-pro-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
+			'fira-pro-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
 		},
 
 		screens: {
@@ -146,6 +164,7 @@ module.exports = {
 		fontSize: {
 			'largeHeadline': '42px',
 			'extraLarge': '72px',
+			'small': '16px',
 			...defaultTheme.fontSize
 		},
 
@@ -269,6 +288,10 @@ module.exports = {
 				'2-icon-1fr': '1.2em 1fr',
 				'affiliates-map-list': '70% 1fr',
 				'people-story': '25% 1fr',
+				'2-33-auto': '30% 1fr',
+				'2-160-auto': '160px auto',
+				'2-slider-bubbles': '1fr 1fr',
+				'slider-tabs': 'clamp(200px, 35%, 430px) 1fr',
 			},
 
 			gridTemplateRows: {
@@ -295,6 +318,7 @@ module.exports = {
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
 				touch: MIN_TOUCH,
+				'small-text': `min(${HOMEPAGE_TEASER_TEXT_WIDTH}, 100vw)`,
 			},
 
 			width: {
@@ -336,11 +360,6 @@ module.exports = {
 				...SPACES,
 			},
 
-			inset: {
-				...SPACES,
-				revertHeaderOffset: -HEADER_HEIGHT + 'px'
-			},
-
 			borderRadius: {
 				...SPACES,
 			},
@@ -352,6 +371,7 @@ module.exports = {
 				'6xl': ['3.75rem', {
 					lineHeight: '1.3em',
 				}],
+				'space14': '14px',
 			},
 
 			boxShadow: {
@@ -380,8 +400,79 @@ module.exports = {
 			},
 
 			right: {
+				...SPACES,
 				offcanvas: OFFCANVAS_WIDTH,
 			},
+
+			inset: {
+				...SPACES,
+				header: HEADER_HEIGHT,
+				revertHeaderOffset: -HEADER_HEIGHT + 'px'
+			},
+
+			backgroundImage: {
+				'sliderItem': 'linear-gradient(17.54deg, #000000 -7.11%, rgba(0, 0, 0, 0.0001) 47.28%);'
+			},
+
+			animation: {
+				'fade-in-text': 'fadeIn 3s',
+				'fade-out-text': 'fadeOut 3s',
+				'fade-in-text-translate': 'fadeInWithTranslate 3s',
+				'fade-out-text-translate': 'fadeOutWithTranslate 3s',
+			},
+
+			keyframes: {
+				'fadeIn': {
+					'0%': {
+						opacity: 0,
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'100%': {
+						opacity: 1
+					}
+				},
+				'fadeOut': {
+					'100%': {
+						opacity: 0,
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'0%': {
+						opacity: 1
+					}
+				},
+				'fadeInWithTranslate': {
+					'0%': {
+						opacity: 0,
+						transform: 'translateX(-50px)'
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'100%': {
+						opacity: 1,
+					}
+				},
+				'fadeOutWithTranslate': {
+					'100%': {
+						opacity: 0,
+						transform: 'translateX(-50px)'
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'00%': {
+						opacity: 1
+					}
+				}
+			},
+
+			aspectRatio: {
+				'5/3': '5 / 3',
+			}
 		},
 	},
 	variants: {
@@ -415,6 +506,55 @@ module.exports = {
 				},
 				'.nav-bot-inset' : {
 					'bottom': '0'
+				},
+				'.bg-header': {
+					'background': 'white',
+					'color': 'rgba(0, 0, 0, .5)',
+					'transition': 'background-color .5s'
+				},
+				'.bg-header-transparent': {
+					'background': 'linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.937255) 6.08%, rgba(0, 0, 0, 0.866667) 12.31%, rgba(0, 0, 0, 0.788235) 18.7%, rgba(0, 0, 0, 0.705882) 25.25%, rgba(0, 0, 0, 0.623529) 31.96%, rgba(0, 0, 0, 0.541176) 38.83%, rgba(0, 0, 0, 0.454902) 45.88%, rgba(0, 0, 0, 0.372549) 53.08%, rgba(0, 0, 0, 0.294118) 60.46%, rgba(0, 0, 0, 0.219608) 68.02%, rgba(0, 0, 0, 0.152941) 75.75%, rgba(0, 0, 0, 0.0901961) 83.65%, rgba(0, 0, 0, 0.0392157) 91.73%, rgba(0, 0, 0, 0.0001) 100%)',
+					'mix-blend-mode': 'normal',
+					'opacity': '0.6'
+				},
+				'.bg-nav-card': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
+				},
+				'.bg-mobile-nav': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 68.67%, rgba(255, 255, 255, 0.93) 100%)',
+				},
+				'.press-overview-top-news-grid': {
+					'display': 'grid',
+					'grid-gap': '50px',
+					'grid-template-columns': 'repeat(4, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.press-overview-grid': {
+					'display': 'grid',
+					'grid-gap': '24px',
+					'grid-template-columns': 'repeat(3, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.press-overview-grid-tablet': {
+					'display': 'grid',
+					'grid-gap': '16px',
+					'grid-template-columns': 'repeat(2, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.press-overview-grid-mobile': {
+					'display': 'grid',
+					'grid-gap': '50px',
+					'grid-template-columns': 'repeat(1, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.bg-hanns': {
+					'background': 'linear-gradient(90deg, #F1F0EE 35.34%, rgba(241, 240, 238, 0.968) 79.74%, rgba(241, 240, 238, 0.93) 99.97%)',
+				},
+				'.bg-stage-press': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
+				},
+				'.card-hyphens': {
+					' hyphens': 'auto',
 				}
 			}, ['responsive']);
 		}),

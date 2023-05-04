@@ -27,7 +27,7 @@
     slider__preview__image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       options:
-        preset: 'image.square'
+        preset: 'image.5_3'
       ui:
         label: 'Slider: Grafik'
         inspector:

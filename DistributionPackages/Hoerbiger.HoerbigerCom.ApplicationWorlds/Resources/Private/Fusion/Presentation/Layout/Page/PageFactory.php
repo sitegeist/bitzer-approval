@@ -110,7 +110,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     )
                     : null,
-                new scrollToTop(),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),
                     (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
@@ -144,7 +143,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup'
                 ),
-                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer')))
+                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
+                )
             ]), $identity)
         );
     }
