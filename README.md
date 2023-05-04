@@ -20,8 +20,8 @@ sudo apt-get install openfortivpn
 > Execute the following commands as sudo -i
 
 ```sh
-export VPN_USER=$vpnUsername
-export VPN_PASS=$vpnPassword
+VPN_USER=$vpnUsername
+VPN_PASS=$vpnPassword
 ```
 
 **Creating the ip-up config file**
@@ -54,7 +54,8 @@ cat >> /etc/systemd/network/10-hoerbiger.network <<EOF
 Name=hoerbiger
 
 [Network]
-DNS=172.20.0.14
+DNS=172.20.0.16
+DNS=172.20.1.23
 Domains=hoerbiger.com
 EOF
 ```
@@ -82,7 +83,7 @@ EOF
 > Execute the following commands as regular user
 
 ```sh
-export VPN_USER=$vpnUsername
+VPN_USER=$vpnUsername
 ```
 
 ```sh
