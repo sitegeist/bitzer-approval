@@ -196,8 +196,11 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
             null
         );
 
-        array_splice($pressReleaseCards, 2, 0 , '');
-        $pressReleaseCards[2] = $hansMetaCard;
+        if ($hannsMagazine->getProperty('preview__headline') && $hannsMagazine->getProperty('preview__description')) {
+            array_splice($pressReleaseCards, 2, 0 , '');
+            $pressReleaseCards[2] = $hansMetaCard;
+        }
+
         return new PressOverview(
             PressOverviewVariant::regular(),
             $labels,
