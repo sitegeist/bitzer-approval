@@ -1,5 +1,5 @@
 <?php declare(strict_types=1);
-namespace Hoerbiger\Shared\Presentation\Block\ScrollToTop;
+namespace Hoerbiger\Shared\Presentation\Layout\Slider;
 
 /*
  * This file is part of the Hoerbiger.Shared package.
@@ -7,6 +7,6 @@ namespace Hoerbiger\Shared\Presentation\Block\ScrollToTop;
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 
-final class ScrollToTopFactory extends AbstractComponentPresentationObjectFactory
+final class SliderFactory extends AbstractComponentPresentationObjectFactory
 {
 }

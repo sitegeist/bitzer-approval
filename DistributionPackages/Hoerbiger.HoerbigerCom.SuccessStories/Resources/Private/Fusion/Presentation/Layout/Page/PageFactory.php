@@ -15,7 +15,6 @@ use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Stage\StageFactory as SuccessStoriesStageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
-use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
@@ -53,7 +52,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($magazine, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($magazine, $subgraph, $inBackend);
 
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -69,13 +68,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new ScrollToTop(),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new ContentContainer(
@@ -84,6 +78,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         $this->articleOverviewFactory->forMagazine($magazine),
                         'Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList'
                     )
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
                 )
             ]), $identity)
         );
@@ -114,16 +112,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new ScrollToTop(),
-                new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    $breadcrumb
-                ),
                 new ContentContainer(
                     ContentContainerVariant::regularStageAfterBreadcrumb(),
                     $introSection
                 ),
-                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    $breadcrumb
+                )
             ]), $identity)
         );
     }

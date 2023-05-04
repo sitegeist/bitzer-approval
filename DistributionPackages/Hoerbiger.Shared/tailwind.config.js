@@ -8,12 +8,16 @@ const MAX_CONTENT_WIDTH = '1800px';
 const MIN_TOUCH = '48px';
 
 const OFFCANVAS_WIDTH = '340px';
+const HEADER_HEIGHT = 127;
+const NAV_HEIGHT = `${HEADER_HEIGHT + 340}px`;
+const HOMEPAGE_TEASER_TEXT_WIDTH = '800px';
 
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
 const SPACES = {
 	'ch-xs': '.62ch',
 	ch: '1ch',
+	'3ch': '3ch',
 	'2xs': `calc(.4 * ${SPACE_SM})`,
 	xs: `calc(.62 * ${SPACE_SM})`,
 	sm: SPACE_SM,
@@ -21,6 +25,7 @@ const SPACES = {
 	lg: `calc(3 * ${SPACE_SM})`,
 	xl: `calc(4 * ${SPACE_SM})`,
 	'2xl': `calc(6 * ${SPACE_SM})`,
+	'3xl': `calc(8 * ${SPACE_SM})`,
 	'minus-ch-xs': `-.62ch`,
 	'minus-ch': `-1ch`,
 	'minus-xs': `calc(-.62 * ${SPACE_SM})`,
@@ -34,16 +39,13 @@ const SPACES = {
 const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
 
 module.exports = {
-	mode: 'jit',
-	purge: [
+	content: [
 		'./Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.PressArchive/Resources/Private/Fusion/**/*',
 	],
-
-	darkMode: false,
 	theme: {
 		colors: {
 			current: {
@@ -52,6 +54,7 @@ module.exports = {
 
 			light: {
 				DEFAULT: '#fff',
+				contrastTransparent: 'rgba(0, 0, 0, .5)',
 				contrast: 'rgba(0, 0, 0, .85)',
 			},
 			neutral: {
@@ -59,8 +62,10 @@ module.exports = {
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
 				darkest: '#4E4E4E',
+				footer: '#0D1622',
 				contrast: 'rgba(0, 0, 0, .85)',
 				transparent: 'rgba(240, 240, 240, .95)',
+				grey: '#8E969D'
 			},
 			standard: {
 				DEFAULT: '#1B365D'
@@ -76,6 +81,9 @@ module.exports = {
 			transparent: {
 				DEFAULT: 'transparent',
 				contrast: '#fff',
+			},
+			warning: {
+				DEFAULT: '#FF2424'
 			},
 			excite: {
 				DEFAULT: '#A89379',
@@ -96,6 +104,11 @@ module.exports = {
 				red: '#FF2424',
 				lightGrey: '#999',
 				border: '#1D1D1B'
+			},
+			slider: {
+				grey: '#999999',
+				lightGrey: '#8E969D',
+				red: '#FF2424'
 			},
 			default: {
 				DEFAULT: '#075289',
@@ -130,6 +143,10 @@ module.exports = {
 			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
 			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
 			'serif-regular': ['Times New Roman', 'Times', 'serif'],
+			// @TODO ... korrekt Schrift fehlt noch, erst einmal nur DUMMY
+			'fira-pro-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
+			'fira-pro-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
+			'fira-pro-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
 		},
 
 		screens: {
@@ -147,6 +164,7 @@ module.exports = {
 		fontSize: {
 			'largeHeadline': '42px',
 			'extraLarge': '72px',
+			'small': '16px',
 			...defaultTheme.fontSize
 		},
 
@@ -272,6 +290,8 @@ module.exports = {
 				'people-story': '25% 1fr',
 				'2-33-auto': '30% 1fr',
 				'2-160-auto': '160px auto',
+				'2-slider-bubbles': '1fr 1fr',
+				'slider-tabs': 'clamp(200px, 35%, 430px) 1fr',
 			},
 
 			gridTemplateRows: {
@@ -298,6 +318,7 @@ module.exports = {
 				'10-sm': `calc(10 * ${SPACES.sm})`,
 				'quotation': '1152px',
 				touch: MIN_TOUCH,
+				'small-text': `min(${HOMEPAGE_TEASER_TEXT_WIDTH}, 100vw)`,
 			},
 
 			width: {
@@ -309,6 +330,8 @@ module.exports = {
 			height: {
 				...SPACES,
 				touch: MIN_TOUCH,
+				header: HEADER_HEIGHT + 'px',
+				nav: NAV_HEIGHT
 			},
 
 			space: {
@@ -334,10 +357,6 @@ module.exports = {
 			},
 
 			gap: {
-				...SPACES,
-			},
-
-			inset: {
 				...SPACES,
 			},
 
@@ -381,8 +400,78 @@ module.exports = {
 			},
 
 			right: {
+				...SPACES,
 				offcanvas: OFFCANVAS_WIDTH,
 			},
+
+			inset: {
+				...SPACES,
+				header: HEADER_HEIGHT,
+			},
+
+			backgroundImage: {
+				'sliderItem': 'linear-gradient(17.54deg, #000000 -7.11%, rgba(0, 0, 0, 0.0001) 47.28%);'
+			},
+
+			animation: {
+				'fade-in-text': 'fadeIn 3s',
+				'fade-out-text': 'fadeOut 3s',
+				'fade-in-text-translate': 'fadeInWithTranslate 3s',
+				'fade-out-text-translate': 'fadeOutWithTranslate 3s',
+			},
+
+			keyframes: {
+				'fadeIn': {
+					'0%': {
+						opacity: 0,
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'100%': {
+						opacity: 1
+					}
+				},
+				'fadeOut': {
+					'100%': {
+						opacity: 0,
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'0%': {
+						opacity: 1
+					}
+				},
+				'fadeInWithTranslate': {
+					'0%': {
+						opacity: 0,
+						transform: 'translateX(-50px)'
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'100%': {
+						opacity: 1,
+					}
+				},
+				'fadeOutWithTranslate': {
+					'100%': {
+						opacity: 0,
+						transform: 'translateX(-50px)'
+					},
+					'50%': {
+						opacity: 0.35
+					},
+					'00%': {
+						opacity: 1
+					}
+				}
+			},
+
+			aspectRatio: {
+				'5/3': '5 / 3',
+			}
 		},
 	},
 	variants: {
@@ -407,6 +496,22 @@ module.exports = {
 					'height': (Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw',
 					'border-width': `0 0 ${(Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
 					'border-color': `transparent transparent #FFFFFF transparent`,
+				},
+				'.bg-header': {
+					'background': 'white',
+					'color': 'rgba(0, 0, 0, .5)',
+					'transition': 'background-color .5s'
+				},
+				'.bg-header-transparent': {
+					'background': 'linear-gradient(180deg, #000000 0%, rgba(0, 0, 0, 0.937255) 6.08%, rgba(0, 0, 0, 0.866667) 12.31%, rgba(0, 0, 0, 0.788235) 18.7%, rgba(0, 0, 0, 0.705882) 25.25%, rgba(0, 0, 0, 0.623529) 31.96%, rgba(0, 0, 0, 0.541176) 38.83%, rgba(0, 0, 0, 0.454902) 45.88%, rgba(0, 0, 0, 0.372549) 53.08%, rgba(0, 0, 0, 0.294118) 60.46%, rgba(0, 0, 0, 0.219608) 68.02%, rgba(0, 0, 0, 0.152941) 75.75%, rgba(0, 0, 0, 0.0901961) 83.65%, rgba(0, 0, 0, 0.0392157) 91.73%, rgba(0, 0, 0, 0.0001) 100%)',
+					'mix-blend-mode': 'normal',
+					'opacity': '0.6'
+				},
+				'.bg-nav-card': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
+				},
+				'.bg-mobile-nav': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 68.67%, rgba(255, 255, 255, 0.93) 100%)',
 				},
 				'.press-overview-top-news-grid': {
 					'display': 'grid',

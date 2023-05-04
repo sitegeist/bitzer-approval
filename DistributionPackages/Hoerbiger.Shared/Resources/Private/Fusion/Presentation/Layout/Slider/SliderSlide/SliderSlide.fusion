@@ -1,0 +1,49 @@
+prototype(Hoerbiger.Shared:Layout.Slider.SliderSlide) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slider\\SliderSlide\\SliderSlideInterface'
+
+    @styleguide {
+        title = 'SliderSlide'
+
+        props {
+            icon {
+                collectionName = 'shared'
+                iconName = 'arrowRight'
+            }
+            label = 'Text'
+        }
+    }
+
+    renderer = afx`
+        <div class={[
+            "[Layout.Slider.SliderSlide (" + presentationObject.variant + ")]",
+            "relative w-full flex flex-col"
+        ]}>
+            <div
+                @if.1={presentationObject.media}
+                class={[
+                    "flex items-center justify-center z-20 w-full aspect-5/3"
+                ]}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} />
+            </div>
+
+            <div class="flex flex-col pt-sm">
+                <div
+                    class="uppercase text-[16px] font-sans-bold text-slider-red pb-[4px]"
+                    @if.1={presentationObject.headline}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.headline} />
+                </div>
+                <div
+                    @if.1={presentationObject.text}
+                    class="text-slider-lightGrey text-[20px]"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
+                </div>
+                <div @if.1={presentationObject.button}>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.button} />
+                </div>
+            </div>
+        </div>
+    `
+}

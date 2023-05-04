@@ -16,17 +16,6 @@ Neos:
                       removeFormat: true
                       sup: true
                       sub: true
-            'plainWithStrong':
-              type: 'string'
-              ui:
-                inlineEditable: true
-                inline:
-                  editorOptions:
-                    hyphens: true
-                    autoparagraph: false
-                    formatting:
-                      strong: true
-                      removeFormat: true
             'text':
               type: 'string'
               ui:
@@ -48,6 +37,17 @@ Neos:
                       sub: true
                       sup: true
                       a: true
+                      removeFormat: true
+            'plainWithStrong':
+              type: 'string'
+              ui:
+                inlineEditable: true
+                inline:
+                  editorOptions:
+                    hyphens: true
+                    autoparagraph: false
+                    formatting:
+                      strong: true
                       removeFormat: true
           'image':
             'square':
@@ -134,3 +134,17 @@ Neos:
                         locked:
                           width: 5
                           height: 4
+            '5_3':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 5
+                          height: 3

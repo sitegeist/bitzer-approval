@@ -12,16 +12,31 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
 
     renderer = afx`
         <div class={[
-            "[Block.Video]",
+            "[Block.Video (" + presentationObject.variant.value + ")]",
             "flex justify-center items-center relative",
-            presentationObject.caption && "pb-touch"
+            presentationObject.caption && "pb-touch",
+            (presentationObject.variant.value == 'slider') && "w-full h-full"
         ]}>
-            <div class="relative mx-auto">
-                <video class="max-h-[70vh] mx-auto relative" controls>
+            <div
+                class={[
+                    "relative mx-auto",
+                    (presentationObject.variant.value == 'slider') && "w-full h-full"
+                ]}
+            >
+                <video
+                    class={[
+                        "mx-auto relative",
+                        (!presentationObject.variant.value == 'slider') && "max-h-[70vh]",
+                        (presentationObject.variant.value == 'slider') && "w-full h-full object-cover"
+                    ]}
+                    controls controls.@if.1={presentationObject.variant.value != 'slider'}
+                    autoplay autoplay.@if.1={presentationObject.variant.value == 'slider'}
+                    muted muted.@if.1={presentationObject.variant.value == 'slider'}
+                >
                     <source src={presentationObject.source}/>
                 </video>
                 <div
-                    @if.1={presentationObject.figure}
+                    @if.1={presentationObject.figure && presentationObject.variant.value != 'slider'}
                     data-select="poster"
                     class="absolute inset-0 cursor-pointer"
                 >

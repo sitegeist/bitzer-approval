@@ -1,0 +1,29 @@
+prototype(Hoerbiger.Shared:Layout.AnimatedContentContainer) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\AnimatedContentContainer\\AnimatedContentContainerInterface'
+
+    @styleguide {
+        title = 'AnimatedContentContainer'
+
+        props {
+            variant = 'regular'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div
+            data-animation-in={presentationObject.visibleStateClass}
+            data-animation-out={presentationObject.invisibleStateClass}
+            class={[
+                "[Layout.AnimatedContentContainer (" + presentationObject.variant + ")]",
+                "w-full opacity-0"
+            ]}
+        >
+            <div class={[
+                presentationObject.variant.isRegular && ""
+            ]}>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
+            </div>
+        </div>
+    `
+}

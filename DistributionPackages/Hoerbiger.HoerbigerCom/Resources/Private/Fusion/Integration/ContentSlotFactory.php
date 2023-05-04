@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
@@ -59,6 +60,8 @@ use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\HeaderVideoStage;
+use Hoerbiger\Shared\Presentation\Layout\Stage\HeaderVideoStage\SliderItem\SliderItem;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
@@ -191,6 +194,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return Content::fromNode($contentNode, 'Neos.Neos:ContentCollection');
             case 'Hoerbiger.HoerbigerCom:Content.MatomoOptOut':
                 return $this->forMatomoOptOut($subgraph);
+            case 'Hoerbiger.HoerbigerCom:Collection.HeaderVideoStage':
+                return $this->forHeaderVideoStage($contentNode, $subgraph, $inBackend);
+            case 'Hoerbiger.HoerbigerCom:Content.HeaderVideoStage.SliderItem':
+                return $this->forHeaderVideoStageSliderItem($contentNode, $subgraph, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -961,6 +968,67 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new ContentContainer(
             ContentContainerVariant::regular(),
             MatomoOptOut::forLocale(reset($languages))
+        );
+    }
+
+    private function forHeaderVideoStage(TraversableNodeInterface $videoStageNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::fullViewHeight(),
+            new HeaderVideoStage(
+                Collection::fromNodes(
+                    $videoStageNode->findChildNodes(),
+                    function (TraversableNodeInterface $sliderItem): Content {
+                        return Content::fromNode($sliderItem, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                    }
+                )
+            ),
+        );
+    }
+
+    private function forHeaderVideoStageSliderItem(TraversableNodeInterface $sliderItemNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($sliderItemNode, $inBackend);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Property "image" is required for content element image.');
+        }
+
+        $figure = $this->figureFactory->forPartialEclipse(
+            $imageSource
+        );
+
+        $text = new Grid(
+            GridVariant::iconLeft(),
+            Collection::fromIterable([
+                new Tag(
+                    'div',
+                    TagVariant::from('heightFull'),
+                    new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                ),
+                new Text(
+                    TextVariant::brandContrastBold(),
+                    Editable::fromNodeProperty($sliderItemNode, "text"),
+                    false
+                )
+            ], function (SlotInterface $slot) {
+                return $slot;
+            })
+        );
+
+        return new SliderItem(
+            $sliderItemNode->getProperty("headline") || $inBackend
+                ? new Headline(
+                    HeadlineSize::mediumItalic(),
+                    HeadlineColor::white(),
+                    HeadlineType::div(),
+                    Editable::fromNodeProperty($sliderItemNode, "headline")
+                )
+                : null,
+            $sliderItemNode->getProperty("link__target") && !$inBackend
+                ? (new LinkFactory())->forLinkWithContent($sliderItemNode, $subgraph, $text)
+                : $text,
+            $figure,
+            $this->videoFactory->forSliderVideo($sliderItemNode, $inBackend, Theme::slider())
         );
     }
 }

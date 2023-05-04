@@ -16,6 +16,7 @@ final class TagVariant implements PseudoEnumInterface
     const VARIANT_BRANDCOLOR = 'brandColor';
     const VARIANT_BRANDCOLOR_CONTRAST = 'brandColorContrast';
     const VARIANT_TRANSPARENT = 'transparent';
+    const VARIANT_HEIGHT_FULL = 'heightFull';
 
     /**
      * @var array<string,self>|self[]
@@ -32,7 +33,12 @@ final class TagVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_BRANDCOLOR && $string !== self::VARIANT_BRANDCOLOR_CONTRAST && $string !== self::VARIANT_TRANSPARENT) {
+            if (
+                $string !== self::VARIANT_BRANDCOLOR
+                && $string !== self::VARIANT_BRANDCOLOR_CONTRAST
+                && $string !== self::VARIANT_TRANSPARENT
+                && $string !== self::VARIANT_HEIGHT_FULL
+            ) {
                 throw TagVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -56,6 +62,11 @@ final class TagVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_TRANSPARENT);
     }
 
+    public static function heightFull(): self
+    {
+        return self::from(self::VARIANT_HEIGHT_FULL);
+    }
+
     public function getIsBrandColor(): bool
     {
         return $this->value === self::VARIANT_BRANDCOLOR;
@@ -71,6 +82,11 @@ final class TagVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TRANSPARENT;
     }
 
+    public function getIsHeightFull(): bool
+    {
+        return $this->value === self::VARIANT_HEIGHT_FULL;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -79,7 +95,8 @@ final class TagVariant implements PseudoEnumInterface
         return [
             self::from(self::VARIANT_BRANDCOLOR),
             self::from(self::VARIANT_BRANDCOLOR_CONTRAST),
-            self::from(self::VARIANT_TRANSPARENT)
+            self::from(self::VARIANT_TRANSPARENT),
+            self::from(self::VARIANT_HEIGHT_FULL)
         ];
     }
 

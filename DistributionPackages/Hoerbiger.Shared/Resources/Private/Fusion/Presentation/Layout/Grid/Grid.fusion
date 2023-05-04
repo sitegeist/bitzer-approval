@@ -28,7 +28,7 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
             presentationObject.variant.isTwoColumnsThirdAutoGap && "grid-cols-1 gap-xs lg:grid-cols-2-33-auto",
             presentationObject.variant.isTwoColumnsPress && "grid-cols-1 gap-sm md:grid-cols-2-160-auto",
             presentationObject.variant.isIconRight && "gap-x-xs grid-cols-2-1fr-max items-center",
-            presentationObject.variant.isIconLeft && "gap-x-xs grid-cols-2-max-1fr items-center"
+            presentationObject.variant.isIconLeft && "gap-x-ch-xs grid-cols-2-max-1fr items-center"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

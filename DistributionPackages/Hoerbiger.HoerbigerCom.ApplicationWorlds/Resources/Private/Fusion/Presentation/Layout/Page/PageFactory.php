@@ -18,7 +18,6 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
-use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -91,11 +90,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                new scrollToTop(),
-                new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
-                ),
                 new ContentContainer(
                     ContentContainerVariant::stageAfterBreadcrumb(),
                     $stage ?: Value::fromString('')
@@ -125,7 +119,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ),
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup'
                 ),
-                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer')))
+                Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer'))),
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
+                )
             ]), $identity)
         );
     }

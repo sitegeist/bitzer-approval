@@ -22,6 +22,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_REGULARX = 'regularX';
     const VARIANT_BLANK = 'blank';
     const VARIANT_BLANKY = 'blankY';
+    const VARIANT_BLANK_BOTTOM = 'blankBottom';
     const VARIANT_STAGEAFTERBREADCRUMB = 'stageAfterBreadcrumb';
     const VARIANT_REGULARSTAGEAFTERBREADCRUMB = 'regularStageAfterBreadcrumb';
     const VARIANT_STACKSTAGE = 'stackStage';
@@ -36,6 +37,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_VISIBLE_SM = 'visibleSm';
     const VARIANT_VISIBLE_MD = 'visibleMd';
     const VARIANT_VISIBLE_LG = 'visibleLg';
+    const VARIANT_FULL_VIEW_HEIGHT = 'fullViewHeight';
+    const VARIANT_SMALL_TEXT = 'smallText';
 
     /**
      * @var array<string,self>|self[]
@@ -60,7 +63,9 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_REGULARSM
                 && $string !== self::VARIANT_REGULARX
                 && $string !== self::VARIANT_BLANK
+                && $string !== self::VARIANT_FULL_VIEW_HEIGHT
                 && $string !== self::VARIANT_BLANKY
+                && $string !== self::VARIANT_BLANK_BOTTOM
                 && $string !== self::VARIANT_REGULARSTAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_STAGEAFTERBREADCRUMB
                 && $string !== self::VARIANT_REGULAR_WITHOUT_BOTTOM
@@ -74,7 +79,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_VISIBLE_SM
                 && $string !== self::VARIANT_VISIBLE_MD
                 && $string !== self::VARIANT_VISIBLE_LG
-                && $string !== self::VARIANT_PRESS_IMAGE) {
+                && $string !== self::VARIANT_PRESS_IMAGE
+                && $string !== self::VARIANT_SMALL_TEXT) {
                 throw ContentContainerVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -123,14 +129,29 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_BLANK);
     }
 
+    public static function fullViewHeight(): self
+    {
+        return self::from(self::VARIANT_FULL_VIEW_HEIGHT);
+    }
+
     public static function blankY(): self
     {
         return self::from(self::VARIANT_BLANKY);
     }
 
+    public static function blankBottom(): self
+    {
+        return self::from(self::VARIANT_BLANK_BOTTOM);
+    }
+
     public static function stageAfterBreadcrumb(): self
     {
         return self::from(self::VARIANT_STAGEAFTERBREADCRUMB);
+    }
+
+    public static function headerStage(): self
+    {
+        return self::from(self::VARIANT_BLANK_BOTTOM);
     }
 
     public static function regularStageAfterBreadcrumb(): self
@@ -198,6 +219,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_PRESS_IMAGE);
     }
 
+    public static function smallText(): self
+    {
+        return self::from(self::VARIANT_SMALL_TEXT);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -238,9 +264,19 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BLANK;
     }
 
+    public function getIsFullViewHeight(): bool
+    {
+        return $this->value === self::VARIANT_FULL_VIEW_HEIGHT;
+    }
+
     public function getIsBlankY(): bool
     {
         return $this->value === self::VARIANT_BLANKY;
+    }
+
+    public function getIsBlankBottom(): bool
+    {
+        return $this->value === self::VARIANT_BLANK_BOTTOM;
     }
 
     public function getIsStageAfterBreadcrumb(): bool
@@ -313,6 +349,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_VISIBLE_LG;
     }
 
+    public function getIsSmallText(): bool
+    {
+        return $this->value === self::VARIANT_SMALL_TEXT;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -327,7 +368,9 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_REGULARSM),
             self::from(self::VARIANT_REGULARX),
             self::from(self::VARIANT_BLANK),
+            self::from(self::VARIANT_FULL_VIEW_HEIGHT),
             self::from(self::VARIANT_BLANKY),
+            self::from(self::VARIANT_BLANK_BOTTOM),
             self::from(self::VARIANT_STAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULARSTAGEAFTERBREADCRUMB),
             self::from(self::VARIANT_REGULAR_WITHOUT_BOTTOM),
@@ -341,7 +384,8 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_PRESS_IMAGE),
             self::from(self::VARIANT_VISIBLE_SM),
             self::from(self::VARIANT_VISIBLE_MD),
-            self::from(self::VARIANT_VISIBLE_LG)
+            self::from(self::VARIANT_VISIBLE_LG),
+            self::from(self::VARIANT_SMALL_TEXT)
         ];
     }
 

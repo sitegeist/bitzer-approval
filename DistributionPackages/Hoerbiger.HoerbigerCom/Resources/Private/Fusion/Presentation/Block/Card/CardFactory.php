@@ -9,6 +9,9 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Block\Card;
  */
 
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
+use Hoerbiger\Shared\Presentation\Block\Button\Button;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
 use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
@@ -29,6 +32,8 @@ use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Utility\Files;
@@ -87,8 +92,8 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($headlineProperty) {
             $headline = new Headline(
-                HeadlineSize::tile(),
-                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                HeadlineSize::verySmallRegular(),
+                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
                 HeadlineType::div(),
                 Value::fromString($headlineProperty)
             );
@@ -112,10 +117,21 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $headline,
             null,
             $text,
-            $link->withContent(
-                Value::fromString(
-                    $this->translator->translateById('link.label', [], null, null, 'Block.Card.NavigationCard', 'Hoerbiger.HoerbigerCom') ?: ''
-                )
+            new Button(
+                ButtonType::link(),
+                ButtonVariant::plain(),
+                new Grid(
+                    GridVariant::iconLeft(),
+                    Collection::fromIterable([
+                        new Icon("shared", "arrowRight", IconSize::size_1()),
+                        Value::fromString(
+                            $this->translator->translateById('link.label', [], null, null, 'Block.Card.NavigationCard', 'Hoerbiger.HoerbigerCom') ?: ''
+                        )
+                    ])
+                ),
+                $this->uriService->getNodeUri($document),
+                '_self',
+                null
             )
         );
     }
