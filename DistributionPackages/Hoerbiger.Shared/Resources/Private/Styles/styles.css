@@ -96,6 +96,17 @@ details summary::-webkit-details-marker {
 	font-style: normal;
 }
 
+.animate-progress-nav {
+	animation: changeHeight 1s linear infinite;
+	animation-play-state: paused;
+}
+
+@keyframes changeHeight {
+	to {
+		height: 100%;
+	}
+}
+
 .bubble {
 	width: 100%;
 	animation: fading 10s infinite ease-in;

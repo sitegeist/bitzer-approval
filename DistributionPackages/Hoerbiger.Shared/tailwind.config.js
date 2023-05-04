@@ -407,6 +407,7 @@ module.exports = {
 			inset: {
 				...SPACES,
 				header: HEADER_HEIGHT,
+				revertHeaderOffset: -HEADER_HEIGHT + 'px'
 			},
 
 			backgroundImage: {
@@ -496,6 +497,15 @@ module.exports = {
 					'height': (Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw',
 					'border-width': `0 0 ${(Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
 					'border-color': `transparent transparent #FFFFFF transparent`,
+				},
+				'.vertical-lr': {
+					'writing-mode': 'vertical-lr'
+				},
+				'.nav-top-inset' : {
+					'top': '0'
+				},
+				'.nav-bot-inset' : {
+					'bottom': '0'
 				},
 				'.bg-header': {
 					'background': 'white',

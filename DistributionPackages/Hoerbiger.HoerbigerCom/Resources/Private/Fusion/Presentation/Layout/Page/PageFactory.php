@@ -6,6 +6,10 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
  */
 
 use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchFormFactory;
+use Hoerbiger\Shared\Domain\Anchor;
+use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
@@ -14,6 +18,8 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
@@ -78,6 +84,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
         $videoStage = $this->stageFactory->forVideoStageIntroduction($homepage, $inBackend);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($homepage);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $homepage,
@@ -96,6 +104,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $homepage->findNamedChildNode(NodeName::fromString('stage')),
                     'Hoerbiger.HoerbigerCom:ContentSlot'
                 ),
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => (new LinkFactory())->forAnchor($anchor),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ContentContainer(
                     ContentContainerVariant::regular(),
                     new AnimatedContentContainer(
@@ -212,6 +230,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($contactPage, $subgraph);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($contactPage);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $contactPage,
@@ -219,6 +239,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => (new LinkFactory())->forAnchor($anchor),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ContentContainer(
                     ContentContainerVariant::headerStage(),
                     $stage
@@ -259,6 +289,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($notFoundPage, $subgraph, $inBackend);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($notFoundPage);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $notFoundPage,
@@ -266,6 +298,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => (new LinkFactory())->forAnchor($anchor),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ContentContainer(
                     ContentContainerVariant::headerStage(),
                     $stage
@@ -284,6 +326,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
@@ -291,6 +335,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => (new LinkFactory())->forAnchor($anchor),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ContentContainer(
                     ContentContainerVariant::headerStage(),
                     $stage
