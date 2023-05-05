@@ -14,6 +14,10 @@
                 <source>an overview from all stories </source>
                 <target>alle Storys im Überblick</target>
             </trans-unit>
+            <trans-unit id="overview.filters" xml:space="preserve">
+                <source>Stories filter</source>
+                <target>Story-Filter</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

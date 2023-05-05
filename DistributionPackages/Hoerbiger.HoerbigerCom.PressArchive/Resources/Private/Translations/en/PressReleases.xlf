@@ -11,6 +11,9 @@
             <trans-unit id="list.seeOverview" xml:space="preserve">
                 <source>an overview from all stories </source>
             </trans-unit>
+            <trans-unit id="overview.filters" xml:space="preserve">
+                <source>Stories filter</source>
+            </trans-unit>
         </body>
     </file>
 </xliff>

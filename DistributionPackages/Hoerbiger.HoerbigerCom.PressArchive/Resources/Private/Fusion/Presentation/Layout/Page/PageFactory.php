@@ -102,7 +102,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                 ),
                                 new Separator(
                                     SeparatorVariant::fullWidthWithContent(),
-                                    Value::fromString("Storys filter")
+                                    Value::fromString(
+                                        $this->translator->translateById(
+                                            'overview.filters',
+                                            [],
+                                            null,
+                                            null,
+                                            'PressReleases',
+                                            'Hoerbiger.HoerbigerCom.PressArchive'
+                                        )
+                                        ?: 'filters'
+                                    )
                                 ),
                                 new CacheSegment(
                                     (new PressOverviewFactory())->forOverviewPage(
