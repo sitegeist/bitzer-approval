@@ -2,7 +2,7 @@
   class: 'Hoerbiger\Shared\Domain\Asset\AssetCollectionAdapter'
   superTypes:
     'Neos.Neos:Document': true
-    'Hoerbiger.Shared:Tag.ExcludeFromNodeTree': true
+    'Hoerbiger.Shared:Tag.DocumentTreeItem': false
     'Hoerbiger.Shared:Tag.ExcludeFromNavigation': true
   constraints:
     nodeTypes:

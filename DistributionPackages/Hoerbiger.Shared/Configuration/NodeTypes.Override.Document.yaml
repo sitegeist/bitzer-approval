@@ -1,0 +1,3 @@
+'Neos.Neos:Document':
+  superTypes:
+    'Hoerbiger.Shared:Tag.DocumentTreeItem': true
