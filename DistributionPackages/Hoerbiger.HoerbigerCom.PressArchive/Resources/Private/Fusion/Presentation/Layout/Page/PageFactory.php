@@ -102,7 +102,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                 ),
                                 new Separator(
                                     SeparatorVariant::fullWidthWithContent(),
-                                    Value::fromString("Stories filter")
+                                    Value::fromString("Storys filter")
                                 ),
                                 new CacheSegment(
                                     (new PressOverviewFactory())->forOverviewPage(
