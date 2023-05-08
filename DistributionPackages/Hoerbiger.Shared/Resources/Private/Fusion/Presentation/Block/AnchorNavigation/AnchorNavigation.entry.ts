@@ -8,7 +8,6 @@ export default ($node: Element): void => {
 		let isVisible = false;
 
 		setAnchorHeight(anchorPos, height, elementItems);
-
 		window.addEventListener("scroll", () => {
 			if (height !== document.querySelector("main")?.getBoundingClientRect().height) {
 				height = document.querySelector("main")?.getBoundingClientRect().height ?? 0;
@@ -58,8 +57,9 @@ export default ($node: Element): void => {
 			anchorItems.forEach((item , index) => {
 				const ref = item.querySelector(".itemLink")?.getAttribute("href")?.substring(1) as string;
 				const refEl = document.getElementById(ref) as HTMLElement;
+				const refElSibling :HTMLElement = refEl.nextSibling as HTMLElement;
 
-				document.body.style.setProperty("--itemProgress" + index, getViewPercentage(refEl));
+				document.body.style.setProperty("--itemProgress" + index, getViewPercentage(refElSibling, 127));
 			});
 
 			if (anchorPos.getBoundingClientRect().bottom <= window.innerHeight) {
@@ -80,42 +80,29 @@ export default ($node: Element): void => {
 		});
 	}
 
-	function getViewPercentage(element: HTMLElement): string {
+	function getViewPercentage(element: HTMLElement , offset: number): string {
 		const viewport = {
 			top: window.pageYOffset,
 			bottom: window.pageYOffset + window.innerHeight
 		};
 		const elementBoundingRect = element.getBoundingClientRect();
 		const elementPos = {
-			top: elementBoundingRect.y + window.pageYOffset,
-			bottom: elementBoundingRect.y + elementBoundingRect.height + window.pageYOffset
+			top: (elementBoundingRect.y + window.pageYOffset) + offset,
+			bottom: (elementBoundingRect.y + elementBoundingRect.height + window.pageYOffset) + offset
 		};
 		let elementHeightInView = elementBoundingRect.height;
 
-		//ELEMENT NOT IN VIEWPORT
-		if (viewport.top > elementPos.bottom || viewport.bottom < elementPos.top) {
+		if((element.getBoundingClientRect().bottom - offset) < 0)
+		{
 			return "0";
 		}
 
-		// ELEMENT COMPLETELY IN VIEWPORT
-		if (viewport.top < elementPos.top && viewport.bottom > elementPos.bottom) {
-			elementHeightInView = elementHeightInView - (elementPos.bottom - viewport.bottom);
-		}
-
-		// Element BIGGER THAN VIEWPORT
-		if (elementPos.top < viewport.top && elementPos.bottom > viewport.bottom) {
-			return "0.9999";
-		}
-
-		if (elementPos.top < viewport.top) {
-			return "0.9999";
-		}
-
-		if (elementPos.bottom > viewport.bottom) {
-			elementHeightInView = elementHeightInView - (elementPos.bottom - viewport.bottom);
-		}
-
+		elementHeightInView = elementHeightInView - (elementPos.bottom - viewport.bottom);
 		const percentageInView = (elementHeightInView / window.innerHeight);
+		if(percentageInView >= 1)
+		{
+			return "0.99999";
+		}
 		return percentageInView.toString();
 	}
 
