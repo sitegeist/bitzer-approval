@@ -6,7 +6,7 @@
                 <source>See all</source>
             </trans-unit>
             <trans-unit id="list.learnMore" xml:space="preserve">
-                <source>Learn more</source>
+                <source>learn more</source>
             </trans-unit>
         </body>
     </file>
