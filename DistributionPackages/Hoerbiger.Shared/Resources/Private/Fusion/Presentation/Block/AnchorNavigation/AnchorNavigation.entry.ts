@@ -26,7 +26,10 @@ export default ($node: Element): void => {
 
 		anchorItems.forEach((item , index) => {
 			const progressBar = item.querySelector(".animate-progress-nav") as HTMLElement;
+			const progressRota = item.querySelector(".progress-rota") as HTMLElement;
+
 			progressBar.style.animationDelay=`calc(var(--itemProgress${index}) * -1s)`;
+			progressRota.style.rotate=`var(--itemProgressRota${index})`;
 		});
 
 		window.addEventListener("resize", () => {
@@ -34,30 +37,49 @@ export default ($node: Element): void => {
 		});
 	}
 
-	function getViewPercentage(element: HTMLElement , offset: number): string {
+	function getViewPercentage(element: HTMLElement , offset: number): [string, string] {
 		const viewport = {
-			top: window.pageYOffset,
-			bottom: window.pageYOffset + window.innerHeight
+			top: parent.pageYOffset,
+			bottom: parent.pageYOffset + parent.innerHeight
 		};
+
 		const elementBoundingRect = element.getBoundingClientRect();
 		const elementPos = {
-			top: (elementBoundingRect.y + window.pageYOffset) + offset,
-			bottom: (elementBoundingRect.y + elementBoundingRect.height + window.pageYOffset) + offset
+			top: (elementBoundingRect.y + parent.pageYOffset) + offset,
+			bottom: (elementBoundingRect.y + elementBoundingRect.height + parent.pageYOffset) + offset
 		};
-		let elementHeightInView = elementBoundingRect.height;
+		const elementHeight = elementBoundingRect.height;
+		let elementHeightInView = elementHeight;
 
-		if((element.getBoundingClientRect().bottom - offset) < 0)
-		{
-			return "0";
+		if (viewport.top > elementPos.bottom || viewport.bottom < elementPos.top) {
+			return ["0", "0"];
 		}
 
-		elementHeightInView = elementHeightInView - (elementPos.bottom - viewport.bottom);
+		// Element is fully within viewport
+		if (viewport.top < elementPos.top && viewport.bottom > elementPos.bottom) {
+			return ["0.999999", "0"];
+		}
+
+		// Element is bigger than the viewport
+		if (elementPos.top < viewport.top && elementPos.bottom > viewport.bottom) {
+			return ["0.999999", "0"];
+		}
+
+		if (elementPos.top < viewport.top) {
+			elementHeightInView = elementHeight - (parent.pageYOffset - elementPos.top);
+
+			const percentageInView = (elementHeightInView / window.innerHeight);
+
+			return [percentageInView.toString(), "180deg"];
+		}
+
+		if (elementPos.bottom > viewport.bottom) {
+			elementHeightInView = elementHeightInView - (elementPos.bottom - viewport.bottom);
+		}
+
 		const percentageInView = (elementHeightInView / window.innerHeight);
-		if(percentageInView >= 1)
-		{
-			return "0.99999";
-		}
-		return percentageInView.toString();
+
+		return [percentageInView.toString(), "0"];
 	}
 
 	function setAnchorHeight(anchorPos: HTMLElement, height: number, items: NodeListOf<HTMLElement>) {
@@ -114,7 +136,9 @@ export default ($node: Element): void => {
 			const refEl = document.getElementById(ref) as HTMLElement;
 			const refElSibling :HTMLElement = refEl.nextSibling as HTMLElement;
 
-			document.body.style.setProperty("--itemProgress" + index, getViewPercentage(refElSibling, 130));
+			const progressValues = getViewPercentage(refElSibling, 130);
+			document.body.style.setProperty("--itemProgress" + index, progressValues[0]);
+			document.body.style.setProperty("--itemProgressRota" + index, progressValues[1].toString());
 		});
 	}
 };
