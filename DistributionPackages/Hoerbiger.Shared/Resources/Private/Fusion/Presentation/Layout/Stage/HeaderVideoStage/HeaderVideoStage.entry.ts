@@ -18,6 +18,8 @@ export default ($node: Element): void => {
 		const DURATION = 8000;
 		let timeout = 0;
 		const isInNeosBackend = ("neos" in window);
+		const fadeIn = "animate-fade-in-slow";
+		const fadeOut = "animate-fade-out-slow";
 
 		const jumpToNextContainer = $node.querySelector("[data-jump-to-end]") as HTMLElement;
 		const textAnimationItems = $node.querySelectorAll("[data-fade-in-container]") as NodeListOf<HTMLElement>;
@@ -47,11 +49,18 @@ export default ($node: Element): void => {
 						if (currentSlide instanceof HTMLElement) {
 							const video = currentSlide.querySelector("video") as HTMLVideoElement;
 
+							video.classList.remove(fadeIn);
+							video.classList.add(fadeIn);
 							video.pause();
-							video.load();
+							video.currentTime = 0;
 							video.play();
 
 							doAnimations(textAnimationItems, instance.track.details.rel);
+
+							setTimeout(function(){
+								video.classList.remove(fadeOut);
+								video.classList.add(fadeOut);
+							}, DURATION - 1000);
 						}
 
 						if (!isInNeosBackend) {
@@ -59,6 +68,19 @@ export default ($node: Element): void => {
 								window.clearTimeout(timeout);
 							}
 							timeout = window.setTimeout(instance.next, DURATION);
+						}
+					},
+					created: (instance) => {
+						const currentSlide = instance.slides[instance.track.details.rel];
+						if (currentSlide instanceof HTMLElement) {
+							const video = currentSlide.querySelector("video") as HTMLVideoElement;
+							video.classList.remove(fadeIn);
+							video.classList.add(fadeIn);
+
+							setTimeout(function(){
+								video.classList.remove(fadeOut);
+								video.classList.add(fadeOut);
+							}, DURATION - 1000);
 						}
 					}
 				},

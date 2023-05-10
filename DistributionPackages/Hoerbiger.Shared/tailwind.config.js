@@ -419,9 +419,33 @@ module.exports = {
 				'fade-out-text': 'fadeOut 3s',
 				'fade-in-text-translate': 'fadeInWithTranslate 3s',
 				'fade-out-text-translate': 'fadeOutWithTranslate 3s',
+				'fade-in-slow': 'fadeInSlow 1s',
+				'fade-out-slow': 'fadeOutSlow 1s'
 			},
 
 			keyframes: {
+				'fadeOutSlow': {
+					'100%': {
+						opacity: 0,
+					},
+					'90%': {
+						opacity: 0.7
+					},
+					'0%': {
+						opacity: 1
+					}
+				},
+				'fadeInSlow': {
+					'0%': {
+						opacity: 0,
+					},
+					'30%': {
+						opacity: 0.7
+					},
+					'100%': {
+						opacity: 1
+					}
+				},
 				'fadeIn': {
 					'0%': {
 						opacity: 0,
