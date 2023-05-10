@@ -61,7 +61,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
 
         return new StackStage(
-            $pressVariant->getIsNews() || $pressVariant->getIsHanns()
+            $pressVariant->getIsNews()
                 ? StageVariant::press()
                 : StageVariant::pressLarge(),
             new Separator(
