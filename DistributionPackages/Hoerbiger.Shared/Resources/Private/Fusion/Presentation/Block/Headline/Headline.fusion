@@ -53,6 +53,9 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             verySmallItalic = "text-xl [&_strong]:font-sans-bold"
             verySmallItalic.@if.1 = ${presentationObject.size.isVerySmallItalic}
 
+            headerStage = "text-3xl [&_strong]:font-sans-bold"
+            headerStage.@if.1 = ${presentationObject.size.isHeaderStage}
+
             verySmallRegular = "text-[20px] font-sans-regular"
             verySmallRegular.@if.1 = ${presentationObject.size.isVerySmallRegular}
 

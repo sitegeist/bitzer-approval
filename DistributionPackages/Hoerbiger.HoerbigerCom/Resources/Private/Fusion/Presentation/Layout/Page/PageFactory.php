@@ -212,7 +212,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forPeopleAndCultureWebPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($careerPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }

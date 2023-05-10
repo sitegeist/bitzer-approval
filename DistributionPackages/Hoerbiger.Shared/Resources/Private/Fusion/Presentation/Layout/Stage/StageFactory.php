@@ -83,7 +83,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 : null,
             $node->getProperty('headline') || $inBackend
                 ? new Headline(
-                    HeadlineSize::verySmallItalic(),
+                    HeadlineSize::headerStage(),
                     HeadlineColor::neutralContrast(),
                     HeadlineType::h1(),
                     Editable::fromNodeProperty($node, 'headline')
