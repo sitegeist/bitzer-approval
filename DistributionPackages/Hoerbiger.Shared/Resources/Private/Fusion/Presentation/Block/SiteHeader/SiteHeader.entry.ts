@@ -40,16 +40,19 @@ export default ($node: Element): void => {
 				header.classList.remove("[&_input]:text-light");
 				activeLinks?.classList.add("text-neutral-contrast");
 			}
+			const navLogo = header.querySelector(".navLogo") as HTMLElement;
 
 			window.addEventListener("scroll", (e) => {
 				const offset = window.scrollY;
 
 				if (offset > 100) {
 					header.classList.add("bg-header");
+					navLogo.classList.add("text-nav-logo");
 					header.classList.remove("[&_input]:text-light");
 					activeLinks?.classList.add("text-neutral-contrast");
 				} else if (offset === 0) {
 					header.classList.remove("bg-header");
+					navLogo.classList.remove("text-nav-logo");
 					header.classList.add("[&_input]:text-light");
 					activeLinks?.classList.remove("text-neutral-contrast");
 				}
