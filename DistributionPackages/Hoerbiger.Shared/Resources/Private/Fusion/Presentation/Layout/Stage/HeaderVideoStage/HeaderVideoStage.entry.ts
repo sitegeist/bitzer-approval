@@ -18,8 +18,8 @@ export default ($node: Element): void => {
 		const DURATION = 8000;
 		let timeout = 0;
 		const isInNeosBackend = ("neos" in window);
-		const fadeIn = "animate-fade-in-slow";
-		const fadeOut = "animate-fade-out-slow";
+		const opacity1 = "opacity-1";
+		const opacity0 = "opacity-0";
 
 		const jumpToNextContainer = $node.querySelector("[data-jump-to-end]") as HTMLElement;
 		const textAnimationItems = $node.querySelectorAll("[data-fade-in-container]") as NodeListOf<HTMLElement>;
@@ -49,8 +49,8 @@ export default ($node: Element): void => {
 						if (currentSlide instanceof HTMLElement) {
 							const video = currentSlide.querySelector("video") as HTMLVideoElement;
 
-							video.classList.remove(fadeIn);
-							video.classList.add(fadeIn);
+							video.classList.remove(opacity0);
+							video.classList.add(opacity1);
 							video.pause();
 							video.currentTime = 0;
 							video.play();
@@ -58,8 +58,8 @@ export default ($node: Element): void => {
 							doAnimations(textAnimationItems, instance.track.details.rel);
 
 							setTimeout(function(){
-								video.classList.remove(fadeOut);
-								video.classList.add(fadeOut);
+								video.classList.remove(opacity1);
+								video.classList.add(opacity0);
 							}, DURATION - 1000);
 						}
 
@@ -74,12 +74,12 @@ export default ($node: Element): void => {
 						const currentSlide = instance.slides[instance.track.details.rel];
 						if (currentSlide instanceof HTMLElement) {
 							const video = currentSlide.querySelector("video") as HTMLVideoElement;
-							video.classList.remove(fadeIn);
-							video.classList.add(fadeIn);
+							video.classList.remove(opacity0);
+							video.classList.add(opacity1);
 
 							setTimeout(function(){
-								video.classList.remove(fadeOut);
-								video.classList.add(fadeOut);
+								video.classList.remove(opacity1);
+								video.classList.add(opacity0);
 							}, DURATION - 1000);
 						}
 					}
