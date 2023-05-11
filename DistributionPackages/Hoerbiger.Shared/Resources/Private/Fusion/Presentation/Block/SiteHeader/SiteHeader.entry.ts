@@ -4,6 +4,8 @@ import * as ReactDom from "react-dom";
 import {Client} from "./Client";
 
 export default ($node: Element): void => {
+	const navLogo = $node.querySelector(".navLogo") as HTMLElement;
+
 	if ($node instanceof HTMLElement) {
 		const header = $node.querySelector("header") as HTMLElement;
 		const headerVariant = $node.dataset.siteHeaderVariant ?? "regular";
@@ -40,7 +42,6 @@ export default ($node: Element): void => {
 				header.classList.remove("[&_input]:text-light");
 				activeLinks?.classList.add("text-neutral-contrast");
 			}
-			const navLogo = header.querySelector(".navLogo") as HTMLElement;
 
 			window.addEventListener("scroll", (e) => {
 				const offset = window.scrollY;
@@ -110,14 +111,14 @@ export default ($node: Element): void => {
 		const navItems = $node.querySelectorAll(".navItem") as NodeListOf<HTMLElement>;
 
 		navItems?.forEach(item => {
-			item.addEventListener('mouseenter', () => {
+			item.addEventListener("mouseenter", () => {
 				navMain?.classList.add("text-nav-inactiveText");
-				navMain?.querySelector(".navLogo")?.classList.add("text-nav-logo");
+				navLogo?.classList.add("text-nav-logo");
 			});
 
-			item.addEventListener('mouseleave', () => {
+			item.addEventListener("mouseleave", () => {
 				navMain?.classList.remove("text-nav-inactiveText");
-				navMain?.querySelector(".navLogo")?.classList.remove("text-nav-logo");
+				navLogo?.classList.remove("text-nav-logo");
 			});
 		});
 
