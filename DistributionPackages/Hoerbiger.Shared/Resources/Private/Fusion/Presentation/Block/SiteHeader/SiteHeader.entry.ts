@@ -4,9 +4,8 @@ import * as ReactDom from "react-dom";
 import {Client} from "./Client";
 
 export default ($node: Element): void => {
-	const navLogo = $node.querySelector(".navLogo") as HTMLElement;
-
 	if ($node instanceof HTMLElement) {
+		const navLogo = $node.querySelector(".navLogo") as HTMLElement;
 		const header = $node.querySelector("header") as HTMLElement;
 		const headerVariant = $node.dataset.siteHeaderVariant ?? "regular";
 
