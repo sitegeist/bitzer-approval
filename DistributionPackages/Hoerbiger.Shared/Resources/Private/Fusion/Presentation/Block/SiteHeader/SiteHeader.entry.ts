@@ -108,11 +108,13 @@ export default ($node: Element): void => {
 
 		navItems?.forEach(item => {
 			item.addEventListener('mouseenter', () => {
-				navMain?.classList.add('text-light-contrastTransparent');
+				navMain?.classList.add("text-nav-inactiveText");
+				navMain?.querySelector(".navLogo")?.classList.add("text-nav-logo");
 			});
 
 			item.addEventListener('mouseleave', () => {
-				navMain?.classList.remove('text-light-contrastTransparent');
+				navMain?.classList.remove("text-nav-inactiveText");
+				navMain?.querySelector(".navLogo")?.classList.remove("text-nav-logo");
 			});
 		});
 
