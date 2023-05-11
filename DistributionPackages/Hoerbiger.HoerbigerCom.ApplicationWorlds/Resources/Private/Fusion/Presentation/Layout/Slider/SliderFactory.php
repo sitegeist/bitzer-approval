@@ -105,7 +105,7 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
         return new SliderSlide(
             StageVariant::fullMediaTextRight(),
             $mediaVideoSource
-                ? $this->videoFactory->forVideo($targetNode, $inBackend, Theme::simpleLoop())
+                ? $this->videoFactory->forSliderVideo($targetNode, $inBackend, Theme::simpleLoop())
                 : ($mediaImageSource
                     ? $this->figureFactory->forSlideStageIcon($mediaImageSource)
                     : null)
