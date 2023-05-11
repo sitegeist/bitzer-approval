@@ -117,7 +117,9 @@ export default ($node: Element): void => {
 
 			item.addEventListener("mouseleave", () => {
 				navMain?.classList.remove("text-nav-inactiveText");
-				navLogo?.classList.remove("text-nav-logo");
+				if (window.scrollY <= 0) {
+					navLogo?.classList.remove("text-nav-logo");
+				}
 			});
 		});
 
