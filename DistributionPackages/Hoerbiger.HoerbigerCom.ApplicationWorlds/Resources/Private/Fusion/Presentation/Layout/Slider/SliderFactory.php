@@ -14,6 +14,8 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Slider\Slider;
@@ -37,14 +39,18 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
 
     private FigureFactory $figureFactory;
 
+    private VideoFactory $videoFactory;
+
     public function __construct(
         StageFactory $stageFactory,
         ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory
+        FigureFactory $figureFactory,
+        VideoFactory $videoFactory
     ) {
         $this->stageFactory = $stageFactory;
         $this->imageSourceFactory = $imageSourceFactory;
         $this->figureFactory = $figureFactory;
+        $this->videoFactory = $videoFactory;
     }
 
     /**
@@ -94,11 +100,16 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
             $mediaImageSource->setAsync(true);
         }
 
+        $mediaVideoSource = $targetNode->getProperty('video');
+
         return new SliderSlide(
             StageVariant::fullMediaTextRight(),
-            $mediaImageSource
-                ? $this->figureFactory->forSlideStageIcon($mediaImageSource)
-                : null,
+            $mediaVideoSource
+                ? $this->videoFactory->forVideo($targetNode, $inBackend, Theme::simpleLoop())
+                : ($mediaImageSource
+                    ? $this->figureFactory->forSlideStageIcon($mediaImageSource)
+                    : null)
+                ,
             $documentHeadlineContent
                 ? Value::fromString($documentHeadlineContent)
                 : null,

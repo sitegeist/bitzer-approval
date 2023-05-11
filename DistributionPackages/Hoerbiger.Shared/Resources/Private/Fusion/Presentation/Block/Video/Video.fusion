@@ -15,28 +15,29 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
             "[Block.Video (" + presentationObject.variant.value + ")]",
             "flex justify-center items-center relative",
             presentationObject.caption && "pb-touch",
-            (presentationObject.variant.value == 'slider') && "w-full h-full"
+            (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full"
         ]}>
             <div
                 class={[
                     "relative mx-auto",
-                    (presentationObject.variant.value == 'slider') && "w-full h-full"
+                    (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full"
                 ]}
             >
                 <video
                     class={[
                         "mx-auto relative",
-                        (!presentationObject.variant.value == 'slider') && "max-h-[70vh]",
-                        (presentationObject.variant.value == 'slider') && "w-full h-full object-cover"
+                        (presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop') && "max-h-[70vh]",
+                        (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full object-cover"
                     ]}
-                    controls controls.@if.1={presentationObject.variant.value != 'slider'}
-                    autoplay autoplay.@if.1={presentationObject.variant.value == 'slider'}
-                    muted muted.@if.1={presentationObject.variant.value == 'slider'}
+                    controls controls.@if.1={presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop' }
+                    autoplay autoplay.@if.1={presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop'}
+                    muted muted.@if.1={presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop'}
+                    loop loop.@if.1={presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop'}
                 >
                     <source src={presentationObject.source}/>
                 </video>
                 <div
-                    @if.1={presentationObject.figure && presentationObject.variant.value != 'slider'}
+                    @if.1={presentationObject.figure && presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop'}
                     data-select="poster"
                     class="absolute inset-0 cursor-pointer"
                 >
