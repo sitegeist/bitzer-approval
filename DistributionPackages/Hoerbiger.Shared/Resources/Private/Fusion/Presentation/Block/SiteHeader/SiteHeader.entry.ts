@@ -15,6 +15,7 @@ export default ($node: Element): void => {
 		const labels = JSON.parse(compactSearchRoot.dataset.labels ?? "{}");
 		const disableItems = $node.querySelectorAll("[data-search=visible]") as NodeListOf<HTMLElement>;
 
+		let hoverOpen = false;
 
 		if (compactSearchRoot instanceof HTMLElement && compactSearchTargetUri) {
 			ReactDom.render(
@@ -52,7 +53,9 @@ export default ($node: Element): void => {
 					activeLinks?.classList.add("text-neutral-contrast");
 				} else if (offset === 0) {
 					header.classList.remove("bg-header");
-					navLogo.classList.remove("text-nav-logo");
+					if (!hoverOpen) {
+						navLogo.classList.remove("text-nav-logo");
+					}
 					header.classList.add("[&_input]:text-light");
 					activeLinks?.classList.remove("text-neutral-contrast");
 				}
@@ -111,15 +114,17 @@ export default ($node: Element): void => {
 
 		navItems?.forEach(item => {
 			item.addEventListener("mouseenter", () => {
+				hoverOpen = true;
 				navMain?.classList.add("text-nav-inactiveText");
 				navLogo?.classList.add("text-nav-logo");
 			});
 
 			item.addEventListener("mouseleave", () => {
 				navMain?.classList.remove("text-nav-inactiveText");
-				if (window.scrollY <= 0) {
+				if (window.scrollY <= 0 && hoverOpen) {
 					navLogo?.classList.remove("text-nav-logo");
 				}
+				hoverOpen = false;
 			});
 		});
 
