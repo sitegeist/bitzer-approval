@@ -81,6 +81,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
             case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
             case 'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder':
+            case 'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage':
                 $siteHeaderVariant = SiteHeaderVariant::VARIANT_TRANSPARENT;
                 break;
             default:

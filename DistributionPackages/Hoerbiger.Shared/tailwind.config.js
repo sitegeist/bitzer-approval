@@ -11,6 +11,8 @@ const OFFCANVAS_WIDTH = '340px';
 const HEADER_HEIGHT = 127;
 const NAV_HEIGHT = `${HEADER_HEIGHT + 340}px`;
 const HOMEPAGE_TEASER_TEXT_WIDTH = '800px';
+const LOGO_HOVER =  '#8A9199';
+const HEADER_ITEMS_INACTIVE = '#7F7F7F';
 
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
@@ -113,6 +115,10 @@ module.exports = {
 			default: {
 				DEFAULT: '#075289',
 				contrast: '#fff'
+			},
+			nav: {
+				logo: LOGO_HOVER,
+				inactiveText: HEADER_ITEMS_INACTIVE
 			}
 
 		},
@@ -509,7 +515,7 @@ module.exports = {
 				},
 				'.bg-header': {
 					'background': 'white',
-					'color': 'rgba(0, 0, 0, .5)',
+					'color':  HEADER_ITEMS_INACTIVE,
 					'transition': 'background-color .5s'
 				},
 				'.bg-header-transparent': {

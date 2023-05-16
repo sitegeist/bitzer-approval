@@ -230,7 +230,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             function(Node $pressRelease) use($inBackend, $labels){
                 $pressVariant = PressVariant::fromNode($pressRelease);
 
-                $datePublished = $this->formattedDateFactory->createReducedYearDate(
+                $datePublished = $this->formattedDateFactory->createFullDate(
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
                 );
 
