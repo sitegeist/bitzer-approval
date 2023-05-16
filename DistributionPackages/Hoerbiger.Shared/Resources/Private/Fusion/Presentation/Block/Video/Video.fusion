@@ -13,7 +13,7 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
     renderer = afx`
         <div class={[
             "[Block.Video (" + presentationObject.variant.value + ")]",
-            "flex justify-center items-center relative",
+            "flex justify-center items-center relative bg-[black]",
             presentationObject.caption && "pb-touch",
             (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full"
         ]}>
@@ -27,7 +27,7 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
                     class={[
                         "mx-auto relative",
                         (presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop') && "max-h-[70vh]",
-                        (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full object-cover"
+                        (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full object-cover opacity-0 transition-opacity duration-1000"
                     ]}
                     controls controls.@if.1={presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop' }
                     autoplay autoplay.@if.1={presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop'}
