@@ -41,7 +41,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
             <header
                 class={[
                     "w-full fixed z-header top-0 h-header",
-                    (presentationObject.variant.value == 'regular') && "text-light-contrastTransparent bg-light",
+                    (presentationObject.variant.value == 'regular') && "text-service-darker bg-light",
                     (presentationObject.variant.value == 'transparent') && "text-light navMain"
                 ]}
             >
@@ -52,7 +52,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                     ]}
                 >
                     <!-- HOMELINK + LOGO -->
-                    <div class="w-[135px] md:w-[180px] flex-shrink-0 pb-[30px]">
+                    <div class="navLogo w-[135px] md:w-[180px] flex-shrink-0 pb-[30px]">
                         <a
                             class="contents w-[200px]"
                             id="logoLink"
