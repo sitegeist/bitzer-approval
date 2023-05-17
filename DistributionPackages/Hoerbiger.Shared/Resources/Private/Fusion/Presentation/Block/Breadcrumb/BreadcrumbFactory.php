@@ -7,6 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Breadcrumb;
 
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -25,7 +26,16 @@ final class BreadcrumbFactory extends AbstractComponentPresentationObjectFactory
         $current = array_pop($nodesOnPath);
 
         $links = Collection::fromNodes(
-            TraversableNodes::fromArray($nodesOnPath),
+            TraversableNodes::fromArray(array_filter(array_map(function ($node) {
+                if ( !in_array($node->getNodeType(), [
+                    'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Yearbook',
+                    'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Hanns',
+                    'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Press',
+                ]) ) {
+
+                    return $node;
+                }
+            }, $nodesOnPath))),
             function($node) {
                 return (new LinkFactory())->forBreadcrumbItem($node);
             }

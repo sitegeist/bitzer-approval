@@ -23,6 +23,9 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             superLarge = "font-sans-regular text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
             superLarge.@if.1 = ${presentationObject.size.isSuperLarge}
 
+            superLargeLight = "font-sans-light text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
+            superLargeLight.@if.1 = ${presentationObject.size.isSuperLargeLight}
+
             large = "font-sans-regular text-3xl sm:text-4xl lg:text-largeHeadline lg:leading-largeHeadline"
             large.@if.1 = ${presentationObject.size.isLarge}
 
@@ -32,7 +35,7 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
             medium = "font-sans-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl"
             medium.@if.1 = ${presentationObject.size.isMedium}
 
-            mediumItalic = "italic uppercase font-sans-light text-2xl sm:text-3xl lg:text-4xl xl:text-5xl [&_strong]:font-sans-bold [&_strong]:not-italic"
+            mediumItalic = "uppercase font-sans-light text-2xl sm:text-3xl lg:text-4xl xl:text-5xl [&_strong]:font-sans-bold"
             mediumItalic.@if.1 = ${presentationObject.size.isMediumItalic}
 
             small = "font-sans-bold text-2xl sm:text-3xl lg:text-4xl xl:text-4xl"
@@ -46,6 +49,15 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
 
             verySmall = "font-sans-bold text-lg"
             verySmall.@if.1 = ${presentationObject.size.isVerySmall}
+
+            verySmallItalic = "text-xl [&_strong]:font-sans-bold"
+            verySmallItalic.@if.1 = ${presentationObject.size.isVerySmallItalic}
+
+            headerStage = "text-3xl [&_strong]:font-sans-bold"
+            headerStage.@if.1 = ${presentationObject.size.isHeaderStage}
+
+            verySmallRegular = "text-[20px] font-sans-regular"
+            verySmallRegular.@if.1 = ${presentationObject.size.isVerySmallRegular}
 
             colorBrand = "text-brand"
             colorBrand.@if.1 = ${presentationObject.color.isBrand}

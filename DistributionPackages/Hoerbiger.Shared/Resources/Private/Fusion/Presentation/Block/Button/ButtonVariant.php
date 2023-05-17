@@ -15,6 +15,8 @@ final class ButtonVariant implements PseudoEnumInterface
 {
     const VARIANT_CTA = 'cta';
     const VARIANT_CTA_CONTRAST = 'ctaContrast';
+    const VARIANT_CONTRAST = 'contrast';
+    const VARIANT_PLAIN = 'plain';
 
     /**
      * @var array<string,self>|self[]
@@ -31,7 +33,12 @@ final class ButtonVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_CTA && $string !== self::VARIANT_CTA_CONTRAST) {
+            if (
+                $string !== self::VARIANT_CTA
+                && $string !== self::VARIANT_CTA_CONTRAST
+                && $string !== self::VARIANT_CONTRAST
+                && $string !== self::VARIANT_PLAIN
+            ) {
                 throw ButtonVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -50,6 +57,16 @@ final class ButtonVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_CTA_CONTRAST);
     }
 
+    public static function contrast(): self
+    {
+        return self::from(self::VARIANT_CONTRAST);
+    }
+
+    public static function plain(): self
+    {
+        return self::from(self::VARIANT_PLAIN);
+    }
+
     public function getIsCta(): bool
     {
         return $this->value === self::VARIANT_CTA;
@@ -60,6 +77,16 @@ final class ButtonVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_CTA_CONTRAST;
     }
 
+    public function getIsContrast(): bool
+    {
+        return $this->value === self::VARIANT_CONTRAST;
+    }
+
+    public function getIsPlain(): bool
+    {
+        return $this->value === self::VARIANT_PLAIN;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -67,7 +94,9 @@ final class ButtonVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_CTA),
-            self::from(self::VARIANT_CTA_CONTRAST)
+            self::from(self::VARIANT_CTA_CONTRAST),
+            self::from(self::VARIANT_CONTRAST),
+            self::from(self::VARIANT_PLAIN),
         ];
     }
 

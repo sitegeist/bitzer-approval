@@ -3,10 +3,16 @@
     <file original="PressReleases" product-name="Hoerbiger.HoerbigerCom.PressArchive" source-language="en" datatype="plaintext">
         <body>
             <trans-unit id="list.learnMore" xml:space="preserve">
-                <source>Learn more</source>
+                <source>learn more</source>
             </trans-unit>
             <trans-unit id="list.seeAll" xml:space="preserve">
                 <source>See all news</source>
+            </trans-unit>
+            <trans-unit id="list.seeOverview" xml:space="preserve">
+                <source>an overview from all stories </source>
+            </trans-unit>
+            <trans-unit id="overview.filters" xml:space="preserve">
+                <source>Stories filter</source>
             </trans-unit>
         </body>
     </file>

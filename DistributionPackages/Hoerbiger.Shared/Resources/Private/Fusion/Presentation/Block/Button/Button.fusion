@@ -32,7 +32,7 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
             class = Neos.Fusion:DataStructure {
                 name = '[Block.Button]'
 
-                base = "px-8 rounded-full cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch"
+                base = "cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch"
                 text = "font-semibold"
 
                 cta = "bg-brand text-brand-contrast font-sans-bold"
@@ -40,6 +40,15 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
 
                 ctaContrast = "bg-light text-standard font-sans-bold"
                 ctaContrast.@if.1 = ${presentationObject.variant.isCtaContrast}
+
+                contrast = "font-sans-bold"
+                contrast.@if.1 = ${presentationObject.variant.isContrast}
+
+                plain = "font-sans-bold px-0 [&_svg]:pt-[3px]"
+                plain.@if.1 = ${presentationObject.variant.isPlain}
+
+                notPlain = "px-8 rounded-full "
+                notPlain.@if.1 = ${!presentationObject.variant.isPlain && !presentationObject.variant.isContrast}
             }
 
             href = ${presentationObject.href}

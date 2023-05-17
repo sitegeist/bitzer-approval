@@ -55,13 +55,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($jobList, $subGraph);
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($jobList, $subGraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($jobList, $subGraph, $inBackend);
 
         return new Page(
             $this->siteHeaderFactory->forDocument($jobList, $site, $subGraph, null),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new ContentContainer(

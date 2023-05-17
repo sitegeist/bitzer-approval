@@ -67,6 +67,21 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     ): SiteHeaderInterface {
         switch ($document->getNodeType()->getName()) {
             case 'Hoerbiger.HoerbigerCom:Document.HomePage':
+            case 'Hoerbiger.HoerbigerCom:Document.WebPage':
+            case 'Hoerbiger.HoerbigerCom:Document.CareerPage':
+            case 'Hoerbiger.HoerbigerCom:Document.CareerRootPage':
+            case 'Hoerbiger.HoerbigerCom:Document.Chronicle':
+            case 'Hoerbiger.HoerbigerCom:Document.ContactPage':
+            case 'Hoerbiger.HoerbigerCom:Document.Error.404':
+            case 'Hoerbiger.HoerbigerCom:Document.PrivacyPage':
+            case 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage':
+            case 'Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine':
+            case 'Hoerbiger.HoerbigerCom.HR:Document.JobList':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
+            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
+            case 'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder':
+            case 'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage':
                 $siteHeaderVariant = SiteHeaderVariant::VARIANT_TRANSPARENT;
                 break;
             default:

@@ -2,4 +2,13 @@ prototype(Neos.Neos:ContentCollectionRenderer) {
     itemRenderer {
         default.type = ${String.split(q(node).property('_nodeType.name'), ':')[0] + ':ContentSlot'}
     }
+
+    itemRenderer.@process.addAnchor = afx`
+        <div id={Shared.Anchor.extractReadableIdentifierFromLabel(q(node).property('anchorLabel'))}
+            class='relative top-revertHeaderOffset'
+        >
+        </div>
+        {value}
+    `
+    itemRenderer.@process.addAnchor.@if.hasAnchor = ${q(node).property('anchorLabel')}
 }

@@ -1,0 +1,42 @@
+prototype(Hoerbiger.Shared:Block.AnchorNavigation) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\AnchorNavigation\\AnchorNavigationInterface'
+
+    @styleguide {
+        title = 'AnchorNavigation'
+
+        props {
+            variant = 'regular'
+            anchors = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div class="[AnchorNavigation] relative hidden lg:block">
+            <div class="absolute" data-anchor-pos="anchor-pos">
+                <div class={[
+                    "flex w-[60px] h-[100vh] flex-col absolute p-[10px] justify-center",
+                    "left-0 nav-top-inset z-50 gap-xs overflow-hidden font-sans-regular text-xl"
+                ]}
+                    data-anchor-nav="anchor-nav"
+                >
+                    <Neos.Fusion:Loop
+                        items={presentationObject.anchors}
+                        itemName="anchor"
+                    >
+                        <div
+                            class="vertical-lr flex flex-col gap-1 anchorItem"
+                            @if.1={itemKey<6}
+                        >
+                            <Neos.Fusion:Augmenter class="itemLink rotate-180">
+                                <Hoerbiger.Shared:Block.Link presentationObject={anchor} />
+                            </Neos.Fusion:Augmenter>
+                            <div class="progress-rota">
+                                <div class="w-[2px] bg-service-red h-0 animate-progress-nav"></div>
+                            </div>
+                        </div>
+                    </Neos.Fusion:Loop>
+                </div>
+            </div>
+        </div>
+    `
+}

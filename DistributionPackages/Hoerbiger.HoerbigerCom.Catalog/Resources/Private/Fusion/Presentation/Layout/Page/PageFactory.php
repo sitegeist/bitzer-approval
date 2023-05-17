@@ -5,11 +5,19 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Stage\StageFactory as CatalogStageFactory;
+use Hoerbiger\Shared\Domain\Anchor;
+use Hoerbiger\Shared\Domain\Sailor;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -26,6 +34,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -54,7 +63,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($catalog, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($catalog, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $catalog, $stage, $subgraph);
     }
@@ -80,10 +89,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolutions, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($industrySolutions, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolutions, $subgraph);
+
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($industrySolutions);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -92,8 +103,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => (new LinkFactory())->forAnchor($anchor),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new CacheSegment(
@@ -122,10 +143,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($industrySolution, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($industrySolution, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolution, $subgraph);
+
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($industrySolution);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -134,8 +157,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => (new LinkFactory())->forAnchor($anchor),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($industrySolution->findNamedChildNode(NodeName::fromString('main'))),
@@ -160,6 +193,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
+
         return new Page(
             $this->siteHeaderFactory->forDocument(
                 $document,
@@ -167,8 +202,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                        AnchorNavigationVariant::regular(),
+                        array_map(
+                            fn(Anchor $anchor): Link
+                            => (new LinkFactory())->forAnchor($anchor),
+                            $anchors
+                        )
+                    )
+                    : null,
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),

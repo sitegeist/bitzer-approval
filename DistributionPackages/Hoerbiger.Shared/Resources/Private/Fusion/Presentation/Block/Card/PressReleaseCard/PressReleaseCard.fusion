@@ -1,26 +1,83 @@
 prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
     renderer = afx`
-        <div class={[
-            "[Block.Card.PressReleaseCard]",
-            "flex flex-col space-y-ch-xs"
-        ]}>
-            <div class="uppercase text-xs font-sans-bold">
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+        <div
+            data-card="press"
+            data-card-type={presentationObject.variant.value}
+            class={[
+                "[Block.Card.PressReleaseCard (" + presentationObject.variant.value+ ")]",
+                "flex flex-col space-y-[10px] justify-between",
+                presentationObject.variant.value == 'meta' && 'bg-hanns p-xs relative',
+                presentationObject.variant.value == 'hanns' && 'bg-hanns p-xs relative'
+            ]}
+        >
+            <div class="flex flex-col space-y-[10px] justify-between">
+                <div
+                    @if.1={presentationObject.media}
+                    class="pb-[5px]"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.media}
+                    />
+                </div>
+                <div @if.1={!presentationObject.media && (presentationObject.variant.value == 'news' || presentationObject.variant.value == 'top')}>
+                    <div class="border-t-[1px] border-service-border"></div>
+                </div>
+
+                <div
+                    class="uppercase text-xs font-sans-bold text-service-red"
                     @if.1={presentationObject.subheader}
-                    presentationObject={presentationObject.subheader}
-                />
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.subheader}
+                    />
+                </div>
+                <div>
+                    <div
+                        class="uppercase text-xs text-service-lightGrey font-sans-bold"
+                        @if.1={presentationObject.datePublished}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.datePublished}
+                        />
+                    </div>
+                    <div
+                        class={[
+                            (presentationObject.variant.value == 'news') && "font-sans-bold text-xl",
+                            (presentationObject.variant.value == 'top') && "font-sans-bold text-sm",
+                            (presentationObject.variant.value == 'topNews') && "text-lg",
+                            (presentationObject.variant.value == 'yearbook') && "text-2xl",
+                            (presentationObject.variant.value == 'hanns') && "text-2xl",
+                            (presentationObject.variant.value == 'meta') && "text-sm"
+                        ]}
+                        @if.1={presentationObject.header}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.header}
+                        />
+                    </div>
+                </div>
+                <div
+                    class={[
+                        "card-hyphens",
+                        presentationObject.variant.value == 'top' && "text-[14px]",
+                        presentationObject.variant.value == 'topNews' && "text-[14px]"
+                    ]}
+                    @if.1={presentationObject.supportingText}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
+                </div>
             </div>
-            <div class="text-2xl md:text-4xl font-sans-bold">
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                    @if.1={presentationObject.header}
-                    presentationObject={presentationObject.header}
-                />
+            <div
+                class=""
+                @if.1={presentationObject.buttons}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} />
             </div>
-            <div class="">
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} @if.1={presentationObject.supportingText} />
-            </div>
-            <div class="">
-                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
+
+            <div
+                @if.1={presentationObject.variant.value == 'hanns' || presentationObject.variant.value == 'meta'}
+                class="absolute bottom-0 right-0 h-[12px] w-[125px] bg-[black]"
+            >
             </div>
         </div>
     `

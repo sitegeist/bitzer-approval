@@ -18,6 +18,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Layout\Stage\FullMediaStage\FullMediaStage;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\HeaderStage\HeaderStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\VideoStage\VideoStage;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -61,6 +62,41 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 Editable::fromNodeProperty($node, 'abstract'),
                 false
             ),
+            null,
+            $this->figureFactory->forFullMediaStage($imageSource),
+            $button
+        );
+    }
+
+    public function forHeaderStage(TraversableNodeInterface $node, ContentContext $subGraph, bool $inBackend): StageInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
+        if (!$imageSource) {
+            throw new \InvalidArgumentException('Introduction requires image for property media.');
+        }
+        $button = (new ButtonFactory())->forButtonMixin($node, $subGraph);
+
+        return new HeaderStage(
+            StageVariant::from($node->getProperty('stage__variant') ?: StageVariant::VARIANT_FULLMEDIATEXTLEFT),
+            $node->getProperty('metaline') || $inBackend
+                ? Editable::fromNodeProperty($node, 'metaline')
+                : null,
+            $node->getProperty('headline') || $inBackend
+                ? new Headline(
+                    HeadlineSize::headerStage(),
+                    HeadlineColor::neutralContrast(),
+                    HeadlineType::h1(),
+                    Editable::fromNodeProperty($node, 'headline')
+                )
+                : null,
+            null,
+            $node->getProperty('abstract') || $inBackend
+                ? new Text(
+                    TextVariant::liteContrast(),
+                    Editable::fromNodeProperty($node, 'abstract'),
+                    false
+                )
+                : null,
             null,
             $this->figureFactory->forFullMediaStage($imageSource),
             $button

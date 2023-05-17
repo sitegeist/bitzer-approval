@@ -5,9 +5,17 @@ namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.AffiliateDirectory package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\AffiliateFinderFactory;
+use Hoerbiger\Shared\Domain\Anchor;
+use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
+use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -27,6 +35,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -50,7 +59,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $breadcrumb = (new BreadcrumbFactory())->forPage($affiliateFinder, $subGraph);
 
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($affiliateFinder, $subGraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($affiliateFinder, $subGraph, $inBackend);
 
         /** @var SlotInterface $application */
         $application = (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0]);
@@ -59,7 +68,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::headerStage(),
                     $stage
                 ),
                 new ContentContainer(

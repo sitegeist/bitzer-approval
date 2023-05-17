@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class HeadlineSize implements PseudoEnumInterface
 {
     const SIZE_SUPER_LARGE = 'superLarge';
+    const SIZE_SUPER_LARGE_LIGHT = 'superLargeLight';
     const SIZE_EXTRA_LARGE = 'extraLarge';
     const SIZE_LARGE = 'large';
     const SIZE_LARGE_CENTERED = 'largeCentered';
@@ -21,8 +22,12 @@ final class HeadlineSize implements PseudoEnumInterface
     const SIZE_MEDIUM_ITALIC = 'mediumItalic';
     const SIZE_SMALL = 'small';
     const SIZE_VERY_SMALL = 'verySmall';
+    const SIZE_VERY_SMALL_ITALIC = 'verySmallItalic';
+    const SIZE_VERY_SMALL_REGULAR = 'verySmallRegular';
     const SIZE_TILE = 'tile';
     const SIZE_TINY = 'tiny';
+    const SIZE_HEADER_STAGE = 'headerStage';
+
 
     /**
      * @var array<string,self>|self[]
@@ -40,6 +45,7 @@ final class HeadlineSize implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::SIZE_SUPER_LARGE
+                && $string !== self::SIZE_SUPER_LARGE_LIGHT
                 && $string !== self::SIZE_EXTRA_LARGE
                 && $string !== self::SIZE_LARGE
                 && $string !== self::SIZE_LARGE_CENTERED
@@ -47,8 +53,11 @@ final class HeadlineSize implements PseudoEnumInterface
                 && $string !== self::SIZE_MEDIUM_ITALIC
                 && $string !== self::SIZE_SMALL
                 && $string !== self::SIZE_VERY_SMALL
+                && $string !== self::SIZE_VERY_SMALL_ITALIC
+                && $string !== self::SIZE_VERY_SMALL_REGULAR
                 && $string !== self::SIZE_TILE
                 && $string !== self::SIZE_TINY
+                && $string !== self::SIZE_HEADER_STAGE
                 ) {
                 throw HeadlineSizeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -61,6 +70,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function superLarge(): self
     {
         return self::from(self::SIZE_SUPER_LARGE);
+    }
+
+    public static function superLargeLight(): self
+    {
+        return self::from(self::SIZE_SUPER_LARGE_LIGHT);
     }
 
     public static function extraLarge(): self
@@ -98,6 +112,16 @@ final class HeadlineSize implements PseudoEnumInterface
         return self::from(self::SIZE_VERY_SMALL);
     }
 
+    public static function verySmallItalic(): self
+    {
+        return self::from(self::SIZE_VERY_SMALL_ITALIC);
+    }
+
+    public static function verySmallRegular(): self
+    {
+        return self::from(self::SIZE_VERY_SMALL_REGULAR);
+    }
+
     public static function tile(): self
     {
         return self::from(self::SIZE_TILE);
@@ -106,6 +130,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public static function tiny(): self
     {
         return self::from(self::SIZE_TINY);
+    }
+
+    public static function headerStage(): self
+    {
+        return self::from(self::SIZE_HEADER_STAGE);
     }
 
     public function getIsLarge(): bool
@@ -121,6 +150,11 @@ final class HeadlineSize implements PseudoEnumInterface
     public function getIsSuperLarge(): bool
     {
         return $this->value === self::SIZE_SUPER_LARGE;
+    }
+
+    public function getIsSuperLargeLight(): bool
+    {
+        return $this->value === self::SIZE_SUPER_LARGE_LIGHT;
     }
 
     public function getIsLargeCentered(): bool
@@ -148,6 +182,16 @@ final class HeadlineSize implements PseudoEnumInterface
         return $this->value === self::SIZE_VERY_SMALL;
     }
 
+    public function getIsVerySmallItalic(): bool
+    {
+        return $this->value === self::SIZE_VERY_SMALL_ITALIC;
+    }
+
+    public function getIsVerySmallRegular(): bool
+    {
+        return $this->value === self::SIZE_VERY_SMALL_REGULAR;
+    }
+
     public function getIsTile(): bool
     {
         return $this->value === self::SIZE_TILE;
@@ -158,6 +202,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return $this->value === self::SIZE_TINY;
     }
 
+    public function getIsHeaderStage(): bool
+    {
+        return $this->value === self::SIZE_HEADER_STAGE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -166,14 +215,17 @@ final class HeadlineSize implements PseudoEnumInterface
         return [
             self::from(self::SIZE_EXTRA_LARGE),
             self::from(self::SIZE_SUPER_LARGE),
+            self::from(self::SIZE_SUPER_LARGE_LIGHT),
             self::from(self::SIZE_LARGE),
             self::from(self::SIZE_LARGE_CENTERED),
             self::from(self::SIZE_MEDIUM),
             self::from(self::SIZE_MEDIUM_ITALIC),
             self::from(self::SIZE_SMALL),
             self::from(self::SIZE_VERY_SMALL),
+            self::from(self::SIZE_VERY_SMALL_REGULAR),
             self::from(self::SIZE_TILE),
-            self::from(self::SIZE_TINY)
+            self::from(self::SIZE_TINY),
+            self::from(self::SIZE_HEADER_STAGE)
         ];
     }
 

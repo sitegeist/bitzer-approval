@@ -24,10 +24,18 @@
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
         translateOnAdoption: true
+    video:
+      type: 'Neos\Media\Domain\Model\Asset'
+      ui:
+        label: 'Vorschauvideo'
+        inspector:
+          group: 'sliderPreview'
+      constraints:
+        mediaTypes: [ 'video/mp4' ]
     slider__preview__image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       options:
-        preset: 'image.square'
+        preset: 'image.5_3'
       ui:
         label: 'Slider: Grafik'
         inspector:

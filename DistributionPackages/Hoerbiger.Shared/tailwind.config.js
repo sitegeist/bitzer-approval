@@ -11,6 +11,8 @@ const OFFCANVAS_WIDTH = '340px';
 const HEADER_HEIGHT = 127;
 const NAV_HEIGHT = `${HEADER_HEIGHT + 340}px`;
 const HOMEPAGE_TEASER_TEXT_WIDTH = '800px';
+const LOGO_HOVER =  '#8A9199';
+const HEADER_ITEMS_INACTIVE = '#7F7F7F';
 
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
@@ -44,6 +46,7 @@ module.exports = {
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.PressArchive/Resources/Private/Fusion/**/*',
 	],
 	theme: {
 		colors: {
@@ -60,6 +63,8 @@ module.exports = {
 				lighter: '#F0F0F0',
 				DEFAULT: '#B2B5B7',
 				darker: '#8F8F8F',
+				darkest: '#4E4E4E',
+				footer: '#0D1622',
 				contrast: 'rgba(0, 0, 0, .85)',
 				transparent: 'rgba(240, 240, 240, .95)',
 				grey: '#8E969D'
@@ -97,11 +102,23 @@ module.exports = {
 			service: {
 				DEFAULT: '#D9D9D9',
 				contrast: 'rgba(0, 0, 0, .85)',
-				darker: '#8A9199'
+				darker: '#8A9199',
+				red: '#FF2424',
+				lightGrey: '#999',
+				border: '#1D1D1B'
+			},
+			slider: {
+				grey: '#999999',
+				lightGrey: '#8E969D',
+				red: '#FF2424'
 			},
 			default: {
 				DEFAULT: '#075289',
 				contrast: '#fff'
+			},
+			nav: {
+				logo: LOGO_HOVER,
+				inactiveText: HEADER_ITEMS_INACTIVE
 			}
 
 		},
@@ -153,6 +170,7 @@ module.exports = {
 		fontSize: {
 			'largeHeadline': '42px',
 			'extraLarge': '72px',
+			'small': '16px',
 			...defaultTheme.fontSize
 		},
 
@@ -276,6 +294,10 @@ module.exports = {
 				'2-icon-1fr': '1.2em 1fr',
 				'affiliates-map-list': '70% 1fr',
 				'people-story': '25% 1fr',
+				'2-33-auto': '30% 1fr',
+				'2-160-auto': '160px auto',
+				'2-slider-bubbles': '1fr 1fr',
+				'slider-tabs': 'clamp(200px, 35%, 430px) 1fr',
 			},
 
 			gridTemplateRows: {
@@ -355,6 +377,7 @@ module.exports = {
 				'6xl': ['3.75rem', {
 					lineHeight: '1.3em',
 				}],
+				'space14': '14px',
 			},
 
 			boxShadow: {
@@ -390,6 +413,7 @@ module.exports = {
 			inset: {
 				...SPACES,
 				header: HEADER_HEIGHT,
+				revertHeaderOffset: -HEADER_HEIGHT + 'px'
 			},
 
 			backgroundImage: {
@@ -450,6 +474,10 @@ module.exports = {
 						opacity: 1
 					}
 				}
+			},
+
+			aspectRatio: {
+				'5/3': '5 / 3',
 			}
 		},
 	},
@@ -476,9 +504,18 @@ module.exports = {
 					'border-width': `0 0 ${(Math.tan(2 * Math.PI / 180) * 100).toFixed(3) + 'vw'} 100vw`,
 					'border-color': `transparent transparent #FFFFFF transparent`,
 				},
+				'.vertical-lr': {
+					'writing-mode': 'vertical-lr'
+				},
+				'.nav-top-inset' : {
+					'top': '0'
+				},
+				'.nav-bot-inset' : {
+					'bottom': '0'
+				},
 				'.bg-header': {
 					'background': 'white',
-					'color': 'rgba(0, 0, 0, .5)',
+					'color':  HEADER_ITEMS_INACTIVE,
 					'transition': 'background-color .5s'
 				},
 				'.bg-header-transparent': {
@@ -486,6 +523,45 @@ module.exports = {
 					'mix-blend-mode': 'normal',
 					'opacity': '0.6'
 				},
+				'.bg-nav-card': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
+				},
+				'.bg-mobile-nav': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 68.67%, rgba(255, 255, 255, 0.93) 100%)',
+				},
+				'.press-overview-top-news-grid': {
+					'display': 'grid',
+					'grid-gap': '50px',
+					'grid-template-columns': 'repeat(4, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.press-overview-grid': {
+					'display': 'grid',
+					'grid-gap': '24px',
+					'grid-template-columns': 'repeat(3, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.press-overview-grid-tablet': {
+					'display': 'grid',
+					'grid-gap': '16px',
+					'grid-template-columns': 'repeat(2, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.press-overview-grid-mobile': {
+					'display': 'grid',
+					'grid-gap': '50px',
+					'grid-template-columns': 'repeat(1, 1fr)',
+					'grid-auto-rows': '1px',
+				},
+				'.bg-hanns': {
+					'background': 'linear-gradient(90deg, #F1F0EE 35.34%, rgba(241, 240, 238, 0.968) 79.74%, rgba(241, 240, 238, 0.93) 99.97%)',
+				},
+				'.bg-stage-press': {
+					'background': 'linear-gradient(90deg, #FFFFFF 35.34%, rgba(255, 255, 255, 0.968) 79.74%, rgba(255, 255, 255, 0.93) 99.97%)',
+				},
+				'.card-hyphens': {
+					' hyphens': 'auto',
+				}
 			}, ['responsive']);
 		}),
 		plugin(({addVariant, e}) => {

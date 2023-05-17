@@ -5,6 +5,7 @@ import {Client} from "./Client";
 
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
+		const navLogo = $node.querySelector(".navLogo") as HTMLElement;
 		const header = $node.querySelector("header") as HTMLElement;
 		const headerVariant = $node.dataset.siteHeaderVariant ?? "regular";
 
@@ -14,6 +15,7 @@ export default ($node: Element): void => {
 		const labels = JSON.parse(compactSearchRoot.dataset.labels ?? "{}");
 		const disableItems = $node.querySelectorAll("[data-search=visible]") as NodeListOf<HTMLElement>;
 
+		let hoverOpen = false;
 
 		if (compactSearchRoot instanceof HTMLElement && compactSearchTargetUri) {
 			ReactDom.render(
@@ -46,10 +48,14 @@ export default ($node: Element): void => {
 
 				if (offset > 100) {
 					header.classList.add("bg-header");
+					navLogo.classList.add("text-nav-logo");
 					header.classList.remove("[&_input]:text-light");
 					activeLinks?.classList.add("text-neutral-contrast");
 				} else if (offset === 0) {
 					header.classList.remove("bg-header");
+					if (!hoverOpen) {
+						navLogo.classList.remove("text-nav-logo");
+					}
 					header.classList.add("[&_input]:text-light");
 					activeLinks?.classList.remove("text-neutral-contrast");
 				}
@@ -107,14 +113,31 @@ export default ($node: Element): void => {
 		const navItems = $node.querySelectorAll(".navItem") as NodeListOf<HTMLElement>;
 
 		navItems?.forEach(item => {
-			item.addEventListener('mouseenter', () => {
-				navMain?.classList.add('text-light-contrastTransparent');
-			})
+			item.addEventListener("mouseenter", () => {
+				hoverOpen = true;
+				navMain?.classList.add("text-nav-inactiveText");
+				navLogo?.classList.add("text-nav-logo");
+			});
 
-			item.addEventListener('mouseleave', () => {
-				navMain?.classList.remove('text-light-contrastTransparent');
-			})
-		})
+			item.addEventListener("mouseleave", () => {
+				navMain?.classList.remove("text-nav-inactiveText");
+				if (window.scrollY <= 0 && hoverOpen) {
+					navLogo?.classList.remove("text-nav-logo");
+				}
+				hoverOpen = false;
+			});
+		});
+
+		// handle mobile navigation items
+
+		const mobileNavItems = $node.querySelectorAll("[data-menu-item]") as NodeListOf<HTMLElement>;
+		mobileNavItems?.forEach(item => {
+			item.addEventListener("click", () => {
+				item.classList.toggle("text-[red]");
+				item.classList.toggle("border-b");
+				item.querySelector("div")?.classList.toggle("rotate-180");
+			});
+		});
 	}
 };
 

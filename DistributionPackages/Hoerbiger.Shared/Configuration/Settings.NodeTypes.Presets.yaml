@@ -134,3 +134,17 @@ Neos:
                         locked:
                           width: 5
                           height: 4
+            '5_3':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 5
+                          height: 3

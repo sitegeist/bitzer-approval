@@ -9,6 +9,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  */
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\Shared\Domain\Anchor;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
@@ -42,7 +43,7 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     {
         $linkTarget = LinkTarget::forNode($document);
         return new Link(
-            LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+            LinkVariant::tryFromTheme($theme) ?: LinkVariant::iconLabel(),
             $this->uriService->getNodeUri($document),
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
@@ -60,6 +61,17 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             $linkTarget,
             $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
             Value::fromString($labelContent),
+            null
+        );
+    }
+
+    public function forAnchor(Anchor $anchor): Link {
+        return new Link(
+            LinkVariant::container(),
+            new Uri('#' . $anchor->getIdentifier()),
+            LinkTarget::self(),
+            null,
+            Value::fromString($anchor->getLabel()),
             null
         );
     }
