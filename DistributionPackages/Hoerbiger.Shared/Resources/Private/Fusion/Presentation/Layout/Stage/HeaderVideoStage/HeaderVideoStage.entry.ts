@@ -60,7 +60,7 @@ export default ($node: Element): void => {
 							setTimeout(function(){
 								video.classList.remove(opacity1);
 								video.classList.add(opacity0);
-							}, DURATION - 1000);
+							}, DURATION - 400);
 						}
 
 						if (!isInNeosBackend) {
@@ -80,7 +80,7 @@ export default ($node: Element): void => {
 							setTimeout(function(){
 								video.classList.remove(opacity1);
 								video.classList.add(opacity0);
-							}, DURATION - 1000);
+							}, DURATION - 400);
 						}
 					}
 				},
