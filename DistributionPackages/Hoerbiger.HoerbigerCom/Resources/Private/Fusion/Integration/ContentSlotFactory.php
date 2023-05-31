@@ -122,7 +122,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom:Collection.Downloads':
-                return $this->forDownloadsNode($contentNode);
+                return $this->forDownloadsNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.Download':
                 return $this->cardFactory->forDownloadNode($contentNode, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
@@ -146,7 +146,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Square':
             case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait':
-                return $this->forGalleryNode($contentNode);
+                return $this->forGalleryNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Square':
             case 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait':
@@ -203,18 +203,28 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
     }
 
-    private function forDownloadsNode(TraversableNodeInterface $downloadsNode): SlotInterface
+    private function forDownloadsNode(TraversableNodeInterface $downloadsNode, bool $inBackend): SlotInterface
     {
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            new Grid(
-                GridVariant::threeColumnsGap(),
-                Collection::fromNodes(
-                    $downloadsNode->findChildNodes(),
-                    function (TraversableNodeInterface $node): Content {
-                        return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                    }
-                )
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $downloadsNode->getProperty('metaHeadline')
+                    ? new Separator(
+                        SeparatorVariant::fullWidthWithContent(),
+                        Editable::fromNodeProperty($downloadsNode, 'metaHeadline')
+                    ): null,
+                    new Grid(
+                        GridVariant::threeColumnsGap(),
+                        Collection::fromNodes(
+                            $downloadsNode->findChildNodes(),
+                            function (TraversableNodeInterface $node): Content {
+                                return Content::fromNode($node, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                            }
+                        )
+                    )
+                ]))
             )
         );
     }
@@ -525,30 +535,50 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         return new ContentContainer(
             ContentContainerVariant::press(),
-            new ContentContainer(
-                ContentContainerVariant::blankY(),
-                new NewsQuotation(
-                    NewsQuotationVariant::tryFromTheme($theme),
-                    Editable::fromNodeProperty($NewsquotationNode, 'text'),
-                    Editable::fromNodeProperty($NewsquotationNode, 'spokenByCharacter'),
-                    Editable::fromNodeProperty($NewsquotationNode, 'division')
-                )
-            )
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable(array_filter([
+                    $NewsquotationNode->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::fullWidthWithContent(),
+                        Editable::fromNodeProperty($NewsquotationNode, 'metaHeadline')
+                    ): null,
+                    new ContentContainer(
+                        ContentContainerVariant::blankY(),
+                        new NewsQuotation(
+                            NewsQuotationVariant::tryFromTheme($theme),
+                            Editable::fromNodeProperty($NewsquotationNode, 'text'),
+                            Editable::fromNodeProperty($NewsquotationNode, 'spokenByCharacter'),
+                            Editable::fromNodeProperty($NewsquotationNode, 'division')
+                        )
+                    )
+                ]))
+            ),
         );
     }
 
-    public function forGalleryNode(TraversableNodeInterface $galleryNode): SlotInterface
+    public function forGalleryNode(TraversableNodeInterface $galleryNode, bool $inBackend): SlotInterface
     {
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            new Row(
-                RowVariant::gallery(),
-                Collection::fromNodes(
-                    $galleryNode->findChildNodes(),
-                    function (TraversableNodeInterface $galleryImage) {
-                        return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                    }
-                )
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $galleryNode->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::fullWidthWithContent(),
+                        Editable::fromNodeProperty($galleryNode, 'metaHeadline')
+                    ): null,
+                    new Row(
+                        RowVariant::gallery(),
+                        Collection::fromNodes(
+                            $galleryNode->findChildNodes(),
+                            function (TraversableNodeInterface $galleryImage) {
+                                return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                            }
+                        )
+                    )
+                ]))
             )
         );
     }

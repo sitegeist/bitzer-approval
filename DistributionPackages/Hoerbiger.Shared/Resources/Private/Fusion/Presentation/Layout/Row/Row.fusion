@@ -13,7 +13,8 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <div class={[
             "[Layout.Row (" + presentationObject.variant + ")] flex",
-            presentationObject.variant.isAlternateMetalineEllipsis && "w-full"
+            presentationObject.variant.isAlternateMetalineEllipsis && "w-full",
+            presentationObject.variant.isGallery && "w-full"
         ]}>
             <div class={[
                 "flex",
