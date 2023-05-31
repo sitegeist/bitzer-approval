@@ -6,49 +6,22 @@ namespace Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage;
  */
 
 use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
 /**
  * @Flow\Proxy(false)
  */
-final class Layout implements PseudoEnumInterface
+enum Layout: string
 {
-    const VALUE_IMAGEFIRST = 'imageFirst';
-    const VALUE_IMAGELAST = 'imageLast';
+    case VALUE_IMAGEFIRST = 'imageFirst';
+    case VALUE_IMAGELAST = 'imageLast';
 
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
-
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self
     {
-        $this->value = $value;
-    }
-
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if ($string !== self::VALUE_IMAGEFIRST
-                && $string !== self::VALUE_IMAGELAST) {
-                throw LayoutIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
-    }
-
-    public static function imageFirst(): self
-    {
-        return self::from(self::VALUE_IMAGEFIRST);
-    }
-
-    public static function imageLast(): self
-    {
-        return self::from(self::VALUE_IMAGELAST);
+        return match ($string){
+            'imageFirst' => self::VALUE_IMAGEFIRST,
+            'imageLast' => self::VALUE_IMAGELAST,
+            default => null
+        };
     }
 
     public function getIsImageFirst(): bool

@@ -100,9 +100,9 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
             }),
             ($inBackend || $productListNode->getProperty("headline"))
                 ? new Headline(
-                    HeadlineSize::large(),
-                    HeadlineColor::white(),
-                    HeadlineType::h2(),
+                    HeadlineSize::SIZE_LARGE,
+                    HeadlineColor::COLOR_WHITE,
+                    HeadlineType::TYPE_H2,
                     Editable::fromNodeProperty($productListNode, 'headline')
                 )
                 : null

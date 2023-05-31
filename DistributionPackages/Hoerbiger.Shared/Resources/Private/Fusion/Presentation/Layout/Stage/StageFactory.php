@@ -51,14 +51,14 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             StageVariant::from($node->getProperty('stage__variant') ?: StageVariant::VARIANT_FULLMEDIATEXTLEFT),
             null,
             new Headline(
-                HeadlineSize::superLarge(),
-                HeadlineColor::liteContrast(),
-                HeadlineType::h1(),
+                HeadlineSize::SIZE_SUPER_LARGE,
+                HeadlineColor::COLOR_LITE_CONTRAST,
+                HeadlineType::TYPE_H1,
                 Editable::fromNodeProperty($node, 'headline')
             ),
             null,
             new Text(
-                TextVariant::liteContrast(),
+                TextVariant::VARIANT_LITE_CONTRAST,
                 Editable::fromNodeProperty($node, 'abstract'),
                 false
             ),
@@ -83,16 +83,16 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 : null,
             $node->getProperty('headline') || $inBackend
                 ? new Headline(
-                    HeadlineSize::headerStage(),
-                    HeadlineColor::neutralContrast(),
-                    HeadlineType::h1(),
+                    HeadlineSize::SIZE_HEADER_STAGE,
+                    HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                    HeadlineType::TYPE_H1,
                     Editable::fromNodeProperty($node, 'headline')
                 )
                 : null,
             null,
             $node->getProperty('abstract') || $inBackend
                 ? new Text(
-                    TextVariant::liteContrast(),
+                    TextVariant::VARIANT_LITE_CONTRAST,
                     Editable::fromNodeProperty($node, 'abstract'),
                     false
                 )
@@ -122,14 +122,14 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             StageVariant::default(),
             null,
             new Headline(
-                HeadlineSize::superLarge(),
-                HeadlineColor::liteContrast(),
-                HeadlineType::h1(),
+                HeadlineSize::SIZE_SUPER_LARGE,
+                HeadlineColor::COLOR_LITE_CONTRAST,
+                HeadlineType::TYPE_H1,
                 Editable::fromNodeProperty($node, 'headline')
             ),
             null,
             new Text(
-                TextVariant::lightContrast(),
+                TextVariant::VARIANT_LIGHT_CONTRAST,
                 Editable::fromNodeProperty($node, 'text'),
                 false
             ),

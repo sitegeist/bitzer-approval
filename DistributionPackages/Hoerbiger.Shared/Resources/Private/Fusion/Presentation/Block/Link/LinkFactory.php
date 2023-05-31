@@ -29,10 +29,10 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
         return $href
             ? new Link(
-                LinkVariant::tryFromTheme($theme) ?: LinkVariant::labelDefault(),
+                LinkVariant::tryFromTheme($theme) ?: LinkVariant::VARIANT_LABELDEFAULT,
                 $href,
                 $linkTarget,
-                $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+                $linkTarget === LinkTarget::TARGET_BLANK ? 'noopener nofollow' : null,
                 Value::fromString($node->getProperty('link__label') ?: ''),
                 null
             )
@@ -43,10 +43,10 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     {
         $linkTarget = LinkTarget::forNode($document);
         return new Link(
-            LinkVariant::tryFromTheme($theme) ?: LinkVariant::iconLabel(),
+            LinkVariant::tryFromTheme($theme) ?: LinkVariant::VARIANT_ICONLABEL,
             $this->uriService->getNodeUri($document),
             $linkTarget,
-            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            $linkTarget === LinkTarget::TARGET_BLANK ? 'noopener nofollow' : null,
             Value::fromString($document->getProperty("titleOverride") ?? $document->getLabel()),
             null
         );
@@ -56,10 +56,10 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     {
         $linkTarget = LinkTarget::forNode($document);
         return new Link(
-            LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+            LinkVariant::tryFromTheme($theme) ?: LinkVariant::VARIANT_LABEL,
             $this->uriService->getNodeUri($document),
             $linkTarget,
-            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            $linkTarget === LinkTarget::TARGET_BLANK ? 'noopener nofollow' : null,
             Value::fromString($labelContent),
             null
         );
@@ -67,9 +67,9 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
 
     public function forAnchor(Anchor $anchor): Link {
         return new Link(
-            LinkVariant::container(),
+            LinkVariant::VARIANT_CONTAINER,
             new Uri('#' . $anchor->getIdentifier()),
-            LinkTarget::self(),
+            LinkTarget::TARGET_SELF,
             null,
             Value::fromString($anchor->getLabel()),
             null
@@ -79,9 +79,9 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     public function forBreadcrumbItem(TraversableNodeInterface $document): Link
     {
         return new Link(
-            LinkVariant::noStyles(),
+            LinkVariant::VARIANT_NOSTYLES,
             $this->uriService->getNodeUri($document),
-            LinkTarget::self(),
+            LinkTarget::TARGET_SELF,
             null,
             Value::fromString($document->getLabel()),
             null
@@ -91,11 +91,11 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     public function forSocialMediaIcon(string $iconName, string $socialMediaLink, string $socialMediaLabel): Link
     {
         return new Link(
-            LinkVariant::squareTouchIcon(),
+            LinkVariant::VARIANT_SQUARETOUCHICON,
             new Uri($socialMediaLink),
-            LinkTarget::self(),
+            LinkTarget::TARGET_SELF,
             null,
-            new Icon('shared', strtolower($iconName), null, IconColor::white()),
+            new Icon('shared', strtolower($iconName), null, IconColor::COLOR_WHITE),
             $socialMediaLabel
         );
     }
@@ -105,10 +105,10 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         $linkTarget = LinkTarget::forNode($document);
 
         return new Link(
-            LinkVariant::siteFooter(),
+            LinkVariant::VARIANT_SITEFOOTER,
             $this->uriService->getNodeUri($document),
             $linkTarget,
-            $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+            $linkTarget === LinkTarget::TARGET_BLANK ? 'noopener nofollow' : null,
             Value::fromString($document->getLabel()),
             null
         );
@@ -117,9 +117,9 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     public function forLanguageMenuItem(Uri $documentUri, string $localeIdentifier): Link
     {
         return new Link(
-            LinkVariant::touchIcon(),
+            LinkVariant::VARIANT_TOUCHICON,
             $documentUri,
-            LinkTarget::self(),
+            LinkTarget::TARGET_SELF,
             null,
             Value::fromString($localeIdentifier),
             null
@@ -129,9 +129,9 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     public function forAsset(Document $asset): Link
     {
         return new Link(
-            LinkVariant::container(),
+            LinkVariant::VARIANT_CONTAINER,
             $this->uriService->getAssetUri($asset),
-            LinkTarget::blank(),
+            LinkTarget::TARGET_SELF,
             null,
             null,
             null
@@ -167,10 +167,10 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
         $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
         return $href
             ? new Link(
-                LinkVariant::noStyles(),
+                LinkVariant::VARIANT_NOSTYLES,
                 $href,
                 $linkTarget,
-                $linkTarget->getIsBlank() ? 'noopener nofollow' : null,
+                $linkTarget === LinkTarget::TARGET_BLANK ? 'noopener nofollow' : null,
                 $content,
                 null
             )

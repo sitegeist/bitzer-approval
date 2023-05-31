@@ -65,9 +65,9 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 ? StageVariant::press()
                 : StageVariant::pressLarge(),
             new Separator(
-                SeparatorVariant::fullWidthWithContent(),
+                SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                 new MetaHeadline(
-                    MetaHeadlineVariant::regular(),
+                    MetaHeadlineVariant::VARIANT_REGULAR,
                     Value::fromString($labels['label.' . $pressVariant->getValue()]),
                     $pressVariant->getIsNews()
                         ? Value::fromString('_' . $this->formattedDateFactory->createFullDate($datePublished))
@@ -82,18 +82,18 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 )
             ),
             new Headline(
-                $pressVariant->getIsNews()
-                    ? HeadlineSize::tiny()
-                    : HeadlineSize::large(),
-                HeadlineColor::text(),
-                HeadlineType::h1(),
+                $pressVariant == PressVariant::VARIANT_NEWS
+                    ? HeadlineSize::SIZE_TINY
+                    : HeadlineSize::SIZE_LARGE,
+                HeadlineColor::COLOR_TEXT,
+                HeadlineType::TYPE_H1,
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
             ),
             null,
-            !$pressVariant->getIsNews()
+            !$pressVariant === PressVariant::VARIANT_NEWS
                 ? $pressRelease->getProperty('abstract') || $inBackend
                     ? new Text(
-                        TextVariant::lightContrast(),
+                        TextVariant::VARIANT_LIGHT_CONTRAST,
                         Editable::fromNodeProperty($pressRelease, 'abstract'),
                         false
                     )

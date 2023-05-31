@@ -6,106 +6,26 @@ namespace Hoerbiger\Shared\Presentation\Block\Separator;
  */
 
 use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
 /**
  * @Flow\Proxy(false)
  */
-final class SeparatorVariant implements PseudoEnumInterface
+enum SeparatorVariant: string
 {
-    const VARIANT_REGULAR = 'regular';
-    const VARIANT_BOLD = 'bold';
-    const VARIANT_BOLD_RED = 'boldRed';
-    const VARIANT_FULL_WIDTH_WITH_CONTENT = 'fullWidthWithContent';
+    case VARIANT_REGULAR = 'regular';
+    case VARIANT_BOLD = 'bold';
+    case VARIANT_BOLD_RED = 'boldRed';
+    case VARIANT_FULL_WIDTH_WITH_CONTENT = 'fullWidthWithContent';
 
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
-
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self
     {
-        $this->value = $value;
+        return match ($string){
+            'regular' => self::VARIANT_REGULAR,
+            'bold' => self::VARIANT_BOLD,
+            'boldRed' => self::VARIANT_BOLD_RED,
+            'fullWidthWithContent' => self::VARIANT_FULL_WIDTH_WITH_CONTENT,
+            default => null
+        };
     }
 
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_REGULAR
-                && $string !== self::VARIANT_BOLD
-                && $string !== self::VARIANT_BOLD_RED
-                && $string !== self::VARIANT_FULL_WIDTH_WITH_CONTENT
-            ) {
-                throw SeparatorVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
-    }
-
-    public static function regular(): self
-    {
-        return self::from(self::VARIANT_REGULAR);
-    }
-
-    public static function bold(): self
-    {
-        return self::from(self::VARIANT_BOLD);
-    }
-
-    public static function boldRed(): self
-    {
-        return self::from(self::VARIANT_BOLD_RED);
-    }
-
-    public static function fullWidthWithContent(): self
-    {
-        return self::from(self::VARIANT_FULL_WIDTH_WITH_CONTENT);
-    }
-
-    public function getIsRegular(): bool
-    {
-        return $this->value === self::VARIANT_REGULAR;
-    }
-
-    public function getIsBold(): bool
-    {
-        return $this->value === self::VARIANT_BOLD;
-    }
-
-    public function getIsBoldRed(): bool
-    {
-        return $this->value === self::VARIANT_BOLD_RED;
-    }
-
-    public function getIsFullWidthWithContent(): bool
-    {
-        return $this->value === self::VARIANT_FULL_WIDTH_WITH_CONTENT;
-    }
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::VARIANT_REGULAR),
-            self::from(self::VARIANT_BOLD),
-            self::from(self::VARIANT_BOLD_RED),
-            self::from(self::VARIANT_FULL_WIDTH_WITH_CONTENT)
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
 }

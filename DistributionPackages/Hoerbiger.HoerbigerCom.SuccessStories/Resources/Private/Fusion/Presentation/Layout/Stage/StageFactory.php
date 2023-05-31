@@ -73,16 +73,16 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 })
             ),
             new Headline(
-                HeadlineSize::superLarge(),
-                HeadlineColor::brand(),
-                HeadlineType::h1(),
+                HeadlineSize::SIZE_SUPER_LARGE,
+                HeadlineColor::COLOR_BRAND,
+                HeadlineType::TYPE_H1,
                 Editable::fromNodeProperty($successStory, 'headline', false)
             ),
             $inBackend || $successStory->getProperty('alternativeHeadline')
                 ? Editable::fromNodeProperty($successStory, 'alternativeHeadline')
                 : null,
             new Text(
-                TextVariant::lightContrast(),
+                TextVariant::VARIANT_LIGHT_CONTRAST,
                 Editable::fromNodeProperty($successStory, 'abstract'),
                 false
             ),

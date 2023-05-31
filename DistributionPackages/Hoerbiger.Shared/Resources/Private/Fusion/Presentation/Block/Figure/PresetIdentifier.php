@@ -6,131 +6,31 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
  */
 
 use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
 /**
  * @Flow\Proxy(false)
  */
-final class PresetIdentifier implements PseudoEnumInterface
+enum PresetIdentifier: string
 {
-    const IDENTIFIER_XS = 'xs';
-    const IDENTIFIER_SM = 'sm';
-    const IDENTIFIER_MD = 'md';
-    const IDENTIFIER_LG = 'lg';
-    const IDENTIFIER_XL = 'xl';
-    const IDENTIFIER_PDF = 'pdf';
+    case IDENTIFIER_XS = 'xs';
+    case IDENTIFIER_SM = 'sm';
+    case IDENTIFIER_MD = 'md';
+    case IDENTIFIER_LG = 'lg';
+    case IDENTIFIER_XL = 'xl';
+    case IDENTIFIER_PDF = 'pdf';
 
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
 
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self|null
     {
-        $this->value = $value;
+        return match ($string){
+            'xs' => self::IDENTIFIER_XS,
+            'sm' => self::IDENTIFIER_SM,
+            'md' => self::IDENTIFIER_MD,
+            'lg' => self::IDENTIFIER_LG,
+            'xl' => self::IDENTIFIER_XL,
+            'pdf' => self::IDENTIFIER_PDF,
+            default => null
+        };
     }
 
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if ($string !== self::IDENTIFIER_XS
-                && $string !== self::IDENTIFIER_SM
-                && $string !== self::IDENTIFIER_MD
-                && $string !== self::IDENTIFIER_LG
-                && $string !== self::IDENTIFIER_XL
-                && $string !== self::IDENTIFIER_PDF) {
-                throw PresetIdentifierIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
-    }
-
-    public static function xs(): self
-    {
-        return self::from(self::IDENTIFIER_XS);
-    }
-
-    public static function sm(): self
-    {
-        return self::from(self::IDENTIFIER_SM);
-    }
-
-    public static function md(): self
-    {
-        return self::from(self::IDENTIFIER_MD);
-    }
-
-    public static function lg(): self
-    {
-        return self::from(self::IDENTIFIER_LG);
-    }
-
-    public static function xl(): self
-    {
-        return self::from(self::IDENTIFIER_XL);
-    }
-
-    public static function pdf(): self
-    {
-        return self::from(self::IDENTIFIER_PDF);
-    }
-
-    public function getIsXs(): bool
-    {
-        return $this->value === self::IDENTIFIER_XS;
-    }
-
-    public function getIsSm(): bool
-    {
-        return $this->value === self::IDENTIFIER_SM;
-    }
-
-    public function getIsMd(): bool
-    {
-        return $this->value === self::IDENTIFIER_MD;
-    }
-
-    public function getIsLg(): bool
-    {
-        return $this->value === self::IDENTIFIER_LG;
-    }
-
-    public function getIsXl(): bool
-    {
-        return $this->value === self::IDENTIFIER_XL;
-    }
-
-    public function getIsPdf(): bool
-    {
-        return $this->value === self::IDENTIFIER_PDF;
-    }
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::IDENTIFIER_XS),
-            self::from(self::IDENTIFIER_SM),
-            self::from(self::IDENTIFIER_MD),
-            self::from(self::IDENTIFIER_LG),
-            self::from(self::IDENTIFIER_XL),
-            self::from(self::IDENTIFIER_PDF)
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
 }

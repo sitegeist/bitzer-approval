@@ -54,14 +54,14 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             StageVariant::fullMediaTextCenter(),
             null,
             new Headline(
-                HeadlineSize::extraLarge(),
-                HeadlineColor::white(),
-                HeadlineType::h1(),
+                HeadlineSize::SIZE_EXTRA_LARGE,
+                HeadlineColor::COLOR_WHITE,
+                HeadlineType::TYPE_H1,
                 Editable::fromNodeProperty($applicationWorld, 'headline')
             ),
             null,
             new Text(
-                TextVariant::centered(),
+                TextVariant::VARIANT_CENTERED,
                 Editable::fromNodeProperty($applicationWorld, 'abstract'),
                 false
             ),
@@ -94,8 +94,8 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             $documentHeadlineContent
                 ? new Headline(
-                    HeadlineSize::large(),
-                    HeadlineColor::white(),
+                    HeadlineSize::SIZE_LARGE,
+                    HeadlineColor::COLOR_WHITE,
                     HeadlineType::div(),
                     Value::fromString($documentHeadlineContent)
                 )
@@ -103,7 +103,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             $textContent
                 ? new Text(
-                    TextVariant::transparentContrast(),
+                    TextVariant::VARIANT_TRANSPARENT_CONTRAST,
                     $textContent,
                     false
                 )
@@ -126,13 +126,13 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null,
             null,
             new Headline(
-                HeadlineSize::extraLarge(),
-                HeadlineColor::white(),
-                HeadlineType::h1(),
+                HeadlineSize::SIZE_EXTRA_LARGE,
+                HeadlineColor::COLOR_WHITE,
+                HeadlineType::TYPE_H1,
                 Value::fromString($applicationWorld->getLabel())
             ),
             new Text(
-                TextVariant::centered(),
+                TextVariant::VARIANT_CENTERED,
                 Value::fromString($section->getLabel()),
                 false
             ),

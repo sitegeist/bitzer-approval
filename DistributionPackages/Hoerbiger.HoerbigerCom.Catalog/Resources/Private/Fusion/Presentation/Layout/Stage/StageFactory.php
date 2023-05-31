@@ -63,18 +63,18 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         }
         $background = $this->figureFactory->forFullMediaStage($backgroundImageSource);
 
-        $this->textColor = TextVariant::brandContrast();
+        $this->textColor = TextVariant::VARIANT_BRAND_CONTRAST;
         if (($theme && $theme->getValue() === 'service')) {
-            $this->textColor = TextVariant::lite();
+            $this->textColor = TextVariant::VARIANT_LITE;
         }
 
         return new BrandStage(
             StageVariant::fromTheme($theme),
             null,
             new Headline(
-                HeadlineSize::superLarge(),
-                HeadlineColor::white(),
-                HeadlineType::h1(),
+                HeadlineSize::SIZE_SUPER_LARGE,
+                HeadlineColor::COLOR_WHITE,
+                HeadlineType::TYPE_H1,
                 Editable::fromNodeProperty($documentNode, 'headline')
             ),
             null,

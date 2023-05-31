@@ -32,7 +32,7 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
         $this->collectionName = $collectionName;
         $this->iconName = $iconName;
         $this->size = $size;
-        $this->color = is_null($color) ? IconColor::current() : $color;
+        $this->color = is_null($color) ? IconColor::COLOR_CURRENT : $color;
     }
 
     public static function fromStampedeDataSourceValue(

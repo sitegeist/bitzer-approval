@@ -26,8 +26,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100vw',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -38,12 +38,12 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $imageSource,
             false,
             $this->sourceSetProvider->getSourceSetForPresets([
-                PresetIdentifier::xs()
+                PresetIdentifier::IDENTIFIER_XS
             ]),
             new QualifiedPresetIdentifiers([]),
             '100px',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -54,15 +54,15 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $imageSource,
             true,
             $this->sourceSetProvider->getSourceSetForPresets([
-                PresetIdentifier::sm(),
-                PresetIdentifier::xs()
+                PresetIdentifier::IDENTIFIER_SM,
+                PresetIdentifier::IDENTIFIER_XS
             ]),
             new QualifiedPresetIdentifiers([
-                '(min-width: 768px)' => PresetIdentifier::sm()
+                '(min-width: 768px)' => PresetIdentifier::IDENTIFIER_SM
             ]),
             '100vw',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -73,15 +73,15 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $imageSource,
             true,
             $this->sourceSetProvider->getSourceSetForPresets([
-                PresetIdentifier::sm(),
-                PresetIdentifier::xs()
+                PresetIdentifier::IDENTIFIER_SM,
+                PresetIdentifier::IDENTIFIER_XS
             ]),
             new QualifiedPresetIdentifiers([
-                '(min-width: 768px)' => PresetIdentifier::sm()
+                '(min-width: 768px)' => PresetIdentifier::IDENTIFIER_SM
             ]),
             '100vw',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -93,12 +93,12 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             true,
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([
-                '(min-width: 1600px)' => PresetIdentifier::md(),
-                '(min-width: 768px)' => PresetIdentifier::sm()
+                '(min-width: 1600px)' => PresetIdentifier::IDENTIFIER_MD,
+                '(min-width: 768px)' => PresetIdentifier::IDENTIFIER_SM
             ]),
             '100vw',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -110,12 +110,12 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             true,
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([
-                '(min-width: 1600px)' => PresetIdentifier::lg(),
-                '(min-width: 1024px)' => PresetIdentifier::md()
+                '(min-width: 1600px)' => PresetIdentifier::IDENTIFIER_LG,
+                '(min-width: 1024px)' => PresetIdentifier::IDENTIFIER_MD
             ]),
             '100w',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -142,8 +142,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '350px',
-            FigureObjectFit::contain(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_CONTAIN,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -170,8 +170,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -184,8 +184,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -198,8 +198,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -212,8 +212,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::contain(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_CONTAIN,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -226,8 +226,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -240,8 +240,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::contain(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_CONTAIN,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -254,8 +254,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::contain(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_CONTAIN,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }
@@ -267,10 +267,10 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             false,
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([
-                '(min-width: 1800px)' => PresetIdentifier::xl()
+                '(min-width: 1800px)' => PresetIdentifier::IDENTIFIER_XL
             ]),
             '100w',
-            FigureObjectFit::cover(),
+            FigureObjectFit::FIT_COVER,
             null,
             null
         );
@@ -284,8 +284,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::top(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_TOP,
             null
         );
     }
@@ -298,8 +298,8 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
             $this->sourceSetProvider->getFullSet(),
             new QualifiedPresetIdentifiers([]),
             '100w',
-            FigureObjectFit::cover(),
-            FigureObjectPosition::center(),
+            FigureObjectFit::FIT_COVER,
+            FigureObjectPosition::POSITION_CENTER,
             null
         );
     }

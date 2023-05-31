@@ -107,14 +107,14 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $link = (new LinkFactory())->forLinkToDocument($industrySolution, null);
 
             $headline = new Headline(
-                HeadlineSize::small(),
-                HeadlineColor::brand(),
-                HeadlineType::div(),
+                HeadlineSize::SIZE_SMALL,
+                HeadlineColor::COLOR_BRAND,
+                HeadlineType::TYPE_DIV,
                 Value::fromString($industrySolution->getProperty('preview__headline') ?: $industrySolution->getLabel())
             );
 
             $text = new Text(
-                TextVariant::lightContrast(),
+                TextVariant::VARIANT_LIGHT_CONTRAST,
                 Value::fromString($industrySolution->getProperty('preview__description') ?: ''),
                 false
             );
@@ -152,9 +152,9 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         $supportingText = $highlight ?: $thing->getProperty('preview__description');
 
         $headline = new Headline(
-            HeadlineSize::tiny(),
-            HeadlineColor::brand(),
-            HeadlineType::h2(),
+            HeadlineSize::SIZE_TINY,
+            HeadlineColor::COLOR_BRAND,
+            HeadlineType::TYPE_H2,
             Value::fromString($thing->getLabel())
         );
 
@@ -187,13 +187,13 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                         Collection::fromIterable([
                             new Tag(
                                 'span',
-                                TagVariant::brandColor(),
+                                TagVariant::VARIANT_BRANDCOLOR,
                                 Value::fromString(
                                     $productDocument->getProperty('headline')
                                         ?: $productDocument->getLabel()
                                 )
                             ),
-                            new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                            new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5)
                         ], function (SlotInterface $slot) {
                             return $slot;
                         })
@@ -234,13 +234,13 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                         Collection::fromIterable([
                             new Tag(
                                 'span',
-                                TagVariant::brandColor(),
+                                TagVariant::VARIANT_BRANDCOLOR,
                                 Value::fromString(
                                     $productDocument->getProperty('headline')
                                         ?: $productDocument->getLabel()
                                 )
                             ),
-                            new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                            new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5)
                         ], function (SlotInterface $slot) {
                             return $slot;
                         })

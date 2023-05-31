@@ -6,107 +6,26 @@ namespace Hoerbiger\Shared\Presentation\Block\Tag;
  */
 
 use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
 /**
  * @Flow\Proxy(false)
  */
-final class TagVariant implements PseudoEnumInterface
+enum TagVariant: string
 {
-    const VARIANT_BRANDCOLOR = 'brandColor';
-    const VARIANT_BRANDCOLOR_CONTRAST = 'brandColorContrast';
-    const VARIANT_TRANSPARENT = 'transparent';
-    const VARIANT_HEIGHT_FULL = 'heightFull';
+    case VARIANT_BRANDCOLOR = 'brandColor';
+    case VARIANT_BRANDCOLOR_CONTRAST = 'brandColorContrast';
+    case VARIANT_TRANSPARENT = 'transparent';
+    case VARIANT_HEIGHT_FULL = 'heightFull';
 
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
-
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self
     {
-        $this->value = $value;
+        return match ($string){
+            'brandColor' => self::VARIANT_BRANDCOLOR,
+            'brandColorContrast' => self::VARIANT_BRANDCOLOR_CONTRAST,
+            'transparent' => self::VARIANT_TRANSPARENT,
+            'heightFull' => self::VARIANT_HEIGHT_FULL,
+            default => null
+        };
     }
 
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if (
-                $string !== self::VARIANT_BRANDCOLOR
-                && $string !== self::VARIANT_BRANDCOLOR_CONTRAST
-                && $string !== self::VARIANT_TRANSPARENT
-                && $string !== self::VARIANT_HEIGHT_FULL
-            ) {
-                throw TagVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
-    }
-
-    public static function brandColor(): self
-    {
-        return self::from(self::VARIANT_BRANDCOLOR);
-    }
-
-    public static function brandColorContrast(): self
-    {
-        return self::from(self::VARIANT_BRANDCOLOR_CONTRAST);
-    }
-
-    public static function transparent(): self
-    {
-        return self::from(self::VARIANT_TRANSPARENT);
-    }
-
-    public static function heightFull(): self
-    {
-        return self::from(self::VARIANT_HEIGHT_FULL);
-    }
-
-    public function getIsBrandColor(): bool
-    {
-        return $this->value === self::VARIANT_BRANDCOLOR;
-    }
-
-    public function getIsBrandColorContrast(): bool
-    {
-        return $this->value === self::VARIANT_BRANDCOLOR_CONTRAST;
-    }
-
-    public function getIsTransparent(): bool
-    {
-        return $this->value === self::VARIANT_TRANSPARENT;
-    }
-
-    public function getIsHeightFull(): bool
-    {
-        return $this->value === self::VARIANT_HEIGHT_FULL;
-    }
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::VARIANT_BRANDCOLOR),
-            self::from(self::VARIANT_BRANDCOLOR_CONTRAST),
-            self::from(self::VARIANT_TRANSPARENT),
-            self::from(self::VARIANT_HEIGHT_FULL)
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
 }

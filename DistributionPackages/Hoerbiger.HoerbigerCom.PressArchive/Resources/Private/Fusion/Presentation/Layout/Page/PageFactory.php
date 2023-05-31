@@ -95,13 +95,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                             StackVariant::sm(),
                             Collection::fromIterable(array_filter([
                                 new Headline(
-                                    HeadlineSize::superLarge(),
-                                    HeadlineColor::text(),
-                                    HeadlineType::h1(),
+                                    HeadlineSize::SIZE_SUPER_LARGE,
+                                    HeadlineColor::COLOR_TEXT,
+                                    HeadlineType::TYPE_H1,
                                     Editable::fromNodeProperty($overviewPage, 'headline')
                                 ),
                                 new Separator(
-                                    SeparatorVariant::fullWidthWithContent(),
+                                    SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                                     Value::fromString(
                                         $this->translator->translateById(
                                             'overview.filters',
@@ -219,12 +219,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                         GridVariant::twoColumnsPress(),
                                         Collection::fromIterable(array_filter([
                                             new Text(
-                                                TextVariant::default(),
+                                                TextVariant::VARIANT_DEFAULT,
                                                 Value::fromString(''),
                                                 false
                                             ),
                                             new Separator(
-                                                SeparatorVariant::bold(),
+                                                SeparatorVariant::VARIANT_BOLD,
                                                 null
                                             )
                                         ]))

@@ -109,7 +109,7 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
                 new Grid(
                     GridVariant::iconLeft(),
                     Collection::fromIterable(array_filter([
-                        new Icon('shared', 'arrowRight', IconSize::size_1()),
+                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
                         Value::fromString(
                             $this->translator->translateById('link.label', [], null, null, 'Block.Card.NavigationCard', 'Hoerbiger.HoerbigerCom') ?: ''
                         )

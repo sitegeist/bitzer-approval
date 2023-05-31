@@ -8,10 +8,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Psr\Http\Message\UriInterface;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 /**
@@ -91,27 +91,27 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
 
     public function asContainer(): self
     {
-        return $this->withLinkVariant(LinkVariant::container());
+        return $this->withLinkVariant(LinkVariant::VARIANT_CONTAINER);
     }
 
     public function forLabel(): self
     {
-        return $this->withLinkVariant(LinkVariant::label());
+        return $this->withLinkVariant(LinkVariant::VARIANT_LABEL);
     }
 
     public function asPlainLabel(): self
     {
-        return $this->withLinkVariant(LinkVariant::plainLabel());
+        return $this->withLinkVariant(LinkVariant::VARIANT_PLAINLABEL);
     }
 
     public function asIconLabel(): self
     {
-        return $this->withLinkVariant(LinkVariant::iconLabel());
+        return $this->withLinkVariant(LinkVariant::VARIANT_ICONLABEL);
     }
 
     public function asNoStyles(): self
     {
-        return $this->withLinkVariant(LinkVariant::noStyles());
+        return $this->withLinkVariant(LinkVariant::VARIANT_NOSTYLES);
     }
 
     public function withLinkVariant(LinkVariant $variant): self
@@ -131,7 +131,7 @@ final class Link extends AbstractComponentPresentationObject implements LinkInte
         return new self(
             $this->variant,
             $this->href,
-            LinkTarget::blank(),
+            LinkTarget::TARGET_SELF,
             $this->rel,
             $this->content,
             $this->ariaLabel

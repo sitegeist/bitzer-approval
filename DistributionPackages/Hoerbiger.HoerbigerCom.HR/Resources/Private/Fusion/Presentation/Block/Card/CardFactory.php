@@ -46,9 +46,9 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         }
 
         $headline = new Headline(
-            HeadlineSize::tiny(),
-            HeadlineColor::brand(),
-            HeadlineType::h2(),
+            HeadlineSize::SIZE_TINY,
+            HeadlineColor::COLOR_BRAND,
+            HeadlineType::TYPE_H2,
             Value::fromString($thing->getLabel())
         );
 

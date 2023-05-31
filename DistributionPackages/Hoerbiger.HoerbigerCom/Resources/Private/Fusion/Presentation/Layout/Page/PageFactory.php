@@ -119,9 +119,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     new AnimatedContentContainer(
                         AnimatedContentContainerVariant::fadeAndTranslate(),
                         new Headline(
-                            HeadlineSize::mediumItalic(),
-                            HeadlineColor::neutralContrast(),
-                            HeadlineType::h1(),
+                            HeadlineSize::SIZE_MEDIUM_ITALIC,
+                            HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                            HeadlineType::TYPE_H1,
                             Editable::fromNodeProperty($homepage, 'headline')
                         ),
                         AnimatedContentContainerFactory::getClassForVisibleContainer(
@@ -137,14 +137,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     Collection::fromIterable(array_filter([
                         $homepage->getProperty('teaser_text_headline') || $inBackend
                             ? new Headline(
-                                HeadlineSize::verySmall(),
-                                HeadlineColor::neutralContrast(),
+                                HeadlineSize::SIZE_VERY_SMALL,
+                                HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                                 HeadlineType::div(),
                                 Editable::fromNodeProperty($homepage, 'teaser_text_headline')
                             )
                             : null,
                         new Text(
-                            TextVariant::neutralContrastFiraPro(),
+                            TextVariant::VARIANT_NEUTRAL_CONTRAST_FIRA_PRO,
                             Editable::fromNodeProperty($homepage, "text"),
                             false
                         )

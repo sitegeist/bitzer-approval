@@ -30,8 +30,8 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
                 function (TraversableNodeInterface $tabNode) use ($theme) {
                     return new Tab(
                         Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:TabLabel'),
-                        new Icon('shared', 'arrowRight', IconSize::size_1()),
-                        new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::tryFromTheme($theme, false) ?: IconColor::current()),
+                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
+                        new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5, IconColor::tryFromTheme($theme, false) ?: IconColor::COLOR_CURRENT),
                         Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:ContentSlot')
                     );
                 }

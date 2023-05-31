@@ -107,9 +107,9 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
                 );
                 return new Link(
-                    LinkVariant::container(),
+                    LinkVariant::VARIANT_CONTAINER,
                     $this->uriService->getNodeUri($pressRelease),
-                    LinkTarget::self(),
+                    LinkTarget::TARGET_SELF,
                     null,
                     new PressReleaseCard(
                         PressReleaseCardVariant::from($pressVariant->getValue()),
@@ -137,7 +137,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                             new Grid(
                                 GridVariant::iconLeft(),
                                 Collection::fromIterable(array_filter([
-                                    new Icon('shared', 'arrowRight', IconSize::size_1_5()),
+                                    new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
                                     Value::fromString($this->getLabel('list.learnMore'))
                                 ]))
                             ),
@@ -164,15 +164,15 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
             : null;
 
         $hansMetaCard = new Link(
-            LinkVariant::container(),
+            LinkVariant::VARIANT_CONTAINER,
             $this->linkFacotry->resolveRawLinkTargetUri(
                 $hannsMagazine->getProperty('link__target'),
                 $subgraph
             ) ?: new Uri('#'),
-            LinkTarget::self(),
+            LinkTarget::TARGET_SELF,
             null,
             new PressReleaseCard(
-                PressReleaseCardVariant::meta(),
+                PressReleaseCardVariant::VARIANT_META,
                 null,
                 $hansMetaCardFigure,
                 Value::fromString($hannsMagazine->getProperty('preview__headline') ?: ''),
@@ -184,7 +184,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                     new Grid(
                         GridVariant::iconLeft(),
                         Collection::fromIterable(array_filter([
-                            new Icon('shared', 'arrowRight', IconSize::size_1_5()),
+                            new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
                             Value::fromString($labels['label.button.getNewestRelease'])
                         ]))
                     ),
@@ -202,7 +202,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
         }
 
         return new PressOverview(
-            PressOverviewVariant::regular(),
+            PressOverviewVariant::VARIANT_REGULAR,
             $labels,
             Collection::fromIterable(
                 $pressReleaseCards

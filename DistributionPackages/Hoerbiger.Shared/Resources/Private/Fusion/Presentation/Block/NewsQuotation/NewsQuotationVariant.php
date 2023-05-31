@@ -15,68 +15,24 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 /**
  * @Flow\Proxy(false)
  */
-final class NewsQuotationVariant implements PseudoEnumInterface
+enum NewsQuotationVariant: string
 {
-    const VARIANT_REGULAR = 'regular';
+    case VARIANT_REGULAR = 'regular';
 
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
-
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self|null
     {
-        $this->value = $value;
-    }
-
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if (
-                $string !== self::VARIANT_REGULAR
-            ) {
-                throw NewsQuotationVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
+        return match ($string){
+            'regular' => self::VARIANT_REGULAR,
+            default => null
+        };
     }
 
     public static function tryFromTheme(?Theme $theme): self
     {
         if (!$theme || $theme->getValue() == 'default') {
-            return self::from(self::VARIANT_REGULAR);
+            return self::VARIANT_REGULAR;
         }
-        return self::from($theme->getValue());
+        return self::fromString($theme->getValue());
     }
 
-    public static function regular(): self
-    {
-        return self::from(self::VARIANT_REGULAR);
-    }
-
-
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::VARIANT_REGULAR)
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
 }

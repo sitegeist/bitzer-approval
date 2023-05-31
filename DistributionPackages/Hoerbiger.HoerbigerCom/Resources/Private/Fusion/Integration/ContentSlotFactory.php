@@ -266,15 +266,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::large(),
-                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
-                            HeadlineType::h2(),
+                            HeadlineSize::SIZE_LARGE,
+                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_BRAND,
+                            HeadlineType::TYPE_H2,
                             Editable::fromNodeProperty($textNode, 'headline')
                         )
                         : null,
                     $inBackend || $textNode->getProperty('text')
                         ? new Text(
-                            TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
+                            TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
                             Editable::fromNodeProperty($textNode, 'text'),
                             $columns->getIsMaxTwo()
                         )
@@ -307,11 +307,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     StackVariant::metaPress(),
                                     Collection::fromIterable(array_filter([
                                         new Separator(
-                                            SeparatorVariant::boldRed(),
+                                            SeparatorVariant::VARIANT_BOLD_RED,
                                             null
                                         ),
                                         new Text(
-                                            TextVariant::serviceRed(),
+                                            TextVariant::VARIANT_SERVICE_RED,
                                             Editable::fromNodeProperty($textWithMetaTextNode, 'meta_text'),
                                             false
                                         )
@@ -325,15 +325,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $textWithMetaTextNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
-                                    HeadlineType::h2(),
+                                    HeadlineSize::SIZE_LARGE,
+                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_BRAND,
+                                    HeadlineType::TYPE_H2,
                                     Editable::fromNodeProperty($textWithMetaTextNode, 'headline')
                             )
                                 : null,
                             $inBackend || $textWithMetaTextNode->getProperty('text')
                                 ? new Text(
-                                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
+                                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
                                     Editable::fromNodeProperty($textWithMetaTextNode, 'text'),
                                     false
                             )
@@ -373,14 +373,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::large(),
-                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                            HeadlineSize::SIZE_LARGE,
+                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_BRAND,
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textWithImageNode, 'headline')
                         )
                         : null,
                     new Text(
-                        TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
+                        TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
                         Editable::fromNodeProperty($textWithImageNode, 'text'),
                         false
                     ),
@@ -393,7 +393,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 ]), $identity)
             )
         );
-        $layout = Layout::from(
+        $layout = Layout::fromString(
             $textWithImageNode->getProperty('layout')
                 ?: Layout::VALUE_IMAGEFIRST
         );
@@ -402,7 +402,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ContentContainerVariant::regular(),
             new Grid(
                 GridVariant::twoColumnsNoGap(),
-                $layout->getIsImageFirst()
+                $layout === Layout::VALUE_IMAGEFIRST
                     ? Collection::fromIterable([$figure, $text], $identity)
                     : Collection::fromIterable([$text, $figure], $identity)
             )
@@ -463,14 +463,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $mostWantedNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::large(),
-                            HeadlineColor::brand(),
-                            HeadlineType::h2(),
+                            HeadlineSize::SIZE_LARGE,
+                            HeadlineColor::COLOR_BRAND,
+                            HeadlineType::TYPE_H2,
                             Editable::fromNodeProperty($mostWantedNode, 'headline')
                         )
                         : null,
                     new Text(
-                        TextVariant::lightContrast(),
+                        TextVariant::VARIANT_LIGHT_CONTRAST,
                         Editable::fromNodeProperty($mostWantedNode, 'text'),
                         false
                     ),
@@ -481,9 +481,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 $this->wantedNodeRepository->findMostWanted($language, $site),
                                 function (TraversableNodeInterface $node): LinkInterface {
                                     return new Link(
-                                        LinkVariant::label(),
+                                        LinkVariant::VARIANT_LABEL,
                                         $this->uriService->getNodeUri($node),
-                                        LinkTarget::self(),
+                                        LinkTarget::TARGET_SELF,
                                         null,
                                         Value::fromString($node->getLabel()),
                                         null
@@ -565,7 +565,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             Collection::fromIterable([
                 $this->figureFactory->forGalleryImage($imageSource),
                 new Text(
-                    TextVariant::default(),
+                    TextVariant::VARIANT_DEFAULT,
                     Editable::fromNodeProperty($galleryImageNode, 'caption'),
                     false
                 )
@@ -624,8 +624,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     Collection::fromIterable(array_filter([
                         $inBackend || $tabBox->getProperty('headline')
                             ? new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                                HeadlineSize::SIZE_LARGE,
+                                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_BRAND,
                                 HeadlineType::div(),
                                 Editable::fromNodeProperty($tabBox, 'headline')
                             )
@@ -654,13 +654,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineSize::small(),
-                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
-                    HeadlineType::div(),
+                    HeadlineSize::SIZE_SMALL,
+                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_BRAND,
+                    HeadlineType::TYPE_DIV,
                     Editable::fromNodeProperty($textTabNode, 'headline')
                 ),
                 new Text(
-                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::neutralContrast(),
+                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_NEUTRAL_CONTRAST,
                     Editable::fromNodeProperty($textTabNode, 'text'),
                     false
                 )
@@ -685,23 +685,23 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         $icon ?
                             new Tag(
                             'span',
-                            TagVariant::transparent(),
+                            TagVariant::VARIANT_TRANSPARENT,
                             Icon::fromStampedeDataSourceValue(
                                 $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
-                                IconSize::size_3()
+                                IconSize::SIZE_SIZE_3
                                 )
                             )
                             : null,
                         new Headline(
-                            HeadlineSize::small(),
-                            HeadlineColor::brand(),
+                            HeadlineSize::SIZE_SMALL,
+                            HeadlineColor::COLOR_BRAND,
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textTabNode, 'headline')
                         ),
                     ]), $identity)
                 ),
                 new Text(
-                    TextVariant::neutralContrast(),
+                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
                     Editable::fromNodeProperty($textTabNode, 'text'),
                     false
                 )
@@ -751,15 +751,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $benefitsNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::brand(),
-                                    HeadlineType::h2(),
+                                    HeadlineSize::SIZE_LARGE,
+                                    HeadlineColor::COLOR_BRAND,
+                                    HeadlineType::TYPE_H2,
                                     Editable::fromNodeProperty($benefitsNode, 'headline')
                                 )
                                 : null,
                             $inBackend || $benefitsNode->getProperty('text')
                                 ? new Text(
-                                    TextVariant::neutralContrast(),
+                                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
                                     Editable::fromNodeProperty($benefitsNode, 'text'),
                                     false
                                 )
@@ -785,13 +785,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new IconCard(
             Icon::fromStampedeDataSourceValue(
                 $benefitNode->getProperty('icon') ?: 'benefits:responsibility',
-                IconSize::sizeParent(),
-                IconColor::white()
+                IconSize::SIZE_PARENT,
+                IconColor::COLOR_WHITE
             ),
             Editable::fromNodeProperty($benefitNode, 'headline'),
             null,
             new Text(
-                TextVariant::neutralContrast(),
+                TextVariant::VARIANT_NEUTRAL_CONTRAST,
                 Editable::fromNodeProperty($benefitNode, 'text'),
                 false
             ),
@@ -815,15 +815,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $peopleStoriesNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::brand(),
-                                    HeadlineType::h2(),
+                                    HeadlineSize::SIZE_LARGE,
+                                    HeadlineColor::COLOR_BRAND,
+                                    HeadlineType::TYPE_H2,
                                     Editable::fromNodeProperty($peopleStoriesNode, 'headline')
                                 )
                                 : null,
                             $inBackend || $peopleStoriesNode->getProperty('text')
                                 ? new Text(
-                                    TextVariant::neutralContrast(),
+                                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
                                     Editable::fromNodeProperty($peopleStoriesNode, 'text'),
                                     false
                                 )
@@ -851,21 +851,21 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new PeopleStory(
             $this->figureFactory->forPeopleStory($imageSource),
             new Headline(
-                HeadlineSize::large(),
-                HeadlineColor::text(),
+                HeadlineSize::SIZE_LARGE,
+                HeadlineColor::COLOR_TEXT,
                 HeadlineType::div(),
                 Editable::fromNodeProperty($peopleStoryNode, 'headline')
             ),
             $inBackend || $peopleStoryNode->getProperty('introduction')
                 ? new Text(
-                    TextVariant::neutralContrast(),
+                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
                     Editable::fromNodeProperty($peopleStoryNode, 'introduction'),
                     false
                 )
                 : null,
             $inBackend || $peopleStoryNode->getProperty('text')
                 ? new Quotation(
-                    QuotationVariant::inline(),
+                    QuotationVariant::VARIANT_INLINE,
                     Editable::fromNodeProperty($peopleStoryNode, 'text'),
                     Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
                 )
@@ -889,22 +889,22 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             new Tag(
                                 'span',
-                                TagVariant::transparent(),
+                                TagVariant::VARIANT_TRANSPARENT,
                                 Icon::fromStampedeDataSourceValue(
                                     $sectionIntroductionNode->getProperty('icon') ?: 'peopleCulture:faqs',
-                                    IconSize::size_4()
+                                    IconSize::SIZE_SIZE_4
                                 ),
                             ),
                             new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::brand(),
-                                HeadlineType::h2(),
+                                HeadlineSize::SIZE_LARGE,
+                                HeadlineColor::COLOR_BRAND,
+                                HeadlineType::TYPE_H2,
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
                             ),
                         ]), $identity)
                     ),
                     new Text(
-                        TextVariant::neutralContrast(),
+                        TextVariant::VARIANT_NEUTRAL_CONTRAST,
                         Editable::fromNodeProperty($sectionIntroductionNode, 'text'),
                         false
                     )
@@ -945,9 +945,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         GridVariant::twoColumnsFrMaxGap(),
                         Collection::fromIterable(array_filter([
                             new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::brand(),
-                                HeadlineType::h2(),
+                                HeadlineSize::SIZE_LARGE,
+                                HeadlineColor::COLOR_BRAND,
+                                HeadlineType::TYPE_H2,
                                 Editable::fromNodeProperty($imageWithLinkNode, 'headline')
                             ),
                             $link
@@ -1003,10 +1003,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 new Tag(
                     'div',
                     TagVariant::from('heightFull'),
-                    new Icon('shared', 'arrowRight', IconSize::size_1_5())
+                    new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5)
                 ),
                 new Text(
-                    TextVariant::brandContrastBold(),
+                    TextVariant::VARIANT_BRAND_CONTRAST_BOLD,
                     Editable::fromNodeProperty($sliderItemNode, "text"),
                     false
                 )
@@ -1018,8 +1018,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new SliderItem(
             $sliderItemNode->getProperty("headline") || $inBackend
                 ? new Headline(
-                    HeadlineSize::mediumItalic(),
-                    HeadlineColor::white(),
+                    HeadlineSize::SIZE_MEDIUM_ITALIC,
+                    HeadlineColor::COLOR_WHITE,
                     HeadlineType::div(),
                     Editable::fromNodeProperty($sliderItemNode, "headline")
                 )

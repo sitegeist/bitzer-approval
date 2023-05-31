@@ -42,7 +42,7 @@ final class CompactSearchFormFactory extends AbstractComponentPresentationObject
 
         return new CompactSearchForm(
             $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true),
-            new Icon("shared", "search", IconSize::size_1_5()),
+            new Icon("shared", "search", IconSize::SIZE_SIZE_1_5),
             json_encode($labels) ?: '{}'
         );
     }

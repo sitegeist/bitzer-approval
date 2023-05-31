@@ -52,19 +52,19 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                         Collection::fromIterable([
                             new Tag(
                                 'strong',
-                                TagVariant::brandColorContrast(),
+                                TagVariant::VARIANT_BRANDCOLOR_CONTRAST,
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_subline'))
                             ),
                             new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::liteContrast(),
-                                HeadlineType::h2(),
+                                HeadlineSize::SIZE_LARGE,
+                                HeadlineColor::COLOR_LITE_CONTRAST,
+                                HeadlineType::TYPE_H2,
                                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_headline'))
                             )
                         ], $identity),
                     ),
                     new Text(
-                        TextVariant::brandContrast(),
+                        TextVariant::VARIANT_BRAND_CONTRAST,
                         Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_text')),
                         false
                     )

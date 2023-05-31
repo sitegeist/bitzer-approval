@@ -88,15 +88,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 GridVariant::twoColumnsFrMaxGap(),
                                 Collection::fromIterable([
                                     new Headline(
-                                        HeadlineSize::large(),
-                                        HeadlineColor::brand(),
-                                        HeadlineType::h2(),
+                                        HeadlineSize::SIZE_LARGE,
+                                        HeadlineColor::COLOR_BRAND,
+                                        HeadlineType::TYPE_H2,
                                         Editable::fromNodeProperty($topSuccessStories, 'headline')
                                     ),
                                     new Link(
-                                        LinkVariant::label(),
+                                        LinkVariant::VARIANT_LABEL,
                                         $this->uriService->getNodeUri($successStories),
-                                        LinkTarget::self(),
+                                        LinkTarget::TARGET_SELF,
                                         null,
                                         Value::fromString($this->getLabel('list.seeAll') ?: ''),
                                         null
@@ -124,9 +124,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         return new ArticleCard(
                                             $imageSource
                                                 ? new Link(
-                                                    LinkVariant::container(),
+                                                    LinkVariant::VARIANT_CONTAINER,
                                                     $this->uriService->getNodeUri($successStory),
-                                                    LinkTarget::self(),
+                                                    LinkTarget::TARGET_SELF,
                                                     null,
                                                     $this->figureFactory->forArticleCard($imageSource),
                                                     null

@@ -10,231 +10,51 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
 /**
  * @Flow\Proxy(false)
  */
-final class LinkVariant implements PseudoEnumInterface
+enum LinkVariant: string
 {
-    const VARIANT_CONTAINER = 'container';
-    const VARIANT_LABEL = 'label';
-    const VARIANT_TOUCHICON = 'touchIcon';
-    const VARIANT_SQUARETOUCHICON = 'squareTouchIcon';
-    const VARIANT_NOSTYLES = 'noStyles';
-    const VARIANT_SITEFOOTER = 'siteFooter';
-    const VARIANT_PLAINLABEL = 'plainLabel';
-    const VARIANT_ICONLABEL = 'iconLabel';
-    const VARIANT_LABELEXCITE = 'labelExcite';
-    const VARIANT_LABELEXPERIENCE = 'labelExperience';
-    const VARIANT_LABELLITE = 'labelLite';
-    const VARIANT_LABELSERVICE = 'labelService';
-    const VARIANT_LABELDEFAULT = 'labelDefault';
+    case VARIANT_CONTAINER = 'container';
+    case VARIANT_LABEL = 'label';
+    case VARIANT_TOUCHICON = 'touchIcon';
+    case VARIANT_SQUARETOUCHICON = 'squareTouchIcon';
+    case VARIANT_NOSTYLES = 'noStyles';
+    case VARIANT_SITEFOOTER = 'siteFooter';
+    case VARIANT_PLAINLABEL = 'plainLabel';
+    case VARIANT_ICONLABEL = 'iconLabel';
+    case VARIANT_LABELEXCITE = 'labelExcite';
+    case VARIANT_LABELEXPERIENCE = 'labelExperience';
+    case VARIANT_LABELLITE = 'labelLite';
+    case VARIANT_LABELSERVICE = 'labelService';
+    case VARIANT_LABELDEFAULT = 'labelDefault';
 
-
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
-
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self
     {
-        $this->value = $value;
-    }
-
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if (
-                $string !== self::VARIANT_CONTAINER
-                && $string !== self::VARIANT_LABEL
-                && $string !== self::VARIANT_TOUCHICON
-                && $string !== self::VARIANT_SQUARETOUCHICON
-                && $string !== self::VARIANT_NOSTYLES
-                && $string !== self::VARIANT_SITEFOOTER
-                && $string !== self::VARIANT_PLAINLABEL
-                && $string !== self::VARIANT_ICONLABEL
-                && $string !== self::VARIANT_LABELEXCITE
-                && $string !== self::VARIANT_LABELEXPERIENCE
-                && $string !== self::VARIANT_LABELLITE
-                && $string !== self::VARIANT_LABELSERVICE
-                && $string !== self::VARIANT_LABELDEFAULT
-            ) {
-                throw LinkVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
+        return match ($string){
+            'container' => self::VARIANT_CONTAINER,
+            'label' => self::VARIANT_LABEL,
+            'touchIcon' => self::VARIANT_TOUCHICON,
+            'squareTouchIcon' => self::VARIANT_SQUARETOUCHICON,
+            'noStyles' => self::VARIANT_NOSTYLES,
+            'siteFooter' => self::VARIANT_SITEFOOTER,
+            'plainLabel' => self::VARIANT_PLAINLABEL,
+            'iconLabel' => self::VARIANT_ICONLABEL,
+            'labelExcite' => self::VARIANT_LABELEXCITE,
+            'labelExperience' => self::VARIANT_LABELEXPERIENCE,
+            'labelLite' => self::VARIANT_LABELLITE,
+            'labelService' => self::VARIANT_LABELSERVICE,
+            'labelDefault' => self::VARIANT_LABELDEFAULT,
+            default => null
+        };
     }
 
     public static function tryFromTheme(?Theme $theme): ?self
     {
         return $theme
-            ? self::from('label' . (ucfirst($theme->getValue())))
+            ? self::fromString('label' . (ucfirst($theme->getValue())))
             : null;
     }
 
-    public static function container(): self
-    {
-        return self::from(self::VARIANT_CONTAINER);
-    }
-
-    public static function label(): self
-    {
-        return self::from(self::VARIANT_LABEL);
-    }
-
-    public static function touchIcon(): self
-    {
-        return self::from(self::VARIANT_TOUCHICON);
-    }
-
-    public static function squareTouchIcon(): self
-    {
-        return self::from(self::VARIANT_SQUARETOUCHICON);
-    }
-
-    public static function noStyles(): self
-    {
-        return self::from(self::VARIANT_NOSTYLES);
-    }
-
-    public static function siteFooter(): self
-    {
-        return self::from(self::VARIANT_SITEFOOTER);
-    }
-
-    public static function plainLabel(): self
-    {
-        return self::from(self::VARIANT_PLAINLABEL);
-    }
-
-    public static function iconLabel(): self
-    {
-        return self::from(self::VARIANT_ICONLABEL);
-    }
-
-    public static function labelExcite(): self
-    {
-        return self::from(self::VARIANT_LABELEXCITE);
-    }
-
-    public static function labelExperience(): self
-    {
-        return self::from(self::VARIANT_LABELEXPERIENCE);
-    }
-
-    public static function labelLite(): self
-    {
-        return self::from(self::VARIANT_LABELLITE);
-    }
-
-    public static function labelService(): self
-    {
-        return self::from(self::VARIANT_LABELSERVICE);
-    }
-
-    public static function labelDefault(): self
-    {
-        return self::from(self::VARIANT_LABELDEFAULT);
-    }
-
-    public function getIsContainer(): bool
-    {
-        return $this->value === self::VARIANT_CONTAINER;
-    }
-
-    public function getIsLabel(): bool
-    {
-        return $this->value === self::VARIANT_LABEL;
-    }
-
-    public function getIsTouchIcon(): bool
-    {
-        return $this->value === self::VARIANT_TOUCHICON;
-    }
-
-    public function getIsSquareTouchIcon(): bool
-    {
-        return $this->value === self::VARIANT_SQUARETOUCHICON;
-    }
-
-    public function getIsNoStyles(): bool
-    {
-        return $this->value === self::VARIANT_NOSTYLES;
-    }
-
-    public function getIsSiteFooter(): bool
-    {
-        return $this->value === self::VARIANT_SITEFOOTER;
-    }
-
-    public function getIsPlainLabel(): bool
-    {
-        return $this->value === self::VARIANT_PLAINLABEL;
-    }
-
-    public function getIsIconLabel(): bool
-    {
-        return $this->value === self::VARIANT_ICONLABEL;
-    }
-
-    public function getIsLabelExcite(): bool
-    {
-        return $this->value === self::VARIANT_LABELEXCITE;
-    }
-
-    public function getIsLabelExperience(): bool
-    {
-        return $this->value === self::VARIANT_LABELEXPERIENCE;
-    }
-
-    public function getIsLabelLite(): bool
-    {
-        return $this->value === self::VARIANT_LABELLITE;
-    }
-
-    public function getIsLabelService(): bool
-    {
-        return $this->value === self::VARIANT_LABELSERVICE;
-    }
-
-    public function getIsLabelDefault(): bool
-    {
-        return $this->value === self::VARIANT_LABELDEFAULT;
-    }
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::VARIANT_CONTAINER),
-            self::from(self::VARIANT_LABEL),
-            self::from(self::VARIANT_TOUCHICON),
-            self::from(self::VARIANT_NOSTYLES),
-            self::from(self::VARIANT_SITEFOOTER),
-            self::from(self::VARIANT_PLAINLABEL),
-            self::from(self::VARIANT_ICONLABEL),
-            self::from(self::VARIANT_LABELEXCITE),
-            self::from(self::VARIANT_LABELEXPERIENCE),
-            self::from(self::VARIANT_LABELLITE),
-            self::from(self::VARIANT_LABELSERVICE),
-            self::from(self::VARIANT_LABELDEFAULT)
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
 }

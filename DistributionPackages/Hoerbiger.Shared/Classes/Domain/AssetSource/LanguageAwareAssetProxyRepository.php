@@ -219,4 +219,9 @@ final class LanguageAwareAssetProxyRepository implements
 
         return $query;
     }
+
+    public function countByTag(Tag $tag): int
+    {
+        // TODO: Implement countByTag() method.
+    }
 }

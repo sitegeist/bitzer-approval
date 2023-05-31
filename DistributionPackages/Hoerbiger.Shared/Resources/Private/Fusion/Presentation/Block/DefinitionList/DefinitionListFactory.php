@@ -15,7 +15,7 @@ final class DefinitionListFactory extends AbstractComponentPresentationObjectFac
     public function forDefinitionList(TraversableNodeInterface $definitionList): DefinitionList
     {
         return new DefinitionList(
-            DefinitionListVariant::regular(),
+            DefinitionListVariant::VARIANT_REGULAR,
             Collection::fromNodes(
                 $definitionList->findChildNodes(),
                 function(TraversableNodeInterface $definitionNode) {

@@ -122,15 +122,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 GridVariant::twoColumnsFrMaxGap(),
                                 Collection::fromIterable([
                                     new Headline(
-                                        HeadlineSize::large(),
-                                        HeadlineColor::brand(),
-                                        HeadlineType::h2(),
+                                        HeadlineSize::SIZE_LARGE,
+                                        HeadlineColor::COLOR_BRAND,
+                                        HeadlineType::TYPE_H2,
                                         Editable::fromNodeProperty($latestPressReleaseNode, 'headline')
                                     ),
                                     new Link(
-                                        LinkVariant::label(),
+                                        LinkVariant::VARIANT_LABEL,
                                         $this->uriService->getNodeUri($pressArchive),
-                                        LinkTarget::self(),
+                                        LinkTarget::TARGET_SELF,
                                         null,
                                         Value::fromString($this->getLabel('list.seeAll')),
                                         null
@@ -157,9 +157,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
                                         return new ArticleCard(
                                             new Link(
-                                                LinkVariant::container(),
+                                                LinkVariant::VARIANT_CONTAINER,
                                                 $this->uriService->getNodeUri($pressRelease),
-                                                LinkTarget::self(),
+                                                LinkTarget::TARGET_SELF,
                                                 null,
                                                 $this->figureFactory->forArticleCard($imageSource),
                                                 null
@@ -170,7 +170,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                             ),
                                             null,
                                             new Text(
-                                                TextVariant::lightContrast(),
+                                                TextVariant::VARIANT_LIGHT_CONTRAST,
                                                 Value::fromString(
                                                     $pressRelease->getProperty('preview__description')
                                                         ?: $pressRelease->getProperty('abstract') ?: ''
@@ -178,9 +178,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                 false
                                             ),
                                             new Link(
-                                                LinkVariant::label(),
+                                                LinkVariant::VARIANT_LABEL,
                                                 $this->uriService->getNodeUri($pressRelease),
-                                                LinkTarget::self(),
+                                                LinkTarget::TARGET_SELF,
                                                 null,
                                                 Value::fromString($this->getLabel('list.learnMore')),
                                                 null
@@ -209,7 +209,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Grid(
                 GridVariant::iconLeft(),
                 Collection::fromIterable(array_filter([
-                    new Icon('shared', 'arrowRight', IconSize::size_1_5()),
+                    new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
                     Value::fromString($this->getLabel('list.seeOverview') ?: '')
                 ]))
             ),
@@ -236,7 +236,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
                 $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
 
-                $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
+                $showImage = !$pressVariant == PressReleaseCardVariant::VARIANT_TOP || $pressRelease->getProperty('showImage');
 
                 $figure = $imageSource && $showImage
                     ? $this->figureFactory->forPressReleaseCard($imageSource)
@@ -245,10 +245,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->linkFactory->forLinkToDocument($pressRelease, null)
                     ->asPlainLabel()->withContent(
                         new PressReleaseCard(
-                            $pressVariant->getIsNews()
-                                ? PressReleaseCardVariant::top()
-                                : PressReleaseCardVariant::topNews(),
-                            $pressVariant->getIsNews()
+                            $pressVariant == PressReleaseCardVariant::VARIANT_TOP
+                                ? PressReleaseCardVariant::VARIANT_TOP
+                                : PressReleaseCardVariant::VARIANT_TOP_NEWS,
+                            $pressVariant == PressReleaseCardVariant::VARIANT_TOP
                                 ? Value::fromString($datePublished ?: '')
                                 : null,
                             $figure,
@@ -258,7 +258,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     ?: ''
                             ),
                             Value::fromString(
-                                $labels['label.filter.' . $pressVariant->getValue()]
+                                $labels['label.filter.' . $pressVariant->value]
                                 . ' ' . $pressRelease->getProperty('edition')
                             ),
                             Value::fromString(
@@ -267,14 +267,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     ?: ''
                             ),
                             new Button(
-                                ButtonType::regular(),
-                                ButtonVariant::contrast(),
+                                ButtonType::TYPE_REGULAR,
+                                ButtonVariant::VARIANT_CONTRAST,
                                 new Grid(
                                     GridVariant::iconLeft(),
                                     Collection::fromIterable(array_filter([
-                                        new Icon('shared', 'arrowRight', IconSize::size_1()),
+                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
                                         new Text(
-                                            TextVariant::sm(),
+                                            TextVariant::VARIANT_SM,
                                             Value::fromString($this->getLabel('list.learnMore')),
                                             false
                                         )
@@ -295,7 +295,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 StackVariant::sm(),
                 Collection::fromIterable([
                     new Separator(
-                        SeparatorVariant::fullWidthWithContent(),
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                         Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
                     ),
                     new Grid(
@@ -306,9 +306,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 Collection::fromIterable(array_filter([
                                     $inBackend || $topNewsNode->getProperty('headline')
                                         ? new Headline(
-                                            HeadlineSize::superLargeLight(),
-                                            HeadlineColor::text(),
-                                            HeadlineType::h2(),
+                                            HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
+                                            HeadlineColor::COLOR_TEXT,
+                                            HeadlineType::TYPE_H2,
                                             Editable::fromNodeProperty($topNewsNode, 'headline')
                                         )
                                         : null,
@@ -317,7 +317,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 )
                             ),
                             new PressOverview(
-                                PressOverviewVariant::topNews(),
+                                PressOverviewVariant::VARIANT_TOP_NEWS,
                                 [],
                                 $pressReleases
                             )

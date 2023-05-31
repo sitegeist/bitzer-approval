@@ -22,19 +22,17 @@
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "hoerbiger/hoerbigercom-affiliatedirectory": "*",
         "hoerbiger/hoerbigercom-catalog-calculator": "*",
-        "hoerbiger/hoerbigercom-hr": "*",
-        "internezzo/childreload": "^1.0"
+        "hoerbiger/hoerbigercom-hr": "*"
     },
     "require-dev": {
-        "neos/buildessentials": "^7.1",
+        "neos/buildessentials": "~8.1.0",
         "mikey179/vfsstream": "^1.6",
-        "phpunit/phpunit": "^9.0",
-        "symfony/css-selector": "~2.0",
-        "neos/behat": "^7.1",
-        "deployer/deployer": "^6.2",
-        "editorconfig-checker/editorconfig-checker": "^10.0",
-        "squizlabs/php_codesniffer": "^3.4",
-        "sitegeist/magicwand": "dev-configurableDumpCommand",
+        "phpunit/phpunit": "^9.6",
+        "symfony/css-selector": "~2.8",
+        "deployer/deployer": "^6.9",
+        "editorconfig-checker/editorconfig-checker": "^10.3",
+        "squizlabs/php_codesniffer": "^3.7",
+        "sitegeist/magicwand": "~4.4.1",
         "phpstan/phpstan": "^0.12.42"
     },
     "suggest": {

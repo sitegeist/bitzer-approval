@@ -6,79 +6,23 @@ namespace Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse;
  */
 
 use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
 
 /**
  * @Flow\Proxy(false)
  */
-final class PartialFigureEclipseVariant implements PseudoEnumInterface
+enum PartialFigureEclipseVariant: string
 {
-    const VARIANT_IMAGELEFT = 'imageLeft';
-    const VARIANT_IMAGERIGHT = 'imageRight';
+    case VARIANT_IMAGELEFT = 'imageLeft';
+    case VARIANT_IMAGERIGHT = 'imageRight';
 
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
 
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self
     {
-        $this->value = $value;
+        return match ($string){
+            'imageLeft' => self::VARIANT_IMAGELEFT,
+            'imageRight' => self::VARIANT_IMAGERIGHT,
+            default => null
+        };
     }
 
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_IMAGELEFT
-                && $string !== self::VARIANT_IMAGERIGHT) {
-                throw PartialFigureEclipseVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
-    }
-
-    public static function imageLeft(): self
-    {
-        return self::from(self::VARIANT_IMAGELEFT);
-    }
-
-    public static function imageRight(): self
-    {
-        return self::from(self::VARIANT_IMAGERIGHT);
-    }
-
-    public function getIsImageLeft(): bool
-    {
-        return $this->value === self::VARIANT_IMAGELEFT;
-    }
-
-    public function getIsImageRight(): bool
-    {
-        return $this->value === self::VARIANT_IMAGERIGHT;
-    }
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::VARIANT_IMAGELEFT),
-            self::from(self::VARIANT_IMAGERIGHT)
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
 }

@@ -6,28 +6,13 @@ namespace Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction;
  */
 
 use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant as Source;
 
 /**
  * @Flow\Proxy(false)
  */
-final class StageVariant implements PseudoEnumInterface
+enum StageVariant: string
 {
+    case VARIANT_FULLMEDIATEXTLEFT = 'fullMediaTextLeft';
+    case VARIANT_FULLMEDIATEXTRIGHT = 'fullMediaTextRight';
 
-    /**
-     * @return array<int,Source>|Source[]
-     */
-    public static function cases(): array
-    {
-        return [
-            Source::fullMediaTextLeft(),
-            Source::fullMediaTextRight()
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return '';
-    }
 }

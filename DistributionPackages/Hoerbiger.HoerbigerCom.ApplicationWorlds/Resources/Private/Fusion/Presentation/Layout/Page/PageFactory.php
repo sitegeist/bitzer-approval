@@ -135,7 +135,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                         ThumbNavigationItemType::plainText()
                                     ),
                                     null,
-                                    new Icon('shared', 'chevronDown', IconSize::size_1_5(), IconColor::current()),
+                                    new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5, IconColor::COLOR_CURRENT),
                                     $this->productListFactory->forSection($section, $subgraph, $inBackend)
                                 );
                             }

@@ -92,8 +92,8 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($headlineProperty) {
             $headline = new Headline(
-                HeadlineSize::verySmallRegular(),
-                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
+                HeadlineSize::SIZE_VERY_SMALL_REGULAR,
+                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                 HeadlineType::div(),
                 Value::fromString($headlineProperty)
             );
@@ -106,7 +106,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
         if ($abstractProperty) {
             $text = new Text(
-                TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
+                TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
                 Value::fromString($abstractProperty),
                 false
             );
@@ -123,7 +123,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                 new Grid(
                     GridVariant::iconLeft(),
                     Collection::fromIterable([
-                        new Icon("shared", "arrowRight", IconSize::size_1()),
+                        new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
                         Value::fromString(
                             $this->translator->translateById('link.label', [], null, null, 'Block.Card.NavigationCard', 'Hoerbiger.HoerbigerCom') ?: ''
                         )
@@ -139,9 +139,9 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     public function forDocument(Document $document, string $typeIdentifier, ?string $highlight): CardInterface
     {
         $headline = new Headline(
-            HeadlineSize::tiny(),
-            HeadlineColor::brand(),
-            HeadlineType::h2(),
+            HeadlineSize::SIZE_TINY,
+            HeadlineColor::COLOR_BRAND,
+            HeadlineType::TYPE_H2,
             Value::fromString($document->getLabel())
         );
 
@@ -150,7 +150,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $headline,
             Value::fromString($this->getTypeLabel($typeIdentifier)),
             $highlight ? Value::fromString($highlight) : null,
-            new Icon("shared", "downloadFile", IconSize::size_2())
+            new Icon("shared", "downloadFile", IconSize::SIZE_SIZE_2)
         );
     }
 
@@ -158,9 +158,9 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     {
         $supportingText = $highlight ?: $thing->getProperty('preview__description');
         $headline = new Headline(
-            HeadlineSize::tiny(),
-            HeadlineColor::brand(),
-            HeadlineType::h2(),
+            HeadlineSize::SIZE_TINY,
+            HeadlineColor::COLOR_BRAND,
+            HeadlineType::TYPE_H2,
             Value::fromString($thing->getLabel())
         );
 
@@ -205,9 +205,9 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $asset instanceof Document
                 ? Collection::fromIterable([
                     new Link(
-                        LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+                        LinkVariant::tryFromTheme($theme) ?: LinkVariant::VARIANT_LABEL,
                         $this->uriService->getAssetUri($asset),
-                        LinkTarget::blank(),
+                        LinkTarget::TARGET_SELF,
                         null,
                         Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
                         null

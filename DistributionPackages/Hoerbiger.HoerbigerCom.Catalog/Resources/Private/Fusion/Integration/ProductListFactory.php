@@ -125,9 +125,9 @@ final class ProductListFactory
                 StackVariant::sm(),
                 Collection::fromIterable([
                     new Headline(
-                        HeadlineSize::largeCentered(),
-                        HeadlineColor::brand(),
-                        HeadlineType::h2(),
+                        HeadlineSize::SIZE_LARGE_CENTERED,
+                        HeadlineColor::COLOR_BRAND,
+                        HeadlineType::TYPE_H2,
                         Value::fromString(
                             $this->csvPOTranslator->getLabel(PageFactory::class, 'products')
                                 . ' '

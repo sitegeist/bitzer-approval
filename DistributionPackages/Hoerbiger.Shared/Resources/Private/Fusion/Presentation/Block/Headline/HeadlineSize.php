@@ -11,231 +11,43 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 /**
  * @Flow\Proxy(false)
  */
-final class HeadlineSize implements PseudoEnumInterface
+enum HeadlineSize: string
 {
-    const SIZE_SUPER_LARGE = 'superLarge';
-    const SIZE_SUPER_LARGE_LIGHT = 'superLargeLight';
-    const SIZE_EXTRA_LARGE = 'extraLarge';
-    const SIZE_LARGE = 'large';
-    const SIZE_LARGE_CENTERED = 'largeCentered';
-    const SIZE_MEDIUM = 'medium';
-    const SIZE_MEDIUM_ITALIC = 'mediumItalic';
-    const SIZE_SMALL = 'small';
-    const SIZE_VERY_SMALL = 'verySmall';
-    const SIZE_VERY_SMALL_ITALIC = 'verySmallItalic';
-    const SIZE_VERY_SMALL_REGULAR = 'verySmallRegular';
-    const SIZE_TILE = 'tile';
-    const SIZE_TINY = 'tiny';
-    const SIZE_HEADER_STAGE = 'headerStage';
+    case SIZE_SUPER_LARGE = 'superLarge';
+    case SIZE_SUPER_LARGE_LIGHT = 'superLargeLight';
+    case SIZE_EXTRA_LARGE = 'extraLarge';
+    case SIZE_LARGE = 'large';
+    case SIZE_LARGE_CENTERED = 'largeCentered';
+    case SIZE_MEDIUM = 'medium';
+    case SIZE_MEDIUM_ITALIC = 'mediumItalic';
+    case SIZE_SMALL = 'small';
+    case SIZE_VERY_SMALL = 'verySmall';
+    case SIZE_VERY_SMALL_ITALIC = 'verySmallItalic';
+    case SIZE_VERY_SMALL_REGULAR = 'verySmallRegular';
+    case SIZE_TILE = 'tile';
+    case SIZE_TINY = 'tiny';
+    case SIZE_HEADER_STAGE = 'headerStage';
 
 
-    /**
-     * @var array<string,self>|self[]
-     */
-    private static array $instances;
-
-    private string $value;
-
-    private function __construct(string $value)
+    public static function fromString(string $string): self
     {
-        $this->value = $value;
+        return match ($string){
+            'superLarge' => self::SIZE_SUPER_LARGE,
+            'superLargeLight' => self::SIZE_SUPER_LARGE_LIGHT,
+            'extraLarge' => self::SIZE_EXTRA_LARGE,
+            'large' => self::SIZE_LARGE,
+            'largeCentered' => self::SIZE_LARGE_CENTERED,
+            'medium' => self::SIZE_MEDIUM,
+            'mediumItalic' => self::SIZE_MEDIUM_ITALIC,
+            'small' => self::SIZE_SMALL,
+            'verySmall' => self::SIZE_VERY_SMALL,
+            'verySmallItalic' => self::SIZE_VERY_SMALL_ITALIC,
+            'verySmallRegular' => self::SIZE_VERY_SMALL_REGULAR,
+            'tile' => self::SIZE_TILE,
+            'tiny' => self::SIZE_TINY,
+            'headerStage' => self::SIZE_HEADER_STAGE,
+            default => null
+        };
     }
 
-    public static function from(string $string): self
-    {
-        if (!isset(self::$instances[$string])) {
-            if ($string !== self::SIZE_SUPER_LARGE
-                && $string !== self::SIZE_SUPER_LARGE_LIGHT
-                && $string !== self::SIZE_EXTRA_LARGE
-                && $string !== self::SIZE_LARGE
-                && $string !== self::SIZE_LARGE_CENTERED
-                && $string !== self::SIZE_MEDIUM
-                && $string !== self::SIZE_MEDIUM_ITALIC
-                && $string !== self::SIZE_SMALL
-                && $string !== self::SIZE_VERY_SMALL
-                && $string !== self::SIZE_VERY_SMALL_ITALIC
-                && $string !== self::SIZE_VERY_SMALL_REGULAR
-                && $string !== self::SIZE_TILE
-                && $string !== self::SIZE_TINY
-                && $string !== self::SIZE_HEADER_STAGE
-                ) {
-                throw HeadlineSizeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
-            }
-            self::$instances[$string] = new self($string);
-        }
-
-        return self::$instances[$string];
-    }
-
-    public static function superLarge(): self
-    {
-        return self::from(self::SIZE_SUPER_LARGE);
-    }
-
-    public static function superLargeLight(): self
-    {
-        return self::from(self::SIZE_SUPER_LARGE_LIGHT);
-    }
-
-    public static function extraLarge(): self
-    {
-        return self::from(self::SIZE_EXTRA_LARGE);
-    }
-
-    public static function large(): self
-    {
-        return self::from(self::SIZE_LARGE);
-    }
-
-    public static function largeCentered(): self
-    {
-        return self::from(self::SIZE_LARGE_CENTERED);
-    }
-
-    public static function medium(): self
-    {
-        return self::from(self::SIZE_MEDIUM);
-    }
-
-    public static function mediumItalic(): self
-    {
-        return self::from(self::SIZE_MEDIUM_ITALIC);
-    }
-
-    public static function small(): self
-    {
-        return self::from(self::SIZE_SMALL);
-    }
-
-    public static function verySmall(): self
-    {
-        return self::from(self::SIZE_VERY_SMALL);
-    }
-
-    public static function verySmallItalic(): self
-    {
-        return self::from(self::SIZE_VERY_SMALL_ITALIC);
-    }
-
-    public static function verySmallRegular(): self
-    {
-        return self::from(self::SIZE_VERY_SMALL_REGULAR);
-    }
-
-    public static function tile(): self
-    {
-        return self::from(self::SIZE_TILE);
-    }
-
-    public static function tiny(): self
-    {
-        return self::from(self::SIZE_TINY);
-    }
-
-    public static function headerStage(): self
-    {
-        return self::from(self::SIZE_HEADER_STAGE);
-    }
-
-    public function getIsLarge(): bool
-    {
-        return $this->value === self::SIZE_LARGE;
-    }
-
-    public function getIsExtraLarge(): bool
-    {
-        return $this->value === self::SIZE_EXTRA_LARGE;
-    }
-
-    public function getIsSuperLarge(): bool
-    {
-        return $this->value === self::SIZE_SUPER_LARGE;
-    }
-
-    public function getIsSuperLargeLight(): bool
-    {
-        return $this->value === self::SIZE_SUPER_LARGE_LIGHT;
-    }
-
-    public function getIsLargeCentered(): bool
-    {
-        return $this->value === self::SIZE_LARGE_CENTERED;
-    }
-
-    public function getIsMedium(): bool
-    {
-        return $this->value === self::SIZE_MEDIUM;
-    }
-
-    public function getIsMediumItalic(): bool
-    {
-        return $this->value === self::SIZE_MEDIUM_ITALIC;
-    }
-
-    public function getIsSmall(): bool
-    {
-        return $this->value === self::SIZE_SMALL;
-    }
-
-    public function getIsVerySmall(): bool
-    {
-        return $this->value === self::SIZE_VERY_SMALL;
-    }
-
-    public function getIsVerySmallItalic(): bool
-    {
-        return $this->value === self::SIZE_VERY_SMALL_ITALIC;
-    }
-
-    public function getIsVerySmallRegular(): bool
-    {
-        return $this->value === self::SIZE_VERY_SMALL_REGULAR;
-    }
-
-    public function getIsTile(): bool
-    {
-        return $this->value === self::SIZE_TILE;
-    }
-
-    public function getIsTiny(): bool
-    {
-        return $this->value === self::SIZE_TINY;
-    }
-
-    public function getIsHeaderStage(): bool
-    {
-        return $this->value === self::SIZE_HEADER_STAGE;
-    }
-
-    /**
-     * @return array<int,self>|self[]
-     */
-    public static function cases(): array
-    {
-        return [
-            self::from(self::SIZE_EXTRA_LARGE),
-            self::from(self::SIZE_SUPER_LARGE),
-            self::from(self::SIZE_SUPER_LARGE_LIGHT),
-            self::from(self::SIZE_LARGE),
-            self::from(self::SIZE_LARGE_CENTERED),
-            self::from(self::SIZE_MEDIUM),
-            self::from(self::SIZE_MEDIUM_ITALIC),
-            self::from(self::SIZE_SMALL),
-            self::from(self::SIZE_VERY_SMALL),
-            self::from(self::SIZE_VERY_SMALL_REGULAR),
-            self::from(self::SIZE_TILE),
-            self::from(self::SIZE_TINY),
-            self::from(self::SIZE_HEADER_STAGE)
-        ];
-    }
-
-    public function getValue(): string
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
-    }
 }

@@ -104,10 +104,10 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
             $this->getLanguageNavigationItems($document, $subgraph, $actionRequest),
-            new Icon("shared", "naviChevron", IconSize::size_0_5()),
-            new Icon("shared", "arrowRight", IconSize::size_1()),
+            new Icon("shared", "naviChevron", IconSize::SIZE_SIZE_0_5),
+            new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
             $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true),
-            new Icon("shared", "search", IconSize::size_1_5()),
+            new Icon("shared", "search", IconSize::SIZE_SIZE_1_5),
             json_encode($labels) ?: '{}'
         );
     }

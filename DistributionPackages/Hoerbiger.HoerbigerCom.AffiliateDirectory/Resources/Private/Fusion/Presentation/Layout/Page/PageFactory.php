@@ -78,15 +78,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         Collection::fromIterable(array_filter([
                             $inBackend || $affiliateFinder->getProperty('applicationHeadline')
                                 ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::brand(),
-                                    HeadlineType::h2(),
+                                    HeadlineSize::SIZE_LARGE,
+                                    HeadlineColor::COLOR_BRAND,
+                                    HeadlineType::TYPE_H2,
                                     Editable::fromNodeProperty($affiliateFinder, 'applicationHeadline')
                                 )
                                 : null,
                             $inBackend || $affiliateFinder->getProperty('text')
                                 ? new Text(
-                                    TextVariant::neutralContrast(),
+                                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
                                     Editable::fromNodeProperty($affiliateFinder, 'text'),
                                     false
                                 )
