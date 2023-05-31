@@ -21,6 +21,8 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
+use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
+use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -78,94 +80,104 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            new CacheSegment(
-                new Box(
-                    BoxVariant::decorative(),
-                    new Stack(
-                        StackVariant::sm(),
-                        Collection::fromIterable([
-                            new Grid(
-                                GridVariant::twoColumnsFrMaxGap(),
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $topSuccessStories->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::fullWidthWithContent(),
+                        Editable::fromNodeProperty($topSuccessStories, 'metaHeadline')
+                    ): null,
+                    new CacheSegment(
+                        new Box(
+                            BoxVariant::decorative(),
+                            new Stack(
+                                StackVariant::sm(),
                                 Collection::fromIterable([
-                                    new Headline(
-                                        HeadlineSize::large(),
-                                        HeadlineColor::brand(),
-                                        HeadlineType::h2(),
-                                        Editable::fromNodeProperty($topSuccessStories, 'headline')
-                                    ),
-                                    new Link(
-                                        LinkVariant::label(),
-                                        $this->uriService->getNodeUri($successStories),
-                                        LinkTarget::self(),
-                                        null,
-                                        Value::fromString($this->getLabel('list.seeAll') ?: ''),
-                                        null
-                                    )
-                                ], $identity)
-                            ),
-                            new Grid(
-                                GridVariant::threeColumnsGap(),
-                                Collection::fromIterable(
-                                    $topSuccessStories->getProperty('successStories') ?: [],
-                                    function (TraversableNodeInterface $successStory) use ($inBackend, $identity): ArticleCard {
-                                        $imageSource = $this->imageSourceFactory->forPreviewMixin(
-                                            $successStory,
-                                            $inBackend,
-                                            false
-                                        );
-
-                                        $applicationWorld = $successStory->getProperty('applicationWorld');
-
-                                        /** @var Node $successStory */
-                                        $datePublished = $successStory->getProperty('datePublished') ?: $successStory->getCreationDateTime();
-                                        /** @var TraversableNodeInterface $successStory */
-
-
-                                        return new ArticleCard(
-                                            $imageSource
-                                                ? new Link(
-                                                    LinkVariant::container(),
-                                                    $this->uriService->getNodeUri($successStory),
-                                                    LinkTarget::self(),
-                                                    null,
-                                                    $this->figureFactory->forArticleCard($imageSource),
-                                                    null
-                                                )
-                                                : null,
-                                            Value::fromString(
-                                                $successStory->getProperty('preview__headline')
-                                                    ?: $successStory->getProperty('headline') ?: ''
+                                    new Grid(
+                                        GridVariant::twoColumnsFrMaxGap(),
+                                        Collection::fromIterable([
+                                            new Headline(
+                                                HeadlineSize::large(),
+                                                HeadlineColor::brand(),
+                                                HeadlineType::h2(),
+                                                Editable::fromNodeProperty($topSuccessStories, 'headline')
                                             ),
-                                            new Row(
-                                                RowVariant::alternateMetaline(),
-                                                Collection::fromIterable([
-                                                    // Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
-                                                    Value::fromString($applicationWorld->getProperty('previewHeadline')
-                                                        ? $applicationWorld->getProperty('previewHeadline')
-                                                        : $applicationWorld->getProperty('title') ?? ''
-                                                    )
-                                                ], $identity)
-                                            ),
-                                            Value::fromString(
-                                                $successStory->getProperty('preview__description')
-                                                    ?: $successStory->getProperty('abstract') ?: ''
-                                            ),
-                                            new Button(
-                                                ButtonType::link(),
-                                                ButtonVariant::cta(),
-                                                Value::fromString($this->getLabel('list.learnMore') ?: ''),
-                                                $this->uriService->getNodeUri($successStory),
-                                                '_self',
+                                            new Link(
+                                                LinkVariant::label(),
+                                                $this->uriService->getNodeUri($successStories),
+                                                LinkTarget::self(),
+                                                null,
+                                                Value::fromString($this->getLabel('list.seeAll') ?: ''),
                                                 null
                                             )
-                                        );
-                                    }
-                                )
+                                        ], $identity)
+                                    ),
+                                    new Grid(
+                                        GridVariant::threeColumnsGap(),
+                                        Collection::fromIterable(
+                                            $topSuccessStories->getProperty('successStories') ?: [],
+                                            function (TraversableNodeInterface $successStory) use ($inBackend, $identity): ArticleCard {
+                                                $imageSource = $this->imageSourceFactory->forPreviewMixin(
+                                                    $successStory,
+                                                    $inBackend,
+                                                    false
+                                                );
+
+                                                $applicationWorld = $successStory->getProperty('applicationWorld');
+
+                                                /** @var Node $successStory */
+                                                $datePublished = $successStory->getProperty('datePublished') ?: $successStory->getCreationDateTime();
+                                                /** @var TraversableNodeInterface $successStory */
+
+
+                                                return new ArticleCard(
+                                                    $imageSource
+                                                        ? new Link(
+                                                        LinkVariant::container(),
+                                                        $this->uriService->getNodeUri($successStory),
+                                                        LinkTarget::self(),
+                                                        null,
+                                                        $this->figureFactory->forArticleCard($imageSource),
+                                                        null
+                                                    )
+                                                        : null,
+                                                    Value::fromString(
+                                                        $successStory->getProperty('preview__headline')
+                                                            ?: $successStory->getProperty('headline') ?: ''
+                                                    ),
+                                                    new Row(
+                                                        RowVariant::alternateMetaline(),
+                                                        Collection::fromIterable([
+                                                            // Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
+                                                            Value::fromString($applicationWorld->getProperty('previewHeadline')
+                                                                ? $applicationWorld->getProperty('previewHeadline')
+                                                                : $applicationWorld->getProperty('title') ?? ''
+                                                            )
+                                                        ], $identity)
+                                                    ),
+                                                    Value::fromString(
+                                                        $successStory->getProperty('preview__description')
+                                                            ?: $successStory->getProperty('abstract') ?: ''
+                                                    ),
+                                                    new Button(
+                                                        ButtonType::link(),
+                                                        ButtonVariant::cta(),
+                                                        Value::fromString($this->getLabel('list.learnMore') ?: ''),
+                                                        $this->uriService->getNodeUri($successStory),
+                                                        '_self',
+                                                        null
+                                                    )
+                                                );
+                                            }
+                                        )
+                                    )
+                                ], $identity)
                             )
-                        ], $identity)
+                        ),
+                        'Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList'
                     )
-                ),
-                'Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList'
+                ]))
             )
         );
     }
