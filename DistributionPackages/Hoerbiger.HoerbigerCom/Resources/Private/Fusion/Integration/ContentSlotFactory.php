@@ -236,7 +236,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            $partialFigureEclipse
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $node->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::fullWidthWithContent(),
+                        Editable::fromNodeProperty($node, 'metaHeadline')
+                    ): null,
+                    $partialFigureEclipse
+                ]))
+            )
         );
     }
 
@@ -1001,17 +1011,27 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             Collection::fromIterable([
                 new ContentContainer(
                     ContentContainerVariant::regular(),
-                    new Grid(
-                        GridVariant::twoColumnsFrMaxGap(),
+                    new Stack(
+                        StackVariant::sm(),
                         Collection::fromIterable(array_filter([
-                            new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::brand(),
-                                HeadlineType::h2(),
-                                Editable::fromNodeProperty($imageWithLinkNode, 'headline')
-                            ),
-                            $link
-                        ]), $identity)
+                            $inBackend || $imageWithLinkNode->getProperty('metaHeadline')
+                                ? new Separator(
+                                SeparatorVariant::fullWidthWithContent(),
+                                Editable::fromNodeProperty($imageWithLinkNode, 'metaHeadline')
+                            ): null,
+                            new Grid(
+                                GridVariant::twoColumnsFrMaxGap(),
+                                Collection::fromIterable(array_filter([
+                                    new Headline(
+                                        HeadlineSize::large(),
+                                        HeadlineColor::brand(),
+                                        HeadlineType::h2(),
+                                        Editable::fromNodeProperty($imageWithLinkNode, 'headline')
+                                    ),
+                                    $link
+                                ]), $identity)
+                            )
+                        ]))
                     )
                 ),
                 $link
