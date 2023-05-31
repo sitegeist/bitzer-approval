@@ -607,7 +607,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            $this->videoFactory->forVideo($videoNode, $inBackend, $theme)
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $videoNode->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::fullWidthWithContent(),
+                        Editable::fromNodeProperty($videoNode, 'metaHeadline')
+                    ): null,
+                    $this->videoFactory->forVideo($videoNode, $inBackend, $theme)
+                ]))
+            )
         );
     }
 
@@ -647,23 +657,33 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::regular(),
-            new Box(
-                BoxVariant::tryFromTheme($theme) ?: BoxVariant::decorative(),
-                new Stack(
-                    StackVariant::xsStretch(),
-                    Collection::fromIterable(array_filter([
-                        $inBackend || $tabBox->getProperty('headline')
-                            ? new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
-                                HeadlineType::div(),
-                                Editable::fromNodeProperty($tabBox, 'headline')
-                            )
-                            : null,
-                        (new TabBoxFactory())->forTabBox($tabBox, $identifier, $theme)
-                    ]), $identity)
-                ),
-                $identifier
+            new Stack(
+                StackVariant::sm(),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $tabBox->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::fullWidthWithContent(),
+                        Editable::fromNodeProperty($tabBox, 'metaHeadline')
+                    ): null,
+                    new Box(
+                        BoxVariant::tryFromTheme($theme) ?: BoxVariant::decorative(),
+                        new Stack(
+                            StackVariant::xsStretch(),
+                            Collection::fromIterable(array_filter([
+                                $inBackend || $tabBox->getProperty('headline')
+                                    ? new Headline(
+                                    HeadlineSize::large(),
+                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                                    HeadlineType::div(),
+                                    Editable::fromNodeProperty($tabBox, 'headline')
+                                )
+                                    : null,
+                                (new TabBoxFactory())->forTabBox($tabBox, $identifier, $theme)
+                            ]), $identity)
+                        ),
+                        $identifier
+                    )
+                ]))
             )
         );
     }
