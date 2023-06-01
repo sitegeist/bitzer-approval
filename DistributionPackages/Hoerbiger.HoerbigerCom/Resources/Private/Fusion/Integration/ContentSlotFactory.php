@@ -497,7 +497,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         SeparatorVariant::fullWidthWithContent(),
                         Editable::fromNodeProperty($imageNode, 'metaHeadline')
                     ): null,
-                    $image
+                    new ContentContainer(
+                        ContentContainerVariant::tightX(),
+                        $image
+                    )
                 ]))
             )
         );

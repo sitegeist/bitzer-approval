@@ -49,6 +49,19 @@ Neos:
                     formatting:
                       strong: true
                       removeFormat: true
+            'plainWithRed':
+              type: 'string'
+              ui:
+                inlineEditable: true
+                inline:
+                  editorOptions:
+                    autoparagraph: false
+                    hyphens: true
+                    formatting:
+                      removeFormat: true
+                      sup: true
+                      sub: true
+                      underline: true
           'image':
             'square':
               type: 'Neos\Media\Domain\Model\ImageInterface'

@@ -156,3 +156,9 @@ details summary::-webkit-details-marker {
 		aspect-ratio: auto;
 	}
 }
+
+u {
+	text-decoration: none;
+	font-weight: bold;
+	color: red;
+}
