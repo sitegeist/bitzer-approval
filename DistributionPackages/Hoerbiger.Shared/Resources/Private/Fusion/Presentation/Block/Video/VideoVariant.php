@@ -11,9 +11,6 @@ namespace Hoerbiger\Shared\Presentation\Block\Video;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
 enum VideoVariant: string
 {
     case VARIANT_REGULAR = 'regular';
@@ -22,18 +19,11 @@ enum VideoVariant: string
     case VARIANT_LITE = 'lite';
     case VARIANT_SERVICE = 'service';
     case VARIANT_SLIDER = 'slider';
+    case VARIANT_SIMPLE_LOOP = 'simpleLoop';
 
     public static function fromString(string $string): self
     {
-        return match ($string){
-            'regular' => self::VARIANT_REGULAR,
-            'excite' => self::VARIANT_EXCITE,
-            'experience' => self::VARIANT_EXPERIENCE,
-            'lite' => self::VARIANT_LITE,
-            'service' => self::VARIANT_SERVICE,
-            'slider' => self::VARIANT_SLIDER,
-            default => null
-        };
+        return self::tryFrom($string);
     }
 
     public static function tryFromTheme(?Theme $theme): self
