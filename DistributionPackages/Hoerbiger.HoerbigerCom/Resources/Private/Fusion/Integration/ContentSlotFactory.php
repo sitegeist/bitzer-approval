@@ -642,13 +642,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         SeparatorVariant::fullWidthWithContent(),
                         Editable::fromNodeProperty($galleryNode, 'metaHeadline')
                     ): null,
-                    new Row(
-                        RowVariant::gallery(),
-                        Collection::fromNodes(
-                            $galleryNode->findChildNodes(),
-                            function (TraversableNodeInterface $galleryImage) {
-                                return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                            }
+                    new ContentContainer(
+                        ContentContainerVariant::tightX(),
+                        new Row(
+                            RowVariant::gallery(),
+                            Collection::fromNodes(
+                                $galleryNode->findChildNodes(),
+                                function (TraversableNodeInterface $galleryImage) {
+                                    return Content::fromNode($galleryImage, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                                }
+                            )
                         )
                     )
                 ]))
@@ -668,7 +671,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             Collection::fromIterable([
                 $this->figureFactory->forGalleryImage($imageSource),
                 new Text(
-                    TextVariant::default(),
+                    TextVariant::neutralSmall(),
                     Editable::fromNodeProperty($galleryImageNode, 'caption'),
                     false
                 )
