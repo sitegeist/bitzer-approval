@@ -12,15 +12,15 @@ prototype(Hoerbiger.Shared:Block.Separator) < prototype(PackageFactory.AtomicFus
     renderer = afx`
         <div
             class={[
-                "[Block.Separator ( " + presentationObject.variant + ")]",
-                presentationObject.variant.value == "boldRed" && "w-full border-t-8 border-service-red",
-                presentationObject.variant.value == "bold" && "border-t-[12px] border-service-border w-1/3",
-                presentationObject.variant.value == "fullWidthWithContent" && "w-full border-t-[1px] border-service-border"
+                "[Block.Separator ( " + presentationObject.variant.value + ")]",
+                presentationObject.variant.equals('boldRed') && "w-full border-t-8 border-service-red",
+                presentationObject.variant.equals('bold') && "border-t-[12px] border-service-border w-1/3",
+                presentationObject.variant.equals('fullWidthWithContent') && "w-full border-t-[1px] border-service-border"
             ]}
         >
             <div class={[
                 "text-space14 leading-5 pt-ch [&_strong]:font-sans-bold",
-                presentationObject.variant.value == "boldRed" && "w-full"
+                presentationObject.variant.equals('boldRed') && "w-full"
             ]}
                 @if.1={presentationObject.content}
             >

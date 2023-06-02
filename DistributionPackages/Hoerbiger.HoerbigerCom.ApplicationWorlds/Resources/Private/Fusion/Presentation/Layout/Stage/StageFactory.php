@@ -51,7 +51,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         }
 
         return new ApplicationWorldMediaStage(
-            StageVariant::fullMediaTextCenter(),
+            StageVariant::VARIANT_FULLMEDIATEXTCENTER,
             null,
             new Headline(
                 HeadlineSize::SIZE_EXTRA_LARGE,
@@ -77,7 +77,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ?: null;
 
         $textContent = $targetNode->getProperty('slider__preview__description')
-            ? Value::fromString($targetNode->getProperty('slider__preview__description') ?: '')
+            ? Value::fromString($targetNode->getProperty('slider__preview__description'))
             : null;
 
         $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
@@ -90,13 +90,13 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         }
 
         return new ApplicationWorldNavStage(
-            StageVariant::fullMediaTextRight(),
+            StageVariant::VARIANT_FULLMEDIATEXTRIGHT,
             null,
             $documentHeadlineContent
                 ? new Headline(
                     HeadlineSize::SIZE_LARGE,
                     HeadlineColor::COLOR_WHITE,
-                    HeadlineType::div(),
+                    HeadlineType::TYPE_DIV,
                     Value::fromString($documentHeadlineContent)
                 )
                 : null,
@@ -122,7 +122,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $mediaBackgroundImageSource = $this->imageSourceFactory->forImageMixin($section, $inBackend);
 
         return new SlideStage(
-            StageVariant::fullMediaTextCenter(),
+            StageVariant::VARIANT_FULLMEDIATEXTCENTER,
             null,
             null,
             new Headline(

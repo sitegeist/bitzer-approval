@@ -80,7 +80,7 @@ final class Messenger
                 ? $this->findApplicationWorldLabel($applicationWorldIdentifier)
                 : null,
             'salutation' => $this->findLabel(
-                'salutation.' . ($command->getSalutation() ?: 'none'),
+                'salutation.' . ($command->getSalutation()?->value ?: 'none'),
                 $command->getLanguage()
             ),
             'givenName' => $command->getGivenName(),
@@ -113,7 +113,7 @@ final class Messenger
 
     private function findCustomerGroupLabel(CustomerGroupIdentifier $customerGroupIdentifier): string
     {
-        return $this->findLabel('customerGroup.' . $customerGroupIdentifier, 'de');
+        return $this->findLabel('customerGroup.' . $customerGroupIdentifier->value, 'de');
     }
 
     private function findLabel(string $identifier, string $language): string
@@ -177,7 +177,7 @@ final class Messenger
                 ['{givenName}', '{familyName}'],
                 [$command->getGivenName(), $command->getFamilyName()],
                 $this->findLabel(
-                    'customerConfirmation.salutation.' . $command->getSalutation(),
+                    'customerConfirmation.salutation.' . $command->getSalutation()?->value,
                     $command->getLanguage()
                 )
             ),

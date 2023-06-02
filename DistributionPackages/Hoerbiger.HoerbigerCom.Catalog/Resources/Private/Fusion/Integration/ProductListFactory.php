@@ -120,9 +120,9 @@ final class ProductListFactory
         }
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::VARIANT_REGULAR,
             new Stack(
-                StackVariant::sm(),
+                StackVariant::VARIANT_SM,
                 Collection::fromIterable([
                     new Headline(
                         HeadlineSize::SIZE_LARGE_CENTERED,
@@ -135,7 +135,7 @@ final class ProductListFactory
                         )
                     ),
                     new Grid(
-                        GridVariant::threeColumnsGap(),
+                        GridVariant::VARIANT_THREECOLUMNSGAP,
                         Collection::fromIterable(
                             $productCards,
                             $identity

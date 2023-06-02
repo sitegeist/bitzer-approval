@@ -9,13 +9,12 @@ namespace Hoerbiger\Shared\Presentation\Block\Icon;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
-use Neos\Flow\Annotations as Flow;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-/**
- * @Flow\Proxy(false)
- */
-enum IconColor: string
+enum IconColor:string
 {
+    use StringComponentVariant;
+
     case COLOR_CURRENT = 'current';
     case COLOR_BRAND = 'brand';
     case COLOR_WHITE = 'white';
@@ -29,35 +28,14 @@ enum IconColor: string
     case COLOR_SERVICE_CONTRAST = 'serviceContrast';
     case COLOR_DEFAULT = 'default';
 
-
-    public static function fromString(string $string): self|null
-    {
-        return match ($string){
-            'current' => self::COLOR_CURRENT,
-            'brand' => self::COLOR_BRAND,
-            'white' => self::COLOR_WHITE,
-            'text' => self::COLOR_TEXT,
-            'excite' => self::COLOR_EXCITE,
-            'exciteContrast' => self::COLOR_EXCITE_CONTRAST,
-            'experience' => self::COLOR_EXPERIENCE,
-            'experienceContrast' => self::COLOR_EXPERIENCE_CONTRAST,
-            'lite' => self::COLOR_LITE,
-            'liteContrast' => self::COLOR_LITE_CONTRAST,
-            'serviceContrast' => self::COLOR_SERVICE_CONTRAST,
-            'default' => self::COLOR_DEFAULT,
-            default => null
-        };
-    }
-
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {
         return $theme
-            ? self::fromString(
-                $theme->getIsService()
-                    ? $theme->getValue() . 'Contrast'
-                    : $theme->getValue() . ($contrast ? 'Contrast' : '')
+            ? self::tryFrom(
+                $theme === THEME::VALUE_SERVICE
+                    ? $theme->value . 'Contrast'
+                    : $theme->value . ($contrast ? 'Contrast' : '')
             )
             : null;
     }
-
 }

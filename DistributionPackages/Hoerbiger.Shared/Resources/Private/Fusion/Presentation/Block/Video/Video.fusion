@@ -15,25 +15,25 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
             "[Block.Video (" + presentationObject.variant.value + ")]",
             "flex justify-center items-center relative bg-[black]",
             presentationObject.caption && "pb-touch",
-            (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full"
+            (presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')) && "w-full h-full"
         ]}>
             <div
                 class={[
                     "relative mx-auto",
-                    (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full"
+                    (presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')) && "w-full h-full"
                 ]}
             >
                 <video
                     class={[
                         "mx-auto relative",
-                        (presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop') && "max-h-[70vh]",
-                        (presentationObject.variant.value == 'slider') && "w-full h-full object-cover opacity-0 transition-opacity duration-[400ms]",
-                        (presentationObject.variant.value == 'simpleLoop') && "w-full h-full object-cover"
+                        (!presentationObject.variant.equals('slider') && !presentationObject.variant.equals('simpleLoop')) && "max-h-[70vh]",
+                        (presentationObject.variant.equals('slider')) && "w-full h-full object-cover opacity-0 transition-opacity duration-[400ms]",
+                        (presentationObject.variant.equals('simpleLoop')) && "w-full h-full object-cover"
                     ]}
-                    controls controls.@if.1={presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop' }
-                    autoplay autoplay.@if.1={presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop'}
-                    muted muted.@if.1={presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop'}
-                    loop loop.@if.1={presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop'}
+                    controls controls.@if.1={!presentationObject.variant.equals('slider') && !presentationObject.variant.equals('simpleLoop')}
+                    autoplay autoplay.@if.1={presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')}
+                    muted muted.@if.1={presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')}
+                    loop loop.@if.1={presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')}
                 >
                     <source src={presentationObject.source}/>
                 </video>

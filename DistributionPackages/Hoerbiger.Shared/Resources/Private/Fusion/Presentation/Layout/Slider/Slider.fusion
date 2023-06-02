@@ -1,15 +1,6 @@
 prototype(Hoerbiger.Shared:Layout.Slider) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
     @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slider\\SliderInterface'
 
-    @styleguide {
-        title = 'Slider'
-
-        props {
-            slides = '- Add Slot Content -'
-            thumbs = '- Add Slot Content -'
-        }
-    }
-
     renderer = afx`
         <div class={[
             "[Layout.Slider] w-full relative flex flex-col"

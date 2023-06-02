@@ -3,7 +3,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared
 
     renderer = afx`
         <div class={[
-            "[Layout.VideoStage (" + presentationObject.variant + ")]",
+            "[Layout.VideoStage (" + presentationObject.variant.value + ")]",
             "relative w-full"
         ]}>
             <div class="hidden sm:block sm:pb-[200px] md:pb-[100px]">

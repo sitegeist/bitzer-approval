@@ -10,13 +10,13 @@ use Neos\Flow\Annotations as Flow;
 /**
  * A collection of marketing URLs
  *
- * @implements \IteratorAggregate<int,MarketingUrl>
+ * @implements \IteratorAggregate<int|string,MarketingUrl>
  * @Flow\Proxy(false)
  */
 final class MarketingUrls implements \IteratorAggregate
 {
     /**
-     * @var array<int,MarketingUrl>
+     * @var array<int|string,MarketingUrl>
      */
     private array $marketingUrls;
 
@@ -26,7 +26,7 @@ final class MarketingUrls implements \IteratorAggregate
     }
 
     /**
-     * @return \ArrayIterator<int,MarketingUrl>
+     * @return \ArrayIterator<int|string,MarketingUrl>
      */
     public function getIterator(): \ArrayIterator
     {

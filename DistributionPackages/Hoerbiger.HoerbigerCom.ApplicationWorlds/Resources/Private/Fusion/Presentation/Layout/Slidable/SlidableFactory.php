@@ -60,7 +60,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $linkFactory = new LinkFactory();
 
         return new Slidable(
-            SlidableVariant::applicationWorld(),
+            SlidableVariant::VARIANT_APPLICATION_WORLD,
             Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
                 $link = $linkFactory->forLinkToDocument($targetNode, null);
                 return $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
@@ -114,7 +114,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
         $sections = $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes();
 
         return new Slidable(
-            SlidableVariant::regular(),
+            SlidableVariant::VARIANT_REGULAR,
             Collection::fromNodes($sections, function($targetNode) use ($inBackend, $applicationWorld): SlotInterface {
                 return $this->stageFactory->forSection($targetNode, $applicationWorld, $inBackend);
             }),
@@ -145,7 +145,7 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                     : null,
                 $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
-                ThumbNavigationItemType::mobile()
+                ThumbNavigationItemType::TYPE_MOBILE
             );
 
             if ($inBackend) {

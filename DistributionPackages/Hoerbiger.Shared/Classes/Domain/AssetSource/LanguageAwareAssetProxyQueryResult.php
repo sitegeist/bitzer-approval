@@ -76,15 +76,12 @@ final class LanguageAwareAssetProxyQueryResult implements AssetProxyQueryResultI
         }
     }
 
-    public function next()
+    public function next(): void
     {
         $this->flowPersistenceQueryResult->next();
     }
 
-    /**
-     * @return bool|float|int|string
-     */
-    public function key()
+    public function key(): mixed
     {
         return $this->flowPersistenceQueryResult->key();
     }
@@ -122,7 +119,7 @@ final class LanguageAwareAssetProxyQueryResult implements AssetProxyQueryResultI
      * @param mixed $offset
      * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): never
     {
         throw new \RuntimeException('Unsupported operation: ' . __METHOD__, 1510060444);
     }
@@ -130,7 +127,7 @@ final class LanguageAwareAssetProxyQueryResult implements AssetProxyQueryResultI
     /**
      * @param mixed $offset
      */
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): never
     {
         throw new \RuntimeException('Unsupported operation: ' . __METHOD__, 1510060467);
     }

@@ -15,33 +15,33 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <a
             href={presentationObject.href}
-            target={presentationObject.target}
+            target={presentationObject.target.value}
             rel={presentationObject.rel}
             rel.@if.1={presentationObject.rel}
             aria-label={presentationObject.ariaLabel}
             aria-label.@if.1={presentationObject.ariaLabel}
             class={[
-                "[Block.Link (" + presentationObject.variant + ")]",
-                presentationObject.variant.isContainer && "w-full h-full",
-                presentationObject.variant.isLabel && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl",
-                presentationObject.variant.isLabelLite && "flex items-center min-h-touch min-w-touch text-lite font-sans-bold text-xl",
-                presentationObject.variant.isLabelService && "flex items-center min-h-touch min-w-touch text-[#8A9199] font-sans-bold text-xl",
-                presentationObject.variant.isLabelExcite && "flex items-center min-h-touch min-w-touch text-excite font-sans-bold text-xl",
-                presentationObject.variant.isLabelExperience && "flex items-center min-h-touch min-w-touch text-experience font-sans-bold text-xl",
-                presentationObject.variant.isTouchIcon && "flex items-center h-full max-h-touch",
-                presentationObject.variant.isSquareTouchIcon && "flex items-center h-full max-h-touch max-w-touch",
-                presentationObject.variant.isSiteFooter && "text-light min-h-touch xl:min-h-full flex items-center whitespace-nowrap",
-                presentationObject.variant.isPlainLabel && "min-h-touch flex items-center",
-                presentationObject.variant.isIconLabel && "min-h-touch flex items-center justify-between",
-                presentationObject.variant.isLabelDefault && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
+                "[Block.Link (" + presentationObject.variant.value + ")]",
+                presentationObject.variant.equals('container') && "w-full h-full",
+                presentationObject.variant.equals('label') && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl",
+                presentationObject.variant.equals('labelLite') && "flex items-center min-h-touch min-w-touch text-lite font-sans-bold text-xl",
+                presentationObject.variant.equals('labelService') && "flex items-center min-h-touch min-w-touch text-[#8A9199] font-sans-bold text-xl",
+                presentationObject.variant.equals('labelExcite') && "flex items-center min-h-touch min-w-touch text-excite font-sans-bold text-xl",
+                presentationObject.variant.equals('labelExperience') && "flex items-center min-h-touch min-w-touch text-experience font-sans-bold text-xl",
+                presentationObject.variant.equals('touchIcon') && "flex items-center h-full max-h-touch",
+                presentationObject.variant.equals('squareTouchIcon') && "flex items-center h-full max-h-touch max-w-touch",
+                presentationObject.variant.equals('siteFooter') && "text-light min-h-touch xl:min-h-full flex items-center whitespace-nowrap",
+                presentationObject.variant.equals('plainLabel') && "min-h-touch flex items-center",
+                presentationObject.variant.equals('iconLabel') && "min-h-touch flex items-center justify-between",
+                presentationObject.variant.equals('labelDefault') && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
             ]}
         >
             <Neos.Fusion:Augmenter
                 class={Array.join(Array.filter([
-                    presentationObject.variant.isTouchIcon && "max-h-touch",
-                    presentationObject.variant.isSquareTouchIcon && "max-h-touch max-w-touch"
+                    presentationObject.variant.equals('touchIcon') && "max-h-touch",
+                    presentationObject.variant.equals('squareTouchIcon') && "max-h-touch max-w-touch"
                 ]))}
-                class.@if.any={presentationObject.variant.isTouchIcon || presentationObject.variant.isSquareTouchIcon}
+                class.@if.any={presentationObject.variant.equals('touchIcon') || presentationObject.variant.equals('squareTouchIcon')}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     @if.1={presentationObject.content}

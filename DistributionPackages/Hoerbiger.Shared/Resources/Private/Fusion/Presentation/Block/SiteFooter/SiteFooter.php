@@ -8,7 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteFooter;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CollectionInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use Psr\Http\Message\UriInterface;
 
 /**
@@ -20,23 +20,23 @@ final class SiteFooter extends AbstractComponentPresentationObject implements Si
 
     private UriInterface $logoUri;
 
-    private CollectionInterface $primaryNavigationItems;
+    private Collection $primaryNavigationItems;
 
-    private CollectionInterface $secondaryNavigationItems;
+    private Collection $secondaryNavigationItems;
 
-    private CollectionInterface $tertiaryNavigationItems;
+    private Collection $tertiaryNavigationItems;
 
-    private CollectionInterface $socialLinks;
+    private Collection $socialLinks;
 
     private ?ContactFormLinkInterface $contactFormLink;
 
     public function __construct(
         UriInterface $siteUri,
         UriInterface $logoUri,
-        CollectionInterface $primaryNavigationItems,
-        CollectionInterface $secondaryNavigationItems,
-        CollectionInterface $tertiaryNavigationItems,
-        CollectionInterface $socialLinks,
+        Collection $primaryNavigationItems,
+        Collection $secondaryNavigationItems,
+        Collection $tertiaryNavigationItems,
+        Collection $socialLinks,
         ?ContactFormLinkInterface $contactFormLink
     ) {
         $this->siteUri = $siteUri;
@@ -58,22 +58,22 @@ final class SiteFooter extends AbstractComponentPresentationObject implements Si
         return $this->logoUri;
     }
 
-    public function getPrimaryNavigationItems(): CollectionInterface
+    public function getPrimaryNavigationItems(): Collection
     {
         return $this->primaryNavigationItems;
     }
 
-    public function getSecondaryNavigationItems(): CollectionInterface
+    public function getSecondaryNavigationItems(): Collection
     {
         return $this->secondaryNavigationItems;
     }
 
-    public function getTertiaryNavigationItems(): CollectionInterface
+    public function getTertiaryNavigationItems(): Collection
     {
         return $this->tertiaryNavigationItems;
     }
 
-    public function getSocialLinks(): CollectionInterface
+    public function getSocialLinks(): Collection
     {
         return $this->socialLinks;
     }

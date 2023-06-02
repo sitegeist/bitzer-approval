@@ -65,28 +65,25 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         ContentContext $subgraph,
         ?ActionRequest $actionRequest = null
     ): SiteHeaderInterface {
-        switch ($document->getNodeType()->getName()) {
-            case 'Hoerbiger.HoerbigerCom:Document.HomePage':
-            case 'Hoerbiger.HoerbigerCom:Document.WebPage':
-            case 'Hoerbiger.HoerbigerCom:Document.CareerPage':
-            case 'Hoerbiger.HoerbigerCom:Document.CareerRootPage':
-            case 'Hoerbiger.HoerbigerCom:Document.Chronicle':
-            case 'Hoerbiger.HoerbigerCom:Document.ContactPage':
-            case 'Hoerbiger.HoerbigerCom:Document.Error.404':
-            case 'Hoerbiger.HoerbigerCom:Document.PrivacyPage':
-            case 'Hoerbiger.HoerbigerCom:Document.SearchResultsPage':
-            case 'Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine':
-            case 'Hoerbiger.HoerbigerCom.HR:Document.JobList':
-            case 'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog':
-            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions':
-            case 'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution':
-            case 'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder':
-            case 'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage':
-                $siteHeaderVariant = SiteHeaderVariant::VARIANT_TRANSPARENT;
-                break;
-            default:
-                $siteHeaderVariant = SiteHeaderVariant::VARIANT_REGULAR;
-        }
+        $siteHeaderVariant = match ($document->getNodeType()->getName()) {
+            'Hoerbiger.HoerbigerCom:Document.HomePage',
+            'Hoerbiger.HoerbigerCom:Document.WebPage',
+            'Hoerbiger.HoerbigerCom:Document.CareerPage',
+            'Hoerbiger.HoerbigerCom:Document.CareerRootPage',
+            'Hoerbiger.HoerbigerCom:Document.Chronicle',
+            'Hoerbiger.HoerbigerCom:Document.ContactPage',
+            'Hoerbiger.HoerbigerCom:Document.Error.404',
+            'Hoerbiger.HoerbigerCom:Document.PrivacyPage',
+            'Hoerbiger.HoerbigerCom:Document.SearchResultsPage',
+            'Hoerbiger.HoerbigerCom.SuccessStories:Document.Magazine',
+            'Hoerbiger.HoerbigerCom.HR:Document.JobList',
+            'Hoerbiger.HoerbigerCom.Catalog:Document.Catalog',
+            'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolutions',
+            'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution',
+            'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder',
+            'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage' => SiteHeaderVariant::VARIANT_TRANSPARENT,
+            default => SiteHeaderVariant::VARIANT_REGULAR,
+        };
 
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
             'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv'
@@ -98,9 +95,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
 
         return new SiteHeader(
-            SiteHeaderVariant::from(
-                $siteHeaderVariant
-            ),
+            $siteHeaderVariant,
             $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
             $this->getLanguageNavigationItems($document, $subgraph, $actionRequest),
@@ -135,15 +130,13 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv'
         );
 
-        $label = $labelSource
-            ? $labelSource->findTranslationLabelByIdentifier('label_overview')
-            : null;
+        $label = $labelSource?->findTranslationLabelByIdentifier('label_overview');
 
-        $translatedLabel = $label
-            ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
+        $translatedLabel = $label?->findTranslationForLocaleChain(
+            $this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
-            ))->getTranslation()
-            : null;
+            )
+        )->getTranslation();
 
         if ($currentLevel <= $maxDepth) {
             $menuItems = [];
@@ -236,10 +229,8 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             $contentContext = $this->contentContextFactory->create($contextProperties);
 
             /** @var TraversableNodeInterface $variant */
-            /** @phpstan-ignore-next-line */
             $variant = $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier())
-                ? $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier())
-                : $contentContext->getCurrentSiteNode();
+                ?: $contentContext->getCurrentSiteNode();
 
             $identifier = strtoupper($localeIdentifier);
 

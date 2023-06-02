@@ -9,14 +9,12 @@ namespace Hoerbiger\Shared\Presentation\Block\Text;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
-use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-/**
- * @Flow\Proxy(false)
- */
 enum TextVariant: string
 {
+    use StringComponentVariant;
+
     case VARIANT_DEFAULT = 'default';
     case VARIANT_CENTERED = 'centered';
     case VARIANT_LIGHT_CONTRAST = 'lightContrast';
@@ -35,24 +33,13 @@ enum TextVariant: string
     case VARIANT_SERVICE_RED = 'serviceRed';
     case VARIANT_SM = 'sm';
 
-    public static function fromString(string $string): self|null
-    {
-    }
-
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {
-
-        if ($theme) {
-            switch ($theme->getValue()) {
-                case Theme::VALUE_SERVICE:
-                    return self::fromString($theme->getValue() . 'Contrast');
-                case Theme::VALUE_DEFAULT:
-                    return self::VARIANT_DEFAULT;
-                default:
-                    return self::fromString($theme->getValue() . ($contrast ? 'Contrast' : ''));
-            }
-        }
-        return null;
+        return match ($theme) {
+            Theme::VALUE_SERVICE => self::VARIANT_SERVICE_CONTRAST,
+            Theme::VALUE_DEFAULT => self::VARIANT_DEFAULT,
+            null => null,
+            default => self::tryFrom($theme->value . ($contrast ? 'Contrast' : '')),
+        };
     }
-
 }

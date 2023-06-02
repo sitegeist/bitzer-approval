@@ -30,23 +30,12 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ImageSourceFactory $imageSourceFactory;
-
-    private FigureFactory $figureFactory;
-
-    private FormattedDateFactory $formattedDateFactory;
-    private CsvPOTranslator $csvPOTranslator;
-
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory,
-        FormattedDateFactory $formattedDateFactory,
-        CsvPOTranslator $csvPOTranslator
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
+        private readonly FormattedDateFactory $formattedDateFactory,
+        private readonly CsvPOTranslator $csvPOTranslator
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->figureFactory = $figureFactory;
-        $this->formattedDateFactory = $formattedDateFactory;
-        $this->csvPOTranslator = $csvPOTranslator;
     }
 
     public function forPressReleaseIntroduction(Node $pressRelease, bool $inBackend): StageInterface
@@ -54,25 +43,25 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $imageSource = $this->imageSourceFactory->forImageMixin($pressRelease, $inBackend, true);
         $labels = $this->csvPOTranslator->getLabels(self::class);
 
-        $pressVariant = PressVariant::fromNode($pressRelease);
+        $pressVariant = PressVariant::tryFromNode($pressRelease);
 
         $datePublished = $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime();
 
-        $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
+        $showImage = $pressVariant !== PressVariant::VARIANT_NEWS || $pressRelease->getProperty('showImage');
 
         return new StackStage(
-            $pressVariant->getIsNews()
-                ? StageVariant::press()
-                : StageVariant::pressLarge(),
+            $pressVariant === PressVariant::VARIANT_NEWS
+                ? StageVariant::VARIANT_PRESS
+                : StageVariant::VARIANT_PRESS_LARGE,
             new Separator(
                 SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                 new MetaHeadline(
                     MetaHeadlineVariant::VARIANT_REGULAR,
-                    Value::fromString($labels['label.' . $pressVariant->getValue()]),
-                    $pressVariant->getIsNews()
+                    Value::fromString($labels['label.' . $pressVariant?->value] ?? ''),
+                    $pressVariant === PressVariant::VARIANT_NEWS
                         ? Value::fromString('_' . $this->formattedDateFactory->createFullDate($datePublished))
                         : null,
-                    !$pressVariant->getIsNews()
+                    $pressVariant !== PressVariant::VARIANT_NEWS
                         ? Value::fromString(
                             $pressRelease->getProperty('edition')
                                 ? '_' .$pressRelease->getProperty('edition')
@@ -90,7 +79,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
                 Editable::fromNodeProperty($pressRelease, 'headline', false)
             ),
             null,
-            !$pressVariant === PressVariant::VARIANT_NEWS
+            $pressVariant !== PressVariant::VARIANT_NEWS
                 ? $pressRelease->getProperty('abstract') || $inBackend
                     ? new Text(
                         TextVariant::VARIANT_LIGHT_CONTRAST,

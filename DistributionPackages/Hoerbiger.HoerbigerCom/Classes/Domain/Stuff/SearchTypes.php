@@ -9,30 +9,22 @@ use Neos\Flow\Annotations as Flow;
 
 /**
  * @Flow\Proxy(false)
- * @implements \IteratorAggregate<int,SearchType>
+ * @implements \IteratorAggregate<int|string,SearchType>
  */
 final class SearchTypes implements \IteratorAggregate, \Countable, \JsonSerializable
 {
     /**
-     * @var array<int,SearchType>
+     * @var array<int|string,SearchType>
      */
     private array $searchTypes;
 
-    /**
-     * @param array<int,mixed> $array
-     */
-    public function __construct(array $array)
+    public function __construct(SearchType ...$searchTypes)
     {
-        foreach ($array as $element) {
-            if (!$element instanceof SearchType) {
-                throw new \InvalidArgumentException(self::class . ' can only consist of ' . SearchType::class);
-            }
-        }
-        $this->searchTypes = $array;
+        $this->searchTypes = $searchTypes;
     }
 
     /**
-     * @return \ArrayIterator<int,SearchType>
+     * @return \ArrayIterator<int|string,SearchType>
      */
     public function getIterator(): \ArrayIterator
     {
@@ -49,7 +41,10 @@ final class SearchTypes implements \IteratorAggregate, \Countable, \JsonSerializ
         return empty($this->searchTypes);
     }
 
-    public function jsonSerialize()
+    /**
+     * @return array<int|string,SearchType>
+     */
+    public function jsonSerialize(): array
     {
         return $this->searchTypes;
     }

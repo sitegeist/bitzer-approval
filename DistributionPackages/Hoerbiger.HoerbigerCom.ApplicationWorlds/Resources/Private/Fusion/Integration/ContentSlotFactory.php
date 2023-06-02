@@ -44,7 +44,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         /** @var TraversableNodeInterface $siteNode */
         $siteNode = $subgraph->getCurrentSiteNode();
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::VARIANT_REGULAR,
             Collection::fromIterable([
                 $this->sliderFactory->forSliderPreviewMixins(
                     $this->findChildNodesByNodeTypeFilterString(

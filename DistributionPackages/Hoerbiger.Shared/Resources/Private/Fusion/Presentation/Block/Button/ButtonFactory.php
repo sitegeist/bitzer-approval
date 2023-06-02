@@ -20,8 +20,8 @@ final class ButtonFactory extends AbstractComponentPresentationObjectFactory
 
         return $href
             ? new Button(
-                ButtonType::link(),
-                ButtonVariant::cta(),
+                ButtonType::TYPE_LINK,
+                ButtonVariant::VARIANT_CTA,
                 Value::fromString($node->getProperty('link__label') ?: ''),
                 $href,
                 '_self',

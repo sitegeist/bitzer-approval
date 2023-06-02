@@ -20,62 +20,60 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
             @glue = " "
 
             size_1 = "w-[0.5em] h-[0.5em]"
-            size_1.@if.1 = ${presentationObject.size.isSize_0_5}
+            size_1.@if.1 = ${presentationObject.size.equals('size_0_5')}
 
             size_1 = "w-[1em] h-[1em]"
-            size_1.@if.1 = ${presentationObject.size.isSize_1}
+            size_1.@if.1 = ${presentationObject.size.equals('size_1')}
 
             size_1_5 = "w-[1.5em] h-[1.5em]"
-            size_1_5.@if.1 = ${presentationObject.size.isSize_1_5}
+            size_1_5.@if.1 = ${presentationObject.size.equals('size_1_5')}
 
             size_2 = "w-[2em] h-[2em]"
-            size_2.@if.1 = ${presentationObject.size.isSize_2}
+            size_2.@if.1 = ${presentationObject.size.equals('size_2')}
 
             size_2_5 = "w-[2.5em] h-[2.5em]"
-            size_2_5.@if.1 = ${presentationObject.size.isSize_2_5}
+            size_2_5.@if.1 = ${presentationObject.size.equals('size_2_5')}
 
             size_3 = "w-[3em] h-[3em]"
-            size_3.@if.1 = ${presentationObject.size.isSize_3}
+            size_3.@if.1 = ${presentationObject.size.equals('size_3')}
 
             size_4 = "w-[4em] h-[4em]"
-            size_4.@if.1 = ${presentationObject.size.isSize_4}
+            size_4.@if.1 = ${presentationObject.size.equals('size_4')}
 
             size_parent = "w-full h-full"
-            size_parent.@if.1 = ${presentationObject.size.isSizeParent}
+            size_parent.@if.1 = ${presentationObject.size.equals('sizeParent')}
 
 
 
             colorCurrent = "fill-current"
-            colorCurrent.@if.1 = ${presentationObject.color.isCurrent}
+            colorCurrent.@if.1 = ${presentationObject.color.equals('current')}
 
             colorBrand = "fill-brand"
-            colorBrand.@if.1 = ${presentationObject.color.isBrand}
+            colorBrand.@if.1 = ${presentationObject.color.equals('brand')}
 
             colorWhite = "fill-[#ffffff]"
-            colorWhite.@if.1 = ${presentationObject.color.isWhite}
+            colorWhite.@if.1 = ${presentationObject.color.equals('white')}
 
             colorExcite = "fill-excite"
-            colorExcite.@if.1 = ${presentationObject.color.isExcite}
+            colorExcite.@if.1 = ${presentationObject.color.equals('excite')}
 
             colorExciteContrast = "fill-excite-contrast"
-            colorExciteContrast.@if.1 = ${presentationObject.color.isExciteContrast}
+            colorExciteContrast.@if.1 = ${presentationObject.color.equals('exciteContrast')}
 
             colorExperience = "fill-experience"
-            colorExperience.@if.1 = ${presentationObject.color.isExperience}
+            colorExperience.@if.1 = ${presentationObject.color.equals('experience')}
 
             colorExperienceContrast = "fill-experience-contrast"
-            colorExperienceContrast.@if.1 = ${presentationObject.color.isExperienceContrast}
+            colorExperienceContrast.@if.1 = ${presentationObject.color.equals('experienceContrast')}
 
             colorLite = "fill-lite"
-            colorLite.@if.1 = ${presentationObject.color.isLite}
+            colorLite.@if.1 = ${presentationObject.color.equals('lite')}
 
             colorLiteContrast = "fill-lite-contrast"
-            colorLiteContrast.@if.1 = ${presentationObject.color.isLiteContrast}
+            colorLiteContrast.@if.1 = ${presentationObject.color.equals('liteContrast')}
 
             colorServiceContrast = "fill-service-contrast"
-            colorServiceContrast.@if.1 = ${presentationObject.color.isServiceContrast}
-
-
+            colorServiceContrast.@if.1 = ${presentationObject.color.equals('serviceContrast')}
         }
         style = null
         inline = true

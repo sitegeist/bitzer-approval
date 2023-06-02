@@ -102,7 +102,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                                 => (new LinkFactory())->forAnchor($anchor),
@@ -111,17 +111,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    ContentContainerVariant::VARIANT_STAGEAFTERBREADCRUMB,
                     $stage ?: Value::fromString('')
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
                 new CacheSegment(
                     new TabBox(
-                        TabBoxVariant::horizontal(),
+                        TabBoxVariant::VARIANT_HORIZONTAL,
                         Collection::fromIterable(
                             $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
                             function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {
@@ -132,7 +132,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                             ? $this->figureFactory->forSlideThumbnailIcon($thumbnailImageSource)
                                             : null,
                                         $section->getLabel(),
-                                        ThumbNavigationItemType::plainText()
+                                        ThumbNavigationItemType::TYPE_PLAINTEXT
                                     ),
                                     null,
                                     new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5, IconColor::COLOR_CURRENT),
@@ -145,7 +145,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer'))),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
                 )
             ]), $identity)

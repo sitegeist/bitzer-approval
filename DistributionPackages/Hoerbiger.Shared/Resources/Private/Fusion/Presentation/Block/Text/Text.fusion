@@ -12,27 +12,27 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
 
     renderer = afx`
         <div class={[
-            "[Block.Text (" + presentationObject.variant + ")]",
+            "[Block.Text (" + presentationObject.variant.value + ")]",
             "prose",
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
-                : presentationObject.variant.isCentered
+                : presentationObject.variant.equals('centered')
                     ? "max-w-content-full"
                     : "max-w-content-tight",
-            presentationObject.variant.isDefault && "prose-brand",
-            presentationObject.variant.isCentered && "prose-brand-contrast font-sans-regular",
-            presentationObject.variant.isBrandContrast && "prose-brand-contrast",
-            presentationObject.variant.isBrandContrastBold && "prose-brand-contrast font-sans-bold text-lg",
-            presentationObject.variant.isNeutralContrast && "prose-neutral-contrast",
-            presentationObject.variant.isNeutralContrastFiraPro && "text-neutral-grey font-fira-pro-regular",
-            presentationObject.variant.isDecorativeContrast && "prose-decorative-contrast",
-            presentationObject.variant.isTransparentContrast && "prose-transparent-contrast",
-            presentationObject.variant.isLite && "prose-lite",
-            presentationObject.variant.isExcite && "prose-excite",
-            presentationObject.variant.isExperience && "prose.experience",
-            presentationObject.variant.isServiceContrast && "prose-service",
-            presentationObject.variant.isServiceRed && "text-service-red font-sans-bold text-[16px] text-center",
-            presentationObject.variant.isSm && "text-sm"
+            presentationObject.variant.equals('default') && "prose-brand",
+            presentationObject.variant.equals('centered') && "prose-brand-contrast font-sans-regular",
+            presentationObject.variant.equals('brandContrast') && "prose-brand-contrast",
+            presentationObject.variant.equals('brandContrastBold') && "prose-brand-contrast font-sans-bold text-lg",
+            presentationObject.variant.equals('neutralContrast') && "prose-neutral-contrast",
+            presentationObject.variant.equals('neutralContrastFiraPro') && "text-neutral-grey font-fira-pro-regular",
+            presentationObject.variant.equals('decorativeContrast') && "prose-decorative-contrast",
+            presentationObject.variant.equals('transparentContrast') && "prose-transparent-contrast",
+            presentationObject.variant.equals('lite') && "prose-lite",
+            presentationObject.variant.equals('excite') && "prose-excite",
+            presentationObject.variant.equals('experience') && "prose.experience",
+            presentationObject.variant.equals('serviceContrast') && "prose-service",
+            presentationObject.variant.equals('serviceRed') && "text-service-red font-sans-bold text-[16px] text-center",
+            presentationObject.variant.equals('sm') && "text-sm"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

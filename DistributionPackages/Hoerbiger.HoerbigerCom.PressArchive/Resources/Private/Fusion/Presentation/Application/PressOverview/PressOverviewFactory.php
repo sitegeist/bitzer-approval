@@ -75,7 +75,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
         $pressReleases = [];
 
         $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
-        foreach ( $overviewPage->findChildNodes() as $magazine) {
+        foreach ($overviewPage->findChildNodes() as $magazine) {
             $pressReleases = array_merge(
                 $pressReleases,
                 $this->findChildNodesByNodeTypeFilterString(
@@ -83,7 +83,8 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                     'Hoerbiger.HoerbigerCom:Document'
                 )->toArray()
             );
-        };
+        }
+        /** @var array<int,Node> $pressReleases */
 
         uasort($pressReleases, function (Node $a, Node $b) {
             return ($b->getProperty('datePublished') ?: $b->getCreationDateTime())
@@ -91,13 +92,12 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
         });
 
         $pressReleaseCards = array_map(
-            function (Node $pressRelease) use ($inBackend, $labels): Link
-            {
-                $pressVariant = PressVariant::fromNode($pressRelease);
+            function (Node $pressRelease) use ($inBackend, $labels): Link {
+                $pressVariant = PressVariant::tryFromNode($pressRelease);
 
                 $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
 
-                $showImage = !$pressVariant->getIsNews() || $pressRelease->getProperty('showImage');
+                $showImage = $pressVariant !== PressVariant::VARIANT_NEWS || $pressRelease->getProperty('showImage');
 
                 $figure = $imageSource && $showImage
                     ? $this->figureFactory->forPressReleaseCard($imageSource)
@@ -112,8 +112,8 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                     LinkTarget::TARGET_SELF,
                     null,
                     new PressReleaseCard(
-                        PressReleaseCardVariant::from($pressVariant->getValue()),
-                        $pressVariant->getIsNews()
+                        PressReleaseCardVariant::from(($pressVariant ?: PressVariant::VARIANT_NEWS)->value),
+                        $pressVariant === PressVariant::VARIANT_NEWS
                             ? Value::fromString($datePublished ?: '')
                             : null,
                         $figure,
@@ -123,7 +123,7 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                                 ?: ''
                         ),
                         Value::fromString(
-                            $labels['label.filter.' . $pressVariant->getValue()]
+                            ($labels['label.filter.' . $pressVariant?->value] ?? '')
                             . ' ' . $pressRelease->getProperty('edition')
                         ),
                         Value::fromString(
@@ -132,10 +132,10 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                                 ?: ''
                         ),
                         new Button(
-                            ButtonType::regular(),
-                            ButtonVariant::contrast(),
+                            ButtonType::TYPE_REGULAR,
+                            ButtonVariant::VARIANT_CONTRAST,
                             new Grid(
-                                GridVariant::iconLeft(),
+                                GridVariant::VARIANT_ICONLEFT,
                                 Collection::fromIterable(array_filter([
                                     new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
                                     Value::fromString($this->getLabel('list.learnMore'))
@@ -179,10 +179,10 @@ final class PressOverviewFactory extends AbstractComponentPresentationObjectFact
                 null,
                 Value::fromString($hannsMagazine->getProperty('preview__description') ?: ''),
                 new Button(
-                    ButtonType::regular(),
-                    ButtonVariant::contrast(),
+                    ButtonType::TYPE_REGULAR,
+                    ButtonVariant::VARIANT_CONTRAST,
                     new Grid(
-                        GridVariant::iconLeft(),
+                        GridVariant::VARIANT_ICONLEFT,
                         Collection::fromIterable(array_filter([
                             new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
                             Value::fromString($labels['label.button.getNewestRelease'])

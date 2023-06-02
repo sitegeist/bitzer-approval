@@ -87,13 +87,15 @@ final class LanguageAwareAssetProxy implements AssetProxyInterface, ProvidesOrig
 
     public function getMediaType(): string
     {
-        return $this->asset->getMediaType() ?? 'application/octet-stream';
+        return $this->asset->getMediaType();
     }
 
     public function getWidthInPixels(): ?int
     {
         if ($this->asset instanceof ImageInterface) {
-            return $this->asset->getWidth() ?? null;
+            /** @var ?int $width */
+            $width = $this->asset->getWidth();
+            return $width;
         }
 
         return 0;
@@ -102,7 +104,9 @@ final class LanguageAwareAssetProxy implements AssetProxyInterface, ProvidesOrig
     public function getHeightInPixels(): ?int
     {
         if ($this->asset instanceof ImageInterface) {
-            return $this->asset->getHeight() ?? 0;
+            /** @var ?int $height */
+            $height = $this->asset->getHeight();
+            return $height;
         }
 
         return 0;

@@ -42,20 +42,10 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ImageSourceFactory $imageSourceFactory;
-
-    private FigureFactory $figureFactory;
-
-    private FormattedDateFactory $formattedDateFactory;
-
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory,
-        FormattedDateFactory $formattedDateFactory
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->figureFactory = $figureFactory;
-        $this->formattedDateFactory = $formattedDateFactory;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, bool $inBackend, TraversableNodeInterface $site): SlotInterface
@@ -77,15 +67,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $successStories = $site->findNamedChildNode(NodeName::fromString('magazine'));
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::VARIANT_REGULAR,
             new CacheSegment(
                 new Box(
-                    BoxVariant::decorative(),
+                    BoxVariant::VARIANT_DECORATIVE,
                     new Stack(
-                        StackVariant::sm(),
+                        StackVariant::VARIANT_SM,
                         Collection::fromIterable([
                             new Grid(
-                                GridVariant::twoColumnsFrMaxGap(),
+                                GridVariant::VARIANT_TWOCOLUMNSFRMAXGAP,
                                 Collection::fromIterable([
                                     new Headline(
                                         HeadlineSize::SIZE_LARGE,
@@ -104,7 +94,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 ], $identity)
                             ),
                             new Grid(
-                                GridVariant::threeColumnsGap(),
+                                GridVariant::VARIANT_THREECOLUMNSGAP,
                                 Collection::fromIterable(
                                     $topSuccessStories->getProperty('successStories') ?: [],
                                     function (TraversableNodeInterface $successStory) use ($inBackend, $identity): ArticleCard {
@@ -137,7 +127,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                     ?: $successStory->getProperty('headline') ?: ''
                                             ),
                                             new Row(
-                                                RowVariant::alternateMetaline(),
+                                                RowVariant::VARIANT_ALTERNATEMETALINE,
                                                 Collection::fromIterable([
                                                     // Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                                                     Value::fromString($applicationWorld->getProperty('previewHeadline')
@@ -151,8 +141,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                                     ?: $successStory->getProperty('abstract') ?: ''
                                             ),
                                             new Button(
-                                                ButtonType::link(),
-                                                ButtonVariant::cta(),
+                                                ButtonType::TYPE_LINK,
+                                                ButtonVariant::VARIANT_CTA,
                                                 Value::fromString($this->getLabel('list.learnMore') ?: ''),
                                                 $this->uriService->getNodeUri($successStory),
                                                 '_self',

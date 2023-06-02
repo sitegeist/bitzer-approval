@@ -7,7 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteFooter;
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
 use Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CollectionInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use Psr\Http\Message\UriInterface;
 
 interface SiteFooterInterface extends ComponentPresentationObjectInterface
@@ -16,13 +16,13 @@ interface SiteFooterInterface extends ComponentPresentationObjectInterface
 
     public function getLogoUri(): UriInterface;
 
-    public function getPrimaryNavigationItems(): CollectionInterface;
+    public function getPrimaryNavigationItems(): Collection;
 
-    public function getSecondaryNavigationItems(): CollectionInterface;
+    public function getSecondaryNavigationItems(): Collection;
 
-    public function getTertiaryNavigationItems(): CollectionInterface;
+    public function getTertiaryNavigationItems(): Collection;
 
-    public function getSocialLinks(): CollectionInterface;
+    public function getSocialLinks(): Collection;
 
     public function getContactFormLink(): ?ContactFormLinkInterface;
 }

@@ -16,7 +16,7 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
 {
     /**
      * @Flow\InjectConfiguration(path="socialMedia")
-     * @var array<string,array>
+     * @var array<string,mixed>
      */
     protected $socialMediaSettings;
 

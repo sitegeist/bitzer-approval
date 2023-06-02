@@ -8,7 +8,6 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Stage;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
-use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
@@ -16,9 +15,9 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\SvgImage\SvgImage;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Stage\BrandStage\BrandStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -46,14 +45,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $productClass = $documentNode->getProperty('productClass')
             ? ProductClass::from($documentNode->getProperty('productClass'))
             : null;
-        $theme = $productClass ? $productClass->toTheme() : null;
-//        $media = $productClass && !$productClass->getIsDefault()
-//            ? new SvgImage(
-//                $this->resolveProductClassImageUri($productClass),
-//                $productClass->getLabel(),
-//                $productClass->getLabel()
-//            )
-//            : null;
+        $theme = $productClass?->toTheme();
 
         $backgroundImageSource = $this->imageSourceFactory->forImageMixin($documentNode, $inBackend);
         if (!$backgroundImageSource) {
@@ -64,7 +56,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $background = $this->figureFactory->forFullMediaStage($backgroundImageSource);
 
         $this->textColor = TextVariant::VARIANT_BRAND_CONTRAST;
-        if (($theme && $theme->getValue() === 'service')) {
+        if (($theme && $theme === Theme::VALUE_SERVICE)) {
             $this->textColor = TextVariant::VARIANT_LITE;
         }
 
@@ -85,14 +77,6 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             ),
             null,
             $background
-        );
-    }
-
-    private function resolveProductClassImageUri(ProductClass $productClass): Uri
-    {
-        return $this->uriService->getResourceUri(
-            'Hoerbiger.HoerbigerCom.Catalog',
-            'Images/Compression/' . $productClass->getImageFileName()
         );
     }
 }

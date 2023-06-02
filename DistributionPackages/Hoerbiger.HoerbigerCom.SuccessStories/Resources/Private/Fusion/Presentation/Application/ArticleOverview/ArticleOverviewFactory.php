@@ -23,28 +23,12 @@ use Neos\ContentRepository\Domain\Model\Node;
  */
 final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFactory
 {
-    private TranslationLabelSourceRepository $translationLabelSourceRepository;
-
-    private LocalizationService $localizationService;
-
-    private ThumbnailService $thumbnailService;
-
-    private ResourceManager $resourceManager;
-
-    private FormattedDateFactory $formattedDateFactory;
-
     public function __construct(
-        TranslationLabelSourceRepository $translationLabelSourceRepository,
-        LocalizationService $localizationService,
-        ThumbnailService $thumbnailService,
-        ResourceManager $resourceManager,
-        FormattedDateFactory $formattedDateFactory
+        private readonly TranslationLabelSourceRepository $translationLabelSourceRepository,
+        private readonly LocalizationService $localizationService,
+        private readonly ThumbnailService $thumbnailService,
+        private readonly ResourceManager $resourceManager,
     ) {
-        $this->translationLabelSourceRepository = $translationLabelSourceRepository;
-        $this->localizationService = $localizationService;
-        $this->thumbnailService = $thumbnailService;
-        $this->resourceManager = $resourceManager;
-        $this->formattedDateFactory = $formattedDateFactory;
     }
 
     public function forMagazine(TraversableNodeInterface $magazine): ArticleOverview
@@ -92,12 +76,7 @@ final class ArticleOverviewFactory extends AbstractComponentPresentationObjectFa
                     $rendition = null;
                 }
 
-                /** @var Node $successStory */
-                $datePublished = $successStory->getProperty('datePublished') ?: $successStory->getCreationDateTime();
-                /** @var TraversableNodeInterface $successStory */
-
                 return [
-                    //'datePublished' => (string)Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                     'image' => [
                         'src' => $rendition instanceof Thumbnail ? $this->resourceManager->getPublicPersistentResourceUri($rendition->getResource()) : '',
                         'alt' => $successStory->getProperty('preview__image__alt') ?: $successStory->getProperty('image__alt') ?: '',

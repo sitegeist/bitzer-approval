@@ -19,7 +19,7 @@
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
   postprocessors:
     columns:
-      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider
       postprocessorOptions:
         enumName: Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns
         propertyNames:

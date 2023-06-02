@@ -4,10 +4,10 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
             data-card="press"
             data-card-type={presentationObject.variant.value}
             class={[
-                "[Block.Card.PressReleaseCard (" + presentationObject.variant.value+ ")]",
+                "[Block.Card.PressReleaseCard (" + presentationObject.variant.value + ")]",
                 "flex flex-col space-y-[10px] justify-between",
-                presentationObject.variant.value == 'meta' && 'bg-hanns p-xs relative',
-                presentationObject.variant.value == 'hanns' && 'bg-hanns p-xs relative'
+                presentationObject.variant.equals('meta') && 'bg-hanns p-xs relative',
+                presentationObject.variant.equals('hanns') && 'bg-hanns p-xs relative'
             ]}
         >
             <div class="flex flex-col space-y-[10px] justify-between">
@@ -19,7 +19,7 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                         presentationObject={presentationObject.media}
                     />
                 </div>
-                <div @if.1={!presentationObject.media && (presentationObject.variant.value == 'news' || presentationObject.variant.value == 'top')}>
+                <div @if.1={!presentationObject.media && (presentationObject.variant.equals('news') || presentationObject.variant.equals('top'))}>
                     <div class="border-t-[1px] border-service-border"></div>
                 </div>
 
@@ -42,12 +42,12 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                     </div>
                     <div
                         class={[
-                            (presentationObject.variant.value == 'news') && "font-sans-bold text-xl",
-                            (presentationObject.variant.value == 'top') && "font-sans-bold text-sm",
-                            (presentationObject.variant.value == 'topNews') && "text-lg",
-                            (presentationObject.variant.value == 'yearbook') && "text-2xl",
-                            (presentationObject.variant.value == 'hanns') && "text-2xl",
-                            (presentationObject.variant.value == 'meta') && "text-sm"
+                            (presentationObject.variant.equals('news')) && "font-sans-bold text-xl",
+                            (presentationObject.variant.equals('top')) && "font-sans-bold text-sm",
+                            (presentationObject.variant.equals('topNews')) && "text-lg",
+                            (presentationObject.variant.equals('yearbook')) && "text-2xl",
+                            (presentationObject.variant.equals('hanns')) && "text-2xl",
+                            (presentationObject.variant.equals('meta')) && "text-sm"
                         ]}
                         @if.1={presentationObject.header}
                     >
@@ -59,8 +59,8 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                 <div
                     class={[
                         "card-hyphens",
-                        presentationObject.variant.value == 'top' && "text-[14px]",
-                        presentationObject.variant.value == 'topNews' && "text-[14px]"
+                        presentationObject.variant.equals('top') && "text-[14px]",
+                        presentationObject.variant.equals('topNews') && "text-[14px]"
                     ]}
                     @if.1={presentationObject.supportingText}
                 >
@@ -75,7 +75,7 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
             </div>
 
             <div
-                @if.1={presentationObject.variant.value == 'hanns' || presentationObject.variant.value == 'meta'}
+                @if.1={presentationObject.variant.equals('hanns') || presentationObject.variant.equals('meta')}
                 class="absolute bottom-0 right-0 h-[12px] w-[125px] bg-[black]"
             >
             </div>

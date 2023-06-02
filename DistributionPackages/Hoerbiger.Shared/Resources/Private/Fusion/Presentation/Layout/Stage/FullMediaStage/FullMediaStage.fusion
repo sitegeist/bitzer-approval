@@ -2,7 +2,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
 
     renderer = afx`
         <div class={[
-            "[Layout.FullMediaStage (" + presentationObject.variant + ")]"
+            "[Layout.FullMediaStage (" + presentationObject.variant.value + ")]"
         ]}>
             <div class="relative h-0 pt-ratio-2-1">
                 <div class="absolute inset-0 z-10"
@@ -37,7 +37,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.FullMediaStage) < prototype(Hoerbiger.Sh
             <div class="relative bg-light">
                 <div class={[
                     "max-w-content-full mx-auto px-md py-contentcontainer flex",
-                    presentationObject.variant.isfullMediaTextLeft && "sm:py-[50px]"
+                    presentationObject.variant.equals('fullMediaTextLeft') && "sm:py-[50px]"
                 ]}>
                     <div class="lg:max-w-[66%]">
                         <Hoerbiger.Shared:Block.Text

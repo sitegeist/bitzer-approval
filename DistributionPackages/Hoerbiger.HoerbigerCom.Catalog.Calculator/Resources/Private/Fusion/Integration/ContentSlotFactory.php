@@ -44,7 +44,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     public function forMiniCalculatorNode(): SlotInterface
     {
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::VARIANT_REGULAR,
             $this->miniCalculatorFactory->create()
         );
     }

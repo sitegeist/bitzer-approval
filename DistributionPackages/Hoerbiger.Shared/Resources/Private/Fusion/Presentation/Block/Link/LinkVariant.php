@@ -9,13 +9,12 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
-use Neos\Flow\Annotations as Flow;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-/**
- * @Flow\Proxy(false)
- */
 enum LinkVariant: string
 {
+    use StringComponentVariant;
+
     case VARIANT_CONTAINER = 'container';
     case VARIANT_LABEL = 'label';
     case VARIANT_TOUCHICON = 'touchIcon';
@@ -30,31 +29,10 @@ enum LinkVariant: string
     case VARIANT_LABELSERVICE = 'labelService';
     case VARIANT_LABELDEFAULT = 'labelDefault';
 
-    public static function fromString(string $string): self
-    {
-        return match ($string){
-            'container' => self::VARIANT_CONTAINER,
-            'label' => self::VARIANT_LABEL,
-            'touchIcon' => self::VARIANT_TOUCHICON,
-            'squareTouchIcon' => self::VARIANT_SQUARETOUCHICON,
-            'noStyles' => self::VARIANT_NOSTYLES,
-            'siteFooter' => self::VARIANT_SITEFOOTER,
-            'plainLabel' => self::VARIANT_PLAINLABEL,
-            'iconLabel' => self::VARIANT_ICONLABEL,
-            'labelExcite' => self::VARIANT_LABELEXCITE,
-            'labelExperience' => self::VARIANT_LABELEXPERIENCE,
-            'labelLite' => self::VARIANT_LABELLITE,
-            'labelService' => self::VARIANT_LABELSERVICE,
-            'labelDefault' => self::VARIANT_LABELDEFAULT,
-            default => null
-        };
-    }
-
     public static function tryFromTheme(?Theme $theme): ?self
     {
         return $theme
-            ? self::fromString('label' . (ucfirst($theme->getValue())))
+            ? self::tryFrom('label' . (ucfirst($theme->value)))
             : null;
     }
-
 }

@@ -70,8 +70,8 @@ final class CsvPOTranslator
         $labelSourcePath = \str_replace(
             '/Resources/',
             '/',
-            $componentName->getFusionFilePath('resource://' . $componentName->getPackageKey())
-            . '/' . $componentName->getName() . '.labels.csv'
+            $componentName->getFusionFilePath('resource://' . $componentName->packageKey)
+            . '/' . $componentName->name . '.labels.csv'
         );
 
         return $this->labelSourceRepository->findOneByIdentifier($labelSourcePath);

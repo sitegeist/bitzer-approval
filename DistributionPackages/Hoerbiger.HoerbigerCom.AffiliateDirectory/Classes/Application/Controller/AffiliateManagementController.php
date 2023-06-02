@@ -64,7 +64,6 @@ final class AffiliateManagementController extends AbstractModuleController
         /** @var FlowUploadedFile $file */
         $file = $command['file'];
 
-        /** @phpstan-ignore-next-line */
         $pathInfo = $file->getClientFilename() ? pathinfo($file->getClientFilename()) : [];
         if ($file->getStream()->getSize() > 0 &&
             isset($pathInfo['extension']) &&

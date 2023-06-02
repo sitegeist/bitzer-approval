@@ -12,16 +12,16 @@ prototype(Hoerbiger.Shared:Layout.Box) < prototype(PackageFactory.AtomicFusion.P
 
     renderer = afx`
         <div id={presentationObject.identifier} class={[
-            "[Layout.Box (" + presentationObject.variant + ")]",
+            "[Layout.Box (" + presentationObject.variant.value + ")]",
             "relative w-full before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-full before:max-w-md before:h-2",
-            presentationObject.variant.isTextCenter && "flex items-center p-md bg-neutral-lighter p-md",
-            presentationObject.variant.isNeutral && "bg-neutral-lighter p-md",
-            presentationObject.variant.isDecorative && "bg-neutral-lighter before:bg-brand p-md",
-            presentationObject.variant.isExcite && "bg-neutral-lighter before:bg-excite p-md",
-            presentationObject.variant.isExperience && "bg-neutral-lighter before:bg-experience p-md",
-            presentationObject.variant.isLite && "bg-neutral-lighter before:bg-lite p-md",
-            presentationObject.variant.isService && "bg-neutral-lighter before:bg-service p-md",
-            presentationObject.variant.isLight && "bg-light py-xs"
+            presentationObject.variant.equals('textCenter') && "flex items-center p-md bg-neutral-lighter p-md",
+            presentationObject.variant.equals('neutral') && "bg-neutral-lighter p-md",
+            presentationObject.variant.equals('decorative') && "bg-neutral-lighter before:bg-brand p-md",
+            presentationObject.variant.equals('excite') && "bg-neutral-lighter before:bg-excite p-md",
+            presentationObject.variant.equals('experience') && "bg-neutral-lighter before:bg-experience p-md",
+            presentationObject.variant.equals('lite') && "bg-neutral-lighter before:bg-lite p-md",
+            presentationObject.variant.equals('service') && "bg-neutral-lighter before:bg-service p-md",
+            presentationObject.variant.equals('light') && "bg-light py-xs"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

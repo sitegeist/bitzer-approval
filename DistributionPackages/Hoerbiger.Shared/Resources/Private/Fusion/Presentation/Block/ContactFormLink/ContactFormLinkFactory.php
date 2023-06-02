@@ -45,10 +45,10 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
 
         return new ContactFormLink(
             new Stack(
-                StackVariant::xs(),
+                StackVariant::VARIANT_XS,
                 Collection::fromIterable([
                     new Stack(
-                        StackVariant::noGap(),
+                        StackVariant::VARIANT_NOGAP,
                         Collection::fromIterable([
                             new Tag(
                                 'strong',
@@ -71,8 +71,8 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
                 ], $identity)
             ),
             new Button(
-                ButtonType::link(),
-                ButtonVariant::ctaContrast(),
+                ButtonType::TYPE_LINK,
+                ButtonVariant::VARIANT_CTA_CONTRAST,
                 Value::fromString($this->csvPOTranslator->getLabel(ContactFormLink::class, 'contact_form_link_button')),
                 $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('contact'))),
                 "_self",

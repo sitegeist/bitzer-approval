@@ -222,6 +222,6 @@ final class LanguageAwareAssetProxyRepository implements
 
     public function countByTag(Tag $tag): int
     {
-        // TODO: Implement countByTag() method.
+        return 0;
     }
 }

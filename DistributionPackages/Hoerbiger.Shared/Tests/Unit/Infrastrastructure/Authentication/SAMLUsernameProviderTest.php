@@ -1,15 +1,16 @@
 <?php
-namespace Hoerbiger\HoerbigerCom\Tests\Unit\Infrastructure\Authentication;
+namespace Hoerbiger\Shared\Tests\Unit\Infrastructure\Authentication;
 
 /*
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
-use Hoerbiger\HoerbigerCom\Infrastructure\Authentication\SAMLUsernameProvider;
-use Hoerbiger\HoerbigerCom\Infrastructure\Authentication\SAMLUsernameToken;
+use Hoerbiger\Shared\Infrastructure\Authentication\SAMLUsernameProvider;
+use Hoerbiger\Shared\Infrastructure\Authentication\SAMLUsernameToken;
 use Neos\Flow\Security\Account;
 use Neos\Flow\Security\AccountRepository;
 use Neos\Flow\Security\Authentication\TokenInterface;
+use Neos\Flow\Security\Context;
 use Neos\Flow\Tests\UnitTestCase;
 use Neos\Utility\ObjectAccess;
 use PHPUnit\Framework\Assert;
@@ -33,6 +34,12 @@ class SAMLUsernameProviderTest extends UnitTestCase
             ->willReturn($dummyAccount);
         $this->inject($subject, 'accountRepository', $mockAccountRepository);
 
+        $mockSecurityContext = $this->createMock(Context::class);
+        $mockSecurityContext->expects($this->once())
+            ->method('getCsrfProtectionToken')
+            ->willReturn('nudelsuppe');
+        $this->inject($subject, 'securityContext', $mockSecurityContext);
+
         $subject->authenticate($token);
 
         Assert::assertSame(TokenInterface::AUTHENTICATION_SUCCESSFUL, $token->getAuthenticationStatus());
@@ -43,6 +50,7 @@ class SAMLUsernameProviderTest extends UnitTestCase
     public function actionRequestAndCredentialsProvider(): array
     {
         $token1 = new SAMLUsernameToken([]);
+        $token1->setAuthenticationStatus(TokenInterface::AUTHENTICATION_NEEDED);
         ObjectAccess::setProperty($token1, 'credentials', ['identifier' => 'u1dd_pkf'], true);
         return [
             [

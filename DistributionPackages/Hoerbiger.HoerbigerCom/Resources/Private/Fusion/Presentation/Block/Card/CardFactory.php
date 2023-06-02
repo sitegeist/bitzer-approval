@@ -94,7 +94,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             $headline = new Headline(
                 HeadlineSize::SIZE_VERY_SMALL_REGULAR,
                 HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
-                HeadlineType::div(),
+                HeadlineType::TYPE_DIV,
                 Value::fromString($headlineProperty)
             );
         }
@@ -118,10 +118,10 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             null,
             $text,
             new Button(
-                ButtonType::link(),
-                ButtonVariant::plain(),
+                ButtonType::TYPE_LINK,
+                ButtonVariant::VARIANT_PLAIN,
                 new Grid(
-                    GridVariant::iconLeft(),
+                    GridVariant::VARIANT_ICONLEFT,
                     Collection::fromIterable([
                         new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
                         Value::fromString(

@@ -9,10 +9,12 @@ namespace Hoerbiger\Shared\Presentation\Block\Video;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
-use Neos\Flow\Annotations as Flow;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
 enum VideoVariant: string
 {
+    use StringComponentVariant;
+
     case VARIANT_REGULAR = 'regular';
     case VARIANT_EXCITE = 'excite';
     case VARIANT_EXPERIENCE = 'experience';
@@ -21,17 +23,12 @@ enum VideoVariant: string
     case VARIANT_SLIDER = 'slider';
     case VARIANT_SIMPLE_LOOP = 'simpleLoop';
 
-    public static function fromString(string $string): self
-    {
-        return self::tryFrom($string);
-    }
-
     public static function tryFromTheme(?Theme $theme): self
     {
-        if (!$theme || $theme->getValue() == 'default') {
+        if (!$theme || $theme === THEME::VALUE_DEFAULT) {
             return self::VARIANT_REGULAR;
         }
-        return self::fromString($theme->getValue());
-    }
 
+        return self::tryFrom($theme->value);
+    }
 }

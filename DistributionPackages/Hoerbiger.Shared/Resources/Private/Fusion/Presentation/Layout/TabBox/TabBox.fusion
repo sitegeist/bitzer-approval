@@ -12,25 +12,25 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
 
     renderer = afx`
         <div class={[
-            "[Layout.TabBox (" + presentationObject.variant + ")]",
-            presentationObject.variant.isRegular && "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red",
-            presentationObject.variant.isHorizontal && "flex flex-col w-full max-w-full-content p-md"
-        ]} data-orientation={presentationObject.variant} >
+            "[Layout.TabBox (" + presentationObject.variant.value + ")]",
+            presentationObject.variant.equals('regular') && "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red",
+            presentationObject.variant.equals('horizontal') && "flex flex-col w-full max-w-full-content p-md"
+        ]} data-orientation={presentationObject.variant.value} >
             <nav class={[
                 "hidden md:flex",
-                presentationObject.variant.isRegular && "hidden tabBoxToggle:flex flex-col relative",
-                presentationObject.variant.isHorizontal && "flex flex-row justify-flex-start flex-wrap w-full justify-center"
+                presentationObject.variant.equals('regular') && "hidden tabBoxToggle:flex flex-col relative",
+                presentationObject.variant.equals('horizontal') && "flex flex-row justify-flex-start flex-wrap w-full justify-center"
             ]}>
                 <Neos.Fusion:Loop items={presentationObject.tabs.items}>
                     <label
                         class={[
-                            presentationObject.variant.isRegular &&
+                            presentationObject.variant.equals('regular') &&
                             "cursor-pointer py-xs flex items-center justify-between text-lg font-semibold",
                             "border-b text-light-contrast border-light-contrast",
-                            presentationObject.variant.isHorizontal && "border-none flex mr-xs mb-xs last:mr-0",
-                            (presentationObject.variant.isRegular && !iterator.isFirst) && "opacity-30",
-                            (presentationObject.variant.isRegular && iterator.isFirst) && "opacity-100",
-                            presentationObject.variant.isHorizontal && "opacity-100"
+                            presentationObject.variant.equals('horizontal') && "border-none flex mr-xs mb-xs last:mr-0",
+                            (presentationObject.variant.equals('regular') && !iterator.isFirst) && "opacity-30",
+                            (presentationObject.variant.equals('regular') && iterator.isFirst) && "opacity-100",
+                            presentationObject.variant.equals('horizontal') && "opacity-100"
                         ]}
                         data-select="tab"
                         data-box-id={presentationObject.identifier}>

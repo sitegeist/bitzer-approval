@@ -22,8 +22,8 @@ prototype(Hoerbiger.Shared:Layout.Stage.ApplicationWorldNavStage) < prototype(Ho
                 (!presentationObject.variant.isFullMediaTextCenter) && "",
                 (!presentationObject.variant.isFullMediaTextCenter) && "md:-translate-y-1/2 md:bottom-auto md:top-1/2 md:max-w-[35%] md:w-full",
                 "md:absolute md:inset-md md:p-sm",
-                presentationObject.variant.isFullMediaTextLeft &&  "md:right-auto",
-                presentationObject.variant.isFullMediaTextRight &&  "md:left-auto",
+                presentationObject.variant.equals('fullMediaTextLeft') &&  "md:right-auto",
+                presentationObject.variant.equals('fullMediaTextRight') &&  "md:left-auto",
                 presentationObject.variant.isFullMediaTextCenter &&  "text-center mx-auto"
             ]}>
             </div>

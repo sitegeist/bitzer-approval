@@ -12,23 +12,23 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
 
     renderer = afx`
         <div class={[
-            '[Layout.Grid (' + presentationObject.variant + ')]',
+            '[Layout.Grid (' + presentationObject.variant.value + ')]',
             'grid w-full',
-            presentationObject.variant.isOneColumn && "grid-cols-1 gap-xl md:gap-md",
-            presentationObject.variant.isTwoColumns && "grid-cols-1 gap-xl lg:grid-cols-2 md:gap-sm",
-            presentationObject.variant.isTwoColumnsNoGap && "grid-cols-1 lg:grid-cols-2",
-            presentationObject.variant.isTwoColumnsGap && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-sm",
-            presentationObject.variant.isThreeColumnsGap && Array.length(presentationObject.content.items) == 1 && "grid-cols-1 mx-auto md:max-w-[66%] lg:max-w-[33%]",
-            presentationObject.variant.isThreeColumnsGap && Array.length(presentationObject.content.items) == 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md mx-auto lg:max-w-[66%]",
-            presentationObject.variant.isThreeColumnsGap && Array.length(presentationObject.content.items) > 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md lg:grid-cols-3",
-            presentationObject.variant.isThreeColumnsNarrowGap && Array.length(presentationObject.content.items) == 1 && "grid-cols-1 mx-auto md:max-w-[66%] lg:max-w-[33%]",
-            presentationObject.variant.isThreeColumnsNarrowGap && Array.length(presentationObject.content.items) == 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md mx-auto lg:max-w-[66%]",
-            presentationObject.variant.isThreeColumnsNarrowGap && Array.length(presentationObject.content.items) > 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-sm lg:grid-cols-3",
-            presentationObject.variant.isTwoColumnsFrMaxGap && "grid-cols-1 gap-xs md:grid-cols-2-1fr-max",
-            presentationObject.variant.isTwoColumnsThirdAutoGap && "grid-cols-1 gap-xs lg:grid-cols-2-33-auto",
-            presentationObject.variant.isTwoColumnsPress && "grid-cols-1 gap-sm md:grid-cols-2-160-auto",
-            presentationObject.variant.isIconRight && "gap-x-xs grid-cols-2-1fr-max items-center",
-            presentationObject.variant.isIconLeft && "gap-x-ch-xs grid-cols-2-max-1fr items-center"
+            presentationObject.variant.equals('oneColumn') && "grid-cols-1 gap-xl md:gap-md",
+            presentationObject.variant.equals('twoColumns') && "grid-cols-1 gap-xl lg:grid-cols-2 md:gap-sm",
+            presentationObject.variant.equals('twoColumnsNoGap') && "grid-cols-1 lg:grid-cols-2",
+            presentationObject.variant.equals('twoColumnsGap') && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-sm",
+            presentationObject.variant.equals('threeColumnsGap') && Array.length(presentationObject.content.items) == 1 && "grid-cols-1 mx-auto md:max-w-[66%] lg:max-w-[33%]",
+            presentationObject.variant.equals('threeColumnsGap') && Array.length(presentationObject.content.items) == 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md mx-auto lg:max-w-[66%]",
+            presentationObject.variant.equals('threeColumnsGap') && Array.length(presentationObject.content.items) > 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md lg:grid-cols-3",
+            presentationObject.variant.equals('threeColumnsNarrowGap') && Array.length(presentationObject.content.items) == 1 && "grid-cols-1 mx-auto md:max-w-[66%] lg:max-w-[33%]",
+            presentationObject.variant.equals('threeColumnsNarrowGap') && Array.length(presentationObject.content.items) == 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md mx-auto lg:max-w-[66%]",
+            presentationObject.variant.equals('threeColumnsNarrowGap') && Array.length(presentationObject.content.items) > 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-sm lg:grid-cols-3",
+            presentationObject.variant.equals('twoColumnsFrMaxGap') && "grid-cols-1 gap-xs md:grid-cols-2-1fr-max",
+            presentationObject.variant.equals('twoColumnsThirdAutoGap') && "grid-cols-1 gap-xs lg:grid-cols-2-33-auto",
+            presentationObject.variant.equals('twoColumnsPress') && "grid-cols-1 gap-sm md:grid-cols-2-160-auto",
+            presentationObject.variant.equals('iconRight') && "gap-x-xs grid-cols-2-1fr-max items-center",
+            presentationObject.variant.equals('iconLeft') && "gap-x-ch-xs grid-cols-2-max-1fr items-center"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

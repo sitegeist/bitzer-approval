@@ -44,7 +44,7 @@
 
   postprocessors:
     layouts:
-      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider
       postprocessorOptions:
         enumName: Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout
         propertyNames:

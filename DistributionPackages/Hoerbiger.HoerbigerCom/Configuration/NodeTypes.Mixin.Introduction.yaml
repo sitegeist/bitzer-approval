@@ -60,7 +60,7 @@
           editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
   postprocessors:
     stage__variants:
-      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\PseudoEnumProvider
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider
       postprocessorOptions:
         enumName: Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction\StageVariant
         propertyNames:

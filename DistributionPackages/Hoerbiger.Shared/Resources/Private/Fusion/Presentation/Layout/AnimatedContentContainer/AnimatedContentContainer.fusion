@@ -15,12 +15,12 @@ prototype(Hoerbiger.Shared:Layout.AnimatedContentContainer) < prototype(PackageF
             data-animation-in={presentationObject.visibleStateClass}
             data-animation-out={presentationObject.invisibleStateClass}
             class={[
-                "[Layout.AnimatedContentContainer (" + presentationObject.variant + ")]",
+                "[Layout.AnimatedContentContainer (" + presentationObject.variant.value + ")]",
                 "w-full opacity-0"
             ]}
         >
             <div class={[
-                presentationObject.variant.isRegular && ""
+                presentationObject.variant.equals('regular') && ""
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </div>

@@ -90,9 +90,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(
                 array_filter([
                     new ContentContainer(
-                        ContentContainerVariant::regular(),
+                        ContentContainerVariant::VARIANT_REGULAR,
                         new Stack(
-                            StackVariant::sm(),
+                            StackVariant::VARIANT_SM,
                             Collection::fromIterable(array_filter([
                                 new Headline(
                                     HeadlineSize::SIZE_SUPER_LARGE,
@@ -126,7 +126,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     ),
                     new ContentContainer(
-                        ContentContainerVariant::regularX(),
+                        ContentContainerVariant::VARIANT_REGULARX,
                         $breadcrumb
                     ),
                 ]),
@@ -169,17 +169,17 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
 
-        $pageVariant = PressVariant::fromNode($document);
+        $pageVariant = PressVariant::tryFromNode($document);
 
-        $content = $pageVariant->getIsNews()
+        $content = $pageVariant === PressVariant::VARIANT_NEWS
             ? new ContentContainer(
-                ContentContainerVariant::pressSmall(),
+                ContentContainerVariant::VARIANT_PRESS_SMALL,
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
             )
             : new ContentContainer(
-                ContentContainerVariant::regular(),
+                ContentContainerVariant::VARIANT_REGULAR,
                 new ContentContainer(
-                    ContentContainerVariant::press(),
+                    ContentContainerVariant::VARIANT_PRESS,
                     Content::fromNode($document->findNamedChildNode(NodeName::fromString('main')))
                 )
             );
@@ -196,7 +196,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 array_filter([
                     count($anchors) > 0
                         ? new AnchorNavigation(
-                            AnchorNavigationVariant::regular(),
+                            AnchorNavigationVariant::VARIANT_REGULAR,
                             array_map(
                                 fn(Anchor $anchor): Link
                                     => (new LinkFactory())->forAnchor($anchor),
@@ -205,18 +205,18 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                         : null,
                     new ContentContainer(
-                        ContentContainerVariant::stackStage(),
+                        ContentContainerVariant::VARIANT_STACKSTAGE,
                         $stage
                     ),
-                    ! $pageVariant->getIsNews()
+                    $pageVariant !== PressVariant::VARIANT_NEWS
                         ? new ContentContainer(
-                            ContentContainerVariant::regularX(),
+                            ContentContainerVariant::VARIANT_REGULARX,
                             new ContentContainer(
-                                ContentContainerVariant::press(),
+                                ContentContainerVariant::VARIANT_PRESS,
                                 new ContentContainer(
-                                    ContentContainerVariant::pressLeftBlank(),
+                                    ContentContainerVariant::VARIANT_PRESS_LEFT_BLANK,
                                     new Grid(
-                                        GridVariant::twoColumnsPress(),
+                                        GridVariant::VARIANT_TWOCOLUMNSPRESS,
                                         Collection::fromIterable(array_filter([
                                             new Text(
                                                 TextVariant::VARIANT_DEFAULT,
@@ -235,7 +235,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         : null,
                     $content,
                     new ContentContainer(
-                        ContentContainerVariant::regularX(),
+                        ContentContainerVariant::VARIANT_REGULARX,
                         $breadcrumb
                     ),
                 ]),

@@ -5,22 +5,11 @@ namespace Hoerbiger\Shared\Presentation\Block\MetaHeadline;
  * This file is part of the Hoerbiger.Shared package.
  */
 
-use Neos\Flow\Annotations as Flow;
-use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-/**
- * @Flow\Proxy(false)
- */
 enum MetaHeadlineVariant: string
 {
+    use StringComponentVariant;
+
     case VARIANT_REGULAR = 'regular';
-
-    public static function fromString(string $string): self
-    {
-        return match ($string){
-            'regular' => self::VARIANT_REGULAR,
-            default => null
-        };
-    }
-
 }

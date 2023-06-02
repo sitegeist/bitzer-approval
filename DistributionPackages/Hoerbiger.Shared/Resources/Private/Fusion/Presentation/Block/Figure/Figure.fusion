@@ -20,7 +20,7 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
         <figure class={[
             "[Block.Figure (" + (presentationObject.objectFit || "no-objectFit") + ", " + (presentationObject.objectPosition || "no-objectPosition") + ")]",
             "flex flex-col max-h-full relative",
-            (presentationObject.objectFit.isCover || presentationObject.objectFit.isContain) && "w-full h-full"
+            (presentationObject.objectFit.equals('cover') || presentationObject.objectFit.equals('contain')) && "w-full h-full"
         ]}>
             <Sitegeist.Lazybones:Image
                 imageSource={presentationObject.imageSource}
@@ -30,18 +30,18 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
                 sizes={presentationObject.sizes.sizes}
                 lazy={presentationObject.isToBeLoadedLazily}
                 class={Array.join(Array.filter([
-                    (presentationObject.objectFit.isCover || presentationObject.objectFit.isContain) && "w-full h-full",
-                    presentationObject.objectFit.isCover && "object-cover",
-                    presentationObject.objectFit.isContain && "object-contain",
-                    presentationObject.objectPosition.isCenter && "object-center",
-                    presentationObject.objectPosition.isTop && "object-top",
-                    presentationObject.objectPosition.isLeft && "object-left",
-                    presentationObject.objectPosition.isRight && "object-right",
-                    presentationObject.objectPosition.isBottom && "object-bottom",
-                    presentationObject.objectPosition.isLeftTop && "object-left-top",
-                    presentationObject.objectPosition.isLeftBottom && "object-left-bottom",
-                    presentationObject.objectPosition.isRightTop && "object-right-top",
-                    presentationObject.objectPosition.isRightBottom && "object-right-bottom"
+                    (presentationObject.objectFit.equals('cover') || presentationObject.objectFit.equals('contain')) && "w-full h-full",
+                    presentationObject.objectFit.equals('cover') && "object-cover",
+                    presentationObject.objectFit.equals('contain') && "object-contain",
+                    presentationObject.objectPosition.equals('center') && "object-center",
+                    presentationObject.objectPosition.equals('top') && "object-top",
+                    presentationObject.objectPosition.equals('left') && "object-left",
+                    presentationObject.objectPosition.equals('right') && "object-right",
+                    presentationObject.objectPosition.equals('bottom') && "object-bottom",
+                    presentationObject.objectPosition.equals('leftTop') && "object-left-top",
+                    presentationObject.objectPosition.equals('leftBottom') && "object-left-bottom",
+                    presentationObject.objectPosition.equals('rightTop') && "object-right-top",
+                    presentationObject.objectPosition.equals('rightBottom') && "object-right-bottom"
                 ]), ' ')}
             />
             <figcaption

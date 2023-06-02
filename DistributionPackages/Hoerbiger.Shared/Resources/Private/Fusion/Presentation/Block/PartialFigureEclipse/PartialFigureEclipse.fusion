@@ -40,13 +40,13 @@ prototype(Hoerbiger.Shared:Block.PartialFigureEclipse) < prototype(PackageFactor
         ]}>
             <div class={[
                 "sm:col-span-1 relative z-20",
-                presentationObject.variant.isImageLeft && "col-start-1",
-                presentationObject.variant.isImageRight && "col-start-2"
+                presentationObject.variant.equals('imageLeft') && "col-start-1",
+                presentationObject.variant.equals('imageRight') && "col-start-2"
             ]}>
                 <div class={[
                     "sm:absolute sm:top-minus-xl sm:bottom-sm",
-                    presentationObject.variant.isImageLeft && "left-md right-minus-md",
-                    presentationObject.variant.isImageRight && "left-minus-md right-md"
+                    presentationObject.variant.equals('imageLeft') && "left-md right-minus-md",
+                    presentationObject.variant.equals('imageRight') && "left-minus-md right-md"
                 ]}>
                     <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure} />
                 </div>
@@ -54,8 +54,8 @@ prototype(Hoerbiger.Shared:Block.PartialFigureEclipse) < prototype(PackageFactor
             <div class={[
                 "sm:col-span-1 sm:w-full sm:max-w-[90%] relative z-40",
                 "bg-light p-md sm:p-sm border border-neutral-lighter shadow-textbox",
-                presentationObject.variant.isImageLeft && "col-start-2 justify-self-start",
-                presentationObject.variant.isImageRight && "col-start-1 row-start-1 justify-self-end"
+                presentationObject.variant.equals('imageLeft') && "col-start-2 justify-self-start",
+                presentationObject.variant.equals('imageRight') && "col-start-1 row-start-1 justify-self-end"
             ]}>
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </div>

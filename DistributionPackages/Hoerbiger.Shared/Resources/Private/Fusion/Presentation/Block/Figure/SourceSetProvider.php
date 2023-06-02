@@ -37,8 +37,8 @@ final class SourceSetProvider
     {
         $extendedPresetIdentifiers = [];
         foreach ($presetIdentifiers as $presetIdentifier) {
-            $extendedPresetIdentifiers[] = $presetIdentifier->getValue();
-            $extendedPresetIdentifiers[] = $presetIdentifier . '2';
+            $extendedPresetIdentifiers[] = $presetIdentifier->value;
+            $extendedPresetIdentifiers[] = $presetIdentifier->value . '2';
         }
         return $this->mapPresetIdentifiersToSourceSet($extendedPresetIdentifiers);
     }

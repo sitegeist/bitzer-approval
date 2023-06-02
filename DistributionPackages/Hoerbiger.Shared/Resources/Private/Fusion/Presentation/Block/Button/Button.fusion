@@ -17,7 +17,7 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
     renderer = Neos.Fusion:Tag {
         tagName = Neos.Fusion:Case {
             link {
-                condition = ${presentationObject.type.isLink}
+                condition = ${presentationObject.type.equals('link')}
                 renderer = 'a'
             }
 
@@ -36,29 +36,29 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
                 text = "font-semibold"
 
                 cta = "bg-brand text-brand-contrast font-sans-bold"
-                cta.@if.1 = ${presentationObject.variant.isCta}
+                cta.@if.1 = ${presentationObject.variant.equals('cta')}
 
                 ctaContrast = "bg-light text-standard font-sans-bold"
-                ctaContrast.@if.1 = ${presentationObject.variant.isCtaContrast}
+                ctaContrast.@if.1 = ${presentationObject.variant.equals('ctaContrast')}
 
                 contrast = "font-sans-bold"
-                contrast.@if.1 = ${presentationObject.variant.isContrast}
+                contrast.@if.1 = ${presentationObject.variant.equals('contrast')}
 
                 plain = "font-sans-bold px-0 [&_svg]:pt-[3px]"
-                plain.@if.1 = ${presentationObject.variant.isPlain}
+                plain.@if.1 = ${presentationObject.variant.equals('plain')}
 
                 notPlain = "px-8 rounded-full "
-                notPlain.@if.1 = ${!presentationObject.variant.isPlain && !presentationObject.variant.isContrast}
+                notPlain.@if.1 = ${!presentationObject.variant.equals('plain') && !presentationObject.variant.equals('contrast')}
             }
 
             href = ${presentationObject.href}
-            href.@if.1 = ${presentationObject.type.isLink}
+            href.@if.1 = ${presentationObject.type.equals('link')}
 
             target = ${presentationObject.target}
-            target.@if.1 = ${presentationObject.type.isLink}
+            target.@if.1 = ${presentationObject.type.equals('link')}
 
             rel = ${presentationObject.rel}
-            rel.@if.1 = ${presentationObject.type.isLink}
+            rel.@if.1 = ${presentationObject.type.equals('link')}
         }
 
         content = PackageFactory.AtomicFusion.PresentationObjects:Slot {

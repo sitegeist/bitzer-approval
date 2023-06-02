@@ -14,37 +14,36 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
         <div class={[
             "[Block.Quotation]",
             "flex flex-col w-full relative",
-            presentationObject.variant.isRegular && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
-            presentationObject.variant.isExperience && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
-            presentationObject.variant.isLite && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
-            presentationObject.variant.isExcite && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
-            presentationObject.variant.isService && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
-            presentationObject.variant.isInline && "pt-[3px] pl-[25px] lg:pl-[40px]"
+            presentationObject.variant.equals('regular') && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
+            presentationObject.variant.equals('experience') && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
+            presentationObject.variant.equals('lite') && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
+            presentationObject.variant.equals('excite') && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
+            presentationObject.variant.equals('service') && "pl-[50px] lg:pl-[65px] max-w-quotation mx-auto",
+            presentationObject.variant.equals('inline') && "pt-[3px] pl-[25px] lg:pl-[40px]"
         ]}>
             <div class={[
                 "flex flex-col w-full",
-                presentationObject.variant.isInline && "space-y-ch-xs lg:space-y-ch"
+                presentationObject.variant.equals('inline') && "space-y-ch-xs lg:space-y-ch"
             ]}>
                 <div class={[
                     "font-serif-regular italic leading-tight lg:leading-snug",
-                    presentationObject.variant.isRegular && "text-3xl lg:text-largeHeadline",
-                    presentationObject.variant.isExperience && "text-3xl lg:text-largeHeadline",
-                    presentationObject.variant.isLite && "text-3xl lg:text-largeHeadline",
-                    presentationObject.variant.isExcite && "text-3xl lg:text-largeHeadline",
-                    presentationObject.variant.isService && "text-3xl lg:text-largeHeadline",
-
-                    presentationObject.variant.isInline && "text-2xl lg:text-3xl"
+                    presentationObject.variant.equals('regular') && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.equals('experience') && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.equals('lite') && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.equals('excite') && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.equals('service') && "text-3xl lg:text-largeHeadline",
+                    presentationObject.variant.equals('inline') && "text-2xl lg:text-3xl"
                 ]}>
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
                 </div>
                 <div class={[
                     "font-sans-bold mt-[10px]",
-                    presentationObject.variant.isRegular && "text-xl",
-                    presentationObject.variant.isExperience && "text-xl",
-                    presentationObject.variant.isLite && "text-xl",
-                    presentationObject.variant.isExcite && "text-xl",
-                    presentationObject.variant.isService && "text-xl",
-                    presentationObject.variant.isInline && "text-base"
+                    presentationObject.variant.equals('regular') && "text-xl",
+                    presentationObject.variant.equals('experience') && "text-xl",
+                    presentationObject.variant.equals('lite') && "text-xl",
+                    presentationObject.variant.equals('excite') && "text-xl",
+                    presentationObject.variant.equals('service') && "text-xl",
+                    presentationObject.variant.equals('inline') && "text-base"
                 ]}>
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.spokenByCharacter} />
                 </div>
@@ -52,14 +51,14 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
             <img
                 class={[
                     "absolute left-0",
-                    presentationObject.variant.isRegular && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
-                    presentationObject.variant.isExperience && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
-                    presentationObject.variant.isLite && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
-                    presentationObject.variant.isExcite && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
-                    presentationObject.variant.isService && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
-                    presentationObject.variant.isInline && "top-[5px] w-[18px] lg:w-[24px]"
+                    presentationObject.variant.equals('regular') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
+                    presentationObject.variant.equals('experience') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
+                    presentationObject.variant.equals('lite') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
+                    presentationObject.variant.equals('excite') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
+                    presentationObject.variant.equals('service') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
+                    presentationObject.variant.equals('inline') && "top-[5px] w-[18px] lg:w-[24px]"
                 ]}
-                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quoteVariants/'+presentationObject.variant+'.svg')}
+                src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/quoteVariants/' + presentationObject.variant.value + '.svg')}
             />
         </div>
     `

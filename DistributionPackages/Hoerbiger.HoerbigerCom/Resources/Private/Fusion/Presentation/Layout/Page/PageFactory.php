@@ -42,24 +42,11 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ImageSourceFactory $imageSourceFactory;
-
-    private SlidableFactory $slidableFactory;
-
-    private StageFactory $stageFactory;
-
-    private SiteHeaderFactory $siteHeaderFactory;
-
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
-        SlidableFactory $slidableFactory,
-        StageFactory $stageFactory,
-        SiteHeaderFactory $siteHeaderFactory
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly StageFactory $stageFactory,
+        private readonly SiteHeaderFactory $siteHeaderFactory
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->slidableFactory = $slidableFactory;
-        $this->stageFactory = $stageFactory;
-        $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
     public function forCareerPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
@@ -106,7 +93,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                             => (new LinkFactory())->forAnchor($anchor),
@@ -115,9 +102,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::regular(),
+                    ContentContainerVariant::VARIANT_REGULAR,
                     new AnimatedContentContainer(
-                        AnimatedContentContainerVariant::fadeAndTranslate(),
+                        AnimatedContentContainerVariant::VARIANT_FADE_AND_TRANSLATE,
                         new Headline(
                             HeadlineSize::SIZE_MEDIUM_ITALIC,
                             HeadlineColor::COLOR_NEUTRAL_CONTRAST,
@@ -125,21 +112,21 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                             Editable::fromNodeProperty($homepage, 'headline')
                         ),
                         AnimatedContentContainerFactory::getClassForVisibleContainer(
-                            AnimatedContentContainerVariant::fadeAndTranslate()
+                            AnimatedContentContainerVariant::VARIANT_FADE_AND_TRANSLATE
                         ),
                         AnimatedContentContainerFactory::getClassForInvisibleContainer(
-                            AnimatedContentContainerVariant::fadeAndTranslate()
+                            AnimatedContentContainerVariant::VARIANT_FADE_AND_TRANSLATE
                         ),
                     )
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::smallText(),
+                    ContentContainerVariant::VARIANT_SMALL_TEXT,
                     Collection::fromIterable(array_filter([
                         $homepage->getProperty('teaser_text_headline') || $inBackend
                             ? new Headline(
                                 HeadlineSize::SIZE_VERY_SMALL,
                                 HeadlineColor::COLOR_NEUTRAL_CONTRAST,
-                                HeadlineType::div(),
+                                HeadlineType::TYPE_DIV,
                                 Editable::fromNodeProperty($homepage, 'teaser_text_headline')
                             )
                             : null,
@@ -178,15 +165,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regular(),
+                    ContentContainerVariant::VARIANT_REGULAR,
                     (new SearchFormFactory())->create($subgraph)
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)
@@ -241,7 +228,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                             => (new LinkFactory())->forAnchor($anchor),
@@ -250,12 +237,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 Content::fromNode($contactPage->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
-                    ContentContainerVariant::blank(),
+                    ContentContainerVariant::VARIANT_BLANK,
                     (new ContactFormFactory())->create(
                         $site,
                         $language,
@@ -265,7 +252,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)
@@ -300,7 +287,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                             => (new LinkFactory())->forAnchor($anchor),
@@ -309,7 +296,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main')))
@@ -337,7 +324,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                             => (new LinkFactory())->forAnchor($anchor),
@@ -346,12 +333,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)

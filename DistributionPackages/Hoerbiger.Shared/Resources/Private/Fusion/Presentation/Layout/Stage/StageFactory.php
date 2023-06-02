@@ -119,7 +119,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         }
 
         return new VideoStage(
-            StageVariant::default(),
+            StageVariant::VARIANT_DEFAULT,
             null,
             new Headline(
                 HeadlineSize::SIZE_SUPER_LARGE,

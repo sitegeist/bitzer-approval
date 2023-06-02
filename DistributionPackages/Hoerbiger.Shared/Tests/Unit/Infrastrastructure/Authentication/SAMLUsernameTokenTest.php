@@ -7,7 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Tests\Unit\Infrastructure\Authentication;
 
 use GuzzleHttp\Psr7\ServerRequest;
 use GuzzleHttp\Psr7\Uri;
-use Hoerbiger\HoerbigerCom\Infrastructure\Authentication\SAMLUsernameToken;
+use Hoerbiger\Shared\Infrastructure\Authentication\SAMLUsernameToken;
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Flow\Tests\UnitTestCase;
 use PHPUnit\Framework\Assert;

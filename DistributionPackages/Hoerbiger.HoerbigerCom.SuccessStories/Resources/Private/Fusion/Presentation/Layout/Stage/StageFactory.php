@@ -5,7 +5,6 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Stage;
  * This file is part of the Hoerbiger.HoerbigerCom.SuccessStories package.
  */
 
-use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
@@ -20,7 +19,6 @@ use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StackStage\StackStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
-use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -30,36 +28,21 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class StageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ImageSourceFactory $imageSourceFactory;
-
-    private FigureFactory $figureFactory;
-
-    private FormattedDateFactory $formattedDateFactory;
-
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory,
-        FormattedDateFactory $formattedDateFactory
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->figureFactory = $figureFactory;
-        $this->formattedDateFactory = $formattedDateFactory;
     }
 
     public function forSuccessStoryIntroduction(TraversableNodeInterface $successStory, bool $inBackend): StageInterface
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($successStory, $inBackend, true);
 
-        /** @var Node $successStory */
-        $datePublished = $successStory->getProperty('datePublished') ?: $successStory->getCreationDateTime();
-        /** @var TraversableNodeInterface $successStory */
-
         return new StackStage(
-            StageVariant::stack(),
+            StageVariant::VARIANT_STACK,
             new Row(
-                RowVariant::alternateMetaline(),
+                RowVariant::VARIANT_ALTERNATEMETALINE,
                 Collection::fromIterable(array_filter([
-                    //Value::fromString($this->formattedDateFactory->createFullDate($datePublished)),
                     new CacheSegment(
                         Value::fromString(
                             $successStory->getProperty('applicationWorld')

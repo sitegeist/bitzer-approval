@@ -105,7 +105,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                             => (new LinkFactory())->forAnchor($anchor),
@@ -114,14 +114,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 new CacheSegment(
                     new ContentContainer(
-                        ContentContainerVariant::regular(),
+                        ContentContainerVariant::VARIANT_REGULAR,
                         new Grid(
-                            GridVariant::threeColumnsGap(),
+                            GridVariant::VARIANT_THREECOLUMNSGAP,
                             Collection::fromIterable((new CardFactory())->forIndustrySolutions($industrySolutions), $identity)
                         )
                     ),
@@ -129,7 +129,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($industrySolutions->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)
@@ -159,7 +159,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                             => (new LinkFactory())->forAnchor($anchor),
@@ -168,7 +168,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 Content::fromNode($industrySolution->findNamedChildNode(NodeName::fromString('main'))),
@@ -177,7 +177,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     'Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList'
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)
@@ -204,7 +204,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
                     ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
+                        AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
                             fn(Anchor $anchor): Link
                             => (new LinkFactory())->forAnchor($anchor),
@@ -213,12 +213,12 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                     : null,
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)

@@ -111,15 +111,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         )->findChildNodes(null, 3);
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::VARIANT_REGULAR,
             new CacheSegment(
                 new Box(
-                    BoxVariant::light(),
+                    BoxVariant::VARIANT_LIGHT,
                     new Stack(
-                        StackVariant::sm(),
+                        StackVariant::VARIANT_SM,
                         Collection::fromIterable([
                             new Grid(
-                                GridVariant::twoColumnsFrMaxGap(),
+                                GridVariant::VARIANT_TWOCOLUMNSFRMAXGAP,
                                 Collection::fromIterable([
                                     new Headline(
                                         HeadlineSize::SIZE_LARGE,
@@ -138,7 +138,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 ], $identity)
                             ),
                             new Grid(
-                                GridVariant::threeColumnsGap(),
+                                GridVariant::VARIANT_THREECOLUMNSGAP,
                                 Collection::fromIterable(
                                     $latestPressReleases,
                                     function (TraversableNodeInterface $pressRelease) use ($inBackend): ArticleCard {
@@ -204,10 +204,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     ): SlotInterface
     {
         $overViewButton = new Button(
-            ButtonType::link(),
-            ButtonVariant::contrast(),
+            ButtonType::TYPE_LINK,
+            ButtonVariant::VARIANT_CONTRAST,
             new Grid(
-                GridVariant::iconLeft(),
+                GridVariant::VARIANT_ICONLEFT,
                 Collection::fromIterable(array_filter([
                     new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
                     Value::fromString($this->getLabel('list.seeOverview') ?: '')
@@ -228,7 +228,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     : []
             ),
             function(Node $pressRelease) use($inBackend, $labels){
-                $pressVariant = PressVariant::fromNode($pressRelease);
+                $pressVariant = PressVariant::tryFromNode($pressRelease);
 
                 $datePublished = $this->formattedDateFactory->createFullDate(
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
@@ -258,7 +258,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     ?: ''
                             ),
                             Value::fromString(
-                                $labels['label.filter.' . $pressVariant->value]
+                                ($labels['label.filter.' . $pressVariant?->value] ?? '')
                                 . ' ' . $pressRelease->getProperty('edition')
                             ),
                             Value::fromString(
@@ -270,7 +270,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 ButtonType::TYPE_REGULAR,
                                 ButtonVariant::VARIANT_CONTRAST,
                                 new Grid(
-                                    GridVariant::iconLeft(),
+                                    GridVariant::VARIANT_ICONLEFT,
                                     Collection::fromIterable(array_filter([
                                         new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
                                         new Text(
@@ -290,19 +290,19 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
 
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::VARIANT_REGULAR,
             new Stack(
-                StackVariant::sm(),
+                StackVariant::VARIANT_SM,
                 Collection::fromIterable([
                     new Separator(
                         SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                         Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
                     ),
                     new Grid(
-                        GridVariant::twoColumnsThirdAutoGap(),
+                        GridVariant::VARIANT_TWOCOLUMNSTHIRDAUTOGAP,
                         Collection::fromIterable([
                             new Stack(
-                                StackVariant::sm(),
+                                StackVariant::VARIANT_SM,
                                 Collection::fromIterable(array_filter([
                                     $inBackend || $topNewsNode->getProperty('headline')
                                         ? new Headline(

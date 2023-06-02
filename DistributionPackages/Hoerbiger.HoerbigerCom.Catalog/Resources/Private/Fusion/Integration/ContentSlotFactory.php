@@ -37,9 +37,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     public function forProductListNode(TraversableNodeInterface $productListNode): SlotInterface
     {
         return new ContentContainer(
-            ContentContainerVariant::regular(),
+            ContentContainerVariant::VARIANT_REGULAR,
             new Grid(
-                GridVariant::threeColumnsGap(),
+                GridVariant::VARIANT_THREECOLUMNSGAP,
                 Collection::fromNodes(
                     $productListNode->findChildNodes(),
                     function (TraversableNodeInterface $groupedProduct) {

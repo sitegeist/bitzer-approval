@@ -5,14 +5,12 @@ namespace Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction;
  * This file is part of the MeisterWerke.MeisterwerkeCom package.
  */
 
-use Neos\Flow\Annotations as Flow;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-/**
- * @Flow\Proxy(false)
- */
 enum StageVariant: string
 {
+    use StringComponentVariant;
+
     case VARIANT_FULLMEDIATEXTLEFT = 'fullMediaTextLeft';
     case VARIANT_FULLMEDIATEXTRIGHT = 'fullMediaTextRight';
-
 }

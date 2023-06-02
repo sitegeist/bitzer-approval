@@ -183,7 +183,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
                 return $link->withContent(
                     new Grid(
-                        GridVariant::iconRight(),
+                        GridVariant::VARIANT_ICONRIGHT,
                         Collection::fromIterable([
                             new Tag(
                                 'span',
@@ -230,7 +230,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
 
                 return $link->withContent(
                     new Grid(
-                        GridVariant::iconRight(),
+                        GridVariant::VARIANT_ICONRIGHT,
                         Collection::fromIterable([
                             new Tag(
                                 'span',

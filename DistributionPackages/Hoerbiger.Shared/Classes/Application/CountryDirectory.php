@@ -24,6 +24,7 @@ class CountryDirectory
                     ->getRawData('localeDisplayNames/territories') as $rawCountryCode => $countryName) {
             $matches = [];
             \preg_match('/@type="(?<countryCode>[A-Z]+)"/s', $rawCountryCode, $matches);
+            /** @phpstan-ignore-next-line not sure whether is_string might still be false */
             if (isset($matches['countryCode']) && is_string($matches['countryCode'])) {
                 $countries[$matches['countryCode']] = new Country($matches['countryCode'], $countryName);
             }

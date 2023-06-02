@@ -17,7 +17,7 @@ final class TimelineFactory extends AbstractComponentPresentationObjectFactory
         return new Timeline(
             Collection::fromNodes(
                 $milestones->findChildNodes(),
-                function(TraversableNodeInterface $milestone): Content {
+                function (TraversableNodeInterface $milestone): Content {
                     return Content::fromNode($milestone, 'Hoerbiger.HoerbigerCom:ContentSlot');
                 }
             )

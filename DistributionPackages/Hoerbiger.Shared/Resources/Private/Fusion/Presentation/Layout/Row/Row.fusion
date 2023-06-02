@@ -12,37 +12,37 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
 
     renderer = afx`
         <div class={[
-            "[Layout.Row (" + presentationObject.variant + ")] flex",
-            presentationObject.variant.isAlternateMetalineEllipsis && "w-full"
+            "[Layout.Row (" + presentationObject.variant.value + ")] flex",
+            presentationObject.variant.equals('alternateMetalineEllipsis') && "w-full"
         ]}>
             <div class={[
                 "flex",
-                presentationObject.variant.isCh && "mt-minus-ch ml-minus-ch flex-wrap",
-                presentationObject.variant.isXs && "mt-minus-xs ml-minus-xs flex-wrap",
-                presentationObject.variant.isSm && "mt-minus-sm ml-minus-sm flex-wrap",
-                presentationObject.variant.isMd && "mt-minus-md ml-minus-md flex-wrap",
-                presentationObject.variant.isLg && "mt-minus-lg ml-minus-lg flex-wrap",
-                presentationObject.variant.isGallery && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center flex-wrap",
-                presentationObject.variant.isAlternateMetaline && "mt-minus-ch ml-minus-ch items-center flex-wrap",
-                presentationObject.variant.isAlternateMetalineEllipsis && "mt-minus-ch ml-minus-ch items-center flex-nowrap max-w-full min-w-0"
+                presentationObject.variant.equals('ch') && "mt-minus-ch ml-minus-ch flex-wrap",
+                presentationObject.variant.equals('xs') && "mt-minus-xs ml-minus-xs flex-wrap",
+                presentationObject.variant.equals('sm') && "mt-minus-sm ml-minus-sm flex-wrap",
+                presentationObject.variant.equals('md') && "mt-minus-md ml-minus-md flex-wrap",
+                presentationObject.variant.equals('lg') && "mt-minus-lg ml-minus-lg flex-wrap",
+                presentationObject.variant.equals('gallery') && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center flex-wrap",
+                presentationObject.variant.equals('alternateMetaline') && "mt-minus-ch ml-minus-ch items-center flex-wrap",
+                presentationObject.variant.equals('alternateMetalineEllipsis') && "mt-minus-ch ml-minus-ch items-center flex-nowrap max-w-full min-w-0"
             ]}>
                 <Neos.Fusion:Loop items={presentationObject.content.items}>
                     <div
                         class="mt-ch ml-ch text-light-contrast flex-shrink-0"
-                        @if.1={(presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && !iterator.isFirst}
+                        @if.1={(presentationObject.variant.equals('alternateMetaline') || presentationObject.variant.equals('alternateMetalineEllipsis')) && !iterator.isFirst}
                     >ꞏ</div>
                     <div class={[
-                        presentationObject.variant.isCh && "mt-ch ml-ch",
-                        presentationObject.variant.isXs && "mt-xs ml-xs",
-                        presentationObject.variant.isSm && "mt-sm ml-sm",
-                        presentationObject.variant.isMd && "mt-md ml-md",
-                        presentationObject.variant.isLg && "mt-lg ml-lg",
-                        presentationObject.variant.isGallery && "mt-xs ml-xs max-w-[350px] max-h-[700px] flex-grow",
-                        (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && "mt-ch ml-ch",
-                        (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isOdd && "text-light-contrast",
-                        (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isEven && "text-brand",
-                        presentationObject.variant.isAlternateMetalineEllipsis && "whitespace-nowrap overflow-hidden overflow-ellipsis",
-                        presentationObject.variant.isAlternateMetalineEllipsis && iterator.isFirst && "flex-shrink-0"
+                        presentationObject.variant.equals('ch') && "mt-ch ml-ch",
+                        presentationObject.variant.equals('xs') && "mt-xs ml-xs",
+                        presentationObject.variant.equals('sm') && "mt-sm ml-sm",
+                        presentationObject.variant.equals('md') && "mt-md ml-md",
+                        presentationObject.variant.equals('lg') && "mt-lg ml-lg",
+                        presentationObject.variant.equals('gallery') && "mt-xs ml-xs max-w-[350px] max-h-[700px] flex-grow",
+                        (presentationObject.variant.equals('alternateMetaline') || presentationObject.variant.equals('alternateMetalineEllipsis')) && "mt-ch ml-ch",
+                        (presentationObject.variant.equals('alternateMetaline') || presentationObject.variant.equals('alternateMetalineEllipsis')) && iterator.isOdd && "text-light-contrast",
+                        (presentationObject.variant.equals('alternateMetaline') || presentationObject.variant.equals('alternateMetalineEllipsis')) && iterator.isEven && "text-brand",
+                        presentationObject.variant.equals('alternateMetalineEllipsis') && "whitespace-nowrap overflow-hidden overflow-ellipsis",
+                        presentationObject.variant.equals('alternateMetalineEllipsis') && iterator.isFirst && "flex-shrink-0"
                     ]}>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item} />
                     </div>

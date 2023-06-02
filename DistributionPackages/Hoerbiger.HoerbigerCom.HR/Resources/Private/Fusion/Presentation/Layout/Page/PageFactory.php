@@ -61,15 +61,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument($jobList, $site, $subGraph, null),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $this->placeholderFactory->forJobList()
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)
@@ -83,7 +83,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         ActionRequest $request
     ): PageInterface {
         $content = new ContentContainer(
-            ContentContainerVariant::regularX(),
+            ContentContainerVariant::VARIANT_REGULARX,
             $this->placeholderFactory->forJob()
         );
 
@@ -103,7 +103,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         ActionRequest $request
     ): PageInterface {
         $content = new ContentContainer(
-            ContentContainerVariant::regularX(),
+            ContentContainerVariant::VARIANT_REGULARX,
             $this->placeholderFactory->forJobNotification()
         );
 
@@ -123,7 +123,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         ActionRequest $request
     ): PageInterface {
         $content = new ContentContainer(
-            ContentContainerVariant::regularX(),
+            ContentContainerVariant::VARIANT_REGULARX,
             $this->placeholderFactory->forJobApplication()
         );
 
@@ -148,7 +148,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 $content,
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)

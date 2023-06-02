@@ -68,13 +68,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
-                    ContentContainerVariant::headerStage(),
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
                     $stage
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularNeutral(),
+                    ContentContainerVariant::VARIANT_REGULARNEUTRAL,
                     new Stack(
-                        StackVariant::xsStretch(),
+                        StackVariant::VARIANT_XS_STRETCH,
                         Collection::fromIterable(array_filter([
                             $inBackend || $affiliateFinder->getProperty('applicationHeadline')
                                 ? new Headline(
@@ -96,7 +96,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     )
                 ),
                 new ContentContainer(
-                    ContentContainerVariant::regularX(),
+                    ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
             ]), $identity)

@@ -25,24 +25,24 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
     renderer = afx`
         <div
             class={[
-                "[Block.SiteHeader(" + presentationObject.variant + ")]"
+                "[Block.SiteHeader(" + presentationObject.variant.value + ")]"
             ]}
-            data-site-header-variant={presentationObject.variant}
+            data-site-header-variant={presentationObject.variant.value}
         >
             <div
                 class="bg-header-transparent h-[200px] absolute top-0 w-full z-[60]"
-                @if.1={(presentationObject.variant.value == 'transparent')}
+                @if.1={(presentationObject.variant.equals('transparent'))}
             >
             </div>
             <div
                 class="h-header"
-                @if.1={presentationObject.variant.value == 'regular'}
+                @if.1={presentationObject.variant.equals('regular')}
             ></div>
             <header
                 class={[
                     "w-full fixed z-header top-0 h-header",
-                    (presentationObject.variant.value == 'regular') && "text-service-darker bg-light",
-                    (presentationObject.variant.value == 'transparent') && "text-light navMain"
+                    (presentationObject.variant.equals('regular')) && "text-service-darker bg-light",
+                    (presentationObject.variant.equals('transparent')) && "text-light navMain"
                 ]}
             >
                 <div
@@ -84,7 +84,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                             data-active-main-link="1"
                                             data-active-main-link.@if.1={item.isActive}
                                             class={[
-                                                (presentationObject.variant.value == 'regular' && item.isActive) && "text-neutral-contrast"
+                                                (presentationObject.variant.equals('regular') && item.isActive) && "text-neutral-contrast"
                                             ]}
                                         >
                                             <Hoerbiger.Shared:Block.Link presentationObject={item.link} />

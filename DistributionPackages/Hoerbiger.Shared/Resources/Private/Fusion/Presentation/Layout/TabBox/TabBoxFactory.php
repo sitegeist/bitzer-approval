@@ -24,7 +24,7 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
     public function forTabBox(TraversableNodeInterface $tabBox, string $identifier, ?Theme $theme = null): TabBox
     {
         return new TabBox(
-            TabBoxVariant::regular(),
+            TabBoxVariant::VARIANT_REGULAR,
             Collection::fromNodes(
                 $tabBox->findChildNodes(),
                 function (TraversableNodeInterface $tabNode) use ($theme) {

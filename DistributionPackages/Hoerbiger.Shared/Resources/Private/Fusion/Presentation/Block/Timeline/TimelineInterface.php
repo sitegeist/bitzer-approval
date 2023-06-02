@@ -6,9 +6,9 @@ namespace Hoerbiger\Shared\Presentation\Block\Timeline;
  */
 
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CollectionInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 interface TimelineInterface extends ComponentPresentationObjectInterface
 {
-    public function getMilestones(): CollectionInterface;
+    public function getMilestones(): Collection;
 }

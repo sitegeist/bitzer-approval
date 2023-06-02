@@ -5,7 +5,6 @@ namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slider;
  * This file is part of the Hoerbiger.Shared package.
  */
 
-use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
@@ -13,7 +12,6 @@ use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
@@ -33,24 +31,11 @@ use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 
 final class SliderFactory extends AbstractComponentPresentationObjectFactory
 {
-    private StageFactory $stageFactory;
-
-    private ImageSourceFactory $imageSourceFactory;
-
-    private FigureFactory $figureFactory;
-
-    private VideoFactory $videoFactory;
-
     public function __construct(
-        StageFactory $stageFactory,
-        ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory,
-        VideoFactory $videoFactory
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
+        private readonly VideoFactory $videoFactory
     ) {
-        $this->stageFactory = $stageFactory;
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->figureFactory = $figureFactory;
-        $this->videoFactory = $videoFactory;
     }
 
     /**
@@ -58,21 +43,16 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
      */
     public function forSliderPreviewMixins(TraversableNodes $nodes, TraversableNodeInterface $productListNode, bool $inBackend): Slider
     {
-        $linkFactory = new LinkFactory();
-
         return new Slider(
-            SliderVariant::applicationWorld(),
-            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
-                $link = $linkFactory->forLinkToDocument($targetNode, null);
+            SliderVariant::VARIANT_APPLICATION_WORLD,
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
                 return $this->forSliderPreviewMixin($targetNode, $inBackend);
             }),
-            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
                 $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
                 if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
                     $thumbnailImageSource->setAsync(true);
                 }
-                $link = $linkFactory->forLinkToDocument($targetNode, null);
-
                 $thumNavigationItem = new SliderTextNavigationItem(
                     $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
                 );
@@ -91,9 +71,7 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
             ?: $targetNode->getProperty('headline')
                 ?: null;
 
-        $textContent = $targetNode->getProperty('slider__preview__description')
-            ? Value::fromString($targetNode->getProperty('slider__preview__description') ?: '')
-            : Value::fromString('');
+        $textContent = Value::fromString($targetNode->getProperty('slider__preview__description') ?: '');
 
         $mediaImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
         if ($mediaImageSource instanceof AssetImageSourceHelper) {
@@ -103,9 +81,9 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
         $mediaVideoSource = $targetNode->getProperty('video');
 
         return new SliderSlide(
-            StageVariant::fullMediaTextRight(),
+            StageVariant::VARIANT_FULLMEDIATEXTRIGHT,
             $mediaVideoSource
-                ? $this->videoFactory->forSliderVideo($targetNode, $inBackend, Theme::simpleLoop())
+                ? $this->videoFactory->forSliderVideo($targetNode, $inBackend, Theme::VALUE_SIMPLE_LOOP)
                 : ($mediaImageSource
                     ? $this->figureFactory->forSlideStageIcon($mediaImageSource)
                     : null)
@@ -115,10 +93,10 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
                 : null,
             $textContent,
             new Button(
-                ButtonType::link(),
-                ButtonVariant::plain(),
+                ButtonType::TYPE_LINK,
+                ButtonVariant::VARIANT_PLAIN,
                 new Grid(
-                    GridVariant::iconLeft(),
+                    GridVariant::VARIANT_ICONLEFT,
                     Collection::fromIterable(array_filter([
                         new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
                         Value::fromString(

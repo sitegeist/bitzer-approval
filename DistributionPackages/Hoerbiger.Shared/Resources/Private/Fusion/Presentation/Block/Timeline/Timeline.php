@@ -7,22 +7,22 @@ namespace Hoerbiger\Shared\Presentation\Block\Timeline;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CollectionInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
 /**
  * @Flow\Proxy(false)
  */
 final class Timeline extends AbstractComponentPresentationObject implements TimelineInterface
 {
-    private CollectionInterface $milestones;
+    private Collection $milestones;
 
     public function __construct(
-        CollectionInterface $milestones
+        Collection $milestones
     ) {
         $this->milestones = $milestones;
     }
 
-    public function getMilestones(): CollectionInterface
+    public function getMilestones(): Collection
     {
         return $this->milestones;
     }

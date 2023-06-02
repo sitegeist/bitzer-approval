@@ -12,82 +12,82 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
     }
 
     renderer = Neos.Fusion:Tag {
-        tagName = ${presentationObject.type}
+        tagName = ${presentationObject.type.value}
 
         attributes.class = Neos.Fusion:DataStructure {
-            name = ${"[Block.Headline (" + presentationObject.type + "_" + presentationObject.size + "_" + presentationObject.color + ")]"}
+            name = ${"[Block.Headline (" + presentationObject.type.value + "_" + presentationObject.size.value + "_" + presentationObject.color.value + ")]"}
 
             extraLarge = "font-sans-regular font-bold text-3xl sm:text-4xl lg:text-extraLarge xl:text-extraLarge"
-            extraLarge.@if.1 = ${presentationObject.size.isExtraLarge}
+            extraLarge.@if.1 = ${presentationObject.size.equals('extraLarge')}
 
             superLarge = "font-sans-regular text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
-            superLarge.@if.1 = ${presentationObject.size.isSuperLarge}
+            superLarge.@if.1 = ${presentationObject.size.equals('superLarge')}
 
             superLargeLight = "font-sans-light text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
-            superLargeLight.@if.1 = ${presentationObject.size.isSuperLargeLight}
+            superLargeLight.@if.1 = ${presentationObject.size.equals('superLargeLight')}
 
             large = "font-sans-regular text-3xl sm:text-4xl lg:text-largeHeadline lg:leading-largeHeadline"
-            large.@if.1 = ${presentationObject.size.isLarge}
+            large.@if.1 = ${presentationObject.size.equals('large')}
 
             largeCentered = "font-sans-regular text-3xl sm:text-4xl lg:text-largeHeadline xl:text-largeHeadline mx-auto"
-            largeCentered.@if.1 = ${presentationObject.size.isLargeCentered}
+            largeCentered.@if.1 = ${presentationObject.size.equals('largeCentered')}
 
             medium = "font-sans-bold text-2xl sm:text-3xl lg:text-4xl xl:text-5xl"
-            medium.@if.1 = ${presentationObject.size.isMedium}
+            medium.@if.1 = ${presentationObject.size.equals('medium')}
 
             mediumItalic = "uppercase font-sans-light text-2xl sm:text-3xl lg:text-4xl xl:text-5xl [&_strong]:font-sans-bold"
-            mediumItalic.@if.1 = ${presentationObject.size.isMediumItalic}
+            mediumItalic.@if.1 = ${presentationObject.size.equals('mediumItalic')}
 
             small = "font-sans-bold text-2xl sm:text-3xl lg:text-4xl xl:text-4xl"
-            small.@if.1 = ${presentationObject.size.isSmall}
+            small.@if.1 = ${presentationObject.size.equals('small')}
 
             tile = "font-sans-regular text-2xl sm:text-3xl"
-            tile.@if.1 = ${presentationObject.size.isTile}
+            tile.@if.1 = ${presentationObject.size.equals('tile')}
 
             tiny = "font-sans-bold text-xl sm:text-2xl lg:text-3xl xl:text-3xl"
-            tiny.@if.1 = ${presentationObject.size.isTiny}
+            tiny.@if.1 = ${presentationObject.size.equals('tiny')}
 
             verySmall = "font-sans-bold text-lg"
-            verySmall.@if.1 = ${presentationObject.size.isVerySmall}
+            verySmall.@if.1 = ${presentationObject.size.equals('verySmall')}
 
             verySmallItalic = "text-xl [&_strong]:font-sans-bold"
-            verySmallItalic.@if.1 = ${presentationObject.size.isVerySmallItalic}
+            verySmallItalic.@if.1 = ${presentationObject.size.equals('verySmallItalic')}
 
             headerStage = "text-3xl [&_strong]:font-sans-bold"
-            headerStage.@if.1 = ${presentationObject.size.isHeaderStage}
+            headerStage.@if.1 = ${presentationObject.size.equals('headerStage')}
 
             verySmallRegular = "text-[20px] font-sans-regular"
-            verySmallRegular.@if.1 = ${presentationObject.size.isVerySmallRegular}
+            verySmallRegular.@if.1 = ${presentationObject.size.equals('verySmallRegular')}
 
             colorBrand = "text-brand"
-            colorBrand.@if.1 = ${presentationObject.color.isBrand}
+            colorBrand.@if.1 = ${presentationObject.color.equals('brand')}
 
             colorWhite = "text-light"
-            colorWhite.@if.1 = ${presentationObject.color.isWhite}
+            colorWhite.@if.1 = ${presentationObject.color.equals('white')}
 
             colorExcite = "text-excite"
-            colorExcite.@if.1 = ${presentationObject.color.isExcite}
+            colorExcite.@if.1 = ${presentationObject.color.equals('excite')}
 
             colorExciteContrast = "text-excite-contrast"
-            colorExciteContrast.@if.1 = ${presentationObject.color.isExciteContrast}
+            colorExciteContrast.@if.1 = ${presentationObject.color.equals('exciteContrast')}
 
             colorExperience = "text-experience"
-            colorExperience.@if.1 = ${presentationObject.color.isExperience}
+            colorExperience.@if.1 = ${presentationObject.color.equals('experience')}
 
             colorExperienceContrast = "text-experience-contrast"
-            colorExperienceContrast.@if.1 = ${presentationObject.color.isExperienceContrast}
+            colorExperienceContrast.@if.1 = ${presentationObject.color.equals('experienceContrast')}
 
             colorLite = "text-lite"
-            colorLite.@if.1 = ${presentationObject.color.isLite}
+            colorLite.@if.1 = ${presentationObject.color.equals('lite')}
 
             colorLiteContrast = "text-lite-contrast"
-            colorLiteContrast.@if.1 = ${presentationObject.color.isLiteContrast}
+            colorLiteContrast.@if.1 = ${presentationObject.color.equals('liteContrast')}
 
             colorServiceContrast = "text-service-darker"
-            colorServiceContrast.@if.1 = ${presentationObject.color.isServiceContrast}
+            colorServiceContrast.@if.1 = ${presentationObject.color.equals('serviceContrast')}
 
             colorNeutralContrast = "text-neutral-contrast"
-            colorNeutralContrast.@if.1 = ${presentationObject.color.isNeutralContrast}
+            colorNeutralContrast.@if.1 = ${presentationObject.color.equals('neutralContrast')}
         }
 
         content = PackageFactory.AtomicFusion.PresentationObjects:Slot {

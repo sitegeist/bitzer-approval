@@ -211,22 +211,13 @@ final class ProductClass
 
     public function toTheme(): Theme
     {
-        switch ($this->class) {
-            case self::CLASS_EXCITE:
-            case self::CLASS_EXCITE_SERVICE:
-                return Theme::excite();
-            case self::CLASS_EXPERIENCE:
-            case self::CLASS_EXPERIENCE_SERVICE:
-                return Theme::experience();
-            case self::CLASS_LITE:
-            case self::CLASS_LITE_SERVICE:
-                return Theme::lite();
-            case self::CLASS_SERVICE:
-                return Theme::service();
-            case self::CLASS_DEFAULT:
-            default:
-                return Theme::default();
-        }
+        return match ($this->class) {
+            self::CLASS_EXCITE, self::CLASS_EXCITE_SERVICE => Theme::VALUE_EXCITE,
+            self::CLASS_EXPERIENCE, self::CLASS_EXPERIENCE_SERVICE => Theme::VALUE_EXPERIENCE,
+            self::CLASS_LITE, self::CLASS_LITE_SERVICE => Theme::VALUE_LITE,
+            self::CLASS_SERVICE => Theme::VALUE_SERVICE,
+            default => Theme::VALUE_DEFAULT,
+        };
     }
 
     public function __toString(): string

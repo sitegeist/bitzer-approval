@@ -56,7 +56,7 @@ final class StuffQuery
             $array['searchTerm'] ? SearchTerm::fromString($array['searchTerm']) : null,
             SortingProperty::from($array['sortingProperty']),
             $array['period'] ? SearchPeriod::from($array['period']) : null,
-            new SearchTypes(array_map(function (string $string): SearchType {
+            new SearchTypes(...array_map(function (string $string): SearchType {
                 return SearchType::from($string);
             }, $array['types'])),
             SearchPage::fromInt($array['page'])
