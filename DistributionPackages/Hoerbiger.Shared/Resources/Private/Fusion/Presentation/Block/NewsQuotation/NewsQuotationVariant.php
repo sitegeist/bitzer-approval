@@ -8,9 +8,10 @@ namespace Hoerbiger\Shared\Presentation\Block\NewsQuotation;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum NewsQuotationVariant: string
+enum NewsQuotationVariant: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

@@ -1,7 +1,7 @@
 prototype(Hoerbiger.Shared:Layout.Stage.ApplicationWorldNavStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
     renderer = afx`
         <div class={[
-            "[Layout.ApplicationWorldNavStage (" + presentationObject.variant + ")]",
+            "[Layout.ApplicationWorldNavStage (" + presentationObject.variant.value + ")]",
             "relative w-full h-full md:h-0 md:pt-ratio-2-1 bg-[#1B365D]"
         ]}>
             <div
@@ -19,12 +19,12 @@ prototype(Hoerbiger.Shared:Layout.Stage.ApplicationWorldNavStage) < prototype(Ho
 
             <div class={[
                 "relative px-[5px] pb-md pt-[80vmin] flex flex-col justify-center bg-transparent space-y-xs z-30 text-light",
-                (!presentationObject.variant.isFullMediaTextCenter) && "",
-                (!presentationObject.variant.isFullMediaTextCenter) && "md:-translate-y-1/2 md:bottom-auto md:top-1/2 md:max-w-[35%] md:w-full",
+                (!presentationObject.variant.equals('fullMediaTextCenter')) && "",
+                (!presentationObject.variant.equals('fullMediaTextCenter')) && "md:-translate-y-1/2 md:bottom-auto md:top-1/2 md:max-w-[35%] md:w-full",
                 "md:absolute md:inset-md md:p-sm",
-                presentationObject.variant.equals('fullMediaTextLeft') &&  "md:right-auto",
-                presentationObject.variant.equals('fullMediaTextRight') &&  "md:left-auto",
-                presentationObject.variant.isFullMediaTextCenter &&  "text-center mx-auto"
+                presentationObject.variant.equals('fullMediaTextLeft') && "md:right-auto",
+                presentationObject.variant.equals('fullMediaTextRight') && "md:left-auto",
+                presentationObject.variant.equals('fullMediaTextCenter') && "text-center mx-auto"
             ]}>
             </div>
         </div>

@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Headline;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum HeadlineType:string
+enum HeadlineType:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

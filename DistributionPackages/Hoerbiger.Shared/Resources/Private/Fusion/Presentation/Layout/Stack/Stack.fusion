@@ -8,15 +8,15 @@ prototype(Hoerbiger.Shared:Layout.Stack) < prototype(PackageFactory.AtomicFusion
             presentationObject.variant.equals('noGap') && "space-y-0 items-start",
             presentationObject.variant.equals('inline') && "space-y-[1ch] items-start",
             presentationObject.variant.equals('xs') && "space-y-xs items-start",
-            presentationObject.variant.equals('xsStretch') && "space-y-xs items-stretch",
+            presentationObject.variant.equals('xs_stretch') && "space-y-xs items-stretch",
             presentationObject.variant.equals('sm') && "space-y-sm items-start",
-            presentationObject.variant.equals('smStretch') && "space-y-sm items-stretch",
+            presentationObject.variant.equals('sm_stretch') && "space-y-sm items-stretch",
             presentationObject.variant.equals('md') && "space-y-md items-start",
-            presentationObject.variant.equals('mdStretch') && "space-y-md items-stretch",
+            presentationObject.variant.equals('md_stretch') && "space-y-md items-stretch",
             presentationObject.variant.equals('lg') && "space-y-lg items-start",
-            presentationObject.variant.equals('lgStretch') && "space-y-lg items-stretch",
+            presentationObject.variant.equals('lg_stretch') && "space-y-lg items-stretch",
             presentationObject.variant.equals('xl') && "space-y-xl items-start",
-            presentationObject.variant.equals('xlStretch') && "space-y-xl items-stretch",
+            presentationObject.variant.equals('xl_stretch') && "space-y-xl items-stretch",
             presentationObject.variant.equals('metaPress') && "space-y-[14px] items-start w-full items-center"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />

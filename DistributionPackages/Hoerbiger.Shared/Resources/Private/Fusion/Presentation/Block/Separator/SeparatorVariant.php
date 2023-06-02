@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Separator;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum SeparatorVariant: string
+enum SeparatorVariant: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

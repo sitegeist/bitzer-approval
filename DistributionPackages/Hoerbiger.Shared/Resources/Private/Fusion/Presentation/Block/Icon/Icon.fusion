@@ -41,7 +41,7 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
             size_4.@if.1 = ${presentationObject.size.equals('size_4')}
 
             size_parent = "w-full h-full"
-            size_parent.@if.1 = ${presentationObject.size.equals('sizeParent')}
+            size_parent.@if.1 = ${presentationObject.size.equals('size_parent')}
 
 
 

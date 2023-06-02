@@ -5,9 +5,10 @@ namespace Hoerbiger\HoerbigerCom\Presentation\EnumProvider\Introduction;
  * This file is part of the MeisterWerke.MeisterwerkeCom package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum StageVariant: string
+enum StageVariant: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

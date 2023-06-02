@@ -9,9 +9,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum LinkVariant: string
+enum LinkVariant: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

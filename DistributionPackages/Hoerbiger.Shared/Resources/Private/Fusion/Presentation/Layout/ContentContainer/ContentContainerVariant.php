@@ -5,8 +5,13 @@ namespace Hoerbiger\Shared\Presentation\Layout\ContentContainer;
  * This file is part of the Hoerbiger.Shared package.
  */
 
-enum ContentContainerVariant:string
+use Neos\Eel\ProtectedContextAwareInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
+
+enum ContentContainerVariant:string implements ProtectedContextAwareInterface
 {
+    use StringComponentVariant;
+
     case VARIANT_REGULAR = 'regular';
     case VARIANT_REGULARNEUTRAL = 'regularNeutral';
     case VARIANT_SNUG = 'snug';

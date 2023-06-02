@@ -6,9 +6,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Link;
  */
 
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum LinkTarget: string
+enum LinkTarget: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

@@ -8,9 +8,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum TabBoxVariant:string
+enum TabBoxVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

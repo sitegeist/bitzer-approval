@@ -9,9 +9,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Headline;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum HeadlineColor: string
+enum HeadlineColor: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

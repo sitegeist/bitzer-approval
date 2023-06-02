@@ -38,7 +38,7 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
                     <source src={presentationObject.source}/>
                 </video>
                 <div
-                    @if.1={presentationObject.figure && presentationObject.variant.value != 'slider' && presentationObject.variant.value != 'simpleLoop'}
+                    @if.1={presentationObject.figure && !presentationObject.variant.equals('slider') && !presentationObject.variant.equals('simpleLoop')}
                     data-select="poster"
                     class="absolute inset-0 cursor-pointer"
                 >
@@ -47,7 +47,7 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
                     <div class="w-32 h-32 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                         <img
                             class="w-full h-full object-contain rounded-full hover:shadow-play"
-                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircleVariants/'+presentationObject.variant+'.svg')}
+                            src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircleVariants/' + presentationObject.variant.value + '.svg')}
                         />
                     </div>
                 </div>

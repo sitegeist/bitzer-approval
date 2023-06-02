@@ -1,8 +1,9 @@
 prototype(Hoerbiger.Shared:Application.Tracking.MatomoTagManagerNoScript) < prototype(Neos.Fusion:Component) {
 
     renderer = ${'<!-- Matomo Image Tracker-->
-                    <noscript>
-                    <img referrerpolicy="no-referrer-when-downgrade" src=https://piwik.hoerbiger.com/matomo.php?idsite=39&amp;rec=1 style="border:0" alt="" />
-                    </noscript>
-                    <!-- End Matomo -->
-                    '}
+                        <noscript>
+                        <img referrerpolicy="no-referrer-when-downgrade" src=https://piwik.hoerbiger.com/matomo.php?idsite=39&amp;rec=1 style="border:0" alt="" />
+                        </noscript>
+                        <!-- End Matomo -->
+                        '}
+}

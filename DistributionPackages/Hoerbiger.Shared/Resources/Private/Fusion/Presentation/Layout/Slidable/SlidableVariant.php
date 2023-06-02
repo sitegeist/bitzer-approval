@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\Slidable;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum SlidableVariant:string
+enum SlidableVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

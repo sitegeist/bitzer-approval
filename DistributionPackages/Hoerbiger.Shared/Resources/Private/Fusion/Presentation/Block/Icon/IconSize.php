@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Icon;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum IconSize: string
+enum IconSize: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

@@ -9,9 +9,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Video;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum VideoVariant: string
+enum VideoVariant: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

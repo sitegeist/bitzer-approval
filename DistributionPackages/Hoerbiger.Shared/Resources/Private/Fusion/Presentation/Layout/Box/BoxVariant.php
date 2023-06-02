@@ -9,9 +9,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\Box;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum BoxVariant:string
+enum BoxVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

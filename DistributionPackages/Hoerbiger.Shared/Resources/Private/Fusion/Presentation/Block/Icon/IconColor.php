@@ -9,9 +9,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Icon;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum IconColor:string
+enum IconColor:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\Slider;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum SliderVariant:string
+enum SliderVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

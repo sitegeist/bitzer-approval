@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\Row;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum RowVariant:string
+enum RowVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

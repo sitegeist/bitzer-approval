@@ -9,9 +9,10 @@ namespace Hoerbiger\Shared\Presentation\Block\Quotation;
  */
 
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum QuotationVariant: string
+enum QuotationVariant: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

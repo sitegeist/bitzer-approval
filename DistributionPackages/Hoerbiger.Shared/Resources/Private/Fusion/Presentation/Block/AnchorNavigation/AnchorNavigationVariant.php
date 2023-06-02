@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Block\AnchorNavigation;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum AnchorNavigationVariant: string
+enum AnchorNavigationVariant: string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

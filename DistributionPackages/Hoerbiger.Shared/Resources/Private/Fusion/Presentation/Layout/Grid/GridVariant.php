@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\Grid;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum GridVariant:string
+enum GridVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 
@@ -16,7 +17,7 @@ enum GridVariant:string
     case VARIANT_TWOCOLUMNSNOGAP = 'twoColumnsNoGap';
     case VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
     case VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
-    case VARIANT_THREECOLUMNSNARROWGAP = 'threeColumnsnNarrowGap';
+    case VARIANT_THREECOLUMNSNARROWGAP = 'threeColumnsNarrowGap';
     case VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
     case VARIANT_TWOCOLUMNSTHIRDAUTOGAP = 'twoColumnsThirdAutoGap';
     case VARIANT_TWOCOLUMNSPRESS = 'twoColumnsPress';

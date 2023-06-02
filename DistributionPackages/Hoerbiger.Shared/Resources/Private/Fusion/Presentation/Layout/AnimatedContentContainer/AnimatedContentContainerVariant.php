@@ -5,9 +5,10 @@ namespace Hoerbiger\Shared\Presentation\Layout\AnimatedContentContainer;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Neos\Eel\ProtectedContextAwareInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\StringComponentVariant;
 
-enum AnimatedContentContainerVariant:string
+enum AnimatedContentContainerVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 

@@ -15,7 +15,7 @@ prototype(Hoerbiger.Shared:Layout.Slider.SliderSlide) < prototype(PackageFactory
 
     renderer = afx`
         <div class={[
-            "[Layout.Slider.SliderSlide (" + presentationObject.variant + ")]",
+            "[Layout.Slider.SliderSlide (" + presentationObject.variant.value + ")]",
             "relative w-full flex flex-col"
         ]}>
             <div

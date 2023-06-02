@@ -18,7 +18,7 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
 
     renderer = afx`
         <figure class={[
-            "[Block.Figure (" + (presentationObject.objectFit || "no-objectFit") + ", " + (presentationObject.objectPosition || "no-objectPosition") + ")]",
+            "[Block.Figure (" + (presentationObject.objectFit.value || "no-objectFit") + ", " + (presentationObject.objectPosition.value || "no-objectPosition") + ")]",
             "flex flex-col max-h-full relative",
             (presentationObject.objectFit.equals('cover') || presentationObject.objectFit.equals('contain')) && "w-full h-full"
         ]}>
@@ -38,10 +38,10 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
                     presentationObject.objectPosition.equals('left') && "object-left",
                     presentationObject.objectPosition.equals('right') && "object-right",
                     presentationObject.objectPosition.equals('bottom') && "object-bottom",
-                    presentationObject.objectPosition.equals('leftTop') && "object-left-top",
-                    presentationObject.objectPosition.equals('leftBottom') && "object-left-bottom",
-                    presentationObject.objectPosition.equals('rightTop') && "object-right-top",
-                    presentationObject.objectPosition.equals('rightBottom') && "object-right-bottom"
+                    presentationObject.objectPosition.equals('topLeft') && "object-left-top",
+                    presentationObject.objectPosition.equals('bottomLeft') && "object-left-bottom",
+                    presentationObject.objectPosition.equals('topRight') && "object-right-top",
+                    presentationObject.objectPosition.equals('bottomRight') && "object-right-bottom"
                 ]), ' ')}
             />
             <figcaption
