@@ -23,7 +23,7 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.isSm && "mt-minus-sm ml-minus-sm flex-wrap",
                 presentationObject.variant.isMd && "mt-minus-md ml-minus-md flex-wrap",
                 presentationObject.variant.isLg && "mt-minus-lg ml-minus-lg flex-wrap",
-                presentationObject.variant.isGallery && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center flex-wrap  gap-y-14",
+                presentationObject.variant.isGallery && "flex-grow mt-minus-xs justify-center items-center flex-wrap gap-14",
                 presentationObject.variant.isAlternateMetaline && "mt-minus-ch ml-minus-ch items-center flex-wrap",
                 presentationObject.variant.isAlternateMetalineEllipsis && "mt-minus-ch ml-minus-ch items-center flex-nowrap max-w-full min-w-0"
             ]}>
@@ -38,7 +38,7 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                         presentationObject.variant.isSm && "mt-sm ml-sm",
                         presentationObject.variant.isMd && "mt-md ml-md",
                         presentationObject.variant.isLg && "mt-lg ml-lg",
-                        presentationObject.variant.isGallery && "mt-xs ml-xs max-w-[300px] max-h-[700px] flex-grow",
+                        presentationObject.variant.isGallery && "mt-xs max-w-[300px] flex-grow",
                         (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && "mt-ch ml-ch",
                         (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isOdd && "text-light-contrast",
                         (presentationObject.variant.isAlternateMetaline || presentationObject.variant.isAlternateMetalineEllipsis) && iterator.isEven && "text-brand",

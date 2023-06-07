@@ -670,7 +670,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
 
         return new Stack(
-            StackVariant::xs(),
+            StackVariant::px16(),
             Collection::fromIterable([
                 $this->figureFactory->forGalleryImage($imageSource),
                 new Text(
