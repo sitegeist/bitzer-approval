@@ -159,6 +159,6 @@ details summary::-webkit-details-marker {
 
 u {
 	text-decoration: none;
-	font-weight: bold;
+	font-family: "TradeGothicNextBold", sans-serif;
 	color: red;
 }

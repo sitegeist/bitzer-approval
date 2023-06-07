@@ -36,6 +36,7 @@ const SPACES = {
 	'minus-lg': `calc(-3 * ${SPACE_SM})`,
 	'minus-xl': `calc(-4 * ${SPACE_SM})`,
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
+	'25': '25px',
 };
 
 const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
