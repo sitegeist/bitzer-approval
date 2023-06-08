@@ -191,13 +191,23 @@ module.exports = {
 							fontFamily: theme('fontFamily.sans-bold')
 						},
 						a: {
-							color: theme('colors.brand.DEFAULT'),
+							color: theme('colors.neutral.contrast'),
 							fontFamily: theme('fontFamily.sans-bold'),
 							fontWeight: 600,
 							textDecoration: 'none',
 						},
+						'ul': {
+							listStyleType: 'none',
+						},
+						'ul li': {
+							marginBottom: '.3em',
+						},
 						'ul li::before': {
-							backgroundColor: theme('colors.light.contrast'),
+							display: 'inline-block',
+							width: '1em',
+							marginLeft: '-1em',
+							content: '"\u2013"',
+							color: theme('colors.service.red'),
 						},
 						p: {
 							marginTop: 0,
