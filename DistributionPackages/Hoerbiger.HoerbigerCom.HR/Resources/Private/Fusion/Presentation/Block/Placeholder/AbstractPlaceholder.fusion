@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom.HR:Block.AbstractPlaceholder) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\HR\\Presentation\\Block\\Placeholder\\Placeholder'
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\HR\\Presentation\\Block\\Placeholder\\AbstractPlaceholder'
 
     @styleguide {
         title = 'Placeholder'

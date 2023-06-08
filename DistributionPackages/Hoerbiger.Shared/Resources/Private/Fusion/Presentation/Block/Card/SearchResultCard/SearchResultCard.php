@@ -7,9 +7,17 @@ namespace Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard;
 
 use Hoerbiger\Shared\Presentation\Block\Card\AbstractCard;
 use Neos\Flow\Annotations as Flow;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 #[Flow\Proxy(false)]
-final class SearchResultCard extends AbstractCard
-{
+final class SearchResultCard extends AbstractComponentPresentationObject{
+    public function __construct(
+        public readonly ?SlotInterface $media,
+        public readonly ?SlotInterface $header,
+        public readonly ?SlotInterface $subheader,
+        public readonly ?SlotInterface $supportingText,
+        public readonly ?SlotInterface $buttons
+    ) {
+    }
 }

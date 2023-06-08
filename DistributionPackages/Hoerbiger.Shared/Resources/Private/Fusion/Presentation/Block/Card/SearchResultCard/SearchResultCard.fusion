@@ -1,4 +1,5 @@
-prototype(Hoerbiger.Shared:Block.Card.SearchResultCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+prototype(Hoerbiger.Shared:Block.Card.SearchResultCard) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\card\\SearchResultCard\\SearchResultCard'
     renderer = afx`
         <div class={[
             "[Block.Card.SearchResultCard]",
