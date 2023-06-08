@@ -241,9 +241,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $node->getProperty('metaHeadline')
                         ? new Separator(
-                        SeparatorVariant::fullWidthWithContent(),
-                        Editable::fromNodeProperty($node, 'metaHeadline')
-                    ): null,
+                            SeparatorVariant::fullWidthWithContent(),
+                            Editable::fromNodeProperty($node, 'metaHeadline')
+                        ): null,
                     $partialFigureEclipse
                 ]))
             )
