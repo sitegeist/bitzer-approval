@@ -454,8 +454,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::large(),
-                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                            HeadlineSize::mediumItalic(),
+                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textWithImageNode, 'headline')
                         )
