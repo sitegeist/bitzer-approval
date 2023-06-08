@@ -36,7 +36,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                     presentationObject.variant.isInline && "text-2xl lg:text-3xl"
                 ]}>
                     <Neos.Fusion:Augmenter
-                        class="after:content-quoteEnd after:-ml-3"
+                        class="after:content-quoteEnd"
                         @if.1={presentationObject.variant.isRegular}
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text}/>
