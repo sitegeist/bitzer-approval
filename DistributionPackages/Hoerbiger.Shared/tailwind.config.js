@@ -198,6 +198,7 @@ module.exports = {
 						},
 						'ul': {
 							listStyleType: 'none',
+							padding: '12px',
 						},
 						'ul li': {
 							marginBottom: '.3em',
