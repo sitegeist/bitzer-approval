@@ -287,6 +287,61 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         $columns = Columns::from($textNode->getProperty('columns') ?: Columns::VALUE_MAX_TWO);
 
+        $headline = new Headline(
+            HeadlineSize::mediumItalic(),
+            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
+            HeadlineType::h2(),
+            Editable::fromNodeProperty($textNode, 'headline')
+        );
+
+        $text = new Text(
+            TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
+            Editable::fromNodeProperty($textNode, 'text'),
+            $columns->getIsMaxTwo()
+        );
+
+        if ($textNode->getProperty('columns') === Columns::VALUE_MAX_ONE_HEADLINE_LEFT_SIDE) {
+            $content[] = new Grid(
+                GridVariant::twoColumnsThirdBigGap(),
+                Collection::fromIterable(array_filter([
+                    $headline,
+                    Collection::fromIterable(array_filter([
+                        $text,
+                        $inBackend || $textNode->getProperty('link__target')
+                            ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
+                            : null
+                    ]), $identity)
+                ]), $identity)
+            );
+        } else if ($textNode->getProperty('columns') === Columns::VALUE_MAX_ONE_HEADLINE_TEXT_SMALL) {
+            $content = [
+                $inBackend || $textNode->getProperty('headline')
+                    ? $headline
+                    : null,
+                $inBackend || $textNode->getProperty('text')
+                    ? new ContentContainer(
+                    ContentContainerVariant::smallText(),
+                    $text
+                )
+                    : null,
+                $inBackend || $textNode->getProperty('link__target')
+                    ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
+                    : null
+            ];
+        } else {
+            $content = [
+                $inBackend || $textNode->getProperty('headline')
+                    ? $headline
+                    : null,
+                $inBackend || $textNode->getProperty('text')
+                    ? $text
+                    : null,
+                $inBackend || $textNode->getProperty('link__target')
+                    ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
+                    : null
+            ];
+        }
+
         return new ContentContainer(
             ContentContainerVariant::regular(),
             new Stack(
@@ -294,35 +349,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textNode->getProperty('metaHeadline')
                         ? new Separator(
-                        SeparatorVariant::fullWidthWithContent(),
-                        Editable::fromNodeProperty($textNode, 'metaHeadline')
-                    ): null,
-                new ContentContainer(
-                $columns->getIsMaxOne()
-                    ? ContentContainerVariant::tightX()
-                    : ContentContainerVariant::blank(),
+                            SeparatorVariant::fullWidthWithContent(),
+                            Editable::fromNodeProperty($textNode, 'metaHeadline')
+                        ): null,
+                    new ContentContainer(
+                        $columns->getIsMaxOne()
+                            ? ContentContainerVariant::tightX()
+                            : ContentContainerVariant::blank(),
                         new Stack(
                             StackVariant::xs(),
-                            Collection::fromIterable(array_filter([
-                                $inBackend || $textNode->getProperty('headline')
-                                    ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
-                                    HeadlineType::h2(),
-                                    Editable::fromNodeProperty($textNode, 'headline')
-                                )
-                                    : null,
-                                $inBackend || $textNode->getProperty('text')
-                                    ? new Text(
-                                    TextVariant::tryFromTheme($theme, false) ?: TextVariant::lightContrast(),
-                                    Editable::fromNodeProperty($textNode, 'text'),
-                                    $columns->getIsMaxTwo()
-                                )
-                                    : null,
-                                $inBackend || $textNode->getProperty('link__target')
-                                    ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
-                                    : null
-                            ]), $identity)
+                            Collection::fromIterable(array_filter(
+                                $content
+                            ), $identity)
                         )
                     )
                 ]))

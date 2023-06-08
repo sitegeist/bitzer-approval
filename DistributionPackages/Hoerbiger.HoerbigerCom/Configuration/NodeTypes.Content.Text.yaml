@@ -8,6 +8,9 @@
     label: 'Text'
     icon: align-left
   properties:
+    headline:
+      options:
+        preset: 'rte.plain'
     metaHeadline:
       options:
         preset: 'rte.plainWithStrong'

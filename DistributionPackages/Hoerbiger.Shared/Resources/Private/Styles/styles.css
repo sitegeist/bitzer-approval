@@ -82,7 +82,7 @@ text-decoration:underline;
 }
 
 li::marker {
-color:#000;
+	color: #FF2424;
 }
 
 /* css details auf dem Iphone */
