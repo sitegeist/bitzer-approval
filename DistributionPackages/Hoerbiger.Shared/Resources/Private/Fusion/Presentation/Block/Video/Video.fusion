@@ -13,8 +13,9 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
     renderer = afx`
         <div class={[
             "[Block.Video (" + presentationObject.variant.value + ")]",
-            "flex justify-center items-center relative bg-[black]",
+            "flex justify-center items-center relative ",
             presentationObject.caption && "pb-touch",
+            presentationObject.variant.value == 'slider' && "bg-[black]",
             (presentationObject.variant.value == 'slider' || presentationObject.variant.value == 'simpleLoop') && "w-full h-full"
         ]}>
             <div
