@@ -787,19 +787,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ): null,
                     new Box(
                         BoxVariant::tryFromTheme($theme) ?: BoxVariant::decorative(),
-                        new Stack(
-                            StackVariant::xsStretch(),
-                            Collection::fromIterable(array_filter([
-                                $inBackend || $tabBox->getProperty('headline')
-                                    ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
-                                    HeadlineType::div(),
-                                    Editable::fromNodeProperty($tabBox, 'headline')
-                                )
-                                    : null,
-                                (new TabBoxFactory())->forTabBox($tabBox, $identifier, $theme)
-                            ]), $identity)
+                        (new TabBoxFactory())->forTabBox(
+                            $inBackend || $tabBox->getProperty('headline')
+                                ? new Headline(
+                                HeadlineSize::mediumItalic(),
+                                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
+                                HeadlineType::div(),
+                                Editable::fromNodeProperty($tabBox, 'headline')
+                            )
+                                : null,
+                            $tabBox,
+                            $identifier,
+                            $theme
                         ),
                         $identifier
                     )
