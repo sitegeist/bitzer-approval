@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 presentationObject.variant.isInline && "space-y-ch-xs lg:space-y-ch"
             ]}>
                 <div class={[
-                    "font-serif-regular italic leading-tight lg:leading-snug",
+                    "font-serif-regular italic leading-tight lg:leading-snug relative",
                     presentationObject.variant.isRegular && "text-3xl lg:text-largeHeadline",
                     presentationObject.variant.isExperience && "text-3xl lg:text-largeHeadline",
                     presentationObject.variant.isLite && "text-3xl lg:text-largeHeadline",
@@ -35,11 +35,23 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
 
                     presentationObject.variant.isInline && "text-2xl lg:text-3xl"
                 ]}>
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
+                    <Neos.Fusion:Augmenter
+                        class="after:content-quoteEnd after:-ml-3"
+                        @if.1={presentationObject.variant.isRegular}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text}/>
+                    </Neos.Fusion:Augmenter>
+                    <span
+                        class="absolute right-full top-0"
+                        @if.1={presentationObject.variant.isRegular}
+                    >
+                        &#8222;
+                    </span>
                 </div>
                 <div class={[
-                    "font-sans-bold mt-[10px]",
-                    presentationObject.variant.isRegular && "text-xl",
+                    "mt-[10px]",
+                    !presentationObject.variant.isRegular && "font-sans-bold",
+                    presentationObject.variant.isRegular && "text-xl font-sans-regular sm:self-end sm:pr-xl",
                     presentationObject.variant.isExperience && "text-xl",
                     presentationObject.variant.isLite && "text-xl",
                     presentationObject.variant.isExcite && "text-xl",
@@ -50,9 +62,9 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 </div>
             </div>
             <img
+                @if.1={!presentationObject.variant.isRegular}
                 class={[
                     "absolute left-0",
-                    presentationObject.variant.isRegular && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
                     presentationObject.variant.isExperience && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
                     presentationObject.variant.isLite && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
                     presentationObject.variant.isExcite && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",

@@ -485,7 +485,11 @@ module.exports = {
 
 			aspectRatio: {
 				'5/3': '5 / 3',
-			}
+			},
+
+			content: {
+				'quoteEnd': '"\\201D"',
+			},
 		},
 	},
 	variants: {

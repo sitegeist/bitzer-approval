@@ -635,10 +635,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         SeparatorVariant::fullWidthWithContent(),
                         Editable::fromNodeProperty($quotationNode, 'metaHeadline')
                     ): null,
-                    new Quotation(
-                        QuotationVariant::tryFromTheme($theme),
-                        Editable::fromNodeProperty($quotationNode, 'text'),
-                        Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+                    new ContentContainer(
+                        ContentContainerVariant::tightX(),
+                        new Quotation(
+                            QuotationVariant::tryFromTheme($theme),
+                            Editable::fromNodeProperty($quotationNode, 'text'),
+                            Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+                        )
                     )
                 ]))
             )
