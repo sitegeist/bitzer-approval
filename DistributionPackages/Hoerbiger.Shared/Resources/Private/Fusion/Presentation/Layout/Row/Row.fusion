@@ -23,7 +23,7 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.isSm && "mt-minus-sm ml-minus-sm flex-wrap",
                 presentationObject.variant.isMd && "mt-minus-md ml-minus-md flex-wrap",
                 presentationObject.variant.isLg && "mt-minus-lg ml-minus-lg flex-wrap",
-                presentationObject.variant.isGallery && "flex-grow mt-minus-xs justify-center items-center flex-wrap gap-14",
+                presentationObject.variant.isGallery && "flex-grow mt-minus-xs justify-center items-center flex-wrap gap-[50px]",
                 presentationObject.variant.isAlternateMetaline && "mt-minus-ch ml-minus-ch items-center flex-wrap",
                 presentationObject.variant.isAlternateMetalineEllipsis && "mt-minus-ch ml-minus-ch items-center flex-nowrap max-w-full min-w-0"
             ]}>
