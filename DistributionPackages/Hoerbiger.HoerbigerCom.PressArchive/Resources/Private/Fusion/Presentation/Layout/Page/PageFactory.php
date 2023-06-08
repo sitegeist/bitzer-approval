@@ -13,7 +13,6 @@ use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVar
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
 use Hoerbiger\Shared\Domain\Anchor;
 use Hoerbiger\Shared\Domain\Sailor;
-use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -40,6 +39,7 @@ use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;

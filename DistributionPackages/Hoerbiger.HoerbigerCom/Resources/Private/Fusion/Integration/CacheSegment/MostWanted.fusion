@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom:CacheSegment.MostWanted) < prototype(Hoerbiger.Shared:CacheSegment) {
+prototype(Hoerbiger.HoerbigerCom:CacheSegment.MostWanted) < prototype(PackageFactory.AtomicFusion.PresentationObjects:CacheSegment) {
     @cache {
         entryIdentifier {
             node = ${node}

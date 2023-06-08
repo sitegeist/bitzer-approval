@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.AbstractCard) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Card\\Card'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Card\\AbstractCard'
 
     @styleguide {
         title = 'Card'

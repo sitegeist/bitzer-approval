@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList) < prototype(Hoerbiger.Shared:CacheSegment) {
+prototype(Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:CacheSegment) {
     @cache {
         entryIdentifier {
             documentNode = ${documentNode}

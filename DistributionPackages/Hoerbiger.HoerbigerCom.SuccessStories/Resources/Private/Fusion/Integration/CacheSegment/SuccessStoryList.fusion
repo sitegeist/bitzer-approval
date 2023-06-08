@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList) < prototype(Hoerbiger.Shared:CacheSegment) {
+prototype(Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:CacheSegment) {
     @cache {
         entryIdentifier {
             documentNode = ${documentNode}

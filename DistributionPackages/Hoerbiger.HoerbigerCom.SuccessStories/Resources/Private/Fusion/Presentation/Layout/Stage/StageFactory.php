@@ -5,7 +5,6 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Stage;
  * This file is part of the Hoerbiger.HoerbigerCom.SuccessStories package.
  */
 
-use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
@@ -20,6 +19,7 @@ use Hoerbiger\Shared\Presentation\Layout\Stage\StackStage\StackStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;

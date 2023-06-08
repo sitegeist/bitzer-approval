@@ -8,13 +8,11 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Page;
 
-use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\Shared\Domain\Anchor;
 use Hoerbiger\Shared\Domain\Sailor;
-use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -36,13 +34,14 @@ use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBox;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxVariant;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
+use Neos\Flow\Annotations as Flow;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {

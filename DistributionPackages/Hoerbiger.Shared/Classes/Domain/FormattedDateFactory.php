@@ -10,9 +10,7 @@ use Neos\Flow\I18n\Formatter\DatetimeFormatter;
 use Neos\Flow\I18n\Service as LocalizationService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 
-/**
- * @Flow\Scope("singleton")
- */
+#[Flow\Scope('singleton')]
 final class FormattedDateFactory extends AbstractComponentPresentationObjectFactory
 {
     private LocalizationService $localizationService;

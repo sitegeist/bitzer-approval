@@ -8,7 +8,6 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
-use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
@@ -16,43 +15,42 @@ use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
-use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
-use Hoerbiger\Shared\Presentation\Block\MatomoOptOut\MatomoOptOut;
-use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
-use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
-use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
-use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
-use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
-use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
-use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
-use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
+use Hoerbiger\Shared\Presentation\Block\MatomoOptOut\MatomoOptOut;
 use Hoerbiger\Shared\Presentation\Block\NewsQuotation\NewsQuotation;
 use Hoerbiger\Shared\Presentation\Block\NewsQuotation\NewsQuotationVariant;
 use Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse\PartialFigureEclipseFactory;
 use Hoerbiger\Shared\Presentation\Block\PeopleStory\PeopleStory;
 use Hoerbiger\Shared\Presentation\Block\Quotation\Quotation;
 use Hoerbiger\Shared\Presentation\Block\Quotation\QuotationVariant;
+use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
+use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
 use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
+use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns;
+use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
+use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
+use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Row\Row;
@@ -67,15 +65,14 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
-/**
- * @Flow\Scope("singleton")
- */
+#[Flow\Scope('singleton')]
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
     private CardFactory $cardFactory;

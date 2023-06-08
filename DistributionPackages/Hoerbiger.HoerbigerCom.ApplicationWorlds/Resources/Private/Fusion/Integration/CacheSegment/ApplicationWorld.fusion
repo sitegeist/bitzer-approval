@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom.ApplicationWorlds:CacheSegment.ApplicationWorld) < prototype(Hoerbiger.Shared:CacheSegment) {
+prototype(Hoerbiger.HoerbigerCom.ApplicationWorlds:CacheSegment.ApplicationWorld) < prototype(PackageFactory.AtomicFusion.PresentationObjects:CacheSegment) {
     @cache {
         entryIdentifier {
             documentNode = ${documentNode}

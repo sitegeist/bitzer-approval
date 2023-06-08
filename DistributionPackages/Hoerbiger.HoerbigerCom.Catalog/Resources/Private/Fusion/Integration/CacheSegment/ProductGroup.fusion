@@ -1,4 +1,4 @@
-prototype(Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup) < prototype(Hoerbiger.Shared:CacheSegment) {
+prototype(Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductGroup) < prototype(PackageFactory.AtomicFusion.PresentationObjects:CacheSegment) {
     @cache {
         entryIdentifier {
             node = ${node}
