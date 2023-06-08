@@ -13,6 +13,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
  */
 final class RowVariant implements PseudoEnumInterface
 {
+    const VARIANT_BLANK = 'blank';
     const VARIANT_CH = 'ch';
     const VARIANT_XS = 'xs';
     const VARIANT_SM = 'sm';
@@ -37,7 +38,8 @@ final class RowVariant implements PseudoEnumInterface
     public static function from(string $string): self
     {
         if (!isset(self::$instances[$string])) {
-            if ($string !== self::VARIANT_CH
+            if ($string !== self::VARIANT_BLANK
+                && $string !== self::VARIANT_CH
                 && $string !== self::VARIANT_XS
                 && $string !== self::VARIANT_SM
                 && $string !== self::VARIANT_MD
@@ -51,6 +53,11 @@ final class RowVariant implements PseudoEnumInterface
         }
 
         return self::$instances[$string];
+    }
+
+    public static function blank(): self
+    {
+        return self::from(self::VARIANT_BLANK);
     }
 
     public static function ch(): self
@@ -91,6 +98,11 @@ final class RowVariant implements PseudoEnumInterface
     public static function alternateMetalineEllipsis(): self
     {
         return self::from(self::VARIANT_ALTERNATEMETALINE_ELLIPSIS);
+    }
+
+    public function getIsBlank(): bool
+    {
+        return $this->value === self::VARIANT_BLANK;
     }
 
     public function getIsCh(): bool
@@ -139,6 +151,7 @@ final class RowVariant implements PseudoEnumInterface
     public static function cases(): array
     {
         return [
+            self::from(self::VARIANT_BLANK),
             self::from(self::VARIANT_CH),
             self::from(self::VARIANT_XS),
             self::from(self::VARIANT_SM),

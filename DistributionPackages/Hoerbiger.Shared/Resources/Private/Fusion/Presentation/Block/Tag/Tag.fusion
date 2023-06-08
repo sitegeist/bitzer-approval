@@ -16,6 +16,10 @@ prototype(Hoerbiger.Shared:Block.Tag) < prototype(PackageFactory.AtomicFusion.Pr
         attributes.class = Neos.Fusion:Join {
             brandColor = "text-brand"
             brandColor.@if.1 = ${presentationObject.variant.isBrandColor}
+            brandColorBold = "text-warning font-semibold"
+            brandColorBold.@if.1 = ${presentationObject.variant.isBrandColorBold}
+            brandColorLight = "text-warning font-light"
+            brandColorLight.@if.1 = ${presentationObject.variant.isBrandColorLight}
             brandColorContrast = "text-brand-contrast"
             brandColorContrast.@if.1 = ${presentationObject.variant.isBrandColorContrast}
             transparent = "text-[transparent]"

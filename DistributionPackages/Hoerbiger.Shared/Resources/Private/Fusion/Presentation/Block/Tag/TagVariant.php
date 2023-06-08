@@ -14,6 +14,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class TagVariant implements PseudoEnumInterface
 {
     const VARIANT_BRANDCOLOR = 'brandColor';
+    const VARIANT_BRANDCOLOR_BOLD = 'brandColorBold';
+    const VARIANT_BRANDCOLOR_LIGHT = 'brandColorLight';
     const VARIANT_BRANDCOLOR_CONTRAST = 'brandColorContrast';
     const VARIANT_TRANSPARENT = 'transparent';
     const VARIANT_HEIGHT_FULL = 'heightFull';
@@ -35,6 +37,8 @@ final class TagVariant implements PseudoEnumInterface
         if (!isset(self::$instances[$string])) {
             if (
                 $string !== self::VARIANT_BRANDCOLOR
+                && $string !== self::VARIANT_BRANDCOLOR_BOLD
+                && $string !== self::VARIANT_BRANDCOLOR_LIGHT
                 && $string !== self::VARIANT_BRANDCOLOR_CONTRAST
                 && $string !== self::VARIANT_TRANSPARENT
                 && $string !== self::VARIANT_HEIGHT_FULL
@@ -50,6 +54,16 @@ final class TagVariant implements PseudoEnumInterface
     public static function brandColor(): self
     {
         return self::from(self::VARIANT_BRANDCOLOR);
+    }
+
+    public static function brandColorBold(): self
+    {
+        return self::from(self::VARIANT_BRANDCOLOR_BOLD);
+    }
+
+    public static function brandColorLight(): self
+    {
+        return self::from(self::VARIANT_BRANDCOLOR_LIGHT);
     }
 
     public static function brandColorContrast(): self
@@ -70,6 +84,16 @@ final class TagVariant implements PseudoEnumInterface
     public function getIsBrandColor(): bool
     {
         return $this->value === self::VARIANT_BRANDCOLOR;
+    }
+
+    public function getIsBrandColorBold(): bool
+    {
+        return $this->value === self::VARIANT_BRANDCOLOR_BOLD;
+    }
+
+    public function getIsBrandColorLight(): bool
+    {
+        return $this->value === self::VARIANT_BRANDCOLOR_LIGHT;
     }
 
     public function getIsBrandColorContrast(): bool
@@ -94,6 +118,8 @@ final class TagVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_BRANDCOLOR),
+            self::from(self::VARIANT_BRANDCOLOR_BOLD),
+            self::from(self::VARIANT_BRANDCOLOR_LIGHT),
             self::from(self::VARIANT_BRANDCOLOR_CONTRAST),
             self::from(self::VARIANT_TRANSPARENT),
             self::from(self::VARIANT_HEIGHT_FULL)
