@@ -823,8 +823,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineSize::small(),
-                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                    HeadlineSize::mediumItalic(),
+                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
                 ),
