@@ -732,7 +732,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         SeparatorVariant::fullWidthWithContent(),
                         Editable::fromNodeProperty($videoNode, 'metaHeadline')
                     ): null,
-                    $this->videoFactory->forVideo($videoNode, $inBackend, $theme)
+                    new ContentContainer(
+                        ContentContainerVariant::tightX(),
+                        $this->videoFactory->forVideo($videoNode, $inBackend, $theme)
+                    )
                 ]))
             )
         );
