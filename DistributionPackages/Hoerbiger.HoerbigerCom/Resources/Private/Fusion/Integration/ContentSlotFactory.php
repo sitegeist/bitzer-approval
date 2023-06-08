@@ -467,10 +467,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ),
                     (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme),
                     $textBlockFigure
-                    ? new ContentContainer(
-                        ContentContainerVariant::halfWidth(),
-                        $textBlockFigure
-                    ) : null
+                        ? new ContentContainer(
+                            ContentContainerVariant::halfWidth(),
+                            $textBlockFigure
+                        ) : null
                 ]), $identity)
             )
         );

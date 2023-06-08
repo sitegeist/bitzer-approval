@@ -33,7 +33,7 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.isSiteFooter && "text-light min-h-touch xl:min-h-full flex items-center whitespace-nowrap",
                 presentationObject.variant.isPlainLabel && "min-h-touch flex items-center",
                 presentationObject.variant.isIconLabel && "min-h-touch flex items-center justify-between",
-                presentationObject.variant.isLabelDefault && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
+                presentationObject.variant.isLabelDefault && "flex items-center min-h-touch min-w-touch font-sans-bold text-xl"
             ]}
         >
             <Neos.Fusion:Augmenter
