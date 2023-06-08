@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Domain\AssetSource;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class LanguageAwareAssetSourceIdentifierIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOrStartWithNeos(string $attemptedValue): self

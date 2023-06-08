@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.NavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\NavigationItem\\NavigationItemInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\NavigationItem\\NavigationItem'
 
     @styleguide {
         title = 'NavigationItem'

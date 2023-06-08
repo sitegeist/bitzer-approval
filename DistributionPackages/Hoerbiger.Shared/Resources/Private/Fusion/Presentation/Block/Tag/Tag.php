@@ -9,40 +9,13 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Tag extends AbstractComponentPresentationObject implements TagInterface
+#[Flow\Proxy(false)]
+final class Tag extends AbstractComponentPresentationObject
 {
-    private string $tagName;
-
-    private ?TagVariant $variant;
-
-    private SlotInterface $content;
-
-
     public function __construct(
-        string $tagName,
-        ?TagVariant $variant,
-        SlotInterface $content
+        public readonly string $tagName,
+        public readonly ?TagVariant $variant,
+        public readonly SlotInterface $content
     ) {
-        $this->tagName = $tagName;
-        $this->variant = $variant;
-        $this->content = $content;
-    }
-
-    public function getTagName(): string
-    {
-        return $this->tagName;
-    }
-
-    public function getVariant(): ?TagVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
     }
 }

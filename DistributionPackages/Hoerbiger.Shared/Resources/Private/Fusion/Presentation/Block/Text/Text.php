@@ -10,39 +10,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Text extends AbstractComponentPresentationObject implements TextInterface
+#[Flow\Proxy(false)]
+final class Text extends AbstractComponentPresentationObject
 {
-    private TextVariant $variant;
-
-    private SlotInterface $content;
-
-    private bool $canHaveColumns;
-
     public function __construct(
-        TextVariant $variant,
-        SlotInterface $content,
-        bool $canHaveColumns
+        public readonly TextVariant $variant,
+        public readonly SlotInterface $content,
+        public readonly bool $canHaveColumns
     ) {
-        $this->variant = $variant;
-        $this->content = $content;
-        $this->canHaveColumns = $canHaveColumns;
-    }
-
-    public function getVariant(): TextVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
-    }
-
-    public function getCanHaveColumns(): bool
-    {
-        return $this->canHaveColumns;
     }
 }

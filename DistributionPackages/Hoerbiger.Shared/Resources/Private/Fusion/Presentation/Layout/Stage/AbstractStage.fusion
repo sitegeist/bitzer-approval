@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.AbstractStage) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\StageInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\Stage'
 
     @styleguide {
         title = 'Stage'

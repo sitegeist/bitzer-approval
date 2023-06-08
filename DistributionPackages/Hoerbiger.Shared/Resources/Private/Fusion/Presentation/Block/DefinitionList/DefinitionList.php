@@ -9,30 +9,14 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
-/**
- * @Flow\Proxy(false)
- */
-final class DefinitionList extends AbstractComponentPresentationObject implements DefinitionListInterface
+#[Flow\Proxy(false)]
+final class DefinitionList extends AbstractComponentPresentationObject
 {
-    private DefinitionListVariant $variant;
-
-    private Collection $definitions;
-
     public function __construct(
-        DefinitionListVariant $variant,
-        Collection $definitions
-    ) {
-        $this->variant = $variant;
-        $this->definitions = $definitions;
-    }
-
-    public function getVariant(): DefinitionListVariant
+        public readonly DefinitionListVariant $variant,
+        public readonly Collection $definitions
+    )
     {
-        return $this->variant;
-    }
-
-    public function getDefinitions(): Collection
-    {
-        return $this->definitions;
     }
 }
+

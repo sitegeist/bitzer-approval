@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.ThumbnailList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ThumbnailList\\ThumbnailListInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ThumbnailList\\ThumbnailList'
 
     @styleguide {
         title = 'ThumbnailList'

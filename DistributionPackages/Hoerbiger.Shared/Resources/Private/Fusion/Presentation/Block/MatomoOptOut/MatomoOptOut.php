@@ -10,26 +10,15 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Psr\Http\Message\UriInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class MatomoOptOut extends AbstractComponentPresentationObject implements MatomoOptOutInterface
+
+final class MatomoOptOut extends AbstractComponentPresentationObject
 {
-    private UriInterface $src;
-
     public function __construct(
-        UriInterface $src
+        public readonly UriInterface $src
     ) {
-        $this->src = $src;
     }
-
     public static function forLocale(string $locale): self
     {
         return new self(new Uri('https://piwik.hoerbiger.com/index.php?module=CoreAdminHome&action=optOut&language=' . $locale . '&backgroundColor=&fontColor=000000&fontSize=&fontFamily=bzw'));
-    }
-
-    public function getSrc(): UriInterface
-    {
-        return $this->src;
     }
 }

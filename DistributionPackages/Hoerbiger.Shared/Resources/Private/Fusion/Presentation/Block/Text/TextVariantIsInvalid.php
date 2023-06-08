@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Text;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class TextVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

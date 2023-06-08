@@ -37,7 +37,7 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
         $this->csvPOTranslator = $csvPOTranslator;
     }
 
-    public function forSiteFooter(TraversableNodeInterface $site): ContactFormLinkInterface
+    public function forSiteFooter(TraversableNodeInterface $site): ContactFormLink
     {
         $identity = function(SlotInterface $slot) {
             return $slot;
@@ -81,7 +81,7 @@ final class ContactFormLinkFactory extends AbstractComponentPresentationObjectFa
         );
     }
 
-    public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): ?ContactFormLinkInterface
+    public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): ?ContactFormLink
     {
         switch ($document->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom:Document.HomePage':

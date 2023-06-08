@@ -9,48 +9,14 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class NewsQuotation extends AbstractComponentPresentationObject implements NewsQuotationInterface
+#[Flow\Proxy(false)]
+final class NewsQuotation extends AbstractComponentPresentationObject
 {
-    private NewsQuotationVariant $variant;
-
-    private SlotInterface $text;
-
-    private SlotInterface $spokenByCharacter;
-
-    private SlotInterface $division;
-
     public function __construct(
-        NewsQuotationVariant $variant,
-        SlotInterface $text,
-        SlotInterface $spokenByCharacter,
-        SlotInterface $division
+        public readonly NewsQuotationVariant $variant,
+        public readonly SlotInterface $text,
+        public readonly SlotInterface $spokenByCharacter,
+        public readonly SlotInterface $division
     ) {
-        $this->variant = $variant;
-        $this->text = $text;
-        $this->spokenByCharacter = $spokenByCharacter;
-        $this->division = $division;
-    }
-
-    public function getVariant(): NewsQuotationVariant
-    {
-        return $this->variant;
-    }
-
-    public function getText(): SlotInterface
-    {
-        return $this->text;
-    }
-
-    public function getSpokenByCharacter(): SlotInterface
-    {
-        return $this->spokenByCharacter;
-    }
-
-    public function getDivision(): SlotInterface
-    {
-        return $this->division;
     }
 }

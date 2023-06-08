@@ -9,21 +9,11 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class HeaderVideoStage extends AbstractComponentPresentationObject implements HeaderVideoStageInterface
+#[Flow\Proxy(false)]
+final class HeaderVideoStage extends AbstractComponentPresentationObject
 {
-    private SlotInterface $slides;
-
     public function __construct(
-        SlotInterface $slides
+        public readonly SlotInterface $slides
     ) {
-        $this->slides = $slides;
-    }
-
-    public function getSlides(): SlotInterface
-    {
-        return $this->slides;
     }
 }

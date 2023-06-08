@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Headline\\HeadlineInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Headline\\Headline'
 
     @styleguide {
         title = 'Headline'

@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.NewsQuotation) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\NewsQuotation\\NewsQuotationInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\NewsQuotation\\NewsQuotation'
 
     @styleguide {
         title = 'NewsQuotation'

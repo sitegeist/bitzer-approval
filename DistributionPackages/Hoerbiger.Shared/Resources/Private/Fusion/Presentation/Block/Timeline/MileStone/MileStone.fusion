@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Timeline\\MileStone\\MileStoneInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Timeline\\MileStone\\MileStone'
 
     @styleguide {
         title = 'MileStone'

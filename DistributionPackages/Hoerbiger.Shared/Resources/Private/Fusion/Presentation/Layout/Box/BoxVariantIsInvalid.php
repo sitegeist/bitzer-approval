@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Box;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class BoxVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

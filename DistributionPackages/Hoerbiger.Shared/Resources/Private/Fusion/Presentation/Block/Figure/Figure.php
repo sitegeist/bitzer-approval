@@ -10,90 +10,29 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Figure extends AbstractComponentPresentationObject implements FigureInterface
+#[Flow\Proxy(false)]
+final class Figure extends AbstractComponentPresentationObject
 {
-    private ImageSourceHelperInterface $imageSource;
-
-    private bool $isToBeLoadedLazily;
-
-    private SourceSet $sourceSet;
-
     private Sizes $sizes;
-
-    private ?FigureObjectFit $objectFit;
-
-    private ?FigureObjectPosition $objectPosition;
-
-    private ?SlotInterface $caption;
-
     public function __construct(
-        ImageSourceHelperInterface $imageSource,
-        bool $isToBeLoadedLazily,
-        SourceSet $sourceSet,
+        public readonly ImageSourceHelperInterface $imageSource,
+        public readonly bool $isToBeLoadedLazily,
+        public readonly SourceSet $sourceSet,
         QualifiedPresetIdentifiers $sizes,
-        string $finalWidth,
-        ?FigureObjectFit $objectFit,
-        ?FigureObjectPosition $objectPosition,
-        ?SlotInterface $caption
+        public readonly string $finalWidth,
+        public readonly ?FigureObjectFit $objectFit,
+        public readonly ?FigureObjectPosition $objectPosition,
+        public readonly ?SlotInterface $caption
     ) {
-        $this->imageSource = $imageSource;
-        $this->isToBeLoadedLazily = $isToBeLoadedLazily;
-        $this->sourceSet = $sourceSet;
         $this->sizes = new Sizes(
             array_map(function (PresetIdentifier $presetIdentifier) use($sourceSet): string {
                 return $sourceSet->getWidth($presetIdentifier);
             },$sizes->getIterator()->getArrayCopy()),
             $finalWidth
         );
-        $this->objectFit = $objectFit;
-        $this->objectPosition = $objectPosition;
-        $this->caption = $caption;
     }
-
-    public function getImageSource(): ImageSourceHelperInterface
-    {
-        return $this->imageSource;
-    }
-
-    public function getIsToBeLoadedLazily(): bool
-    {
-        return $this->isToBeLoadedLazily;
-    }
-
-    public function getSourceSet(): SourceSet
-    {
-        return $this->sourceSet;
-    }
-
     public function getSizes(): Sizes
     {
         return $this->sizes;
-    }
-
-    public function getObjectFit(): ?FigureObjectFit
-    {
-        return $this->objectFit;
-    }
-
-    public function getObjectPosition(): ?FigureObjectPosition
-    {
-        return $this->objectPosition;
-    }
-
-    public function getCaption(): ?SlotInterface
-    {
-        return $this->caption;
-    }
-
-    public function withObjectFitAndPosition(FigureObjectFit $objectFit, FigureObjectPosition $objectPosition): self
-    {
-        $clone = clone $this;
-        $clone->objectFit = $objectFit;
-        $clone->objectPosition = $objectPosition;
-
-        return $clone;
     }
 }

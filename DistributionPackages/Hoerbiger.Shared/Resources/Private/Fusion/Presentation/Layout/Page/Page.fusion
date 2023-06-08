@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Page\\PageInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Page\\Page'
 
     @styleguide {
         title = 'Page'

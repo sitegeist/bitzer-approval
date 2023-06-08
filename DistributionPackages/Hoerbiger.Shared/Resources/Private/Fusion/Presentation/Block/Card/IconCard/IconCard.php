@@ -8,9 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Card\IconCard;
 use Hoerbiger\Shared\Presentation\Block\Card\AbstractCard;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class IconCard extends AbstractCard
 {
 }

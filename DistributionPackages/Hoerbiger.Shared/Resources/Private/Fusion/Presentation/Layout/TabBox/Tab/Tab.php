@@ -11,50 +11,16 @@ namespace Hoerbiger\Shared\Presentation\Layout\TabBox\Tab;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use Hoerbiger\Shared\Presentation\Block\Icon\IconInterface;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Tab extends AbstractComponentPresentationObject implements TabInterface
+#[Flow\Proxy(false)]
+final class Tab extends AbstractComponentPresentationObject
 {
-    private SlotInterface $label;
-
-    private ?IconInterface $tabIcon;
-
-    private ?IconInterface $accordionIcon;
-
-    private SlotInterface $content;
-
     public function __construct(
-        SlotInterface $label,
-        ?IconInterface $tabIcon,
-        ?IconInterface $accordionIcon,
-        SlotInterface $content
+        public readonly SlotInterface $label,
+        public readonly ?Icon $tabIcon,
+        public readonly ?Icon $accordionIcon,
+        public readonly SlotInterface $content
     ) {
-        $this->label = $label;
-        $this->tabIcon = $tabIcon;
-        $this->accordionIcon = $accordionIcon;
-        $this->content = $content;
-    }
-
-    public function getLabel(): SlotInterface
-    {
-        return $this->label;
-    }
-
-    public function getTabIcon(): ?IconInterface
-    {
-        return $this->tabIcon;
-    }
-
-    public function getAccordionIcon(): ?IconInterface
-    {
-        return $this->accordionIcon;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
     }
 }

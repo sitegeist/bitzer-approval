@@ -8,9 +8,7 @@ namespace Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-abstract class AbstractPlaceholder extends AbstractComponentPresentationObject implements PlaceholderInterface
+#[Flow\Proxy(false)]
+abstract class AbstractPlaceholder extends AbstractComponentPresentationObject
 {
 }

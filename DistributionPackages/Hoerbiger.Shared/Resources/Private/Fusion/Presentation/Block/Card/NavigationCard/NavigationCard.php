@@ -8,9 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Card\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Card\AbstractCard;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class NavigationCard extends AbstractCard
 {
 }

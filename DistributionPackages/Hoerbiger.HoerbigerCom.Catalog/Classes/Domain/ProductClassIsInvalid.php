@@ -8,9 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Domain;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class ProductClassIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

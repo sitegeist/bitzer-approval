@@ -14,13 +14,11 @@ use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
@@ -135,7 +133,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         return $cards;
     }
 
-    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): CardInterface
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): SearchResultCard
     {
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
             'resource://Hoerbiger.HoerbigerCom/Private/Fusion/Presentation/Application/SearchForm/SearchForm.translation.csv'

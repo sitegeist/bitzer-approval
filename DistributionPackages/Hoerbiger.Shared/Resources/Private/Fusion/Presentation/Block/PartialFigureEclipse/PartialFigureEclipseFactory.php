@@ -38,7 +38,7 @@ final class PartialFigureEclipseFactory extends AbstractComponentPresentationObj
         $this->figureFactory = $figureFactory;
     }
 
-    public function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend, ?Theme $theme): PartialFigureEclipseInterface
+    public function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend, ?Theme $theme): PartialFigureEclipse
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend);
         if (!$imageSource) {

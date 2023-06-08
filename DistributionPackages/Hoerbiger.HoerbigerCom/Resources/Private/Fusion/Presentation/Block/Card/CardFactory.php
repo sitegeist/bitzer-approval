@@ -13,7 +13,6 @@ use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\DownloadCard\DownloadCard;
-use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\NavigationCard\NavigationCard;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
@@ -22,7 +21,6 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
@@ -136,7 +134,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
-    public function forDocument(Document $document, string $typeIdentifier, ?string $highlight): CardInterface
+    public function forDocument(Document $document, string $typeIdentifier, ?string $highlight): SearchResultCard
     {
         $headline = new Headline(
             HeadlineSize::SIZE_TINY,
@@ -154,7 +152,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
-    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): CardInterface
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): SearchResultCard
     {
         $supportingText = $highlight ?: $thing->getProperty('preview__description');
         $headline = new Headline(

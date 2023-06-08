@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Row\\RowInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Row\\Row'
 
     @styleguide {
         title = 'Row'

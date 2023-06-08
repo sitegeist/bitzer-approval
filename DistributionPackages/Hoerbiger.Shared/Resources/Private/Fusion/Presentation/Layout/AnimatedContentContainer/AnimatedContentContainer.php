@@ -10,48 +10,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class AnimatedContentContainer extends AbstractComponentPresentationObject implements AnimatedContentContainerInterface
-{
-    private AnimatedContentContainerVariant $variant;
-
-    private SlotInterface $content;
-
-    private string $visibleStateClass;
-
-    private string $invisibleStateClass;
-
-    public function __construct(
-        AnimatedContentContainerVariant $variant,
-        SlotInterface $content,
-        string  $visibleStateClass,
-        string $invisibleStateClass
+#[Flow\Proxy(false)]
+final class AnimatedContentContainer extends AbstractComponentPresentationObject
+{    public function __construct(
+        public readonly AnimatedContentContainerVariant $variant,
+        public readonly SlotInterface $content,
+        public readonly string  $visibleStateClass,
+        public readonly string $invisibleStateClass
     ) {
-        $this->variant = $variant;
-        $this->content = $content;
-        $this->visibleStateClass = $visibleStateClass;
-        $this->invisibleStateClass = $invisibleStateClass;
-    }
-
-    public function getVariant(): AnimatedContentContainerVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
-    }
-
-    public function getVisibleStateClass(): string
-    {
-        return $this->visibleStateClass;
-    }
-
-    public function getInvisibleStateClass(): string
-    {
-        return $this->invisibleStateClass;
     }
 }

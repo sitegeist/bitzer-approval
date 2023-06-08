@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Tag;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class TagVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

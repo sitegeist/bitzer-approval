@@ -7,33 +7,14 @@ namespace Hoerbiger\Shared\Presentation\Layout\Row;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Row extends AbstractComponentPresentationObject implements RowInterface
+#[Flow\Proxy(false)]
+final class Row extends AbstractComponentPresentationObject
 {
-    private RowVariant $variant;
-
-    private Collection $content;
-
     public function __construct(
-        RowVariant $variant,
-        Collection $content
+        public readonly RowVariant $variant,
+        public readonly Collection $content
     ) {
-        $this->variant = $variant;
-        $this->content = $content;
-    }
-
-    public function getVariant(): RowVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): Collection
-    {
-        return $this->content;
     }
 }

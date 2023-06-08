@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom:Application.ContactForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\ContactForm\\ContactFormInterface'
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\ContactForm\\ContactForm'
 
     renderer = afx`
         <div class="[Application.ContactForm] w-full">

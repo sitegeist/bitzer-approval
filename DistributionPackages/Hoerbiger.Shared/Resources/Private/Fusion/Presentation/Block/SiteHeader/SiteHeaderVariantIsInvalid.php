@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class SiteHeaderVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

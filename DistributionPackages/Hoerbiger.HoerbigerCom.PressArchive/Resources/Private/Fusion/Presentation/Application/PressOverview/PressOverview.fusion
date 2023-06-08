@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.PressOverview) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\PressArchive\\Presentation\\Application\\PressOverview\\PressOverviewInterface'
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\PressArchive\\Presentation\\Application\\PressOverview\\PressOverview'
 
     @styleguide {
         title = 'PressOverview'

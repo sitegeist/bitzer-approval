@@ -7,9 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class SearchPeriodIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

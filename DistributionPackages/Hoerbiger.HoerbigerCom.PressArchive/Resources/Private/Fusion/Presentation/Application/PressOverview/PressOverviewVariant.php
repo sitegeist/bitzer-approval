@@ -7,9 +7,7 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOver
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 enum PressOverviewVariant: string
 {
     case VARIANT_REGULAR = 'regular';

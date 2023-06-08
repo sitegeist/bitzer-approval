@@ -8,26 +8,24 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.
  */
 
-use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverviewFactory;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVariant;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
 use Hoerbiger\Shared\Domain\Anchor;
 use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
+use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
-use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
-use Hoerbiger\Shared\Domain\FormattedDateFactory;
-use Hoerbiger\Shared\Presentation\Block\Card\PressReleaseCard\PressReleaseCard;
-use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Link\Link;
+use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
 use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
@@ -35,17 +33,11 @@ use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVarian
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
-use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
-use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
-use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -53,6 +45,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
+use Neos\Flow\Annotations as Flow;
 
 /**
  * @Flow\Scope("singleton")
@@ -72,7 +65,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
-    public function  forPressArchive(TraversableNodeInterface $site, TraversableNodeInterface $overviewPage, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function  forPressArchive(TraversableNodeInterface $site, TraversableNodeInterface $overviewPage, ContentContext $subgraph, bool $inBackend): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -136,7 +129,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forPressRelease(TraversableNodeInterface $site, Node $pressRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forPressRelease(TraversableNodeInterface $site, Node $pressRelease, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
@@ -144,7 +137,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage);
     }
 
-    public function forYearbookRelease(TraversableNodeInterface $site, Node $yearbookRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forYearbookRelease(TraversableNodeInterface $site, Node $yearbookRelease, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($yearbookRelease, $inBackend);
@@ -152,7 +145,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage);
     }
 
-    public function forHannsRelease(TraversableNodeInterface $site, Node $hannsRelease, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forHannsRelease(TraversableNodeInterface $site, Node $hannsRelease, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($hannsRelease, $inBackend);
@@ -160,7 +153,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, Node $document, ContentContext $subgraph, SlotInterface $stage): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, Node $document, ContentContext $subgraph, SlotInterface $stage): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;

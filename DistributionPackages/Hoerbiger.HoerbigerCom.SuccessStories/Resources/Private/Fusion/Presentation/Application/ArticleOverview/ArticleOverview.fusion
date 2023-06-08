@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom.SuccessStories:Application.ArticleOverview) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\SuccessStories\\Presentation\\Application\\ArticleOverview\\ArticleOverviewInterface'
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\SuccessStories\\Presentation\\Application\\ArticleOverview\\ArticleOverview'
 
     renderer = afx`
         <div class="[Application.ArticleOverview]">

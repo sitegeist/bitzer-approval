@@ -9,7 +9,6 @@ declare(strict_types=1);
 namespace Hoerbiger\HoerbigerCom\HR\Presentation\Block\Card;
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactoryInterface;
-use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
@@ -37,7 +36,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
      */
     protected $localizationService;
 
-    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): CardInterface
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): SearchResultCard
     {
         if ($thing->getNodeTypeName()->equals(NodeTypeName::fromString('Hoerbiger.HoerbigerCom.HR:Document.JobList'))) {
             $supportingText = $highlight ?: $thing->getProperty('abstract');

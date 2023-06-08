@@ -7,9 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Domain\Contact;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class CustomerGroupIdentifierIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

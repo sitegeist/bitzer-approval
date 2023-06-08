@@ -7,33 +7,14 @@ namespace Hoerbiger\Shared\Presentation\Block\Separator;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Separator extends AbstractComponentPresentationObject implements SeparatorInterface
+#[Flow\Proxy(false)]
+final class Separator extends AbstractComponentPresentationObject
 {
-    private SeparatorVariant $variant;
-
-    private ?SlotInterface $content;
-
     public function __construct(
-        SeparatorVariant $variant,
-        ?SlotInterface $content
+        public readonly SeparatorVariant $variant,
+        public readonly ?SlotInterface $content
     ) {
-        $this->variant = $variant;
-        $this->content = $content;
-    }
-
-    public function getVariant(): SeparatorVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): ?SlotInterface
-    {
-        return $this->content;
     }
 }

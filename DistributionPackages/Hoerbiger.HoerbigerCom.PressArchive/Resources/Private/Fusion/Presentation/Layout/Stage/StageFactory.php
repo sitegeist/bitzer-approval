@@ -21,7 +21,6 @@ use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StackStage\StackStage;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Model\Node;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -38,7 +37,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
     ) {
     }
 
-    public function forPressReleaseIntroduction(Node $pressRelease, bool $inBackend): StageInterface
+    public function forPressReleaseIntroduction(Node $pressRelease, bool $inBackend): StackStage
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($pressRelease, $inBackend, true);
         $labels = $this->csvPOTranslator->getLabels(self::class);

@@ -30,7 +30,6 @@ use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
-use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -49,7 +48,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     ) {
     }
 
-    public function forCareerPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forCareerPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
@@ -57,7 +56,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }
 
-    public function forPrivacyPage(TraversableNodeInterface $privacyPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forPrivacyPage(TraversableNodeInterface $privacyPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($privacyPage, $subgraph, $inBackend);
@@ -65,7 +64,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph);
     }
 
-    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): Page
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
@@ -142,7 +141,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forSearchResultsPage(TraversableNodeInterface $searchResultsPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forSearchResultsPage(TraversableNodeInterface $searchResultsPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -180,7 +179,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forWebPage(TraversableNodeInterface $site, TraversableNodeInterface $webPage, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forWebPage(TraversableNodeInterface $site, TraversableNodeInterface $webPage, bool $inBackend, ContentContext $subgraph): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($webPage, $subgraph, $inBackend);
@@ -188,7 +187,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
     }
 
-    public function forCareerRootPage(TraversableNodeInterface $site, TraversableNodeInterface $careerRootPage, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forCareerRootPage(TraversableNodeInterface $site, TraversableNodeInterface $careerRootPage, bool $inBackend, ContentContext $subgraph): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($careerRootPage, $subgraph, $inBackend);
@@ -196,7 +195,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $careerRootPage, $stage, $subgraph);
     }
 
-    public function forPeopleAndCultureWebPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forPeopleAndCultureWebPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
@@ -204,7 +203,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }
 
-    public function forContactPage(TraversableNodeInterface $site, TraversableNodeInterface $contactPage, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forContactPage(TraversableNodeInterface $site, TraversableNodeInterface $contactPage, bool $inBackend, ContentContext $subgraph): Page
     {
         $languages = $subgraph->getDimensions()['language'];
         $language = reset($languages);
@@ -259,7 +258,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forChroniclePage(TraversableNodeInterface $site, TraversableNodeInterface $chroniclePage, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forChroniclePage(TraversableNodeInterface $site, TraversableNodeInterface $chroniclePage, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($chroniclePage, $subgraph, $inBackend);
@@ -267,7 +266,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph);
     }
 
-    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage, ContentContext $subgraph, bool $inBackend): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -304,7 +303,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;

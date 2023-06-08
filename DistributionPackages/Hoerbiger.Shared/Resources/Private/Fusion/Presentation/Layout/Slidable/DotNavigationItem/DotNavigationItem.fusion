@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Slidable.DotNavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\DotNavigationItem\\DotNavigationItemInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\DotNavigationItem\\DotNavigationItem'
 
     @styleguide {
         title = 'DotNavigationItem'

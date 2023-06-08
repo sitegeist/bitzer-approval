@@ -5,7 +5,6 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.SuccessStories package.
  */
 
-use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
@@ -17,7 +16,6 @@ use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;

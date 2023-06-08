@@ -17,7 +17,6 @@ use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StackStage\StackStage;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -34,7 +33,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
     ) {
     }
 
-    public function forSuccessStoryIntroduction(TraversableNodeInterface $successStory, bool $inBackend): StageInterface
+    public function forSuccessStoryIntroduction(TraversableNodeInterface $successStory, bool $inBackend): StackStage
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($successStory, $inBackend, true);
 

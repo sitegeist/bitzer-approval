@@ -8,35 +8,19 @@ namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\Aff
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-final class AffiliateFinder extends AbstractComponentPresentationObject implements AffiliateFinderInterface
+#[Flow\Proxy(false)]
+final class AffiliateFinder extends AbstractComponentPresentationObject
 {
-    private Affiliates $affiliates;
-
-    private string $googleMapsApiKey;
-
-    /**
-     * @var array<string,string>
-     */
-    private array $labels;
-
-    private string $language;
-
     /**
      * @param array<string,string> $labels
      */
     public function __construct(
-        Affiliates $affiliates,
-        string $googleMapsApiKey,
-        array $labels,
-        string $language
+        public readonly Affiliates $affiliates,
+        public readonly string $googleMapsApiKey,
+        /** @var array<string,string> */
+        public readonly array $labels,
+        public readonly string $language
     ) {
-        $this->affiliates = $affiliates;
-        $this->googleMapsApiKey = $googleMapsApiKey;
-        $this->labels = $labels;
-        $this->language = $language;
     }
 
     public function getApplicationData(): string

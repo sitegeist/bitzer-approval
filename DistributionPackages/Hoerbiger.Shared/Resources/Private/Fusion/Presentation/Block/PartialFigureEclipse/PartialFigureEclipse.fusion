@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.PartialFigureEclipse) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\PartialFigureEclipse\\PartialFigureEclipseInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\PartialFigureEclipse\\PartialFigureEclipse'
 
     @styleguide {
         title = 'PartialFigureEclipse'

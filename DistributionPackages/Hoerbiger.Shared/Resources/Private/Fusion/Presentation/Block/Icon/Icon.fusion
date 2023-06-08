@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Icon\\IconInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Icon\\Icon'
 
     @styleguide {
         title = 'Icon'

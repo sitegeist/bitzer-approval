@@ -10,30 +10,12 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class ContentContainer extends AbstractComponentPresentationObject implements ContentContainerInterface
+#[Flow\Proxy(false)]
+final class ContentContainer extends AbstractComponentPresentationObject
 {
-    private ContentContainerVariant $variant;
-
-    private SlotInterface $content;
-
     public function __construct(
-        ContentContainerVariant $variant,
-        SlotInterface $content
+        public readonly ContentContainerVariant $variant,
+        public readonly SlotInterface $content
     ) {
-        $this->variant = $variant;
-        $this->content = $content;
-    }
-
-    public function getVariant(): ContentContainerVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
     }
 }

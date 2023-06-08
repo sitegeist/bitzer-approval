@@ -5,7 +5,6 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
-use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Integration\ProductListFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Layout\Stage\StageFactory as CatalogStageFactory;
@@ -17,24 +16,21 @@ use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Hoerbiger\Shared\Presentation\Block\ScrollToTop\ScrollToTop;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
-use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
-use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
+use Neos\Flow\Annotations as Flow;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -60,7 +56,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->productListFactory = $productListFactory;
     }
 
-    public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($catalog, $subgraph, $inBackend);
@@ -68,21 +64,21 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $catalog, $stage, $subgraph);
     }
 
-    public function forProductCategory(TraversableNodeInterface $site, TraversableNodeInterface $productCategory,  bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forProductCategory(TraversableNodeInterface $site, TraversableNodeInterface $productCategory,  bool $inBackend, ContentContext $subgraph): Page
     {
         $stage = $this->catalogstageFactory->forProductAndCategoryIntroduction($productCategory, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $productCategory,$stage, $subgraph);
     }
 
-    public function forProduct(TraversableNodeInterface $site, TraversableNodeInterface $product, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forProduct(TraversableNodeInterface $site, TraversableNodeInterface $product, bool $inBackend, ContentContext $subgraph): Page
     {
         $stage = $this->catalogstageFactory->forProductAndCategoryIntroduction($product, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $product, $stage, $subgraph);
     }
 
-    public function forIndustrySolutions(TraversableNodeInterface $site, TraversableNodeInterface $industrySolutions, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forIndustrySolutions(TraversableNodeInterface $site, TraversableNodeInterface $industrySolutions, bool $inBackend, ContentContext $subgraph): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -136,7 +132,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forIndustrySolution(TraversableNodeInterface $site, TraversableNodeInterface $industrySolution, bool $inBackend, ContentContext $subgraph): PageInterface
+    public function forIndustrySolution(TraversableNodeInterface $site, TraversableNodeInterface $industrySolution, bool $inBackend, ContentContext $subgraph): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -184,7 +180,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;

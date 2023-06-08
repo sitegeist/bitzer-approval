@@ -9,21 +9,17 @@ use Hoerbiger\Shared\Presentation\Block\Card\AbstractCard;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class PressReleaseCard extends AbstractCard
 {
-    private PressReleaseCardVariant $variant;
-    private ?SlotInterface $datePublished;
     public function __construct(
-        PressReleaseCardVariant $variant,
-        ?SlotInterface $datePublished,
-        ?SlotInterface $media,
-        ?SlotInterface $header,
-        ?SlotInterface $subheader,
-        ?SlotInterface $supportingText,
-        ?SlotInterface $buttons
+        public readonly PressReleaseCardVariant $variant,
+        public readonly ?SlotInterface $datePublished,
+        public readonly ?SlotInterface $media,
+        public readonly ?SlotInterface $header,
+        public readonly ?SlotInterface $subheader,
+        public readonly ?SlotInterface $supportingText,
+        public readonly ?SlotInterface $buttons
     ) {
         parent::__construct(
             $media,
@@ -32,17 +28,5 @@ final class PressReleaseCard extends AbstractCard
             $supportingText,
             $buttons
         );
-        $this->variant = $variant;
-        $this->datePublished = $datePublished;
-    }
-
-    public function getVariant(): PressReleaseCardVariant
-    {
-        return $this->variant;
-    }
-
-    public function getDatePublished(): ?SlotInterface
-    {
-        return $this->datePublished;
     }
 }

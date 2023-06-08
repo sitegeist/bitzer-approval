@@ -9,30 +9,30 @@ use Neos\Flow\Annotations as Flow;
 
 /**
  * @Flow\Proxy(false)
- * @implements \IteratorAggregate<int,NavigationItemInterface>
+ * @implements \IteratorAggregate<int,NavigationItem>
  */
 final class NavigationItems implements \IteratorAggregate, \Countable
 {
     /**
-     * @var array<int,NavigationItemInterface>|NavigationItemInterface[]
+     * @var array<int,NavigationItem>|NavigationItem[]
      */
     private array $navigationItems;
 
     /**
-     * @param array<int,NavigationItemInterface> $array
+     * @param array<int,NavigationItem> $array
      */
     public function __construct(array $array = [])
     {
         foreach ($array as $element) {
-            if (!$element instanceof NavigationItemInterface) {
-                throw new \InvalidArgumentException(self::class . ' can only consist of ' . NavigationItemInterface::class);
+            if (!$element instanceof NavigationItem) {
+                throw new \InvalidArgumentException(self::class . ' can only consist of ' . NavigationItem::class);
             }
         }
         $this->navigationItems = $array;
     }
 
     /**
-     * @return \ArrayIterator<int,NavigationItemInterface>|NavigationItemInterface[]
+     * @return \ArrayIterator<int,NavigationItem>|NavigationItem[]
      */
     public function getIterator(): \ArrayIterator
     {

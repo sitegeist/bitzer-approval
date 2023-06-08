@@ -10,39 +10,14 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Box extends AbstractComponentPresentationObject implements BoxInterface
+#[Flow\Proxy(false)]
+final class Box extends AbstractComponentPresentationObject
 {
-    private BoxVariant $variant;
-
-    private SlotInterface $content;
-
-    private ?string $identifier;
-
     public function __construct(
-        BoxVariant $variant,
-        SlotInterface $content,
-        ?string $identifier = null
+        public readonly BoxVariant $variant,
+        public readonly SlotInterface $content,
+        public readonly ?string $identifier = null
     ) {
-        $this->variant = $variant;
-        $this->content = $content;
-        $this->identifier = $identifier;
-    }
 
-    public function getVariant(): BoxVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
-    }
-
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
     }
 }

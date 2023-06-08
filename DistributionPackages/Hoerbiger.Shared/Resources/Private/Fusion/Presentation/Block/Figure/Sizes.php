@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class Sizes
 {
     /**

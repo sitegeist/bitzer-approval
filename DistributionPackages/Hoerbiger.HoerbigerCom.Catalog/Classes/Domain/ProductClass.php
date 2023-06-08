@@ -9,9 +9,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Domain;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class ProductClass
 {
     const CLASS_EXCITE = 'excite';

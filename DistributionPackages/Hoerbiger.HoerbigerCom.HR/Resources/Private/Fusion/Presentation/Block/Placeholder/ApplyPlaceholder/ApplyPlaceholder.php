@@ -8,9 +8,7 @@ namespace Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\ApplyPlacehol
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\HoerbigerCom\HR\Presentation\Block\Placeholder\AbstractPlaceholder;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class ApplyPlaceholder extends AbstractPlaceholder
 {
 }

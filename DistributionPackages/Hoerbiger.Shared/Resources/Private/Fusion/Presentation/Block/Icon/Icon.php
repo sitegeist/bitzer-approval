@@ -9,32 +9,17 @@ namespace Hoerbiger\Shared\Presentation\Block\Icon;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Icon extends AbstractComponentPresentationObject implements IconInterface
+#[Flow\Proxy(false)]
+final class Icon extends AbstractComponentPresentationObject
 {
-    private string $collectionName;
-
-    private string $iconName;
-
-    private ?IconSize $size;
-
-    private ?IconColor $color;
-
     public function __construct(
-        string $collectionName,
-        string $iconName,
-        ?IconSize $size = null,
-        ?IconColor $color = null
+        public readonly string $collectionName,
+        public readonly string $iconName,
+        public readonly ?IconSize $size = null,
+        public readonly ?IconColor $color = null
     )
     {
-        $this->collectionName = $collectionName;
-        $this->iconName = $iconName;
-        $this->size = $size;
-        $this->color = is_null($color) ? IconColor::COLOR_CURRENT : $color;
     }
-
     public static function fromStampedeDataSourceValue(
         string $dataSourceValue,
         ?IconSize $size = null,
@@ -53,25 +38,5 @@ final class Icon extends AbstractComponentPresentationObject implements IconInte
             $size,
             $color
         );
-    }
-
-    public function getCollectionName(): string
-    {
-        return $this->collectionName;
-    }
-
-    public function getIconName(): string
-    {
-        return $this->iconName;
-    }
-
-    public function getSize(): ?IconSize
-    {
-        return $this->size;
-    }
-
-    public function getColor(): ?IconColor
-    {
-        return $this->color;
     }
 }

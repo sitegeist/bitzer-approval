@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\DefinitionList;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 enum DefinitionListVariant: string
 {
     case VARIANT_REGULAR = 'regular';

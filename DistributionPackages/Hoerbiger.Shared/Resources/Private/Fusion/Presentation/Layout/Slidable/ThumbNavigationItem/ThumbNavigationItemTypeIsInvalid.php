@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Slidable\ThumbNavigationItem;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class ThumbNavigationItemTypeIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self

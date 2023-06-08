@@ -9,48 +9,14 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class MileStone extends AbstractComponentPresentationObject implements MileStoneInterface
+#[Flow\Proxy(false)]
+final class MileStone extends AbstractComponentPresentationObject
 {
-    private SlotInterface $year;
-
-    private SlotInterface $label;
-
-    private SlotInterface $description;
-
-    private ?SlotInterface $figures;
-
     public function __construct(
-        SlotInterface $year,
-        SlotInterface $label,
-        SlotInterface $description,
-        ?SlotInterface $figures
+        public readonly SlotInterface $year,
+        public readonly SlotInterface $label,
+        public readonly SlotInterface $description,
+        public readonly ?SlotInterface $figures
     ) {
-        $this->year = $year;
-        $this->label = $label;
-        $this->description = $description;
-        $this->figures = $figures;
-    }
-
-    public function getYear(): SlotInterface
-    {
-        return $this->year;
-    }
-
-    public function getLabel(): SlotInterface
-    {
-        return $this->label;
-    }
-
-    public function getDescription(): SlotInterface
-    {
-        return $this->description;
-    }
-
-    public function getFigures(): ?SlotInterface
-    {
-        return $this->figures;
     }
 }

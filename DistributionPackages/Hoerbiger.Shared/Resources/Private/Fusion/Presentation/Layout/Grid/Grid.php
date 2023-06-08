@@ -7,33 +7,14 @@ namespace Hoerbiger\Shared\Presentation\Layout\Grid;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Grid extends AbstractComponentPresentationObject implements GridInterface
+#[Flow\Proxy(false)]
+final class Grid extends AbstractComponentPresentationObject
 {
-    private GridVariant $variant;
-
-    private SlotInterface $content;
-
     public function __construct(
-        GridVariant $variant,
-        SlotInterface $content
+        public readonly GridVariant $variant,
+        public readonly SlotInterface $content
     ) {
-        $this->variant = $variant;
-        $this->content = $content;
-    }
-
-    public function getVariant(): GridVariant
-    {
-        return $this->variant;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
     }
 }

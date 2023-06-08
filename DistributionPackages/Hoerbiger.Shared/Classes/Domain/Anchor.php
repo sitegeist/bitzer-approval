@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Domain;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class Anchor
 {
     private string $identifier;

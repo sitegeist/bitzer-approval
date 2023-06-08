@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Slider.SliderTextNavigationItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slider\\SliderTextNavigationItem\\SliderTextNavigationItemInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slider\\SliderTextNavigationItem\\SliderTextNavigationItem'
 
     @styleguide {
         title = 'SliderTextNavigationItem'

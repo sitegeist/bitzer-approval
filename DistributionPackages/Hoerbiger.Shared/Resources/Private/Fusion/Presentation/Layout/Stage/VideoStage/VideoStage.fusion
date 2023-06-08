@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Stage.VideoStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\VideoStage\\VideoStageInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\VideoStage\\VideoStage'
 
     renderer = afx`
         <div class={[

@@ -8,25 +8,15 @@ declare(strict_types=1);
 
 namespace Hoerbiger\Shared\Presentation\Layout\Slider\SliderTextNavigationItem;
 
-use Hoerbiger\Shared\Presentation\Block\Icon\IconInterface;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-final class SliderTextNavigationItem extends AbstractComponentPresentationObject implements SliderTextNavigationItemInterface
+#[Flow\Proxy(false)]
+final class SliderTextNavigationItem extends AbstractComponentPresentationObject
 {
-    private string $label;
-
     public function __construct(
-        string $label
+        public readonly string $label
     ) {
-        $this->label = $label;
-    }
-
-    public function getLabel(): string
-    {
-        return $this->label;
     }
 }

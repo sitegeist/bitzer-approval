@@ -7,38 +7,28 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage\VideoStage;
 
 use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\Shared\Presentation\Block\Figure\Figure;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineInterface;
-use Hoerbiger\Shared\Presentation\Block\Text\TextInterface;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Layout\Stage\AbstractStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageVariant;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class VideoStage extends AbstractStage implements VideoStageInterface
+#[Flow\Proxy(false)]
+final class VideoStage extends AbstractStage
 {
-    private Uri $desktopVideoUri;
-
-    private Figure $mobileFigure;
-
     public function __construct(
-        StageVariant $variant,
-        ?SlotInterface $metaline,
-        ?HeadlineInterface $headline,
-        ?SlotInterface $subheadline,
-        ?TextInterface $text,
-        ?SlotInterface $media,
-        ?SlotInterface $mediaBackground,
-        ?SlotInterface $button,
-        Uri $desktopVideoUri,
-        Figure $mobileFigure
+        public readonly StageVariant $variant,
+        public readonly ?SlotInterface $metaline,
+        public readonly ?Headline $headline,
+        public readonly ?SlotInterface $subheadline,
+        public readonly ?Text $text,
+        public readonly ?SlotInterface $media,
+        public readonly ?SlotInterface $mediaBackground,
+        public readonly ?SlotInterface $button,
+        public readonly Uri $desktopVideoUri,
+        public readonly Figure $mobileFigure
     ) {
-        $this->desktopVideoUri = $desktopVideoUri;
-        $this->mobileFigure = $mobileFigure;
-
         parent::__construct(
             $variant,
             $metaline,
@@ -49,15 +39,5 @@ final class VideoStage extends AbstractStage implements VideoStageInterface
             $mediaBackground,
             $button
         );
-    }
-
-    public function getDesktopVideoUri(): Uri
-    {
-        return $this->desktopVideoUri;
-    }
-
-    public function getMobileFigure(): FigureInterface
-    {
-        return $this->mobileFigure;
     }
 }

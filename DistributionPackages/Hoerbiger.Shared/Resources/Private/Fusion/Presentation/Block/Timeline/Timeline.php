@@ -9,21 +9,11 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Timeline extends AbstractComponentPresentationObject implements TimelineInterface
+#[Flow\Proxy(false)]
+final class Timeline extends AbstractComponentPresentationObject
 {
-    private Collection $milestones;
-
     public function __construct(
-        Collection $milestones
+        public readonly Collection $milestones
     ) {
-        $this->milestones = $milestones;
-    }
-
-    public function getMilestones(): Collection
-    {
-        return $this->milestones;
     }
 }

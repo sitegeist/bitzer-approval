@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Stack) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stack\\StackInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stack\\Stack'
 
     renderer = afx`
         <div class={[

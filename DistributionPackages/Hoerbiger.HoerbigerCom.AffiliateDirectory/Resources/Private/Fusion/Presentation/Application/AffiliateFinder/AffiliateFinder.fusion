@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom.AffiliateDirectory:Application.AffiliateFinder) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\AffiliateDirectory\\Presentation\\Application\\AffiliateFinder\\AffiliateFinderInterface'
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\AffiliateDirectory\\Presentation\\Application\\AffiliateFinder\\AffiliateFinder'
 
     renderer = afx`
         <div class="[Application.AffiliateFinder] relative">

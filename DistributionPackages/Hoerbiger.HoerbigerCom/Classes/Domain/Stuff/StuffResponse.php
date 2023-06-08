@@ -8,9 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class StuffResponse implements \JsonSerializable
 {
     private int $numberOfPages;

@@ -9,9 +9,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Domain;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class CatalogRequest implements \JsonSerializable
 {
     const DEFAULT_LIMIT = 10000;

@@ -7,51 +7,17 @@ namespace Hoerbiger\Shared\Presentation\Block\Video;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\Figure\FigureInterface;
+use Hoerbiger\Shared\Presentation\Block\Figure\Figure;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Video extends AbstractComponentPresentationObject implements VideoInterface
+#[Flow\Proxy(false)]
+final class Video extends AbstractComponentPresentationObject
 {
-    private string $source;
-
-    private ?FigureInterface $figure;
-
-    private ?SlotInterface $caption;
-
-    private VideoVariant $variant;
-
     public function __construct(
-        string $source,
-        ?FigureInterface $figure,
-        ?SlotInterface $caption,
-        VideoVariant $variant
+        public readonly string $source,
+        public readonly ?Figure $figure,
+        public readonly ?SlotInterface $caption,
+        public readonly VideoVariant $variant
     ) {
-        $this->source = $source;
-        $this->figure = $figure;
-        $this->caption = $caption;
-        $this->variant = $variant;
-    }
-
-    public function getSource(): string
-    {
-        return $this->source;
-    }
-
-    public function getFigure(): ?FigureInterface
-    {
-        return $this->figure;
-    }
-
-    public function getCaption(): ?SlotInterface
-    {
-        return $this->caption;
-    }
-
-    public function getVariant(): VideoVariant
-    {
-        return $this->variant;
     }
 }

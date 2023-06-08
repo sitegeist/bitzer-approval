@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.ContactFormLink) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ContactFormLink\\ContactFormLinkInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ContactFormLink\\ContactFormLink'
 
     @styleguide {
         title = 'ContactFormLink'

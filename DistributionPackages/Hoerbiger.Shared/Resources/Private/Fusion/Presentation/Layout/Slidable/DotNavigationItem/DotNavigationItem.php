@@ -8,16 +8,12 @@ declare(strict_types=1);
 
 namespace Hoerbiger\Shared\Presentation\Layout\Slidable\DotNavigationItem;
 
-use Hoerbiger\Shared\Presentation\Block\Icon\IconInterface;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-final class DotNavigationItem extends AbstractComponentPresentationObject implements DotNavigationItemInterface
+#[Flow\Proxy(false)]
+final class DotNavigationItem extends AbstractComponentPresentationObject
 {
     public function __construct() {
-
     }
 }

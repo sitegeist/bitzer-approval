@@ -10,9 +10,7 @@ use Neos\Flow\Security\Account;
 use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Model\User;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 
 final class IsEditor
 {

@@ -8,21 +8,11 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Application\Article
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-final class ArticleOverview extends AbstractComponentPresentationObject implements ArticleOverviewInterface
+#[Flow\Proxy(false)]
+final class ArticleOverview extends AbstractComponentPresentationObject
 {
-    private string $applicationData;
-
     public function __construct(
-        string $applicationData
+        public readonly string $applicationData
     ) {
-        $this->applicationData = $applicationData;
-    }
-
-    public function getApplicationData(): string
-    {
-        return $this->applicationData;
     }
 }

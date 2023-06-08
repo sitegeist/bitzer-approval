@@ -9,35 +9,17 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-abstract class AbstractCard extends AbstractComponentPresentationObject implements CardInterface
+#[Flow\Proxy(false)]
+abstract class AbstractCard extends AbstractComponentPresentationObject
 {
-    private ?SlotInterface $media;
-
-    private ?SlotInterface $header;
-
-    private ?SlotInterface $subheader;
-
-    private ?SlotInterface $supportingText;
-
-    private ?SlotInterface $buttons;
-
     public function __construct(
-        ?SlotInterface $media,
-        ?SlotInterface $header,
-        ?SlotInterface $subheader,
-        ?SlotInterface $supportingText,
-        ?SlotInterface $buttons
+        private ?SlotInterface $media,
+        private ?SlotInterface $header,
+        private ?SlotInterface $subheader,
+        private ?SlotInterface $supportingText,
+        private ?SlotInterface $buttons
     ) {
-        $this->media = $media;
-        $this->header = $header;
-        $this->subheader = $subheader;
-        $this->supportingText = $supportingText;
-        $this->buttons = $buttons;
     }
-
     public function getMedia(): ?SlotInterface
     {
         return $this->media;
@@ -57,7 +39,6 @@ abstract class AbstractCard extends AbstractComponentPresentationObject implemen
     {
         return $this->supportingText;
     }
-
     public function getButtons(): ?SlotInterface
     {
         return $this->buttons;

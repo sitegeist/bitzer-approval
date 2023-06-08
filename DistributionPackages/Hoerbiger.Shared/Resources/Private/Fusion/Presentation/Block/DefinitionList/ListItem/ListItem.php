@@ -9,30 +9,12 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class ListItem extends AbstractComponentPresentationObject implements ListItemInterface
+#[Flow\Proxy(false)]
+final class ListItem extends AbstractComponentPresentationObject
 {
-    private SlotInterface $term;
-
-    private SlotInterface $definition;
-
     public function __construct(
-        SlotInterface $term,
-        SlotInterface $definition
+        public readonly SlotInterface $term,
+        public readonly SlotInterface $definition
     ) {
-        $this->term = $term;
-        $this->definition = $definition;
-    }
-
-    public function getTerm(): SlotInterface
-    {
-        return $this->term;
-    }
-
-    public function getDefinition(): SlotInterface
-    {
-        return $this->definition;
     }
 }

@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Link\\LinkInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Link\\Link'
 
     @styleguide {
         title = 'Link'

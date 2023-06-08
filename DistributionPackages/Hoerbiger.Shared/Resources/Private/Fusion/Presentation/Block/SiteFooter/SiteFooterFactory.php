@@ -30,7 +30,7 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
         $this->linkFactory = $linkFactory;
     }
 
-    public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): SiteFooterInterface
+    public function forDocument(TraversableNodeInterface $document, TraversableNodeInterface $site): SiteFooter
     {
         $socialMediaLinks = Collection::fromIterable(
             $this->socialMediaSettings,

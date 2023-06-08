@@ -8,50 +8,16 @@ namespace Hoerbiger\Shared\Presentation\Block\Breadcrumb;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use Hoerbiger\Shared\Presentation\Block\Icon\IconInterface;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Breadcrumb extends AbstractComponentPresentationObject implements BreadcrumbInterface
+#[Flow\Proxy(false)]
+final class Breadcrumb extends AbstractComponentPresentationObject
 {
-    private SlotInterface $links;
-
-    private SlotInterface $currentDocumentItem;
-
-    private IconInterface $glue;
-
-    private IconInterface $compactGlue;
-
     public function __construct(
-        SlotInterface $links,
-        SlotInterface $currentDocumentItem,
-        IconInterface $glue,
-        IconInterface $compactGlue
+        public readonly SlotInterface $links,
+        public readonly SlotInterface $currentDocumentItem,
+        public readonly Icon $glue,
+        public readonly Icon $compactGlue
     ) {
-        $this->links = $links;
-        $this->currentDocumentItem = $currentDocumentItem;
-        $this->glue = $glue;
-        $this->compactGlue = $compactGlue;
-    }
-
-    public function getLinks(): SlotInterface
-    {
-        return $this->links;
-    }
-
-    public function getCurrentDocumentItem(): SlotInterface
-    {
-        return $this->currentDocumentItem;
-    }
-
-    public function getGlue(): IconInterface
-    {
-        return $this->glue;
-    }
-
-    public function getCompactGlue(): IconInterface
-    {
-        return $this->compactGlue;
     }
 }

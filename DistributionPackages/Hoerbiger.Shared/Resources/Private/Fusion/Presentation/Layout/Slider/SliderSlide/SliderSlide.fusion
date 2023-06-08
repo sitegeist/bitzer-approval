@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Slider.SliderSlide) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slider\\SliderSlide\\SliderSlideInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slider\\SliderSlide\\SliderSlide'
 
     @styleguide {
         title = 'SliderSlide'

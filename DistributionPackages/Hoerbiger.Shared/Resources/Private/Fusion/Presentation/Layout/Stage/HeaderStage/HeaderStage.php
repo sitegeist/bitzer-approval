@@ -8,9 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage\HeaderStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\AbstractStage;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class HeaderStage extends AbstractStage
 {
 }

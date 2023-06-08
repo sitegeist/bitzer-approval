@@ -8,21 +8,11 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Calculator\Presentation\Application\Min
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-final class MiniCalculator extends AbstractComponentPresentationObject implements MiniCalculatorInterface
+#[Flow\Proxy(false)]
+final class MiniCalculator extends AbstractComponentPresentationObject
 {
-    private string $content;
-
     public function __construct(
-        string $content
+        public readonly string $content
     ) {
-        $this->content = $content;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
     }
 }

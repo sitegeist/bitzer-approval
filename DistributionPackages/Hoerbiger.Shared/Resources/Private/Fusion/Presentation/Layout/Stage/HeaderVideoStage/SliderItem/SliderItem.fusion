@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Stage.HeaderVideoStage.SliderItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\HeaderVideoStage\\SliderItem\\SliderItemInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Stage\\HeaderVideoStage\\SliderItem\\SliderItem'
 
     renderer = afx`
         <div

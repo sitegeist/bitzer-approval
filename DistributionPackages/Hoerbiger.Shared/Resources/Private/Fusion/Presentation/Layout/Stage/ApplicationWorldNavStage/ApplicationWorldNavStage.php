@@ -8,9 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\Stage\ApplicationWorldNavStage;
 use Hoerbiger\Shared\Presentation\Layout\Stage\AbstractStage;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class ApplicationWorldNavStage extends AbstractStage
 {
 }

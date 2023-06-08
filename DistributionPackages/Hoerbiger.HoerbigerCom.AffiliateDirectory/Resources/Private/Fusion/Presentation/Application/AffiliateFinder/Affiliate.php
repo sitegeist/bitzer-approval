@@ -7,9 +7,7 @@ namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\Aff
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class Affiliate implements \JsonSerializable
 {
     private string $identifier;

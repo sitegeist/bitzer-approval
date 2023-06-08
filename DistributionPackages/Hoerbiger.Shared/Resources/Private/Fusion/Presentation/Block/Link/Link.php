@@ -14,69 +14,18 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Psr\Http\Message\UriInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Link extends AbstractComponentPresentationObject implements LinkInterface
+#[Flow\Proxy(false)]
+final class Link extends AbstractComponentPresentationObject
 {
-    private LinkVariant $variant;
-
-    private UriInterface $href;
-
-    private LinkTarget $target;
-
-    private ?string $rel;
-
-    private ?SlotInterface $content;
-
-    private ?string $ariaLabel;
-
     public function __construct(
-        LinkVariant $variant,
-        UriInterface $href,
-        LinkTarget $target,
-        ?string $rel,
-        ?SlotInterface $content,
-        ?string $ariaLabel
+        public readonly LinkVariant $variant,
+        public readonly UriInterface $href,
+        public readonly LinkTarget $target,
+        public readonly ?string $rel,
+        public readonly ?SlotInterface $content,
+        public readonly ?string $ariaLabel
     ) {
-        $this->variant = $variant;
-        $this->href = $href;
-        $this->target = $target;
-        $this->rel = $rel;
-        $this->content = $content;
-        $this->ariaLabel = $ariaLabel;
     }
-
-    public function getVariant(): LinkVariant
-    {
-        return $this->variant;
-    }
-
-    public function getHref(): UriInterface
-    {
-        return $this->href;
-    }
-
-    public function getTarget(): LinkTarget
-    {
-        return $this->target;
-    }
-
-    public function getRel(): ?string
-    {
-        return $this->rel;
-    }
-
-    public function getContent(): ?SlotInterface
-    {
-        return $this->content;
-    }
-
-    public function getAriaLabel(): ?string
-    {
-        return $this->ariaLabel;
-    }
-
     public function withContent(?SlotInterface $content): self
     {
         return new self(

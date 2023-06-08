@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Grid\\GridInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Grid\\Grid'
 
     @styleguide {
         title = 'Grid'

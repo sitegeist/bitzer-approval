@@ -14,55 +14,21 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PhpParser\Node\Expr\Cast\Bool_;
 
-/**
- * @Flow\Proxy(false)
- */
-final class ContactForm extends AbstractComponentPresentationObject implements ContactFormInterface
+#[Flow\Proxy(false)]
+final class ContactForm extends AbstractComponentPresentationObject
 {
-    private string $csrfProtectionToken;
-
-    private string $language;
-
-    private Uri $targetUri;
-
-    /**
-     * @var array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|Salutation|string>>
-     */
-    private array $options;
-
-    /**
-     * @var array<string,string>
-     */
-    private array $labels;
-
-    private SlotInterface $successContent;
-
-    private SlotInterface $failContent;
-
-    private bool $isInBackend;
-
-    /**
-     * @param array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|Salutation|string>> $options
-     * @param array<string,string> $labels
-     */
     public function __construct(
-        string $csrfProtectionToken,
-        string $language,
-        Uri $targetUri,
-        array $options,
-        array $labels,
-        SlotInterface $successContent,
-        SlotInterface $failContent,
-        bool $isInBackend
+        public readonly string $csrfProtectionToken,
+        public readonly string $language,
+        public readonly Uri $targetUri,
+        /** @var array<string,array<int,CustomerGroupIdentifier|NodeAggregateIdentifier|Salutation|string>> */
+        public readonly array $options,
+        /** @var array<string,string> */
+        public readonly array $labels,
+        public readonly SlotInterface $successContent,
+        public readonly SlotInterface $failContent,
+        public readonly bool $isInBackend
     ) {
-        $this->csrfProtectionToken = $csrfProtectionToken;
-        $this->language = $language;
-        $this->targetUri = $targetUri;
-        $this->options = $options;
-        $this->labels = $labels;
-        $this->successContent = $successContent;
-        $this->failContent = $failContent;
-        $this->isInBackend = $isInBackend;
     }
 
     public function getApplicationData(): string
@@ -74,20 +40,5 @@ final class ContactForm extends AbstractComponentPresentationObject implements C
             'options' => $this->options,
             'labels' => $this->labels
         ]) ?: '{}';
-    }
-
-    public function getSuccessContent(): SlotInterface
-    {
-        return $this->successContent;
-    }
-
-    public function getFailContent(): SlotInterface
-    {
-        return $this->failContent;
-    }
-
-    public function getIsInBackend(): bool
-    {
-        return $this->isInBackend;
     }
 }

@@ -7,9 +7,7 @@ namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class SearchPage implements \JsonSerializable
 {
     private int $value;

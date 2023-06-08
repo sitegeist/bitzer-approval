@@ -7,9 +7,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Headline;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 enum HeadlineVariant: string
 {
     case VARIANT_LARGEBRAND = 'largeBrand';

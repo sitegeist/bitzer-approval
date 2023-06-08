@@ -9,9 +9,7 @@ namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class StuffRequest implements \JsonSerializable
 {
     const DEFAULT_LIMIT = 10;

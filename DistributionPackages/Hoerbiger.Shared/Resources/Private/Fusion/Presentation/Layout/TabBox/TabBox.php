@@ -10,39 +10,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 
-/**
- * @Flow\Proxy(false)
- */
-final class TabBox extends AbstractComponentPresentationObject implements TabBoxInterface
+#[Flow\Proxy(false)]
+final class TabBox extends AbstractComponentPresentationObject
 {
-    private TabBoxVariant $variant;
-
-    private Collection $tabs;
-
-    private ?string $identifier;
-
     public function __construct(
-        TabBoxVariant $variant,
-        Collection $tabs,
-        ?string $identifier = null
+        public readonly TabBoxVariant $variant,
+        public readonly Collection $tabs,
+        public readonly ?string $identifier = null
     ) {
-        $this->variant = $variant;
-        $this->tabs = $tabs;
-        $this->identifier = $identifier;
-    }
-
-    public function getVariant(): TabBoxVariant
-    {
-        return $this->variant;
-    }
-
-    public function getTabs(): Collection
-    {
-        return $this->tabs;
-    }
-
-    public function getIdentifier(): ?string
-    {
-        return $this->identifier;
     }
 }

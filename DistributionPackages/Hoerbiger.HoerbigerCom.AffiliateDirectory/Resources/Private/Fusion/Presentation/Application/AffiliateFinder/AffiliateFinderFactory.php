@@ -39,7 +39,7 @@ final class AffiliateFinderFactory extends AbstractComponentPresentationObjectFa
      */
     protected $googleMapsApiKey;
 
-    public function create(string $locale): AffiliateFinderInterface
+    public function create(string $locale): AffiliateFinder
     {
         return new AffiliateFinder(
             $this->affiliateRepository->findAffiliates($locale),

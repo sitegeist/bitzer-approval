@@ -29,7 +29,6 @@ use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
 use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkInterface;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
@@ -477,7 +476,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             StackVariant::VARIANT_NOGAP,
                             Collection::fromIterable(
                                 $this->wantedNodeRepository->findMostWanted($language, $site),
-                                function (TraversableNodeInterface $node): LinkInterface {
+                                function (TraversableNodeInterface $node): Link {
                                     return new Link(
                                         LinkVariant::VARIANT_LABEL,
                                         $this->uriService->getNodeUri($node),

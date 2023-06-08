@@ -8,42 +8,16 @@ namespace Hoerbiger\Shared\Presentation\Block\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class AnchorNavigation extends AbstractComponentPresentationObject implements AnchorNavigationInterface
+#[Flow\Proxy(false)]
+final class AnchorNavigation extends AbstractComponentPresentationObject
 {
-    private AnchorNavigationVariant $variant;
-
-    /**
-     * @var array<int,Link>
-     */
-    private array $anchors;
-
     /**
      * @param array<int,Link> $anchors
      */
     public function __construct(
-        AnchorNavigationVariant $variant,
-        array $anchors
+        public readonly AnchorNavigationVariant $variant,
+        public readonly array $anchors
     ) {
-        $this->variant = $variant;
-        $this->anchors = $anchors;
-    }
-
-    public function getVariant(): AnchorNavigationVariant
-    {
-        return $this->variant;
-    }
-
-    /**
-     * @return array<int,Link>
-     */
-    public function getAnchors(): array
-    {
-        return $this->anchors;
     }
 }

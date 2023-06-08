@@ -14,7 +14,6 @@ use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
-use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Flow\Mvc\ActionRequest;
@@ -46,7 +45,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $jobList,
         bool $inBackend,
         ContentContext $subGraph
-    ): PageInterface {
+    ): Page {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -81,7 +80,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $job,
         ContentContext $subGraph,
         ActionRequest $request
-    ): PageInterface {
+    ): Page {
         $content = new ContentContainer(
             ContentContainerVariant::VARIANT_REGULARX,
             $this->placeholderFactory->forJob()
@@ -101,7 +100,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $jobNotification,
         ContentContext $subGraph,
         ActionRequest $request
-    ): PageInterface {
+    ): Page {
         $content = new ContentContainer(
             ContentContainerVariant::VARIANT_REGULARX,
             $this->placeholderFactory->forJobNotification()
@@ -121,7 +120,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $jobApplication,
         ContentContext $subGraph,
         ActionRequest $request
-    ): PageInterface {
+    ): Page {
         $content = new ContentContainer(
             ContentContainerVariant::VARIANT_REGULARX,
             $this->placeholderFactory->forJobApplication()
@@ -136,7 +135,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         SlotInterface $content,
         ContentContext $subGraph,
         ActionRequest $request
-    ): PageInterface {
+    ): Page {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };

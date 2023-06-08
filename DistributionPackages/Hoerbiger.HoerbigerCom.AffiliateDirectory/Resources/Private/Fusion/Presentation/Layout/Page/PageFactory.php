@@ -5,37 +5,27 @@ namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Layout\Page;
  * This file is part of the Hoerbiger.HoerbigerCom.AffiliateDirectory package.
  */
 
-use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Application\AffiliateFinder\AffiliateFinderFactory;
-use Hoerbiger\Shared\Domain\Anchor;
-use Hoerbiger\Shared\Domain\Sailor;
-use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
-use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
-use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
-use Hoerbiger\Shared\Presentation\Block\Link\Link;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
-use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
-use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -49,7 +39,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
-    public function forAffiliateFinder(TraversableNodeInterface $site, TraversableNodeInterface $affiliateFinder, bool $inBackend, ContentContext $subGraph): PageInterface
+    public function forAffiliateFinder(TraversableNodeInterface $site, TraversableNodeInterface $affiliateFinder, bool $inBackend, ContentContext $subGraph): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;

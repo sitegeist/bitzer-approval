@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Separator) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Separator\\SeparatorInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Separator\\Separator'
 
     @styleguide {
         title = 'Separator'

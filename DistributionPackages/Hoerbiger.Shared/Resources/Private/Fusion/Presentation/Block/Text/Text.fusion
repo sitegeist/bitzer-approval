@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Text\\TextInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Text\\Text'
 
     @styleguide {
         title = 'Text'

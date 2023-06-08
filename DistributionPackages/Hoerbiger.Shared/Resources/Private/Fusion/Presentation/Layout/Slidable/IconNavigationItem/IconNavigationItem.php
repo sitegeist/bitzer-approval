@@ -8,34 +8,16 @@ declare(strict_types=1);
 
 namespace Hoerbiger\Shared\Presentation\Layout\Slidable\IconNavigationItem;
 
-use Hoerbiger\Shared\Presentation\Block\Icon\IconInterface;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 
-/**
- * @Flow\Proxy(false)
- */
-final class IconNavigationItem extends AbstractComponentPresentationObject implements IconNavigationItemInterface
+#[Flow\Proxy(false)]
+final class IconNavigationItem extends AbstractComponentPresentationObject
 {
-    private IconInterface $icon;
-
-    private string $label;
-
     public function __construct(
-        IconInterface $icon,
-        string $label
+        public readonly Icon $icon,
+        public readonly string $label
     ) {
-        $this->icon = $icon;
-        $this->label = $label;
-    }
-
-    public function getIcon(): IconInterface
-    {
-        return $this->icon;
-    }
-
-    public function getLabel(): string
-    {
-        return $this->label;
     }
 }

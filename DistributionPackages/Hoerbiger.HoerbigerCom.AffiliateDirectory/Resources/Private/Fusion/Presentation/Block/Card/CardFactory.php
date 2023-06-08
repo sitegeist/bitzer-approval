@@ -9,13 +9,11 @@ declare(strict_types=1);
 namespace Hoerbiger\HoerbigerCom\AffiliateDirectory\Presentation\Block\Card;
 
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactoryInterface;
-use Hoerbiger\Shared\Presentation\Block\Card\CardInterface;
 use Hoerbiger\Shared\Presentation\Block\Card\SearchResultCard\SearchResultCard;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
-use Neos\ContentRepository\Domain\NodeType\NodeTypeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
@@ -37,7 +35,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
      */
     protected $localizationService;
 
-    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): CardInterface
+    public function forThing(TraversableNodeInterface $thing, string $typeIdentifier, ?string $highlight): SearchResultCard
     {
         $supportingText = $highlight ?: $thing->getProperty('abstract');
 

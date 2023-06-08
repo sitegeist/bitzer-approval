@@ -9,7 +9,6 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  */
 
 use GuzzleHttp\Psr7\Uri;
-use Hoerbiger\Shared\Presentation\Application\CompactSearchForm\CompactSearchFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
@@ -64,7 +63,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $site,
         ContentContext $subgraph,
         ?ActionRequest $actionRequest = null
-    ): SiteHeaderInterface {
+    ): SiteHeader {
         $siteHeaderVariant = match ($document->getNodeType()->getName()) {
             'Hoerbiger.HoerbigerCom:Document.HomePage',
             'Hoerbiger.HoerbigerCom:Document.WebPage',
@@ -183,7 +182,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
                         }
 
                         $newMenuItems[$i] = new NavigationItem(
-                            $menuItems[$i]->getLink(),
+                            $menuItems[$i]->link,
                             new NavigationItems($subItems),
                             true
                         );

@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.Slidable) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\SlidableInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\Slidable\\Slidable'
 
     @styleguide {
         title = 'Slidable'

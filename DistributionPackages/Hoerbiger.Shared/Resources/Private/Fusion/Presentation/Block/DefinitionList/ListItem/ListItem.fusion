@@ -1,5 +1,5 @@
     prototype(Hoerbiger.Shared:Block.DefinitionList.ListItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\DefinitionList\\ListItem\\ListItemInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\DefinitionList\\ListItem\\ListItem'
 
     @styleguide {
         title = 'ListItem'

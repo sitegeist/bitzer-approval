@@ -9,73 +9,19 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Psr\Http\Message\UriInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class SearchForm extends AbstractComponentPresentationObject implements SearchFormInterface
+#[Flow\Proxy(false)]
+final class SearchForm extends AbstractComponentPresentationObject
 {
-    private string $csrfProtectionToken;
-
-    private UriInterface $endpointUri;
-
-    private string $sortingPropertyOptions;
-
-    private string $periodOptions;
-
-    private string $labels;
-
-    private string $language;
-
-    private UriInterface $mostWantedEndpointUri;
-
     public function __construct(
-        string $csrfProtectionToken,
-        UriInterface $endpointUri,
-        string $sortingPropertyOptions,
-        string $periodOptions,
-        string $labels,
-        string $language,
-        UriInterface $mostWantedEndpointUri
+        public readonly string $csrfProtectionToken,
+        public readonly UriInterface $endpointUri,
+        public readonly string $sortingPropertyOptions,
+        public readonly string $periodOptions,
+        public readonly string $labels,
+        public readonly string $language,
+        public readonly UriInterface $mostWantedEndpointUri
     ) {
-        $this->csrfProtectionToken = $csrfProtectionToken;
-        $this->endpointUri = $endpointUri;
-        $this->sortingPropertyOptions = $sortingPropertyOptions;
-        $this->periodOptions = $periodOptions;
-        $this->labels = $labels;
-        $this->language = $language;
-        $this->mostWantedEndpointUri = $mostWantedEndpointUri;
     }
-
-    public function getEndpointUri(): UriInterface
-    {
-        return $this->endpointUri;
-    }
-
-    public function getSortingPropertyOptions(): string
-    {
-        return $this->sortingPropertyOptions;
-    }
-
-    public function getPeriodOptions(): string
-    {
-        return $this->periodOptions;
-    }
-
-    public function getLabels(): string
-    {
-        return $this->labels;
-    }
-
-    public function getLanguage(): string
-    {
-        return $this->language;
-    }
-
-    public function getMostWantedEndpointUri(): UriInterface
-    {
-        return $this->mostWantedEndpointUri;
-    }
-
     public function getApplicationData(): string
     {
         return json_encode([

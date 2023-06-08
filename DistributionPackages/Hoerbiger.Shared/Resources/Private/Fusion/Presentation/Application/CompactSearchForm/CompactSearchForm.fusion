@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Application.CompactSearchForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Application\\CompactSearchForm\\CompactSearchFormInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Application\\CompactSearchForm\\CompactSearchForm'
 
     @styleguide {
         title = 'CompactSearchForm'

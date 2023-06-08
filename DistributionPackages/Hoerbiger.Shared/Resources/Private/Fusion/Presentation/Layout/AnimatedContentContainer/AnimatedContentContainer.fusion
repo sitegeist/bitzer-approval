@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Layout.AnimatedContentContainer) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\AnimatedContentContainer\\AnimatedContentContainerInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Layout\\AnimatedContentContainer\\AnimatedContentContainer'
 
     @styleguide {
         title = 'AnimatedContentContainer'

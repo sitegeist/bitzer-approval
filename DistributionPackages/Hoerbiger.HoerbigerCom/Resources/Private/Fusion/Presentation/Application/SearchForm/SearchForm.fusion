@@ -1,5 +1,5 @@
 prototype(Hoerbiger.HoerbigerCom:Application.SearchForm) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\SearchForm\\SearchFormInterface'
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Presentation\\Application\\SearchForm\\SearchForm'
 
     renderer = afx`
         <div class={[

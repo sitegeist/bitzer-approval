@@ -13,13 +13,10 @@ use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Page\Page;
-use Hoerbiger\Shared\Presentation\Layout\Page\PageInterface;
 use Hoerbiger\Shared\Integration\CacheSegment\CacheSegment;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\HoerbigerCom\SuccessStories\Presentation\Layout\Stage\StageFactory as SuccessStoriesStageFactory;
@@ -59,7 +56,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
-    public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($magazine, $subgraph, $inBackend);
@@ -98,7 +95,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     }
 
-    public function forSuccessStory(TraversableNodeInterface $site, TraversableNodeInterface $successStory, ContentContext $subgraph, bool $inBackend): PageInterface
+    public function forSuccessStory(TraversableNodeInterface $site, TraversableNodeInterface $successStory, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
         $stage = $this->successStoriesStageFactory->forSuccessStoryIntroduction($successStory, $inBackend);
@@ -106,7 +103,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $successStory, $stage, $subgraph);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $introSection, ContentContext $subgraph): PageInterface
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $introSection, ContentContext $subgraph): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;

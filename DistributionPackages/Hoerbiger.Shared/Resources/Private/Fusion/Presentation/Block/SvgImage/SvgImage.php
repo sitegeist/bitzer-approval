@@ -9,39 +9,14 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Psr\Http\Message\UriInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class SvgImage extends AbstractComponentPresentationObject implements SvgImageInterface
+#[Flow\Proxy(false)]
+final class SvgImage extends AbstractComponentPresentationObject
 {
-    private UriInterface $source;
-
-    private string $alt;
-
-    private string $title;
 
     public function __construct(
-        UriInterface $source,
-        string $alt,
-        string $title
+        public readonly UriInterface $source,
+        public readonly string $alt,
+        public readonly string $title
     ) {
-        $this->source = $source;
-        $this->alt = $alt;
-        $this->title = $title;
-    }
-
-    public function getSource(): UriInterface
-    {
-        return $this->source;
-    }
-
-    public function getAlt(): string
-    {
-        return $this->alt;
-    }
-
-    public function getTitle(): string
-    {
-        return $this->title;
     }
 }

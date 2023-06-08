@@ -8,9 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 use Neos\Flow\Annotations as Flow;
 use Neos\Media\Domain\Model\ThumbnailConfiguration;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class SourceSet
 {
     /**

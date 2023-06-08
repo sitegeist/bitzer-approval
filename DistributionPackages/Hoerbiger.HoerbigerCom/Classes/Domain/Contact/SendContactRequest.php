@@ -8,9 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Domain\Contact;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeAggregateIdentifier;
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class SendContactRequest
 {
     private string $language;

@@ -12,48 +12,14 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class SliderItem extends AbstractComponentPresentationObject implements SliderItemInterface
+#[Flow\Proxy(false)]
+final class SliderItem extends AbstractComponentPresentationObject
 {
-    private ?Headline $headline;
-
-    private ?SlotInterface $text;
-
-    private Figure $figure;
-
-    private Video $video;
-
     public function __construct(
-        ?Headline $headline,
-        ?SlotInterface $text,
-        Figure $figure,
-        Video $video
+        public readonly ?Headline $headline,
+        public readonly ?SlotInterface $text,
+        public readonly Figure $figure,
+        public readonly Video $video
     ) {
-        $this->headline = $headline;
-        $this->text = $text;
-        $this->figure = $figure;
-        $this->video = $video;
-    }
-
-    public function getHeadline(): ?Headline
-    {
-        return $this->headline;
-    }
-
-    public function getText(): ?SlotInterface
-    {
-        return $this->text;
-    }
-
-    public function getFigure(): Figure
-    {
-        return $this->figure;
-    }
-
-    public function getVideo(): Video
-    {
-        return $this->video;
     }
 }

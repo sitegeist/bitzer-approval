@@ -39,7 +39,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         $this->figureFactory = $figureFactory;
     }
 
-    public function forFullMediaIntroduction(TraversableNodeInterface $node, ContentContext $subGraph, bool $inBackend): StageInterface
+    public function forFullMediaIntroduction(TraversableNodeInterface $node, ContentContext $subGraph, bool $inBackend): FullMediaStage
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
         if (!$imageSource) {
@@ -68,7 +68,7 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forHeaderStage(TraversableNodeInterface $node, ContentContext $subGraph, bool $inBackend): StageInterface
+    public function forHeaderStage(TraversableNodeInterface $node, ContentContext $subGraph, bool $inBackend): HeaderStage
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend, true);
         if (!$imageSource) {

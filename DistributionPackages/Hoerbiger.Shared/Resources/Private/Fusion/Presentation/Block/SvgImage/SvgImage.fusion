@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.SvgImage) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\SvgImage\\SvgImageInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\SvgImage\\SvgImage'
 
     @styleguide {
         title = 'SvgImage'

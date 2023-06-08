@@ -7,34 +7,15 @@ namespace Hoerbiger\Shared\Presentation\Layout\Page;
 
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
-use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderInterface;
+use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeader;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
-use Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterInterface;
 
-/**
- * @Flow\Proxy(false)
- */
-final class Page extends AbstractComponentPresentationObject implements PageInterface
+#[Flow\Proxy(false)]
+final class Page extends AbstractComponentPresentationObject
 {
-    private SiteHeaderInterface $siteHeader;
-
-    private SlotInterface $content;
-
     public function __construct(
-        SiteHeaderInterface $siteHeader,
-        SlotInterface $content
+        public readonly SiteHeader $siteHeader,
+        public readonly SlotInterface $content
     ) {
-        $this->siteHeader = $siteHeader;
-        $this->content = $content;
-    }
-
-    public function getSiteHeader(): SiteHeaderInterface
-    {
-        return $this->siteHeader;
-    }
-
-    public function getContent(): SlotInterface
-    {
-        return $this->content;
     }
 }

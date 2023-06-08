@@ -1,5 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
-    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Button\\ButtonInterface'
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Button\\Button'
 
     @styleguide {
         title = 'Button'

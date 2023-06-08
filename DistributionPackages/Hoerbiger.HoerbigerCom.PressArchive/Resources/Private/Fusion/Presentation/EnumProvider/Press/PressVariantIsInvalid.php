@@ -8,9 +8,7 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- */
+#[Flow\Proxy(false)]
 final class PressVariantIsInvalid extends \DomainException
 {
     public static function becauseItMustBeOneOfTheDefinedConstants(string $attemptedValue): self
