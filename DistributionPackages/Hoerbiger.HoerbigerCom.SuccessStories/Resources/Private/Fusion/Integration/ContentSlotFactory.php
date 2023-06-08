@@ -98,8 +98,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         GridVariant::twoColumnsFrMaxGap(),
                                         Collection::fromIterable([
                                             new Headline(
-                                                HeadlineSize::large(),
-                                                HeadlineColor::brand(),
+                                                HeadlineSize::mediumItalic(),
+                                                HeadlineColor::neutralContrast(),
                                                 HeadlineType::h2(),
                                                 Editable::fromNodeProperty($topSuccessStories, 'headline')
                                             ),

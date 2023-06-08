@@ -13,10 +13,10 @@ prototype(Hoerbiger.Shared:Layout.Box) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <div id={presentationObject.identifier} class={[
             "[Layout.Box (" + presentationObject.variant + ")]",
-            "relative w-full before:absolute before:top-0 before:left-1/2 before:-translate-x-1/2 before:w-full before:max-w-md before:h-2",
-            presentationObject.variant.isTextCenter && "flex items-center p-md bg-neutral-lighter p-md",
+            "relative w-full",
+            presentationObject.variant.isTextCenter && "flex items-center p-md p-md",
             presentationObject.variant.isNeutral && "bg-neutral-lighter p-md",
-            presentationObject.variant.isDecorative && "bg-neutral-lighter before:bg-brand p-md",
+            presentationObject.variant.isDecorative && "bg-neutral-lighter p-md",
             presentationObject.variant.isExcite && "bg-neutral-lighter before:bg-excite p-md",
             presentationObject.variant.isExperience && "bg-neutral-lighter before:bg-experience p-md",
             presentationObject.variant.isLite && "bg-neutral-lighter before:bg-lite p-md",
