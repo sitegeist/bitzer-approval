@@ -208,6 +208,7 @@ module.exports = {
 							marginLeft: '-1em',
 							content: '"\u2013"',
 							color: theme('colors.service.red'),
+							fontWeight: 'bold',
 						},
 						p: {
 							marginTop: 0,
