@@ -107,7 +107,6 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution,Hoerbiger.HoerbigerCom:Document.Shortcut'
         ) as $industrySolution) {
             $imageSource = $this->imageSourceFactory->forPreviewMixin($industrySolution, false);
-            $link = (new LinkFactory())->forLinkToDocument($industrySolution, null);
 
             $headline = new Headline(
                 HeadlineSize::verySmallRegular(),
@@ -143,11 +142,6 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     '_self',
                     null
                 )
-    //                $link->withContent(
-    //                    Value::fromString(
-    //                        $this->translator->translateById('link.label', [], null, null, 'Block.Card.NavigationCard', 'Hoerbiger.HoerbigerCom') ?: ''
-    //                    )
-    //                )
             );
         }
 
