@@ -887,7 +887,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     public function forDownloadsTabNode(TraversableNodeInterface $downloadsNode): SlotInterface
     {
         return new Grid(
-            GridVariant::twoColumnsGap(),
+            GridVariant::oneColumn(),
             Collection::fromNodes(
                 $downloadsNode->findChildNodes(),
                 function (TraversableNodeInterface $node): Content {
