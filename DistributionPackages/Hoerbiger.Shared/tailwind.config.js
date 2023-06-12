@@ -106,8 +106,9 @@ module.exports = {
 				darker: '#8A9199',
 				red: '#FF2424',
 				lightGrey: '#999',
-				border: '#1D1D1B'
-			},
+				border: '#1D1D1B',
+				borderLight: 'rgba(100, 100, 100, .5)'
+},
 			slider: {
 				grey: '#999999',
 				lightGrey: '#8E969D',
