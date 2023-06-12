@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Block.Card.DownloadCard) < prototype(Hoerbiger.Shared
                     />
                 </div>
             </div>
-            <Neos.Fusion:Augmenter class="flex w-full items-center justify-between">
+            <Neos.Fusion:Augmenter class="flex w-full items-center justify-between flex-wrap gap-x-sm">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     @if.1={presentationObject.buttons}
                     presentationObject={presentationObject.buttons}
