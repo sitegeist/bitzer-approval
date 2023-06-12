@@ -923,8 +923,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $benefitsNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::brand(),
+                                    HeadlineSize::mediumItalic(),
+                                    HeadlineColor::neutralContrast(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($benefitsNode, 'headline')
                                 )
@@ -987,8 +987,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $peopleStoriesNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::brand(),
+                                    HeadlineSize::mediumItalic(),
+                                    HeadlineColor::neutralContrast(),
                                     HeadlineType::h2(),
                                     Editable::fromNodeProperty($peopleStoriesNode, 'headline')
                                 )
