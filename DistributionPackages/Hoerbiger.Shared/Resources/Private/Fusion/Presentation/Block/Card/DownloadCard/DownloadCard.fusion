@@ -2,7 +2,7 @@ prototype(Hoerbiger.Shared:Block.Card.DownloadCard) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={[
             "[Block.Card.DownloadCard]",
-            "flex flex-col border border-neutral-lighter bg-neutral-lighter space-y-ch bg-light px-xs pt-xs pb-ch"
+            "flex flex-col bg-neutral-lighter space-y-ch bg-light px-xs pt-xs pb-ch"
         ]}>
             <div class="grid grid-cols-2-max-1fr grid-cols-2-max-1fr gap-xs flex-grow">
                 <div class="w-[100px] h-0 pt-ratio-square relative border border-neutral-lighter bg-light">

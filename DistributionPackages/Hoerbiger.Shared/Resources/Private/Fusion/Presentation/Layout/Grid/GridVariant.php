@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class GridVariant implements PseudoEnumInterface
 {
     const VARIANT_ONECOLUMN = 'oneColumn';
+    const VARIANT_ONECOLUMN_NOGAP_BORDER = 'oneColumnNoGapBorder';
     const VARIANT_TWOCOLUMNS = 'twoColumns';
     const VARIANT_TWOCOLUMNSNOGAP = 'twoColumnsNoGap';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
@@ -42,6 +43,7 @@ final class GridVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_ONECOLUMN
+                && $string !== self::VARIANT_ONECOLUMN_NOGAP_BORDER
                 && $string !== self::VARIANT_TWOCOLUMNS
                 && $string !== self::VARIANT_TWOCOLUMNSNOGAP
                 && $string !== self::VARIANT_TWOCOLUMNSGAP
@@ -64,6 +66,11 @@ final class GridVariant implements PseudoEnumInterface
     public static function oneColumn(): self
     {
         return self::from(self::VARIANT_ONECOLUMN);
+    }
+
+    public static function oneColumnNoGapBorder(): self
+    {
+        return self::from(self::VARIANT_ONECOLUMN_NOGAP_BORDER);
     }
 
     public static function twoColumns(): self
@@ -124,6 +131,11 @@ final class GridVariant implements PseudoEnumInterface
     public function getIsOneColumn(): bool
     {
         return $this->value === self::VARIANT_ONECOLUMN;
+    }
+
+    public function getIsOneColumnNoGapBorder(): bool
+    {
+        return $this->value === self::VARIANT_ONECOLUMN_NOGAP_BORDER;
     }
 
     public function getIsTwoColumns(): bool
@@ -188,6 +200,7 @@ final class GridVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_ONECOLUMN),
+            self::from(self::VARIANT_ONECOLUMN_NOGAP_BORDER),
             self::from(self::VARIANT_TWOCOLUMNS),
             self::from(self::VARIANT_TWOCOLUMNSNOGAP),
             self::from(self::VARIANT_TWOCOLUMNSGAP),

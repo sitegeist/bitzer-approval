@@ -15,6 +15,7 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
             '[Layout.Grid (' + presentationObject.variant + ')]',
             'grid w-full',
             presentationObject.variant.isOneColumn && "grid-cols-1 gap-xl md:gap-md",
+            presentationObject.variant.isOneColumnNoGapBorder && "grid-cols-1 [&>div:not(:last-child)]:border-b [&>div:not(:last-child)]:border-service-borderLight",
             presentationObject.variant.isTwoColumns && "grid-cols-1 gap-xl lg:grid-cols-2 md:gap-sm",
             presentationObject.variant.isTwoColumnsNoGap && "grid-cols-1 lg:grid-cols-2",
             presentationObject.variant.isTwoColumnsGap && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-sm",
