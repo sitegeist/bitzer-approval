@@ -169,7 +169,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
                 return $this->forTabBox($contentNode, $inBackend, null);
             case 'Hoerbiger.HoerbigerCom:Content.TextTab':
-                return $this->forTextTabNode($contentNode, $theme);
+                return $this->forTextTabNode($contentNode, $inBackend, $theme);
             case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
                 return $this->forDefinitionListTabNode($contentNode);
             case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
@@ -815,7 +815,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return Editable::fromNodeProperty($tabNode, 'tab__label');
     }
 
-    public function forTextTabNode(TraversableNodeInterface $textTabNode, ?Theme $theme): SlotInterface
+    public function forTextTabNode(TraversableNodeInterface $textTabNode, bool $inBackend, ?Theme $theme): SlotInterface
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -825,12 +825,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new Stack(
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
-                new Headline(
-                    HeadlineSize::mediumItalic(),
-                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
-                    HeadlineType::div(),
-                    Editable::fromNodeProperty($textTabNode, 'headline')
-                ),
+                $inBackend || $textTabNode->getProperty('headline')
+                    ? new Headline(
+                        HeadlineSize::mediumItalic(),
+                        HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
+                        HeadlineType::div(),
+                        Editable::fromNodeProperty($textTabNode, 'headline')
+                    )
+                    : null,
                 new Text(
                     TextVariant::tryFromTheme($theme, false) ?: TextVariant::neutralContrast(),
                     Editable::fromNodeProperty($textTabNode, 'text'),
