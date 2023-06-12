@@ -190,12 +190,6 @@ module.exports = {
 						strong: {
 							fontFamily: theme('fontFamily.sans-bold')
 						},
-						a: {
-							color: theme('colors.neutral.contrast'),
-							fontFamily: theme('fontFamily.sans-bold'),
-							fontWeight: 600,
-							textDecoration: 'none',
-						},
 						'ul': {
 							listStyleType: 'none',
 							padding: '12px',
@@ -491,7 +485,11 @@ module.exports = {
 
 			aspectRatio: {
 				'5/3': '5 / 3',
-			}
+			},
+
+			content: {
+				'quoteEnd': '"\\201D"',
+			},
 		},
 	},
 	variants: {

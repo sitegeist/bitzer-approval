@@ -122,6 +122,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 new CacheSegment(
                     new TabBox(
                         TabBoxVariant::horizontal(),
+                        null,
                         Collection::fromIterable(
                             $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
                             function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {

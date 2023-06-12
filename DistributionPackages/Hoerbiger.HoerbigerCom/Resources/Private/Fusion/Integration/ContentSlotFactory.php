@@ -635,10 +635,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         SeparatorVariant::fullWidthWithContent(),
                         Editable::fromNodeProperty($quotationNode, 'metaHeadline')
                     ): null,
-                    new Quotation(
-                        QuotationVariant::tryFromTheme($theme),
-                        Editable::fromNodeProperty($quotationNode, 'text'),
-                        Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+                    new ContentContainer(
+                        ContentContainerVariant::tightX(),
+                        new Quotation(
+                            QuotationVariant::tryFromTheme($theme),
+                            Editable::fromNodeProperty($quotationNode, 'text'),
+                            Editable::fromNodeProperty($quotationNode, 'spokenByCharacter')
+                        )
                     )
                 ]))
             )
@@ -787,19 +790,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ): null,
                     new Box(
                         BoxVariant::tryFromTheme($theme) ?: BoxVariant::decorative(),
-                        new Stack(
-                            StackVariant::xsStretch(),
-                            Collection::fromIterable(array_filter([
-                                $inBackend || $tabBox->getProperty('headline')
-                                    ? new Headline(
-                                    HeadlineSize::large(),
-                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
-                                    HeadlineType::div(),
-                                    Editable::fromNodeProperty($tabBox, 'headline')
-                                )
-                                    : null,
-                                (new TabBoxFactory())->forTabBox($tabBox, $identifier, $theme)
-                            ]), $identity)
+                        (new TabBoxFactory())->forTabBox(
+                            $inBackend || $tabBox->getProperty('headline')
+                                ? new Headline(
+                                HeadlineSize::mediumItalic(),
+                                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
+                                HeadlineType::div(),
+                                Editable::fromNodeProperty($tabBox, 'headline')
+                            )
+                                : null,
+                            $tabBox,
+                            $identifier,
+                            $theme
                         ),
                         $identifier
                     )
@@ -824,8 +826,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             StackVariant::xs(),
             Collection::fromIterable(array_filter([
                 new Headline(
-                    HeadlineSize::small(),
-                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::brand(),
+                    HeadlineSize::mediumItalic(),
+                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::neutralContrast(),
                     HeadlineType::div(),
                     Editable::fromNodeProperty($textTabNode, 'headline')
                 ),
