@@ -17,6 +17,7 @@ final class TagVariant implements PseudoEnumInterface
     const VARIANT_BRANDCOLOR_BOLD = 'brandColorBold';
     const VARIANT_BRANDCOLOR_LIGHT = 'brandColorLight';
     const VARIANT_BRANDCOLOR_CONTRAST = 'brandColorContrast';
+    const VARIANT_NEUTRAL_CONTRAST = 'neutralContrast';
     const VARIANT_TRANSPARENT = 'transparent';
     const VARIANT_HEIGHT_FULL = 'heightFull';
 
@@ -40,6 +41,7 @@ final class TagVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_BRANDCOLOR_BOLD
                 && $string !== self::VARIANT_BRANDCOLOR_LIGHT
                 && $string !== self::VARIANT_BRANDCOLOR_CONTRAST
+                && $string !== self::VARIANT_NEUTRAL_CONTRAST
                 && $string !== self::VARIANT_TRANSPARENT
                 && $string !== self::VARIANT_HEIGHT_FULL
             ) {
@@ -69,6 +71,11 @@ final class TagVariant implements PseudoEnumInterface
     public static function brandColorContrast(): self
     {
         return self::from(self::VARIANT_BRANDCOLOR_CONTRAST);
+    }
+
+    public static function neutralContrast(): self
+    {
+        return self::from(self::VARIANT_NEUTRAL_CONTRAST);
     }
 
     public static function transparent(): self
@@ -101,6 +108,11 @@ final class TagVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_BRANDCOLOR_CONTRAST;
     }
 
+    public function getIsNeutralContrast(): bool
+    {
+        return $this->value === self::VARIANT_NEUTRAL_CONTRAST;
+    }
+
     public function getIsTransparent(): bool
     {
         return $this->value === self::VARIANT_TRANSPARENT;
@@ -121,6 +133,7 @@ final class TagVariant implements PseudoEnumInterface
             self::from(self::VARIANT_BRANDCOLOR_BOLD),
             self::from(self::VARIANT_BRANDCOLOR_LIGHT),
             self::from(self::VARIANT_BRANDCOLOR_CONTRAST),
+            self::from(self::VARIANT_NEUTRAL_CONTRAST),
             self::from(self::VARIANT_TRANSPARENT),
             self::from(self::VARIANT_HEIGHT_FULL)
         ];

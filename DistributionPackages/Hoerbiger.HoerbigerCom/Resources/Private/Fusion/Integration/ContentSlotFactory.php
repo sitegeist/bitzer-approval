@@ -859,7 +859,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         $icon ?
                             new Tag(
                             'span',
-                            TagVariant::transparent(),
+                            TagVariant::neutralContrast(),
                             Icon::fromStampedeDataSourceValue(
                                 $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
                                 IconSize::size_3()
@@ -867,8 +867,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             )
                             : null,
                         new Headline(
-                            HeadlineSize::small(),
-                            HeadlineColor::brand(),
+                            HeadlineSize::mediumItalic(),
+                            HeadlineColor::neutralContrast(),
                             HeadlineType::div(),
                             Editable::fromNodeProperty($textTabNode, 'headline')
                         ),
@@ -1063,15 +1063,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             new Tag(
                                 'span',
-                                TagVariant::transparent(),
+                                TagVariant::neutralContrast(),
                                 Icon::fromStampedeDataSourceValue(
                                     $sectionIntroductionNode->getProperty('icon') ?: 'peopleCulture:faqs',
                                     IconSize::size_4()
                                 ),
                             ),
                             new Headline(
-                                HeadlineSize::large(),
-                                HeadlineColor::brand(),
+                                HeadlineSize::mediumItalic(),
+                                HeadlineColor::neutralContrast(),
                                 HeadlineType::h2(),
                                 Editable::fromNodeProperty($sectionIntroductionNode, 'headline')
                             ),
