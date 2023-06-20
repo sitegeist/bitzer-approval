@@ -191,6 +191,9 @@ module.exports = {
 						strong: {
 							fontFamily: theme('fontFamily.sans-bold')
 						},
+						a: {
+							textDecoration: 'none',
+						},
 						'ul': {
 							listStyleType: 'none',
 							padding: '12px',

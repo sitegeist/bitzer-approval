@@ -14,7 +14,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
         <div class={[
             "[Block.Text (" + presentationObject.variant + ")]",
             "prose",
-            "[&_a]:font-sans-bold [&_a]:text-neutral-contrast [&_a]:no-underline",
+            "[&_a]:font-sans-bold",
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
                 : presentationObject.variant.isCentered
