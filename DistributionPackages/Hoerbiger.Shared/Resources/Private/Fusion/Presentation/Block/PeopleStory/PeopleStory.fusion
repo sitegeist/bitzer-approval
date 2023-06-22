@@ -38,7 +38,7 @@ prototype(Hoerbiger.Shared:Block.PeopleStory) < prototype(PackageFactory.AtomicF
             </div>
             <div class="flex flex-col space-y-sm md:space-y-xs p-sm md:px-0">
                 <div class="flex text-sm uppercase space-x-ch font-sans-bold">
-                    <div class="text-brand">
+                    <div class="text-service-red">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.metaline} />
                     </div>
                     <span class="font-bold">&#8226;</span>

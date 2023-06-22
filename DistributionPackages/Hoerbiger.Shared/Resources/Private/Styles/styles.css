@@ -82,7 +82,7 @@ text-decoration:underline;
 }
 
 li::marker {
-color:#000;
+	color: #FF2424;
 }
 
 /* css details auf dem Iphone */
@@ -155,4 +155,10 @@ details summary::-webkit-details-marker {
 		width: 70px;
 		aspect-ratio: auto;
 	}
+}
+
+u {
+	text-decoration: none;
+	font-family: "TradeGothicNextBold", sans-serif;
+	color: red;
 }

@@ -16,7 +16,6 @@ prototype(Hoerbiger.Shared:Block.DefinitionList) < prototype(PackageFactory.Atom
             "w-full grid grid-cols-2 text-sm",
             "NEOS_BE_HELPER_Block_DefinitionList"
         ]}>
-
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.definitions}/>
         </dl>
     `

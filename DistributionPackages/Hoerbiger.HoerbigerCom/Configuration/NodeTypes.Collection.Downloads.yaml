@@ -1,3 +1,15 @@
 'Hoerbiger.HoerbigerCom:Collection.Downloads':
   superTypes:
     'Hoerbiger.HoerbigerCom:Mixin.Downloads': true
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text

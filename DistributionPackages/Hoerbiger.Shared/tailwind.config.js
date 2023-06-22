@@ -36,6 +36,7 @@ const SPACES = {
 	'minus-lg': `calc(-3 * ${SPACE_SM})`,
 	'minus-xl': `calc(-4 * ${SPACE_SM})`,
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
+	'25': '25px',
 };
 
 const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
@@ -105,8 +106,9 @@ module.exports = {
 				darker: '#8A9199',
 				red: '#FF2424',
 				lightGrey: '#999',
-				border: '#1D1D1B'
-			},
+				border: '#1D1D1B',
+				borderLight: 'rgba(100, 100, 100, .5)'
+},
 			slider: {
 				grey: '#999999',
 				lightGrey: '#8E969D',
@@ -190,13 +192,22 @@ module.exports = {
 							fontFamily: theme('fontFamily.sans-bold')
 						},
 						a: {
-							color: theme('colors.brand.DEFAULT'),
-							fontFamily: theme('fontFamily.sans-bold'),
-							fontWeight: 600,
 							textDecoration: 'none',
 						},
+						'ul': {
+							listStyleType: 'none',
+							padding: '12px',
+						},
+						'ul li': {
+							marginBottom: '.3em',
+						},
 						'ul li::before': {
-							backgroundColor: theme('colors.light.contrast'),
+							display: 'inline-block',
+							width: '1em',
+							marginLeft: '-1em',
+							content: '"\u2013"',
+							color: theme('colors.service.red'),
+							fontWeight: 'bold',
 						},
 						p: {
 							marginTop: 0,
@@ -478,7 +489,11 @@ module.exports = {
 
 			aspectRatio: {
 				'5/3': '5 / 3',
-			}
+			},
+
+			content: {
+				'quoteEnd': '"\\201D"',
+			},
 		},
 	},
 	variants: {

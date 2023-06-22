@@ -14,7 +14,7 @@
           type: text
     spokenByCharacter:
       options:
-        preset: 'rte.plain'
+        preset: 'rte.plainWithRed'
       ui:
         inline:
           editorOptions:

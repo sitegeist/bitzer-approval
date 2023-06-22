@@ -9,6 +9,17 @@
     label: 'Bild mit überlappendem Text'
     icon: 'clone'
   properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
     text:
       type: string
       ui:

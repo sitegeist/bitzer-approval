@@ -26,6 +26,7 @@ final class StackVariant implements PseudoEnumInterface
     const VARIANT_XL = 'xl';
     const VARIANT_XL_STRETCH = 'xl_stretch';
     const VARIANT_META_PRESS = 'metaPress';
+    const VARIANT_PX16 = '16px';
 
     /**
      * @var array<string,self>|self[]
@@ -54,7 +55,8 @@ final class StackVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_LG_STRETCH
                 && $string !== self::VARIANT_XL
                 && $string !== self::VARIANT_XL_STRETCH
-                && $string !== self::VARIANT_META_PRESS) {
+                && $string !== self::VARIANT_META_PRESS
+                && $string !== self::VARIANT_PX16) {
                 throw StackVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
             self::$instances[$string] = new self($string);
@@ -128,6 +130,11 @@ final class StackVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_META_PRESS);
     }
 
+    public static function px16(): self
+    {
+        return self::from(self::VARIANT_PX16);
+    }
+
     public function getIsNoGap(): bool
     {
         return $this->value === self::VARIANT_NOGAP;
@@ -193,6 +200,11 @@ final class StackVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_META_PRESS;
     }
 
+    public function getIsPx16(): bool
+    {
+        return $this->value === self::VARIANT_PX16;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -212,6 +224,7 @@ final class StackVariant implements PseudoEnumInterface
             self::from(self::VARIANT_XL),
             self::from(self::VARIANT_XL_STRETCH),
             self::from(self::VARIANT_META_PRESS),
+            self::from(self::VARIANT_PX16),
         ];
     }
 

@@ -14,6 +14,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
         <div class={[
             "[Block.Text (" + presentationObject.variant + ")]",
             "prose",
+            "[&_a]:font-sans-bold",
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
                 : presentationObject.variant.isCentered
@@ -32,7 +33,8 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.isExperience && "prose.experience",
             presentationObject.variant.isServiceContrast && "prose-service",
             presentationObject.variant.isServiceRed && "text-service-red font-sans-bold text-[16px] text-center",
-            presentationObject.variant.isSm && "text-sm"
+            presentationObject.variant.isSm && "text-sm",
+            presentationObject.variant.isNeutralSmall && "text-small text-light-contrast"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

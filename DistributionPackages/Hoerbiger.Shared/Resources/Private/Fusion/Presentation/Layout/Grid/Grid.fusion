@@ -15,6 +15,7 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
             '[Layout.Grid (' + presentationObject.variant + ')]',
             'grid w-full',
             presentationObject.variant.isOneColumn && "grid-cols-1 gap-xl md:gap-md",
+            presentationObject.variant.isOneColumnNoGapBorder && "grid-cols-1 [&>div:not(:last-child)]:border-b [&>div:not(:last-child)]:border-service-borderLight",
             presentationObject.variant.isTwoColumns && "grid-cols-1 gap-xl lg:grid-cols-2 md:gap-sm",
             presentationObject.variant.isTwoColumnsNoGap && "grid-cols-1 lg:grid-cols-2",
             presentationObject.variant.isTwoColumnsGap && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-sm",
@@ -26,6 +27,7 @@ prototype(Hoerbiger.Shared:Layout.Grid) < prototype(PackageFactory.AtomicFusion.
             presentationObject.variant.isThreeColumnsNarrowGap && Array.length(presentationObject.content.items) > 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-sm lg:grid-cols-3",
             presentationObject.variant.isTwoColumnsFrMaxGap && "grid-cols-1 gap-xs md:grid-cols-2-1fr-max",
             presentationObject.variant.isTwoColumnsThirdAutoGap && "grid-cols-1 gap-xs lg:grid-cols-2-33-auto",
+            presentationObject.variant.isTwoColumnsThirdBigGap && "grid-cols-1 gap-lg lg:grid-cols-2-33-auto",
             presentationObject.variant.isTwoColumnsPress && "grid-cols-1 gap-sm md:grid-cols-2-160-auto",
             presentationObject.variant.isIconRight && "gap-x-xs grid-cols-2-1fr-max items-center",
             presentationObject.variant.isIconLeft && "gap-x-ch-xs grid-cols-2-max-1fr items-center"
