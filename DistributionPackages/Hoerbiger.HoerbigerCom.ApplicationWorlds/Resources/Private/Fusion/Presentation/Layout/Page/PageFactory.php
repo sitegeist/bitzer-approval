@@ -100,6 +100,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::regularX(),
+                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::stageAfterBreadcrumb(),
+                    $stage ?: Value::fromString('')
+                ),
                 count($anchors) > 0
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::regular(),
@@ -110,14 +118,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     )
                     : null,
-                new ContentContainer(
-                    ContentContainerVariant::regularX(),
-                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::stageAfterBreadcrumb(),
-                    $stage ?: Value::fromString('')
-                ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
                 new CacheSegment(
                     new TabBox(
