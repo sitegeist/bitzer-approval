@@ -87,7 +87,7 @@ export const Client = (props: ApplicationData): JSX.Element => {
 					</div>
 
 					<button
-						className="mt-lg md:mt-md px-8 rounded-full cursor-pointer whitespace-nowrap flex justify-center items-center space-x-[1em] min-h-touch max-h-touch bg-brand text-brand-contrast font-semibold"
+						className="mt-lg md:mt-md px-8 rounded-full cursor-pointer whitespace-nowrap flex justify-center items-center space-x-[1em] min-h-touch max-h-touch bg-service-darker text-brand-contrast font-semibold"
 						type="submit"
 						disabled={formState !== "USERINPUT"}
 					>

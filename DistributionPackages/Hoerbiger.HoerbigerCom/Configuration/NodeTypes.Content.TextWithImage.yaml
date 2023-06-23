@@ -13,6 +13,17 @@
           label: 'Text'
           icon: 'align-left'
   properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
     layout:
       type: string
       defaultValue: 'imageFirst'

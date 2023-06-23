@@ -33,6 +33,7 @@ enum TextVariant: string implements ProtectedContextAwareInterface
     case VARIANT_SERVICE_CONTRAST = 'serviceContrast';
     case VARIANT_SERVICE_RED = 'serviceRed';
     case VARIANT_SM = 'sm';
+    case VARIANT_NEUTRAL_SMALL = 'neutralSmall';
 
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {

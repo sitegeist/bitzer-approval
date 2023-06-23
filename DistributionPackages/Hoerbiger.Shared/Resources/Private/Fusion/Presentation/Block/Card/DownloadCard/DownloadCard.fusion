@@ -2,11 +2,11 @@ prototype(Hoerbiger.Shared:Block.Card.DownloadCard) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={[
             "[Block.Card.DownloadCard]",
-            "flex flex-col p-xs border border-neutral-lighter shadow-card space-y-ch bg-light"
+            "flex flex-col bg-neutral-lighter space-y-ch bg-light px-xs pt-xs pb-ch"
         ]}>
-            <div class="grid grid-cols-2-max-1fr tabBoxToggle:grid-cols-1 2xl:grid-cols-2-max-1fr gap-xs flex-grow">
-                <div class="w-[100px] h-0 pt-ratio-square relative border border-neutral-lighter shadow-card">
-                    <div class="absolute inset-ch">
+            <div class="grid grid-cols-2-max-1fr grid-cols-2-max-1fr gap-xs flex-grow">
+                <div class="w-[100px] h-0 pt-ratio-square relative border border-neutral-lighter bg-light">
+                    <div class="absolute inset-0">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot
                             @if.1={presentationObject.media}
                             presentationObject={presentationObject.media}
@@ -14,7 +14,7 @@ prototype(Hoerbiger.Shared:Block.Card.DownloadCard) < prototype(Hoerbiger.Shared
                     </div>
                 </div>
                 <div class="flex flex-col space-y-ch">
-                    <div class="font-semibold">
+                    <div class="font-semibold text-lg">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot
                             @if.1={presentationObject.header}
                             presentationObject={presentationObject.header}
@@ -26,18 +26,12 @@ prototype(Hoerbiger.Shared:Block.Card.DownloadCard) < prototype(Hoerbiger.Shared
                     />
                 </div>
             </div>
-            <div class="flex flex-col">
+            <Neos.Fusion:Augmenter class="flex w-full items-center justify-between flex-wrap gap-x-sm">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot
                     @if.1={presentationObject.buttons}
                     presentationObject={presentationObject.buttons}
                 />
-                <div class="text-neutral-darker uppercase font-semibold text-sm">
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                        @if.1={presentationObject.subheader}
-                        presentationObject={presentationObject.subheader}
-                    />
-                </div>
-            </div>
+            </Neos.Fusion:Augmenter>
         </div>
     `
 }

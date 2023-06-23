@@ -11,6 +11,17 @@
           label: 'Video'
           position: start
   properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
     video:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:

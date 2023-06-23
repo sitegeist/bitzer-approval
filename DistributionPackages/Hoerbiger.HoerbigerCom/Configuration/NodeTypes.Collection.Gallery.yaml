@@ -16,3 +16,15 @@
           type: 'Hoerbiger.HoerbigerCom:Content.GalleryImage'
         'image2':
           type: 'Hoerbiger.HoerbigerCom:Content.GalleryImage'
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text

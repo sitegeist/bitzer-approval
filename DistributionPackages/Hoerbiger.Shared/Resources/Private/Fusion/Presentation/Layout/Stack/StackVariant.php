@@ -25,4 +25,5 @@ enum StackVariant:string implements ProtectedContextAwareInterface
     case VARIANT_XL = 'xl';
     case VARIANT_XL_STRETCH = 'xl_stretch';
     case VARIANT_META_PRESS = 'metaPress';
+    case VARIANT_PX16 = '16px';
 }

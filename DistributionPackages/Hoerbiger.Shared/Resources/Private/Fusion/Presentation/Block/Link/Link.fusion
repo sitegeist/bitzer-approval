@@ -23,7 +23,7 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
             class={[
                 "[Block.Link (" + presentationObject.variant.value + ")]",
                 presentationObject.variant.equals('container') && "w-full h-full",
-                presentationObject.variant.equals('label') && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl",
+                presentationObject.variant.equals('label') && "flex items-center min-h-touch min-w-touch font-sans-bold text-xl",
                 presentationObject.variant.equals('labelLite') && "flex items-center min-h-touch min-w-touch text-lite font-sans-bold text-xl",
                 presentationObject.variant.equals('labelService') && "flex items-center min-h-touch min-w-touch text-[#8A9199] font-sans-bold text-xl",
                 presentationObject.variant.equals('labelExcite') && "flex items-center min-h-touch min-w-touch text-excite font-sans-bold text-xl",
@@ -33,7 +33,7 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.equals('siteFooter') && "text-light min-h-touch xl:min-h-full flex items-center whitespace-nowrap",
                 presentationObject.variant.equals('plainLabel') && "min-h-touch flex items-center",
                 presentationObject.variant.equals('iconLabel') && "min-h-touch flex items-center justify-between",
-                presentationObject.variant.equals('labelDefault') && "flex items-center min-h-touch min-w-touch text-brand font-sans-bold text-xl"
+                presentationObject.variant.equals('labelDefault') && "flex items-center min-h-touch min-w-touch font-sans-bold text-xl"
             ]}
         >
             <Neos.Fusion:Augmenter

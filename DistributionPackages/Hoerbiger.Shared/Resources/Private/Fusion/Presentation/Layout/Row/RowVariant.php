@@ -12,6 +12,7 @@ enum RowVariant:string implements ProtectedContextAwareInterface
 {
     use StringComponentVariant;
 
+    case VARIANT_BLANK = 'blank';
     case VARIANT_CH = 'ch';
     case VARIANT_XS = 'xs';
     case VARIANT_SM = 'sm';

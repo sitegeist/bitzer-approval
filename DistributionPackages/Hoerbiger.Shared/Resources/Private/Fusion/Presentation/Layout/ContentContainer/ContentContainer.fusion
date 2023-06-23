@@ -24,6 +24,7 @@ prototype(Hoerbiger.Shared:Layout.ContentContainer) < prototype(PackageFactory.A
                 presentationObject.variant.equals('snug') && "max-w-content-snug mx-auto px-md py-contentcontainer bg-light",
                 presentationObject.variant.equals('snugOverlay') && "w-content-full lg:w-[90%]  mx-auto lg:mt-[-180px] xl:mt-[-250px] px-md py-contentcontainer bg-light z-50 relative shadow-textbox",
                 presentationObject.variant.equals('tight') && "max-w-content-tight mx-auto px-md py-contentcontainer bg-light",
+                presentationObject.variant.equals('tightX') && "md:max-w-content-tight mx-auto md:px-sm bg-light",
                 presentationObject.variant.equals('regularSm') && "max-w-content-full mx-auto pb-sm sm:p-sm bg-light",
                 presentationObject.variant.equals('regularX') && "max-w-content-full mx-auto px-md bg-light",
                 presentationObject.variant.equals('stageAfterBreadcrumb') && "max-w-content-full mx-auto p-md sm:p-sm py-0 sm:py-0 bg-light",

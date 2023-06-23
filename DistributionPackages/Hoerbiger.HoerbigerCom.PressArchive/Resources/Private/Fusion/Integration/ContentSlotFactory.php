@@ -52,6 +52,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\Kaleidoscope\EelHelpers\ResourceImageSourceHelper;
+use function PHPUnit\Framework\isEmpty;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -117,13 +118,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     BoxVariant::VARIANT_LIGHT,
                     new Stack(
                         StackVariant::VARIANT_SM,
-                        Collection::fromIterable([
+                        Collection::fromIterable(array_filter([
+                            $inBackend || $latestPressReleaseNode->getProperty('metaHeadline')
+                                ? new Separator(
+                                    SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                                    Editable::fromNodeProperty($latestPressReleaseNode, 'metaHeadline')
+                                ): null,
                             new Grid(
                                 GridVariant::VARIANT_TWOCOLUMNSFRMAXGAP,
                                 Collection::fromIterable([
                                     new Headline(
-                                        HeadlineSize::SIZE_LARGE,
-                                        HeadlineColor::COLOR_BRAND,
+                                        HeadlineSize::SIZE_MEDIUM_ITALIC,
+                                        HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                                         HeadlineType::TYPE_H2,
                                         Editable::fromNodeProperty($latestPressReleaseNode, 'headline')
                                     ),
@@ -189,7 +195,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     }
                                 )
                             ),
-                        ], $identity)
+                        ]), $identity)
                     )
                 ),
                 'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
@@ -293,11 +299,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ContentContainerVariant::VARIANT_REGULAR,
             new Stack(
                 StackVariant::VARIANT_SM,
-                Collection::fromIterable([
-                    new Separator(
-                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                        Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
-                    ),
+                Collection::fromIterable(array_filter([
+                    $inBackend || $topNewsNode->getProperty('metaHeadline')
+                        ? new Separator(
+                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                            Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
+                        ): null,
                     new Grid(
                         GridVariant::VARIANT_TWOCOLUMNSTHIRDAUTOGAP,
                         Collection::fromIterable([
@@ -323,7 +330,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             )
                         ])
                     )
-                ])
+                ]))
             )
         );
     }

@@ -26,7 +26,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 presentationObject.variant.equals('inline') && "space-y-ch-xs lg:space-y-ch"
             ]}>
                 <div class={[
-                    "font-serif-regular italic leading-tight lg:leading-snug",
+                    "font-serif-regular italic leading-tight lg:leading-snug relative",
                     presentationObject.variant.equals('regular') && "text-3xl lg:text-largeHeadline",
                     presentationObject.variant.equals('experience') && "text-3xl lg:text-largeHeadline",
                     presentationObject.variant.equals('lite') && "text-3xl lg:text-largeHeadline",
@@ -34,11 +34,23 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                     presentationObject.variant.equals('service') && "text-3xl lg:text-largeHeadline",
                     presentationObject.variant.equals('inline') && "text-2xl lg:text-3xl"
                 ]}>
-                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} />
+                    <Neos.Fusion:Augmenter
+                        class="after:content-quoteEnd"
+                        @if.1={presentationObject.variant.isRegular}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text}/>
+                    </Neos.Fusion:Augmenter>
+                    <span
+                        class="absolute right-full top-0"
+                        @if.1={presentationObject.variant.isRegular}
+                    >
+                        &#8222;
+                    </span>
                 </div>
                 <div class={[
-                    "font-sans-bold mt-[10px]",
-                    presentationObject.variant.equals('regular') && "text-xl",
+                    "mt-[10px]",
+                    !presentationObject.variant.equals('regular') && "font-sans-bold",
+                    presentationObject.variant.equals('regular') && "text-xl font-sans-regular sm:self-end sm:pr-xl",
                     presentationObject.variant.equals('experience') && "text-xl",
                     presentationObject.variant.equals('lite') && "text-xl",
                     presentationObject.variant.equals('excite') && "text-xl",
@@ -49,9 +61,9 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 </div>
             </div>
             <img
+                @if.1={!presentationObject.variant.equals('regular')}
                 class={[
                     "absolute left-0",
-                    presentationObject.variant.equals('regular') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
                     presentationObject.variant.equals('experience') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
                     presentationObject.variant.equals('lite') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",
                     presentationObject.variant.equals('excite') && "top-[-10px] lg:top-[-15px] w-[32px] lg:w-[48px]",

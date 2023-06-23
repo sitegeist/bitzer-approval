@@ -5,7 +5,7 @@
   properties:
     image__caption:
       options:
-        preset: 'rte.plain'
+        preset: 'rte.plainWithRed'
       ui:
         inline:
           editorOptions:

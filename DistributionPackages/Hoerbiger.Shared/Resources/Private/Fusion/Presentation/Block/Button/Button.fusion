@@ -35,7 +35,7 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
                 base = "cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch"
                 text = "font-semibold"
 
-                cta = "bg-brand text-brand-contrast font-sans-bold"
+                cta = "bg-service-darker text-brand-contrast font-sans-bold"
                 cta.@if.1 = ${presentationObject.variant.equals('cta')}
 
                 ctaContrast = "bg-light text-standard font-sans-bold"

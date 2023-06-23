@@ -13,7 +13,8 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <div class={[
             "[Layout.Row (" + presentationObject.variant.value + ")] flex",
-            presentationObject.variant.equals('alternateMetalineEllipsis') && "w-full"
+            presentationObject.variant.equals('alternateMetalineEllipsis') && "w-full",
+            presentationObject.variant.equals('gallery') && "w-full"
         ]}>
             <div class={[
                 "flex",
@@ -22,7 +23,7 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.equals('sm') && "mt-minus-sm ml-minus-sm flex-wrap",
                 presentationObject.variant.equals('md') && "mt-minus-md ml-minus-md flex-wrap",
                 presentationObject.variant.equals('lg') && "mt-minus-lg ml-minus-lg flex-wrap",
-                presentationObject.variant.equals('gallery') && "flex-grow mt-minus-xs ml-minus-xs justify-center items-center flex-wrap",
+                presentationObject.variant.equals('gallery') && "flex-grow mt-minus-xs justify-center items-center flex-wrap gap-[50px]",
                 presentationObject.variant.equals('alternateMetaline') && "mt-minus-ch ml-minus-ch items-center flex-wrap",
                 presentationObject.variant.equals('alternateMetalineEllipsis') && "mt-minus-ch ml-minus-ch items-center flex-nowrap max-w-full min-w-0"
             ]}>
@@ -37,7 +38,7 @@ prototype(Hoerbiger.Shared:Layout.Row) < prototype(PackageFactory.AtomicFusion.P
                         presentationObject.variant.equals('sm') && "mt-sm ml-sm",
                         presentationObject.variant.equals('md') && "mt-md ml-md",
                         presentationObject.variant.equals('lg') && "mt-lg ml-lg",
-                        presentationObject.variant.equals('gallery') && "mt-xs ml-xs max-w-[350px] max-h-[700px] flex-grow",
+                        presentationObject.variant.equals('gallery') && "mt-xs max-w-[300px] flex-grow",
                         (presentationObject.variant.equals('alternateMetaline') || presentationObject.variant.equals('alternateMetalineEllipsis')) && "mt-ch ml-ch",
                         (presentationObject.variant.equals('alternateMetaline') || presentationObject.variant.equals('alternateMetalineEllipsis')) && iterator.isOdd && "text-light-contrast",
                         (presentationObject.variant.equals('alternateMetaline') || presentationObject.variant.equals('alternateMetalineEllipsis')) && iterator.isEven && "text-brand",

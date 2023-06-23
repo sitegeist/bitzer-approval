@@ -15,4 +15,6 @@ enum Columns:string implements ProtectedContextAwareInterface
     case VALUE_MAX_ONE = 'maxOne';
     case VALUE_MAX_TWO = 'maxTwo';
     case VALUE_MAX_ONE_LEFT = 'maxOneLeft';
+    case VALUE_MAX_ONE_HEADLINE_LEFT_SIDE = 'maxOneHeadlineLeftSide';
+    case VALUE_MAX_ONE_HEADLINE_TEXT_SMALL = 'maxOneHeadlineTextSmall';
 }

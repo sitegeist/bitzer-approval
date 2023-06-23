@@ -321,6 +321,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
+                    $stage
+                ),
                 count($anchors) > 0
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
@@ -331,10 +335,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     )
                     : null,
-                new ContentContainer(
-                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
-                    $stage
-                ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
                     ContentContainerVariant::VARIANT_REGULARX,

@@ -21,7 +21,7 @@ prototype(Hoerbiger.Shared:Block.Timeline.MileStone) < prototype(PackageFactory.
             open
         >
             <summary class="grid grid-cols-1 sm:grid-cols-2-max-1fr gap-xs focus:outline-none">
-                <span class="text-brand font-sans-bold text-3xl">
+                <span class="text-neutral-contrast font-sans-bold text-3xl">
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.year} />
                 </span>
                 <div class="grid grid-cols-2-1fr-max gap-xs">

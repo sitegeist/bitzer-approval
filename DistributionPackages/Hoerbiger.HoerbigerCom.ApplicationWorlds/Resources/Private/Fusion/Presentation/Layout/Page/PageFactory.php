@@ -97,6 +97,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_REGULARX,
+                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
+                ),
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_STAGEAFTERBREADCRUMB,
+                    $stage ?: Value::fromString('')
+                ),
                 count($anchors) > 0
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
@@ -107,18 +115,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     )
                     : null,
-                new ContentContainer(
-                    ContentContainerVariant::VARIANT_REGULARX,
-                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
-                ),
-                new ContentContainer(
-                    ContentContainerVariant::VARIANT_STAGEAFTERBREADCRUMB,
-                    $stage ?: Value::fromString('')
-                ),
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('main'))),
                 new CacheSegment(
                     new TabBox(
                         TabBoxVariant::VARIANT_HORIZONTAL,
+                        null,
                         Collection::fromIterable(
                             $applicationWorld->findNamedChildNode(NodeName::fromString('sections'))->findChildNodes(),
                             function (TraversableNodeInterface $section) use($subgraph, $inBackend): Tab {

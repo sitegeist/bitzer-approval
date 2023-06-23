@@ -1,9 +1,12 @@
 prototype(Hoerbiger.Shared:Layout.Stage.HeaderStage) < prototype(Hoerbiger.Shared:Layout.AbstractStage) {
 
     renderer = afx`
-        <div class={[
-            "[Layout.HeaderStage (" + presentationObject.variant.value + ")]"
-        ]}>
+        <div
+            class={[
+                "[Layout.HeaderStage (" + presentationObject.variant.value + ")]"
+            ]}
+            data-element-height="headerStage"
+        >
             <div class="h-[40vh] md:h-[80vh]">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.mediaBackground} />
             </div>

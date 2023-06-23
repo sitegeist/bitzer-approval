@@ -14,6 +14,14 @@
                 <source>One column left aligned</source>
                 <target>Einspaltig linksbündig</target>
             </trans-unit>
+            <trans-unit id="columns.maxOneHeadlineLeftSide" xml:space="preserve">
+                <source>Two columns (Headline / Text)</source>
+                <target>zweispaltig (Headline / Text)</target>
+            </trans-unit>
+            <trans-unit id="columns.maxOneHeadlineTextSmall" xml:space="preserve">
+                <source>One column headline, small text</source>
+                <target>Einspaltig Headline + schmaler Text</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

@@ -11,13 +11,11 @@
     }
 
     renderer = afx`
-        <dt class="nth-child-4n+1:bg-light min-h-touch flex items-center px-xs">
+        <dt class="min-h-touch flex items-center px-xs [&:not(:last-of-type)]:border-b border-service-borderLight font-bold">
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.term} />
         </dt>
-        <dd class="nth-child-4n+2:bg-light min-h-touch px-xs py-[20px]">
+        <dd class="min-h-touch px-xs py-[20px] [&:not(:last-child)]:border-b border-service-borderLight">
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.definition} />
         </dd>
     `
 }
-
-

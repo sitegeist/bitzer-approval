@@ -17,6 +17,7 @@ enum ContentContainerVariant:string implements ProtectedContextAwareInterface
     case VARIANT_SNUG = 'snug';
     case VARIANT_SNUGOVERLAY = 'snugOverlay';
     case VARIANT_TIGHT = 'tight';
+    case VARIANT_TIGHTX = 'tightX';
     case VARIANT_REGULARSM = 'regularSm';
     case VARIANT_REGULARX = 'regularX';
     case VARIANT_BLANK = 'blank';

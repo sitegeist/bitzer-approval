@@ -46,7 +46,7 @@ prototype(Hoerbiger.Shared:Block.Figure) < prototype(PackageFactory.AtomicFusion
             />
             <figcaption
                 @if.1={presentationObject.caption}
-                class="bg-light py-ch text-md text-neutral-darker"
+                class="bg-light pb-ch pt-25 text-md"
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.caption} />
             </figcaption>

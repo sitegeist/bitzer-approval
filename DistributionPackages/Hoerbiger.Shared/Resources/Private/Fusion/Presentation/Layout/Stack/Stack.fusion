@@ -17,7 +17,8 @@ prototype(Hoerbiger.Shared:Layout.Stack) < prototype(PackageFactory.AtomicFusion
             presentationObject.variant.equals('lg_stretch') && "space-y-lg items-stretch",
             presentationObject.variant.equals('xl') && "space-y-xl items-start",
             presentationObject.variant.equals('xl_stretch') && "space-y-xl items-stretch",
-            presentationObject.variant.equals('metaPress') && "space-y-[14px] items-start w-full items-center"
+            presentationObject.variant.equals('metaPress') && "space-y-[14px] items-start w-full items-center",
+            presentationObject.variant.equals('16px') && "space-y-[16px] items-start"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>
