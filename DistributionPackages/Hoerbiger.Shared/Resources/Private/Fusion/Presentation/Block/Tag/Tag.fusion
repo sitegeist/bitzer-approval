@@ -24,6 +24,10 @@ prototype(Hoerbiger.Shared:Block.Tag) < prototype(PackageFactory.AtomicFusion.Pr
             brandColorContrast.@if.1 = ${presentationObject.variant.isBrandColorContrast}
             neutralContrast = "text-neutral-contrast"
             neutralContrast.@if.1 = ${presentationObject.variant.isNeutralContrast}
+            neutralContrastBold = "text-neutral-contrast font-semibold"
+            neutralContrastBold.@if.1 = ${presentationObject.variant.isNeutralContrastBold}
+            neutralContrastLight = "text-neutral-contrast font-light"
+            neutralContrastLight.@if.1 = ${presentationObject.variant.isNeutralContrastLight}
             transparent = "text-[transparent]"
             transparent.@if.1 = ${presentationObject.variant.isTransparent}
             heightFull = "h-full"
