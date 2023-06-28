@@ -143,7 +143,6 @@ module.exports = {
 			service: {
 				DEFAULT: '#D9D9D9',
 			}
-
 		},
 
 		fontFamily: {
@@ -227,7 +226,7 @@ module.exports = {
 							color: theme('colors.brand.contrast'),
 						},
 						'ul li::before': {
-							backgroundColor: theme('colors.brand.contrast'),
+							color: '#000',
 						},
 					},
 				},
@@ -236,6 +235,10 @@ module.exports = {
 						color: theme('colors.neutral.contrast'),
 						strong: {
 							color: theme('colors.neutral.contrast'),
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
 						},
 					},
 				},
@@ -249,7 +252,8 @@ module.exports = {
 							color: theme('colors.decorative.contrast'),
 						},
 						'ul li::before': {
-							backgroundColor: theme('colors.decorative.contrast'),
+							content: '"\u25AA"',
+							color: '#000',
 						},
 					},
 				},
@@ -263,7 +267,8 @@ module.exports = {
 							color: theme('colors.transparent.contrast'),
 						},
 						'ul li::before': {
-							backgroundColor: theme('colors.transparent.contrast'),
+							content: '"\u25AA"',
+							color: '#000',
 						},
 					},
 				},
@@ -271,28 +276,44 @@ module.exports = {
 					css: {
 						a: {
 							color: theme('colors.excite.DEFAULT'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 				'experience': {
 					css: {
 						a: {
 							color: theme('colors.experience.DEFAULT'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 				'lite': {
 					css: {
 						a: {
 							color: theme('colors.lite.DEFAULT'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 				'service': {
 					css: {
 						a: {
 							color: theme('colors.service.contrast'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 			}),
