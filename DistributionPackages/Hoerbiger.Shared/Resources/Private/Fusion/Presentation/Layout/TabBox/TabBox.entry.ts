@@ -11,8 +11,6 @@ export default ($node: Element): void => {
 		const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 0;
 		const theme = $node.dataset.theme ?? "";
 
-		console.log(theme);
-
 		if ($tabs.length === $tabContents.length && $accordeonHeader.length === $tabContents.length) {
 			const updateInnerButtons = (index:number): void => {
 				$tabs.forEach(($tab, i) =>  {
