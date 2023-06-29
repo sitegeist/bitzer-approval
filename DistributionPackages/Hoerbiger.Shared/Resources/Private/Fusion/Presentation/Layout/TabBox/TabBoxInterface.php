@@ -6,6 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\ComponentPresentationObjectInterface;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxVariant;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -19,4 +20,6 @@ interface TabBoxInterface extends ComponentPresentationObjectInterface
     public function getTabs(): Collection;
 
     public function getIdentifier(): ?string;
+
+    public function getTheme(): ?Theme;
 }

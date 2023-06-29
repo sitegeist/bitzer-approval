@@ -6,6 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
  */
 
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Hoerbiger\Shared\Presentation\Layout\TabBox\TabBoxVariant;
@@ -25,16 +26,20 @@ final class TabBox extends AbstractComponentPresentationObject implements TabBox
 
     private ?string $identifier;
 
+    private ?Theme $theme;
+
     public function __construct(
         TabBoxVariant $variant,
         ?Headline $headline,
         Collection $tabs,
-        ?string $identifier = null
+        ?string $identifier = null,
+        ?Theme $theme = null
     ) {
         $this->variant = $variant;
         $this->headline = $headline;
         $this->tabs = $tabs;
         $this->identifier = $identifier;
+        $this->theme = $theme;
     }
 
     public function getVariant(): TabBoxVariant
@@ -55,5 +60,10 @@ final class TabBox extends AbstractComponentPresentationObject implements TabBox
     public function getIdentifier(): ?string
     {
         return $this->identifier;
+    }
+
+    public function getTheme(): ?Theme
+    {
+        return $this->theme;
     }
 }

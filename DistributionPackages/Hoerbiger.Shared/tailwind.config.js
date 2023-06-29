@@ -216,6 +216,14 @@ module.exports = {
 						}
 					},
 				},
+				'standard': {
+					css: {
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
+					}
+				},
 				'brand-contrast': {
 					css: {
 						color: theme('colors.brand.contrast'),
