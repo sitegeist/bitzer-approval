@@ -229,14 +229,14 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                         Collection::fromIterable([
                             new Tag(
                                 'span',
-                                TagVariant::brandColorBold(),
+                                TagVariant::neutralContrastBold(),
                                 Value::fromString(
                                     $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension()).'&nbsp;'
                                 )
                             ),
                             new Tag(
                                 'span',
-                                TagVariant::brandColorLight(),
+                                TagVariant::neutralContrastLight(),
                                 Value::fromString(
                                     '- ' .Files::bytesToSizeString($asset->getResource()->getFileSize())
                                 )
