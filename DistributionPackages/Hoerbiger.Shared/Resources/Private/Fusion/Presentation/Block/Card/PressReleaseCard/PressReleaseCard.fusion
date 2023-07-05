@@ -1,4 +1,5 @@
 prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Card\\PressReleaseCard\\PressReleaseCard'
     renderer = afx`
         <div
             data-card="press"

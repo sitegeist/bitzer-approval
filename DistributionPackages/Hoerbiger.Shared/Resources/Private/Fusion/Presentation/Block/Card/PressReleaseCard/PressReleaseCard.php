@@ -7,10 +7,11 @@ namespace Hoerbiger\Shared\Presentation\Block\Card\PressReleaseCard;
 
 use Hoerbiger\Shared\Presentation\Block\Card\AbstractCard;
 use Neos\Flow\Annotations as Flow;
+use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 #[Flow\Proxy(false)]
-final class PressReleaseCard extends AbstractCard
+final class PressReleaseCard extends AbstractComponentPresentationObject
 {
     public function __construct(
         public readonly PressReleaseCardVariant $variant,
@@ -21,12 +22,5 @@ final class PressReleaseCard extends AbstractCard
         public readonly ?SlotInterface $supportingText,
         public readonly ?SlotInterface $buttons
     ) {
-        parent::__construct(
-            $media,
-            $header,
-            $subheader,
-            $supportingText,
-            $buttons
-        );
     }
 }
