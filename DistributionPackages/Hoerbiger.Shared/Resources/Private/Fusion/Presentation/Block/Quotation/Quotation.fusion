@@ -36,13 +36,13 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                 ]}>
                     <Neos.Fusion:Augmenter
                         class="after:content-quoteEnd"
-                        @if.1={presentationObject.variant.isRegular}
+                        @if.1={presentationObject.variant.equals('regular')}
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text}/>
                     </Neos.Fusion:Augmenter>
                     <span
                         class="absolute right-full top-0"
-                        @if.1={presentationObject.variant.isRegular}
+                        @if.1={presentationObject.variant.equals('regular')}
                     >
                         &#8222;
                     </span>
