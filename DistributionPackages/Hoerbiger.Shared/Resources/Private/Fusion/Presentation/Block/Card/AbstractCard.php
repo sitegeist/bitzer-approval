@@ -13,34 +13,11 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 abstract class AbstractCard extends AbstractComponentPresentationObject
 {
     public function __construct(
-        private ?SlotInterface $media,
-        private ?SlotInterface $header,
-        private ?SlotInterface $subheader,
-        private ?SlotInterface $supportingText,
-        private ?SlotInterface $buttons
+        public readonly ?SlotInterface $media,
+        public readonly ?SlotInterface $header,
+        public readonly ?SlotInterface $subheader,
+        public readonly ?SlotInterface $supportingText,
+        public readonly ?SlotInterface $buttons
     ) {
-    }
-    public function getMedia(): ?SlotInterface
-    {
-        return $this->media;
-    }
-
-    public function getHeader(): ?SlotInterface
-    {
-        return $this->header;
-    }
-
-    public function getSubheader(): ?SlotInterface
-    {
-        return $this->subheader;
-    }
-
-    public function getSupportingText(): ?SlotInterface
-    {
-        return $this->supportingText;
-    }
-    public function getButtons(): ?SlotInterface
-    {
-        return $this->buttons;
     }
 }
