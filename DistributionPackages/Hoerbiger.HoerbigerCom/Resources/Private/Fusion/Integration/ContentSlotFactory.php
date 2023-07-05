@@ -284,7 +284,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $columns = Columns::from($textNode->getProperty('columns') ?: Columns::VALUE_MAX_TWO);
 
         $headline = new Headline(
-            HeadlineSize::SIZE_MEDIUM_ITALIC,
+            $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
             HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
             HeadlineType::TYPE_H2,
             Editable::fromNodeProperty($textNode, 'headline')
@@ -402,8 +402,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $textWithMetaTextNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::SIZE_LARGE,
-                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_BRAND,
+                                    $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
+                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                                     HeadlineType::TYPE_H2,
                                     Editable::fromNodeProperty($textWithMetaTextNode, 'headline')
                             )
@@ -450,7 +450,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::SIZE_MEDIUM_ITALIC,
+                            $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
                             HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                             HeadlineType::TYPE_DIV,
                             Editable::fromNodeProperty($textWithImageNode, 'headline')
@@ -771,6 +771,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         };
 
         $identifier = "anchor-" . (string)$tabBox->getNodeAggregateIdentifier();
+        $headline = $inBackend || $tabBox->getProperty('headline')
+            ? new Headline(
+                $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
+                HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                HeadlineType::TYPE_DIV,
+                Editable::fromNodeProperty($tabBox, 'headline')
+            )
+            : null;
 
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
@@ -784,18 +792,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         ): null,
                     new Box(
                         BoxVariant::tryFromTheme($theme) ?: BoxVariant::VARIANT_DECORATIVE,
-                        (new TabBoxFactory())->forTabBox(
-                            $inBackend || $tabBox->getProperty('headline')
-                                ? new Headline(
-                                    HeadlineSize::SIZE_MEDIUM_ITALIC,
-                                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
-                                    HeadlineType::TYPE_DIV,
-                                    Editable::fromNodeProperty($tabBox, 'headline')
-                                )
-                                : null,
-                            $tabBox,
-                            $identifier,
-                            $theme
+                        new Stack(
+                            StackVariant::VARIANT_XS_STRETCH,
+                            Collection::fromIterable(array_filter([
+                                $theme ? $headline : null,
+                                (new TabBoxFactory())->forTabBox(
+                                    $theme ? null : $headline,
+                                    $tabBox,
+                                    $identifier,
+                                    $theme
+                                ),
+                            ]))
                         ),
                         $identifier
                     )
@@ -821,7 +828,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             Collection::fromIterable(array_filter([
                 $inBackend || $textTabNode->getProperty('headline')
                     ? new Headline(
-                        HeadlineSize::SIZE_MEDIUM_ITALIC,
+                        $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
                         HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                         HeadlineType::TYPE_DIV,
                         Editable::fromNodeProperty($textTabNode, 'headline')

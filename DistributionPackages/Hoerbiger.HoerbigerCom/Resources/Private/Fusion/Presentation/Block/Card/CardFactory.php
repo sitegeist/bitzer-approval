@@ -23,10 +23,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
-use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
-use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
@@ -36,8 +33,6 @@ use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Row\Row;
 use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
-use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
-use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Utility\Files;
@@ -227,14 +222,14 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                         Collection::fromIterable([
                             new Tag(
                                 'span',
-                                TagVariant::VARIANT_BRANDCOLOR_BOLD,
+                                TagVariant::VARIANT_NEUTRAL_CONTRAST_BOLD,
                                 Value::fromString(
                                     $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension()).'&nbsp;'
                                 )
                             ),
                             new Tag(
                                 'span',
-                                TagVariant::VARIANT_BRANDCOLOR_LIGHT,
+                                TagVariant::VARIANT_NEUTRAL_CONTRAST_LIGHT,
                                 Value::fromString(
                                     '- ' .Files::bytesToSizeString($asset->getResource()->getFileSize())
                                 )

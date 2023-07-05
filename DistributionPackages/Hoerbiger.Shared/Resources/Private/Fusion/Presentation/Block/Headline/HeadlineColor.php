@@ -30,11 +30,14 @@ enum HeadlineColor: string implements ProtectedContextAwareInterface
 
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {
-        return match ($theme) {
-            Theme::VALUE_SERVICE => self::COLOR_SERVICE_CONTRAST,
-            Theme::VALUE_DEFAULT => self::COLOR_BRAND,
-            null => null,
-            default => self::tryFrom($theme->value . ($contrast ? 'Contrast' : '')),
-        };
+        if ($theme) {
+            return match ($theme) {
+                Theme::VALUE_SERVICE => self::COLOR_SERVICE_CONTRAST,
+                Theme::VALUE_DEFAULT => self::COLOR_NEUTRAL_CONTRAST,
+                default => self::tryFrom($theme->value . ($contrast ? 'Contrast' : '')),
+            };
+        }
+        return null;
+
     }
 }

@@ -17,6 +17,8 @@ enum TagVariant: string implements ProtectedContextAwareInterface
     case VARIANT_BRANDCOLOR_LIGHT = 'brandColorLight';
     case VARIANT_BRANDCOLOR_CONTRAST = 'brandColorContrast';
     case VARIANT_NEUTRAL_CONTRAST = 'neutralContrast';
+    case VARIANT_NEUTRAL_CONTRAST_BOLD = 'neutralContrastBold';
+    case VARIANT_NEUTRAL_CONTRAST_LIGHT = 'neutralContrastLight';
     case VARIANT_TRANSPARENT = 'transparent';
     case VARIANT_HEIGHT_FULL = 'heightFull';
 }

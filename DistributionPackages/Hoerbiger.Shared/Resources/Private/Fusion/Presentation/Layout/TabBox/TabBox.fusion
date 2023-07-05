@@ -15,7 +15,10 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
             "[Layout.TabBox (" + presentationObject.variant.value + ")]",
             presentationObject.variant.equals('regular') && "grid tabBoxToggle:grid-cols-tabs gap-xl theme-red",
             presentationObject.variant.equals('horizontal') && "flex flex-col w-full max-w-full-content p-md"
-        ]} data-orientation={presentationObject.variant.value} >
+            ]}
+            data-orientation={presentationObject.variant.value}
+            data-theme={presentationObject.theme.value}
+        >
             <div>
                 <div
                     class="pb-xs"
@@ -47,7 +50,7 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                                 data-icon="svg"
                                 class={[
                                     (presentationObject.variant.equals('regular') && !iterator.isFirst) && "pr-[15px]",
-                                    (presentationObject.variant.equals('regular') && iterator.isFirst) && "text-service-red"
+                                    (presentationObject.variant.equals('regular') && iterator.isFirst && !presentationObject.theme) && "text-service-red"
                                 ]}
                             >
                                 <Hoerbiger.Shared:Block.Icon @if.1={item.tabIcon} presentationObject={item.tabIcon} />

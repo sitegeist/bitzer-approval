@@ -43,7 +43,8 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
                     );
                 }
             ),
-            $identifier
+            $identifier,
+            $theme
         );
     }
 }

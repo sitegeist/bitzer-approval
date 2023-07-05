@@ -9,6 +9,7 @@ export default ($node: Element): void => {
 		const $tabContents: Element[] = Array.from($node.querySelectorAll("[data-select='tab-content']"));
 		const $isHorizontal: boolean = $node.dataset.orientation === "horizontal";
 		const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 0;
+		const theme = $node.dataset.theme ?? "";
 
 		if ($tabs.length === $tabContents.length && $accordeonHeader.length === $tabContents.length) {
 			const updateInnerButtons = (index:number): void => {
@@ -48,7 +49,7 @@ export default ($node: Element): void => {
 							$tab.classList.toggle("font-bold", i === index);
 							$tab.classList.toggle("font-base", i !== index);
 							$tab.querySelector("[data-icon]")?.classList.toggle("pr-[15px]", i !== index);
-							$tab.querySelector("[data-icon]")?.classList.toggle("text-service-red", i === index);
+							theme === "" && $tab.querySelector("[data-icon]")?.classList.toggle("text-service-red", i === index);
 
 							$tabContents[i].classList.toggle("flow", i === index);
 							$tabContents[i].classList.toggle("hidden", i !== index);
