@@ -251,10 +251,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->linkFactory->forLinkToDocument($pressRelease, null)
                     ->asPlainLabel()->withContent(
                         new PressReleaseCard(
-                            $pressVariant == PressReleaseCardVariant::VARIANT_TOP
+                            $pressVariant === PressVariant::VARIANT_NEWS
                                 ? PressReleaseCardVariant::VARIANT_TOP
                                 : PressReleaseCardVariant::VARIANT_TOP_NEWS,
-                            $pressVariant == PressReleaseCardVariant::VARIANT_TOP
+                            $pressVariant === PressVariant::VARIANT_NEWS
                                 ? Value::fromString($datePublished ?: '')
                                 : null,
                             $figure,
