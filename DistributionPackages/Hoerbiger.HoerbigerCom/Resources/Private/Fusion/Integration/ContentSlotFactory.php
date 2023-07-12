@@ -296,7 +296,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             $columns === Columns::VALUE_MAX_TWO
         );
 
-        if ($textNode->getProperty('columns') === Columns::VALUE_MAX_ONE_HEADLINE_LEFT_SIDE) {
+        if ($columns === Columns::VALUE_MAX_ONE_HEADLINE_LEFT_SIDE) {
             $content[] = new Grid(
                 GridVariant::VARIANT_TWOCOLUMNSTHIRDBIGGAP,
                 Collection::fromIterable(array_filter([
@@ -309,7 +309,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ]), $identity)
                 ]), $identity)
             );
-        } else if ($textNode->getProperty('columns') === Columns::VALUE_MAX_ONE_HEADLINE_TEXT_SMALL) {
+        } else if ($columns === Columns::VALUE_MAX_ONE_HEADLINE_TEXT_SMALL) {
             $content = [
                 $inBackend || $textNode->getProperty('headline')
                     ? $headline
