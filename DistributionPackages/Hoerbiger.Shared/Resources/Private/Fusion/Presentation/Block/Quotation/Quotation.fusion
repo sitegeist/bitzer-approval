@@ -40,6 +40,7 @@ prototype(Hoerbiger.Shared:Block.Quotation) < prototype(PackageFactory.AtomicFus
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text}/>
                     </Neos.Fusion:Augmenter>
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.text} @if.1={!presentationObject.variant.isRegular}/>
                     <span
                         class="absolute right-full top-0"
                         @if.1={presentationObject.variant.equals('regular')}
