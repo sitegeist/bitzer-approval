@@ -212,7 +212,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forPeopleAndCultureWebPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): PageInterface
     {
         /** @var SlotInterface $stage */
-        $stage = $this->stageFactory->forFullMediaIntroduction($careerPage, $subgraph, $inBackend);
+        $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
     }
@@ -335,6 +335,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::headerStage(),
+                    $stage
+                ),
                 count($anchors) > 0
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::regular(),
@@ -345,10 +349,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     )
                     : null,
-                new ContentContainer(
-                    ContentContainerVariant::headerStage(),
-                    $stage
-                ),
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
                 new ContentContainer(
                     ContentContainerVariant::regularX(),

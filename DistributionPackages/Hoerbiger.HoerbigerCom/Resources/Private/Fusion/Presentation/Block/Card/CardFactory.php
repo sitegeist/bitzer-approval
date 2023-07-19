@@ -29,11 +29,17 @@ use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkVariant;
+use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
+use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
+use Hoerbiger\Shared\Presentation\Layout\Row\Row;
+use Hoerbiger\Shared\Presentation\Layout\Row\RowVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Utility\Files;
@@ -204,17 +210,38 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             Editable::fromNodeProperty($downloadNode, 'description'),
             $asset instanceof Document
                 ? Collection::fromIterable([
-                    new Link(
-                        LinkVariant::tryFromTheme($theme) ?: LinkVariant::label(),
+                    new Button(
+                        ButtonType::link(),
+                        ButtonVariant::plain(),
+                        new Grid(
+                            GridVariant::iconLeft(),
+                            Collection::fromIterable([
+                                new Icon("shared", "arrowRight", IconSize::size_1()),
+                                Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download'))
+                            ])
+                        ),
                         $this->uriService->getAssetUri($asset),
-                        LinkTarget::blank(),
-                        null,
-                        Value::fromString($this->csvPOTranslator->getLabel(DownloadCard::class, 'download')),
+                        '_self',
                         null
                     ),
-                    Value::fromString(
-                        $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension())
-                            . ', ' . Files::bytesToSizeString($asset->getResource()->getFileSize())
+                    new Row(
+                        RowVariant::blank(),
+                        Collection::fromIterable([
+                            new Tag(
+                                'span',
+                                TagVariant::neutralContrastBold(),
+                                Value::fromString(
+                                    $this->csvPOTranslator->getLabel(DownloadCard::class, $asset->getFileExtension()).'&nbsp;'
+                                )
+                            ),
+                            new Tag(
+                                'span',
+                                TagVariant::neutralContrastLight(),
+                                Value::fromString(
+                                    '- ' .Files::bytesToSizeString($asset->getResource()->getFileSize())
+                                )
+                            )
+                        ])
                     )
                 ], $identity)
                 : null,

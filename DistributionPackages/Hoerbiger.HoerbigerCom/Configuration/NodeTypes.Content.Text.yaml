@@ -8,6 +8,20 @@
     label: 'Text'
     icon: align-left
   properties:
+    headline:
+      options:
+        preset: 'rte.plain'
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
     columns:
       type: string
       defaultValue: maxTwo

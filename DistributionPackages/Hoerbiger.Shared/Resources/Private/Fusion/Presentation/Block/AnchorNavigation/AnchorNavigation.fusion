@@ -30,7 +30,9 @@ prototype(Hoerbiger.Shared:Block.AnchorNavigation) < prototype(PackageFactory.At
                             <Neos.Fusion:Augmenter class="itemLink rotate-180">
                                 <Hoerbiger.Shared:Block.Link presentationObject={anchor} />
                             </Neos.Fusion:Augmenter>
-                            <div class="w-[2px] bg-service-red h-0 animate-progress-nav"></div>
+                            <div class="progress-rota">
+                                <div class="w-[2px] bg-service-red h-0 animate-progress-nav"></div>
+                            </div>
                         </div>
                     </Neos.Fusion:Loop>
                 </div>

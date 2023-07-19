@@ -72,7 +72,7 @@ final class HeadlineColor implements PseudoEnumInterface
                 case Theme::VALUE_SERVICE:
                     return self::from($theme->getValue() . 'Contrast');
                 case Theme::VALUE_DEFAULT:
-                    return self::brand();
+                    return self::neutralContrast();
                 default:
                     return self::from($theme->getValue() . ($contrast ? 'Contrast' : ''));
             }

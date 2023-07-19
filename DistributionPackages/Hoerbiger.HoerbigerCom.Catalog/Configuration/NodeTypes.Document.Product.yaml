@@ -36,3 +36,6 @@
     image:
       options:
         preset: 'image.landscape'
+    productClass:
+      type: string
+      defaultValue: 'default'

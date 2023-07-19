@@ -103,20 +103,20 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
-                count($anchors) > 0
-                    ? new AnchorNavigation(
-                        AnchorNavigationVariant::regular(),
-                        array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
-                            $anchors
-                        )
-                    )
-                    : null,
                 new ContentContainer(
                     ContentContainerVariant::headerStage(),
                     $stage
                 ),
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                    AnchorNavigationVariant::regular(),
+                    array_map(
+                        fn(Anchor $anchor): Link
+                        => (new LinkFactory())->forAnchor($anchor),
+                        $anchors
+                    )
+                )
+                : null,
                 new CacheSegment(
                     new ContentContainer(
                         ContentContainerVariant::regular(),
@@ -157,6 +157,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 $subgraph
             ),
             Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::headerStage(),
+                    $stage
+                ),
                 count($anchors) > 0
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::regular(),
@@ -167,10 +171,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                     )
                     : null,
-                new ContentContainer(
-                    ContentContainerVariant::headerStage(),
-                    $stage
-                ),
                 Content::fromNode($industrySolution->findNamedChildNode(NodeName::fromString('main'))),
                 new CacheSegment(
                     $this->productListFactory->forIndustrySolution($industrySolution, $subgraph, $inBackend),

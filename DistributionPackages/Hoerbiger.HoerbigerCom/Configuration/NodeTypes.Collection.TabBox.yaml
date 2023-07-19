@@ -12,6 +12,18 @@
   ui:
     label: 'Tab-Box'
     icon: th-list
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Bitte Überschrift eingeben'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
   options:
     reloadIfChildChanged: true
     template:

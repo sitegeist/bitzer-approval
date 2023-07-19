@@ -14,6 +14,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Domain\Enum\PseudoEnumInterf
 final class GridVariant implements PseudoEnumInterface
 {
     const VARIANT_ONECOLUMN = 'oneColumn';
+    const VARIANT_ONECOLUMN_NOGAP_BORDER = 'oneColumnNoGapBorder';
     const VARIANT_TWOCOLUMNS = 'twoColumns';
     const VARIANT_TWOCOLUMNSNOGAP = 'twoColumnsNoGap';
     const VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
@@ -21,6 +22,7 @@ final class GridVariant implements PseudoEnumInterface
     const VARIANT_THREECOLUMNSNARROWGAP = 'threeColumnsnNarrowGap';
     const VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
     const VARIANT_TWOCOLUMNSTHIRDAUTOGAP = 'twoColumnsThirdAutoGap';
+    const VARIANT_TWOCOLUMNSTHIRDBIGGAP = 'twoColumnsThirdBigGap';
     const VARIANT_TWOCOLUMNSPRESS = 'twoColumnsPress';
     const VARIANT_ICONLEFT = 'iconLeft';
     const VARIANT_ICONRIGHT = 'iconRight';
@@ -41,6 +43,7 @@ final class GridVariant implements PseudoEnumInterface
     {
         if (!isset(self::$instances[$string])) {
             if ($string !== self::VARIANT_ONECOLUMN
+                && $string !== self::VARIANT_ONECOLUMN_NOGAP_BORDER
                 && $string !== self::VARIANT_TWOCOLUMNS
                 && $string !== self::VARIANT_TWOCOLUMNSNOGAP
                 && $string !== self::VARIANT_TWOCOLUMNSGAP
@@ -48,6 +51,7 @@ final class GridVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_THREECOLUMNSNARROWGAP
                 && $string !== self::VARIANT_TWOCOLUMNSFRMAXGAP
                 && $string !== self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP
+                && $string !== self::VARIANT_TWOCOLUMNSTHIRDBIGGAP
                 && $string !== self::VARIANT_TWOCOLUMNSPRESS
                 && $string !== self::VARIANT_ICONLEFT
                 && $string !== self::VARIANT_ICONRIGHT) {
@@ -62,6 +66,11 @@ final class GridVariant implements PseudoEnumInterface
     public static function oneColumn(): self
     {
         return self::from(self::VARIANT_ONECOLUMN);
+    }
+
+    public static function oneColumnNoGapBorder(): self
+    {
+        return self::from(self::VARIANT_ONECOLUMN_NOGAP_BORDER);
     }
 
     public static function twoColumns(): self
@@ -99,6 +108,11 @@ final class GridVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP);
     }
 
+    public static function twoColumnsThirdBigGap(): self
+    {
+        return self::from(self::VARIANT_TWOCOLUMNSTHIRDBIGGAP);
+    }
+
     public static function twoColumnsPress(): self
     {
         return self::from(self::VARIANT_TWOCOLUMNSPRESS);
@@ -117,6 +131,11 @@ final class GridVariant implements PseudoEnumInterface
     public function getIsOneColumn(): bool
     {
         return $this->value === self::VARIANT_ONECOLUMN;
+    }
+
+    public function getIsOneColumnNoGapBorder(): bool
+    {
+        return $this->value === self::VARIANT_ONECOLUMN_NOGAP_BORDER;
     }
 
     public function getIsTwoColumns(): bool
@@ -154,6 +173,11 @@ final class GridVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP;
     }
 
+    public function getIsTwoColumnsThirdBigGap(): bool
+    {
+        return $this->value === self::VARIANT_TWOCOLUMNSTHIRDBIGGAP;
+    }
+
     public function getIsTwoColumnsPress(): bool
     {
         return $this->value === self::VARIANT_TWOCOLUMNSPRESS;
@@ -176,6 +200,7 @@ final class GridVariant implements PseudoEnumInterface
     {
         return [
             self::from(self::VARIANT_ONECOLUMN),
+            self::from(self::VARIANT_ONECOLUMN_NOGAP_BORDER),
             self::from(self::VARIANT_TWOCOLUMNS),
             self::from(self::VARIANT_TWOCOLUMNSNOGAP),
             self::from(self::VARIANT_TWOCOLUMNSGAP),
@@ -183,6 +208,7 @@ final class GridVariant implements PseudoEnumInterface
             self::from(self::VARIANT_THREECOLUMNSNARROWGAP),
             self::from(self::VARIANT_TWOCOLUMNSFRMAXGAP),
             self::from(self::VARIANT_TWOCOLUMNSTHIRDAUTOGAP),
+            self::from(self::VARIANT_TWOCOLUMNSTHIRDBIGGAP),
             self::from(self::VARIANT_TWOCOLUMNSPRESS),
             self::from(self::VARIANT_ICONLEFT),
             self::from(self::VARIANT_ICONRIGHT)

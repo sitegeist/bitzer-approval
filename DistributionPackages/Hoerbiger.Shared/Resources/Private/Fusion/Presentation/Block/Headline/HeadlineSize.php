@@ -26,6 +26,7 @@ final class HeadlineSize implements PseudoEnumInterface
     const SIZE_VERY_SMALL_REGULAR = 'verySmallRegular';
     const SIZE_TILE = 'tile';
     const SIZE_TINY = 'tiny';
+    const SIZE_HEADER_STAGE = 'headerStage';
 
 
     /**
@@ -56,6 +57,7 @@ final class HeadlineSize implements PseudoEnumInterface
                 && $string !== self::SIZE_VERY_SMALL_REGULAR
                 && $string !== self::SIZE_TILE
                 && $string !== self::SIZE_TINY
+                && $string !== self::SIZE_HEADER_STAGE
                 ) {
                 throw HeadlineSizeIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -130,6 +132,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return self::from(self::SIZE_TINY);
     }
 
+    public static function headerStage(): self
+    {
+        return self::from(self::SIZE_HEADER_STAGE);
+    }
+
     public function getIsLarge(): bool
     {
         return $this->value === self::SIZE_LARGE;
@@ -195,6 +202,11 @@ final class HeadlineSize implements PseudoEnumInterface
         return $this->value === self::SIZE_TINY;
     }
 
+    public function getIsHeaderStage(): bool
+    {
+        return $this->value === self::SIZE_HEADER_STAGE;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -212,7 +224,8 @@ final class HeadlineSize implements PseudoEnumInterface
             self::from(self::SIZE_VERY_SMALL),
             self::from(self::SIZE_VERY_SMALL_REGULAR),
             self::from(self::SIZE_TILE),
-            self::from(self::SIZE_TINY)
+            self::from(self::SIZE_TINY),
+            self::from(self::SIZE_HEADER_STAGE)
         ];
     }
 

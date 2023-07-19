@@ -11,6 +11,8 @@ const OFFCANVAS_WIDTH = '340px';
 const HEADER_HEIGHT = 127;
 const NAV_HEIGHT = `${HEADER_HEIGHT + 340}px`;
 const HOMEPAGE_TEASER_TEXT_WIDTH = '800px';
+const LOGO_HOVER =  '#8A9199';
+const HEADER_ITEMS_INACTIVE = '#7F7F7F';
 
 // up to 1920px screen-width this is 1/12 width, not growing any further above 1920px
 const SPACE_SM = `min(calc(100vw / 36), calc(${MAX_CONTENT_WIDTH} / 36))`;
@@ -34,6 +36,7 @@ const SPACES = {
 	'minus-lg': `calc(-3 * ${SPACE_SM})`,
 	'minus-xl': `calc(-4 * ${SPACE_SM})`,
 	'minus-2xl': `calc(-6 * ${SPACE_SM})`,
+	'25': '25px',
 };
 
 const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
@@ -103,8 +106,9 @@ module.exports = {
 				darker: '#8A9199',
 				red: '#FF2424',
 				lightGrey: '#999',
-				border: '#1D1D1B'
-			},
+				border: '#1D1D1B',
+				borderLight: 'rgba(100, 100, 100, .5)'
+},
 			slider: {
 				grey: '#999999',
 				lightGrey: '#8E969D',
@@ -113,6 +117,10 @@ module.exports = {
 			default: {
 				DEFAULT: '#075289',
 				contrast: '#fff'
+			},
+			nav: {
+				logo: LOGO_HOVER,
+				inactiveText: HEADER_ITEMS_INACTIVE
 			}
 
 		},
@@ -135,7 +143,6 @@ module.exports = {
 			service: {
 				DEFAULT: '#D9D9D9',
 			}
-
 		},
 
 		fontFamily: {
@@ -184,13 +191,22 @@ module.exports = {
 							fontFamily: theme('fontFamily.sans-bold')
 						},
 						a: {
-							color: theme('colors.brand.DEFAULT'),
-							fontFamily: theme('fontFamily.sans-bold'),
-							fontWeight: 600,
 							textDecoration: 'none',
 						},
+						'ul': {
+							listStyleType: 'none',
+							padding: '12px',
+						},
+						'ul li': {
+							marginBottom: '.3em',
+						},
 						'ul li::before': {
-							backgroundColor: theme('colors.light.contrast'),
+							display: 'inline-block',
+							width: '1em',
+							marginLeft: '-1em',
+							content: '"\u2013"',
+							color: theme('colors.service.red'),
+							fontWeight: 'bold',
 						},
 						p: {
 							marginTop: 0,
@@ -199,6 +215,14 @@ module.exports = {
 							margin: 0
 						}
 					},
+				},
+				'standard': {
+					css: {
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
+					}
 				},
 				'brand-contrast': {
 					css: {
@@ -210,7 +234,7 @@ module.exports = {
 							color: theme('colors.brand.contrast'),
 						},
 						'ul li::before': {
-							backgroundColor: theme('colors.brand.contrast'),
+							color: '#000',
 						},
 					},
 				},
@@ -219,6 +243,10 @@ module.exports = {
 						color: theme('colors.neutral.contrast'),
 						strong: {
 							color: theme('colors.neutral.contrast'),
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
 						},
 					},
 				},
@@ -232,7 +260,8 @@ module.exports = {
 							color: theme('colors.decorative.contrast'),
 						},
 						'ul li::before': {
-							backgroundColor: theme('colors.decorative.contrast'),
+							content: '"\u25AA"',
+							color: '#000',
 						},
 					},
 				},
@@ -246,7 +275,8 @@ module.exports = {
 							color: theme('colors.transparent.contrast'),
 						},
 						'ul li::before': {
-							backgroundColor: theme('colors.transparent.contrast'),
+							content: '"\u25AA"',
+							color: '#000',
 						},
 					},
 				},
@@ -254,28 +284,44 @@ module.exports = {
 					css: {
 						a: {
 							color: theme('colors.excite.DEFAULT'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 				'experience': {
 					css: {
 						a: {
 							color: theme('colors.experience.DEFAULT'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 				'lite': {
 					css: {
 						a: {
 							color: theme('colors.lite.DEFAULT'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 				'service': {
 					css: {
 						a: {
 							color: theme('colors.service.contrast'),
-						}
+						},
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
 					},
 				},
 			}),
@@ -472,7 +518,11 @@ module.exports = {
 
 			aspectRatio: {
 				'5/3': '5 / 3',
-			}
+			},
+
+			content: {
+				'quoteEnd': '"\\201D"',
+			},
 		},
 	},
 	variants: {
@@ -509,7 +559,7 @@ module.exports = {
 				},
 				'.bg-header': {
 					'background': 'white',
-					'color': 'rgba(0, 0, 0, .5)',
+					'color':  HEADER_ITEMS_INACTIVE,
 					'transition': 'background-color .5s'
 				},
 				'.bg-header-transparent': {

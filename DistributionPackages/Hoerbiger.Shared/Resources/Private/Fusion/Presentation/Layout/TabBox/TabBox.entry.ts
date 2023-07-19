@@ -8,6 +8,8 @@ export default ($node: Element): void => {
 		const $accordeonHeader: Element[] = Array.from($node.querySelectorAll("[data-select='accordeon-header']"));
 		const $tabContents: Element[] = Array.from($node.querySelectorAll("[data-select='tab-content']"));
 		const $isHorizontal: boolean = $node.dataset.orientation === "horizontal";
+		const headerHeight = document.querySelector("header")?.getBoundingClientRect().height ?? 0;
+		const theme = $node.dataset.theme ?? "";
 
 		if ($tabs.length === $tabContents.length && $accordeonHeader.length === $tabContents.length) {
 			const updateInnerButtons = (index:number): void => {
@@ -27,7 +29,8 @@ export default ($node: Element): void => {
 						if ($parentElements) {
 							const $element = $parentElements.querySelector(`#${$boxId}`);
 							if ($element) {
-								$element.scrollIntoView(true);
+								const scrollPos = ($element.getBoundingClientRect().top + window.scrollY) - headerHeight;
+								window.scrollTo({top: scrollPos, behavior: "smooth"});
 							}
 						}
 					}
@@ -43,15 +46,17 @@ export default ($node: Element): void => {
 							}
 							$tabContents[i].classList.toggle("hidden", toggleCondition);
 						} else {
-							$tab.classList.toggle("opacity-100", i === index);
-							$tab.classList.toggle("opacity-30", i !== index);
+							$tab.classList.toggle("font-bold", i === index);
+							$tab.classList.toggle("font-base", i !== index);
+							$tab.querySelector("[data-icon]")?.classList.toggle("pr-[15px]", i !== index);
+							theme === "" && $tab.querySelector("[data-icon]")?.classList.toggle("text-service-red", i === index);
 
 							$tabContents[i].classList.toggle("flow", i === index);
 							$tabContents[i].classList.toggle("hidden", i !== index);
 						}
 
 						if (i === index) {
-							$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.toggle("rotate-180");
+							$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.add("rotate-180");
 						} else {
 							$accordeonHeader[i].querySelector("[data-select='icon']")?.classList.remove("rotate-180");
 						}

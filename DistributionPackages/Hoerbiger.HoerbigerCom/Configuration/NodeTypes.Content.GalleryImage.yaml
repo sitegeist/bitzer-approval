@@ -11,6 +11,8 @@
         preset: 'image.landscape'
     caption:
       type: string
+      options:
+        preset: 'rte.plainWithRed'
       ui:
         inlineEditable: true
         inline:

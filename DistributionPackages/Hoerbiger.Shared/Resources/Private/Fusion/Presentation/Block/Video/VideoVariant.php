@@ -23,6 +23,7 @@ final class VideoVariant implements PseudoEnumInterface
     const VARIANT_LITE = 'lite';
     const VARIANT_SERVICE = 'service';
     const VARIANT_SLIDER = 'slider';
+    const VARIANT_SIMPLE_LOOP = 'simpleLoop';
 
     /**
      * @var array<string,self>|self[]
@@ -46,6 +47,7 @@ final class VideoVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_LITE
                 && $string !== self::VARIANT_SERVICE
                 && $string !== self::VARIANT_SLIDER
+                && $string !== self::VARIANT_SIMPLE_LOOP
             ) {
                 throw VideoVariantIsInvalid::becauseItMustBeOneOfTheDefinedConstants($string);
             }
@@ -88,6 +90,11 @@ final class VideoVariant implements PseudoEnumInterface
         return self::from(self::VARIANT_SERVICE);
     }
 
+    public static function simpleLoop(): self
+    {
+        return self::from(self::VARIANT_SIMPLE_LOOP);
+    }
+
     public function getIsRegular(): bool
     {
         return $this->value === self::VARIANT_REGULAR;
@@ -118,6 +125,11 @@ final class VideoVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_SLIDER;
     }
 
+    public function getIsSimpleLoop(): bool
+    {
+        return $this->value === self::VARIANT_SIMPLE_LOOP;
+    }
+
     /**
      * @return array<int,self>|self[]
      */
@@ -129,7 +141,8 @@ final class VideoVariant implements PseudoEnumInterface
             self::from(self::VARIANT_EXPERIENCE),
             self::from(self::VARIANT_LITE),
             self::from(self::VARIANT_SERVICE),
-            self::from(self::VARIANT_SLIDER)
+            self::from(self::VARIANT_SLIDER),
+            self::from(self::VARIANT_SIMPLE_LOOP)
         ];
     }
 

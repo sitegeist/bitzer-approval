@@ -3,8 +3,8 @@
     <file original="PressReleases" product-name="Hoerbiger.HoerbigerCom.PressArchive" source-language="en" target-language="de" datatype="plaintext">
         <body>
             <trans-unit id="list.learnMore" xml:space="preserve">
-                <source>Learn more</source>
-                <target>Mehr erfahren</target>
+                <source>learn more</source>
+                <target>mehr erfahren</target>
             </trans-unit>
             <trans-unit id="list.seeAll" xml:space="preserve">
                 <source>See all news</source>
@@ -12,7 +12,11 @@
             </trans-unit>
             <trans-unit id="list.seeOverview" xml:space="preserve">
                 <source>an overview from all stories </source>
-                <target>alle Stories im Überblick</target>
+                <target>alle Storys im Überblick</target>
+            </trans-unit>
+            <trans-unit id="overview.filters" xml:space="preserve">
+                <source>Stories filter</source>
+                <target>Story-Filter</target>
             </trans-unit>
         </body>
     </file>

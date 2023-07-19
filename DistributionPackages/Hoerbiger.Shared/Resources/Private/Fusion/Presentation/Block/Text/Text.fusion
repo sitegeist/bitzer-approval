@@ -14,12 +14,13 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
         <div class={[
             "[Block.Text (" + presentationObject.variant + ")]",
             "prose",
+            "[&_a]:font-sans-bold",
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
                 : presentationObject.variant.isCentered
                     ? "max-w-content-full"
                     : "max-w-content-tight",
-            presentationObject.variant.isDefault && "prose-brand",
+            presentationObject.variant.isDefault && "prose-standard",
             presentationObject.variant.isCentered && "prose-brand-contrast font-sans-regular",
             presentationObject.variant.isBrandContrast && "prose-brand-contrast",
             presentationObject.variant.isBrandContrastBold && "prose-brand-contrast font-sans-bold text-lg",
@@ -29,10 +30,11 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.isTransparentContrast && "prose-transparent-contrast",
             presentationObject.variant.isLite && "prose-lite",
             presentationObject.variant.isExcite && "prose-excite",
-            presentationObject.variant.isExperience && "prose.experience",
+            presentationObject.variant.isExperience && "prose-experience",
             presentationObject.variant.isServiceContrast && "prose-service",
             presentationObject.variant.isServiceRed && "text-service-red font-sans-bold text-[16px] text-center",
-            presentationObject.variant.isSm && "text-sm"
+            presentationObject.variant.isSm && "text-sm",
+            presentationObject.variant.isNeutralSmall && "text-small text-light-contrast"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

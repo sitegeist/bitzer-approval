@@ -18,6 +18,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
     const VARIANT_SNUG = 'snug';
     const VARIANT_SNUGOVERLAY = 'snugOverlay';
     const VARIANT_TIGHT = 'tight';
+    const VARIANT_TIGHTX = 'tightX';
     const VARIANT_REGULARSM = 'regularSm';
     const VARIANT_REGULARX = 'regularX';
     const VARIANT_BLANK = 'blank';
@@ -60,6 +61,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
                 && $string !== self::VARIANT_SNUG
                 && $string !== self::VARIANT_SNUGOVERLAY
                 && $string !== self::VARIANT_TIGHT
+                && $string !== self::VARIANT_TIGHTX
                 && $string !== self::VARIANT_REGULARSM
                 && $string !== self::VARIANT_REGULARX
                 && $string !== self::VARIANT_BLANK
@@ -112,6 +114,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
     public static function tight(): self
     {
         return self::from(self::VARIANT_TIGHT);
+    }
+
+    public static function tightX(): self
+    {
+        return self::from(self::VARIANT_TIGHTX);
     }
 
     public static function regularSm(): self
@@ -249,6 +256,11 @@ final class ContentContainerVariant implements PseudoEnumInterface
         return $this->value === self::VARIANT_TIGHT;
     }
 
+    public function getIsTightX(): bool
+    {
+        return $this->value === self::VARIANT_TIGHTX;
+    }
+
     public function getIsRegularSm(): bool
     {
         return $this->value === self::VARIANT_REGULARSM;
@@ -365,6 +377,7 @@ final class ContentContainerVariant implements PseudoEnumInterface
             self::from(self::VARIANT_SNUG),
             self::from(self::VARIANT_SNUGOVERLAY),
             self::from(self::VARIANT_TIGHT),
+            self::from(self::VARIANT_TIGHTX),
             self::from(self::VARIANT_REGULARSM),
             self::from(self::VARIANT_REGULARX),
             self::from(self::VARIANT_BLANK),

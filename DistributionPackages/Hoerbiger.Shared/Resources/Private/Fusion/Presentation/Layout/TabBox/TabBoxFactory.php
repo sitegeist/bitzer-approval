@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
@@ -21,10 +22,16 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
 {
 
-    public function forTabBox(TraversableNodeInterface $tabBox, string $identifier, ?Theme $theme = null): TabBox
+    public function forTabBox(
+        ?Headline $headline,
+        TraversableNodeInterface $tabBox,
+        string $identifier,
+        ?Theme $theme = null
+    ): TabBox
     {
         return new TabBox(
             TabBoxVariant::regular(),
+            $headline,
             Collection::fromNodes(
                 $tabBox->findChildNodes(),
                 function (TraversableNodeInterface $tabNode) use ($theme) {
@@ -36,7 +43,8 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
                     );
                 }
             ),
-            $identifier
+            $identifier,
+            $theme
         );
     }
 }
