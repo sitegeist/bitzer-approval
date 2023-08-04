@@ -2,17 +2,23 @@ export default ($node: HTMLElement): void => {
 	const gridContainer = $node.querySelector("[data-grid=cards]") as HTMLElement;
 	const filtersContainer = $node.querySelector("[data-grid=filters]") as HTMLElement;
 
+	const cardItems = gridContainer.querySelectorAll("a");
+	const filterItems = filtersContainer.querySelectorAll("[data-filter-item]") as NodeListOf<HTMLElement>;
+	const resetBtn = filtersContainer.querySelector("[data-reset-item=reset]") as HTMLElement;
+
+	const filterFromHash = window.location.hash.substr(1);
+	let filterFromHashExists = false;
+
 	/*
 	 * Filter Handling - handle filters for Cards
 	 * */
 	if (filtersContainer) {
-		const cardItems = gridContainer.querySelectorAll("a");
-		const filterItems = filtersContainer.querySelectorAll("[data-filter-item]") as NodeListOf<HTMLElement>;
-		const resetBtn = filtersContainer.querySelector("[data-reset-item=reset]") as HTMLElement;
-
 		resetBtn.addEventListener(("click"), () => {
 			updateFilterItems(null, filterItems, resetBtn);
 			showOnlyCardsFromCategory(null, cardItems);
+
+			location.hash = "";
+			history.pushState("", "", location.pathname);
 		});
 
 		filterItems.forEach((filter) => {
@@ -21,7 +27,13 @@ export default ($node: HTMLElement): void => {
 
 				updateFilterItems(selectedFilter, filterItems, resetBtn);
 				showOnlyCardsFromCategory(selectedFilter, cardItems);
+
+				location.hash = selectedFilter;
 			});
+
+			if (filterFromHash &&( (filter.dataset.filterItem ?? "") === filterFromHash)) {
+				filterFromHashExists = true;
+			}
 		});
 	}
 
@@ -37,7 +49,6 @@ export default ($node: HTMLElement): void => {
 	function updateFilterItems(selected: string | null, filterItems: NodeListOf<HTMLElement>, resetBtn: HTMLElement) {
 		filterItems.forEach((filter) => {
 			const filterType = filter.dataset.filterItem ?? "";
-			console.log(filterType);
 
 			if (selected) {
 				toggleFilterItem(filterType == selected, filter);
@@ -96,5 +107,10 @@ export default ($node: HTMLElement): void => {
 
 			content.classList.add("h-full");
 		}
+	}
+
+	if (filtersContainer && filterFromHashExists) {
+		updateFilterItems(filterFromHash, filterItems, resetBtn);
+		showOnlyCardsFromCategory(filterFromHash, cardItems);
 	}
 };
