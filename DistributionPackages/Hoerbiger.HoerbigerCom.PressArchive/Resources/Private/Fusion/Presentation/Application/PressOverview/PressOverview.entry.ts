@@ -3,8 +3,8 @@ export default ($node: HTMLElement): void => {
 	const filtersContainer = $node.querySelector("[data-grid=filters]") as HTMLElement;
 
 	const cardItems = gridContainer.querySelectorAll("a");
-	const filterItems = filtersContainer.querySelectorAll("[data-filter-item]") as NodeListOf<HTMLElement>;
-	const resetBtn = filtersContainer.querySelector("[data-reset-item=reset]") as HTMLElement;
+	const filterItems = filtersContainer?.querySelectorAll("[data-filter-item]") as NodeListOf<HTMLElement>;
+	const resetBtn = filtersContainer?.querySelector("[data-reset-item=reset]") as HTMLElement;
 
 	const filterFromHash = window.location.hash.substr(1);
 	let filterFromHashExists = false;
@@ -109,7 +109,7 @@ export default ($node: HTMLElement): void => {
 		}
 	}
 
-	if (filtersContainer && filterFromHashExists) {
+	if (filtersContainer && filterItems && resetBtn && cardItems && filterFromHashExists) {
 		updateFilterItems(filterFromHash, filterItems, resetBtn);
 		showOnlyCardsFromCategory(filterFromHash, cardItems);
 	}
