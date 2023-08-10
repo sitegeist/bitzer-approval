@@ -302,6 +302,14 @@ module.exports = {
 						},
 					},
 				},
+				'brand': {
+					css: {
+						'ul li::before': {
+							content: '"\u25AA"',
+							color: '#000',
+						},
+					},
+				},
 				'lite': {
 					css: {
 						a: {
