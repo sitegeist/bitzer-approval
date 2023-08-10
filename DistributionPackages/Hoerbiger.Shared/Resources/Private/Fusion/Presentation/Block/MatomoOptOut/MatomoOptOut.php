@@ -10,7 +10,7 @@ use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use Psr\Http\Message\UriInterface;
 
-
+#[Flow\Proxy(false)]
 final class MatomoOptOut extends AbstractComponentPresentationObject
 {
     public function __construct(
