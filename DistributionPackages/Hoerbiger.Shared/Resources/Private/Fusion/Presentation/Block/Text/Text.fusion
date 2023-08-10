@@ -29,7 +29,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.equals('transparentContrast') && "prose-transparent-contrast",
             presentationObject.variant.equals('lite') && "prose-lite",
             presentationObject.variant.equals('excite') && "prose-excite",
-            presentationObject.variant.equals('experience') && "prose.experience",
+            presentationObject.variant.equals('experience') && "prose-experience",
             presentationObject.variant.equals('serviceContrast') && "prose-service",
             presentationObject.variant.equals('serviceRed') && "text-service-red font-sans-bold text-[16px] text-center",
             presentationObject.variant.equals('sm') && "text-sm",
