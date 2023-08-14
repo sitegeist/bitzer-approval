@@ -3,6 +3,11 @@
     'Hoerbiger.HoerbigerCom.Catalog:Document.Product': true
   ui:
     label: 'Compression-Produkt'
+  childNodes:
+    main:
+      constraints:
+        nodeTypes:
+          'Hoerbiger.HoerbigerCom.Catalog:Content.PaybackCalculatorEVCP': true
   properties:
     productClass:
       type: string

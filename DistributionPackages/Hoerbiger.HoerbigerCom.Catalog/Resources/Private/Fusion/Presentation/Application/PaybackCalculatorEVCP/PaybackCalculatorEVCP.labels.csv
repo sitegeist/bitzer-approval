@@ -1,0 +1,7 @@
+id,description,en,de
+input_cost_dryNaturalGas,Price dry natural gas,Price dry natural gas:,Price dry natural gas:
+input_cost_NGL,Price NGL composite,Price NGL composite:,Price NGL composite:
+input_compressor_annualOperationHours,Annual operating hours,Annual operating hours:,Annual operating hours:
+input_compressor_cylindersNumber,Number of 1st stage cylinders,Number of 1st stage cylinders:,Number of 1st stage cylinders:
+input_compressor_nominalFlowRate,Compressor nominal flow rate without eVCP,Compressor nominal flow rate without eVCP:,Compressor nominal flow rate without eVCP:
+input_compressor_outputIncrease,Increase of output thanks to eVCP,Increase of output thanks to eVCP:,Increase of output thanks to eVCP:

@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.Catalog package.
  */
 
+use Hoerbiger\HoerbigerCom\Catalog\Presentation\Application\PaybackCalculatorEVCP\PaybackCalculatorEVCPFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -16,12 +17,16 @@ use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
+    public function __construct(
+        private readonly PaybackCalculatorEVCPFactory $paybackCalculatorECVPFactory,
+    ) {
+    }
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         switch ((string)$contentNode->getNodeTypeName()) {
@@ -29,6 +34,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forProductListNode($contentNode);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts':
                 return (new CardFactory())->forGroupedProductsNode($contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom.Catalog:Content.PaybackCalculatorEVCP':
+                return $this->forPaybackCalculatorEVCPNode($contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -50,6 +57,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     }
                 )
             )
+        );
+    }
+
+    public function forPaybackCalculatorEVCPNode(TraversableNodeInterface $paybackCalculatorEVCPNode, bool $inBackend): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            $this->paybackCalculatorECVPFactory->create($paybackCalculatorEVCPNode, $inBackend)
         );
     }
 }

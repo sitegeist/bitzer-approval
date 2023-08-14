@@ -1,0 +1,20 @@
+prototype(Hoerbiger.HoerbigerCom.Catalog:Application.PaybackCalculatorEVCP) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Catalog\\Presentation\\Application\\PaybackCalculatorEVCP\\PaybackCalculatorEVCP'
+
+    renderer = afx`
+        <div>Application Placeholder</div>
+    `
+    renderer = afx`
+        <div
+            class={[
+            "[Application.PaybackCalculatorEVCP]"
+        ]}
+            data-application-data={presentationObject.applicationData}
+        >
+            <div>
+                <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} @if.1={presentationObject.headline}/>
+            </div>
+            <div data-select="applicationRoot"></div>
+        </div>
+    `
+}

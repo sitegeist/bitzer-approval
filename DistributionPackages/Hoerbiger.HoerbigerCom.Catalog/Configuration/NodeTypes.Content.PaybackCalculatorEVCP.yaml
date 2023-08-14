@@ -1,0 +1,252 @@
+'Hoerbiger.HoerbigerCom.Catalog:Content.PaybackCalculatorEVCP':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+  ui:
+    icon: 'pencil-square-o'
+    label: 'eVCP Kalkulator'
+    inspector:
+      groups:
+        calculationFactors:
+          label: 'Kalkulationsgrundlage'
+          icon: bars
+        inputDefaults:
+          label: 'Eingabe Voreinstellungen'
+          icon: keyboard-o
+
+  properties:
+    const_unit_btu:
+      type: string
+      defaultValue: 1.055
+      ui:
+        label: '1 Btu (kJ)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/FloatValidator': {}
+
+    const_unit_mmbtu:
+      type: string
+      defaultValue: 1.055
+      ui:
+        label: '1 MMBtu (million) (kJ)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/FloatValidator': {}
+
+    const_unit_scf:
+      type: string
+      defaultValue: 0.0283
+      ui:
+        label: '1 scf, standard cubic feet (Nm3/h)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/FloatValidator': {}
+
+    const_unit_avgHeatingValue4NG:
+      type: integer
+      defaultValue: 1030
+      ui:
+        label: 'Average heating value for 1scf natural gas (BTU)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    const_composition_dryNaturalGas:
+      type: integer
+      defaultValue: 80
+      ui:
+        label: 'Gas composition - Dry natural gas (%)'
+        help:
+          message: "Gas composition of raw natural gas: (typical)"
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NumberRangeValidator':
+          minimum: 0
+          maximum: 100
+
+    const_composition_NGL:
+      type: integer
+      defaultValue: 10
+      ui:
+        label: 'Gas composition - NGL (%)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NumberRangeValidator':
+          minimum: 0
+          maximum: 100
+
+    const_composition_others:
+      type: integer
+      defaultValue: 10
+      ui:
+        label: 'Gas composition - Others (%)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': { }
+        'Neos.Neos/Validation/NumberRangeValidator':
+          minimum: 0
+          maximum: 100
+
+    const_cost_actuators:
+      type: integer
+      defaultValue: 100000
+      ui:
+        label: 'eVCP actuators per piece ($)'
+        help:
+          message: "Project costs for end-user for one compressor:"
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    const_cost_localPanel:
+      type: integer
+      defaultValue: 8000
+      ui:
+        label: 'Local panel per eVCP ($)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    const_cost_installation:
+      type: integer
+      defaultValue: 33000
+      ui:
+        label: 'installation ($)'
+        help:
+          message: "Cabling, labour mechanical and electrical installation"
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    const_cost_generalSubtotal:
+      type: integer
+      defaultValue: 282000
+      ui:
+        label: 'Subtotal for total number of eVCPs ($)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    const_cost_scheduleAndControl:
+      type: integer
+      defaultValue: 8000
+      ui:
+        label: 'Technical meeting, Schedule and control ($)'
+        help:
+          message: "Technical clarification meeting , development of control scheme and compressor loading shedule"
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    const_cost_customerIntegration:
+      type: integer
+      defaultValue: 20000
+      ui:
+        label: 'Integration into customer control system ($)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    const_cost_commission:
+      type: integer
+      defaultValue: 14000
+      ui:
+        label: 'Commissioning / start-up services ($)'
+        reloadIfChanged: true
+        inspector:
+          group: calculationFactors
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    input_cost_dryNaturalGas:
+      type: string
+      defaultValue: 2.91
+      ui:
+        label: 'Price dry natural gas ($ $ per MMBTU)'
+        reloadIfChanged: true
+        inspector:
+          group: inputDefaults
+      validation:
+        'Neos.Neos/Validation/FloatValidator': {}
+
+    input_cost_NGL:
+      type: string
+      defaultValue: 6.08
+      ui:
+        label: 'Price NGL composite ($ $ per MMBTU)'
+        reloadIfChanged: true
+        inspector:
+          group: inputDefaults
+      validation:
+        'Neos.Neos/Validation/FloatValidator': {}
+
+    input_compressor_annualOperationHours:
+      type: integer
+      defaultValue: 8000
+      ui:
+        label: 'Annual operating hours (hours)'
+        reloadIfChanged: true
+        inspector:
+          group: inputDefaults
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': { }
+
+    input_compressor_cylindersNumber:
+      type: integer
+      defaultValue: 2
+      ui:
+        label: 'Number of 1st stage cylinders (pcs)'
+        reloadIfChanged: true
+        inspector:
+          group: inputDefaults
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': {}
+
+    input_compressor_nominalFlowRate:
+      type: integer
+      defaultValue: 7
+      ui:
+        label: 'Compressor nominal flow rate without eVCP (MMSCFD)'
+        reloadIfChanged: true
+        inspector:
+          group: inputDefaults
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': { }
+
+    input_compressor_outputIncrease:
+      type: integer
+      defaultValue: 7
+      ui:
+        label: 'Increase of output thanks to eVCP'
+        reloadIfChanged: true
+        inspector:
+          group: inputDefaults
+      validation:
+        'Neos.Neos/Validation/IntegerValidator': { }
