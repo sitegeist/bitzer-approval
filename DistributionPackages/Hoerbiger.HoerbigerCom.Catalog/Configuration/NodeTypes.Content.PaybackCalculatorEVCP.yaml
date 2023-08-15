@@ -24,6 +24,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/FloatValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_unit_mmbtu:
       type: string
@@ -35,6 +36,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/FloatValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_unit_scf:
       type: string
@@ -46,6 +48,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/FloatValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_unit_avgHeatingValue4NG:
       type: integer
@@ -57,6 +60,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_composition_dryNaturalGas:
       type: integer
@@ -70,6 +74,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
         'Neos.Neos/Validation/NumberRangeValidator':
           minimum: 0
           maximum: 100
@@ -84,6 +89,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
         'Neos.Neos/Validation/NumberRangeValidator':
           minimum: 0
           maximum: 100
@@ -97,7 +103,8 @@
         inspector:
           group: calculationFactors
       validation:
-        'Neos.Neos/Validation/IntegerValidator': { }
+        'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
         'Neos.Neos/Validation/NumberRangeValidator':
           minimum: 0
           maximum: 100
@@ -114,6 +121,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_cost_localPanel:
       type: integer
@@ -125,6 +133,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_cost_installation:
       type: integer
@@ -138,6 +147,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_cost_generalSubtotal:
       type: integer
@@ -149,6 +159,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_cost_scheduleAndControl:
       type: integer
@@ -162,6 +173,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_cost_customerIntegration:
       type: integer
@@ -173,6 +185,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     const_cost_commission:
       type: integer
@@ -184,6 +197,7 @@
           group: calculationFactors
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     input_cost_dryNaturalGas:
       type: string
@@ -195,6 +209,7 @@
           group: inputDefaults
       validation:
         'Neos.Neos/Validation/FloatValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     input_cost_NGL:
       type: string
@@ -206,6 +221,7 @@
           group: inputDefaults
       validation:
         'Neos.Neos/Validation/FloatValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     input_compressor_annualOperationHours:
       type: integer
@@ -216,7 +232,8 @@
         inspector:
           group: inputDefaults
       validation:
-        'Neos.Neos/Validation/IntegerValidator': { }
+        'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     input_compressor_cylindersNumber:
       type: integer
@@ -228,6 +245,7 @@
           group: inputDefaults
       validation:
         'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     input_compressor_nominalFlowRate:
       type: integer
@@ -238,7 +256,8 @@
         inspector:
           group: inputDefaults
       validation:
-        'Neos.Neos/Validation/IntegerValidator': { }
+        'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
 
     input_compressor_outputIncrease:
       type: integer
@@ -249,4 +268,5 @@
         inspector:
           group: inputDefaults
       validation:
-        'Neos.Neos/Validation/IntegerValidator': { }
+        'Neos.Neos/Validation/IntegerValidator': {}
+        'Neos.Neos/Validation/NotEmptyValidator': {}
