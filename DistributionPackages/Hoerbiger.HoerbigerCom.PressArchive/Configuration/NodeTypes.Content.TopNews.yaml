@@ -34,7 +34,30 @@
               - 'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsRelease'
               - 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease'
               - 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease'
-
+    category:
+      type: string
+      ui:
+        label: 'Link auf Kategorie'
+        reloadIfChanged: true
+        inspector:
+          group: 'news'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+          editorOptions:
+            allowEmpty: true
+            values:
+              news:
+                label: 'News'
+              yearbook:
+                label: 'Jahrbuch'
+              hanns:
+                label: 'HANNS.'
+    linkLabel:
+      type: string
+      ui:
+        label: 'Link-Label'
+        reloadIfChanged: true
+        inspector:
+          group: 'news'
 
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   childNodes:

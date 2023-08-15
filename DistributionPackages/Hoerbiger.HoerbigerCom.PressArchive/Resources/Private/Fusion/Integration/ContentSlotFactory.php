@@ -209,6 +209,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         bool $inBackend
     ): SlotInterface
     {
+        $targetUri = $this->uriService->getNodeUri(
+            $site->findNamedChildNode(NodeName::fromString('pressarchive'))
+        );
+        if ($topNewsNode->getProperty('category')) {
+            $targetUri = $targetUri->withFragment($topNewsNode->getProperty('category'));
+        }
+
         $overViewButton = new Button(
             ButtonType::TYPE_LINK,
             ButtonVariant::VARIANT_CONTRAST,
@@ -216,12 +223,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 GridVariant::VARIANT_ICONLEFT,
                 Collection::fromIterable(array_filter([
                     new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
-                    Value::fromString($this->getLabel('list.seeOverview') ?: '')
+                    Value::fromString($topNewsNode->getProperty('linkLabel') ?: $this->getLabel('list.seeOverview') ?: '')
                 ]))
             ),
-            $this->uriService->getNodeUri(
-                $site->findNamedChildNode(NodeName::fromString('pressarchive'))
-            ),
+            $targetUri,
             '_self',
             null
         );
