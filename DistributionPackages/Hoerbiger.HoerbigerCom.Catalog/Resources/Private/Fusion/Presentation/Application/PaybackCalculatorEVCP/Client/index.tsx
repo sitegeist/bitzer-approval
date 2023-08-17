@@ -227,12 +227,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<InputRow
 									label={props.getLabelFor("label.compressor.annualOperatingHours")}
 									unit={props.getLabelFor("label.unit.compressor.annualOperatingHours")}
-									tooltip={{
-										abbreviation: "DUMMY",
-										description: "DUMMY",
-										notice: null,
-										link: null,
-									}}
+									tooltip={null}
 									inputName="compressor_annualOperationHours"
 									inputValue={inputs.compressor_annualOperationHours}
 									step="1"
@@ -247,12 +242,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<InputRow
 									label={props.getLabelFor("label.compressor.cylindersNumber")}
 									unit={props.getLabelFor("label.unit.compressor.cylindersNumber")}
-									tooltip={{
-										abbreviation: "DUMMY",
-										description: "DUMMY",
-										notice: null,
-										link: null,
-									}}
+									tooltip={null}
 									inputName="compressor_cylindersNumber"
 									inputValue={inputs.compressor_cylindersNumber}
 									step="1"
@@ -268,8 +258,8 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									label={props.getLabelFor("label.compressor.nominalFlowRate")}
 									unit={props.getLabelFor("label.unit.compressor.nominalFlowRate")}
 									tooltip={{
-										abbreviation: "DUMMY",
-										description: "DUMMY",
+										abbreviation: props.getLabelFor("abbreviation.mmscfd"),
+										description: props.getLabelFor("description.mmscfd"),
 										notice: null,
 										link: null,
 									}}
@@ -287,12 +277,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<InputRow
 									label={props.getLabelFor("label.compressor.outputIncrease")}
 									unit=""
-									tooltip={{
-										abbreviation: "DUMMY",
-										description: "DUMMY",
-										notice: null,
-										link: null,
-									}}
+									tooltip={null}
 									inputName="compressor_outputIncrease"
 									inputValue={inputs.compressor_outputIncrease}
 									step="0.1"
@@ -322,10 +307,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								label={props.getLabelFor("label.prices.dryNaturalGas")}
 								unit={props.getLabelFor("label.unit.prices.dryNaturalGas")}
 								tooltip={{
-									abbreviation: "DUMMY",
-									description: "DUMMY",
-									notice: null,
-									link: null,
+									abbreviation: props.getLabelFor("abbreviation.mmbtu"),
+									description: props.getLabelFor("description.mmbtu"),
+									notice: props.getLabelFor("notice.dryNaturalGas"),
+									link: "https://www.eia.gov/naturalgas/weekly/#tabs-prices-2",
 								}}
 								inputName="cost_dryNaturalGas"
 								inputValue={inputs.cost_dryNaturalGas}
@@ -341,10 +326,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								label={props.getLabelFor("label.prices.NGL")}
 								unit={props.getLabelFor("label.prices.NGL")}
 								tooltip={{
-									abbreviation: "DUMMY",
-									description: "DUMMY",
-									notice: null,
-									link: null,
+									abbreviation: props.getLabelFor("abbreviation.mmbtu"),
+									description: props.getLabelFor("description.mmbtu"),
+									notice: props.getLabelFor("notice.NGL"),
+									link: "https://www.eia.gov/dnav/ng/hist/ngm_epg0_plc_nus_dmmbtum.htm",
 								}}
 								inputName="cost_NGL"
 								inputValue={inputs.cost_NGL}
@@ -378,8 +363,8 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 										label={props.getLabelFor("label.conversionFactor.btu")}
 										value={props.calculationFields.unit_btu + " " + props.getLabelFor("label.unit.conversionFactor.btu") + " (i)"}
 										tooltip={{
-											abbreviation: "DUMMY",
-											description: "DUMMY",
+											abbreviation: props.getLabelFor("abbreviation.btu"),
+											description: props.getLabelFor("description.btu"),
 											notice: null,
 											link: null,
 										}}
@@ -388,7 +373,12 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.mmBtu")}
 										value={props.calculationFields.unit_mmbtu + " " + props.getLabelFor("label.unit.conversionFactor.mmBtu") + " (i)"}
-										tooltip={null}
+										tooltip={{
+											abbreviation: props.getLabelFor("abbreviation.mmbtu"),
+											description: props.getLabelFor("description.mmbtu"),
+											notice: null,
+											link: null,
+										}}
 									/>
 
 									<GridRow
@@ -404,7 +394,12 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.avgHeatingValue4NG")}
 										value={props.calculationFields.unit_avgHeatingValue4NG + " " + props.getLabelFor("label.unit.conversionFactor.avgHeatingValue4NG") + " (i)"}
-										tooltip={null}
+										tooltip={{
+											abbreviation: props.getLabelFor("abbreviation.btu"),
+											description: props.getLabelFor("description.btu"),
+											notice: null,
+											link: null,
+										}}
 									/>
 								</div>
 

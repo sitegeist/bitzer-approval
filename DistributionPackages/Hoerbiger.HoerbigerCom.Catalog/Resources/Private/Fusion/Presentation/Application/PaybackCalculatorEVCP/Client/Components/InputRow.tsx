@@ -50,9 +50,9 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 					</span>
 					{
 						props.tooltip &&
-						<div onClick={handleTooltip} className="cursor-pointer">
-							<InfoIcon />
-						</div>
+							<div onClick={handleTooltip} className="cursor-pointer">
+								<InfoIcon />
+							</div>
 					}
 				</div>
 				{
@@ -62,11 +62,12 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 						</div>
 				}
 			</div>
-			{ modalIsOpen &&
-				<Modal
-					info={props.tooltip}
-					onClick={() => setModalIsOpen(false)}
-				/>
+			{
+				(modalIsOpen && props.tooltip) &&
+					<Modal
+						info={props.tooltip}
+						onClick={() => setModalIsOpen(false)}
+					/>
 			}
 		</div>
 	);

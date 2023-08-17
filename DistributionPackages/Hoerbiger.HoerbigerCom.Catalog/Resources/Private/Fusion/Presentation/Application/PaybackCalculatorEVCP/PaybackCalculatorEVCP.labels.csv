@@ -78,3 +78,19 @@ error.message.annualOperationHours,"Fehler: Wert muss zwischen 1 und 8760 liegen
 error.message.cylindersNumber,"Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen"
 error.message.nominalFlowRate,"Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen"
 error.message.outputIncrease,"Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen"
+
+abbreviation.btu,"BTU","BTU","BTU"
+abbreviation.mmbtu,"MMTBU","MMTBU","MMTBU"
+abbreviation.mmscfd,"MMSCFD","MMSCFD","MMSCFD"
+abbreviation.ngl,"NGL,"NGL,"NGL
+abbreviation.vvcp,"VVCP","VVCP","VVCP"
+
+description.btu,"British thermal unit","British thermal unit","British thermal unit"
+description.mmbtu,"million British thermal units","million British thermal units","million British thermal units"
+description.mmscfd,"million standard cubic feet per day","million standard cubic feet per day","million standard cubic feet per day"
+description.ngl,"non-gaseous liquids","non-gaseous liquids","non-gaseous liquids"
+description.vvcp,"variable volume clearance pocket","variable volume clearance pocket","variable volume clearance pocket"
+
+notice.dryNaturalGas,"US Energy Administration daily spot price Henry Hub, as per 9th August 2023","US Energy Administration daily spot price Henry Hub, as per 9th August 2023","US Energy Administration daily spot price Henry Hub, as per 9th August 2023"
+notice.NGL,"US Energy Administration month Mai 2023, as per 9th August 2023","US Energy Administration month Mai 2023, as per 9th August 2023","US Energy Administration month Mai 2023, as per 9th August 2023"
+
