@@ -1,7 +1,7 @@
 import * as React from "react";
 import cx from "classnames";
 
-import {InputRowParams, LabelGetter} from "../Defintions";
+import {InputRowParams} from "../Defintions";
 import {InfoIcon} from "./Icons";
 import {Modal} from "./Modal";
 
@@ -11,7 +11,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 		props.onChange(value, props.inputName);
 	};
 
-	const [modalIsOpen, setModalIsOpen] = React.useState<boolean>();
+	const [modalIsOpen, setModalIsOpen] = React.useState<boolean>(false);
 
 	const handleTooltip = () => {
 		setModalIsOpen(true);

@@ -1,4 +1,4 @@
-import {ArrowRight} from "./Icons";
+import {ArrowRight, CloseBox} from "./Icons";
 import * as React from "react";
 import cx from "classnames";
 
@@ -32,10 +32,10 @@ export const Modal = (props: ModalParams) => {
 					onClick={props.onClick}
 				>
 					<div className={cx(
-						"flex items-center gap-ch absolute top-0 right-0 p-ch w-touch h-touch",
+						"flex items-center gap-ch absolute top-0 right-0 p-[10px] w-touch h-touch",
 						"text-2xl text-excite"
 					)}>
-						&times;
+						<CloseBox />
 					</div>
 				</div>
 			</div>
