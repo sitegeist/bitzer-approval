@@ -133,3 +133,7 @@ export interface ValidationErrors {
 	compressor_nominalFlowRate: string | null;
 	compressor_outputIncrease: string | null;
 }
+
+export interface ModalParams {
+	onClick: () => void
+}

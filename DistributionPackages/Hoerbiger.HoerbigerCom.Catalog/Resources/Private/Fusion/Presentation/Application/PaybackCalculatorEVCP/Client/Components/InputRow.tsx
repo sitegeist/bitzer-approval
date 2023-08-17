@@ -3,6 +3,7 @@ import cx from "classnames";
 
 import {InputRowParams, LabelGetter} from "../Defintions";
 import {ArrowRight, InfoIcon} from "./Icons";
+import {Modal} from "./Modal";
 
 export const InputRow = (props: InputRowParams): JSX.Element => {
 	const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,21 +63,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 				}
 			</div>
 			{ modalIsOpen &&
-				<div className="absolute w-screen h-screen bg-[#A8937911] left-0 z-50 grid place-items-center">
-					<div className="w-[300px] bg-light p-sm flex flex-col gap-ch justify-between">
-						<h3 className="font-bold text-xl">Überschrift</h3>
-						<p>Hier kommt das modal mit irgendwelchem Text</p>
-						<div
-							className="cursor-pointer font-bold"
-							onClick={() => setModalIsOpen(false)}
-						>
-							<div className="flex items-center gap-ch">
-								<ArrowRight />
-								Fenster schließen
-							</div>
-						</div>
-					</div>
-				</div>
+				<Modal onClick={() => setModalIsOpen(false)} />
 			}
 		</div>
 	);
