@@ -20,7 +20,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 	return (
 		<div className={cx(
 			"grid grid-cols-2 items-center min-h-touch gap-ch",
-			"border-b-[1px] border-light-contrast"
+			"border-b-[1px] border-light-contrast py-ch"
 		)}>
 			<div className={cx(
 				"font-bold",
@@ -30,7 +30,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 			</div>
 			<div className={cx(
 				"flex flex-col",
-				props.errorMessage && "gap-[5px] pt-[5px] pb-[5px]"
+				props.errorMessage && "gap-[5px] py-[5px]"
 			)}>
 				<div className="flex items-center gap-ch">
 					<div className="">
