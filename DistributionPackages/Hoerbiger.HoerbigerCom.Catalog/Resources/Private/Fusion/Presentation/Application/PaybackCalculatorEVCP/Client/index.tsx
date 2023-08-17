@@ -361,7 +361,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<div className="grid grid-cols-2 gap-y-[10px]">
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.btu")}
-										value={props.calculationFields.unit_btu + " " + props.getLabelFor("label.unit.conversionFactor.btu") + " (i)"}
+										value={props.calculationFields.unit_btu + " " + props.getLabelFor("label.unit.conversionFactor.btu")}
 										tooltip={{
 											abbreviation: props.getLabelFor("abbreviation.btu"),
 											description: props.getLabelFor("description.btu"),
@@ -372,7 +372,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.mmBtu")}
-										value={props.calculationFields.unit_mmbtu + " " + props.getLabelFor("label.unit.conversionFactor.mmBtu") + " (i)"}
+										value={props.calculationFields.unit_mmbtu + " " + props.getLabelFor("label.unit.conversionFactor.mmBtu")}
 										tooltip={{
 											abbreviation: props.getLabelFor("abbreviation.mmbtu"),
 											description: props.getLabelFor("description.mmbtu"),
@@ -383,7 +383,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.scf")}
-										value={props.calculationFields.unit_scf + " " + props.getLabelFor("label.unit.conversionFactor.scf") + " (i)"}
+										value={props.calculationFields.unit_scf + " " + props.getLabelFor("label.unit.conversionFactor.scf")}
 										tooltip={null}
 									/>
 
@@ -393,7 +393,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.avgHeatingValue4NG")}
-										value={props.calculationFields.unit_avgHeatingValue4NG + " " + props.getLabelFor("label.unit.conversionFactor.avgHeatingValue4NG") + " (i)"}
+										value={props.calculationFields.unit_avgHeatingValue4NG + " " + props.getLabelFor("label.unit.conversionFactor.avgHeatingValue4NG")}
 										tooltip={{
 											abbreviation: props.getLabelFor("abbreviation.btu"),
 											description: props.getLabelFor("description.btu"),
