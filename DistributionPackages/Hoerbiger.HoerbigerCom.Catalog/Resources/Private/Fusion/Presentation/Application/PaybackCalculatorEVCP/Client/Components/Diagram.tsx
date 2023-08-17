@@ -58,7 +58,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 							position: "bottom",
 							labels: {
 								font: {
-									size: 20
+									size: 18
 								}
 							}
 						}
@@ -78,12 +78,12 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 								display: true,
 								text: props.chartLabels.yLeftLabel,
 								font: {
-									size: 20
+									size: 18
 								}
 							},
 							ticks: {
 								font: {
-									size: 20
+									size: 18
 								}
 							}
 						},
@@ -97,7 +97,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 								display: true,
 								text: props.chartLabels.yRightLabel,
 								font: {
-									size: 20
+									size: 18
 								}
 							},
 
@@ -107,7 +107,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 							},
 							ticks: {
 								font: {
-									size: 20
+									size: 18
 								}
 							}
 						},
@@ -116,7 +116,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 								display: true,
 								text: props.chartLabels.xAxisLabel,
 								font: {
-									size: 20
+									size: 18
 								}
 							},
 							grid: {
@@ -124,7 +124,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 							},
 							ticks: {
 								font: {
-									size: 20
+									size: 18
 								}
 							}
 						},
