@@ -5,3 +5,69 @@ input_compressor_annualOperationHours,Annual operating hours,Annual operating ho
 input_compressor_cylindersNumber,Number of 1st stage cylinders,Number of 1st stage cylinders:,Number of 1st stage cylinders:
 input_compressor_nominalFlowRate,Compressor nominal flow rate without eVCP,Compressor nominal flow rate without eVCP:,Compressor nominal flow rate without eVCP:
 input_compressor_outputIncrease,Increase of output thanks to eVCP,Increase of output thanks to eVCP:,Increase of output thanks to eVCP:
+
+label.headline.naturalGasGathering,"Compressed Gas Value Input","Compressed Gas Value Input","Compressed Gas Value Input",
+label.headline.compressorOperatingData,"Compressor Operating Data Input","Compressor Operating Data Input","Compressor Operating Data Input"
+label.headline.gasComposition,"Heating value for natural gas (average):","Heating value for natural gas (average):","Heating value for natural gas (average):"
+label.headline.conversionFactors,"Conversion factors","Conversion factors","Conversion factors"
+label.headline.gasCompositionRaw,"Gas composition of raw natural gas: (typical)","Gas composition of raw natural gas: (typical)","Gas composition of raw natural gas: (typical)"
+
+label.prices.dryNaturalGas,Price dry natural gas:,Price dry natural gas:,Price dry natural gas:
+label.prices.NGL,"Price NGL composite:","Price NGL composite:","Price NGL composite:"
+label.conversionFactor.btu,"1 Btu","1 Btu","1 Btu"
+label.conversionFactor.mmBtu,"1 MMBtu (million)","1 MMBtu (million)","1 MMBtu (million)"
+label.conversionFactor.scf,"1 scf, standard cubic feet","1 scf, standard cubic feet", "1 scf, standard cubic feet"
+label.conversionFactor.avgHeatingValue4NG,"1 scf, standard cubic feet","1 scf, standard cubic feet","1 scf, standard cubic feet"
+label.addRevenues.dryNaturalGas,"Dry natural gas:","Dry natural gas:","Dry natural gas:"
+label.addRevenues.NGL,"NGL:","NGL:","NGL:"
+label.addRevenues.others,"Others:","Others:","Others:"
+label.addRevenues.total,"Total","Total","Total"
+
+label.unit.prices.dryNaturalGas,"$ per MMBTU","$ per MMBTU","$ per MMBTU"
+label.unit.prices.NGL,"$ per MMBTU","$ per MMBTU","$ per MMBTU"
+label.unit.addRevenues.dryNaturalGas,"%","%","%"
+label.unit.addRevenues.NGL,"%","%","%"
+label.unit.addRevenues.others,"%","%","%"
+label.unit.addRevenues.total,"%","%","%"
+label.unit.conversionFactor.btu,"kJ","kJ","kJ"
+label.unit.conversionFactor.mmBtu,"GJ","GJ","GJ"
+label.unit.conversionFactor.scf,"Nm3/h","Nm3/h","Nm3/h"
+label.unit.conversionFactor.avgHeatingValue4NG,"BTU","BTU","BTU"
+
+label.projectCost.numberOfCompressors,"Total number of eVCPs per compressor","Total number of eVCPs per compressor","Total number of eVCPs per compressor"
+label.projectCost.actuators,"eVCP actuators per piece","eVCP actuators per piece","eVCP actuators per piece"
+label.projectCost.localPanel,"Local panel per eVCP","Local panel per eVCP","Local panel per eVCP"
+label.projectCost.installation,"Cabling, labour mechanical and electrical installation","Cabling, labour mechanical and electrical installation","Cabling, labour mechanical and electrical installation"
+label.projectCost.subTotal,"Subtotal per eVCP","Subtotal per eVCP","Subtotal per eVCP"
+
+label.projectCost.generalSubtotal,"Subtotal for total number of eVCPs","Subtotal for total number of eVCPs","Subtotal for total number of eVCPs"
+label.projectCost.scheduleAndControl,"Technical clarification meeting , development of control scheme and compressor loading schedule","Technical clarification meeting , development of control scheme and compressor loading schedule","Technical clarification meeting , development of control scheme and compressor loading schedule"
+label.projectCost.customerIntegration,"Integration into customer control system","Integration into customer control system","Integration into customer control system"
+label.projectCost.commission,"Commissioning / start-up services","Commissioning / start-up services","Commissioning / start-up services"
+label.projectCost.total,"Total","Total","Total"
+
+label.unit.dollar,"$","$","$"
+
+label.showDerivation,"Herleitung anzeigen","Herleitung anzeigen","Herleitung anzeigen"
+label.disableDerivation,"Herleitung verbergen","Herleitung verbergen","Herleitung verbergen"
+
+
+label.compressor.annualOperatingHours,"Annual operating hours","Annual operating hours","Annual operating hours"
+label.compressor.cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders","Number of 1st stage cylinders"
+label.compressor.nominalFlowRate,"Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP"
+label.compressor.outputIncrease,"Increase of output thanks to eVCP","Increase of output thanks to eVCP","Increase of output thanks to eVCP"
+
+label.unit.compressor.annualOperatingHours,"hours","hours","hours"
+label.unit.compressor.cylindersNumber,"pcs","pcs","pcs"
+label.unit.compressor.nominalFlowRate,"MMSCFD","MMSCFD","MMSCFD"
+label.unit.compressor.outputIncrease,"","",""
+
+label.footnote,"*) Note: The presented increase in delivery volume in a range of 5 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 5 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 5 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER."
+label.disclaimer,"Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation."
+
+label.chart.title,"eVCP Payback Calculation Result","eVCP Payback Calculation Result","eVCP Payback Calculation Result"
+label.chart.barChartLabel,"Additional revenue per year [USD]","Additional revenue per year [USD]","Additional revenue per year [USD]"
+label.chart.lineChartLabel,"Payback time [months]","Payback time [months]","Payback time [months]"
+label.chart.xAxisLabel,"Increase of compressor output with eVCP in % (typical range 5%...10%*)","Increase of compressor output with eVCP in % (typical range 5%...10%*)","Increase of compressor output with eVCP in % (typical range 5%...10%*)"
+label.chart.yLeftLabel,"Additional revenue per year in USD","Additional revenue per year in USD","Additional revenue per year in USD"
+label.chart.yRightLabel,"Payback time in months","Payback time in months","Payback time in months"

@@ -1,6 +1,7 @@
 'Hoerbiger.HoerbigerCom.Catalog:Content.PaybackCalculatorEVCP':
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   ui:
     icon: 'pencil-square-o'
     label: 'eVCP Kalkulator'
@@ -30,7 +31,7 @@
       type: string
       defaultValue: 1.055
       ui:
-        label: '1 MMBtu (million) (kJ)'
+        label: '1 MMBtu (million) (GJ)'
         reloadIfChanged: true
         inspector:
           group: calculationFactors

@@ -44,10 +44,11 @@ const NTH_CHILD_SELECTORS = ['nth-child-4n+1', 'nth-child-4n+2'];
 module.exports = {
 	content: [
 		'./Resources/Private/Fusion/**/*',
-		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.Catalog/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.PressArchive/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 	],
 	theme: {
 		colors: {

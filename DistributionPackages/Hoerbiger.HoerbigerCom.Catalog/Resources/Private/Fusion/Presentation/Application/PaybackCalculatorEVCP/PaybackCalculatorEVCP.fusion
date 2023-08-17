@@ -7,8 +7,9 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:Application.PaybackCalculatorEVCP) < pr
     renderer = afx`
         <div
             class={[
-            "[Application.PaybackCalculatorEVCP]"
-        ]}
+                "[Application.PaybackCalculatorEVCP]",
+                "bg-neutral-lighter p-md"
+            ]}
             data-application-data={presentationObject.applicationData}
         >
             <div>

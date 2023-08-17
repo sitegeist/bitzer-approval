@@ -27,30 +27,39 @@ final class PaybackCalculatorEVCPFactory extends AbstractComponentPresentationOb
             $paybackCalculatorECVPNode->getProperty('headline') || $inBackend
                 ? new Headline(
                     HeadlineSize::SIZE_MEDIUM_ITALIC,
-                    HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                    HeadlineColor::COLOR_EXCITE,
                     HeadlineType::TYPE_H2,
                     Editable::fromNodeProperty($paybackCalculatorECVPNode, 'headline')
                 )
             : null,
             \json_encode([
-                'form' => ['const_unit_scf' => $paybackCalculatorECVPNode->getProperty('const_unit_scf'),
-                    'const_unit_avgHeatingValue4NG' => $paybackCalculatorECVPNode->getProperty('const_unit_avgHeatingValue4NG'),
-                    'const_composition_dryNaturalGas' => $paybackCalculatorECVPNode->getProperty('const_composition_dryNaturalGas'),
-                    'const_composition_NGL' => $paybackCalculatorECVPNode->getProperty('const_composition_NGL'),
-                    'const_composition_others' => $paybackCalculatorECVPNode->getProperty('const_composition_others'),
-                    'const_cost_actuators' => $paybackCalculatorECVPNode->getProperty('const_cost_actuators'),
-                    'const_cost_localPanel' => $paybackCalculatorECVPNode->getProperty('const_cost_localPanel'),
-                    'const_cost_installation' => $paybackCalculatorECVPNode->getProperty('const_cost_installation'),
-                    'const_cost_generalSubtotal' => $paybackCalculatorECVPNode->getProperty('const_cost_generalSubtotal'),
-                    'const_cost_scheduleAndControl' => $paybackCalculatorECVPNode->getProperty('const_cost_scheduleAndControl'),
-                    'const_cost_customerIntegration' => $paybackCalculatorECVPNode->getProperty('const_cost_customerIntegration'),
-                    'const_cost_commission' => $paybackCalculatorECVPNode->getProperty('const_cost_commission'),
-                    'input_cost_dryNaturalGas' => $paybackCalculatorECVPNode->getProperty('input_cost_dryNaturalGas'),
-                    'input_cost_NGL' => $paybackCalculatorECVPNode->getProperty('input_cost_NGL'),
-                    'input_compressor_annualOperationHours' => $paybackCalculatorECVPNode->getProperty('input_compressor_annualOperationHours'),
-                    'input_compressor_cylindersNumber' => $paybackCalculatorECVPNode->getProperty('input_compressor_cylindersNumber'),
-                    'input_compressor_nominalFlowRate' => $paybackCalculatorECVPNode->getProperty('input_compressor_nominalFlowRate'),
-                    'input_compressor_outputIncrease' => $paybackCalculatorECVPNode->getProperty('input_compressor_outputIncrease')
+                'inputFields' => [
+                    'cost_dryNaturalGas' => $paybackCalculatorECVPNode->getProperty('input_cost_dryNaturalGas'),
+                    'cost_NGL' => $paybackCalculatorECVPNode->getProperty('input_cost_NGL'),
+                    'compressor_annualOperationHours' => $paybackCalculatorECVPNode->getProperty('input_compressor_annualOperationHours'),
+                    'compressor_cylindersNumber' => $paybackCalculatorECVPNode->getProperty('input_compressor_cylindersNumber'),
+                    'compressor_nominalFlowRate' => $paybackCalculatorECVPNode->getProperty('input_compressor_nominalFlowRate'),
+                    'compressor_outputIncrease' => $paybackCalculatorECVPNode->getProperty('input_compressor_outputIncrease')
+                ],
+                'calculationFields' => [
+                    'unit_btu' => $paybackCalculatorECVPNode->getProperty('const_unit_btu'),
+                    'unit_mmbtu' => $paybackCalculatorECVPNode->getProperty('const_unit_mmbtu'),
+                    'unit_scf' => $paybackCalculatorECVPNode->getProperty('const_unit_scf'),
+
+                    'unit_avgHeatingValue4NG' => $paybackCalculatorECVPNode->getProperty('const_unit_avgHeatingValue4NG'),
+
+                    'composition_dryNaturalGas' => $paybackCalculatorECVPNode->getProperty('const_composition_dryNaturalGas'),
+                    'composition_NGL' => $paybackCalculatorECVPNode->getProperty('const_composition_NGL'),
+                    'composition_others' => $paybackCalculatorECVPNode->getProperty('const_composition_others'),
+
+                    'cost_actuators' => $paybackCalculatorECVPNode->getProperty('const_cost_actuators'),
+                    'cost_localPanel' => $paybackCalculatorECVPNode->getProperty('const_cost_localPanel'),
+                    'cost_installation' => $paybackCalculatorECVPNode->getProperty('const_cost_installation'),
+
+                    'cost_generalSubtotal' => $paybackCalculatorECVPNode->getProperty('const_cost_generalSubtotal'),
+                    'cost_scheduleAndControl' => $paybackCalculatorECVPNode->getProperty('const_cost_scheduleAndControl'),
+                    'cost_customerIntegration' => $paybackCalculatorECVPNode->getProperty('const_cost_customerIntegration'),
+                    'cost_commission' => $paybackCalculatorECVPNode->getProperty('const_cost_commission'),
                 ],
                 'labels' => $this->csvPOTranslator->getLabels(self::class)
             ], JSON_THROW_ON_ERROR)

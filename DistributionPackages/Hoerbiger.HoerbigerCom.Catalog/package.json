@@ -1,0 +1,17 @@
+{
+  "name": "@hoerbiger/hoerbigercom-catalog",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "webpack --mode production",
+    "watch": "webpack -w --mode development",
+    "lint-ts": "eslint Resources/Private/**/*.ts"
+  },
+  "dependencies": {
+    "@hoerbiger/shared": "^1.0.0",
+    "chart.js": "^4.3.3"
+  },
+  "devDependencies": {
+    "@types/chart.js": "^2.9.37"
+  }
+}
