@@ -559,10 +559,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 						/>
 				}
 			</div>
-			<div className="w-full">
+			<div className="w-full font-sans-light py-xs text-sm">
 				{props.getLabelFor("label.footnote")}
 			</div>
-			<div className="w-full">
+			<div className="w-full font-sans-light text-sm">
 				{props.getLabelFor("label.disclaimer")}
 			</div>
 
