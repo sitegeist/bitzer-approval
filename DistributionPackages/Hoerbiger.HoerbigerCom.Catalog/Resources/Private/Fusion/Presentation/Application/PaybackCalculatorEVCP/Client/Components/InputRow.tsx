@@ -2,7 +2,7 @@ import * as React from "react";
 import cx from "classnames";
 
 import {InputRowParams, LabelGetter} from "../Defintions";
-import {ArrowRight, InfoIcon} from "./Icons";
+import {InfoIcon} from "./Icons";
 import {Modal} from "./Modal";
 
 export const InputRow = (props: InputRowParams): JSX.Element => {
@@ -63,7 +63,10 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 				}
 			</div>
 			{ modalIsOpen &&
-				<Modal onClick={() => setModalIsOpen(false)} />
+				<Modal
+					info={props.tooltip}
+					onClick={() => setModalIsOpen(false)}
+				/>
 			}
 		</div>
 	);

@@ -21,18 +21,13 @@ export interface InputRowParams {
 	inputValue: number|null;
 	label: string;
 	unit: string;
-	tooltip: Tooltip;
+	tooltip: ModalInformations;
 	step: string;
 	min: number;
 	max: number;
 	errorMessage: string | null;
 	getLabelFor: LabelGetter;
 	onChange: (value: string, name: string) => void;
-}
-
-export interface Tooltip {
-	abbreviation: string;
-	description: string;
 }
 
 export interface ChartParams {
@@ -122,7 +117,7 @@ export interface Result {
 export interface GridRowParams {
 	label: string;
 	value: string;
-	tooltip: string | null;
+	tooltip: ModalInformations | null;
 }
 export interface ValidationErrors {
 	cost_dryNaturalGas: string | null,
@@ -135,5 +130,13 @@ export interface ValidationErrors {
 }
 
 export interface ModalParams {
-	onClick: () => void
+	onClick: () => void;
+	info: ModalInformations;
+}
+
+export interface ModalInformations {
+	abbreviation: string;
+	description: string;
+	notice: string | null;
+	link: string | null;
 }
