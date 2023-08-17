@@ -71,3 +71,10 @@ label.chart.lineChartLabel,"Payback time [months]","Payback time [months]","Payb
 label.chart.xAxisLabel,"Increase of compressor output with eVCP in % (typical range 5%...10%*)","Increase of compressor output with eVCP in % (typical range 5%...10%*)","Increase of compressor output with eVCP in % (typical range 5%...10%*)"
 label.chart.yLeftLabel,"Additional revenue per year in USD","Additional revenue per year in USD","Additional revenue per year in USD"
 label.chart.yRightLabel,"Payback time in months","Payback time in months","Payback time in months"
+
+error.message.cost,"Fehler: Wert muss zwischen 0 und 99 liegen","Fehler: Wert muss zwischen 0 und 99 liegen","Fehler: Wert muss zwischen 0 und 99 liegen"
+
+error.message.annualOperationHours,"Fehler: Wert muss zwischen 1 und 8760 liegen","Fehler: Wert muss zwischen 1 und 8760 liegen","Fehler: Wert muss zwischen 1 und 8760 liegen"
+error.message.cylindersNumber,"Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen"
+error.message.nominalFlowRate,"Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen"
+error.message.outputIncrease,"Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen"

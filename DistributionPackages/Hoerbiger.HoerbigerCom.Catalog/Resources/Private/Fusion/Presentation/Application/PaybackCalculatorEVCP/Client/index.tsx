@@ -75,35 +75,35 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 			if (value > 0 && value <= 99) {
 				message = null;
 			} else {
-				message = "Fehler: Wert muss zwischen 0 und 99 liegen";
+				message = props.getLabelFor("error.message.cost");
 			}
 			break;
 		case "compressor_annualOperationHours":
 			if (value >= 1 && value <= 8760) {
 				message = null;
 			} else {
-				message = "Fehler: Wert muss zwischen 1 und 8760 liegen";
+				message = props.getLabelFor("error.message.annualOperationHours");
 			}
 			break;
 		case "compressor_cylindersNumber":
 			if (value >= 1 && value <= 10) {
 				message = null;
 			} else {
-				message = "Fehler: Wert muss zwischen 1 und 10 liegen";
+				message = props.getLabelFor("error.message.cylindersNumber");
 			}
 			break;
 		case "compressor_nominalFlowRate":
 			if (value > 0 && value <= 99) {
 				message = null;
 			} else {
-				message = "Fehler: Wert muss zwischen 0.01 und 99 liegen";
+				message = props.getLabelFor("error.message.nominalFlowRate");
 			}
 			break;
 		case "compressor_outputIncrease":
 			if (value >= 5 && value <= 10) {
 				message = null;
 			} else {
-				message = "Fehler: Wert muss zwischen 5 und 10 liegen";
+				message = props.getLabelFor("error.message.outputIncrease");
 			}
 
 			break;
