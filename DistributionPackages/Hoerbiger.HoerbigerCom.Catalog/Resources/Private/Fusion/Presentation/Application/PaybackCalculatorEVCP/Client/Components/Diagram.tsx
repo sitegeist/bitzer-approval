@@ -51,10 +51,16 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 							text: props.chartLabels.chartTitle,
 							font: {
 								size: 30
-							}
+							},
+							padding: 30
 						},
 						legend: {
-							position: "bottom"
+							position: "bottom",
+							labels: {
+								font: {
+									size: 20
+								}
+							}
 						}
 					},
 					scales: {
@@ -70,8 +76,16 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 							min: 0,
 							title: {
 								display: true,
-								text: props.chartLabels.yLeftLabel
+								text: props.chartLabels.yLeftLabel,
+								font: {
+									size: 20
+								}
 							},
+							ticks: {
+								font: {
+									size: 20
+								}
+							}
 						},
 						y_right: {
 							type: "linear",
@@ -81,21 +95,37 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 
 							title: {
 								display: true,
-								text: props.chartLabels.yRightLabel
+								text: props.chartLabels.yRightLabel,
+								font: {
+									size: 20
+								}
 							},
 
 							// grid line settings
 							grid: {
 								drawOnChartArea: false, // only want the grid lines for one axis to show up
 							},
+							ticks: {
+								font: {
+									size: 20
+								}
+							}
 						},
 						x: {
 							title: {
 								display: true,
-								text: props.chartLabels.xAxisLabel
+								text: props.chartLabels.xAxisLabel,
+								font: {
+									size: 20
+								}
 							},
 							grid: {
 								display: false
+							},
+							ticks: {
+								font: {
+									size: 20
+								}
 							}
 						},
 					}
