@@ -14,6 +14,7 @@ import {
 import {InputRow} from "./Components/InputRow";
 import {Diagram} from "./Components/Diagram";
 import {GridRow} from "./Components/GridRow";
+import {ArrowRight} from "./Components/Icons";
 
 export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 	const startPercentage = 5;
@@ -430,12 +431,14 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 						{
 							showFirstContainer
 								? (
-									<span>
+									<span className="flex items-center gap-ch">
+										<ArrowRight />
 										{props.getLabelFor("label.disableDerivation")}
 									</span>
 								)
 								: (
-									<span>
+									<span className="flex items-center gap-ch">
+										<ArrowRight />
 										{props.getLabelFor("label.showDerivation")}
 									</span>
 								)
@@ -448,7 +451,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 
 					{
 						showSecondContainer &&
-							<div className="bg-light p-sm h-full grid grid-cols-2 gap-y-[10px]">
+							<div className="bg-light p-sm h-full grid grid-cols-2 gap-y-[10px] gap-ch">
 								<GridRow
 									label={props.getLabelFor("label.projectCost.numberOfCompressors")}
 									value={inputs.compressor_cylindersNumber + ""}
@@ -513,12 +516,14 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 						{
 							showSecondContainer
 								? (
-									<span>
+									<span className="flex items-center gap-ch">
+										<ArrowRight />
 										{props.getLabelFor("label.disableDerivation")}
 									</span>
 								)
 								: (
-									<span>
+									<span className="flex items-center gap-ch">
+										<ArrowRight />
 										{props.getLabelFor("label.showDerivation")}
 									</span>
 								)
@@ -561,7 +566,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 				{props.getLabelFor("label.disclaimer")}
 			</div>
 
-
+			{/*=================================== Kommt raus =================================================*/}
 			<br/>
 			<br/>
 			<hr/>
