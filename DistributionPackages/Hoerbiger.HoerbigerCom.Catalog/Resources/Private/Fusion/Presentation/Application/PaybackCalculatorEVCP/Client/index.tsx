@@ -8,7 +8,8 @@ import {
 	CompressorOperatingData,
 	CompressorOperatingDataTable,
 	InputFields,
-	Result
+	Result,
+	ValidationErrors
 } from "./Defintions";
 import {InputRow} from "./Components/InputRow";
 import {Diagram} from "./Components/Diagram";
@@ -56,8 +57,67 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 		paybackTimePerMonth: 0
 	});
 
+	const [hasErrors, setHasErrors] = React.useState<ValidationErrors>({
+		cost_dryNaturalGas: null,
+		cost_NGL: null,
+		compressor_annualOperationHours: null,
+		compressor_cylindersNumber: null,
+		compressor_nominalFlowRate: null,
+		compressor_outputIncrease:  null,
+	});
+
+	const validateFormElement = (element: string, value: number): boolean => {
+		let message: string | null = null;
+		switch (element) {
+		case "cost_dryNaturalGas":
+		case "cost_NGL":
+			if (value > 0 && value <= 99) {
+				message = null;
+			} else {
+				message = "Fehler: Wert muss zwischen 0 und 99 liegen";
+			}
+			break;
+		case "compressor_annualOperationHours":
+			if (value >= 1 && value <= 8760) {
+				message = null;
+			} else {
+				message = "Fehler: Wert muss zwischen 1 und 8760 liegen";
+			}
+			break;
+		case "compressor_cylindersNumber":
+			if (value >= 1 && value <= 10) {
+				message = null;
+			} else {
+				message = "Fehler: Wert muss zwischen 1 und 10 liegen";
+			}
+			break;
+		case "compressor_nominalFlowRate":
+			if (value > 0 && value <= 99) {
+				message = null;
+			} else {
+				message = "Fehler: Wert muss zwischen 0.01 und 99 liegen";
+			}
+			break;
+		case "compressor_outputIncrease":
+			if (value >= 5 && value <= 10) {
+				message = null;
+			} else {
+				message = "Fehler: Wert muss zwischen 5 und 10 liegen";
+			}
+
+			break;
+		}
+
+		setHasErrors(hasErrors => ({...hasErrors, [element]: message}));
+		return (message === null);
+	};
+
 	const handleInputChange = (value: string, name: string) => {
-		setInputs(values => ({...values, [name]: Number(value)}));
+		const isValid = validateFormElement(name, Number(value));
+
+		if (isValid) {
+			setInputs(values => ({...values, [name]: Number(value)}));
+		}
 	};
 
 	React.useEffect(() => {
@@ -172,6 +232,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									}}
 									inputName="compressor_annualOperationHours"
 									inputValue={inputs.compressor_annualOperationHours}
+									step="1"
+									min={1}
+									max={8760}
+									errorMessage={hasErrors.compressor_annualOperationHours}
 									getLabelFor={props.getLabelFor}
 									onChange={handleInputChange}
 								/>
@@ -186,6 +250,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									}}
 									inputName="compressor_cylindersNumber"
 									inputValue={inputs.compressor_cylindersNumber}
+									step="1"
+									min={1}
+									max={10}
+									errorMessage={hasErrors.compressor_cylindersNumber}
 									getLabelFor={props.getLabelFor}
 									onChange={handleInputChange}
 								/>
@@ -200,6 +268,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									}}
 									inputName="compressor_nominalFlowRate"
 									inputValue={inputs.compressor_nominalFlowRate}
+									step="0.01"
+									min={0.01}
+									max={99.00}
+									errorMessage={hasErrors.compressor_nominalFlowRate}
 									getLabelFor={props.getLabelFor}
 									onChange={handleInputChange}
 								/>
@@ -214,6 +286,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									}}
 									inputName="compressor_outputIncrease"
 									inputValue={inputs.compressor_outputIncrease}
+									step="0.1"
+									min={5.0}
+									max={10.0}
+									errorMessage={hasErrors.compressor_outputIncrease}
 									getLabelFor={props.getLabelFor}
 									onChange={handleInputChange}
 								/>
@@ -242,6 +318,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								}}
 								inputName="cost_dryNaturalGas"
 								inputValue={inputs.cost_dryNaturalGas}
+								step="0.01"
+								min={0.01}
+								max={99.0}
+								errorMessage={hasErrors.cost_dryNaturalGas}
 								getLabelFor={props.getLabelFor}
 								onChange={handleInputChange}
 							/>
@@ -255,6 +335,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								}}
 								inputName="cost_NGL"
 								inputValue={inputs.cost_NGL}
+								step="0.01"
+								min={0.01}
+								max={99.0}
+								errorMessage={hasErrors.cost_NGL}
 								getLabelFor={props.getLabelFor}
 								onChange={handleInputChange}
 							/>

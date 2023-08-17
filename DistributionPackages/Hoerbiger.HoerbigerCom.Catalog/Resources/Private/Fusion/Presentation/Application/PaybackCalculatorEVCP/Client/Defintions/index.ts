@@ -22,6 +22,10 @@ export interface InputRowParams {
 	label: string;
 	unit: string;
 	tooltip: Tooltip;
+	step: string;
+	min: number;
+	max: number;
+	errorMessage: string | null;
 	getLabelFor: LabelGetter;
 	onChange: (value: string, name: string) => void;
 }
@@ -119,4 +123,13 @@ export interface GridRowParams {
 	label: string;
 	value: string;
 	tooltip: string | null;
+}
+export interface ValidationErrors {
+	cost_dryNaturalGas: string | null,
+	cost_NGL: string | null
+
+	compressor_annualOperationHours: string | null;
+	compressor_cylindersNumber: string | null;
+	compressor_nominalFlowRate: string | null;
+	compressor_outputIncrease: string | null;
 }
