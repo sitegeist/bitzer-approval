@@ -91,7 +91,8 @@ module.exports = {
 			},
 			excite: {
 				DEFAULT: '#A89379',
-				contrast: '#fff'
+				contrast: '#fff',
+				transparent: 'rgb(168, 147, 121, .10)'
 			},
 			experience: {
 				DEFAULT: '#5E8AB4',

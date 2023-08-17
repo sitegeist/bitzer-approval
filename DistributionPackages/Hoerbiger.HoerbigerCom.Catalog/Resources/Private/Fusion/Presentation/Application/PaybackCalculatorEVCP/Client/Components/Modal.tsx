@@ -4,9 +4,9 @@ import cx from "classnames";
 
 import {ModalParams} from "../Defintions";
 
-export const Modal = (props: ModalParams) => {
+export const Modal: React.FC<ModalParams> = (props) => {
 	return (
-		<div className="fixed w-screen h-screen bg-[#A8937911] inset-0 z-50 grid place-items-center">
+		<div className="fixed w-screen h-screen bg-excite-transparent inset-0 z-50 grid place-items-center">
 			<div className="w-[400px] bg-light p-sm flex flex-col gap-ch justify-between shadow relative">
 				<div className="flex flex-col gap-ch">
 					<h3 className="font-sans-regular text-xl">What does &quot;{props.info.abbreviation}&quot; mean</h3>
