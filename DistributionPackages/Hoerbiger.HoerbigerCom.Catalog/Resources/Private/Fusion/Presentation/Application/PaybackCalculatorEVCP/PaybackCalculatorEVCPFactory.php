@@ -26,7 +26,7 @@ final class PaybackCalculatorEVCPFactory extends AbstractComponentPresentationOb
         return new PaybackCalculatorEVCP(
             $paybackCalculatorECVPNode->getProperty('headline') || $inBackend
                 ? new Headline(
-                    HeadlineSize::SIZE_MEDIUM_ITALIC,
+                    HeadlineSize::SIZE_LARGE,
                     HeadlineColor::COLOR_EXCITE,
                     HeadlineType::TYPE_H2,
                     Editable::fromNodeProperty($paybackCalculatorECVPNode, 'headline')

@@ -15,7 +15,7 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:Application.PaybackCalculatorEVCP) < pr
             <div>
                 <Hoerbiger.Shared:Block.Headline presentationObject={presentationObject.headline} @if.1={presentationObject.headline}/>
             </div>
-            <div data-select="applicationRoot"></div>
+            <div class="mt-xs" data-select="applicationRoot"></div>
         </div>
     `
 }

@@ -1,27 +1,41 @@
 import {ArrowRight} from "./Icons";
 import * as React from "react";
+import cx from "classnames";
+
 import {ModalParams} from "../Defintions";
 
 export const Modal = (props: ModalParams) => {
 	return (
 		<div className="fixed w-screen h-screen bg-[#A8937911] inset-0 z-50 grid place-items-center">
-			<div className="w-[300px] bg-light p-sm flex flex-col gap-ch justify-between">
-				<h3 className="font-bold text-xl">What does {props.info.abbreviation} mean</h3>
-				<p>{props.info.description}</p>
+			<div className="w-[400px] bg-light p-sm flex flex-col gap-ch justify-between shadow relative">
+				<div className="flex flex-col gap-ch">
+					<h3 className="font-sans-regular text-xl">What does &quot;{props.info.abbreviation}&quot; mean</h3>
+					<p className="capitalize">{props.info.description}</p>
+				</div>
 				{
 					(props.info.notice && props.info.link) &&
-						<div>
-							{props.info.notice}
-							<a href={props.info.link} target="blank">more informations</a>
+						<div className="flex flex-col gap-y-ch my-ch">
+							<p className="mb-ch">
+								{props.info.notice}
+							</p>
+
+							<a href={props.info.link} target="blank">
+								<span className="flex gap-x-ch items-center font-bold">
+									<ArrowRight />
+									more informations
+								</span>
+							</a>
 						</div>
 				}
 				<div
 					className="cursor-pointer font-bold"
 					onClick={props.onClick}
 				>
-					<div className="flex items-center gap-ch">
-						<ArrowRight />
-						Fenster schließen
+					<div className={cx(
+						"flex items-center gap-ch absolute top-0 right-0 p-ch w-touch h-touch",
+						"text-2xl text-excite"
+					)}>
+						&times;
 					</div>
 				</div>
 			</div>

@@ -22,8 +22,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 	const [hasDiagram, setHasDiagram] = React.useState<boolean>(false);
 	const [inputs, setInputs] = React.useState<InputFields>(props.inputFields);
 
-	const [showFirstContainer, setShowFirstContainer] = React.useState<boolean>(false);
-	const [showSecondContainer, setShowSecondContainer] = React.useState<boolean>(false);
+	const [showContainer, setShowContainer] = React.useState<boolean>(false);
 
 	const [calculations, setCalculations] = React.useState<Calculation>({
 		gasCompositionOfRawNaturalGasTotal: 0,
@@ -200,12 +199,8 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 		});
 	},[inputs]);
 
-	const toggleFirstContainer = () => {
-		setShowFirstContainer(!showFirstContainer);
-	};
-
-	const toggleSecondContainer = () => {
-		setShowSecondContainer(!showSecondContainer);
+	const toggleContainer = () => {
+		setShowContainer(!showContainer);
 	};
 
 	React.useEffect(() => {
@@ -215,11 +210,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 	return (
 		<div>
 			<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-sm">
-
 				{/* input Felder Linke Spalte */}
 				<div className="flex flex-col justify-between">
 					<div>
-						<div className="text-excite text-2xl font-sans-regular">
+						<div className="text-excite text-2xl font-sans-regular mb-xs">
 							{props.getLabelFor("label.headline.compressorOperatingData")}
 						</div>
 						<div>
@@ -299,7 +293,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 				{/* input Felder rechte Spalte */}
 				<div className="flex flex-col justify-between ">
 					<div>
-						<div className="text-excite text-2xl font-sans-regular">
+						<div className="text-excite text-2xl font-sans-regular mb-xs">
 							{props.getLabelFor("label.headline.naturalGasGathering")}
 						</div>
 						<div>
@@ -349,16 +343,16 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 			</div>
 
 
-			<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-sm my-sm">
-				{/* Herleitung linke Spalte */}
-				<div className="flex flex-col justify-between">
-					{
-						showFirstContainer &&
-							<div className="bg-light p-sm h-full">
+			{
+				showContainer &&
+					<div className="grid grid-cols-1 md:grid-cols-2 mt-sm">
+						{/* Herleitung linke Spalte */}
+						<div className="flex flex-col justify-between">
+							<div className="bg-light p-sm h-full flex flex-col gap-y-ch gap-x-sm">
 								<div className="text-excite text-2xl font-sans-regular">
 									{props.getLabelFor("label.headline.conversionFactors")}
 								</div>
-								<div className="grid grid-cols-2 gap-y-[10px]">
+								<div className="grid grid-cols-2 gap-ch mb-xs">
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.btu")}
 										value={props.calculationFields.unit_btu + " " + props.getLabelFor("label.unit.conversionFactor.btu")}
@@ -387,7 +381,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 										tooltip={null}
 									/>
 
-									<div className="col-span-2 font-sans-bold">
+									<div className="col-span-2 text-lg">
 										{props.getLabelFor("label.headline.gasComposition")}
 									</div>
 
@@ -406,7 +400,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<div className="text-excite text-2xl font-sans-regular">
 									{props.getLabelFor("label.headline.gasCompositionRaw")}
 								</div>
-								<div className="grid grid-cols-2">
+								<div className="grid grid-cols-2 gap-ch">
 									<GridRow
 										label={props.getLabelFor("label.addRevenues.dryNaturalGas")}
 										value={props.calculationFields.composition_dryNaturalGas + " " + props.getLabelFor("label.unit.addRevenues.dryNaturalGas")}
@@ -423,7 +417,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 										tooltip={null}
 									/>
 
-									<div className="col-span-2 font-sans-bold">
+									<div className="col-span-2 text-lg">
 										{props.getLabelFor("label.headline.gasComposition")}
 									</div>
 
@@ -434,114 +428,93 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									/>
 								</div>
 							</div>
-					}
+						</div>
 
-					<div
-						className="font-sans-regular text-lg py-xs cursor-pointer"
-						onClick={toggleFirstContainer}
-					>
-						{
-							showFirstContainer
-								? (
-									<span className="flex items-center gap-ch">
-										<ArrowRight />
-										{props.getLabelFor("label.disableDerivation")}
-									</span>
-								)
-								: (
-									<span className="flex items-center gap-ch">
-										<ArrowRight />
-										{props.getLabelFor("label.showDerivation")}
-									</span>
-								)
-						}
-					</div>
-				</div>
+						{/* Herleitung rechte Spalte */}
+						<div className="flex flex-col justify-between">
+							<div className="flex flex-col gap-y-sm p-sm bg-light">
+								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
+									<GridRow
+										label={props.getLabelFor("label.projectCost.numberOfCompressors")}
+										value={inputs.compressor_cylindersNumber + ""}
+										tooltip={null}
+									/>
+								</div>
+								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
+									<GridRow
+										label={props.getLabelFor("label.projectCost.actuators")}
+										value={props.calculationFields.cost_actuators + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
+									<GridRow
+										label={props.getLabelFor("label.projectCost.localPanel")}
+										value={props.calculationFields.cost_localPanel + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
+									<GridRow
+										label={props.getLabelFor("label.projectCost.installation")}
+										value={props.calculationFields.cost_installation + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
 
-				{/* Herleitung rechte Spalte */}
-				<div className="flex flex-col justify-between">
+									<GridRow
+										label={props.getLabelFor("label.projectCost.subTotal")}
+										value={calculations.projectCostSubtotalEVCP + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
+								</div>
+								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
+									<GridRow
+										label={props.getLabelFor("label.projectCost.generalSubtotal")}
+										value={props.calculationFields.cost_generalSubtotal + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
+									<GridRow
+										label={props.getLabelFor("label.projectCost.scheduleAndControl")}
+										value={props.calculationFields.cost_scheduleAndControl + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
+									<GridRow
+										label={props.getLabelFor("label.projectCost.customerIntegration")}
+										value={props.calculationFields.cost_customerIntegration + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
 
-					{
-						showSecondContainer &&
-							<div className="bg-light p-sm h-full grid grid-cols-2 gap-y-[10px] gap-ch">
-								<GridRow
-									label={props.getLabelFor("label.projectCost.numberOfCompressors")}
-									value={inputs.compressor_cylindersNumber + ""}
-									tooltip={null}
-								/>
-								<GridRow
-									label={props.getLabelFor("label.projectCost.actuators")}
-									value={props.calculationFields.cost_actuators + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
-								<GridRow
-									label={props.getLabelFor("label.projectCost.localPanel")}
-									value={props.calculationFields.cost_localPanel + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
-								<GridRow
-									label={props.getLabelFor("label.projectCost.installation")}
-									value={props.calculationFields.cost_installation + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
+									<GridRow
+										label={props.getLabelFor("label.projectCost.commission")}
+										value={props.calculationFields.cost_commission + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
 
-								<GridRow
-									label={props.getLabelFor("label.projectCost.subTotal")}
-									value={calculations.projectCostSubtotalEVCP + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
-
-								<GridRow
-									label={props.getLabelFor("label.projectCost.generalSubtotal")}
-									value={props.calculationFields.cost_generalSubtotal + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
-								<GridRow
-									label={props.getLabelFor("label.projectCost.scheduleAndControl")}
-									value={props.calculationFields.cost_scheduleAndControl + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
-								<GridRow
-									label={props.getLabelFor("label.projectCost.customerIntegration")}
-									value={props.calculationFields.cost_customerIntegration + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
-
-								<GridRow
-									label={props.getLabelFor("label.projectCost.commission")}
-									value={props.calculationFields.cost_commission + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
-
-								<GridRow
-									label={props.getLabelFor("label.projectCost.total")}
-									value={calculations.projectCostTotal + " " + props.getLabelFor("label.unit.dollar")}
-									tooltip={null}
-								/>
+									<GridRow
+										label={props.getLabelFor("label.projectCost.total")}
+										value={calculations.projectCostTotal + " " + props.getLabelFor("label.unit.dollar")}
+										tooltip={null}
+									/>
+								</div>
 							</div>
-					}
-
-					<div
-						className="font-sans-regular text-lg py-xs cursor-pointer"
-						onClick={toggleSecondContainer}
-					>
-						{
-							showSecondContainer
-								? (
-									<span className="flex items-center gap-ch">
-										<ArrowRight />
-										{props.getLabelFor("label.disableDerivation")}
-									</span>
-								)
-								: (
-									<span className="flex items-center gap-ch">
-										<ArrowRight />
-										{props.getLabelFor("label.showDerivation")}
-									</span>
-								)
-						}
+						</div>
 					</div>
-				</div>
+			}
+			<div
+				className="font-sans-bold text-lg py-xs cursor-pointer"
+				onClick={toggleContainer}
+			>
+				{
+					showContainer
+						? (
+							<span className="flex items-center gap-ch">
+								<ArrowRight />
+								{props.getLabelFor("label.disableDerivation")}
+							</span>
+						)
+						: (
+							<span className="flex items-center gap-ch">
+								<ArrowRight />
+								{props.getLabelFor("label.showDerivation")}
+							</span>
+						)
+				}
 			</div>
 
 			{/* Diagram */}
@@ -576,216 +549,6 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 			</div>
 			<div className="w-full font-sans-light text-sm">
 				{props.getLabelFor("label.disclaimer")}
-			</div>
-
-			{/*=================================== Kommt raus =================================================*/}
-			<br/>
-			<br/>
-			<hr/>
-			<br/>
-			<br/>
-
-
-
-			Hello World ... PaybackCalculatorEVCP React Application {props.getLabelFor("cost_dryNaturalGas")}
-
-			<div>
-				Part 1:
-				<div>
-					Price dry natural gas:	{props.inputFields.cost_dryNaturalGas}	$ per MMBTU
-
-				</div>
-				<div>
-					Price NGL composite:	{props.inputFields.cost_NGL}	$ per MMBTU
-
-				</div>
-			</div>
-
-			<br/>
-			<br/>
-			<hr/>
-			<br/>
-			<br/>
-
-			<div>
-				Part 2:
-				<div>Compressor operating data:</div>
-				<div>
-
-				</div>
-				<div>
-
-				</div>
-				<div>
-
-				</div>
-				<div>
-
-				</div>
-				<div>-----</div>
-				<div>
-					in standard cubic feet	0,49	MMSCFD
-					<div className="text-[green]">
-						{calculations.compressorOperatingData.standardCubicFeet}
-					</div>
-				</div>
-				<div>
-					in heating value	505	MMBTU per day
-					<div className="text-[green]">
-						{calculations.compressorOperatingData.heatingValue}
-					</div>
-				</div>
-
-				<br/>
-				<hr/>
-				<br/>
-				<br/>
-
-				<div>
-					Part 3:
-					Additional revenues per day
-					<div>
-						Dry natural gas:	1175	$ per day
-						<div className="text-[green]">
-							{calculations.additionalRevenue.dryNaturalGas}
-						</div>
-					</div>
-					<div>
-						NGL:	307	$ per day
-						<div className="text-[green]">
-							{calculations.additionalRevenue.NGL}
-						</div>
-					</div>
-					<div>
-						Total	1482	$ per day
-						<div className="text-[green]">
-							{calculations.additionalRevenue.total}
-						</div>
-					</div>
-
-				</div>
-
-				<br/>
-				<hr/>
-				<br/>
-				<br/>
-
-				<div>
-					Part 4:
-					Project costs for end-user for one compressor:
-					<div>
-						Total number of eVCPs per compressor	<div className="text-[green]">{inputs.compressor_cylindersNumber}</div>
-					</div>
-
-					<div>
-						eVCP actuators per piece	<div className="text-[green]">{props.calculationFields.cost_actuators}</div>
-					</div>
-					<div>
-						Local panel per eVCP	<div className="text-[green]">{props.calculationFields.cost_localPanel}</div>
-					</div>
-					<div>
-						Cabling, labour mechanical and electrical  installation	<div className="text-[green]">{props.calculationFields.cost_installation}</div>
-					</div>
-
-					<div>
-						Subtotal per eVCP	141000
-						<div className="text-[green]">
-							{calculations.projectCostSubtotalEVCP}
-						</div>
-					</div>
-
-					<div>
-						Subtotal for total number of eVCPs	<div className="text-[green]">{props.calculationFields.cost_generalSubtotal}</div>
-					</div>
-
-					<div>
-						Technical clarification meeting , development of control scheme and compressor loading shedule	<div className="text-[green]">{props.calculationFields.cost_scheduleAndControl}</div>
-					</div>
-					<div>
-						Integration into customer control system	<div className="text-[green]">{props.calculationFields.cost_customerIntegration}</div>
-					</div>
-					<div>
-						Commissioning / start-up services	<div className="text-[green]">{props.calculationFields.cost_commission}</div>
-					</div>
-
-					<div>
-						Total	324000
-						<div className="text-[green]">
-							{calculations.projectCostTotal}
-						</div>
-					</div>
-				</div>
-
-
-				<br/>
-				<hr/>
-				<br/>
-				<br/>
-
-				<div>
-					Part 5:
-					{
-						calculations.compressorOperatingDataTable &&
-						Object.entries(calculations.compressorOperatingDataTable).map(([key, value]) => (
-							<div
-								key={key}
-							>
-								<span>{value.percentage} Prozente   </span>
-								<span >standard cubic fee: <span className="text-[green]">{value.standardCubicFeet}   </span></span>
-								<span>heating value: <span className="text-[green]">{value.heatingValue}</span></span>
-							</div>
-						))
-					}
-				</div>
-
-
-				<br/>
-				<hr/>
-				<br/>
-				<br/>
-
-				<div>
-					Part 6:
-					{
-						calculations.additionalRevenueTable &&
-						Object.entries(calculations.additionalRevenueTable).map(([key, value]) => (
-							<div
-								key={key}
-							>
-								<span>{value.percentage} Prozente </span>
-								<span>dry natural gas: <span className="text-[green]">{value.dryNaturalGas}   </span></span>
-								<span>NGL: <span className="text-[green]">{value.NGL}</span></span>
-								<span>total: <span className="text-[green]">{value.total}</span></span>
-							</div>
-						))
-					}
-				</div>
-
-				<br/>
-				<hr/>
-				<br/>
-				<br/>
-
-				<div>
-					Part 7:
-					{
-						calculations.calculationResult &&
-							<div>
-								{
-									Object.entries(calculations.calculationResult).map(([key, value]) => (
-										<div
-											key={key}
-										>
-											<span>{value.percentage} Prozente </span>
-											<span>Additional revenue per day [USD]: <span className="text-[green]">{value.additionalRevenuePerDay}   </span></span>
-											<span>Additional revenue per year [USD]: <span className="text-[green]">{value.additionalRevenuePerYear}</span></span>
-											<span>Payback time [months]: <span className="text-[green]">{value.paybackTime}</span></span>
-										</div>
-									))
-								}
-							</div>
-					}
-				</div>
 			</div>
 		</div>
 	);

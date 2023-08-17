@@ -24,7 +24,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 		)}>
 			<div className={cx(
 				"font-bold",
-				props.errorMessage && "text-[red]"
+				props.errorMessage && "self-start"
 			)}>
 				{props.label}
 			</div>
@@ -38,7 +38,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 							name={props.inputName}
 							type="number"
 							value={props.inputValue ?? 0}
-							className="bg-light focus:outline-brand w-[72px] text-right border border-[#C0C0C0]"
+							className="bg-light focus:outline-brand w-[72px] text-right border border-[#C0C0C0] pr-ch lg:pr-0"
 							step={props.step}
 							min={props.min}
 							max={props.max}
