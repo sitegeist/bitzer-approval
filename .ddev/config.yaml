@@ -21,7 +21,7 @@ hooks:
   post-start:
   - exec: sudo echo alias ll=\"ls -lhA\" >> ~/.bashrc
   - exec: bash -c 'cat /etc/custom-config/ssh-config.txt >> ~/.ssh/config'
-omit_containers: [dba]
+omit_containers: []
 timezone: Europe/Berlin
 webimage_extra_packages: [poppler-utils]
 use_dns_when_possible: true
@@ -34,6 +34,7 @@ web_environment:
 - DISPLAY_NAME=Admin Admin
 - e-mail=admin@sitegeist.de
 - REMOTE_USER=admin
+- NODE_OPTIONS=--openssl-legacy-provider
 
 
 # This config.yaml was created with ddev version v1.18.0-alpha4
