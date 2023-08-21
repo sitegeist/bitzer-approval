@@ -209,7 +209,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 
 	return (
 		<div>
-			<div className="grid grid-cols-1 md:grid-cols-2 md:gap-x-sm">
+			<div className="grid grid-cols-1 md:grid-cols-2 gap-y-sm md:gap-y-0 md:gap-x-sm">
 				{/* input Felder Linke Spalte */}
 				<div className="flex flex-col justify-between">
 					<div>

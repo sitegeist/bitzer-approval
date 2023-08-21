@@ -32,7 +32,7 @@ export const Modal: React.FC<ModalParams> = (props) => {
 					onClick={props.onClick}
 				>
 					<div className={cx(
-						"flex items-center gap-ch absolute top-0 right-0 p-[10px] w-touch h-touch",
+						"flex items-center justify-center gap-ch absolute top-0 right-0 md:top-[10px] md:right-[10px] p-[10px] w-touch h-touch",
 						"text-2xl text-excite"
 					)}>
 						<CloseBox />
