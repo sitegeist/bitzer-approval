@@ -44,6 +44,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 			five: {percentage: 0, dryNaturalGas: 0, NGL: 0, total: 0},
 		},
 		projectCostSubtotalEVCP: 0,
+		projectCostSubtotalForNumberOfEVCP: 0,
 		projectCostTotal: 0,
 		calculationResult: {
 			0: {
@@ -133,7 +134,8 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 		const total = dryNaturalGas + NGL;
 
 		const projectCostSubtotalEVCP = props.calculationFields.cost_actuators + props.calculationFields.cost_localPanel + props.calculationFields.cost_installation;
-		const projectCostTotal = props.calculationFields.cost_generalSubtotal + props.calculationFields.cost_scheduleAndControl + props.calculationFields.cost_customerIntegration + props.calculationFields.cost_commission;
+		const projectCostSubtotalForNumberOfEVCP = projectCostSubtotalEVCP * inputs.compressor_cylindersNumber;
+		const projectCostTotal = projectCostSubtotalForNumberOfEVCP + props.calculationFields.cost_scheduleAndControl + props.calculationFields.cost_customerIntegration + props.calculationFields.cost_commission;
 
 		const compressorOperatingDataTable: CompressorOperatingDataTable = {};
 
@@ -192,6 +194,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 			},
 			additionalRevenueTable,
 			projectCostSubtotalEVCP,
+			projectCostSubtotalForNumberOfEVCP,
 			projectCostTotal,
 			calculationResult,
 			paybackTimePerDay,
@@ -472,7 +475,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
 									<GridRow
 										label={props.getLabelFor("label.projectCost.generalSubtotal")}
-										value={props.calculationFields.cost_generalSubtotal + " " + props.getLabelFor("label.unit.dollar")}
+										value={calculations.projectCostSubtotalForNumberOfEVCP + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 									<GridRow

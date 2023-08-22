@@ -150,18 +150,6 @@
         'Neos.Neos/Validation/IntegerValidator': {}
         'Neos.Neos/Validation/NotEmptyValidator': {}
 
-    const_cost_generalSubtotal:
-      type: integer
-      defaultValue: 282000
-      ui:
-        label: 'Subtotal for total number of eVCPs ($)'
-        reloadPageIfChanged: true
-        inspector:
-          group: calculationFactors
-      validation:
-        'Neos.Neos/Validation/IntegerValidator': {}
-        'Neos.Neos/Validation/NotEmptyValidator': {}
-
     const_cost_scheduleAndControl:
       type: integer
       defaultValue: 8000

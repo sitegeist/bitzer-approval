@@ -64,7 +64,6 @@ export interface CalculationFields {
 	cost_localPanel: number;
 	cost_installation: number;
 
-	cost_generalSubtotal: number;
 	cost_scheduleAndControl: number;
 	cost_customerIntegration: number;
 	cost_commission: number;
@@ -77,6 +76,7 @@ export interface Calculation {
 	additionalRevenue: AdditionalRevenue;
 	additionalRevenueTable: AdditionalRevenueTable;
 	projectCostSubtotalEVCP: number;
+	projectCostSubtotalForNumberOfEVCP: number;
 	projectCostTotal: number;
 	calculationResult: CalculationResult;
 	paybackTimePerDay: number;
