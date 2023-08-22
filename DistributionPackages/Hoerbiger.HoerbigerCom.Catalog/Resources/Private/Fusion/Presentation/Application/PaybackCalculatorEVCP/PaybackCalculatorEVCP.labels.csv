@@ -80,9 +80,9 @@ error.message.nominalFlowRate,"Fehler: Wert muss zwischen 0.01 und 99 liegen","F
 error.message.outputIncrease,"Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen"
 
 abbreviation.btu,"BTU","BTU","BTU"
-abbreviation.mmbtu,"MMTBU","MMTBU","MMTBU"
+abbreviation.mmbtu,"MMBTU","MMBTU","MMBTU"
 abbreviation.mmscfd,"MMSCFD","MMSCFD","MMSCFD"
-abbreviation.ngl,"NGL,"NGL,"NGL
+abbreviation.ngl,"NGL","NGL","NGL"
 abbreviation.vvcp,"VVCP","VVCP","VVCP"
 
 description.btu,"British thermal unit","British thermal unit","British thermal unit"

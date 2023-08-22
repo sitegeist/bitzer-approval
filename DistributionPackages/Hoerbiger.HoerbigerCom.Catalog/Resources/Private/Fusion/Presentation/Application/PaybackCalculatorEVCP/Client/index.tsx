@@ -318,7 +318,13 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 
 							<InputRow
 								label={props.getLabelFor("label.prices.NGL")}
-								unit={props.getLabelFor("label.prices.NGL")}
+								unit={props.getLabelFor("label.unit.prices.NGL")}
+								labelTooltip={{
+									abbreviation: props.getLabelFor("abbreviation.ngl"),
+									description: props.getLabelFor("description.ngl"),
+									notice: null,
+									link: null,
+								}}
 								tooltip={{
 									abbreviation: props.getLabelFor("abbreviation.mmbtu"),
 									description: props.getLabelFor("description.mmbtu"),

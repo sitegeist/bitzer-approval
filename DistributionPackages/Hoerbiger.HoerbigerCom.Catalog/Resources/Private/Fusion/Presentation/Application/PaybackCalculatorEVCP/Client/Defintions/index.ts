@@ -21,6 +21,7 @@ export interface InputRowParams {
 	inputValue: number|null;
 	label: string;
 	unit: string;
+	labelTooltip?: ModalInformations | null;
 	tooltip: ModalInformations | null;
 	step: string;
 	min: number;

@@ -12,9 +12,14 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 	};
 
 	const [modalIsOpen, setModalIsOpen] = React.useState<boolean>(false);
+	const [labelModalIsOpen, setLabelModalIsOpen] = React.useState<boolean>(false);
 
 	const handleTooltip = () => {
 		setModalIsOpen(true);
+	};
+
+	const handleLabelTooltip = () => {
+		setLabelModalIsOpen(true);
 	};
 
 	return (
@@ -23,10 +28,17 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 			"border-b-[1px] border-light-contrast py-ch"
 		)}>
 			<div className={cx(
-				"font-bold",
+				"font-bold flex items-center gap-ch",
 				props.errorMessage && "self-start"
 			)}>
 				{props.label}
+
+				{
+					props.labelTooltip &&
+						<div onClick={handleLabelTooltip} className="cursor-pointer">
+							<InfoIcon />
+						</div>
+				}
 			</div>
 			<div className={cx(
 				"flex flex-col",
@@ -67,6 +79,13 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 					<Modal
 						info={props.tooltip}
 						onClick={() => setModalIsOpen(false)}
+					/>
+			}
+			{
+				(labelModalIsOpen && props.labelTooltip) &&
+					<Modal
+						info={props.labelTooltip}
+						onClick={() => setLabelModalIsOpen(false)}
 					/>
 			}
 		</div>
