@@ -56,7 +56,6 @@ final class PaybackCalculatorEVCPFactory extends AbstractComponentPresentationOb
                     'cost_localPanel' => $paybackCalculatorECVPNode->getProperty('const_cost_localPanel'),
                     'cost_installation' => $paybackCalculatorECVPNode->getProperty('const_cost_installation'),
 
-                    'cost_generalSubtotal' => $paybackCalculatorECVPNode->getProperty('const_cost_generalSubtotal'),
                     'cost_scheduleAndControl' => $paybackCalculatorECVPNode->getProperty('const_cost_scheduleAndControl'),
                     'cost_customerIntegration' => $paybackCalculatorECVPNode->getProperty('const_cost_customerIntegration'),
                     'cost_commission' => $paybackCalculatorECVPNode->getProperty('const_cost_commission'),
