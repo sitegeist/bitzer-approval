@@ -22,6 +22,10 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 		setLabelModalIsOpen(true);
 	};
 
+	const handleFocus = (e: React.MouseEvent<HTMLInputElement>) => {
+		e.currentTarget.select();
+	};
+
 	return (
 		<div className={cx(
 			"grid grid-cols-2 items-center min-h-touch gap-ch",
@@ -55,6 +59,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 							min={props.min}
 							max={props.max}
 							onChange={onChange}
+							onClick={handleFocus}
 						/>
 					</div>
 					<span>

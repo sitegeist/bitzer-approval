@@ -116,12 +116,20 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 	const handleInputChange = (value: string, name: string) => {
 		const isValid = validateFormElement(name, Number(value));
 
-		if (isValid) {
-			setInputs(values => ({...values, [name]: Number(value)}));
-		}
+		setInputs(values => ({...values, [name]: Number(value)}));
 	};
 
 	React.useEffect(() => {
+		let isValid = true;
+
+		Object.values(hasErrors).forEach((value) => {
+			if (value) {
+				isValid = false;
+			}
+		});
+
+		if (!isValid) return;
+
 		setHasDiagram(false);
 
 		const gasCompositionOfRawNaturalGasTotal = props.calculationFields.composition_dryNaturalGas + props.calculationFields.composition_NGL + props.calculationFields.composition_others;
