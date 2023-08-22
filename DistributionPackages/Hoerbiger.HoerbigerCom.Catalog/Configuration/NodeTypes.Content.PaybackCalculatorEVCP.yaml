@@ -20,7 +20,7 @@
       defaultValue: 1.055
       ui:
         label: '1 Btu (kJ)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -32,7 +32,7 @@
       defaultValue: 1.055
       ui:
         label: '1 MMBtu (million) (GJ)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -44,7 +44,7 @@
       defaultValue: 0.0283
       ui:
         label: '1 scf, standard cubic feet (Nm3/h)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -56,7 +56,7 @@
       defaultValue: 1030
       ui:
         label: 'Average heating value for 1scf natural gas (BTU)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -70,7 +70,7 @@
         label: 'Gas composition - Dry natural gas (%)'
         help:
           message: "Gas composition of raw natural gas: (typical)"
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -85,7 +85,7 @@
       defaultValue: 10
       ui:
         label: 'Gas composition - NGL (%)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -100,7 +100,7 @@
       defaultValue: 10
       ui:
         label: 'Gas composition - Others (%)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -117,7 +117,7 @@
         label: 'eVCP actuators per piece ($)'
         help:
           message: "Project costs for end-user for one compressor:"
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -129,7 +129,7 @@
       defaultValue: 8000
       ui:
         label: 'Local panel per eVCP ($)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -143,7 +143,7 @@
         label: 'installation ($)'
         help:
           message: "Cabling, labour mechanical and electrical installation"
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -155,7 +155,7 @@
       defaultValue: 282000
       ui:
         label: 'Subtotal for total number of eVCPs ($)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -169,7 +169,7 @@
         label: 'Technical meeting, Schedule and control ($)'
         help:
           message: "Technical clarification meeting , development of control scheme and compressor loading shedule"
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -181,7 +181,7 @@
       defaultValue: 20000
       ui:
         label: 'Integration into customer control system ($)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -193,7 +193,7 @@
       defaultValue: 14000
       ui:
         label: 'Commissioning / start-up services ($)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: calculationFactors
       validation:
@@ -205,7 +205,7 @@
       defaultValue: 2.91
       ui:
         label: 'Price dry natural gas ($ $ per MMBTU)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: inputDefaults
       validation:
@@ -217,7 +217,7 @@
       defaultValue: 6.08
       ui:
         label: 'Price NGL composite ($ $ per MMBTU)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: inputDefaults
       validation:
@@ -229,7 +229,7 @@
       defaultValue: 8000
       ui:
         label: 'Annual operating hours (hours)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: inputDefaults
       validation:
@@ -241,7 +241,7 @@
       defaultValue: 2
       ui:
         label: 'Number of 1st stage cylinders (pcs)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: inputDefaults
       validation:
@@ -253,7 +253,7 @@
       defaultValue: 7
       ui:
         label: 'Compressor nominal flow rate without eVCP (MMSCFD)'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: inputDefaults
       validation:
@@ -265,7 +265,7 @@
       defaultValue: 7
       ui:
         label: 'Increase of output thanks to eVCP'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: inputDefaults
       validation:
