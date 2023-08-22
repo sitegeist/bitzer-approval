@@ -51,7 +51,6 @@ label.unit.dollar,"$","$","$"
 label.showDerivation,"Herleitung anzeigen","Herleitung anzeigen","Herleitung anzeigen"
 label.disableDerivation,"Herleitung verbergen","Herleitung verbergen","Herleitung verbergen"
 
-
 label.compressor.annualOperatingHours,"Annual operating hours","Annual operating hours","Annual operating hours"
 label.compressor.cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders","Number of 1st stage cylinders"
 label.compressor.nominalFlowRate,"Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP"
@@ -73,11 +72,11 @@ label.chart.yLeftLabel,"Additional revenue per year in USD","Additional revenue 
 label.chart.yRightLabel,"Payback time in months","Payback time in months","Payback time in months"
 
 error.message.cost,"Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen"
-
 error.message.annualOperationHours,"Fehler: Wert muss zwischen 1 und 8760 liegen","Fehler: Wert muss zwischen 1 und 8760 liegen","Fehler: Wert muss zwischen 1 und 8760 liegen"
 error.message.cylindersNumber,"Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen"
 error.message.nominalFlowRate,"Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen"
 error.message.outputIncrease,"Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen"
+error.message.noDiagram,"A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries"
 
 abbreviation.btu,"BTU","BTU","BTU"
 abbreviation.mmbtu,"MMBTU","MMBTU","MMBTU"

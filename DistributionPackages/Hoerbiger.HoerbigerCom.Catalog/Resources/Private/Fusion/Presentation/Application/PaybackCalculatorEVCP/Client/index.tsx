@@ -540,28 +540,35 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 			{/* Diagram */}
 			<div className="w-full">
 				{
-					(calculations.calculationResult && hasDiagram) &&
-						<Diagram
-							applicationRoot={props.applicationRoot}
-							chartLabels={{
-								chartTitle: props.getLabelFor("label.chart.title"),
-								barChartLabel: props.getLabelFor("label.chart.barChartLabel"),
-								lineChartLabel: props.getLabelFor("label.chart.lineChartLabel"),
-								xAxisLabel: props.getLabelFor("label.chart.xAxisLabel"),
-								yLeftLabel: props.getLabelFor("label.chart.yLeftLabel"),
-								yRightLabel: props.getLabelFor("label.chart.yRightLabel"),
-							}}
-							xAxisData={Object.values(calculations.calculationResult).map((option) => (
-								option.percentage + "%"
-							))}
-							barChartData={Object.values(calculations.calculationResult).map((option) => (
-								option.additionalRevenuePerYear
-							))}
-							lineChartData={Object.values(calculations.calculationResult).map((option) => (
-								option.paybackTime
-							))}
-							getLabelFor={props.getLabelFor}
-						/>
+					(calculations.calculationResult && hasDiagram)
+						? (
+							<Diagram
+								applicationRoot={props.applicationRoot}
+								chartLabels={{
+									chartTitle: props.getLabelFor("label.chart.title"),
+									barChartLabel: props.getLabelFor("label.chart.barChartLabel"),
+									lineChartLabel: props.getLabelFor("label.chart.lineChartLabel"),
+									xAxisLabel: props.getLabelFor("label.chart.xAxisLabel"),
+									yLeftLabel: props.getLabelFor("label.chart.yLeftLabel"),
+									yRightLabel: props.getLabelFor("label.chart.yRightLabel"),
+								}}
+								xAxisData={Object.values(calculations.calculationResult).map((option) => (
+									option.percentage + "%"
+								))}
+								barChartData={Object.values(calculations.calculationResult).map((option) => (
+									option.additionalRevenuePerYear
+								))}
+								lineChartData={Object.values(calculations.calculationResult).map((option) => (
+									option.paybackTime
+								))}
+								getLabelFor={props.getLabelFor}
+							/>
+						)
+						: (
+							<div className="font-sans-bold text-[red]">
+								{props.getLabelFor("error.message.noDiagram")}
+							</div>
+						)
 				}
 			</div>
 			<div className="w-full font-sans-light py-xs text-sm">
