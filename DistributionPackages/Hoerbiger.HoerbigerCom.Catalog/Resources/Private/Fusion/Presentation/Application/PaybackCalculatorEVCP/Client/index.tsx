@@ -151,7 +151,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 		const compressorOperatingDataTable: CompressorOperatingDataTable = {};
 
 		for (let i = 0; i < duration; i++) {
-			const tmp = props.inputFields.compressor_nominalFlowRate * (startPercentage + i) / 100;
+			const tmp = inputs.compressor_nominalFlowRate * (startPercentage + i) / 100;
 			compressorOperatingDataTable[startPercentage + i] = {
 				percentage: startPercentage + i,
 				standardCubicFeet: tmp,
