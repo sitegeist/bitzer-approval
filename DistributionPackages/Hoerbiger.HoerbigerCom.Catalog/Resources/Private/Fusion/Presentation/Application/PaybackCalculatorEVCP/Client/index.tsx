@@ -116,6 +116,9 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 	const handleInputChange = (value: string, name: string) => {
 		const isValid = validateFormElement(name, Number(value));
 
+		if (!isValid) {
+			setHasDiagram(false);
+		}
 		setInputs(values => ({...values, [name]: Number(value)}));
 	};
 
