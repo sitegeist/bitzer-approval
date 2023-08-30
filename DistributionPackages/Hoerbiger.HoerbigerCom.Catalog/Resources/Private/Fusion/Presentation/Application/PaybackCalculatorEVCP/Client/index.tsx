@@ -284,7 +284,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							<div>
 								<InputRow
 									label={props.getLabelFor("label.compressor.outputIncrease")}
-									unit=""
+									unit={props.getLabelFor("label.unit.percentage")}
 									tooltip={null}
 									inputName="compressor_outputIncrease"
 									inputValue={inputs.compressor_outputIncrease}

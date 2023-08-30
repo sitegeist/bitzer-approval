@@ -47,9 +47,10 @@ label.projectCost.commission,"Commissioning / start-up services","Commissioning 
 label.projectCost.total,"Total","Total","Total"
 
 label.unit.dollar,"$","$","$"
+label.unit.percentage,"%","%","%"
 
-label.showDerivation,"Herleitung anzeigen","Herleitung anzeigen","Herleitung anzeigen"
-label.disableDerivation,"Herleitung verbergen","Herleitung verbergen","Herleitung verbergen"
+label.showDerivation,"show details","Herleitung anzeigen","show details"
+label.disableDerivation,"hide details","Herleitung verbergen","hide details"
 
 label.compressor.annualOperatingHours,"Annual operating hours","Annual operating hours","Annual operating hours"
 label.compressor.cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders","Number of 1st stage cylinders"
