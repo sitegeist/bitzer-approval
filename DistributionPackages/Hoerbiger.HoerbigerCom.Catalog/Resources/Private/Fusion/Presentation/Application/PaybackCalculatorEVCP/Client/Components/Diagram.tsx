@@ -158,7 +158,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 	}, []);
 
 	return (
-		<div data-select="diagram">
+		<div data-select="diagram" className="h-[500px]">
 			<canvas
 				ref={chartRef}
 				className="h-[500px]"

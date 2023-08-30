@@ -15,6 +15,7 @@ import {InputRow} from "./Components/InputRow";
 import {Diagram} from "./Components/Diagram";
 import {GridRow} from "./Components/GridRow";
 import {ArrowRight} from "./Components/Icons";
+import cx from "classnames";
 
 export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 	const startPercentage = 5;
@@ -298,10 +299,6 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							</div>
 						</div>
 					</div>
-
-					{/*<div className="text-[red] h-touch border-b-[1px] border-[red] flex items-center">*/}
-					{/*	payback time: {calculations.paybackTimePerMonth}*/}
-					{/*</div>*/}
 				</div>
 
 				{/* input Felder rechte Spalte */}
@@ -356,9 +353,6 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							/>
 						</div>
 					</div>
-					{/*<div className="text-[red] h-touch border-b-[1px] border-[red] flex items-center">*/}
-					{/*	Additional revenues per day {calculations.additionalRevenue.total}*/}
-					{/*</div>*/}
 				</div>
 			</div>
 
@@ -540,28 +534,74 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 				{
 					(calculations.calculationResult && hasDiagram)
 						? (
-							<Diagram
-								selectedIncrease={Math.round(inputs.compressor_outputIncrease)}
-								applicationRoot={props.applicationRoot}
-								chartLabels={{
-									chartTitle: props.getLabelFor("label.chart.title"),
-									barChartLabel: props.getLabelFor("label.chart.barChartLabel"),
-									lineChartLabel: props.getLabelFor("label.chart.lineChartLabel"),
-									xAxisLabel: props.getLabelFor("label.chart.xAxisLabel"),
-									yLeftLabel: props.getLabelFor("label.chart.yLeftLabel"),
-									yRightLabel: props.getLabelFor("label.chart.yRightLabel"),
-								}}
-								xAxisData={Object.values(calculations.calculationResult).map((option) => (
-									option.percentage + "%"
-								))}
-								barChartData={Object.values(calculations.calculationResult).map((option) => (
-									Math.round(option.additionalRevenuePerYear)
-								))}
-								lineChartData={Object.values(calculations.calculationResult).map((option) => (
-									Math.round(option.paybackTime)
-								))}
-								getLabelFor={props.getLabelFor}
-							/>
+							<div>
+								<div className="hidden sm:block h-[500px]">
+									<Diagram
+										selectedIncrease={Math.round(inputs.compressor_outputIncrease)}
+										applicationRoot={props.applicationRoot}
+										chartLabels={{
+											chartTitle: props.getLabelFor("label.chart.title"),
+											barChartLabel: props.getLabelFor("label.chart.barChartLabel"),
+											lineChartLabel: props.getLabelFor("label.chart.lineChartLabel"),
+											xAxisLabel: props.getLabelFor("label.chart.xAxisLabel"),
+											yLeftLabel: props.getLabelFor("label.chart.yLeftLabel"),
+											yRightLabel: props.getLabelFor("label.chart.yRightLabel"),
+										}}
+										xAxisData={Object.values(calculations.calculationResult).map((option) => (
+											option.percentage + "%"
+										))}
+										barChartData={Object.values(calculations.calculationResult).map((option) => (
+											Math.round(option.additionalRevenuePerYear)
+										))}
+										lineChartData={Object.values(calculations.calculationResult).map((option) => (
+											Math.round(option.paybackTime)
+										))}
+										getLabelFor={props.getLabelFor}
+									/>
+								</div>
+								<div className="flex sm:hidden w-full py-sm">
+									{
+										calculations.calculationResult &&
+											<div className="w-full">
+												<div className="text-excite text-2xl font-sans-regular mb-xs">
+													{props.getLabelFor("label.chart.title")}
+												</div>
+												<div className="flex w-full border-b-[1px]">
+													<span className="w-1/3 text-center font-sans-bold my-[10px]">
+														{props.getLabelFor("label.compressor.outputIncrease")}
+													</span>
+													<span className="w-1/3 text-center font-sans-bold my-[10px]">
+														{props.getLabelFor("label.chart.yLeftLabel")}
+													</span>
+													<span className="w-1/3 text-center font-sans-bold my-[10px]">
+														{props.getLabelFor("label.chart.yRightLabel")}
+													</span>
+												</div>
+												{
+													Object.entries(calculations.calculationResult).map(([key, value]) => (
+														<div
+															key={key}
+															className={cx(
+																"flex w-full py-[5px] odd:bg-[white]",
+																(value.percentage === Math.round(inputs.compressor_outputIncrease)) && "font-sans-bold"
+															)}
+														>
+															<span className="w-1/3 text-center">
+																{value.percentage}%
+															</span>
+															<span className="w-1/3 text-center">
+																$ {Math.round(value.additionalRevenuePerYear).toLocaleString()}
+															</span>
+															<span className="w-1/3 text-center">
+																{Math.round(value.paybackTime)}
+															</span>
+														</div>
+													))
+												}
+											</div>
+									}
+								</div>
+							</div>
 						)
 						: (
 							<div className="font-sans-bold text-[red]">
