@@ -555,10 +555,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									option.percentage + "%"
 								))}
 								barChartData={Object.values(calculations.calculationResult).map((option) => (
-									option.additionalRevenuePerYear
+									Math.round(option.additionalRevenuePerYear)
 								))}
 								lineChartData={Object.values(calculations.calculationResult).map((option) => (
-									option.paybackTime
+									Math.round(option.paybackTime)
 								))}
 								getLabelFor={props.getLabelFor}
 							/>
