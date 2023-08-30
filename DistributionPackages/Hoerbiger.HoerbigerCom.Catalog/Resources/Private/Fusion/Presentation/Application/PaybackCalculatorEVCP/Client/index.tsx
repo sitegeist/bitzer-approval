@@ -437,10 +437,6 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 										tooltip={null}
 									/>
 
-									<div className="col-span-2 text-lg">
-										{props.getLabelFor("label.headline.gasComposition")}
-									</div>
-
 									<GridRow
 										label={props.getLabelFor("label.addRevenues.total")}
 										value={calculations.gasCompositionOfRawNaturalGasTotal + " " + props.getLabelFor("label.unit.addRevenues.total")}
@@ -482,13 +478,14 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 										value={calculations.projectCostSubtotalEVCP + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
-								</div>
-								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
+
 									<GridRow
 										label={props.getLabelFor("label.projectCost.generalSubtotal")}
 										value={calculations.projectCostSubtotalForNumberOfEVCP + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
+								</div>
+								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
 									<GridRow
 										label={props.getLabelFor("label.projectCost.scheduleAndControl")}
 										value={props.calculationFields.cost_scheduleAndControl + " " + props.getLabelFor("label.unit.dollar")}
@@ -499,13 +496,14 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 										value={props.calculationFields.cost_customerIntegration + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
-
 									<GridRow
 										label={props.getLabelFor("label.projectCost.commission")}
 										value={props.calculationFields.cost_commission + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
+								</div>
 
+								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
 									<GridRow
 										label={props.getLabelFor("label.projectCost.total")}
 										value={calculations.projectCostTotal + " " + props.getLabelFor("label.unit.dollar")}
@@ -543,6 +541,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 					(calculations.calculationResult && hasDiagram)
 						? (
 							<Diagram
+								selectedIncrease={Math.round(inputs.compressor_outputIncrease)}
 								applicationRoot={props.applicationRoot}
 								chartLabels={{
 									chartTitle: props.getLabelFor("label.chart.title"),

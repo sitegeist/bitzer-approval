@@ -7,9 +7,20 @@ import {
 
 export const Diagram = (props: ChartParams): JSX.Element => {
 	const chartRef = React.createRef<HTMLCanvasElement>();
+	const startPercentage = 5;
+	const duration = 6;
 
 	React.useEffect(() => {
 		const diagramRoot = chartRef.current?.getContext("2d");
+
+		const barchartBackgrounds: string[] = [];
+		for (let i = startPercentage; i < (startPercentage + duration); i++) {
+			if (i === props.selectedIncrease) {
+				barchartBackgrounds.push("#A89379");
+			} else {
+				barchartBackgrounds.push("#4f81bd");
+			}
+		}
 
 		if (diagramRoot) {
 			const data = {
@@ -19,7 +30,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 						label: props.chartLabels.barChartLabel,
 						data: props.barChartData,
 						borderColor: "#4f81bd",
-						backgroundColor: "#4f81bd",
+						backgroundColor: barchartBackgrounds,
 						yAxisID: "y_left",
 						order: 1
 					},
@@ -59,6 +70,13 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 							labels: {
 								font: {
 									size: 18
+								}
+							}
+						},
+						tooltip: {
+							callbacks: {
+								title(tooltipItems): string | string[] | void {
+									return tooltipItems[0].label + " " + props.getLabelFor("label.chart.extension");
 								}
 							}
 						}

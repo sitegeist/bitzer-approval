@@ -32,6 +32,7 @@ export interface InputRowParams {
 }
 
 export interface ChartParams {
+	selectedIncrease: number;
 	applicationRoot: HTMLElement;
 	chartLabels: CharLabels
 	xAxisData: string[],
