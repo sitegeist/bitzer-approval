@@ -417,23 +417,23 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<div className="grid grid-cols-2 gap-ch">
 									<GridRow
 										label={props.getLabelFor("label.addRevenues.dryNaturalGas")}
-										value={props.calculationFields.composition_dryNaturalGas + " " + props.getLabelFor("label.unit.addRevenues.dryNaturalGas")}
+										value={props.calculationFields.composition_dryNaturalGas + props.getLabelFor("label.unit.addRevenues.dryNaturalGas")}
 										tooltip={null}
 									/>
 									<GridRow
 										label={props.getLabelFor("label.addRevenues.NGL")}
-										value={props.calculationFields.composition_NGL + " " + props.getLabelFor("label.unit.addRevenues.NGL")}
+										value={props.calculationFields.composition_NGL + props.getLabelFor("label.unit.addRevenues.NGL")}
 										tooltip={null}
 									/>
 									<GridRow
 										label={props.getLabelFor("label.addRevenues.others")}
-										value={props.calculationFields.composition_others + " " + props.getLabelFor("label.unit.addRevenues.others")}
+										value={props.calculationFields.composition_others + props.getLabelFor("label.unit.addRevenues.others")}
 										tooltip={null}
 									/>
 
 									<GridRow
 										label={props.getLabelFor("label.addRevenues.total")}
-										value={calculations.gasCompositionOfRawNaturalGasTotal + " " + props.getLabelFor("label.unit.addRevenues.total")}
+										value={calculations.gasCompositionOfRawNaturalGasTotal + props.getLabelFor("label.unit.addRevenues.total")}
 										tooltip={null}
 									/>
 								</div>
@@ -453,46 +453,46 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
 									<GridRow
 										label={props.getLabelFor("label.projectCost.actuators")}
-										value={props.calculationFields.cost_actuators + " " + props.getLabelFor("label.unit.dollar")}
+										value={props.calculationFields.cost_actuators.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 									<GridRow
 										label={props.getLabelFor("label.projectCost.localPanel")}
-										value={props.calculationFields.cost_localPanel + " " + props.getLabelFor("label.unit.dollar")}
+										value={props.calculationFields.cost_localPanel.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 									<GridRow
 										label={props.getLabelFor("label.projectCost.installation")}
-										value={props.calculationFields.cost_installation + " " + props.getLabelFor("label.unit.dollar")}
+										value={props.calculationFields.cost_installation.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 
 									<GridRow
 										label={props.getLabelFor("label.projectCost.subTotal")}
-										value={calculations.projectCostSubtotalEVCP + " " + props.getLabelFor("label.unit.dollar")}
+										value={calculations.projectCostSubtotalEVCP.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 
 									<GridRow
 										label={props.getLabelFor("label.projectCost.generalSubtotal")}
-										value={calculations.projectCostSubtotalForNumberOfEVCP + " " + props.getLabelFor("label.unit.dollar")}
+										value={calculations.projectCostSubtotalForNumberOfEVCP.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 								</div>
 								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
 									<GridRow
 										label={props.getLabelFor("label.projectCost.scheduleAndControl")}
-										value={props.calculationFields.cost_scheduleAndControl + " " + props.getLabelFor("label.unit.dollar")}
+										value={props.calculationFields.cost_scheduleAndControl.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 									<GridRow
 										label={props.getLabelFor("label.projectCost.customerIntegration")}
-										value={props.calculationFields.cost_customerIntegration + " " + props.getLabelFor("label.unit.dollar")}
+										value={props.calculationFields.cost_customerIntegration.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 									<GridRow
 										label={props.getLabelFor("label.projectCost.commission")}
-										value={props.calculationFields.cost_commission + " " + props.getLabelFor("label.unit.dollar")}
+										value={props.calculationFields.cost_commission.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 								</div>
@@ -554,7 +554,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 											Math.round(option.additionalRevenuePerYear)
 										))}
 										lineChartData={Object.values(calculations.calculationResult).map((option) => (
-											Math.round(option.paybackTime)
+											Math.round(option.paybackTime * 10) / 10
 										))}
 										getLabelFor={props.getLabelFor}
 									/>
@@ -590,10 +590,10 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 																{value.percentage}%
 															</span>
 															<span className="w-1/3 text-center">
-																$ {Math.round(value.additionalRevenuePerYear).toLocaleString()}
+																$ {Math.round(value.additionalRevenuePerYear).toLocaleString(props.locale)}
 															</span>
 															<span className="w-1/3 text-center">
-																{Math.round(value.paybackTime)}
+																{Math.round(value.paybackTime * 10) / 10}
 															</span>
 														</div>
 													))

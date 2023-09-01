@@ -6,11 +6,11 @@ input_compressor_cylindersNumber,Number of 1st stage cylinders,Number of 1st sta
 input_compressor_nominalFlowRate,Compressor nominal flow rate without eVCP,Compressor nominal flow rate without eVCP:,Compressor nominal flow rate without eVCP:
 input_compressor_outputIncrease,Increase of output thanks to eVCP,Increase of output thanks to eVCP:,Increase of output thanks to eVCP:
 
-label.headline.naturalGasGathering,"Compressed Gas Value Input","Compressed Gas Value Input","Compressed Gas Value Input",
-label.headline.compressorOperatingData,"Compressor Operating Data Input","Compressor Operating Data Input","Compressor Operating Data Input"
+label.headline.naturalGasGathering,"Compressed gas value input","Compressed gas value input","Compressed gas value input",
+label.headline.compressorOperatingData,"Compressor operating data input","Compressor operating data input","Compressor operating data input"
 label.headline.gasComposition,"Heating value for natural gas (average):","Heating value for natural gas (average):","Heating value for natural gas (average):"
 label.headline.conversionFactors,"Conversion factors","Conversion factors","Conversion factors"
-label.headline.gasCompositionRaw,"Gas composition of raw natural gas: (typical)","Gas composition of raw natural gas: (typical)","Gas composition of raw natural gas: (typical)"
+label.headline.gasCompositionRaw,"Gas composition of raw natural gas (typical):","Gas composition of raw natural gas (typical):","Gas composition of raw natural gas (typical):"
 
 label.prices.dryNaturalGas,Price dry natural gas:,Price dry natural gas:,Price dry natural gas:
 label.prices.NGL,"Price NGL composite:","Price NGL composite:","Price NGL composite:"
@@ -41,7 +41,7 @@ label.projectCost.installation,"Cabling, labour mechanical and electrical instal
 label.projectCost.subTotal,"Subtotal per eVCP","Subtotal per eVCP","Subtotal per eVCP"
 
 label.projectCost.generalSubtotal,"Subtotal for total number of eVCPs","Subtotal for total number of eVCPs","Subtotal for total number of eVCPs"
-label.projectCost.scheduleAndControl,"Technical clarification meeting , development of control scheme and compressor loading schedule","Technical clarification meeting , development of control scheme and compressor loading schedule","Technical clarification meeting , development of control scheme and compressor loading schedule"
+label.projectCost.scheduleAndControl,"Technical clarification meeting, development of control scheme and compressor loading schedule","Technical clarification meeting, development of control scheme and compressor loading schedule","Technical clarification meeting, development of control scheme and compressor loading schedule"
 label.projectCost.customerIntegration,"Integration into customer control system","Integration into customer control system","Integration into customer control system"
 label.projectCost.commission,"Commissioning / start-up services","Commissioning / start-up services","Commissioning / start-up services"
 label.projectCost.total,"Total","Total","Total"
@@ -49,8 +49,8 @@ label.projectCost.total,"Total","Total","Total"
 label.unit.dollar,"$","$","$"
 label.unit.percentage,"%","%","%"
 
-label.showDerivation,"show details","Herleitung anzeigen","show details"
-label.disableDerivation,"hide details","Herleitung verbergen","hide details"
+label.showDerivation,"show details","show details","Herleitung anzeigen"
+label.disableDerivation,"hide details","hide details","Herleitung verbergen"
 
 label.compressor.annualOperatingHours,"Annual operating hours","Annual operating hours","Annual operating hours"
 label.compressor.cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders","Number of 1st stage cylinders"
@@ -65,7 +65,7 @@ label.unit.compressor.outputIncrease,"","",""
 label.footnote,"*) Note: The presented increase in delivery volume in a range of 5 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 5 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 5 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER."
 label.disclaimer,"Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation."
 
-label.chart.title,"eVCP Payback Calculation Result","eVCP Payback Calculation Result","eVCP Payback Calculation Result"
+label.chart.title,"eVCP Payback calculation result","eVCP Payback calculation result","eVCP Payback calculation result"
 label.chart.barChartLabel,"Additional revenue per year [USD]","Additional revenue per year [USD]","Additional revenue per year [USD]"
 label.chart.lineChartLabel,"Payback time [months]","Payback time [months]","Payback time [months]"
 label.chart.xAxisLabel,"Increase of compressor output with eVCP in % (typical range 5%...10%*)","Increase of compressor output with eVCP in % (typical range 5%...10%*)","Increase of compressor output with eVCP in % (typical range 5%...10%*)"
@@ -80,8 +80,8 @@ error.message.nominalFlowRate,"Fehler: Wert muss zwischen 0.01 und 99 liegen","F
 error.message.outputIncrease,"Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen"
 error.message.noDiagram,"A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries"
 
-abbreviation.btu,"BTU","BTU","BTU"
-abbreviation.mmbtu,"MMBTU","MMBTU","MMBTU"
+abbreviation.btu,"Btu","Btu","Btu"
+abbreviation.mmbtu,"MMBtu","MMBtu","MMBtu"
 abbreviation.mmscfd,"MMSCFD","MMSCFD","MMSCFD"
 abbreviation.ngl,"NGL","NGL","NGL"
 abbreviation.vvcp,"VVCP","VVCP","VVCP"

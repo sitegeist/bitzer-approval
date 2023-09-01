@@ -1,6 +1,7 @@
 export type LabelGetter = (key: string, fallback?: string) => string;
 
 export interface ApplicationData {
+	locale: string;
 	applicationRoot: HTMLElement;
 	inputFields: InputFields;
 	calculationFields: CalculationFields;

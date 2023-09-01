@@ -13,6 +13,7 @@ export default ($node: Element): void => {
 			React.createElement(
 				PaybackCalculatorEVCP,
 				{
+					locale: applicationData.locale,
 					applicationRoot,
 					inputFields: {...applicationData.inputFields} as InputFields,
 					calculationFields: {...applicationData.calculationFields} as CalculationFields,

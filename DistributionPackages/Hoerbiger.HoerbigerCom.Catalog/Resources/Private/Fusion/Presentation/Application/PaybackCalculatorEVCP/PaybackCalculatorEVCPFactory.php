@@ -11,6 +11,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 
@@ -21,7 +22,7 @@ final class PaybackCalculatorEVCPFactory extends AbstractComponentPresentationOb
     ){
     }
 
-    public function create(TraversableNodeInterface $paybackCalculatorECVPNode, bool $inBackend): PaybackCalculatorEVCP
+    public function create(TraversableNodeInterface $paybackCalculatorECVPNode, ContentContext $subgraph, bool $inBackend): PaybackCalculatorEVCP
     {
         return new PaybackCalculatorEVCP(
             $paybackCalculatorECVPNode->getProperty('headline') || $inBackend
@@ -33,6 +34,7 @@ final class PaybackCalculatorEVCPFactory extends AbstractComponentPresentationOb
                 )
             : null,
             \json_encode([
+                'locale' => $subgraph->getDimensions()['language'][0],
                 'inputFields' => [
                     'cost_dryNaturalGas' => $paybackCalculatorECVPNode->getProperty('input_cost_dryNaturalGas'),
                     'cost_NGL' => $paybackCalculatorECVPNode->getProperty('input_cost_NGL'),

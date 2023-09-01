@@ -35,7 +35,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts':
                 return (new CardFactory())->forGroupedProductsNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.PaybackCalculatorEVCP':
-                return $this->forPaybackCalculatorEVCPNode($contentNode, $inBackend);
+                return $this->forPaybackCalculatorEVCPNode($contentNode, $subgraph, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -60,11 +60,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forPaybackCalculatorEVCPNode(TraversableNodeInterface $paybackCalculatorEVCPNode, bool $inBackend): SlotInterface
+    public function forPaybackCalculatorEVCPNode(TraversableNodeInterface $paybackCalculatorEVCPNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
-            $this->paybackCalculatorECVPFactory->create($paybackCalculatorEVCPNode, $inBackend)
+            $this->paybackCalculatorECVPFactory->create($paybackCalculatorEVCPNode, $subgraph, $inBackend)
         );
     }
 }
