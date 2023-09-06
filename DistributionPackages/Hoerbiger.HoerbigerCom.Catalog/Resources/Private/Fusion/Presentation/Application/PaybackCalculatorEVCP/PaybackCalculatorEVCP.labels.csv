@@ -32,7 +32,7 @@ label.unit.addRevenues.total,"%","%","%"
 label.unit.conversionFactor.btu,"kJ","kJ","kJ"
 label.unit.conversionFactor.mmBtu,"GJ","GJ","GJ"
 label.unit.conversionFactor.scf,"Nm3/h","Nm3/h","Nm3/h"
-label.unit.conversionFactor.avgHeatingValue4NG,"BTU","BTU","BTU"
+label.unit.conversionFactor.avgHeatingValue4NG,"Btu","Btu","Btu"
 
 label.projectCost.numberOfCompressors,"Total number of eVCPs per compressor","Total number of eVCPs per compressor","Total number of eVCPs per compressor"
 label.projectCost.actuators,"eVCP actuators per piece","eVCP actuators per piece","eVCP actuators per piece"
