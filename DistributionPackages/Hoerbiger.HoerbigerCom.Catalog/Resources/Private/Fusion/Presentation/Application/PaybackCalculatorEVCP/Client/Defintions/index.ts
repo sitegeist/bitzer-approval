@@ -33,6 +33,7 @@ export interface InputRowParams {
 }
 
 export interface ChartParams {
+	locale: string;
 	selectedIncrease: number;
 	applicationRoot: HTMLElement;
 	chartLabels: CharLabels

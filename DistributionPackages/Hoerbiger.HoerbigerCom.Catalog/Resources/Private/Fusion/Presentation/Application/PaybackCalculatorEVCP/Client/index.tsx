@@ -537,6 +537,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							<div>
 								<div className="hidden sm:block h-[500px]">
 									<Diagram
+										locale={props.locale}
 										selectedIncrease={Math.round(inputs.compressor_outputIncrease)}
 										applicationRoot={props.applicationRoot}
 										chartLabels={{

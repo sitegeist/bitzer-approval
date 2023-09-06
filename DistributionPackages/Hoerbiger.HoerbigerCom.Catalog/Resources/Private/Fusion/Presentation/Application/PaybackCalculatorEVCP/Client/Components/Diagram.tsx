@@ -50,6 +50,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 				type: "bar",
 				data: data,
 				options: {
+					locale: props.locale,
 					maintainAspectRatio: false,
 					responsive: true,
 					interaction: {
@@ -59,6 +60,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 					plugins: {
 						title: {
 							display: true,
+							color: "#A89379",
 							text: props.chartLabels.chartTitle,
 							font: {
 								size: 30
