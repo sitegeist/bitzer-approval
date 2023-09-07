@@ -401,7 +401,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 
 									<GridRow
 										label={props.getLabelFor("label.conversionFactor.avgHeatingValue4NG")}
-										value={props.calculationFields.unit_avgHeatingValue4NG + " " + props.getLabelFor("label.unit.conversionFactor.avgHeatingValue4NG")}
+										value={props.calculationFields.unit_avgHeatingValue4NG.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.conversionFactor.avgHeatingValue4NG")}
 										tooltip={{
 											abbreviation: props.getLabelFor("abbreviation.btu"),
 											description: props.getLabelFor("description.btu"),
@@ -500,7 +500,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 								<div className="bg-light h-full grid grid-cols-2 gap-y-ch gap-x-sm">
 									<GridRow
 										label={props.getLabelFor("label.projectCost.total")}
-										value={calculations.projectCostTotal + " " + props.getLabelFor("label.unit.dollar")}
+										value={calculations.projectCostTotal.toLocaleString(props.locale) + " " + props.getLabelFor("label.unit.dollar")}
 										tooltip={null}
 									/>
 								</div>
