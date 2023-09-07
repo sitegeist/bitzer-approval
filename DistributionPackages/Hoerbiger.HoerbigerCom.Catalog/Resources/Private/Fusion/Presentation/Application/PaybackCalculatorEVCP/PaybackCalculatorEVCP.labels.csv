@@ -49,8 +49,8 @@ label.projectCost.total,"Total","Total","Total"
 label.unit.dollar,"$","$","$"
 label.unit.percentage,"%","%","%"
 
-label.showDerivation,"show details","show details","Herleitung anzeigen"
-label.disableDerivation,"hide details","hide details","Herleitung verbergen"
+label.showDerivation,"show details","show details","show details"
+label.disableDerivation,"hide details","hide details","hide details"
 
 label.compressor.annualOperatingHours,"Annual operating hours","Annual operating hours","Annual operating hours"
 label.compressor.cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders","Number of 1st stage cylinders"
