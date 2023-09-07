@@ -18,6 +18,7 @@ export interface InputFields {
 }
 
 export interface InputRowParams {
+	locale: string;
 	inputName: string;
 	inputValue: number|null;
 	label: string;

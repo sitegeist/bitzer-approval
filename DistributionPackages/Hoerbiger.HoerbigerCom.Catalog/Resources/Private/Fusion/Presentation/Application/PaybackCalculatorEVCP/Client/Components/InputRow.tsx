@@ -49,7 +49,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 				props.errorMessage && "gap-[5px] py-[5px]"
 			)}>
 				<div className="flex items-center gap-ch">
-					<div className="">
+					<div>
 						<input
 							name={props.inputName}
 							type="number"
@@ -58,6 +58,7 @@ export const InputRow = (props: InputRowParams): JSX.Element => {
 							step={props.step}
 							min={props.min}
 							max={props.max}
+							lang={props.locale}
 							onChange={onChange}
 							onClick={handleFocus}
 						/>

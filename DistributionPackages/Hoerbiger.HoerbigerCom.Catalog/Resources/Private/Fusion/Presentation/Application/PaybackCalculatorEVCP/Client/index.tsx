@@ -234,6 +234,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 						<div>
 							<div>
 								<InputRow
+									locale={props.locale}
 									label={props.getLabelFor("label.compressor.annualOperatingHours")}
 									unit={props.getLabelFor("label.unit.compressor.annualOperatingHours")}
 									tooltip={null}
@@ -249,6 +250,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							</div>
 							<div>
 								<InputRow
+									locale={props.locale}
 									label={props.getLabelFor("label.compressor.cylindersNumber")}
 									unit={props.getLabelFor("label.unit.compressor.cylindersNumber")}
 									tooltip={null}
@@ -264,6 +266,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							</div>
 							<div>
 								<InputRow
+									locale={props.locale}
 									label={props.getLabelFor("label.compressor.nominalFlowRate")}
 									unit={props.getLabelFor("label.unit.compressor.nominalFlowRate")}
 									tooltip={{
@@ -284,6 +287,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							</div>
 							<div>
 								<InputRow
+									locale={props.locale}
 									label={props.getLabelFor("label.compressor.outputIncrease")}
 									unit={props.getLabelFor("label.unit.percentage")}
 									tooltip={null}
@@ -309,6 +313,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 						</div>
 						<div>
 							<InputRow
+								locale={props.locale}
 								label={props.getLabelFor("label.prices.dryNaturalGas")}
 								unit={props.getLabelFor("label.unit.prices.dryNaturalGas")}
 								tooltip={{
@@ -328,6 +333,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 							/>
 
 							<InputRow
+								locale={props.locale}
 								label={props.getLabelFor("label.prices.NGL")}
 								unit={props.getLabelFor("label.unit.prices.NGL")}
 								labelTooltip={{
