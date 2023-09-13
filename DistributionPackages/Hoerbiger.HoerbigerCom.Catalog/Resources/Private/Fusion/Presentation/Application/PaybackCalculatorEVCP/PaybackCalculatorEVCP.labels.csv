@@ -73,11 +73,11 @@ label.chart.yLeftLabel,"Additional revenue per year in USD","Additional revenue 
 label.chart.yRightLabel,"Payback time in months","Payback time in months","Payback time in months"
 label.chart.extension,"increase of output thanks to eVCP","increase of output thanks to eVCP","increase of output thanks to eVCP"
 
-error.message.cost,"Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen"
-error.message.annualOperationHours,"Fehler: Wert muss zwischen 1 und 8760 liegen","Fehler: Wert muss zwischen 1 und 8760 liegen","Fehler: Wert muss zwischen 1 und 8760 liegen"
-error.message.cylindersNumber,"Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen","Fehler: Wert muss zwischen 1 und 10 liegen"
-error.message.nominalFlowRate,"Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen","Fehler: Wert muss zwischen 0.01 und 99 liegen"
-error.message.outputIncrease,"Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen","Fehler: Wert muss zwischen 5 und 10 liegen"
+error.message.cost,"Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99", "Invalid input, the value must be in the range from 0.01 to 99"
+error.message.annualOperationHours,"Invalid input, the value must be in the range from 1 to 8760","Invalid input, the value must be in the range from 1 to 8760","Invalid input, the value must be in the range from 1 to 8760"
+error.message.cylindersNumber,"Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10"
+error.message.nominalFlowRate,"Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99"
+error.message.outputIncrease,"Invalid input, the value must be in the range from 5 to 10","Invalid input, the value must be in the range from 5 to 10","Invalid input, the value must be in the range from 5 to 10"
 error.message.noDiagram,"A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries"
 
 abbreviation.btu,"Btu","Btu","Btu"
