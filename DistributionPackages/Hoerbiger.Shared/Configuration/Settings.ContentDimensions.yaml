@@ -15,6 +15,10 @@ Neos:
             label: English
             values: ['en']
             uriSegment: en
+          zh:
+            label: Chinese
+            values: [ 'zh', 'en' ]
+            uriSegment: zh
 
   Neos:
     routing:
