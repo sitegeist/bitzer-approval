@@ -17,7 +17,7 @@ Neos:
             uriSegment: en
           zh:
             label: Chinese
-            values: [ 'zh', 'en' ]
+            values: ['zh']
             uriSegment: zh
 
   Neos:
