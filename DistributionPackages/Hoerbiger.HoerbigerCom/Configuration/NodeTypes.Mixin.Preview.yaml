@@ -28,7 +28,7 @@
         inspector:
           group: 'preview'
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     preview__image__title:
       type: 'string'
       ui:
@@ -36,7 +36,7 @@
         inspector:
           group: 'preview'
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     preview__headline:
       type: 'string'
       ui:
@@ -44,7 +44,7 @@
         inspector:
           group: 'preview'
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     preview__description:
       type: 'string'
       ui:
@@ -55,4 +55,4 @@
           editorOptions:
             rows: 7
       options:
-        translateOnAdoption: true
+        automaticTranslation: true

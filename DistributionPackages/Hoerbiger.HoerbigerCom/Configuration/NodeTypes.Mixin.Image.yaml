@@ -24,6 +24,8 @@
           group: 'image'
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': {}
+      options:
+        automaticTranslation: true
     image__title:
       type: 'string'
       ui:
@@ -32,3 +34,5 @@
           group: 'image'
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': {}
+      options:
+        automaticTranslation: true
