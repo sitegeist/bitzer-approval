@@ -1,0 +1,5 @@
+Sitegeist:
+  CsvPO:
+    management:
+      packageKeys:
+        pressArchive: 'Hoerbiger.HoerbigerCom.PressArchive'
