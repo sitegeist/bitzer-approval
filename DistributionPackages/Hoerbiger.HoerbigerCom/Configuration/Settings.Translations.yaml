@@ -2,5 +2,7 @@ Sitegeist:
   CsvPO:
     management:
       packageKeys:
-        - 'Hoerbiger.HoerbigerCom'
-        - 'Hoerbiger.Shared'
+        hoerbiger: 'Hoerbiger.HoerbigerCom'
+      locales:
+        - en
+        - zh
