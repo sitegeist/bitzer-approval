@@ -22,3 +22,5 @@
         reloadIfChanged: true
         inspector:
           group: 'link'
+      options:
+        automaticTranslation: true
