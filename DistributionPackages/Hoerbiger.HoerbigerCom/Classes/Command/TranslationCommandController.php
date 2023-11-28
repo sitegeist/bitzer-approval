@@ -8,6 +8,7 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Command;
 
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
@@ -109,13 +110,13 @@ class TranslationCommandController extends CommandController
             // already properly translated
             return;
         }
-        /** @var ?NodeInterface $targetNode */
+        /** @var ?Node $targetNode */
         $targetNode = $targetContext->getNodeByIdentifier($node->getIdentifier());
 
-        if (is_null($targetNode)) {
+        if (is_null($targetNode) || !$targetNode->getDimensions()) {
             $this->output->outputLine('Translating node ' . $node->getLabel());
             $targetContext->adoptNode($node);
-        } elseif ($targetNode->isAutoCreated()) {
+        } elseif ($targetNode->isTethered()) {
             $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
         } elseif ($node->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Mixin.Introduction')) {
             $this->output->outputLine('Translating properties of node ' . $node->getLabel());
