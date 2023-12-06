@@ -6,3 +6,10 @@ Neos:
           loadingDepth: 1
         structureTree:
           loadingDepth: 2
+    Ui:
+      configurationDefaultEelContext:
+        Hoerbiger.Shared.NeosUiContentDimensions: Hoerbiger\Shared\Application\NeosUiContentDimensionsProvider
+      documentNodeInformation:
+        metaData:
+          contentDimensions:
+            allowedPresets: '${Neos.Ui.Api.emptyArrayToObject(Hoerbiger.Shared.NeosUiContentDimensions.getAllowedPresetsByName(documentNode.context.dimensions))}'
