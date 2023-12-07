@@ -9,7 +9,9 @@ Neos:
     Ui:
       configurationDefaultEelContext:
         Hoerbiger.Shared.NeosUiContentDimensions: Hoerbiger\Shared\Application\NeosUiContentDimensionsProvider
-      documentNodeInformation:
-        metaData:
+      initialState:
+        cr:
           contentDimensions:
+            byName: '${Hoerbiger.Shared.NeosUiContentDimensions.contentDimensionsByName()}'
             allowedPresets: '${Neos.Ui.Api.emptyArrayToObject(Hoerbiger.Shared.NeosUiContentDimensions.getAllowedPresetsByName(documentNode.context.dimensions))}'
+

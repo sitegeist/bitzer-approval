@@ -57,6 +57,24 @@ class NeosUiContentDimensionsProvider implements ProtectedContextAwareInterface
         return $allowedPresets;
     }
 
+    /**
+     * @return array<string,mixed> Dimensions indexed by name with presets indexed by name
+     */
+    public function contentDimensionsByName(): array
+    {
+        $availablePresets = $this->contentDimensionPresetSource->getAllPresets();
+        $roleId = LanguageBasedRoleId::tryFromUser($this->userService->getBackendUser());
+        if ($roleId) {
+            $availablePresets['language']['presets'] = [
+                $roleId->toContentDimensionValue($this->contentDimensionPresetSource)
+                => $availablePresets['language']['presets'][
+                    $roleId->toContentDimensionValue($this->contentDimensionPresetSource)
+                ]
+            ];
+        }
+        return $availablePresets;
+    }
+
     public function allowsCallOfMethod($methodName): bool
     {
         return true;
