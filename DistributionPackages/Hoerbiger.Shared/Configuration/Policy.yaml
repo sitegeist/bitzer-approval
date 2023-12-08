@@ -2,6 +2,39 @@ privilegeTargets:
   'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
     'Hoerbiger.Shared:Module.Editors':
       matcher: 'administration/editors'
+  'Neos\Neos\Security\Authorization\Privilege\NodeTreePrivilege':
+    'Hoerbiger.Shared:AccessAllSubgraphs': &allSubgraphs
+      matcher: 'TRUE'
+    'Hoerbiger.Shared:AccessEnglishSubgraph': &englishSubgraph
+      matcher: 'isInDimensionPreset("language", "en")'
+    'Hoerbiger.Shared:AccessGermanSubgraph': &germanSubgraph
+      matcher: 'isInDimensionPreset("language", "de")'
+    'Hoerbiger.Shared:AccessChineseSubgraph': &chineseSubgraph
+      matcher: 'isInDimensionPreset("language", "zh")'
+
+  'Neos\ContentRepository\Security\Authorization\Privilege\Node\EditNodePropertyPrivilege':
+    'Hoerbiger.Shared:EditPropertiesInAllSubgraphs': *allSubgraphs
+    'Hoerbiger.Shared:EditPropertiesInEnglishSubgraph': *englishSubgraph
+    'Hoerbiger.Shared:EditPropertiesInGermanSubgraph': *germanSubgraph
+    'Hoerbiger.Shared:EditPropertiesInChineseSubgraph': *chineseSubgraph
+
+  'Neos\ContentRepository\Security\Authorization\Privilege\Node\EditNodePrivilege':
+    'Hoerbiger.Shared:EditNodesInAllSubgraphs': *allSubgraphs
+    'Hoerbiger.Shared:EditNodesInEnglishSubgraph': *englishSubgraph
+    'Hoerbiger.Shared:EditNodesInGermanSubgraph': *germanSubgraph
+    'Hoerbiger.Shared:EditNodesInChineseSubgraph': *chineseSubgraph
+
+  'Neos\ContentRepository\Security\Authorization\Privilege\Node\RemoveNodePrivilege':
+    'Hoerbiger.Shared:RemoveNodesFromAllSubgraphs': *allSubgraphs
+    'Hoerbiger.Shared:RemoveNodesFromEnglishSubgraph': *englishSubgraph
+    'Hoerbiger.Shared:RemoveNodesFromGermanSubgraph': *germanSubgraph
+    'Hoerbiger.Shared:RemoveNodesFromChineseSubgraph': *chineseSubgraph
+
+  'Neos\ContentRepository\Security\Authorization\Privilege\Node\CreateNodePrivilege':
+    'Hoerbiger.Shared:CreateNodesInAllSubgraphs': *allSubgraphs
+    'Hoerbiger.Shared:CreateNodesInEnglishSubgraph': *englishSubgraph
+    'Hoerbiger.Shared:CreateNodesInGermanSubgraph': *germanSubgraph
+    'Hoerbiger.Shared:CreateNodesInChineseSubgraph': *chineseSubgraph
 
 roles:
   'Neos.Neos:Administrator':
@@ -9,6 +42,62 @@ roles:
       -
         privilegeTarget: 'Hoerbiger.Shared:Module.Editors'
         permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:AccessAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditPropertiesInAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditNodesInAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:RemoveNodesFromAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:CreateNodesInAllSubgraphs'
+        permission: GRANT
+
+  'Neos.Neos:Editor':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.Shared:AccessAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditPropertiesInAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditNodesInAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:RemoveNodesFromAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:CreateNodesInAllSubgraphs'
+        permission: GRANT
+
+  'Hoerbiger.Shared:ChineseEditor':
+    label: 'Redaktion China'
+    parentRoles:
+      - 'Neos.Neos:AbstractEditor'
+      - 'Neos.Neos:LivePublisher'
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.Shared:AccessChineseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditPropertiesInChineseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditNodesInChineseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:RemoveNodesFromChineseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:CreateNodesInChineseSubgraph'
+        permission: GRANT
+
   'Neos.Neos:RestrictedEditor':
     label: 'Redakteur'
   'Hoerbiger.Shared:ChiefEditor':
