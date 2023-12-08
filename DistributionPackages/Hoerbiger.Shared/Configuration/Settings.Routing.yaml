@@ -1,0 +1,7 @@
+Neos:
+  Flow:
+    http:
+      middlewares:
+        languageEditorZookeeper:
+          position: 'before dispatch'
+          middleware:  Hoerbiger\Shared\Infrastructure\LanguageEditorZookeeper
