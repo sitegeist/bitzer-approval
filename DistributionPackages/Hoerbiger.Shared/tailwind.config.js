@@ -148,14 +148,10 @@ module.exports = {
 		},
 
 		fontFamily: {
-			'sans-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
-			'sans-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
-			'sans-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
-			'serif-regular': ['Times New Roman', 'Times', 'serif'],
-			// @TODO ... korrekt Schrift fehlt noch, erst einmal nur DUMMY
-			'fira-pro-light': ['TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif'],
-			'fira-pro-regular': ['TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif'],
-			'fira-pro-bold': ['TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif'],
+			'sans-light': 'var(--font-light)',
+			'sans-regular': 'var(--font-regular)',
+			'sans-bold': 'var(--font-bold)',
+			'serif-regular': 'var(--font-serif-regular)',
 		},
 
 		screens: {

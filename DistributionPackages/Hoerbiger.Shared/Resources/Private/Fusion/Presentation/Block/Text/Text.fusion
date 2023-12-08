@@ -25,7 +25,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.equals('brandContrast') && "prose-brand-contrast",
             presentationObject.variant.equals('brandContrastBold') && "prose-brand-contrast font-sans-bold text-lg",
             presentationObject.variant.equals('neutralContrast') && "prose-neutral-contrast",
-            presentationObject.variant.equals('neutralContrastFiraPro') && "text-neutral-grey font-fira-pro-regular",
+            presentationObject.variant.equals('neutralContrastFiraPro') && "text-neutral-grey font-sans-regular",
             presentationObject.variant.equals('transparentContrast') && "prose-transparent-contrast",
             presentationObject.variant.equals('lite') && "prose-lite",
             presentationObject.variant.equals('excite') && "prose-excite",

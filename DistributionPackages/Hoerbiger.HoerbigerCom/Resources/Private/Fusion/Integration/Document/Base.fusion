@@ -13,7 +13,6 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             metaViewport = '<meta name="viewport" content="width=device-width">'
             favicons = Hoerbiger.HoerbigerCom:Resource.Favicons
             stylesheets = ${props.stylesheets}
-            fonts = Hoerbiger.Shared:Resource.Fonts
 
             titleTag {
                 content = ${props.titleOverride ? props.titleOverride : props.title}
@@ -31,6 +30,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
                 fontShop = ${props.fontShop}
             }
         }
+
+        htmlTag.attributes.data-lang = ${documentNode.context.dimensions.language[0]}
 
         body = ${props.body}
         body.@process.contentElementWrapping {
