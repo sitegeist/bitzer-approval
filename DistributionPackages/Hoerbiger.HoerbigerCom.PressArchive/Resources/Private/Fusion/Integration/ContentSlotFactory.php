@@ -247,7 +247,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
                 $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
 
-                $showImage = !$pressVariant == PressReleaseCardVariant::VARIANT_TOP || $pressRelease->getProperty('showImage');
+                $showImage = ($pressVariant !== PressVariant::VARIANT_NEWS) || $pressRelease->getProperty('showImage');
 
                 $figure = $imageSource && $showImage
                     ? $this->figureFactory->forPressReleaseCard($imageSource)
@@ -328,10 +328,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     ])
                                 )
                             ),
-                            new PressOverview(
-                                PressOverviewVariant::VARIANT_TOP_NEWS,
-                                [],
-                                $pressReleases
+                            new CacheSegment(
+                                new PressOverview(
+                                    PressOverviewVariant::VARIANT_TOP_NEWS,
+                                    [],
+                                    $pressReleases
+                                ),
+                                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
                             )
                         ])
                     )
