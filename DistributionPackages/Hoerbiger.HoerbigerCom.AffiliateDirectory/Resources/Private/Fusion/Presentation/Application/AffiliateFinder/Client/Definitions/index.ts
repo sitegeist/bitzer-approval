@@ -11,7 +11,7 @@ export interface Affiliate {
 	postalCode: string;
 	addressLocality: string;
 	addressCountry: string;
-	email: string;
+	email: string[] | null;
 	latitude: number;
 	longitude: number;
 	telephone: string;

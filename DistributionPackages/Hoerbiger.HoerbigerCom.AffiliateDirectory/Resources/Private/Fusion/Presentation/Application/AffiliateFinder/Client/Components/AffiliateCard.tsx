@@ -31,13 +31,19 @@ export const AffiliateCard = ({affiliates}: AffiliateCardProps): JSX.Element => 
 					}
 					<div className="flex flex-col">
 						{
-							affiliate.email
-								? <a href={`mailto:${affiliate.email}`} className="flex items-center gap-ch">
-									<StampedeIcon
-										iconName="email"
-									/>
-									{affiliate.email}
-								</a>
+							affiliate.email && affiliate.email.length > 0
+								? affiliate.email.map(mail => (
+									<a
+										key={mail}
+										href={`mailto:${mail}`}
+										className="flex items-center gap-ch"
+									>
+										<StampedeIcon
+											iconName="email"
+										/>
+										{mail}
+									</a>
+								))
 								: null
 						}
 						{
