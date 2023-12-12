@@ -13,6 +13,7 @@ use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVar
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
 use Hoerbiger\Shared\Domain\Anchor;
 use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -53,16 +54,17 @@ use Neos\Flow\Annotations as Flow;
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
     private PressArchiveStageFactory $pressArchivestageFactory;
-
-
     private SiteHeaderFactory $siteHeaderFactory;
+    private CsvPOTranslator $csvPOTranslator;
 
     public function __construct(
         PressArchiveStageFactory $pressArchivestageFactory,
-        SiteHeaderFactory $siteHeaderFactory
+        SiteHeaderFactory $siteHeaderFactory,
+        CsvPOTranslator $csvPOTranslator
     ) {
         $this->pressArchivestageFactory = $pressArchivestageFactory;
         $this->siteHeaderFactory = $siteHeaderFactory;
+        $this->csvPOTranslator = $csvPOTranslator;
     }
 
     public function  forPressArchive(TraversableNodeInterface $site, TraversableNodeInterface $overviewPage, ContentContext $subgraph, bool $inBackend): Page
@@ -96,13 +98,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                 new Separator(
                                     SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                                     Value::fromString(
-                                        $this->translator->translateById(
-                                            'overview.filters',
-                                            [],
-                                            null,
-                                            null,
+                                        $this->csvPOTranslator->getLabelFromTranslationResource(
+                                            'Hoerbiger.HoerbigerCom.PressArchive',
                                             'PressReleases',
-                                            'Hoerbiger.HoerbigerCom.PressArchive'
+                                            'overview.filters'
                                         )
                                         ?: 'filters'
                                     )

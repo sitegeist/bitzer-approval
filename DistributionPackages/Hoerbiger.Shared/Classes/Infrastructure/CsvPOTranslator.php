@@ -43,11 +43,41 @@ final class CsvPOTranslator
         return $labels;
     }
 
+    /**
+     * @return array<string,string>
+     */
+    public function getLabelsFromTranslationResource(string $packageName, string $sourceIdentifier): array
+    {
+        $labelSource = $this->getLabelSourceFromTranslationResource($packageName, $sourceIdentifier);
+        $labels = [];
+
+        foreach ($labelSource ? $labelSource->findAllTranslationLabels() : [] as $label) {
+            $labels[$label->getIdentifier()] = $this->getTranslationForLabel($label);
+        }
+        return $labels;
+    }
+
+    public function getLabelFromTranslationResource(
+        string $packageName,
+        string $sourceIdentifier,
+        string $labelIdentifier
+    ): string {
+        $labelSource = $this->getLabelSourceFromTranslationResource($packageName, $sourceIdentifier);
+        return $this->translateLabelFromLabelSource($labelSource, $labelIdentifier);
+    }
+
     public function getLabel(string $componentClassName, string $labelIdentifier): string
     {
         $labelSource = $this->getLabelSourceFor($componentClassName);
-        if ($labelSource) {
-            $label = $labelSource->findTranslationLabelByIdentifier($labelIdentifier);
+        return $this->translateLabelFromLabelSource($labelSource, $labelIdentifier);
+    }
+
+    private function translateLabelFromLabelSource(
+        ?TranslationLabelSource $translationLabelSource,
+        string $labelIdentifier
+    ): string {
+        if ($translationLabelSource) {
+            $label = $translationLabelSource->findTranslationLabelByIdentifier($labelIdentifier);
             if ($label) {
                 return $this->getTranslationForLabel($label);
             }
@@ -74,6 +104,18 @@ final class CsvPOTranslator
             . '/' . $componentName->name . '.labels.csv'
         );
 
+        return $this->labelSourceRepository->findOneByIdentifier($labelSourcePath);
+    }
+
+    private function getLabelSourceFromTranslationResource(
+        string $packageName,
+        string $sourceIdentifier
+    ): ?TranslationLabelSource {
+        $labelSourcePath = 'resource://'
+            . $packageName
+            . '/Private/Fusion/Presentation/Translations/'
+            . $sourceIdentifier
+            . '.labels.csv';
         return $this->labelSourceRepository->findOneByIdentifier($labelSourcePath);
     }
 }

@@ -5,6 +5,7 @@ namespace Hoerbiger\HoerbigerCom\SuccessStories\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.SuccessStories package.
  */
 
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
@@ -45,6 +46,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     public function __construct(
         private readonly ImageSourceFactory $imageSourceFactory,
         private readonly FigureFactory $figureFactory,
+        private readonly CsvPOTranslator $csvPOTranslator
     ) {
     }
 
@@ -170,18 +172,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    /**
-     * @param array<mixed,mixed> $arguments
-     */
-    private function getLabel(string $identifier, array $arguments = []): string
+    private function getLabel(string $identifier): string
     {
-        return $this->translator->translateById(
-            $identifier,
-            $arguments,
-            null,
-            null,
+        return $this->csvPOTranslator->getLabelFromTranslationResource(
+            'Hoerbiger.HoerbigerCom.SuccessStories',
             'SuccessStories',
-            'Hoerbiger.HoerbigerCom.SuccessStories'
-        ) ?: $identifier;
+            $identifier
+        );
     }
 }

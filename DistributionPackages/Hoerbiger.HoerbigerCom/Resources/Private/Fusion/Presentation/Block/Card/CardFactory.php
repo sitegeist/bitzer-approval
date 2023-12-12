@@ -124,7 +124,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     Collection::fromIterable([
                         new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
                         Value::fromString(
-                            $this->translator->translateById('link.label', [], null, null, 'Block.Card.NavigationCard', 'Hoerbiger.HoerbigerCom') ?: ''
+                            $this->csvPOTranslator->getLabelFromTranslationResource('Hoerbiger.HoerbigerCom', 'NavigationCard', 'link.label')
                         )
                     ])
                 ),
