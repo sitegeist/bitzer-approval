@@ -6,6 +6,7 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteFooter;
  */
 
 use Hoerbiger\Shared\Presentation\Block\ContactFormLink\ContactFormLinkFactory;
+use Neos\ContentRepository\Exception\NodeException;
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
@@ -41,6 +42,12 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
             )
         );
 
+        $contactFormLink = null;
+        try {
+            $contactFormLink = $this->contactFormLinkFactory->forDocument($document, $site);
+        } catch (NodeException $exception) {
+        }
+
         return new SiteFooter(
             $this->uriService->getNodeUri($site),
             $this->uriService->getResourceUri('Hoerbiger.Shared', 'Images/logo_white.svg'),
@@ -57,7 +64,7 @@ final class SiteFooterFactory extends AbstractComponentPresentationObjectFactory
                 fn (TraversableNodeInterface $footerLinkNode) => $this->linkFactory->forFooterMenuItem($footerLinkNode)
             ),
             $socialMediaLinks,
-            $this->contactFormLinkFactory->forDocument($document, $site)
+            $contactFormLink
         );
     }
 }
