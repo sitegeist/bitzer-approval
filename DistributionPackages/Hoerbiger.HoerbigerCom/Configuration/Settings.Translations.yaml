@@ -9,5 +9,6 @@ Sitegeist:
 Hoerbiger:
   HoerbigerCom:
     translation:
+      referenceLanguage: en
       listenerDimensions:
         - zh

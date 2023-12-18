@@ -53,7 +53,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     prototype(Neos.Neos:ContentCollection) {
         content.@process.addInfo = Neos.Fusion:Join {
             info = Sitegeist.LostInTranslation:Collection.TranslationInformation {
-                referenceLanguage = 'en'
+                referenceLanguage = ${Configuration.setting('Hoerbiger.HoerbigerCom.translation.referenceLanguage')}
             }
             content = ${value}
         }
