@@ -50,4 +50,14 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
         bodyScripts = ${props.bodyScripts}
         bodyScripts.@position = 'before closingBodyTag'
     }
+    prototype(Neos.Neos:ContentCollection) {
+        content.@process.addInfo = Neos.Fusion:Join {
+            info = Sitegeist.LostInTranslation:Collection.TranslationInformation {
+                referenceLanguage = 'en'
+            }
+            content = ${value}
+        }
+
+        content.@process.addInfo.@if.onlyListenerLanguages = ${Array.indexOf(Configuration.setting('Hoerbiger.HoerbigerCom.translation.listenerDimensions'), Array.first(node.context.dimensions.language)) > -1}
+    }
 }

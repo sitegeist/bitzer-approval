@@ -2785,7 +2785,7 @@
         },
         {
             "name": "hoerbiger/hoerbigercom-catalog-calculator",
-            "version": "dev-75112-newLanguages",
+            "version": "dev-84874-deeplContentComparison",
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.HoerbigerCom.Catalog.Calculator",
@@ -2902,7 +2902,7 @@
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.Shared",
-                "reference": "33eccd7829067bf11ff609ad851c81de7afa4ce5"
+                "reference": "509072cf7d601f2836ec55c1bfcf8430e56eb473"
             },
             "require": {
                 "flownative/workspace-preview": "^2.0",
@@ -2926,7 +2926,7 @@
                 "sitegeist/kaleidoscope": "^6.0",
                 "sitegeist/klarschiff": "^3.0",
                 "sitegeist/lazybones": "^3.0",
-                "sitegeist/lostintranslation": "^2.0",
+                "sitegeist/lostintranslation": "dev-feature/contentCollectionComparison",
                 "sitegeist/monocle": "^7.2",
                 "sitegeist/stampede": "^1.5"
             },
@@ -8497,24 +8497,26 @@
         },
         {
             "name": "sitegeist/lostintranslation",
-            "version": "v2.2.0",
+            "version": "dev-feature/contentCollectionComparison",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/Sitegeist.LostInTranslation.git",
-                "reference": "197833372ab3ba7acf1e2fbfc1b0cefe6f1cb694"
+                "reference": "af7124dbeff42609879ced791107fe8572ad41eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sitegeist/Sitegeist.LostInTranslation/zipball/197833372ab3ba7acf1e2fbfc1b0cefe6f1cb694",
-                "reference": "197833372ab3ba7acf1e2fbfc1b0cefe6f1cb694",
+                "url": "https://api.github.com/repos/sitegeist/Sitegeist.LostInTranslation/zipball/af7124dbeff42609879ced791107fe8572ad41eb",
+                "reference": "af7124dbeff42609879ced791107fe8572ad41eb",
                 "shasum": ""
             },
             "require": {
-                "neos/http-factories": "^6.3 || ^7.0 || ^8.0 || dev-master",
-                "neos/neos": "^5.3 || ^7.0 || ^8.0 || dev-master"
+                "neos/http-factories": "^7.3 || ^8.0 || dev-master",
+                "neos/neos": "^7.3 || ^8.0 || dev-master",
+                "neos/neos-ui": "^7.3 || ^8.0 || dev-master",
+                "php": ">=8.0.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "0.12.99",
+                "phpstan/phpstan": "~1.10.0",
                 "squizlabs/php_codesniffer": "^3.7"
             },
             "type": "neos-package",
@@ -8535,9 +8537,9 @@
             "description": "Automatic content translations for Neos using the DeepL Api",
             "support": {
                 "issues": "https://github.com/sitegeist/Sitegeist.LostInTranslation/issues",
-                "source": "https://github.com/sitegeist/Sitegeist.LostInTranslation/tree/v2.2.0"
+                "source": "https://github.com/sitegeist/Sitegeist.LostInTranslation/tree/feature/contentCollectionComparison"
             },
-            "time": "2023-08-21T10:15:24+00:00"
+            "time": "2023-12-07T15:34:28+00:00"
         },
         {
             "name": "sitegeist/monocle",
