@@ -115,7 +115,7 @@ class TranslationCommandController extends CommandController
 
         if (is_null($targetNode) || !$targetNode->getDimensions()) {
             $this->output->outputLine('Translating node ' . $node->getLabel());
-            $targetContext->adoptNode($node);
+            $targetNode = $targetContext->adoptNode($node);
         } elseif ($targetNode->isTethered()) {
             $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
         } elseif ($node->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Mixin.Introduction')) {
@@ -133,6 +133,7 @@ class TranslationCommandController extends CommandController
                 $targetNode->setProperty($propertyName, $translation);
             }
         }
+        $targetNode->setIndex($node->getIndex());
 
         foreach ($node->getChildNodes() as $childNode) {
             $this->refreshNode($childNode, $targetContext, $sourceLanguage, $targetLanguage);
