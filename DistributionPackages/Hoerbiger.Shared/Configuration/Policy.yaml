@@ -81,6 +81,7 @@ roles:
     parentRoles:
       - 'Neos.Neos:AbstractEditor'
       - 'Neos.Neos:LivePublisher'
+      - 'Sitegeist.CsvPO:TranslationEditor'
     privileges:
       -
         privilegeTarget: 'Hoerbiger.Shared:AccessChineseSubgraph'
