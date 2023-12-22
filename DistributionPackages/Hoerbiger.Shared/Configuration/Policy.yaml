@@ -76,12 +76,16 @@ roles:
         privilegeTarget: 'Hoerbiger.Shared:CreateNodesInAllSubgraphs'
         permission: GRANT
 
+  'Hoerbiger.Shared:TranslationEditor':
+    abstract: true
+
   'Hoerbiger.Shared:ChineseEditor':
     label: 'Redaktion China'
     parentRoles:
       - 'Neos.Neos:AbstractEditor'
       - 'Neos.Neos:LivePublisher'
       - 'Sitegeist.CsvPO:TranslationEditor'
+      - 'Hoerbiger.Shared:TranslationEditor'
     privileges:
       -
         privilegeTarget: 'Hoerbiger.Shared:AccessChineseSubgraph'
