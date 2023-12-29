@@ -22,7 +22,6 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
 {
     private ThumbnailService $thumbnailService;
     private ImageRepository $imageRepository;
-
     private PersistenceManagerInterface $persistenceManager;
 
     public function __construct(
@@ -38,7 +37,7 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
 
     public function forDocument(
         Document $document
-    ): ?ImageSourceHelperInterface {
+    ): ?AssetImageSource {
         try {
             $thumbnail = $this->thumbnailService->getThumbnail(
                 $document,
