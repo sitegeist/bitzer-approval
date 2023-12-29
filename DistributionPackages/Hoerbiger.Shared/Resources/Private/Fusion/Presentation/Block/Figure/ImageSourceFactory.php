@@ -7,10 +7,13 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Media\Domain\Model\Document;
 use Neos\Media\Domain\Model\Image;
+use Neos\Media\Domain\Repository\ImageRepository;
 use Neos\Media\Domain\Service\ThumbnailService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
+use Sitegeist\Kaleidoscope\Domain\AssetImageSource;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\DummyImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
@@ -18,10 +21,19 @@ use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 final class ImageSourceFactory extends AbstractComponentPresentationObjectFactory
 {
     private ThumbnailService $thumbnailService;
+    private ImageRepository $imageRepository;
 
-    public function __construct(ThumbnailService $thumbnailService)
-    {
+    private PersistenceManagerInterface $persistenceManager;
+
+    public function __construct(
+        ThumbnailService $thumbnailService,
+        ImageRepository $imageRepository,
+        PersistenceManagerInterface $persistenceManager
+    ) {
         $this->thumbnailService = $thumbnailService;
+        $this->imageRepository = $imageRepository;
+        $this->persistenceManager = $persistenceManager;
+
     }
 
     public function forDocument(
@@ -36,7 +48,17 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
             $thumbnail = null;
         }
 
-        return $thumbnail ? new AssetImageSourceHelper(new Image($thumbnail->getResource())) : null;
+        if ($thumbnail) {
+            $image = $this->imageRepository->findOneByResourceSha1($thumbnail->getResource()->getSha1());
+
+            if (!$image instanceof Image) {
+                $image = new Image($thumbnail->getResource());
+                $this->imageRepository->add($image);
+                $this->persistenceManager->persistAll();
+            }
+            return new AssetImageSource($image);
+        }
+        return null;
     }
 
     public function forImageMixin(
