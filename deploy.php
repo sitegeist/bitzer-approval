@@ -12,6 +12,7 @@ set('repository', 'ssh://git@git.sitegeist.de:40022/hoerbiger/hoerbiger-websites
 // SSH
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
+set('writable_mode', 'chmod');
 set('writable_chmod_mode', '0775');
 set('writable_dirs', ['.']);
 set('writable_chmod_recursive', true);
