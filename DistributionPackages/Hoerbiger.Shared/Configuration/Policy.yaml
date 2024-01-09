@@ -105,6 +105,22 @@ roles:
 
   'Neos.Neos:RestrictedEditor':
     label: 'Redakteur'
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.Shared:AccessAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditPropertiesInAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditNodesInAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:RemoveNodesFromAllSubgraphs'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:CreateNodesInAllSubgraphs'
+        permission: GRANT
   'Hoerbiger.Shared:ChiefEditor':
     label: Chefredakteur
     description: Grants access to the content, asset, workspace and history module. Users with this role is able to publish to the live workspace.
