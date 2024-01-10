@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Hoerbiger\Shared\Infrastructure;
 
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Model\User;
 use Neos\Neos\Domain\Service\ContentDimensionPresetSourceInterface;
 
@@ -17,6 +18,8 @@ final class LanguageBasedRoleId
 {
     private const ROLE_ID_PREFIX = 'Hoerbiger.Shared:';
     private const ROLE_ID_SUFFIX = 'Editor';
+
+    private const ABSTRACT_TRANSLATOR_ROLE = 'Hoerbiger.Shared:TranslationEditor';
     public function __construct(
         private readonly string $value
     ) {
@@ -27,7 +30,7 @@ final class LanguageBasedRoleId
         $roleId = null;
         foreach ($user?->getAccounts() ?: [] as $account) {
             foreach ($account->getRoles() as $role) {
-                $roleId = self::tryFromRoleId($role->getIdentifier());
+                $roleId = self::tryFromRole($role);
                 if (!$roleId) {
                     return null;
                 }
@@ -35,10 +38,13 @@ final class LanguageBasedRoleId
         }
         return $roleId;
     }
-    public static function tryFromRoleId(string $roleId): ?self
+    public static function tryFromRole(Role $role): ?self
     {
-        if (\str_starts_with($roleId, self::ROLE_ID_PREFIX) && \str_ends_with($roleId, self::ROLE_ID_SUFFIX)) {
-            return new self($roleId);
+        $abstractTranslatorRole = new Role(self::ABSTRACT_TRANSLATOR_ROLE);
+
+        if ($role->hasParentRole($abstractTranslatorRole)
+        ) {
+            return new self($role->getIdentifier());
         }
 
         return null;

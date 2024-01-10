@@ -16,11 +16,15 @@ final class Affiliate implements \JsonSerializable
     private string $postalCode;
     private string $addressLocality;
     private string $addressCountry;
-    private string $email;
+    /** @var array<string>|null $email  */
+    private ?array $email;
     private ?string $telephone;
     private float $latitude;
     private float $longitude;
 
+    /**
+     * @param array<string>|null $email
+     */
     public function __construct(
         string $identifier,
         string $legalName,
@@ -28,7 +32,7 @@ final class Affiliate implements \JsonSerializable
         string $postalCode,
         string $addressLocality,
         string $addressCountry,
-        string $email,
+        ?array $email,
         ?string $telephone,
         float $latitude,
         float $longitude
@@ -54,7 +58,7 @@ final class Affiliate implements \JsonSerializable
             '22312',
             'Hamburg',
             'Deutschland',
-            'fledermaus@sitegeist.de',
+            ['fledermaus@sitegeist.de'],
             '004512345678',
             53.5853532,
             10.0039283
@@ -91,7 +95,10 @@ final class Affiliate implements \JsonSerializable
         return $this->addressCountry;
     }
 
-    public function getEmail(): string
+    /**
+     * @return array<string>|null
+     */
+    public function getEmail(): ?array
     {
         return $this->email;
     }

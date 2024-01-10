@@ -80,7 +80,7 @@ class AffiliateRepository
                 (string)$postalCodeCell->getValue(),
                 (string)$addressLocalityCell->getValue(),
                 (string)$addressCountryCell->getValue(),
-                (string)$emailCell->getValue(),
+                $emailCell->getValue() ? explode(PHP_EOL, $emailCell->getValue()) : null,
                 (string)$telephoneCell->getValue(),
                 $coordinates->getLatitude(),
                 $coordinates->getLongitude()
