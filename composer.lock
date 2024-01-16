@@ -2902,7 +2902,7 @@
             "dist": {
                 "type": "path",
                 "url": "./DistributionPackages/Hoerbiger.Shared",
-                "reference": "509072cf7d601f2836ec55c1bfcf8430e56eb473"
+                "reference": "14a1bd0bd52a599c1c634b2ef5138ce2eb98cc15"
             },
             "require": {
                 "flownative/workspace-preview": "^2.0",
@@ -2926,7 +2926,7 @@
                 "sitegeist/kaleidoscope": "^6.0",
                 "sitegeist/klarschiff": "^3.0",
                 "sitegeist/lazybones": "^3.0",
-                "sitegeist/lostintranslation": "dev-feature/contentCollectionComparison",
+                "sitegeist/lostintranslation": "~2.3",
                 "sitegeist/monocle": "^7.2",
                 "sitegeist/stampede": "^1.5"
             },
@@ -8497,16 +8497,16 @@
         },
         {
             "name": "sitegeist/lostintranslation",
-            "version": "dev-feature/contentCollectionComparison",
+            "version": "v2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/Sitegeist.LostInTranslation.git",
-                "reference": "af7124dbeff42609879ced791107fe8572ad41eb"
+                "reference": "6a0d0f25e3883a31b1f3c2cdf64bf9def610b7d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sitegeist/Sitegeist.LostInTranslation/zipball/af7124dbeff42609879ced791107fe8572ad41eb",
-                "reference": "af7124dbeff42609879ced791107fe8572ad41eb",
+                "url": "https://api.github.com/repos/sitegeist/Sitegeist.LostInTranslation/zipball/6a0d0f25e3883a31b1f3c2cdf64bf9def610b7d9",
+                "reference": "6a0d0f25e3883a31b1f3c2cdf64bf9def610b7d9",
                 "shasum": ""
             },
             "require": {
@@ -8537,9 +8537,9 @@
             "description": "Automatic content translations for Neos using the DeepL Api",
             "support": {
                 "issues": "https://github.com/sitegeist/Sitegeist.LostInTranslation/issues",
-                "source": "https://github.com/sitegeist/Sitegeist.LostInTranslation/tree/feature/contentCollectionComparison"
+                "source": "https://github.com/sitegeist/Sitegeist.LostInTranslation/tree/v2.3.0"
             },
-            "time": "2023-12-07T15:34:28+00:00"
+            "time": "2024-01-15T16:31:19+00:00"
         },
         {
             "name": "sitegeist/monocle",
@@ -12805,5 +12805,5 @@
     "platform-overrides": {
         "php": "8.1"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

@@ -47,17 +47,19 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             default = ${value}
         }
 
-        bodyScripts = ${props.bodyScripts}
-        bodyScripts.@position = 'before closingBodyTag'
-    }
-    prototype(Neos.Neos:ContentCollection) {
-        content.@process.addInfo = Neos.Fusion:Join {
-            info = Sitegeist.LostInTranslation:Collection.TranslationInformation {
-                referenceLanguage = ${Configuration.setting('Hoerbiger.HoerbigerCom.translation.referenceLanguage')}
+        body.@process.addInfo = Neos.Fusion:Join {
+            info = Neos.Fusion:Tag {
+                attributes.style = "margin-top:150px;"
+                content = Sitegeist.LostInTranslation:Document.TranslationInformation {
+                    referenceLanguage = ${Configuration.setting('Hoerbiger.HoerbigerCom.translation.referenceLanguage')}
+                }
             }
             content = ${value}
         }
 
-        content.@process.addInfo.@if.onlyListenerLanguages = ${Array.indexOf(Configuration.setting('Hoerbiger.HoerbigerCom.translation.listenerDimensions'), Array.first(node.context.dimensions.language)) > -1}
+        body.@process.addInfo.@if.onlyListenerLanguages = ${Array.indexOf(Configuration.setting('Hoerbiger.HoerbigerCom.translation.listenerDimensions'), Array.first(node.context.dimensions.language)) > -1}
+
+        bodyScripts = ${props.bodyScripts}
+        bodyScripts.@position = 'before closingBodyTag'
     }
 }
