@@ -6,3 +6,9 @@ Sitegeist:
       locales:
         - en
         - zh
+Hoerbiger:
+  HoerbigerCom:
+    translation:
+      referenceLanguage: en
+      listenerDimensions:
+        - zh
