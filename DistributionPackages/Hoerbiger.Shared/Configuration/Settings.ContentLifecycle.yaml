@@ -1,0 +1,9 @@
+Sitegeist:
+  Bitzer:
+    Translation:
+      languageDimension: 'language'
+      assignments:
+        en:
+          zh:
+            agents: ['Hoerbiger.Shared:ChineseEditor']
+            interval: 'P1D'

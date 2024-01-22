@@ -22,7 +22,8 @@
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "hoerbiger/hoerbigercom-affiliatedirectory": "*",
         "hoerbiger/hoerbigercom-catalog-calculator": "*",
-        "hoerbiger/hoerbigercom-hr": "*"
+        "hoerbiger/hoerbigercom-hr": "*",
+        "sitegeist/bitzer-translation": "dev-main"
     },
     "require-dev": {
         "neos/buildessentials": "^8.3",
@@ -102,6 +103,10 @@
         "bitzer-approval": {
             "type": "git",
             "url": "https://github.com/sitegeist/bitzer-approval.git"
+        },
+        "bitzer-translation": {
+            "type": "git",
+            "url": "https://github.com/sitegeist/bitzer-translation.git"
         }
     }
 }

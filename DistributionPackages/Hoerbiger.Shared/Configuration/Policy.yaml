@@ -86,6 +86,7 @@ roles:
       - 'Neos.Neos:LivePublisher'
       - 'Sitegeist.CsvPO:TranslationEditor'
       - 'Hoerbiger.Shared:TranslationEditor'
+      - 'Sitegeist.Bitzer:Agent'
     privileges:
       -
         privilegeTarget: 'Hoerbiger.Shared:AccessChineseSubgraph'

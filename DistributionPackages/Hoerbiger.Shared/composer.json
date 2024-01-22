@@ -29,6 +29,7 @@
         "sitegeist/stampede": "^1.5",
         "sitegeist/inspectorgadget": "*",
         "sitegeist/bitzer-approval": "~1.0",
+        "sitegeist/bitzer-translation": "*",
         "sitegeist/lostintranslation": "~2.3",
         "sitegeist/archaeopteryx": "^1.3",
         "flownative/workspace-preview": "^2.0"
