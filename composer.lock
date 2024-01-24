@@ -8497,16 +8497,16 @@
         },
         {
             "name": "sitegeist/lostintranslation",
-            "version": "v2.3.0",
+            "version": "v2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/Sitegeist.LostInTranslation.git",
-                "reference": "6a0d0f25e3883a31b1f3c2cdf64bf9def610b7d9"
+                "reference": "434564dedb95ab3613e6209cc360cb83e3f4c608"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sitegeist/Sitegeist.LostInTranslation/zipball/6a0d0f25e3883a31b1f3c2cdf64bf9def610b7d9",
-                "reference": "6a0d0f25e3883a31b1f3c2cdf64bf9def610b7d9",
+                "url": "https://api.github.com/repos/sitegeist/Sitegeist.LostInTranslation/zipball/434564dedb95ab3613e6209cc360cb83e3f4c608",
+                "reference": "434564dedb95ab3613e6209cc360cb83e3f4c608",
                 "shasum": ""
             },
             "require": {
@@ -8537,9 +8537,9 @@
             "description": "Automatic content translations for Neos using the DeepL Api",
             "support": {
                 "issues": "https://github.com/sitegeist/Sitegeist.LostInTranslation/issues",
-                "source": "https://github.com/sitegeist/Sitegeist.LostInTranslation/tree/v2.3.0"
+                "source": "https://github.com/sitegeist/Sitegeist.LostInTranslation/tree/v2.3.1"
             },
-            "time": "2024-01-15T16:31:19+00:00"
+            "time": "2024-01-24T15:21:25+00:00"
         },
         {
             "name": "sitegeist/monocle",
