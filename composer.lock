@@ -8126,20 +8126,20 @@
         },
         {
             "name": "sitegeist/bitzer",
-            "version": "2.0.x-dev",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/bitzer.git",
-                "reference": "5ed785520186fd4b20a6479de76de9394b5a4475"
+                "reference": "e92d2f5ff8b16a14b9e1a49690be526232334a71"
             },
             "require": {
                 "doctrine/dbal": "*",
                 "doctrine/migrations": "*",
-                "neos/content-repository": "~7.0 || ~8.0",
+                "neos/content-repository": "~8.2",
                 "neos/content-repository-dimensionspace": "1.0.x-dev",
-                "neos/fusion": "~7.0 || ~8.0",
-                "neos/fusion-afx": "~7.0 || ~8.0",
-                "neos/neos": "~7.0 || ~8.0"
+                "neos/fusion": "~8.2",
+                "neos/fusion-afx": "~8.2",
+                "neos/neos": "~8.2"
             },
             "type": "neos-package",
             "autoload": {
@@ -8148,7 +8148,7 @@
                 }
             },
             "description": "A content lifecycle task manager for Neos CMS",
-            "time": "2022-10-18T15:35:48+00:00"
+            "time": "2024-01-24T09:58:02+00:00"
         },
         {
             "name": "sitegeist/bitzer-approval",
@@ -8156,7 +8156,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/bitzer-approval.git",
-                "reference": "2a5d57d56d6fb436f3b83b04c93a7715389300fc"
+                "reference": "d2fc225abcc70b926899426f5e0a81b33cb136b4"
             },
             "require": {
                 "neos/content-repository": "~7.0 || ~8.0",
@@ -8164,7 +8164,7 @@
                 "neos/fusion-afx": "~7.0 || ~8.0",
                 "neos/neos": "~7.0 || ~8.0",
                 "neos/neos-ui": "~7.0 || ~8.0",
-                "sitegeist/bitzer": "~2.0"
+                "sitegeist/bitzer": "~2.0 || ~3.0"
             },
             "type": "neos-package",
             "autoload": {
@@ -8173,7 +8173,7 @@
                 }
             },
             "description": "The approval plugin for the Bitzer content lifecycle task manager for Neos CMS",
-            "time": "2023-05-17T07:11:26+00:00"
+            "time": "2024-01-24T10:01:21+00:00"
         },
         {
             "name": "sitegeist/bitzer-translation",
@@ -8181,7 +8181,7 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sitegeist/bitzer-translation.git",
-                "reference": "7778e2917f5667a7fd5e4a1a3c5f7ca70154040f"
+                "reference": "9a4352d9c0baeb8d1e2b2c336ee199355f19e520"
             },
             "require": {
                 "neos/content-repository": "~7.0 || ~8.0",
@@ -8189,7 +8189,7 @@
                 "neos/fusion-afx": "~7.0 || ~8.0",
                 "neos/neos": "~7.0 || ~8.0",
                 "neos/neos-ui": "~7.0 || ~8.0",
-                "sitegeist/bitzer": "~2.0"
+                "sitegeist/bitzer": "~2.0 || ~3.0"
             },
             "default-branch": true,
             "type": "neos-package",
@@ -8199,7 +8199,7 @@
                 }
             },
             "description": "The translation plugin for the Bitzer content lifecycle task manager for Neos CMS",
-            "time": "2024-01-22T14:00:47+00:00"
+            "time": "2024-01-24T10:02:46+00:00"
         },
         {
             "name": "sitegeist/csvpo",
