@@ -32,9 +32,10 @@ prototype(Hoerbiger.Shared:Block.Video) < prototype(PackageFactory.AtomicFusion.
                         (presentationObject.variant.equals('simpleLoop')) && "w-full h-full object-cover"
                     ]}
                     controls controls.@if.1={!presentationObject.variant.equals('slider') && !presentationObject.variant.equals('simpleLoop')}
-                    autoplay autoplay.@if.1={presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')}
+                    autoplay autoplay.@if.1={presentationObject.variant.equals('simpleLoop')}
                     muted muted.@if.1={presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')}
                     loop loop.@if.1={presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')}
+                    playsinline playsinline.@if.1={presentationObject.variant.equals('slider') || presentationObject.variant.equals('simpleLoop')}
                 >
                     <source src={presentationObject.source}/>
                 </video>
