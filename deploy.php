@@ -130,6 +130,5 @@ task('release', [
 task('deploy', [
     'build',
     'release',
-    'cleanup',
     'success'
 ]);
