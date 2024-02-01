@@ -26,7 +26,7 @@
       type: references
       ui:
         label: 'Top News'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: 'news'
           editorOptions:
