@@ -4,7 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
   ui:
-    label: 'Meist gesucht'
+    label: 'Most Wanted'
     icon: crosshairs
   properties:
     metaHeadline:
@@ -13,7 +13,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:

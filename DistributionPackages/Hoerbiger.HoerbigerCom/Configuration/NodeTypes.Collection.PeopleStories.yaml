@@ -39,7 +39,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Metaline eingeben'
+            placeholder: 'Please enter metaline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -51,7 +51,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Tags eingeben'
+            placeholder: 'Please enter Tags'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -63,7 +63,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Text eingeben'
+            placeholder: 'Please enter text'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:

@@ -6,7 +6,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Link': true
     'Hoerbiger.HoerbigerCom:Mixin.Adjust': true
   ui:
-    label: 'Bild mit überlappendem Text'
+    label: 'Image Overlapped By Text'
     icon: 'clone'
   properties:
     metaHeadline:
@@ -15,7 +15,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -25,7 +25,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Text eingeben'
+            placeholder: 'Please enter text'
       options:
         preset: 'rte.text'
       search:
@@ -36,7 +36,7 @@
       type: 'string'
       defaultValue: 'imageLeft'
       ui:
-        label: 'Variante'
+        label: 'Variant'
         reloadIfChanged: true
         inspector:
           group: adjust

@@ -15,7 +15,7 @@
       type: 'Hoerbiger.HoerbigerCom.PressArchive:Document.Magazine.Press'
   ui:
     icon: archive
-    label: 'Pressearchiv'
+    label: 'Press Archive'
   properties:
     searchType:
       search:

@@ -31,7 +31,7 @@
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   ui:
     icon: file
-    label: 'Seite'
+    label: 'Web Page'
   properties:
     searchType:
       search:

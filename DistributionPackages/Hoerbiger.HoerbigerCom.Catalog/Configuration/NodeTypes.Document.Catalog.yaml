@@ -32,7 +32,7 @@
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
   ui:
     icon: book
-    label: 'Katalog'
+    label: 'Catalog'
   properties:
     searchType:
       search:

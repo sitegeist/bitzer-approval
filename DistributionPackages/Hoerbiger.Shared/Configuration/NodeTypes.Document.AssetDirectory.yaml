@@ -10,5 +10,5 @@
       '*': false
       'Hoerbiger.Shared:Adapter.AssetCollection': true
   ui:
-    label: 'Medienverzeichnis'
+    label: 'Asset Directory'
     icon: 'folder-open'

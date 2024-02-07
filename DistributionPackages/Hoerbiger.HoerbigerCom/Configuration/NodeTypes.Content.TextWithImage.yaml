@@ -5,7 +5,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
     'Hoerbiger.HoerbigerCom:Mixin.Link': true
   ui:
-    label: 'Bild mit Text'
+    label: 'Text With Image'
     icon: id-card
     inspector:
       groups:
@@ -19,7 +19,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -28,7 +28,7 @@
       type: string
       defaultValue: 'imageFirst'
       ui:
-        label: 'Ausrichtung'
+        label: 'Layout'
         reloadIfChanged: true
         inspector:
           group: 'image'
@@ -36,14 +36,14 @@
     text__block__image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       ui:
-        label: 'Bild im Text'
+        label: 'Image inside Text'
         reloadIfChanged: true
         inspector:
           group: 'text'
     text__block__image__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text'
+        label: 'Alt Text'
         inspector:
           group: 'text'
     text__block__image__title:

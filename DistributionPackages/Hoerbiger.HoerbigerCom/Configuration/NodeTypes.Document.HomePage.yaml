@@ -75,7 +75,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
     video__source__desktop:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:
@@ -93,7 +93,7 @@
         'Neos.Neos/Validation/NotEmptyValidator': {}
     image:
       ui:
-        label: 'Bild (Mobil)'
+        label: 'Image (Mobile)'
         reloadIfChanged: true
         inspector:
           group: 'video'
@@ -108,7 +108,7 @@
     primaryFooter:
       type: references
       ui: &footerMenu
-        label: 'Menüpunkte Primärer Footer'
+        label: 'Primary Footer Menu Items'
         reloadIfChanged: true
         inspector:
           group: menu
@@ -120,9 +120,9 @@
       type: references
       ui:
         <<: *footerMenu
-        label: 'Menüpunkte Sekundärer Footer'
+        label: 'Secondary Footer Menu Items'
     tertiaryFooter:
       type: references
       ui:
         <<: *footerMenu
-        label: 'Menüpunkte Tertiärer Footer'
+        label: 'Tertiary Footer Menu Items'

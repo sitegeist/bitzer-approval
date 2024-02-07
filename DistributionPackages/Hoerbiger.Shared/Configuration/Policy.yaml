@@ -10,9 +10,9 @@ roles:
         privilegeTarget: 'Hoerbiger.Shared:Module.Editors'
         permission: GRANT
   'Neos.Neos:RestrictedEditor':
-    label: 'Redakteur'
+    label: 'Editor'
   'Hoerbiger.Shared:ChiefEditor':
-    label: Chefredakteur
+    label: Chief Editor
     description: Grants access to the content, asset, workspace and history module. Users with this role is able to publish to the live workspace.
     parentRoles:
       - 'Neos.Neos:Editor'

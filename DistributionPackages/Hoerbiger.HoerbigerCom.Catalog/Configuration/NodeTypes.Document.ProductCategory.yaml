@@ -30,7 +30,7 @@
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
   ui:
     icon: boxes
-    label: 'Produktkategorie'
+    label: 'Product Category'
   properties:
     searchType:
       search:

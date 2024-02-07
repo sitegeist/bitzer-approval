@@ -8,7 +8,7 @@
       '*': false
       'Hoerbiger.HoerbigerCom:Content.DefinitionItem': true
   ui:
-    label: 'Beschreibungsliste'
+    label: 'Definition List'
     icon: list
   options:
     template:
@@ -25,7 +25,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
   ui:
-    label: 'Listeneintrag'
+    label: 'Definition Item'
     icon: minus
   properties:
     term:

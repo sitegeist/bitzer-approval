@@ -36,13 +36,13 @@
     datePublished:
       type: DateTime
       ui:
-        label: 'Publikationsdatum'
+        label: 'Date of Publication'
         inspector:
           group: story
     applicationWorld:
       type: reference
       ui:
-        label: 'Anwendungswelt'
+        label: 'Application World'
         reloadIfChanged: true
         inspector:
           group: story
@@ -55,7 +55,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       options:
         preset: 'rte.plain'
     searchType:
