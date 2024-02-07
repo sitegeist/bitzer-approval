@@ -33,7 +33,9 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
                 $document,
                 $this->thumbnailService->getThumbnailConfigurationForPreset(PresetIdentifier::IDENTIFIER_PDF->value)
             );
-            return new UriImageSource($this->thumbnailService->getUriForThumbnail($thumbnail));
+            return $thumbnail
+                ? new UriImageSource($this->thumbnailService->getUriForThumbnail($thumbnail))
+                : null;
         } catch (\Exception $exception) {
             return null;
         }

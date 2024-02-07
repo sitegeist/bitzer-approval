@@ -10,6 +10,7 @@ namespace Hoerbiger\Shared\Command;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
+use Neos\Flow\ResourceManagement\PersistentResource;
 use Neos\Media\Domain\Model\Document;
 use Neos\Media\Domain\Model\Image;
 use Neos\Media\Domain\Model\Thumbnail;
@@ -26,22 +27,33 @@ final class ThumbnailCommandController extends CommandController
         private readonly DocumentRepository $documentRepository,
         private readonly ThumbnailRepository $thumbnailRepository,
         private readonly ImageRepository $imageRepository,
-    )
-    {
+    ) {
         parent::__construct();
     }
 
     public function clearDocumentThumbnailImagesCommand(): void
     {
+        $documents = $this->documentRepository->findAll();
+        $this->output->progressStart(count($documents));
         foreach ($this->documentRepository->findAll() as $document) {
             /** @var Document $document */
-            foreach ($this->thumbnailRepository->findByAsset($document) as $thumbnail) {
+            /** @phpstan-ignore-next-line magic method */
+            foreach ($this->thumbnailRepository->findByOriginalAsset($document) as $thumbnail) {
                 /** @var Thumbnail $thumbnail */
-                $thumbnailImage = $this->imageRepository->findOneByResourceSha1($thumbnail->getResource()->getSha1());
+                $this->thumbnailRepository->remove($thumbnail);
+                /** @var ?PersistentResource $resource */
+                $resource = $thumbnail->getResource();
+                if (!$resource) {
+                    continue;
+                }
+                $thumbnailImage = $this->imageRepository->findOneByResourceSha1($resource->getSha1());
                 if ($thumbnailImage instanceof Image) {
                     $this->imageRepository->remove($thumbnailImage);
                 }
             }
+            $this->output->progressAdvance();
         }
+        $this->output->progressFinish();
+        $this->outputLine('');
     }
 }
