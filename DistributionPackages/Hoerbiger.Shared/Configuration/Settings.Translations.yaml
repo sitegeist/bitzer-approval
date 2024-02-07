@@ -1,9 +1,7 @@
 Neos:
   Flow:
     i18n:
-      defaultLocale: de
-      fallbackRule:
-        order: [de, en]
+      defaultLocale: en
 
 Sitegeist:
   CsvPO:
