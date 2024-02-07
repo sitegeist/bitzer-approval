@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\Figure;
 
 /*
@@ -7,57 +10,33 @@ namespace Hoerbiger\Shared\Presentation\Block\Figure;
 
 use Neos\ContentRepository\Domain\Model\NodeType;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Media\Domain\Model\Document;
-use Neos\Media\Domain\Model\Image;
-use Neos\Media\Domain\Repository\ImageRepository;
 use Neos\Media\Domain\Service\ThumbnailService;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
-use Sitegeist\Kaleidoscope\Domain\AssetImageSource;
+use Sitegeist\Kaleidoscope\Domain\UriImageSource;
 use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\DummyImageSourceHelper;
 use Sitegeist\Kaleidoscope\EelHelpers\ImageSourceHelperInterface;
 
 final class ImageSourceFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ThumbnailService $thumbnailService;
-    private ImageRepository $imageRepository;
-    private PersistenceManagerInterface $persistenceManager;
-
     public function __construct(
-        ThumbnailService $thumbnailService,
-        ImageRepository $imageRepository,
-        PersistenceManagerInterface $persistenceManager
+        private readonly ThumbnailService $thumbnailService,
     ) {
-        $this->thumbnailService = $thumbnailService;
-        $this->imageRepository = $imageRepository;
-        $this->persistenceManager = $persistenceManager;
-
     }
 
     public function forDocument(
         Document $document
-    ): ?AssetImageSource {
+    ): ?UriImageSource {
         try {
             $thumbnail = $this->thumbnailService->getThumbnail(
                 $document,
                 $this->thumbnailService->getThumbnailConfigurationForPreset(PresetIdentifier::IDENTIFIER_PDF->value)
             );
+            return new UriImageSource($this->thumbnailService->getUriForThumbnail($thumbnail));
         } catch (\Exception $exception) {
-            $thumbnail = null;
+            return null;
         }
-
-        if ($thumbnail) {
-            $image = $this->imageRepository->findOneByResourceSha1($thumbnail->getResource()->getSha1());
-
-            if (!$image instanceof Image) {
-                $image = new Image($thumbnail->getResource());
-                $this->imageRepository->add($image);
-                $this->persistenceManager->persistAll();
-            }
-            return new AssetImageSource($image);
-        }
-        return null;
     }
 
     public function forImageMixin(
