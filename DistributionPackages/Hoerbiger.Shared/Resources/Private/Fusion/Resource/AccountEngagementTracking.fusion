@@ -13,11 +13,20 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
                     var s = document.createElement("script"); s.type = "text/javascript";
                     s.src = ("https:" == document.location.protocol ? "https://" : "http://") + piHostname + "/pd.js";
                     var c = document.getElementsByTagName("script")[0]; c.parentNode.insertBefore(s, c);
+
+                    var t = document.createElement("script"); t.type = "text/javascript";
+                    t.src = ("https:" == document.location.protocol ? "https://" : "http://") + piHostname + "/pdt.js";
+                    c.parentNode.insertBefore(t, c);
+
+                    window["pdt"] = window["pdt"] || function(){(window["pdt"].cq = window["pdt"].cq || []).push(arguments);};
+                    pdt("setOptIn", Cookiebot.consent.marketing || Cookiebot.consent.statistics);
+                    window.addEventListener("CookiebotOnConsentReady", () => {
+                        pdt("setOptIn", Cookiebot.consent.marketing || Cookiebot.consent.statistics);
+                    }, false);
                 }
             if(window.attachEvent) { window.attachEvent("onload", async_load); }
             else { window.addEventListener("load", async_load, false); }
             })();
-
         </script>'
     }
 }
