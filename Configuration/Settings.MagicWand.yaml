@@ -8,7 +8,7 @@ Sitegeist:
     clonePresets:
       develop:
         host: hoerbiger
-        user: uext_anf
+        user: uext_mhed
         port: 22
         sshOptions: '-t '
         path: '/srv/dockerdata/www-dev/www/hoerbiger_deployer/current'

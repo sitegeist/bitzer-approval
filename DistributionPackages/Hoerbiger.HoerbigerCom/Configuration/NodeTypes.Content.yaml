@@ -6,14 +6,14 @@
     inspector:
       groups:
         anchor:
-          label: 'Anker'
+          label: 'Anchor'
           icon: 'anchor'
           position: start 0
   properties:
     anchorLabel:
       type: string
       ui:
-        label: 'Anker-Bezeichnung'
+        label: 'Anchor Label'
         reloadPageIfChanged: true
         inspector:
           group: 'anchor'

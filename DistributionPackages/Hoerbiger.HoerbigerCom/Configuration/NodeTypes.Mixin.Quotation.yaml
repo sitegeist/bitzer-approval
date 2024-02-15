@@ -7,7 +7,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Text eingeben'
+            placeholder: 'Please enter text'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -18,4 +18,4 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Name eingeben'
+            placeholder: 'Please enter name'

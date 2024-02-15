@@ -6,4 +6,4 @@
       'Hoerbiger.HoerbigerCom.Catalog:Document.Product': false
       'Hoerbiger.HoerbigerCom.Catalog:Document.Product.Compression': true
   ui:
-    label: 'Compression-Produktkategorie'
+    label: 'Compression Product Category'

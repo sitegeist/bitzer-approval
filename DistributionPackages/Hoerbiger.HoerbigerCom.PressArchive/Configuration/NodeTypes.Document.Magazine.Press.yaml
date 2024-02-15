@@ -8,7 +8,7 @@
       'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease': true
   ui:
     icon: folder-open
-    label: 'Pressearchiv'
+    label: 'Press Archive'
   properties:
     targetMode:
       type: string

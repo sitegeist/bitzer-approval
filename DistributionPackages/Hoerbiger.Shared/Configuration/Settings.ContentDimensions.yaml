@@ -4,7 +4,7 @@ Neos:
       language:
         default: de
         defaultPreset: de
-        label: Sprache
+        label: Language
         icon: icon-language
         presets:
           de:

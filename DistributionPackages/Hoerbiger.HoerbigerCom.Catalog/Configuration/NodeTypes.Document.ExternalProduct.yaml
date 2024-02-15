@@ -6,7 +6,7 @@
     'Hoerbiger.HoerbigerCom.Catalog:Tag.Product': true
   ui:
     icon: barcode
-    label: 'Externes Produkt'
+    label: 'External Product'
   properties:
     targetMode:
       defaultValue: 'selectedTarget'

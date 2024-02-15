@@ -5,11 +5,11 @@
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
   ui:
     icon: 'object-ungroup'
-    label: 'Produktgruppe'
+    label: 'Grouped Products'
     inspector:
       groups:
         products:
-          label: 'Produkte'
+          label: 'Products'
           icon: 'barcode'
   properties:
     name:
@@ -18,7 +18,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Titel eingeben'
+            placeholder: 'Please enter title'
       search:
         fulltextExtractor: ${Indexing.extractInto('h2', value)}
         elasticSearchMapping:
@@ -26,7 +26,7 @@
     products:
       type: references
       ui:
-        label: 'Produktseiten'
+        label: 'Product Pages'
         reloadIfChanged: true
         inspector:
           group: products

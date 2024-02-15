@@ -17,7 +17,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -25,7 +25,7 @@
     video:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:
-        label: 'Videodatei'
+        label: 'Video File'
         reloadIfChanged: true
         inspector:
           group: video

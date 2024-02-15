@@ -7,7 +7,7 @@
       '*': false
       'Hoerbiger.HoerbigerCom:Content.Milestone': true
   ui:
-    label: 'Meilensteine'
+    label: 'Milestones'
     icon: business-time
   options:
     template:

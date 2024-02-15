@@ -17,7 +17,7 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
   ui:
     icon: exclamation-triangle
-    label: '404-Seite'
+    label: '404 Page'
   properties:
     title:
       defaultValue: '404'

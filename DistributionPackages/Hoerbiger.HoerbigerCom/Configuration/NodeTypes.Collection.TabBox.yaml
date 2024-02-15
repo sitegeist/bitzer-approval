@@ -10,7 +10,7 @@
       'Hoerbiger.HoerbigerCom:Content.DefinitionListTab': true
       'Hoerbiger.HoerbigerCom:Content.DownloadsTab': true
   ui:
-    label: 'Tab-Box'
+    label: 'Tab Box'
     icon: th-list
   properties:
     metaHeadline:
@@ -19,7 +19,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -51,7 +51,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Tab': true
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
   ui:
-    label: 'Text-Tab'
+    label: 'Text Tab'
 
 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
   superTypes:
@@ -59,7 +59,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Tab': true
     'Hoerbiger.HoerbigerCom:Mixin.DefinitionList': true
   ui:
-    label: 'Beschreibungsliste-Tab'
+    label: 'Definition List Tab'
 
 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
   superTypes:
@@ -67,4 +67,4 @@
     'Hoerbiger.HoerbigerCom:Mixin.Tab': true
     'Hoerbiger.HoerbigerCom:Mixin.Downloads': true
   ui:
-    label: 'Downloads-Tab'
+    label: 'Downloads Tab'

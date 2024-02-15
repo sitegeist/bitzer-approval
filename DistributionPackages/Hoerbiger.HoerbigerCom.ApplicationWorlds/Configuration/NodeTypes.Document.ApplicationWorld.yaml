@@ -33,7 +33,7 @@
       '*': false
   ui:
     icon: compact-disc
-    label: 'Anwendungswelt'
+    label: 'Application World'
     inspector:
       tabs:
         sliderPreview:
@@ -41,7 +41,7 @@
           position: 'after preview'
       groups:
         sliderPreview:
-          label: 'Vorschau Slider Homepage'
+          label: 'Preview Slider Homepage'
           tab: 'sliderPreview'
   properties:
     image:

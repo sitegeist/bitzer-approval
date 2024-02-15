@@ -10,6 +10,6 @@
     freestanding:
       type: 'Hoerbiger.HoerbigerCom.Catalog:Tag.ProductGroup'
   ui:
-    label: 'Gruppenverwaltungen'
+    label: 'Group Administration'
     icon: 'dot-circle'
 

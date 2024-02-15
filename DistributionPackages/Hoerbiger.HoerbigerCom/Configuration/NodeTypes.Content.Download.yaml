@@ -7,7 +7,7 @@
     inspector:
       groups:
         asset:
-          label: 'Datei'
+          label: 'File'
           icon: file
   properties:
     title:
@@ -16,7 +16,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Titel eingeben'
+            placeholder: 'Please enter Title'
     description:
       options:
         preset: 'rte.text'
@@ -27,11 +27,11 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Beschreibung eingeben'
+            placeholder: 'Please enter description'
     asset:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:
-        label: 'Datei'
+        label: 'File'
         reloadIfChanged: true
         inspector:
           group: asset

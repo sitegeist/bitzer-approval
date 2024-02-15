@@ -25,18 +25,18 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
   ui:
     icon: file-invoice
-    label: 'Pressemitteilung'
+    label: 'Press Release'
     inspector:
       groups:
         release:
-          label: 'Pressemitteilung'
+          label: 'Press Release'
           icon: 'file-invoice'
           position: 'before image'
   properties:
     datePublished:
       type: DateTime
       ui:
-        label: 'Publikationsdatum'
+        label: 'Date of Publication'
         reloadPageIfChanged: true
         inspector:
           group: release
@@ -44,7 +44,7 @@
       type: boolean
       defaultValue: true
       ui:
-        label: 'Bild anzeigen'
+        label: 'Show Image'
         reloadPageIfChanged: true
         inspector:
           group: image

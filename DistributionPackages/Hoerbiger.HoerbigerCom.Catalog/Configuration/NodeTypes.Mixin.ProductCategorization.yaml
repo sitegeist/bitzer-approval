@@ -4,13 +4,13 @@
     inspector:
       groups:
         product:
-          label: Produkt
+          label: Product
           icon: barcode
   properties:
     sections:
       type: references
       ui:
-        label: 'Bereiche'
+        label: 'Sections'
         reloadIfChanged: true
         inspector:
           group: product
@@ -20,7 +20,7 @@
     industrySolutions:
       type: references
       ui:
-        label: 'Branchenlösungen'
+        label: 'Industry Solutions'
         reloadIfChanged: true
         inspector:
           group: product
@@ -30,7 +30,7 @@
     productGroup:
       type: reference
       ui:
-        label: 'Produktgruppe'
+        label: 'Product Group'
         reloadIfChanged: true
         inspector:
           group: product

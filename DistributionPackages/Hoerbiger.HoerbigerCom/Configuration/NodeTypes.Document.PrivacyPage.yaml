@@ -9,7 +9,7 @@
       type: 'Hoerbiger.HoerbigerCom:Collection.PrivacyPageContent'
   ui:
     icon: lock
-    label: 'Datenschutz'
+    label: 'Privacy'
   properties:
     searchType:
       search:

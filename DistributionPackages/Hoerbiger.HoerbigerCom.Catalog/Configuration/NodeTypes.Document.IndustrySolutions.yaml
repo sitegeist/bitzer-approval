@@ -30,7 +30,7 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
   ui:
     icon: lightbulb
-    label: 'Branchenlösungen'
+    label: 'Industry Solutions'
   properties:
     searchType:
       search:

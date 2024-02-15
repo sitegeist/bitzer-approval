@@ -3,7 +3,7 @@
     'Hoerbiger.HoerbigerCom:Content': true
   ui:
     icon: 'calculator'
-    label: 'Mini-Rechner'
+    label: 'Mini Calculator'
 
 'Hoerbiger.HoerbigerCom.Catalog:Document.Product':
   childNodes:

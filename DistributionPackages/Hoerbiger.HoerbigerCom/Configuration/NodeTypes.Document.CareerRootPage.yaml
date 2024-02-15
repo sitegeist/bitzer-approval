@@ -31,7 +31,7 @@
       'Hoerbiger.HoerbigerCom:Document.CareerPage': true
   ui:
     icon: scroll
-    label: 'Karriere'
+    label: 'Career'
   properties:
     searchType:
       search:

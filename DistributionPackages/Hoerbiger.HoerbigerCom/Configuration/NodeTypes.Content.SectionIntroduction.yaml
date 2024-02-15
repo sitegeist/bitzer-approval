@@ -5,7 +5,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
     'Hoerbiger.HoerbigerCom:Mixin.Icon': true
   ui:
-    label: 'Einleitung für Abschnitt'
+    label: 'Section Introduction'
     icon: heading
   properties:
     icon:

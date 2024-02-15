@@ -7,7 +7,7 @@
       '*': false
       'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait': true
   ui:
-    label: 'Bilder-Galerie (3:4)'
+    label: 'Image Gallery (3:4)'
     icon: images
   options:
     template:
@@ -23,7 +23,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:

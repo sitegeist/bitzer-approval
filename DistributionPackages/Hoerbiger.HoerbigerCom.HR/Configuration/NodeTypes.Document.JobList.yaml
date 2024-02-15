@@ -13,7 +13,7 @@
       type: 'Hoerbiger.HoerbigerCom.HR:Document.JobNotification'
   ui:
     icon: bullhorn
-    label: 'Ergebnisliste'
+    label: 'Jobs List'
   properties:
     searchType:
       search:

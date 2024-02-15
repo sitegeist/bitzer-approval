@@ -4,19 +4,19 @@
     inspector:
       tabs:
         preview:
-          label: 'Vorschau'
+          label: 'Preview'
           icon: 'eye'
           position: 'after default'
       groups:
         preview:
           tab: preview
-          label: 'Vorschau'
+          label: 'Preview'
           icon: eye
   properties:
     preview__image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       ui:
-        label: 'Vorschaubild'
+        label: 'Preview Image'
         inspector:
           group: 'preview'
       options:
@@ -24,7 +24,7 @@
     preview__image__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text'
+        label: 'Alt Text'
         inspector:
           group: 'preview'
       options:
@@ -40,7 +40,7 @@
     preview__headline:
       type: 'string'
       ui:
-        label: 'Vorschau-Überschrift'
+        label: 'Preview Headline'
         inspector:
           group: 'preview'
       options:
@@ -48,7 +48,7 @@
     preview__description:
       type: 'string'
       ui:
-        label: 'Vorschau-Kurzbeschreibung'
+        label: 'Preview Description'
         inspector:
           group: 'preview'
           editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'

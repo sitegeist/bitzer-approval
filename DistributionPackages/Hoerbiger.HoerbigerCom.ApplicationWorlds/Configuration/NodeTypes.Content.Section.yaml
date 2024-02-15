@@ -6,11 +6,11 @@
     'Hoerbiger.HoerbigerCom:Mixin.Icon': true
   ui:
     icon: compact-disc
-    label: 'Bereich'
+    label: 'Section'
     inspector:
       groups:
         section:
-          label: 'Bereich'
+          label: 'Section'
           icon: compact-disc
   properties:
     name:
@@ -33,7 +33,7 @@
       options:
         preset: 'image.square'
       ui:
-        label: 'Tab-Bild'
+        label: 'Tab-Image'
         inspector:
           group: section
       validation:
@@ -41,7 +41,7 @@
     tab__image__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text Tab-Bild'
+        label: 'Alt Text Tab-Image'
         inspector:
           group: section
       validation:
@@ -51,7 +51,7 @@
     tab__image__title:
       type: 'string'
       ui:
-        label: 'Title-Text Tab-Bild'
+        label: 'Title Text Tab-Image'
         inspector:
           group: section
       validation:

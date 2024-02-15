@@ -3,5 +3,5 @@
     'Hoerbiger.HoerbigerCom:Content': true
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
   ui:
-    label: 'Bild'
+    label: 'Image'
     icon: image

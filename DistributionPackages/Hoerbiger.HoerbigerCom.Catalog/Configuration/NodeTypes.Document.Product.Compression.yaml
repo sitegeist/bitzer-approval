@@ -2,7 +2,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom.Catalog:Document.Product': true
   ui:
-    label: 'Compression-Produkt'
+    label: 'Compression Product'
   childNodes:
     main:
       constraints:
@@ -13,7 +13,7 @@
       type: string
       defaultValue: 'default'
       ui:
-        label: 'Produktklasse'
+        label: 'Product Class'
         reloadIfChanged: true
         inspector:
           group: product

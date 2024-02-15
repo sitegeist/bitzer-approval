@@ -4,7 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Quotation': true
   ui:
     icon: comment-alt
-    label: 'News-zitat'
+    label: 'News Quotation'
   properties:
     division:
         options:
@@ -12,4 +12,4 @@
         ui:
           inline:
             editorOptions:
-              placeholder: 'Bitte Abteilung eingeben'
+              placeholder: 'Please enter division'

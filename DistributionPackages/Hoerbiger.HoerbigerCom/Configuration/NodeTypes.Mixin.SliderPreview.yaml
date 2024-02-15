@@ -4,7 +4,7 @@
     slider__preview__headline:
       type: 'string'
       ui:
-        label: 'Slider: Überschrift'
+        label: 'Slider: Headline'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -14,7 +14,7 @@
     slider__preview__description:
       type: 'string'
       ui:
-        label: 'Slider: Kurzbeschreibung'
+        label: 'Slider: Description'
         inspector:
           group: 'sliderPreview'
           editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
@@ -27,7 +27,7 @@
     video:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:
-        label: 'Vorschauvideo'
+        label: 'Preview Video'
         inspector:
           group: 'sliderPreview'
       constraints:
@@ -37,7 +37,7 @@
       options:
         preset: 'image.5_3'
       ui:
-        label: 'Slider: Grafik'
+        label: 'Slider: Image'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -45,7 +45,7 @@
     slider__preview__image__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text Grafik'
+        label: 'Alt Text Image'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -55,7 +55,7 @@
     slider__preview__image__title:
       type: 'string'
       ui:
-        label: 'Title-Text Grafik'
+        label: 'Title-Text Image'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -65,7 +65,7 @@
       options:
         preset: 'image.landscape'
       ui:
-        label: 'Slider: Hintergrundbild'
+        label: 'Slider: Background Image'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -73,7 +73,7 @@
     slider__preview__background__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text Hintergrundbild'
+        label: 'Alt Text Background Image'
         inspector:
           group: 'sliderPreview'
       validation:
@@ -83,7 +83,7 @@
     slider__preview__background__title:
       type: 'string'
       ui:
-        label: 'Title-Text Hintergrundbild'
+        label: 'Title-Text Backgrund Image'
         inspector:
           group: 'sliderPreview'
       validation:
