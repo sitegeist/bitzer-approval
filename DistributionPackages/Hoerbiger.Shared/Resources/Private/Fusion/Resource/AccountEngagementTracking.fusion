@@ -19,9 +19,9 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
                     c.parentNode.insertBefore(t, c);
 
                     window["pdt"] = window["pdt"] || function(){(window["pdt"].cq = window["pdt"].cq || []).push(arguments);};
-                    pdt("setOptIn", Cookiebot.consent.marketing || Cookiebot.consent.statistics);
+                    pdt("setOptIn", Cookiebot.consent.marketing);
                     window.addEventListener("CookiebotOnConsentReady", () => {
-                        pdt("setOptIn", Cookiebot.consent.marketing || Cookiebot.consent.statistics);
+                        pdt("setOptIn", Cookiebot.consent.marketing);
                     }, false);
                 }
             if(window.attachEvent) { window.attachEvent("onload", async_load); }
