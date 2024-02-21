@@ -24,20 +24,13 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private StageFactory $stageFactory;
-
-    private SiteHeaderFactory $siteHeaderFactory;
-
-    private PlaceholderFactory $placeholderFactory;
 
     public function __construct(
-        StageFactory $stageFactory,
-        SiteHeaderFactory $siteHeaderFactory,
-        PlaceholderFactory $placeholderFactory
+        private readonly StageFactory $stageFactory,
+        private readonly SiteHeaderFactory $siteHeaderFactory,
+        private readonly PlaceholderFactory $placeholderFactory,
+        private readonly BreadcrumbFactory $breadcrumbFactory,
     ) {
-        $this->stageFactory = $stageFactory;
-        $this->siteHeaderFactory = $siteHeaderFactory;
-        $this->placeholderFactory = $placeholderFactory;
     }
 
     public function forJobList(
@@ -51,7 +44,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($jobList, $subGraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($jobList, $subGraph);
 
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($jobList, $subGraph, $inBackend);
@@ -141,7 +134,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subGraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($document, $subGraph);
         return new Page(
             $this->siteHeaderFactory->forDocument($document, $site, $subGraph, $request),
             Collection::fromIterable(array_filter([

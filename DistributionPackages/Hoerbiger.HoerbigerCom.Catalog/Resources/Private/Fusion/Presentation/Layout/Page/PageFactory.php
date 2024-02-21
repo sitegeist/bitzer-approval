@@ -34,26 +34,14 @@ use Neos\Flow\Annotations as Flow;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    /**
-     * @Flow\Inject
-     * @var CatalogStageFactory
-     */
-    protected $catalogstageFactory;
-
-    private StageFactory $stageFactory;
-
-    private SiteHeaderFactory $siteHeaderFactory;
-
-    private ProductListFactory $productListFactory;
-
     public function __construct(
-        StageFactory $stageFactory,
-        SiteHeaderFactory $siteHeaderFactory,
-        ProductListFactory $productListFactory
+        private readonly StageFactory $stageFactory,
+        private readonly SiteHeaderFactory $siteHeaderFactory,
+        private readonly ProductListFactory $productListFactory,
+        private readonly CatalogStageFactory $catalogStageFactory,
+        private readonly LinkFactory $linkFactory,
+        private readonly BreadcrumbFactory $breadcrumbFactory,
     ) {
-        $this->stageFactory = $stageFactory;
-        $this->siteHeaderFactory = $siteHeaderFactory;
-        $this->productListFactory = $productListFactory;
     }
 
     public function forCatalog(TraversableNodeInterface $site, TraversableNodeInterface $catalog, bool $inBackend, ContentContext $subgraph): Page
@@ -66,14 +54,14 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
 
     public function forProductCategory(TraversableNodeInterface $site, TraversableNodeInterface $productCategory,  bool $inBackend, ContentContext $subgraph): Page
     {
-        $stage = $this->catalogstageFactory->forProductAndCategoryIntroduction($productCategory, $inBackend);
+        $stage = $this->catalogStageFactory->forProductAndCategoryIntroduction($productCategory, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $productCategory,$stage, $subgraph);
     }
 
     public function forProduct(TraversableNodeInterface $site, TraversableNodeInterface $product, bool $inBackend, ContentContext $subgraph): Page
     {
-        $stage = $this->catalogstageFactory->forProductAndCategoryIntroduction($product, $inBackend);
+        $stage = $this->catalogStageFactory->forProductAndCategoryIntroduction($product, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $product, $stage, $subgraph);
     }
@@ -88,7 +76,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forHeaderStage($industrySolutions, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolutions, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($industrySolutions, $subgraph);
 
         $anchors = (new Sailor())->findAvailableAnchorsForDocument($industrySolutions);
 
@@ -107,8 +95,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )
@@ -142,7 +129,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forHeaderStage($industrySolution, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($industrySolution, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($industrySolution, $subgraph);
 
         $anchors = (new Sailor())->findAvailableAnchorsForDocument($industrySolution);
 
@@ -161,8 +148,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )
@@ -187,7 +173,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($document, $subgraph);
 
         $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
 
@@ -202,8 +188,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )

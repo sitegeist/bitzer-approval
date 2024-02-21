@@ -44,7 +44,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function __construct(
         private readonly ImageSourceFactory $imageSourceFactory,
         private readonly StageFactory $stageFactory,
-        private readonly SiteHeaderFactory $siteHeaderFactory
+        private readonly SiteHeaderFactory $siteHeaderFactory,
+        private readonly LinkFactory $linkFactory,
+        private readonly BreadcrumbFactory $breadcrumbFactory,
     ) {
     }
 
@@ -94,8 +96,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )
@@ -154,7 +155,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forHeaderStage($searchResultsPage, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($searchResultsPage, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($searchResultsPage, $subgraph);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -214,7 +215,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forHeaderStage($contactPage, $subgraph, $inBackend);
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($contactPage, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($contactPage, $subgraph);
 
         $anchors = (new Sailor())->findAvailableAnchorsForDocument($contactPage);
 
@@ -229,8 +230,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )
@@ -288,8 +288,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )
@@ -310,7 +309,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($document, $subgraph);
 
         $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
 
@@ -329,8 +328,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                            => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )

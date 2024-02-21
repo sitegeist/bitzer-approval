@@ -29,14 +29,12 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterf
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private StageFactory $stageFactory;
 
-    private SiteHeaderFactory $siteHeaderFactory;
-
-    public function __construct(StageFactory $stageFactory, SiteHeaderFactory $siteHeaderFactory)
-    {
-        $this->stageFactory = $stageFactory;
-        $this->siteHeaderFactory = $siteHeaderFactory;
+    public function __construct(
+        private readonly StageFactory $stageFactory,
+        private readonly SiteHeaderFactory $siteHeaderFactory,
+        private readonly BreadcrumbFactory $breadcrumbFactory,
+    ) {
     }
 
     public function forAffiliateFinder(TraversableNodeInterface $site, TraversableNodeInterface $affiliateFinder, bool $inBackend, ContentContext $subGraph): Page
@@ -46,7 +44,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($affiliateFinder, $subGraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($affiliateFinder, $subGraph);
 
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($affiliateFinder, $subGraph, $inBackend);

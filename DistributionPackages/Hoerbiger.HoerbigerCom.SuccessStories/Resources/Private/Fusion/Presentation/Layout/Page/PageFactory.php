@@ -34,24 +34,15 @@ use Neos\Flow\Annotations as Flow;
  */
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ArticleOverviewFactory $articleOverviewFactory;
-
-    private StageFactory $stageFactory;
-
-    private SuccessStoriesStageFactory $successStoriesStageFactory;
-
-    private SiteHeaderFactory $siteHeaderFactory;
 
     public function __construct(
-        ArticleOverviewFactory $articleOverviewFactory,
-        StageFactory $stageFactory,
-        SuccessStoriesStageFactory $successStoriesStageFactory,
-        SiteHeaderFactory $siteHeaderFactory
+        private readonly ArticleOverviewFactory $articleOverviewFactory,
+        private readonly StageFactory $stageFactory,
+        private readonly SuccessStoriesStageFactory $successStoriesStageFactory,
+        private readonly SiteHeaderFactory $siteHeaderFactory,
+        private readonly LinkFactory $linkFactory,
+        private readonly BreadcrumbFactory $breadcrumbFactory,
     ) {
-        $this->articleOverviewFactory = $articleOverviewFactory;
-        $this->stageFactory = $stageFactory;
-        $this->successStoriesStageFactory = $successStoriesStageFactory;
-        $this->siteHeaderFactory = $siteHeaderFactory;
     }
 
     public function forMagazine(TraversableNodeInterface $site, TraversableNodeInterface $magazine, ContentContext $subgraph, bool $inBackend): Page
@@ -64,7 +55,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($magazine, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($magazine, $subgraph);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -108,7 +99,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($document, $subgraph);
 
         $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
 
@@ -123,8 +114,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )

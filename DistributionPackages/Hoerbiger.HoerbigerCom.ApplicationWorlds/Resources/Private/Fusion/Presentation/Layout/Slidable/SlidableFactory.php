@@ -30,20 +30,13 @@ use Sitegeist\Kaleidoscope\EelHelpers\AssetImageSourceHelper;
 
 final class SlidableFactory extends AbstractComponentPresentationObjectFactory
 {
-    private StageFactory $stageFactory;
-
-    private ImageSourceFactory $imageSourceFactory;
-
-    private FigureFactory $figureFactory;
 
     public function __construct(
-        StageFactory $stageFactory,
-        ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory
+        private readonly StageFactory $stageFactory,
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
+        private readonly LinkFactory $linkFactory,
     ) {
-        $this->stageFactory = $stageFactory;
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->figureFactory = $figureFactory;
     }
 
     /**
@@ -51,21 +44,18 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
      */
     public function forSliderPreviewMixins(TraversableNodes $nodes, TraversableNodeInterface $productListNode, bool $inBackend): Slidable
     {
-        $linkFactory = new LinkFactory();
-
         return new Slidable(
             SlidableVariant::VARIANT_APPLICATION_WORLD,
-            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
-                $link = $linkFactory->forLinkToDocument($targetNode, null);
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
                 return $this->stageFactory->forSliderPreviewMixin($targetNode, $inBackend);
             }),
             null,
-            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
                 $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
                 if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
                     $thumbnailImageSource->setAsync(true);
                 }
-                $link = $linkFactory->forLinkToDocument($targetNode, null);
+                $link = $this->linkFactory->forLinkToDocument($targetNode, null);
 
                 $thumNavigationItem = new TextNavigationItem(
                     $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
@@ -77,12 +67,12 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                     return $link->asNoStyles()->withContent($thumNavigationItem);
                 }
             }),
-            Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
+            Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
                 $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
                 if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
                     $thumbnailImageSource->setAsync(true);
                 }
-                $link = $linkFactory->forLinkToDocument($targetNode, null);
+                $link = $this->linkFactory->forLinkToDocument($targetNode, null);
 
                 $thumNavigationItem = new DotNavigationItem();
 
@@ -125,14 +115,16 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
      */
     public function forThumbs(TraversableNodes $nodes, bool $inBackend): SlotInterface
     {
-        $linkFactory = new LinkFactory();
-
-        $result = Collection::fromNodes($nodes, function($targetNode) use ($inBackend, $linkFactory) {
-            $thumbnailImageSource = $this->imageSourceFactory->forImageProperty($targetNode, $inBackend, 'slider__preview__image');
+        return Collection::fromNodes($nodes, function($targetNode) use ($inBackend) {
+            $thumbnailImageSource = $this->imageSourceFactory->forImageProperty(
+                $targetNode,
+                $inBackend,
+                'slider__preview__image'
+            );
             if ($thumbnailImageSource instanceof AssetImageSourceHelper) {
                 $thumbnailImageSource->setAsync(true);
             }
-            $link = $linkFactory->forLinkToDocument($targetNode, null);
+            $link = $this->linkFactory->forLinkToDocument($targetNode, null);
 
             $thumNavigationItem = new ThumbNavigationItem(
                 $thumbnailImageSource
@@ -148,6 +140,5 @@ final class SlidableFactory extends AbstractComponentPresentationObjectFactory
                 return $link->asContainer()->withContent($thumNavigationItem);
             }
         });
-        return $result;
     }
 }

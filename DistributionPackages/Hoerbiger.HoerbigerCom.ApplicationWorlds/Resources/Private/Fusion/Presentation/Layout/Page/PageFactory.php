@@ -45,38 +45,16 @@ use Neos\Flow\Annotations as Flow;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    /**
-     * @Flow\Inject
-     * @var SlidableFactory
-     */
-    protected $slidableFactory;
-
-    /**
-     * @Flow\Inject
-     * @var ImageSourceFactory
-     */
-    protected $imageSourceFactory;
-
-    /**
-     * @Flow\Inject
-     * @var FigureFactory
-     */
-    protected $figureFactory;
-
-    private SiteHeaderFactory $siteHeaderFactory;
-
-    private ProductListFactory $productListFactory;
-
-    private StageFactory $stageFactory;
-
     public function __construct(
-        SiteHeaderFactory $siteHeaderFactory,
-        ProductListFactory $productListFactory,
-        StageFactory $stageFactory
+        private readonly SiteHeaderFactory $siteHeaderFactory,
+        private readonly ProductListFactory $productListFactory,
+        private readonly StageFactory $stageFactory,
+        private readonly SlidableFactory $slidableFactory,
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
+        private readonly LinkFactory $linkFactory,
+        private readonly BreadcrumbFactory $breadcrumbFactory,
     ) {
-        $this->siteHeaderFactory = $siteHeaderFactory;
-        $this->productListFactory = $productListFactory;
-        $this->stageFactory = $stageFactory;
     }
 
     public function forApplicationWorld(TraversableNodeInterface $site, TraversableNodeInterface $applicationWorld, bool $inBackend, ContentContext $subgraph): Page
@@ -99,7 +77,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::VARIANT_REGULARX,
-                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
+                    $this->breadcrumbFactory->forPage($applicationWorld, $subgraph)
                 ),
                 new ContentContainer(
                     ContentContainerVariant::VARIANT_STAGEAFTERBREADCRUMB,
@@ -109,8 +87,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ? new AnchorNavigation(
                         AnchorNavigationVariant::VARIANT_REGULAR,
                         array_map(
-                            fn(Anchor $anchor): Link
-                                => (new LinkFactory())->forAnchor($anchor),
+                            fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                             $anchors
                         )
                     )
@@ -144,7 +121,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 Content::fromNode($applicationWorld->findNamedChildNode(NodeName::fromString('footer'))),
                 new ContentContainer(
                     ContentContainerVariant::VARIANT_REGULARX,
-                    (new BreadcrumbFactory())->forPage($applicationWorld, $subgraph)
+                    $this->breadcrumbFactory->forPage($applicationWorld, $subgraph)
                 )
             ]), $identity)
         );
