@@ -5,8 +5,8 @@
     "version": "1.0.0",
     "require": {
         "internezzo/childreload": "^1.0",
-        "neos/neos": "~8.3.0",
-        "neos/neos-ui": "~8.3.0",
+        "neos/neos": "<8.3.3",
+        "neos/neos-ui": "8.3.6",
         "neos/seo": "^3.3",
         "neos/swiftmailer": "^7.1",
         "neos/redirecthandler-ui": "^2.4",
