@@ -19,7 +19,7 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
                     var c=document.getElementsByTagName("script")[0];c.parentNode.insertBefore(s,c);
                     window["pdt"] = window["pdt"] || function(){(window["pdt"].cq = window["pdt"].cq || []).push(arguments);};
                     pdt("create", piAId, piCId, piDomain);
-                    pdt("hideConsentBanner",true);
+                    pdt("hideConsentBanner", Cookiebot.consent.marketing);
                     pdt("sendPageView");
                 }
                 function async_load(){
