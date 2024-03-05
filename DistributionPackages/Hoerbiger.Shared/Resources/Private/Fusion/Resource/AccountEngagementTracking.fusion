@@ -38,12 +38,4 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
             })();
         </script>'
     }
-
-    @cache {
-        mode = 'uncached'
-        context {
-            1 = 'node'
-            2 = 'documentNode'
-        }
-    }
 }
