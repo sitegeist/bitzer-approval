@@ -7,7 +7,7 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
     renderer = ${
         '<script>
             piAId =  ' + props.piAId + ';
-            piCId = ' + props.piAId + ';
+            piCId = ' + props.piCId + ';
             piDomain = "' + props.piHostname + '";
             (function() {
                 function initializeAccountEngagementScript() {
@@ -34,5 +34,13 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
             } else { window.addEventListener("load", async_load, false); }
             })();
         </script>'
+    }
+
+    @cache {
+        mode = 'uncached'
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+        }
     }
 }
