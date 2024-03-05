@@ -12,6 +12,9 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
             (function() {
                 function initializeAccountEngagementScript() {
                     if (!Cookiebot.consent.marketing) {
+                        if (pdt) {
+                            pdt("revokeConsent");
+                        }
                         return;
                     }
 
