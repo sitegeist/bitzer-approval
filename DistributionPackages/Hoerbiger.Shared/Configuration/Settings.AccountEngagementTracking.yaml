@@ -1,6 +1,6 @@
 Hoerbiger:
   Shared:
     salesforce:
-      piAId: 0
+      piAId: ''
       piHostname: ''
-      piCId: 0
+      piCId: ''

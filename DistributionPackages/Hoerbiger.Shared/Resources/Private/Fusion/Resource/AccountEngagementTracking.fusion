@@ -8,7 +8,7 @@ prototype(Hoerbiger.Shared:Resource.AccountEngagementTracking) < prototype(Neos.
         '<script>
             piAId =  ' + props.piAId + ';
             piCId = ' + props.piAId + ';
-            piDomain = ' + props.piAId + ';
+            piDomain = "' + props.piHostname + '";
             (function() {
                 function initializeAccountEngagementScript() {
                     if (!Cookiebot.consent.marketing) {
