@@ -7,6 +7,8 @@ prototype(Hoerbiger.Shared:Resource.BodyScripts) < prototype(Neos.Fusion:Array) 
         }
     }
 
+    accountEngagementTracking = Hoerbiger.Shared:Resource.AccountEngagementTracking
+
     shared = Neos.Fusion:Tag {
         tagName = 'script'
         attributes.src = Neos.Fusion:ResourceUri {
