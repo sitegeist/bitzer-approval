@@ -134,7 +134,7 @@ class TranslationCommandController extends CommandController
             }
         }
         $targetNode->setIndex($node->getIndex());
-
+        $targetNode->setHiddenInIndex($node->isHiddenInIndex());
         foreach ($node->getChildNodes() as $childNode) {
             $this->refreshNode($childNode, $targetContext, $sourceLanguage, $targetLanguage);
         }
