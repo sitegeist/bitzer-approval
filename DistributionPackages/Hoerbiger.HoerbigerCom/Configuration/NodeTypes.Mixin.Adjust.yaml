@@ -4,5 +4,5 @@
     inspector:
       groups:
         adjust:
-          label: 'Darstellung'
+          label: 'Adjustment'
           icon: 'palette'

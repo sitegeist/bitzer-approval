@@ -75,128 +75,116 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 #[Flow\Scope('singleton')]
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
-    private CardFactory $cardFactory;
-
-    private FigureFactory $figureFactory;
-
-    private ImageSourceFactory $imageSourceFactory;
-
-    private MileStoneFactory $milestoneFactory;
-
-    private PartialFigureEclipseFactory $partialFigureEclipseFactory;
-
-    private TimelineFactory $timelineFactory;
-
-    private VideoFactory $videoFactory;
-
-    private WantedNodeRepository $wantedNodeRepository;
-
     public function __construct(
-        CardFactory $cardFactory,
-        FigureFactory $figureFactory,
-        ImageSourceFactory $imageSourceFactory,
-        MileStoneFactory $milestoneFactory,
-        PartialFigureEclipseFactory $partialFigureEclipseFactory,
-        TimelineFactory $timelineFactory,
-        VideoFactory $videoFactory,
-        WantedNodeRepository $wantedNodeRepository
+        private readonly CardFactory $cardFactory,
+        private readonly FigureFactory $figureFactory,
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly MileStoneFactory $milestoneFactory,
+        private readonly PartialFigureEclipseFactory $partialFigureEclipseFactory,
+        private readonly TimelineFactory $timelineFactory,
+        private readonly VideoFactory $videoFactory,
+        private readonly WantedNodeRepository $wantedNodeRepository,
+        private readonly LinkFactory $linkFactory,
     ) {
-        $this->cardFactory = $cardFactory;
-        $this->figureFactory = $figureFactory;
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->milestoneFactory = $milestoneFactory;
-        $this->partialFigureEclipseFactory = $partialFigureEclipseFactory;
-        $this->timelineFactory = $timelineFactory;
-        $this->videoFactory = $videoFactory;
-        $this->wantedNodeRepository = $wantedNodeRepository;
     }
 
     public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site, TraversableNodeInterface $documentNode): SlotInterface
     {
         $productClass = ProductClass::tryFrom($documentNode->getProperty('productClass'));
-        $theme = $productClass ? $productClass->toTheme() : null;
+        $theme = $productClass?->toTheme();
 
-        switch ((string)$contentNode->getNodeTypeName()) {
-            case 'Hoerbiger.HoerbigerCom:Collection.Downloads':
-                return $this->forDownloadsNode($contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.Download':
-                return $this->cardFactory->forDownloadNode($contentNode, $theme);
-            case 'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText':
-                return $this->forImageOverLappedByTextNode($contentNode, $subgraph, $inBackend, $theme);
-            case 'Hoerbiger.HoerbigerCom:Content.TileNavigation':
-                return $this->forTileNavigation($contentNode, $inBackend, $theme);
-            case 'Hoerbiger.HoerbigerCom:Content.Text':
-                return $this->forTextNode($contentNode, $subgraph, $inBackend, $theme);
-            case 'Hoerbiger.HoerbigerCom:Content.TextWithMetaText':
-                return $this->forTextWithMetaTextNode($contentNode, $subgraph, $inBackend, $theme);
-            case 'Hoerbiger.HoerbigerCom:Content.TextWithImage':
-                return $this->forTextWithImageNode($contentNode, $inBackend, $subgraph, $theme);
-            case 'Hoerbiger.HoerbigerCom:Content.Image':
-                return $this->forImageNode($documentNode, $contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.MostWanted':
-                return $this->forMostWantedNode($contentNode, $inBackend, $subgraph, $site);
-            case 'Hoerbiger.HoerbigerCom:Content.Quotation':
-                return $this->forQuotationNode($contentNode, $theme, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.NewsQuotation':
-                return $this->forNewsQuotationNode($contentNode, $theme);
-            case 'Hoerbiger.HoerbigerCom:Collection.Gallery':
-            case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Square':
-            case 'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait':
-                return $this->forGalleryNode($contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.GalleryImage':
-            case 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Square':
-            case 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait':
-                return $this->forGalleryImageNode($contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.Video':
-                return $this->forVideoNode($contentNode, $inBackend, $theme);
-            case 'Hoerbiger.HoerbigerCom:Collection.Milestones':
-                return $this->forMilestonesNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.Milestone':
-                return $this->milestoneFactory->forMilestone($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.MilestoneImage':
-                return $this->forMilestoneImageNode($contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Collection.DefinitionList':
-                return $this->forDefinitionListNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.DefinitionItem':
-                // @todo how?
-                return $this->forDefinitionItemNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Collection.TabBox':
-                return $this->forTabBox($contentNode, $inBackend, $theme);
-            case 'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox':
-                return $this->forTabBox($contentNode, $inBackend, null);
-            case 'Hoerbiger.HoerbigerCom:Content.TextTab':
-                return $this->forTextTabNode($contentNode, $inBackend, $theme);
-            case 'Hoerbiger.HoerbigerCom:Content.DefinitionListTab':
-                return $this->forDefinitionListTabNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.DownloadsTab':
-                return $this->forDownloadsTabNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab':
-                return $this->forPeopleAndCultureTextTabNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Collection.Benefits':
-                return $this->forBenefitsNode($contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.Benefit':
-                return $this->forBenefitNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Collection.PeopleStories':
-                return $this->forPeopleStoriesNode($contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.PeopleStory':
-                return $this->forPeopleStoryNode($contentNode, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.SectionIntroduction':
-                return $this->forSectionIntroductionNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.CookieDeclaration':
-                return $this->forCookieDeclarationNode($contentNode);
-            case 'Hoerbiger.HoerbigerCom:Content.ImageWithLink':
-                return $this->forImageWithLink($contentNode, $subgraph, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Collection.PrivacyPageContent':
-                return Content::fromNode($contentNode, 'Neos.Neos:ContentCollection');
-            case 'Hoerbiger.HoerbigerCom:Content.MatomoOptOut':
-                return $this->forMatomoOptOut($subgraph);
-            case 'Hoerbiger.HoerbigerCom:Collection.HeaderVideoStage':
-                return $this->forHeaderVideoStage($contentNode, $subgraph, $inBackend);
-            case 'Hoerbiger.HoerbigerCom:Content.HeaderVideoStage.SliderItem':
-                return $this->forHeaderVideoStageSliderItem($contentNode, $subgraph, $inBackend);
-            default:
-                throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
-        }
+        return match ((string)$contentNode->getNodeTypeName()) {
+            'Hoerbiger.HoerbigerCom:Collection.Downloads' => $this->forDownloadsNode($contentNode, $inBackend),
+            'Hoerbiger.HoerbigerCom:Content.Download' => $this->cardFactory->forDownloadNode($contentNode, $theme),
+            'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText' => $this->forImageOverLappedByTextNode(
+                $contentNode,
+                $subgraph,
+                $inBackend,
+                $theme
+            ),
+            'Hoerbiger.HoerbigerCom:Content.TileNavigation' => $this->forTileNavigation(
+                $contentNode,
+                $inBackend,
+                $theme
+            ),
+            'Hoerbiger.HoerbigerCom:Content.Text' => $this->forTextNode($contentNode, $subgraph, $inBackend, $theme),
+            'Hoerbiger.HoerbigerCom:Content.TextWithMetaText' => $this->forTextWithMetaTextNode(
+                $contentNode,
+                $subgraph,
+                $inBackend,
+                $theme
+            ),
+            'Hoerbiger.HoerbigerCom:Content.TextWithImage' => $this->forTextWithImageNode(
+                $contentNode,
+                $inBackend,
+                $subgraph,
+                $theme
+            ),
+            'Hoerbiger.HoerbigerCom:Content.Image' => $this->forImageNode($documentNode, $contentNode, $inBackend),
+            'Hoerbiger.HoerbigerCom:Content.MostWanted' => $this->forMostWantedNode(
+                $contentNode,
+                $inBackend,
+                $subgraph,
+                $site
+            ),
+            'Hoerbiger.HoerbigerCom:Content.Quotation' => $this->forQuotationNode($contentNode, $theme, $inBackend),
+            'Hoerbiger.HoerbigerCom:Content.NewsQuotation' => $this->forNewsQuotationNode($contentNode, $theme),
+            'Hoerbiger.HoerbigerCom:Collection.Gallery', 'Hoerbiger.HoerbigerCom:Collection.Gallery.Square', 'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait' => $this->forGalleryNode(
+                $contentNode,
+                $inBackend
+            ),
+            'Hoerbiger.HoerbigerCom:Content.GalleryImage', 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Square', 'Hoerbiger.HoerbigerCom:Content.GalleryImage.Portrait' => $this->forGalleryImageNode(
+                $contentNode,
+                $inBackend
+            ),
+            'Hoerbiger.HoerbigerCom:Content.Video' => $this->forVideoNode($contentNode, $inBackend, $theme),
+            'Hoerbiger.HoerbigerCom:Collection.Milestones' => $this->forMilestonesNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Content.Milestone' => $this->milestoneFactory->forMilestone($contentNode),
+            'Hoerbiger.HoerbigerCom:Content.MilestoneImage' => $this->forMilestoneImageNode($contentNode, $inBackend),
+            'Hoerbiger.HoerbigerCom:Collection.DefinitionList' => $this->forDefinitionListNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Content.DefinitionItem' => $this->forDefinitionItemNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Collection.TabBox' => $this->forTabBox($contentNode, $inBackend, $theme),
+            'Hoerbiger.HoerbigerCom:Collection.PeopleAndCultureTabBox' => $this->forTabBox(
+                $contentNode,
+                $inBackend,
+                null
+            ),
+            'Hoerbiger.HoerbigerCom:Content.TextTab' => $this->forTextTabNode($contentNode, $inBackend, $theme),
+            'Hoerbiger.HoerbigerCom:Content.DefinitionListTab' => $this->forDefinitionListTabNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Content.DownloadsTab' => $this->forDownloadsTabNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Content.PeopleAndCultureTextTab' => $this->forPeopleAndCultureTextTabNode(
+                $contentNode
+            ),
+            'Hoerbiger.HoerbigerCom:Collection.Benefits' => $this->forBenefitsNode($contentNode, $inBackend),
+            'Hoerbiger.HoerbigerCom:Content.Benefit' => $this->forBenefitNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Collection.PeopleStories' => $this->forPeopleStoriesNode($contentNode, $inBackend),
+            'Hoerbiger.HoerbigerCom:Content.PeopleStory' => $this->forPeopleStoryNode($contentNode, $inBackend),
+            'Hoerbiger.HoerbigerCom:Content.SectionIntroduction' => $this->forSectionIntroductionNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Content.CookieDeclaration' => $this->forCookieDeclarationNode($contentNode),
+            'Hoerbiger.HoerbigerCom:Content.ImageWithLink' => $this->forImageWithLink(
+                $contentNode,
+                $subgraph,
+                $inBackend
+            ),
+            'Hoerbiger.HoerbigerCom:Collection.PrivacyPageContent' => Content::fromNode(
+                $contentNode,
+                'Neos.Neos:ContentCollection'
+            ),
+            'Hoerbiger.HoerbigerCom:Content.MatomoOptOut' => $this->forMatomoOptOut($subgraph),
+            'Hoerbiger.HoerbigerCom:Collection.HeaderVideoStage' => $this->forHeaderVideoStage(
+                $contentNode,
+                $subgraph,
+                $inBackend
+            ),
+            'Hoerbiger.HoerbigerCom:Content.HeaderVideoStage.SliderItem' => $this->forHeaderVideoStageSliderItem(
+                $contentNode,
+                $subgraph,
+                $inBackend
+            ),
+            default => throw new \InvalidArgumentException(
+                'Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName()
+            ),
+        };
     }
 
     private function forDownloadsNode(TraversableNodeInterface $downloadsNode, bool $inBackend): SlotInterface
@@ -225,10 +213,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
-    {
-        /** @var SlotInterface $partialFigureEclipse */
-        $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode($node, $subgraph, $inBackend, $theme);
+    private function forImageOverLappedByTextNode(
+        TraversableNodeInterface $node,
+        ContentContext $subgraph,
+        bool $inBackend,
+        ?Theme $theme
+    ): SlotInterface {
+        $partialFigureEclipse = $this->partialFigureEclipseFactory->forImageOverLappedByTextNode(
+            $node,
+            $subgraph,
+            $inBackend,
+            $theme
+        );
 
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
@@ -461,7 +457,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Editable::fromNodeProperty($textWithImageNode, 'text'),
                         false
                     ),
-                    (new LinkFactory())->forLinkMixin($textWithImageNode, $subgraph, $theme),
+                    $this->linkFactory->forLinkMixin($textWithImageNode, $subgraph, $theme),
                     $textBlockFigure
                         ? new ContentContainer(
                             ContentContainerVariant::VARIANT_HALF_WITH,
@@ -1100,7 +1096,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         $identity = fn (SlotInterface $slot): SlotInterface => $slot;
 
-        $link = (new LinkFactory())->forLinkMixin($imageWithLinkNode, $subgraph, null);
+        $link = $this->linkFactory->forLinkMixin($imageWithLinkNode, $subgraph, null);
 
         $imageSource = $this->imageSourceFactory->forImageMixin($imageWithLinkNode, $inBackend);
         if (!$imageSource) {
@@ -1210,7 +1206,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 )
                 : null,
             $sliderItemNode->getProperty("link__target") && !$inBackend
-                ? (new LinkFactory())->forLinkWithContent($sliderItemNode, $subgraph, $text)
+                ? $this->linkFactory->forLinkWithContent($sliderItemNode, $subgraph, $text)
                 : $text,
             $figure,
             $this->videoFactory->forSliderVideo($sliderItemNode, $inBackend, Theme::VALUE_SLIDER)

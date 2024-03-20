@@ -47,37 +47,19 @@ use Neos\Flow\Annotations as Flow;
 
 final class CardFactory extends AbstractComponentPresentationObjectFactory implements CardFactoryInterface
 {
-    private ImageSourceFactory $imageSourceFactory;
-
-    private FigureFactory $figureFactory;
-
-    private CsvPOTranslator $csvPOTranslator;
-
-    /**
-     * @var TranslationLabelSourceRepository
-     * @Flow\Inject
-     */
-    protected $translationLabelSourceRepository;
-
-    /**
-     * @Flow\Inject
-     * @var LocalizationService
-     */
-    protected $localizationService;
-
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory,
-        CsvPOTranslator $csvPOTranslator
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
+        private readonly CsvPOTranslator $csvPOTranslator,
+        private readonly LinkFactory $linkFactory,
+        private readonly LocalizationService $localizationService,
+        private readonly TranslationLabelSourceRepository $translationLabelSourceRepository,
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->figureFactory = $figureFactory;
-        $this->csvPOTranslator = $csvPOTranslator;
     }
 
     public function forNavigationTile(TraversableNodeInterface $document, bool $inBackend, ?Theme $theme): NavigationCard
     {
-        $link = (new LinkFactory())->forLinkToDocument($document, $theme);
+        $link = $this->linkFactory->forLinkToDocument($document, $theme);
 
         $imageSource = $this->imageSourceFactory->forPreviewMixin($document, $inBackend);
         $figure = $imageSource

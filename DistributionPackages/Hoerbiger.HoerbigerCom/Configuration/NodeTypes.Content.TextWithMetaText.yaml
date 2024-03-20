@@ -4,7 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Text': true
 
   ui:
-    label: 'Einklinker Text'
+    label: 'Text with Meta Text'
     icon: outdent
   properties:
     meta_text:
@@ -13,7 +13,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Meta-Text eingeben'
+            placeholder: 'Please enter Meta Text'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:

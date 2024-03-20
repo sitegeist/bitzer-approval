@@ -7,7 +7,7 @@
       '*': false
       'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts': true
   ui:
-    label: 'Produktliste'
+    label: 'Produkt List'
     icon: 'object-group'
   options:
     template:

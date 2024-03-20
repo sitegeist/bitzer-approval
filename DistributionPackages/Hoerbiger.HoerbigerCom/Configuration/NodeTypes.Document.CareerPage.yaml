@@ -5,7 +5,7 @@
     'Hoerbiger.Shared:Mixin.Searchable': true
   ui:
     icon: user-tie
-    label: 'Karriere'
+    label: 'Career'
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'

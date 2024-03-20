@@ -5,4 +5,4 @@
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   ui:
     icon: search
-    label: 'Suche'
+    label: 'Search Results'

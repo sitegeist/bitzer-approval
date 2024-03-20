@@ -4,7 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Quotation': true
   ui:
     icon: comment-alt
-    label: 'Zitat'
+    label: 'Quotation'
   properties:
     metaHeadline:
       options:
@@ -12,7 +12,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:

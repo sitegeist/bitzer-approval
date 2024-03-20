@@ -9,7 +9,7 @@
       '*': false
       'Hoerbiger.Shared:Adapter.Asset': true
   ui:
-    label: 'Mediensammlung'
+    label: 'Asset Collection'
     icon: 'photo-video'
   properties:
     name:

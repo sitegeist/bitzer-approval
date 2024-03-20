@@ -53,18 +53,15 @@ use Neos\Flow\Annotations as Flow;
  */
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
-    private PressArchiveStageFactory $pressArchivestageFactory;
-    private SiteHeaderFactory $siteHeaderFactory;
-    private CsvPOTranslator $csvPOTranslator;
+
 
     public function __construct(
-        PressArchiveStageFactory $pressArchivestageFactory,
-        SiteHeaderFactory $siteHeaderFactory,
-        CsvPOTranslator $csvPOTranslator
+        private readonly PressArchiveStageFactory $pressArchiveStageFactory,
+        private readonly SiteHeaderFactory $siteHeaderFactory,
+        private readonly LinkFactory $linkFactory,
+        private readonly BreadcrumbFactory $breadcrumbFactory,
+        private readonly CsvPOTranslator $csvPOTranslator,
     ) {
-        $this->pressArchivestageFactory = $pressArchivestageFactory;
-        $this->siteHeaderFactory = $siteHeaderFactory;
-        $this->csvPOTranslator = $csvPOTranslator;
     }
 
     public function  forPressArchive(TraversableNodeInterface $site, TraversableNodeInterface $overviewPage, ContentContext $subgraph, bool $inBackend): Page
@@ -74,7 +71,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($overviewPage, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($overviewPage, $subgraph);
 
         return new Page(
             $this->siteHeaderFactory->forDocument(
@@ -131,7 +128,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forPressRelease(TraversableNodeInterface $site, Node $pressRelease, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
-        $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
+        $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage);
     }
@@ -139,7 +136,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forYearbookRelease(TraversableNodeInterface $site, Node $yearbookRelease, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
-        $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($yearbookRelease, $inBackend);
+        $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($yearbookRelease, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage);
     }
@@ -147,7 +144,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
     public function forHannsRelease(TraversableNodeInterface $site, Node $hannsRelease, ContentContext $subgraph, bool $inBackend): Page
     {
         /** @var SlotInterface $stage */
-        $stage = $this->pressArchivestageFactory->forPressReleaseIntroduction($hannsRelease, $inBackend);
+        $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($hannsRelease, $inBackend);
 
         return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage);
     }
@@ -159,7 +156,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         };
 
         /** @var SlotInterface $breadcrumb */
-        $breadcrumb = (new BreadcrumbFactory())->forPage($document, $subgraph);
+        $breadcrumb = $this->breadcrumbFactory->forPage($document, $subgraph);
 
         $pageVariant = PressVariant::tryFromNode($document);
 
@@ -190,8 +187,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         ? new AnchorNavigation(
                             AnchorNavigationVariant::VARIANT_REGULAR,
                             array_map(
-                                fn(Anchor $anchor): Link
-                                    => (new LinkFactory())->forAnchor($anchor),
+                                fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
                                 $anchors
                             )
                         )

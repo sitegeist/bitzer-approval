@@ -8,7 +8,7 @@
       'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease': true
   ui:
     icon: folder-open
-    label: 'Jahrbuch'
+    label: 'Yearbook'
   properties:
     targetMode:
       type: string

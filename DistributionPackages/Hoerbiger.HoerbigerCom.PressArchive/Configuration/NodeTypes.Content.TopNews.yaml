@@ -17,7 +17,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -26,7 +26,7 @@
       type: references
       ui:
         label: 'Top News'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: 'news'
           editorOptions:
@@ -37,7 +37,7 @@
     category:
       type: string
       ui:
-        label: 'Link auf Kategorie'
+        label: 'Category'
         reloadIfChanged: true
         inspector:
           group: 'news'
@@ -48,7 +48,7 @@
               news:
                 label: 'News'
               yearbook:
-                label: 'Jahrbuch'
+                label: 'Yearbook'
               hanns:
                 label: 'HANNS.'
     linkLabel:

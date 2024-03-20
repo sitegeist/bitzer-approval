@@ -9,7 +9,7 @@
       '*': false
       'Hoerbiger.HoerbigerCom:Content.MilestoneImage': true
   ui:
-    label: 'Meilenstein'
+    label: 'Milestone'
     icon: clock
   properties:
     year:

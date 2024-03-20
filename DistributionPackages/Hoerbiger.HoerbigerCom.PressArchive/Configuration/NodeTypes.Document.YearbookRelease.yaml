@@ -15,24 +15,24 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithMetaText': true
   ui:
     icon: book
-    label: 'Jahrbuch'
+    label: 'Yearbook'
     inspector:
       groups:
         magazin:
-          label: 'Magazine'
+          label: 'Magazin'
           icon: 'file-invoice'
           position: 'before image'
   properties:
     datePublished:
       type: DateTime
       ui:
-        label: 'Publikationsdatum'
+        label: 'Date of Publication'
         inspector:
           group: magazin
     edition:
       type: string
       ui:
-        label: 'Ausgabe'
+        label: 'Edition'
         reloadIfChanged: true
         inspector:
           group: magazin

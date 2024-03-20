@@ -73,6 +73,12 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
     protected $localizationService;
 
     /**
+     * @Flow\Inject
+     * @var LinkFactory
+     */
+    protected $linkFactory;
+
+    /**
      * @return array<int,ProductCard>
      */
     public function forIndustrySolutionProducts(ContentContext $subgraph, TraversableNodeInterface $industrySolution): array
@@ -188,7 +194,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         $products = Collection::fromNodes(
             TraversableNodes::fromArray($groupedProductListNode->getProperty('products') ?: []),
             function (TraversableNodeInterface $productDocument) {
-                $link = (new LinkFactory())
+                $link = $this->linkFactory
                     ->forLinkToDocument($productDocument, null)
                     ->asPlainLabel();
 
@@ -235,7 +241,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         $products = Collection::fromNodes(
             TraversableNodes::fromArray($products),
             function (TraversableNodeInterface $productDocument) {
-                $link = (new LinkFactory())
+                $link = $this->linkFactory
                     ->forLinkToDocument($productDocument, null)
                     ->asPlainLabel();
 

@@ -8,4 +8,4 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Label eingeben'
+            placeholder: 'Please enter label'

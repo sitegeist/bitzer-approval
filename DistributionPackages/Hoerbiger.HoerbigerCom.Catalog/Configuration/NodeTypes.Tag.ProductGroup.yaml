@@ -3,12 +3,12 @@
     'Hoerbiger.HoerbigerCom:Content': true
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
   ui:
-    label: 'Produktgruppe'
+    label: 'Product Groups'
     icon: 'genderless'
     inspector:
       groups:
         groupSetting:
-          label: 'Produktgruppe'
+          label: 'Group Setting'
           icon: 'object-group'
           position: before image
 
@@ -16,7 +16,7 @@
     title:
       type: 'string'
       ui:
-        label: 'Titel'
+        label: 'Title'
         inspector:
           group: 'groupSetting'
 

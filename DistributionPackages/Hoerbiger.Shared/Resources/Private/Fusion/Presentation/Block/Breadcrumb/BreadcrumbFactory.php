@@ -7,7 +7,6 @@ namespace Hoerbiger\Shared\Presentation\Block\Breadcrumb;
 
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
-use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -17,6 +16,11 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class BreadcrumbFactory extends AbstractComponentPresentationObjectFactory
 {
+    public function __construct(
+        private readonly LinkFactory $linkFactory
+    ) {
+    }
+
     public function forPage(TraversableNodeInterface $currentDocument, ContentContext $subgraph): Breadcrumb
     {
         $nodesOnPath = $subgraph->getNodesOnPath(
@@ -37,7 +41,7 @@ final class BreadcrumbFactory extends AbstractComponentPresentationObjectFactory
                 }
             }, $nodesOnPath))),
             function($node) {
-                return (new LinkFactory())->forBreadcrumbItem($node);
+                return $this->linkFactory->forBreadcrumbItem($node);
             }
         );
 

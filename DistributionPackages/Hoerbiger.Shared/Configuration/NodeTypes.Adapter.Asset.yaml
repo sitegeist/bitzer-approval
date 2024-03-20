@@ -9,7 +9,7 @@
     nodeTypes:
       '*': false
   ui:
-    label: 'Mediendokument'
+    label: 'Asset'
     icon: 'file-text'
   properties:
     name:

@@ -9,7 +9,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Text eingeben'
+            placeholder: 'Please enter text'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:

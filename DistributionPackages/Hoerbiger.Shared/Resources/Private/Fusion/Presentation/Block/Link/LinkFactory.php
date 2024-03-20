@@ -14,7 +14,9 @@ use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Neos\Media\Domain\Model\Asset;
 use Neos\Media\Domain\Model\Document;
+use Neos\Media\Domain\Repository\AssetRepository;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
@@ -23,6 +25,11 @@ use Psr\Http\Message\UriInterface;
 
 final class LinkFactory extends AbstractComponentPresentationObjectFactory
 {
+    public function __construct(
+        private readonly AssetRepository $assetRepository
+    ) {
+    }
+
     public function forLinkMixin(TraversableNodeInterface $node, ContentContext $subgraph, ?Theme $theme): ?Link
     {
         $href = $this->resolveRawLinkTargetUri($node->getProperty('link__target'), $subgraph);
@@ -141,12 +148,16 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
     public function resolveRawLinkTargetUri(?string $rawLinkTarget, ContentContext $subgraph): ?UriInterface
     {
         $rawLinkTarget = $rawLinkTarget ?: '';
-        if (\mb_substr($rawLinkTarget, 0, 7) === 'node://') {
-            /** @var TraversableNodeInterface|null $targetNode */
+        if (\str_starts_with($rawLinkTarget, 'node://')) {
             $targetNode = $subgraph->getNodeByIdentifier(\mb_substr($rawLinkTarget, 7));
-
-            if ($targetNode) {
+            if ($targetNode instanceof TraversableNodeInterface) {
                 return $this->uriService->getNodeUri($targetNode);
+            }
+        }
+        if (\str_starts_with($rawLinkTarget, 'asset://')) {
+            $asset = $this->assetRepository->findByIdentifier(\mb_substr($rawLinkTarget, 8));
+            if ($asset instanceof Asset) {
+                return $this->uriService->getAssetUri($asset);
             }
         }
 

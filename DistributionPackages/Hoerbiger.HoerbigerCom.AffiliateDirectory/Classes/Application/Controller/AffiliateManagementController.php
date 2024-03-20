@@ -79,8 +79,8 @@ final class AffiliateManagementController extends AbstractModuleController
             );
         } else {
             $this->addFlashMessage(
-                'Die hochgeladene Datei war leer oder nicht im geforderten Format (xls).
-            Bitte prüfen und erneut hochladen.',
+                'The uploaded image was empty or did not conform to the required format (xls).
+            Please try a new one.',
                 "",
                 Error\Message::SEVERITY_ERROR
             );

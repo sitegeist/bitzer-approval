@@ -5,7 +5,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.NonEditableUriPathSegment': true
   ui:
     icon: bell
-    label: 'Anmeldung zum Job Alert'
+    label: 'Job Application Notification'
   properties:
     searchType:
       search:

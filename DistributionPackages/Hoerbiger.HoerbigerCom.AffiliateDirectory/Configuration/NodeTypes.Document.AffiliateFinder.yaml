@@ -6,7 +6,7 @@
     'Hoerbiger.Shared:Mixin.Searchable': true
   ui:
     icon: search-location
-    label: 'Standortfinder'
+    label: 'Affiliate Finder'
   properties:
     searchType:
       search:
@@ -17,7 +17,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('h2', value)}
         elasticSearchMapping:

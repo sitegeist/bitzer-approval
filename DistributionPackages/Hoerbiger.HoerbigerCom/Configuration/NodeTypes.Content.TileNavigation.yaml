@@ -2,12 +2,12 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
   ui:
-    label: 'Kachelnavigation'
+    label: 'Tile Navigation'
     icon: 'th-large'
     inspector:
       groups:
         elements:
-          label: 'Elemente'
+          label: 'Items'
           icon: 'th-large'
   properties:
     metaHeadline:
@@ -16,7 +16,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -24,7 +24,7 @@
     documents:
       type: references
       ui:
-        label: 'Seiten'
+        label: 'Documents'
         reloadIfChanged: true
         inspector:
           group: 'elements'

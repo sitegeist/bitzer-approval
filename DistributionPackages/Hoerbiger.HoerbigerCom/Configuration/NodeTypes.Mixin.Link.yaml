@@ -10,7 +10,7 @@
     link__target:
       type: string
       ui:
-        label: 'Link-Ziel'
+        label: 'Link Target'
         reloadIfChanged: true
         inspector:
           group: 'link'
@@ -18,7 +18,7 @@
     link__label:
       type: string
       ui:
-        label: 'Link-Label'
+        label: 'Link Label'
         reloadIfChanged: true
         inspector:
           group: 'link'

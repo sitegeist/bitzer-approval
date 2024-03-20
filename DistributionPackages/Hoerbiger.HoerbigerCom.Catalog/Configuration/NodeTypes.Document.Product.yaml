@@ -28,7 +28,7 @@
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
   ui:
     icon: barcode
-    label: 'Produkt'
+    label: 'Product'
   properties:
     searchType:
       search:

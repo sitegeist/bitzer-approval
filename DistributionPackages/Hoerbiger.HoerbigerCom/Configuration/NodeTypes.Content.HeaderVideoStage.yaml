@@ -29,4 +29,4 @@
     'Hoerbiger.HoerbigerCom:Mixin.Link': true
   ui:
     icon: image
-    label: 'SliderElement'
+    label: 'Slider Item'

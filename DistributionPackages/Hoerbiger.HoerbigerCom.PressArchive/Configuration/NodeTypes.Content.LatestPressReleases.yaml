@@ -4,7 +4,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   ui:
     icon: 'newspaper'
-    label: 'Neueste Pressemitteilungen'
+    label: 'Latest Press Releases'
   properties:
     metaHeadline:
       options:
@@ -12,7 +12,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
@@ -23,7 +23,7 @@
       ui:
         inline:
           editorOptions:
-            placeholder: 'Bitte Überschrift eingeben'
+            placeholder: 'Please enter headline'
       search:
         fulltextExtractor: ${Indexing.extractInto('h2', value)}
         elasticSearchMapping:

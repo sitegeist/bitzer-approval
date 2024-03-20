@@ -4,13 +4,13 @@
     inspector:
       groups:
         image:
-          label: 'Bild'
+          label: 'Image'
           icon: 'image'
   properties:
     image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       ui:
-        label: 'Bild'
+        label: 'Image'
         reloadIfChanged: true
         inspector:
           group: 'image'
@@ -19,7 +19,7 @@
     image__alt:
       type: 'string'
       ui:
-        label: 'Alt-Text'
+        label: 'Alt Text'
         inspector:
           group: 'image'
       validation:

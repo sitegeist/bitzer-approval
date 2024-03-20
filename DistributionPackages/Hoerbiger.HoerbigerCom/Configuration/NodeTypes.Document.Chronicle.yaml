@@ -9,7 +9,7 @@
       type: 'Hoerbiger.HoerbigerCom:Collection.Milestones'
   ui:
     icon: history
-    label: 'Chronik'
+    label: 'Chronicle'
   properties:
     searchType:
       search:

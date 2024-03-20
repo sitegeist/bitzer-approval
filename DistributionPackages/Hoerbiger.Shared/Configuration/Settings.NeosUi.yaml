@@ -1,7 +1,7 @@
 Neos:
   Neos:
     userInterface:
-      defaultLanguage: de
+      defaultLanguage: en
       navigateComponent:
         nodeTree:
           loadingDepth: 1

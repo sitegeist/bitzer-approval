@@ -2,5 +2,5 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
   ui:
-    label: 'Cookie Übersicht'
+    label: 'Cookie Declaration'
     icon: cookie

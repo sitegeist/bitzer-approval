@@ -5,7 +5,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.NonEditableUriPathSegment': true
   ui:
     icon: pen
-    label: 'Bewerbungsformular'
+    label: 'Job Application'
   properties:
     searchType:
       search:

@@ -5,7 +5,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
   ui:
     icon: envelope-open-text
-    label: 'Kontakt'
+    label: 'Contact'
   childNodes:
     main:
       type: 'Neos.Neos:ContentCollection'

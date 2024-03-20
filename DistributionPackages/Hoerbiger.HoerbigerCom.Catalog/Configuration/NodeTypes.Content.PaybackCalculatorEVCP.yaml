@@ -4,14 +4,14 @@
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   ui:
     icon: 'pencil-square-o'
-    label: 'eVCP Kalkulator'
+    label: 'eVCP Calculator'
     inspector:
       groups:
         calculationFactors:
-          label: 'Kalkulationsgrundlage'
+          label: 'Calculation Factors'
           icon: bars
         inputDefaults:
-          label: 'Eingabe Voreinstellungen'
+          label: 'Input Defaults'
           icon: keyboard-o
 
   properties:

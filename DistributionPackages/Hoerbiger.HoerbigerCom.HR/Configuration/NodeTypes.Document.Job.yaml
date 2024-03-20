@@ -5,7 +5,7 @@
     'Hoerbiger.HoerbigerCom:Mixin.NonEditableUriPathSegment': true
   ui:
     icon: glasses
-    label: 'Jobdetailseite'
+    label: 'Job Detail Page'
   properties:
     searchType:
       search:

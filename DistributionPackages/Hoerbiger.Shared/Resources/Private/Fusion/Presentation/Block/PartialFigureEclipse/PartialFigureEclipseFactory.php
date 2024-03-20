@@ -1,4 +1,7 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
+
 namespace Hoerbiger\Shared\Presentation\Block\PartialFigureEclipse;
 
 /*
@@ -22,43 +25,36 @@ use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
-use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class PartialFigureEclipseFactory extends AbstractComponentPresentationObjectFactory
 {
-    private ImageSourceFactory $imageSourceFactory;
-
-    private FigureFactory $figureFactory;
-
     public function __construct(
-        ImageSourceFactory $imageSourceFactory,
-        FigureFactory $figureFactory
+        private readonly ImageSourceFactory $imageSourceFactory,
+        private readonly FigureFactory $figureFactory,
+        private readonly LinkFactory $linkFactory,
     ) {
-        $this->imageSourceFactory = $imageSourceFactory;
-        $this->figureFactory = $figureFactory;
     }
 
-    public function forImageOverLappedByTextNode(TraversableNodeInterface $node, ContentContext $subgraph, bool $inBackend, ?Theme $theme): PartialFigureEclipse
-    {
+    public function forImageOverLappedByTextNode(
+        TraversableNodeInterface $node,
+        ContentContext $subgraph,
+        bool $inBackend,
+        ?Theme $theme
+    ): PartialFigureEclipse {
         $imageSource = $this->imageSourceFactory->forImageMixin($node, $inBackend);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Image must be given for ImageOverLappedByText in frontend.');
         }
-        $figure = $this->figureFactory->forPartialEclipse($imageSource);
-
-        $identity = function (SlotInterface $slot) {
-            return $slot;
-        };
 
         return new PartialFigureEclipse(
             PartialFigureEclipseVariant::from(
                 $node->getProperty('variant')
                     ?: PartialFigureEclipseVariant::VARIANT_IMAGELEFT
             ),
-            $figure,
+            $this->figureFactory->forPartialEclipse($imageSource),
             new Stack(
                 StackVariant::VARIANT_XS,
-                Collection::fromIterable(array_filter([
+                Collection::fromSlots(...array_filter([
                     ($inBackend || $node->getProperty('headline'))
                         ? new Headline(
                             HeadlineSize::SIZE_MEDIUM_ITALIC,
@@ -72,8 +68,8 @@ final class PartialFigureEclipseFactory extends AbstractComponentPresentationObj
                         Editable::fromNodeProperty($node, 'text'),
                         false
                     ),
-                    (new LinkFactory())->forLinkMixin($node, $subgraph, $theme)
-                ]), $identity)
+                    $this->linkFactory->forLinkMixin($node, $subgraph, $theme)
+                ]))
             )
         );
     }

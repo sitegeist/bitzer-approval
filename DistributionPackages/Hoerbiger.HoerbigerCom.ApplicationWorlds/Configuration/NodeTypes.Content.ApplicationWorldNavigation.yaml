@@ -4,9 +4,9 @@
     'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   ui:
     icon: compact-disc
-    label: 'Anwendungswelt-Navigation'
+    label: 'Application Worlds Navigation'
     inspector:
       groups:
         section:
-          label: 'Bereich'
+          label: 'Section'
           icon: compact-disc
