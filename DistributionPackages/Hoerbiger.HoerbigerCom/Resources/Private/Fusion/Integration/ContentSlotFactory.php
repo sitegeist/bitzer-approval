@@ -471,22 +471,19 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
-            new Stack(
-                StackVariant::VARIANT_SM,
-                Collection::fromIterable(array_filter([
-                    $inBackend || $textWithImageNode->getProperty('metaHeadline')
-                        ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($textWithImageNode, 'metaHeadline')
-                        ): null,
-                    new Grid(
-                        GridVariant::VARIANT_TWOCOLUMNSNOGAP,
-                        $layout === Layout::VALUE_IMAGEFIRST
-                            ? Collection::fromIterable([$figure, $text], $identity)
-                            : Collection::fromIterable([$text, $figure], $identity)
-                    )
-                ]))
-            )
+            Collection::fromIterable(array_filter([
+                $inBackend || $textWithImageNode->getProperty('metaHeadline')
+                    ? new Separator(
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($textWithImageNode, 'metaHeadline')
+                    ): null,
+                new Grid(
+                    GridVariant::VARIANT_TWOCOLUMNSNOGAP,
+                    $layout === Layout::VALUE_IMAGEFIRST
+                        ? Collection::fromIterable([$figure, $text], $identity)
+                        : Collection::fromIterable([$text, $figure], $identity)
+                )
+            ]))
         );
     }
 
