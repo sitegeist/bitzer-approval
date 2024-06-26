@@ -12,6 +12,11 @@ an active VPN connection is required.
 
 The following steps are to be executed once on project setup.
 
+**Activate systemd-networkd**
+```sh
+sudo systemctl enable --now systemd-networkd
+```
+
 **Installing the VPN client**
 ```sh
 sudo apt-get install openfortivpn
@@ -24,94 +29,101 @@ VPN_USER=$vpnUsername
 VPN_PASS=$vpnPassword
 ```
 
-**Creating the ip-up config file**
+**Store the VPN connection data**
 ```sh
-cat > /etc/ppp/ip-up.d/hoerbiger <<'EOF'
-#!/bin/bash
-
-IPS='172.20.0.0/16'
-
-INTERFACE=$1
-
-if [ "$INTERFACE" != "hoerbiger" ]; then
-exit 0
-fi
-
-for IP in $IPS; do
-ip route add $IP dev "$INTERFACE"
-done
-EOF
-```
-
-```sh
-chmod +x /etc/ppp/ip-up.d/hoerbiger
-```
-
-**Setting DNS**
-```
-cat >> /etc/systemd/network/10-hoerbiger.network <<EOF
-[Match]
-Name=hoerbiger
-
-[Network]
-DNS=172.20.0.16
-DNS=172.20.1.23
-Domains=hoerbiger.com
-EOF
-```
-
-```
-systemctl restart systemd-networkd.service
-systemctl restart systemd-resolved.service
-```
-
-**Storing the VPN connection data**
-```sh
-cat >> /etc/openfortivpn/hoerbiger <<EOF
+touch /etc/openfortivpn/hoerbiger.conf
+chmod 0600 /etc/openfortivpn/hoerbiger.conf
+cat <<EOF | sudo tee /etc/openfortivpn/hoerbiger.conf >/dev/null
 host = df3.hoerbiger.com
-username = $VPN_USER
-password = $VPN_PASS
+username = ${VPN_USER}
+password = ${VPN_PASS}
 set-dns = 0
-pppd-use-peerdns = 0
+pppd-use-peerdns = 1
 set-routes = 0
 pppd-ifname = hoerbiger
 EOF
 ```
 
-**Adjusting the SSH config**
-
-> Execute the following commands as regular user
+**Create the ip-up config file**
 
 ```sh
-VPN_USER=$vpnUsername
+cat <<'EOF' | sudo tee /etc/ppp/ip-up.d/hoerbiger >/dev/null
+#!/bin/bash
+
+[ "${PPP_IFACE}" != "hoerbiger" ] && exit 0
+
+function kill_ppp {
+    kill -HUP "${PPPD_PID}" 
+    exit 1
+}
+
+[ -n "${DNS1}" ] && DNS+="DNS=${DNS1}" 
+[ -n "${DNS2}" ] && [ "${DNS1}" != "${DNS2}" ] && DNS+=$'\n'"DNS=${DNS2}" 
+
+cat > /etc/systemd/network/10-hoerbiger.network <<EOT
+[Match]
+Name=hoerbiger
+
+[Address]
+Address=${PPP_LOCAL}/16
+
+[Network]
+Domains=hoerbiger.com
+DHCPv6PrefixDelegation=no
+LinkLocalAddressing=no
+${DNS}
+EOT
+
+networkctl reload
+
+#rm /etc/systemd/network/10-hoerbiger.network || true
+
+count=0
+while true; do
+    ((++count < 10)) || kill_ppp
+    if
+        ping -c1 www-dev.hoerbiger.com >/dev/null 2>&1 &&
+        ping -c1 www-stage.hoerbiger.com >/dev/null 2>&1 &&
+        ping -c1 www-prod.hoerbiger.com >/dev/null 2>&1
+    then
+        break
+    fi
+    sleep 1
+done
+true
+EOF
 ```
 
+**Restart network control**
 ```sh
-cat >> ~/.ssh/config <<EOF
-Host hoerbiger
-    HostName 172.20.245.101
-    User $VPN_USER
-EOF
+systemctl restart systemd-networkd.service
+systemctl restart systemd-resolved.service
 ```
 
 #### VPN Connection
 
 You can now connect to the VPN via
-
 ```sh
-sudo openfortivpn -c /etc/openfortivpn/hoerbiger
+sudo systemctl start openfortivpn@hoerbiger
 ```
 
-Keep the tab open for keeping the connection alive.
+#### VPN Status
 
-Additionally, when connecting to the servers via SSH, you might have to run
-
+As of now, the connection runs in the background and does not need a separate console anymore.
+In consequence, to check the current connection status, the following commands are available:
+```sh
+systemctl status openfortivpn@hoerbiger
+networkctl status hoerbiger
 ```
-systemctl restart systemd-networkd.service
-systemctl restart systemd-resolved.service
-```
 
-again after each system start.
+#### VPN Disconnection
+
+To manually disconnect from VPN, use
+```sh
+sudo systemctl stop openfortivpn@hoerbiger
+```
+Additionally, on system shutdown the connection will be terminated as well.
+
 
 ### Deployment
 
