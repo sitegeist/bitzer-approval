@@ -4,7 +4,8 @@ prototype(Hoerbiger.HoerbigerCom:CacheSegment.TileNavigation) < prototype(Packag
             node = ${node}
         }
         entryTags {
-            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom:Document')}
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom:Document', node)}
+            2 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom:Content.TileNavigation', node)}
         }
     }
 }
