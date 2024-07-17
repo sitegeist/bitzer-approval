@@ -11,14 +11,20 @@ Neos:
             label: Deutsch
             values: ['de']
             uriSegment: de
+            options:
+              translationStrategy: 'none'
           en:
             label: English
             values: ['en']
             uriSegment: en
+            options:
+              translationStrategy: 'none'
           zh:
             label: Chinese
             values: ['zh']
             uriSegment: zh
+            options:
+              translationStrategy: 'none'
 
   Neos:
     routing:

@@ -1,0 +1,17 @@
+Hoerbiger:
+  HoerbigerCom:
+    autoTranslationReview:
+      assignments:
+        de:
+          zh:
+            agents: ['Hoerbiger.Shared:ChineseEditor']
+            interval: 'P3D'
+        en:
+          zh:
+            agents: ['Hoerbiger.Shared:ChineseEditor']
+            interval: 'P3D'
+
+Sitegeist:
+  Bitzer:
+    factories:
+      'Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTask': 'Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTaskFactory'
