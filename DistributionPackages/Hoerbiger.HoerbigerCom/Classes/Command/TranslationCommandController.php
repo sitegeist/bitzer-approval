@@ -8,44 +8,46 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Command;
 
+use Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTask;
+use Neos\ContentRepository\DimensionSpace\Dimension\ContentDimensionIdentifier;
+use Neos\ContentRepository\DimensionSpace\DimensionSpace\DimensionSpacePoint;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
 use Neos\Flow\Persistence\PersistenceManagerInterface;
+use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Service\ContentContext;
 use Neos\Neos\Domain\Service\ContentContextFactory;
+use Sitegeist\Bitzer\Application\Bitzer;
+use Sitegeist\Bitzer\Domain\Agent\Agent;
+use Sitegeist\Bitzer\Domain\Task\Command\ScheduleTask;
+use Sitegeist\Bitzer\Domain\Task\NodeAddress;
+use Sitegeist\Bitzer\Domain\Task\Schedule;
+use Sitegeist\Bitzer\Domain\Task\TaskClassName;
+use Sitegeist\Bitzer\Domain\Task\TaskIdentifier;
 use Sitegeist\LostInTranslation\ContentRepository\NodeTranslationService;
 use Sitegeist\LostInTranslation\Domain\TranslationServiceInterface;
 
-/**
- * @Flow\Scope("singleton")
- */
+#[Flow\Scope('singleton')]
 class TranslationCommandController extends CommandController
 {
     /**
-     * @Flow\Inject
-     * @var ContentContextFactory
+     * @var array<string,mixed>
      */
-    protected $contentContextFactory;
+    #[Flow\InjectConfiguration(path: 'autoTranslationReview.assignments')]
+    protected array $translationTaskAssignmentSettings;
 
-    /**
-     * @Flow\Inject
-     * @var TranslationServiceInterface
-     */
-    protected $translationService;
-
-    /**
-     * @Flow\Inject
-     * @var NodeTranslationService
-     */
-    protected $nodeTranslationService;
-
-    /**
-     * @Flow\Inject
-     * @var PersistenceManagerInterface
-     */
-    protected $persistenceManager;
+    public function __construct(
+        private readonly ContentContextFactory $contentContextFactory,
+        private readonly TranslationServiceInterface $translationService,
+        private readonly NodeTranslationService $nodeTranslationService,
+        private readonly PersistenceManagerInterface $persistenceManager,
+        private readonly Bitzer $bitzer,
+        private readonly Schedule $schedule,
+    ) {
+        parent::__construct();
+    }
 
     public function resetCommand(string $sourceLanguage, string $targetLanguage): void
     {
@@ -113,11 +115,21 @@ class TranslationCommandController extends CommandController
         /** @var ?Node $targetNode */
         $targetNode = $targetContext->getNodeByIdentifier($node->getIdentifier());
 
+        $createReviewTask = false;
         if (is_null($targetNode) || !$targetNode->getDimensions()) {
             $this->output->outputLine('Translating node ' . $node->getLabel());
+            /** @var Node $targetNode */
             $targetNode = $targetContext->adoptNode($node);
+            $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
+            if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
+                $targetNode->setHidden(true);
+                $createReviewTask = true;
+            }
         } elseif ($targetNode->isTethered()) {
             $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
+            if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
+                $createReviewTask = true;
+            }
         } elseif ($node->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Mixin.Introduction')) {
             $this->output->outputLine('Translating properties of node ' . $node->getLabel());
             $texts = [
@@ -132,9 +144,47 @@ class TranslationCommandController extends CommandController
             foreach ($translations as $propertyName => $translation) {
                 $targetNode->setProperty($propertyName, $translation);
             }
+            $createReviewTask = true;
         }
         $targetNode->setIndex($node->getIndex());
         $targetNode->setHiddenInIndex($node->isHiddenInIndex());
+
+        if ($createReviewTask) {
+            $dimensionSpacePoint = DimensionSpacePoint::fromLegacyDimensionArray(
+                $node->getContext()->getDimensions()
+            )->vary(
+                new ContentDimensionIdentifier('language'),
+                $targetLanguage
+            );
+
+            $objectAddress = new NodeAddress(
+                'live', // will be replaced in the backend module
+                $dimensionSpacePoint,
+                $targetNode->getNodeAggregateIdentifier(),
+            );
+            $presentTaskIds = $this->schedule->findActiveOrPotentialTaskIdsForObject(
+                $objectAddress,
+                TaskClassName::createFromString(AutoTranslationReviewTask::class),
+            );
+            if (empty($presentTaskIds)) {
+                $targetConfiguration = $this->translationTaskAssignmentSettings[$sourceLanguage][$targetLanguage];
+                foreach ($targetConfiguration['agents'] as $agent) {
+                    $this->bitzer->handleScheduleTask(new ScheduleTask(
+                        TaskIdentifier::create(),
+                        TaskClassName::createFromString(AutoTranslationReviewTask::class),
+                        (new \DateTimeImmutable())
+                            ->add(new \DateInterval($targetConfiguration['interval'] ?? 'P1D')),
+                        Agent::fromRole(new Role($agent)),
+                        $objectAddress,
+                        null,
+                        [
+                            'description' => 'autogenerated translation review task'
+                        ]
+                    ));
+                }
+            }
+        }
+
         foreach ($node->getChildNodes() as $childNode) {
             $this->refreshNode($childNode, $targetContext, $sourceLanguage, $targetLanguage);
         }
