@@ -5,7 +5,7 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:CacheSegment.IndustrySolutionList) < pr
         }
         entryTags {
             // whenever an industry solution is changed, the cache segment will flush
-            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution')}
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution', node)}
         }
     }
 }

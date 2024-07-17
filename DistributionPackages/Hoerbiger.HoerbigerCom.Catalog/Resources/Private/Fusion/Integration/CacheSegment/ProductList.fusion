@@ -5,7 +5,7 @@ prototype(Hoerbiger.HoerbigerCom.Catalog:CacheSegment.ProductList) < prototype(P
         }
         entryTags {
             // whenever a product is changed, the cache segment will flush
-            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.Product')}
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Catalog:Document.Product', node)}
         }
     }
 }

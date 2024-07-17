@@ -5,7 +5,7 @@ prototype(Hoerbiger.HoerbigerCom.SuccessStories:CacheSegment.SuccessStoryList) <
         }
         entryTags {
             1 = ${Neos.Caching.nodeTypeTag('Neos.Neos:Document', documentNode)}
-            2 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.SuccessStories:Document.SuccessStory')}
+            2 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.SuccessStories:Document.SuccessStory', documentNode)}
         }
     }
 }

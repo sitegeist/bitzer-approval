@@ -4,7 +4,7 @@ prototype(Hoerbiger.HoerbigerCom.ApplicationWorlds:CacheSegment.ApplicationWorld
             documentNode = ${documentNode}
         }
         entryTags {
-            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld')}
+            1 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld', documentNode)}
         }
     }
 }
