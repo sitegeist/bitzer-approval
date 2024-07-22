@@ -2,10 +2,6 @@ Hoerbiger:
   HoerbigerCom:
     autoTranslationReview:
       assignments:
-        de:
-          zh:
-            agents: ['Hoerbiger.Shared:ChineseEditor']
-            interval: 'P3D'
         en:
           zh:
             agents: ['Hoerbiger.Shared:ChineseEditor']
