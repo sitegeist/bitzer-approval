@@ -7,3 +7,6 @@ Sitegeist:
           zh:
             agents: ['Hoerbiger.Shared:ChineseEditor']
             interval: 'P1D'
+          ja:
+            agents: [ 'Hoerbiger.Shared:JapaneseEditor' ]
+            interval: 'P1D'

@@ -11,30 +11,36 @@ privilegeTargets:
       matcher: 'isInDimensionPreset("language", "de")'
     'Hoerbiger.Shared:AccessChineseSubgraph': &chineseSubgraph
       matcher: 'isInDimensionPreset("language", "zh")'
+    'Hoerbiger.Shared:AccessJapaneseSubgraph': &japaneseSubgraph
+      matcher: 'isInDimensionPreset("language", "ja")'
 
   'Neos\ContentRepository\Security\Authorization\Privilege\Node\EditNodePropertyPrivilege':
     'Hoerbiger.Shared:EditPropertiesInAllSubgraphs': *allSubgraphs
     'Hoerbiger.Shared:EditPropertiesInEnglishSubgraph': *englishSubgraph
     'Hoerbiger.Shared:EditPropertiesInGermanSubgraph': *germanSubgraph
     'Hoerbiger.Shared:EditPropertiesInChineseSubgraph': *chineseSubgraph
+    'Hoerbiger.Shared:EditPropertiesInJapaneseSubgraph': *japaneseSubgraph
 
   'Neos\ContentRepository\Security\Authorization\Privilege\Node\EditNodePrivilege':
     'Hoerbiger.Shared:EditNodesInAllSubgraphs': *allSubgraphs
     'Hoerbiger.Shared:EditNodesInEnglishSubgraph': *englishSubgraph
     'Hoerbiger.Shared:EditNodesInGermanSubgraph': *germanSubgraph
     'Hoerbiger.Shared:EditNodesInChineseSubgraph': *chineseSubgraph
+    'Hoerbiger.Shared:EditNodesInJapaneseSubgraph': *japaneseSubgraph
 
   'Neos\ContentRepository\Security\Authorization\Privilege\Node\RemoveNodePrivilege':
     'Hoerbiger.Shared:RemoveNodesFromAllSubgraphs': *allSubgraphs
     'Hoerbiger.Shared:RemoveNodesFromEnglishSubgraph': *englishSubgraph
     'Hoerbiger.Shared:RemoveNodesFromGermanSubgraph': *germanSubgraph
     'Hoerbiger.Shared:RemoveNodesFromChineseSubgraph': *chineseSubgraph
+    'Hoerbiger.Shared:RemoveNodesFromJapaneseSubgraph': *japaneseSubgraph
 
   'Neos\ContentRepository\Security\Authorization\Privilege\Node\CreateNodePrivilege':
     'Hoerbiger.Shared:CreateNodesInAllSubgraphs': *allSubgraphs
     'Hoerbiger.Shared:CreateNodesInEnglishSubgraph': *englishSubgraph
     'Hoerbiger.Shared:CreateNodesInGermanSubgraph': *germanSubgraph
     'Hoerbiger.Shared:CreateNodesInChineseSubgraph': *chineseSubgraph
+    'Hoerbiger.Shared:CreateNodesInJapaneseSubgraph': *japaneseSubgraph
 
 roles:
   'Neos.Neos:Administrator':
@@ -102,6 +108,31 @@ roles:
         permission: GRANT
       -
         privilegeTarget: 'Hoerbiger.Shared:CreateNodesInChineseSubgraph'
+        permission: GRANT
+
+  'Hoerbiger.Shared:JapaneseEditor':
+    label: 'Redaktion Japan'
+    parentRoles:
+      - 'Neos.Neos:AbstractEditor'
+      - 'Neos.Neos:LivePublisher'
+      - 'Sitegeist.CsvPO:TranslationEditor'
+      - 'Hoerbiger.Shared:TranslationEditor'
+      - 'Sitegeist.Bitzer:Agent'
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.Shared:AccessJapaneseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditPropertiesInJapaneseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:EditNodesInJapaneseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:RemoveNodesFromJapaneseSubgraph'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.Shared:CreateNodesInJapaneseSubgraph'
         permission: GRANT
 
   'Neos.Neos:RestrictedEditor':
