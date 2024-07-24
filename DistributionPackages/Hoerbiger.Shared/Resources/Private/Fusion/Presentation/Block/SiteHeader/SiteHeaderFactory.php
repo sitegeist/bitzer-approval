@@ -227,14 +227,14 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             /** @var ContentContext $contentContext */
             $contentContext = $this->contentContextFactory->create($contextProperties);
 
-            /** @var TraversableNodeInterface $variant */
-            $variant = $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier())
-                ?: $contentContext->getCurrentSiteNode();
+            $variant = $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier());
 
             $identifier = strtoupper($localeIdentifier);
 
-            $language = [$this->uriService->getNodeUri($variant), $identifier];
-            $languages[] = $language;
+            if ($variant instanceof TraversableNodeInterface) {
+                $language = [$this->uriService->getNodeUri($variant), $identifier];
+                $languages[] = $language;
+            }
         }
         $children = [];
 
