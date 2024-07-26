@@ -17,6 +17,7 @@ use Neos\Neos\Domain\Service\ContentContextFactory;
 use Neos\Neos\Domain\Service\ContentDimensionPresetSourceInterface;
 use Sitegeist\Bitzer\Application\Bitzer;
 use Sitegeist\Bitzer\Domain\Agent\Agent;
+use Sitegeist\Bitzer\Domain\Task\Command\CancelTask;
 use Sitegeist\Bitzer\Domain\Task\Command\CompleteTask;
 use Sitegeist\Bitzer\Domain\Task\Command\ScheduleTask;
 use Sitegeist\Bitzer\Domain\Task\NodeAddress;
@@ -201,6 +202,25 @@ final class AutoTranslationReviewTaskZookeeper
             $targetNode = $removeContext->getNodeByIdentifier($sourceNode->getIdentifier());
             if ($targetNode !== null) {
                 $targetNode->remove();
+                $toBeRemovedObject = new NodeAddress(
+                    'live',
+                    DimensionSpacePoint::fromLegacyDimensionArray($sourceNode->getContext()->getDimensions())
+                        ->vary(
+                            new ContentDimensionIdentifier('language'),
+                            $targetLanguage
+                        ),
+                    $sourceNode->getNodeAggregateIdentifier()
+                );
+
+                $activeAutoTranslationReviewTaskIds = $this->schedule->findActiveOrPotentialTaskIdsForObject(
+                    $toBeRemovedObject,
+                    TaskClassName::createFromString(AutoTranslationReviewTask::class)
+                );
+                foreach ($activeAutoTranslationReviewTaskIds as $activeAutoTranslationReviewTaskId) {
+                    $this->bitzer->handleCancelTask(new CancelTask(
+                        $activeAutoTranslationReviewTaskId
+                    ));
+                }
             }
         }
 
