@@ -9,6 +9,7 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  */
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\Shared\Domain\IsInsideHiddenParent;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
@@ -97,7 +98,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             $siteHeaderVariant,
             $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
-            $this->getLanguageNavigationItems($document, $subgraph, $actionRequest),
+            $this->getLanguageNavigationItems($site, $document, $subgraph, $actionRequest),
             new Icon("shared", "naviChevron", IconSize::SIZE_SIZE_0_5),
             new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
             $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true),
@@ -203,6 +204,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     }
 
     protected function getLanguageNavigationItems(
+        TraversableNodeInterface $site,
         TraversableNodeInterface $documentNode,
         ContentContext $subgraph,
         ?ActionRequest $request
@@ -227,14 +229,15 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             /** @var ContentContext $contentContext */
             $contentContext = $this->contentContextFactory->create($contextProperties);
 
-            /** @var TraversableNodeInterface $variant */
+            /** @var TraversableNodeInterface|null $variant */
             $variant = $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier())
-                ?: $contentContext->getCurrentSiteNode();
+                ?: null;
 
-            $identifier = strtoupper($localeIdentifier);
-
-            $language = [$this->uriService->getNodeUri($variant), $identifier];
-            $languages[] = $language;
+            if ($variant && !IsInsideHiddenParent::isSatisfiedByNode($contentContext, $site, $variant)) {
+                $identifier = strtoupper($localeIdentifier);
+                $language = [$this->uriService->getNodeUri($variant), $identifier];
+                $languages[] = $language;
+            }
         }
         $children = [];
 
