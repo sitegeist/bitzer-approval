@@ -52,5 +52,5 @@ Sitegeist:
           removeUser: './flow user:delete --assume-yes "*"'
           addAdminUser: './flow user:create --roles Administrator admin admin Admin Admin'
         resourceProxy:
-          baseUri: https://www-prod.hoerbiger.com
+          baseUri: https://www.hoerbiger.com
           subdivideHashPathSegment: true

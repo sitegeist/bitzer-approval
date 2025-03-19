@@ -25,6 +25,12 @@ Neos:
             uriSegment: zh
             options:
               translationStrategy: 'none'
+          ja:
+            label: Japanese
+            values: [ 'ja' ]
+            uriSegment: ja
+            options:
+              translationStrategy: 'none'
 
   Neos:
     routing:
