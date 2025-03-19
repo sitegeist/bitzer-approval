@@ -8,9 +8,33 @@ The customer's infrastructure is protected from outside access.
 Thus for server-side connections (deployment, cloning) as well as client-side connections to develop, staging and the master backend,
 an active VPN connection is required.
 
-#### VPN Setup
+#### VPN Setup on Linux
 
 The following steps are to be executed once on project setup.
+
+**Install OpenConnect network manager**
+```sh
+sudo apt-get install network-manager-openconnect-gnome
+```
+
+**Setup new VPN**
+
+Protocol: Fortinet SSL VPN
+
+VPN tab:
+
+| Option | Wert |
+| --- | --- |
+| Gateway | df6.hoerbiger.com |
+| Token Mode | HOTP - manually entered |
+
+IPv4 Settings tab:
+
+| Option | Wert |
+| --- | --- |
+| Method | Automatic (VPN) addresses only |
+| DNS servers | 172.20.244.52, 172.20.244.40 |
+| Search domains | hoerbiger.com |
 
 **Activate systemd-networkd**
 ```sh
