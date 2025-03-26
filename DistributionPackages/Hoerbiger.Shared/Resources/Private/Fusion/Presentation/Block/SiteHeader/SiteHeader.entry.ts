@@ -115,11 +115,18 @@ export default ($node: Element): void => {
 		navItems?.forEach(item => {
 			item.addEventListener("mouseenter", () => {
 				hoverOpen = true;
+				if ("subitems" in item.dataset) {
+					$node.classList.add("hovered-with-items");
+				} else {
+					$node.classList.add("hovered");
+				}
 				navMain?.classList.add("text-nav-inactiveText");
 				navLogo?.classList.add("text-nav-logo");
 			});
 
 			item.addEventListener("mouseleave", () => {
+				$node.classList.remove("hovered");
+				$node.classList.remove("hovered-with-items");
 				navMain?.classList.remove("text-nav-inactiveText");
 				if (window.scrollY <= 0 && hoverOpen) {
 					navLogo?.classList.remove("text-nav-logo");
