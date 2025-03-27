@@ -128,6 +128,7 @@ class TranslationCommandController extends CommandController
         } elseif ($targetNode->isTethered()) {
             $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
             if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
+                $targetNode->setHiddenAfterDateTime(new \DateTime('yesterday noon'));
                 $createReviewTask = true;
             }
         } elseif ($node->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Mixin.Introduction')) {
