@@ -279,7 +279,11 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                         <div class="flex flex-col h-full space-y-ch justify-between ">
                                             <nav class="flex flex-col text-[20px] space-y-sm sm:space-y-0">
                                                 <Neos.Fusion:Loop items={presentationObject.mainNavigation}>
-                                                    <div>
+                                                    <Hoerbiger.Shared:Block.Link
+                                                        presentationObject={item.link}
+                                                        @if.1={!item.subItems}
+                                                    />
+                                                    <div @if.1={item.subItems}>
                                                         <div class="min-h-touch" data-accordion="nav-accordion">
                                                             <div class="flex items-center" data-menu-item="menu-item">
                                                                 <Hoerbiger.Shared:Block.Link presentationObject={item.link}/>
