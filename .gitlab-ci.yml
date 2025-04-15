@@ -7,139 +7,85 @@ stages:
   - 'testing'
   - 'deploy'
 
+variables:
+  DEPLOYMENT_IMAGE: $CI_REGISTRY/sitegeist/automata/deployment-php
+
 services:
   - name: git.sitegeist.de:4567/sitegeist/shadowsocks:latest
     alias: shadowsocks
 
+.automata:
+  image: $DEPLOYMENT_IMAGE:8.2
+  tags:
+    - docker
+  stage: deploy
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - .yarn_cache
+      - .composer_cache
+  before_script:
+    # Specify path to composer and yarn caches
+    - export COMPOSER_CACHE_DIR=$CI_PROJECT_DIR/.composer_cache
+    - export YARN_CACHE_FOLDER=$CI_PROJECT_DIR/.yarn_cache
+    - eval $(ssh-agent -s)
+    - ssh-add <(echo "$SSH_PRIVATE_KEY")
+    - mkdir -p ~/.ssh
+    - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
+    - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
+    # Enforce Node 20
+    - 'npm install --global --force node@20'
+  script:
+    - 'composer2 install'
+    - 'composer2 lint'
+    - 'composer2 test'
 #
 # Automatically create merge requests for feature branches to development, staging and master
 #
 merge-requests:
+  image: $CI_REGISTRY/sitegeist/mr:latest
   tags:
-    - fastlane
+    - docker
   only:
-    - /^(\d)+[^/]*$/
+    - /^\d+(-.*)/
   stage: housekeeping
-  script: |
+  script:
+    |
     # extract parts from branch name
-    mrTicketNumber=$(echo "$CI_COMMIT_REF_NAME" | cut -s -d- -f1)
-    mrTicketTitle=$(echo "$CI_COMMIT_REF_NAME" | cut -s -d- -f2 | sed -r 's/[[:upper:]]/ &/g' | tr "[:upper:]" "[:lower:]")
-    # build title and description
-    mrTitle="$mrTicketTitle #$mrTicketNumber"
-    mrDescription="Automatically created merge request"
-    # create merge requests for development, staging and master
-    # create merge requests for development, staging and master
-    mr -p $CI_PROJECT_ID -d develop --title "$mrTitle" --description "$mrDescription" --labels develop
-    mr -p $CI_PROJECT_ID -d staging --title "WIP: $mrTitle" --description "$mrDescription" --labels staging
-    mr -p $CI_PROJECT_ID -d master --title "WIP: $mrTitle" --description "$mrDescription" --labels master
+    mrTicketNumber=`echo $CI_COMMIT_REF_NAME | cut -d "#" -f2 | cut -d "/" -f1`
 
-#tests:
-#  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
-#  tags:
-#    - docker
-#    - autoscale
-#  cache:
-#    key: ${CI_COMMIT_REF_SLUG}
-#    paths:
-#      - .composer/
-#  stage: 'testing'
-#  only:
-#    - /^(\d)+[^/]*$/
-#    - develop
-#    - staging
-#    - master
-#  before_script:
-#    - eval $(ssh-agent -s)
-#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-#    - mkdir -p ~/.ssh
-#    - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
-#    - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
-#    - docker-php-ext-install exif
-#    - composer install
-#  script:
-#    - FLOW_CONTEXT=Testing bin/phpunit -c Build/BuildEssentials/PhpUnit/UnitTests.xml DistributionPackages/Hoerbiger.HoerbigerCom/Tests/Unit
+    # create merge requests for development, staging and master
+    mr -p "$CI_PROJECT_ID" -s "$CI_COMMIT_REF_NAME" -d develop --token "$BUILD_TOKEN" --title "$mrTicketNumber" --labels Develop
+    mr -p "$CI_PROJECT_ID" -s "$CI_COMMIT_REF_NAME" -d staging --token "$BUILD_TOKEN" --title "$mrTicketNumber" --labels Staging
+    mr -p "$CI_PROJECT_ID" -s "$CI_COMMIT_REF_NAME" -d main --token "$BUILD_TOKEN" --title "$mrTicketNumber" --labels Main
 
-#deployment-develop:
-#  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
-#  tags:
-#    - docker
-#  cache:
-#    key: ${CI_COMMIT_REF_SLUG}
-#    paths:
-#      - .yarn-cache/
-#      - .composer/
-#  stage: deploy
-#  only:
-#    - develop
-#  before_script:
-#    - eval $(ssh-agent -s)
-#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-#    - mkdir -p ~/.ssh
-#    - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
-#    - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
-#    - mkdir -p /usr/node_modules
-#    - npm install --prefix /usr node@12.14.1
-#    - docker-php-ext-install exif
-#  environment:
-#    name: 'develop'
-#    url: 'https://develop.kvhh.net/'
-#  script:
-#    - composer install
-#    - make deploy-develop PATH=/usr/node_modules/.bin:$PATH
-#
-#deployment-staging:
-#  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
-#  tags:
-#    - docker
-#  cache:
-#    key: ${CI_COMMIT_REF_SLUG}
-#    paths:
-#      - .yarn-cache/
-#      - .composer/
-#  stage: deploy
-#  only:
-#    - staging
-#  before_script:
-#    - eval $(ssh-agent -s)
-#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-#    - mkdir -p ~/.ssh
-#    - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
-#    - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
-#    - mkdir -p /usr/node_modules
-#    - npm install --prefix /usr node@12.14.1
-#    - docker-php-ext-install exif
-#  environment:
-#    name: 'staging'
-#    url: 'https://staging.meister.com/'
-#  script:
-#    - composer install
-#    - make deploy-staging PATH=/usr/node_modules/.bin:$PATH
-#
-#deployment-live:
-#  image: git.sitegeist.de:4567/sitegeist/automata/deployment-php
-#  tags:
-#    - docker
-#  cache:
-#    key: ${CI_COMMIT_REF_SLUG}
-#    paths:
-#      - .yarn-cache/
-#      - .composer/
-#  when: manual
-#  stage: deploy
-#  only:
-#    - master
-#  before_script:
-#    - eval $(ssh-agent -s)
-#    - ssh-add <(echo "$SSH_PRIVATE_KEY")
-#    - mkdir -p ~/.ssh
-#    - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
-#    - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
-#    - mkdir -p /usr/node_modules
-#    - npm install --prefix /usr node@12.14.1
-#    - docker-php-ext-install exif
-#  environment:
-#    name: 'master'
-#    url: 'https://meister.meisterwerke.cloud.net.de/'
-#  script:
-#    - composer install
-#    - make deploy-live PATH=/usr/node_modules/.bin:$PATH
+deployment-develop:
+  extends: .automata
+  only:
+    - develop
+  environment:
+    name: develop
+    url: https://www-dev.hoerbiger.com
+  script:
+    - 'composer2 deploy:develop'
+
+deployment-staging:
+  extends: .automata
+  only:
+    - staging
+  environment:
+    name: staging
+    url: https://www-stage.hoerbiger.com
+  script:
+    - 'composer2 deploy:staging'
+
+deployment-main:
+  extends: .automata
+  when: manual
+  only:
+    - main
+  environment:
+    name: main
+    url: https://www.hoerbiger.com
+  script:
+    - 'composer2 deploy:main'

@@ -1,14 +1,14 @@
 Sitegeist:
   MagicWand:
     flowCommand: './flow'
-    defaultPreset: 'master'
+    defaultPreset: 'main'
     clonePresets:
       develop:
-        host: 'hoerbiger'
+        host: 'vpro0993.proserver.punkt.de'
+        user: proserver
         port: 22
-        path: '/srv/dockerdata/www-dev/www/hoerbiger_deployer/current'
-        flowCommand: 'cd /srv/dockerdata/www-dev && docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow'
-        dumpCommand: '"cd /srv/dockerdata/www-dev && docker-compose exec -T db mysqldump"'
+        sshOptions: '-o "ProxyJump=jumping@ssh-jumphost.karlsruhe.punkt.de" '
+        path: '/var/www/vhosts/www-dev.hoerbiger.com/current'
         context: Production
         postClone:
           destroySession: './flow session:destroyall'
@@ -21,11 +21,11 @@ Sitegeist:
           subdivideHashPathSegment: true
 
       staging:
-        host: 'hoerbiger'
+        host: 'vpro0993.proserver.punkt.de'
+        user: proserver
         port: 22
-        path: '/srv/dockerdata/www-stage/www/hoerbiger_deployer/current'
-        flowCommand: 'cd /srv/dockerdata/www-stage && docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow'
-        dumpCommand: '"cd /srv/dockerdata/www-stage && docker-compose exec -T db mysqldump"'
+        sshOptions: '-o "ProxyJump=jumping@ssh-jumphost.karlsruhe.punkt.de" '
+        path: '/var/www/vhosts/www-stage.hoerbiger.com/current'
         context: Production
         postClone:
           destroySession: './flow session:destroyall'
@@ -37,13 +37,12 @@ Sitegeist:
           baseUri: https://www-stage.hoerbiger.com
           subdivideHashPathSegment: true
 
-      master:
-        host: 'hoerbiger'
+      main:
+        host: 'vpro0994.proserver.punkt.de'
+        user: proserver
         port: 22
-        user: uext_arn
-        path: '/srv/dockerdata/www-prod/www/hoerbiger_deployer/current'
-        flowCommand: 'cd /srv/dockerdata/www-prod && docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow'
-        dumpCommand: '"cd /srv/dockerdata/www-prod && docker-compose exec -T db mysqldump"'
+        sshOptions: '-o "ProxyJump=jumping@ssh-jumphost.karlsruhe.punkt.de" '
+        path: '/var/www/vhosts/www.hoerbiger.com/current'
         context: Production
         postClone:
           destroySession: './flow session:destroyall'
@@ -52,5 +51,5 @@ Sitegeist:
           removeUser: './flow user:delete --assume-yes "*"'
           addAdminUser: './flow user:create --roles Administrator admin admin Admin Admin'
         resourceProxy:
-          baseUri: https://www-prod.hoerbiger.com
+          baseUri: https://www.hoerbiger.com
           subdivideHashPathSegment: true

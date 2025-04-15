@@ -37,7 +37,7 @@ set('branch', function() {
         case 'staging':
             return 'staging';
         default:
-            return 'master';
+            return 'main';
     }
 });
 

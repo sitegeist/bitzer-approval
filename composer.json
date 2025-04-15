@@ -5,7 +5,7 @@
         "vendor-dir": "Packages/Libraries",
         "bin-dir": "bin",
         "platform": {
-            "php": "8.1"
+            "php": "8.2"
         },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
@@ -80,7 +80,7 @@
         ],
         "clone:develop": "./flow clone:preset develop",
         "clone:staging": "./flow clone:preset staging",
-        "clone:master": "./flow clone:preset master",
+        "clone:main": "./flow clone:preset main",
 
         "deploy:develop": "dep deploy develop -vv",
         "deploy:staging": "dep deploy staging -vv",
