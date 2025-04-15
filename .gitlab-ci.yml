@@ -40,9 +40,9 @@ services:
     - 'composer2 lint'
     - 'composer2 test'
 #
-# Automatically create merge requests for feature branches to development, staging and master
+# Automatically create merge requests for feature branches to develop, staging and main
 #
-merge-requests:
+housekeeping-merge-requests:
   image: $CI_REGISTRY/sitegeist/mr:latest
   tags:
     - docker
@@ -54,7 +54,7 @@ merge-requests:
     # extract parts from branch name
     mrTicketNumber=`echo $CI_COMMIT_REF_NAME | cut -d "#" -f2 | cut -d "/" -f1`
 
-    # create merge requests for development, staging and master
+    # create merge requests for develop, staging and main
     mr -p "$CI_PROJECT_ID" -s "$CI_COMMIT_REF_NAME" -d develop --token "$BUILD_TOKEN" --title "$mrTicketNumber" --labels Develop
     mr -p "$CI_PROJECT_ID" -s "$CI_COMMIT_REF_NAME" -d staging --token "$BUILD_TOKEN" --title "$mrTicketNumber" --labels Staging
     mr -p "$CI_PROJECT_ID" -s "$CI_COMMIT_REF_NAME" -d main --token "$BUILD_TOKEN" --title "$mrTicketNumber" --labels Main
