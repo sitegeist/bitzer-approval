@@ -1,7 +1,7 @@
 name: hoerbiger-neos-distribution
 type: php
 docroot: Web
-php_version: "8.1"
+php_version: "8.2"
 webserver_type: nginx-fpm
 router_http_port: "80"
 router_https_port: "443"
@@ -11,10 +11,8 @@ additional_hostnames: [
   'my-campaign.hoerbiger'
 ]
 additional_fqdns: []
-mariadb_version: "10.4"
+mariadb_version: "10.6"
 mysql_version: ""
-nfs_mount_enabled: false
-mutagen_enabled: false
 hooks:
   post-composer:
   - exec: ./flow flow:package:rescan
@@ -29,13 +27,7 @@ composer_version: "2"
 web_environment:
 - FLOW_CONTEXT=Development/ddev
 - FLOW_REWRITEURLS=1
-- FLOW_PATH_TEMPORARY_BASE=/tmp/neos
-- FLOW_ROOTPATH=/var/www/html
-- DISPLAY_NAME=Admin Admin
-- e-mail=admin@sitegeist.de
-- REMOTE_USER=admin
 - NODE_OPTIONS=--openssl-legacy-provider
-
 
 # This config.yaml was created with ddev version v1.18.0-alpha4
 # webimage: drud/ddev-webserver:20210729_cspitzlay_mysql_history

@@ -1,7 +1,6 @@
 {
     "name": "hoerbiger/hoerbigercom-pressarchive",
     "type": "neos-hoerbiger",
-    "version": "1.0.0",
     "require": {
         "hoerbiger/hoerbigercom": "*"
     },
