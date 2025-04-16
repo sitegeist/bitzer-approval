@@ -24,7 +24,7 @@
     "eslint-plugin-react": "^7.25.1",
     "glob": "^7.1.7",
     "lerna": "^4.0.0",
-    "node": "^16.6.1",
+    "node": "^20.16.0",
     "postcss": "^8.3.6",
     "postcss-cli": "^9.1.0",
     "postcss-discard-duplicates": "^5.0.1",
