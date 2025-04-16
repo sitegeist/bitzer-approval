@@ -20,25 +20,14 @@ set('default_timeout', 1800);
 set( 'keep_releases', -1 );
 
 // composer
-set('composer_options', function() {
-    switch (input()->getArgument('stage')) {
-        case 'develop':
-            return '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader';
-        default:
-            return '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader';
-    }
+set('bin/composer', function () {
+    return commandExist('composer2')
+        ? 'composer2'
+        : 'composer';
 });
 
-// composer
-set('branch', function() {
-    switch (input()->getArgument('stage')) {
-        case 'develop':
-            return 'develop';
-        case 'staging':
-            return 'staging';
-        default:
-            return 'main';
-    }
+set('composer_options', function() {
+    return '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader';
 });
 
 /**
@@ -60,13 +49,22 @@ task('upload', function () {
     upload(
         __DIR__ . '/.build/current/',
         '{{release_path}}',
-        ['options' => [
-            '--exclude node_modules/',
-            '--chown=:1005'
-        ]]
+        [
+            'options' => [
+                '--exclude /node_modules/',
+                '--exclude /.git/',
+                '--exclude /.ddev/',
+                '--exclude /composer.json',
+                '--exclude /composer.lock',
+                '--exclude /deploy-hosts.yml',
+                '--exclude /deploy.php',
+                '--exclude /Makefile',
+                '--exclude /Readme.md'
+            ],
+            'flags' => 'az'
+        ]
     );
 });
-
 /**
  * Run node repair
  */
