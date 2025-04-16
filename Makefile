@@ -149,8 +149,8 @@ clone-develop::
 clone-staging::
 	@ddev composer clone:staging
 
-clone-master::
-	@ddev composer clone:master
+clone-main::
+	@ddev composer clone:main
 
 ###############################################################################
 #                                DEPLOYMENT                                   #
@@ -161,5 +161,5 @@ deploy-develop::
 deploy-staging::
 	@ddev composer deploy:staging
 
-deploy-master::
-	@ddev composer deploy:master
+deploy-main::
+	@ddev composer deploy:main
