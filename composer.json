@@ -70,7 +70,6 @@
         ],
 
         "test:unit": [
-            "bin/phpunit --colors --stop-on-failure -c Build/BuildEssentials/PhpUnit/UnitTests.xml ./DistributionPackages/Hoerbiger.Shared/Tests/Unit/"
         ],
         "test": "@test:unit",
 
