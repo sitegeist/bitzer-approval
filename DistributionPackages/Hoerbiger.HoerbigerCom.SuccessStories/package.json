@@ -4,8 +4,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --mode production",
-    "watch": "webpack -w --mode development",
-    "lint-ts": "eslint Resources/Private/**/*.ts"
+    "watch": "webpack -w --mode development"
   },
   "dependencies": {
     "@hoerbiger/shared": "^1.0.0"

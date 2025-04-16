@@ -27,7 +27,6 @@ composer_version: "2"
 web_environment:
 - FLOW_CONTEXT=Development/ddev
 - FLOW_REWRITEURLS=1
-- NODE_OPTIONS=--openssl-legacy-provider
 
 # This config.yaml was created with ddev version v1.18.0-alpha4
 # webimage: drud/ddev-webserver:20210729_cspitzlay_mysql_history

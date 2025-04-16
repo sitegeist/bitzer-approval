@@ -34,7 +34,7 @@ services:
     - '[[ -f /.dockerenv ]] && echo "$SSH_CONFIG" > ~/.ssh/config'
     - '[[ -f /.dockerenv ]] && echo "$KNOWN_HOSTS" > ~/.ssh/known_hosts'
     # Enforce Node 16
-    - 'npm install --global --force node@16'
+    - 'npm install --global --force node@20'
   script:
     - 'composer2 install'
     - 'composer2 lint'
