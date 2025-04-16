@@ -69,28 +69,27 @@ task('upload', function () {
  * Run node repair
  */
 task('deploy:node_repair', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow node:repair --only addMissingDefaultValues,createMissingChildNodes');
+    run(
+        'FLOW_CONTEXT={{flow_context}} {{bin/php}} -d memory_limit=-1 {{release_path}}/{{flow_command}} node:repair --only addMissingDefaultValues,createMissingChildNodes,reorderChildNodes',
+        ['timeout' => 60 * 15]
+    );
 })->desc('Run node repair');
 
 /**
  * Flow cache flush
  */
 task('deploy:flush_caches', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow flow:cache:flush --force');
-})->desc('Run node repair');
-
-
-task('deploy:run_migrations', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow doctrine:migrate');
-})->desc('Apply database migrations');
+    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} flow:cache:flushone Sitegeist_KlarSchiff_CacheBusterIdentifierCache');
+    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} flow:cache:flush --force');
+    run('{{bin/php}} {{release_path}}/../../shared/Scripts/cachetool.phar opcache:reset --fcgi=/var/run/php-fpm/php-fpm.socket');
+})->desc('Flush caches');
 
 /**
  * Publish resources
  */
 task('deploy:publish_resources', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow resource:publish');
+    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} -d memory_limit=-1 {{release_path}}/{{flow_command}} resource:publish');
 })->desc('Publish resources');
-
 
 /**
  * Deploy and build locally
