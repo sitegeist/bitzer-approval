@@ -77,6 +77,9 @@ export default ($node: Element): void => {
 							video.classList.remove(opacity0);
 							video.classList.add(opacity1);
 
+							video.currentTime = 0;
+							video.play();
+
 							setTimeout(function(){
 								video.classList.remove(opacity1);
 								video.classList.add(opacity0);
