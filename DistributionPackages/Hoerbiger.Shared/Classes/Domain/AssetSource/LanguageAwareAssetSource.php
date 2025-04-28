@@ -125,7 +125,7 @@ final class LanguageAwareAssetSource implements AssetSourceInterface
         string $assetSourceIdentifier,
         array $assetSourceOptions
     ): self {
-        return new self($assetSourceIdentifier, $assetSourceOptions);
+        return new LanguageAwareAssetSource($assetSourceIdentifier, $assetSourceOptions);
     }
 
     public function getIdentifier(): string
