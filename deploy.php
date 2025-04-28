@@ -9,6 +9,8 @@ ini_set('display_errors', 1);
 // Git
 set('repository', 'ssh://git@git.sitegeist.de:40022/hoerbiger/hoerbiger-websites.git');
 
+set('branch', input()->getArgument('stage'));
+
 // SSH
 set('ssh_type', 'native');
 set('ssh_multiplexing', true);
