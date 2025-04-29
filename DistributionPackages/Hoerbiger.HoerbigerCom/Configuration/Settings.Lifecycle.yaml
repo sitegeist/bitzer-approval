@@ -5,10 +5,10 @@ Hoerbiger:
         en:
           zh:
             agents: ['Hoerbiger.Shared:ChineseEditor']
-            interval: 'P3D'
+            interval: 'P7D'
           ja:
             agents: [ 'Hoerbiger.Shared:JapaneseEditor' ]
-            interval: 'P3D'
+            interval: 'P7D'
 
 
 Sitegeist:
