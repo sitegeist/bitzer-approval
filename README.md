@@ -5,7 +5,7 @@
 ### VPN
 
 The customer's infrastructure is protected from outside access.
-Thus for server-side connections (deployment, cloning) as well as client-side connections to develop, staging and the master backend,
+Thus for server-side connections (deployment, cloning) as well as client-side connections to develop, staging and the main backend,
 an active VPN connection is required.
 
 #### VPN Setup on Linux
@@ -161,9 +161,9 @@ bin/dep deploy develop
 ```sh
 bin/dep deploy staging
 ```
-**master**
+**main**
 ```sh
-bin/dep deploy master
+bin/dep deploy main
 ```
 
 ### Running remote Flow commands
@@ -183,7 +183,7 @@ cd /srv/dockerdata/www-stage
 docker-compose exec -T php php /var/www/html/hoerbiger_deployer/current/flow
 ```
 
-**master**
+**main**
 ```sh
 cd /srv/dockerdata/www-prod
 
@@ -239,7 +239,7 @@ Sitegeist:
             staging:
                 user: $VPN_USER
         
-            master:
+            main:
                 user: $VPN_USER
 ```
 
@@ -256,16 +256,16 @@ make clone-develop
 
 make clone-staging
 
-make clone-master
+make clone-main
 ```
 
 ## Versioning
 
 This project follows the trunk-based approach for continuous integration.
 
-All branches are directly derived from master and named after the corresponding ticket's number, regardless of whether they're features, bugfixes or anything else.
+All branches are directly derived from main and named after the corresponding ticket's number, regardless of whether they're features, bugfixes or anything else.
 
-Ticket branches are independently merged to develop, then staging, then master. All branches except master can at all times be deleted and recreated from master.
+Ticket branches are independently merged to develop, then staging, then main. All branches except master can at all times be deleted and recreated from master.
 
 ### Branching Model
 
@@ -275,7 +275,7 @@ Ticket branches are independently merged to develop, then staging, then master. 
                         /      /                     \    \
     staging      +------------------------- Merge -+-----------------> staging
                 /     /      /                              \
-    master ----+-----+------+------------------------ Merge -+----------> master
+    main   ----+-----+------+------------------------ Merge -+----------> master
 
 
 ## Deployment
@@ -290,5 +290,5 @@ make deploy-develop
 
 make deploy-staging
 
-make deploy-master
+make deploy-main
 ```

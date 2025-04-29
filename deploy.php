@@ -8,6 +8,16 @@ ini_set('display_errors', 1);
 
 // Git
 set('repository', 'ssh://git@git.sitegeist.de:40022/hoerbiger/hoerbiger-websites.git');
+set('branch', function() {
+    switch (input()->getArgument('stage')) {
+        case 'develop':
+            return 'develop';
+        case 'staging':
+            return 'staging';
+        default:
+            return 'main';
+    }
+});
 
 // SSH
 set('ssh_type', 'native');
@@ -20,25 +30,14 @@ set('default_timeout', 1800);
 set( 'keep_releases', -1 );
 
 // composer
-set('composer_options', function() {
-    switch (input()->getArgument('stage')) {
-        case 'develop':
-            return '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --optimize-autoloader';
-        default:
-            return '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader';
-    }
+set('bin/composer', function () {
+    return commandExist('composer2')
+        ? 'composer2'
+        : 'composer';
 });
 
-// composer
-set('branch', function() {
-    switch (input()->getArgument('stage')) {
-        case 'develop':
-            return 'develop';
-        case 'staging':
-            return 'staging';
-        default:
-            return 'master';
-    }
+set('composer_options', function() {
+    return '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader';
 });
 
 /**
@@ -60,39 +59,47 @@ task('upload', function () {
     upload(
         __DIR__ . '/.build/current/',
         '{{release_path}}',
-        ['options' => [
-            '--exclude node_modules/',
-            '--chown=:1005'
-        ]]
+        [
+            'options' => [
+                '--exclude /node_modules/',
+                '--exclude /.git/',
+                '--exclude /.ddev/',
+                '--exclude /composer.json',
+                '--exclude /composer.lock',
+                '--exclude /deploy-hosts.yml',
+                '--exclude /deploy.php',
+                '--exclude /Makefile',
+                '--exclude /Readme.md'
+            ],
+            'flags' => 'az'
+        ]
     );
 });
-
 /**
  * Run node repair
  */
 task('deploy:node_repair', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow node:repair --only addMissingDefaultValues,createMissingChildNodes');
+    run(
+        'FLOW_CONTEXT={{flow_context}} {{bin/php}} -d memory_limit=-1 {{release_path}}/{{flow_command}} node:repair --only addMissingDefaultValues,createMissingChildNodes,reorderChildNodes',
+        ['timeout' => 60 * 15]
+    );
 })->desc('Run node repair');
 
 /**
  * Flow cache flush
  */
 task('deploy:flush_caches', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow flow:cache:flush --force');
-})->desc('Run node repair');
-
-
-task('deploy:run_migrations', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow doctrine:migrate');
-})->desc('Apply database migrations');
+    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} flow:cache:flushone Sitegeist_KlarSchiff_CacheBusterIdentifierCache');
+    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} flow:cache:flush --force');
+    run('{{bin/php}} {{release_path}}/../../shared/Scripts/cachetool.phar opcache:reset --fcgi=/var/run/php-fpm/php-fpm.socket');
+})->desc('Flush caches');
 
 /**
  * Publish resources
  */
 task('deploy:publish_resources', function () {
-    run('cd {{dockerComposeLocation}} && docker-compose exec -T php php -d memory_limit=-1 {{dockerRoot}}/releases/{{release_name}}/flow resource:publish');
+    run('FLOW_CONTEXT={{flow_context}} {{bin/php}} -d memory_limit=-1 {{release_path}}/{{flow_command}} resource:publish');
 })->desc('Publish resources');
-
 
 /**
  * Deploy and build locally

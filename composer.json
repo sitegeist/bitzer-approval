@@ -5,7 +5,7 @@
         "vendor-dir": "Packages/Libraries",
         "bin-dir": "bin",
         "platform": {
-            "php": "8.1"
+            "php": "8.2"
         },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
@@ -71,7 +71,6 @@
         ],
 
         "test:unit": [
-            "bin/phpunit --colors --stop-on-failure -c Build/BuildEssentials/PhpUnit/UnitTests.xml ./DistributionPackages/Hoerbiger.Shared/Tests/Unit/"
         ],
         "test": "@test:unit",
 
@@ -81,11 +80,11 @@
         ],
         "clone:develop": "./flow clone:preset develop",
         "clone:staging": "./flow clone:preset staging",
-        "clone:master": "./flow clone:preset master",
+        "clone:main": "./flow clone:preset main",
 
         "deploy:develop": "dep deploy develop -vv",
         "deploy:staging": "dep deploy staging -vv",
-        "deploy:master": "dep deploy master -vv"
+        "deploy:main": "dep deploy main -vv"
     },
     "repositories": {
         "local": {

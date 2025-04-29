@@ -1,7 +1,6 @@
 {
     "name": "hoerbiger/hoerbigercom-affiliatedirectory",
     "type": "neos-hoerbiger",
-    "version": "1.0.0",
     "require": {
         "hoerbiger/hoerbigercom": "*",
         "phpoffice/phpspreadsheet": "~1.28.0",
