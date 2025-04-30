@@ -88,6 +88,9 @@ prototype(Hoerbiger.Shared:Block.Headline) < prototype(PackageFactory.AtomicFusi
 
             colorNeutralContrast = "text-neutral-contrast"
             colorNeutralContrast.@if.1 = ${presentationObject.color.equals('neutralContrast')}
+
+            colorDecorative = "text-decorative"
+            colorDecorative.@if.1 = ${presentationObject.color.equals('decorative')}
         }
 
         content = PackageFactory.AtomicFusion.PresentationObjects:Slot {
