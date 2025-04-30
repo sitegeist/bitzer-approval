@@ -15,3 +15,4 @@ Sitegeist:
   Bitzer:
     factories:
       'Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTask': 'Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTaskFactory'
+    upcomingInterval: 'P9D' # The interval in which future tasks are considered "upcoming"
