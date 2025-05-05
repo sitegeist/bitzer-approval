@@ -11,6 +11,7 @@ use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Service\Context;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Flow\Security\Context as SecurityContext;
 use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Service\ContentContextFactory;
@@ -48,6 +49,7 @@ final class AutoTranslationReviewTaskZookeeper
         private readonly ContentDimensionPresetSourceInterface $contentDimensionPresetSource,
         private readonly ContentContextFactory $contentContextFactory,
         private readonly NodeTranslationService $nodeTranslationService,
+        private readonly PersistenceManagerInterface $persistenceManager,
     ) {
     }
 
@@ -152,7 +154,7 @@ final class AutoTranslationReviewTaskZookeeper
         if (!$isAutomaticTranslationEnabledForNodeType) {
             return false;
         }
-
+        $this->persistenceManager->persistAll();
         if (!$sourceNode->isRemoved()) {
             $targetContext = $this->getContextForLanguageDimensionAndWorkspaceName($targetLanguage);
             $targetContext->getFirstLevelNodeCache()->flush();
@@ -194,8 +196,9 @@ final class AutoTranslationReviewTaskZookeeper
                 }
             }
 
-            $this->nodeTranslationService->translateNode($sourceNode, $targetNode, $targetContext);
 
+
+            $this->nodeTranslationService->translateNode($sourceNode, $targetNode, $targetContext);
             $targetContext->getFirstLevelNodeCache()->flush();
         } else {
             $removeContext = $this->getContextForLanguageDimensionAndWorkspaceName($targetLanguage);
