@@ -22,8 +22,7 @@
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "hoerbiger/hoerbigercom-affiliatedirectory": "*",
         "hoerbiger/hoerbigercom-catalog-calculator": "*",
-        "hoerbiger/hoerbigercom-hr": "*",
-        "sitegeist/bitzer-translation": "dev-main"
+        "hoerbiger/hoerbigercom-hr": "*"
     },
     "require-dev": {
         "neos/buildessentials": "^8.3",
