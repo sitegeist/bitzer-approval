@@ -91,8 +91,14 @@ task('deploy:node_repair', function () {
 task('deploy:flush_caches', function () {
     run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} flow:cache:flushone Sitegeist_KlarSchiff_CacheBusterIdentifierCache');
     run('FLOW_CONTEXT={{flow_context}} {{bin/php}} {{release_path}}/{{flow_command}} flow:cache:flush --force');
-    run('{{bin/php}} {{release_path}}/../../shared/Scripts/cachetool.phar opcache:reset --fcgi=/var/run/php-fpm/php-fpm.socket');
 })->desc('Flush caches');
+
+/**
+ * Opcache flush
+ */
+task('deploy:flush_opcache', function () {
+    run('{{bin/php}} {{release_path}}/../../shared/Scripts/cachetool.phar opcache:reset --fcgi=/var/run/php-fpm/php-fpm.socket');
+})->desc('Flush opcache');
 
 /**
  * Publish resources
@@ -129,7 +135,8 @@ task('release', [
     'deploy:node_repair',
     'deploy:publish_resources',
     'deploy:writable',
-    'deploy:symlink'
+    'deploy:symlink',
+    'deploy:flush_opcache' // a second time in case it has been built again in the meantime
 ]);
 
 /**
