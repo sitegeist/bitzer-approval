@@ -11,7 +11,6 @@ use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Service\Context;
 use Neos\Flow\Annotations as Flow;
-use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Flow\Security\Context as SecurityContext;
 use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Service\ContentContextFactory;
@@ -49,7 +48,6 @@ final class AutoTranslationReviewTaskZookeeper
         private readonly ContentDimensionPresetSourceInterface $contentDimensionPresetSource,
         private readonly ContentContextFactory $contentContextFactory,
         private readonly NodeTranslationService $nodeTranslationService,
-        private readonly PersistenceManagerInterface $persistenceManager,
     ) {
     }
 
@@ -154,16 +152,11 @@ final class AutoTranslationReviewTaskZookeeper
         if (!$isAutomaticTranslationEnabledForNodeType) {
             return false;
         }
-        $this->persistenceManager->persistAll();
+
         if (!$sourceNode->isRemoved()) {
             $targetContext = $this->getContextForLanguageDimensionAndWorkspaceName($targetLanguage);
             $targetContext->getFirstLevelNodeCache()->flush();
 
-            $presentNode = $targetContext->getNodeByIdentifier($sourceNode->getIdentifier());
-            if ($presentNode) {
-                // the updated node has to be reviewed
-                return true;
-            }
             if (!$sourceNode->getNodeType()->isOfType('Neos.Neos:Document')) {
                 // if a new content node is published on an already reviewed (i.e. enabled) document, we need to
                 // - create a review task for the document
@@ -174,6 +167,15 @@ final class AutoTranslationReviewTaskZookeeper
                 }
                 assert($sourceParent instanceof Node);
                 $targetDocument = $targetContext->getNodeByIdentifier($sourceParent->getIdentifier());
+
+                $presentNode = $targetContext->getNodeByIdentifier($sourceNode->getIdentifier());
+                if ($presentNode) {
+                    if ($targetDocument?->isHidden()) {
+                        $this->nodeTranslationService->translateNode($sourceNode, $presentNode, $targetContext);
+                    }
+                    // the updated node has to be reviewed
+                    return true;
+                }
                 if (!$targetDocument?->isHidden()) {
                     return true;
                 }
@@ -196,9 +198,6 @@ final class AutoTranslationReviewTaskZookeeper
                 }
             }
 
-
-
-            $this->nodeTranslationService->translateNode($sourceNode, $targetNode, $targetContext);
             $targetContext->getFirstLevelNodeCache()->flush();
         } else {
             $removeContext = $this->getContextForLanguageDimensionAndWorkspaceName($targetLanguage);
