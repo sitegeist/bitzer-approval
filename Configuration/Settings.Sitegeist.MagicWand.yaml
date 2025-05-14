@@ -16,6 +16,7 @@ Sitegeist:
           addDomain: './flow domain:add hoerbiger-hoerbigercom hoerbiger.ddev.site'
           removeUser: './flow user:delete --assume-yes "*"'
           addAdminUser: './flow user:create --roles Administrator admin admin Admin Admin'
+          addChineseEditor: './flow user:create --roles Hoerbiger.Shared:ChineseEditor chinese editor Chinese Editor'
         resourceProxy:
           baseUri: https://www-dev.hoerbiger.com
           subdivideHashPathSegment: true
@@ -33,6 +34,7 @@ Sitegeist:
           addDomain: './flow domain:add hoerbiger-hoerbigercom hoerbiger.ddev.site'
           removeUser: './flow user:delete --assume-yes "*"'
           addAdminUser: './flow user:create --roles Administrator admin admin Admin Admin'
+          addChineseEditor: './flow user:create --roles Hoerbiger.Shared:ChineseEditor chinese editor Chinese Editor'
         resourceProxy:
           baseUri: https://www-stage.hoerbiger.com
           subdivideHashPathSegment: true
@@ -50,6 +52,7 @@ Sitegeist:
           addDomain: './flow domain:add hoerbiger-hoerbigercom hoerbiger.ddev.site'
           removeUser: './flow user:delete --assume-yes "*"'
           addAdminUser: './flow user:create --roles Administrator admin admin Admin Admin'
+          addChineseEditor: './flow user:create --roles Hoerbiger.Shared:ChineseEditor chinese editor Chinese Editor'
         resourceProxy:
           baseUri: https://www.hoerbiger.com
           subdivideHashPathSegment: true

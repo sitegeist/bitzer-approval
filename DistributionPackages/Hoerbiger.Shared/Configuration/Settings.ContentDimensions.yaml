@@ -24,13 +24,13 @@ Neos:
             values: ['zh']
             uriSegment: zh
             options:
-              translationStrategy: 'none'
+              translationStrategy: 'once'
           ja:
             label: Japanese
             values: [ 'ja' ]
             uriSegment: ja
             options:
-              translationStrategy: 'none'
+              translationStrategy: 'once'
 
   Neos:
     routing:

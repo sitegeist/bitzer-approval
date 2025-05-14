@@ -24,7 +24,6 @@ use Sitegeist\Bitzer\Domain\Task\NodeAddress;
 use Sitegeist\Bitzer\Domain\Task\Schedule;
 use Sitegeist\Bitzer\Domain\Task\TaskClassName;
 use Sitegeist\Bitzer\Domain\Task\TaskIdentifier;
-use Sitegeist\LostInTranslation\ContentRepository\NodeTranslationService;
 
 #[Flow\Scope('singleton')]
 final class AutoTranslationReviewTaskZookeeper
@@ -47,7 +46,6 @@ final class AutoTranslationReviewTaskZookeeper
         private readonly Schedule $schedule,
         private readonly ContentDimensionPresetSourceInterface $contentDimensionPresetSource,
         private readonly ContentContextFactory $contentContextFactory,
-        private readonly NodeTranslationService $nodeTranslationService,
     ) {
     }
 
@@ -157,29 +155,16 @@ final class AutoTranslationReviewTaskZookeeper
             $targetContext = $this->getContextForLanguageDimensionAndWorkspaceName($targetLanguage);
             $targetContext->getFirstLevelNodeCache()->flush();
 
-            if (!$sourceNode->getNodeType()->isOfType('Neos.Neos:Document')) {
-                // if a new content node is published on an already reviewed (i.e. enabled) document, we need to
-                // - create a review task for the document
-                // - not translate the content node as this is to be done manually by the editor
-                $sourceParent = $sourceNode->getParent();
-                while ($sourceParent && !$sourceParent->getNodeType()->isOfType('Neos.Neos:Document')) {
-                    $sourceParent = $sourceParent->getParent();
-                }
-                assert($sourceParent instanceof Node);
-                $targetDocument = $targetContext->getNodeByIdentifier($sourceParent->getIdentifier());
-
-                $presentNode = $targetContext->getNodeByIdentifier($sourceNode->getIdentifier());
-                if ($presentNode) {
-                    if ($targetDocument?->isHidden()) {
-                        $this->nodeTranslationService->translateNode($sourceNode, $presentNode, $targetContext);
-                    }
-                    // the updated node has to be reviewed
-                    return true;
-                }
-                if (!$targetDocument?->isHidden()) {
-                    return true;
-                }
+            $presentNode = $targetContext->getNodeByIdentifier($sourceNode->getIdentifier());
+            if ($presentNode) {
+                // the updated node has to be reviewed
+                return true;
             }
+
+            if (!$sourceNode->getNodeType()->isOfType('Neos.Neos:Document')) {
+                return true;
+            }
+
             $targetNode = $targetContext->adoptNode($sourceNode);
             if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
                 // disable newly published documents

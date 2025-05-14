@@ -24,13 +24,5 @@ class Package extends BasePackage
             'whenNodeWasPublished',
             false
         );
-
-        $dispatcher->connect(
-            Context::class,
-            'afterAdoptNode',
-            NodeTranslationService::class,
-            'afterAdoptNode',
-            false
-        );
     }
 }
