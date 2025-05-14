@@ -166,9 +166,10 @@ final class AutoTranslationReviewTaskZookeeper
             }
 
             $targetNode = $targetContext->adoptNode($sourceNode);
-            if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
+            if ($targetNode instanceof Node && $targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
                 // disable newly published documents
                 $targetNode->setHidden(true);
+                $targetNode->setLastPublicationDateTime(new \DateTimeImmutable('now'));
             }
 
             // Move node if targetNode has no parent or node parents are not matching
