@@ -292,3 +292,29 @@ make deploy-staging
 
 make deploy-main
 ```
+
+## Translation
+
+### Translate all pages from english to a new language
+```sh
+./flow translation:refresh --source-language en --target-language <target language>
+```
+### Bypass deepl translation on a test server
+By enabling translation bypass, sending translation requests to DeepL is avoided and a suffix (-translated) is added to the original text.
+```sh
+Hoerbiger:
+    HoerbigerCom:
+        translation: 
+            bypassEnabled: false
+```
+### Non-translatable properties synchronization
+Synchronization strategy is controlled using an option in property definition in node type configuration
+```sh
+properties:
+    foo:    
+        ui:        
+            options:
+                synchronizationStrategy: <once|sync>
+```
+Default strategy is sync. If a property is to be translated only once when adopted and get separated from the original property the once strategy can be set. 
+
