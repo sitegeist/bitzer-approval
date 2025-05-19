@@ -6,3 +6,6 @@
     nodeTypes:
       '*': false
       'Neos.Neos:Document': false
+  properties:
+    lastUpdateAction:
+      type: DateTime

@@ -14,3 +14,4 @@ Hoerbiger:
       listenerDimensions:
         - zh
         - ja
+      bypassEnabled: false
