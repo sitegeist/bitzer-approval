@@ -11,6 +11,7 @@ use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\ContentRepository\Domain\Model\Workspace;
 use Neos\ContentRepository\Domain\Service\Context;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\Persistence\PersistenceManagerInterface;
 use Neos\Flow\Security\Context as SecurityContext;
 use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Service\ContentContextFactory;
@@ -24,6 +25,8 @@ use Sitegeist\Bitzer\Domain\Task\NodeAddress;
 use Sitegeist\Bitzer\Domain\Task\Schedule;
 use Sitegeist\Bitzer\Domain\Task\TaskClassName;
 use Sitegeist\Bitzer\Domain\Task\TaskIdentifier;
+
+use function PHPUnit\Framework\stringStartsWith;
 
 #[Flow\Scope('singleton')]
 final class AutoTranslationReviewTaskZookeeper
@@ -40,13 +43,43 @@ final class AutoTranslationReviewTaskZookeeper
     #[Flow\InjectConfiguration(path: 'autoTranslationReview.assignments')]
     protected array $translationTaskAssignmentSettings;
 
+
+    /**
+     * @var array<int,string>
+     */
+    protected array $newlyPublishedDocumentsCache;
     public function __construct(
         private readonly SecurityContext $securityContext,
         private readonly Bitzer $bitzer,
         private readonly Schedule $schedule,
         private readonly ContentDimensionPresetSourceInterface $contentDimensionPresetSource,
         private readonly ContentContextFactory $contentContextFactory,
+        private readonly PersistenceManagerInterface $persistenceManager,
     ) {
+        $this->newlyPublishedDocumentsCache = [];
+    }
+
+    public function beforeNodeWasPublished(Node $node, Workspace $workspace): void
+    {
+        if (!$this->enabled) {
+            return;
+        }
+
+        if ($workspace->getName() !== 'live') {
+            return;
+        }
+
+        $liveContentContext = $this->getContextForLanguageDimensionAndWorkspaceName('en');
+
+        if ($node->getContext()->getDimensions()['language'][0] === 'en'
+            && $node->getNodeType()->isOfType('Neos.Neos:Document')
+        ) {
+            $presentDocumentNode = $liveContentContext->getNodeByIdentifier($node->getIdentifier());
+
+            if (!$presentDocumentNode) {
+                $this->newlyPublishedDocumentsCache[] = $node->getPath();
+            }
+        }
     }
 
     public function whenNodeWasPublished(Node $node, Workspace $workspace): void
@@ -60,6 +93,7 @@ final class AutoTranslationReviewTaskZookeeper
         }
 
         $language = $node->getContext()->getTargetDimensions()['language'];
+
         if (array_key_exists($language, $this->translationTaskAssignmentSettings)) {
             foreach ($this->translationTaskAssignmentSettings[$language] as $targetLanguage => $targetConfiguration) {
                 $createReviewTask = false;
@@ -162,10 +196,24 @@ final class AutoTranslationReviewTaskZookeeper
             }
 
             if (!$sourceNode->getNodeType()->isOfType('Neos.Neos:Document')) {
-                return true;
+                $insideNewDocument = false;
+
+                foreach ($this->newlyPublishedDocumentsCache as $newlyPublishedDocumentPath) {
+                    if (str_starts_with($sourceNode->getParentPath(), $newlyPublishedDocumentPath)) {
+                        $insideNewDocument = true;
+                        break;
+                    }
+                }
+                if (!$insideNewDocument) {
+                    return true;
+                }
             }
 
+
+            $this->persistenceManager->persistAll();
+
             $targetNode = $targetContext->adoptNode($sourceNode);
+
             if ($targetNode instanceof Node && $targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
                 // disable newly published documents
                 $targetNode->setHidden(true);

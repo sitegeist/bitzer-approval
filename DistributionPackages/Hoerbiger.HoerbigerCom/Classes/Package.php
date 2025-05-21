@@ -22,5 +22,13 @@ class Package extends BasePackage
             'whenNodeWasPublished',
             false
         );
+
+        $dispatcher->connect(
+            Workspace::class,
+            'beforeNodePublishing',
+            AutoTranslationReviewTaskZookeeper::class,
+            'beforeNodeWasPublished',
+            false
+        );
     }
 }
