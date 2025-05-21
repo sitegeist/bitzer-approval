@@ -27,6 +27,7 @@ enum HeadlineColor: string implements ProtectedContextAwareInterface
     case COLOR_LITE_CONTRAST = 'liteContrast';
     case COLOR_SERVICE_CONTRAST = 'serviceContrast';
     case COLOR_NEUTRAL_CONTRAST = 'neutralContrast';
+    case COLOR_DECORATIVE = 'decorative';
 
     public static function tryFromTheme(?Theme $theme, bool $contrast): ?self
     {

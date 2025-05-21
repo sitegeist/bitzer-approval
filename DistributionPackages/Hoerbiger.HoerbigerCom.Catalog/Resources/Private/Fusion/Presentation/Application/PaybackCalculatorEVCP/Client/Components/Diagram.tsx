@@ -7,8 +7,8 @@ import {
 
 export const Diagram = (props: ChartParams): JSX.Element => {
 	const chartRef = React.createRef<HTMLCanvasElement>();
-	const startPercentage = 5;
-	const duration = 6;
+	const startPercentage = 1;
+	const duration = 10;
 
 	React.useEffect(() => {
 		const diagramRoot = chartRef.current?.getContext("2d");
@@ -16,7 +16,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 		const barchartBackgrounds: string[] = [];
 		for (let i = startPercentage; i < (startPercentage + duration); i++) {
 			if (i === props.selectedIncrease) {
-				barchartBackgrounds.push("#A89379");
+				barchartBackgrounds.push("#1b365d");
 			} else {
 				barchartBackgrounds.push("#4f81bd");
 			}
@@ -60,7 +60,7 @@ export const Diagram = (props: ChartParams): JSX.Element => {
 					plugins: {
 						title: {
 							display: true,
-							color: "#A89379",
+							color: "#1b365d",
 							text: props.chartLabels.chartTitle,
 							font: {
 								size: 30

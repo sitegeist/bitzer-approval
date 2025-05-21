@@ -18,8 +18,8 @@ import {ArrowRight} from "./Components/Icons";
 import cx from "classnames";
 
 export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
-	const startPercentage = 5;
-	const duration = 6;
+	const startPercentage = 1;
+	const duration = 10;
 	const [hasDiagram, setHasDiagram] = React.useState<boolean>(false);
 	const [inputs, setInputs] = React.useState<InputFields>(props.inputFields);
 
@@ -101,7 +101,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 			}
 			break;
 		case "compressor_outputIncrease":
-			if (value >= 5 && value <= 10) {
+			if (value >= 1 && value <= 10) {
 				message = null;
 			} else {
 				message = props.getLabelFor("error.message.outputIncrease");
@@ -228,7 +228,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 				{/* input Felder Linke Spalte */}
 				<div className="flex flex-col justify-between">
 					<div>
-						<div className="text-excite text-2xl font-sans-regular mb-xs">
+						<div className="text-standard text-2xl font-sans-regular mb-xs">
 							{props.getLabelFor("label.headline.compressorOperatingData")}
 						</div>
 						<div>
@@ -308,7 +308,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 				{/* input Felder rechte Spalte */}
 				<div className="flex flex-col justify-between ">
 					<div>
-						<div className="text-excite text-2xl font-sans-regular mb-xs">
+						<div className="text-standard text-2xl font-sans-regular mb-xs">
 							{props.getLabelFor("label.headline.naturalGasGathering")}
 						</div>
 						<div>
@@ -369,7 +369,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 						{/* Herleitung linke Spalte */}
 						<div className="flex flex-col justify-between">
 							<div className="bg-light p-sm h-full flex flex-col gap-y-ch gap-x-sm">
-								<div className="text-excite text-2xl font-sans-regular">
+								<div className="text-standard text-2xl font-sans-regular">
 									{props.getLabelFor("label.headline.conversionFactors")}
 								</div>
 								<div className="grid grid-cols-2 gap-ch mb-xs">
@@ -417,7 +417,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									/>
 								</div>
 
-								<div className="text-excite text-2xl font-sans-regular">
+								<div className="text-standard text-2xl font-sans-regular">
 									{props.getLabelFor("label.headline.gasCompositionRaw")}
 								</div>
 								<div className="grid grid-cols-2 gap-ch">
@@ -570,7 +570,7 @@ export const PaybackCalculatorEVCP = (props: ApplicationData): JSX.Element => {
 									{
 										calculations.calculationResult &&
 											<div className="w-full">
-												<div className="text-excite text-2xl font-sans-regular mb-xs">
+												<div className="text-standard text-2xl font-sans-regular mb-xs">
 													{props.getLabelFor("label.chart.title")}
 												</div>
 												<div className="flex w-full border-b-[1px]">

@@ -33,7 +33,7 @@ export const Modal: React.FC<ModalParams> = (props) => {
 				>
 					<div className={cx(
 						"flex items-center justify-center gap-ch absolute top-0 right-0 md:top-[10px] md:right-[10px] p-[10px] w-touch h-touch",
-						"text-2xl text-excite"
+						"text-2xl text-standard"
 					)}>
 						<CloseBox />
 					</div>
