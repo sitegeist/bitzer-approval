@@ -37,3 +37,16 @@
     '@format':     'json'
   httpMethods: ['POST']
   appendExceedingArguments: true
+
+##
+# Translation Export
+-
+  name:  'Translation Export'
+  uriPattern: 'translation/export'
+  defaults:
+    '@package':    'Hoerbiger.HoerbigerCom'
+    '@subpackage': 'Application'
+    '@controller': 'Translation'
+    '@action':     'exportDocument'
+  httpMethods: ['GET']
+  appendExceedingArguments: true

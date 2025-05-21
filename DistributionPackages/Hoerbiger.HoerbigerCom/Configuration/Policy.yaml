@@ -10,6 +10,8 @@ privilegeTargets:
       matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\WantedNodeController->(register)Action())'
     'Hoerbiger.HoerbigerCom:ContactRequest':
       matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\ContactRequestController->sendAction())'
+    'Hoerbiger.HoerbigerCom:TranslationExport':
+      matcher: 'method(Hoerbiger\HoerbigerCom\Application\Controller\TranslationController->exportDocumentAction())'
   'Neos\Neos\Security\Authorization\Privilege\ModulePrivilege':
     'Hoerbiger.HoerbigerCom:Module.MarketingUrls':
       matcher: 'management/marketingUrls'
@@ -27,14 +29,26 @@ roles:
         privilegeTarget: 'Hoerbiger.HoerbigerCom:ContactRequest'
         permission: GRANT
 
+  'Hoerbiger.Shared:TranslationEditor':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:TranslationExport'
+        permission: GRANT
+
   'Hoerbiger.Shared:ChiefEditor':
     privileges:
       -
         privilegeTarget: 'Hoerbiger.HoerbigerCom:Module.MarketingUrls'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:TranslationExport'
         permission: GRANT
 
   'Neos.Neos:Administrator':
     privileges:
       -
         privilegeTarget: 'Hoerbiger.HoerbigerCom:Module.MarketingUrls'
+        permission: GRANT
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom:TranslationExport'
         permission: GRANT

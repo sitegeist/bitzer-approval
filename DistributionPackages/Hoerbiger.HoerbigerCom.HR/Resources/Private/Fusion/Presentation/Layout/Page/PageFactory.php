@@ -50,7 +50,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forHeaderStage($jobList, $subGraph, $inBackend);
 
         return new Page(
-            $this->siteHeaderFactory->forDocument($jobList, $site, $subGraph, null),
+            $this->siteHeaderFactory->forDocument($jobList, $site, $subGraph, $inBackend, null),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::VARIANT_BLANK_BOTTOM,
@@ -72,7 +72,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $site,
         TraversableNodeInterface $job,
         ContentContext $subGraph,
-        ActionRequest $request
+        ActionRequest $request,
+        bool $inBackend
     ): Page {
         $content = new ContentContainer(
             ContentContainerVariant::VARIANT_REGULARX,
@@ -84,7 +85,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $job,
             $content,
             $subGraph,
-            $request
+            $request,
+            $inBackend
         );
     }
 
@@ -92,7 +94,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $site,
         TraversableNodeInterface $jobNotification,
         ContentContext $subGraph,
-        ActionRequest $request
+        ActionRequest $request,
+        bool $inBackend
     ): Page {
         $content = new ContentContainer(
             ContentContainerVariant::VARIANT_REGULARX,
@@ -104,7 +107,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $jobNotification,
             $content,
             $subGraph,
-            $request
+            $request,
+            $inBackend
         );
     }
 
@@ -112,14 +116,15 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $site,
         TraversableNodeInterface $jobApplication,
         ContentContext $subGraph,
-        ActionRequest $request
+        ActionRequest $request,
+        bool $inBackend,
     ): Page {
         $content = new ContentContainer(
             ContentContainerVariant::VARIANT_REGULARX,
             $this->placeholderFactory->forJobApplication()
         );
 
-        return $this->forDocumentWithoutIntroduction($site,$jobApplication,$content,$subGraph, $request);
+        return $this->forDocumentWithoutIntroduction($site,$jobApplication,$content,$subGraph, $request, $inBackend);
     }
 
     public function forDocumentWithoutIntroduction(
@@ -127,7 +132,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $document,
         SlotInterface $content,
         ContentContext $subGraph,
-        ActionRequest $request
+        ActionRequest $request,
+        bool $inBackend
     ): Page {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -136,7 +142,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $breadcrumb */
         $breadcrumb = $this->breadcrumbFactory->forPage($document, $subGraph);
         return new Page(
-            $this->siteHeaderFactory->forDocument($document, $site, $subGraph, $request),
+            $this->siteHeaderFactory->forDocument($document, $site, $subGraph, $inBackend, $request),
             Collection::fromIterable(array_filter([
                 $content,
                 new ContentContainer(

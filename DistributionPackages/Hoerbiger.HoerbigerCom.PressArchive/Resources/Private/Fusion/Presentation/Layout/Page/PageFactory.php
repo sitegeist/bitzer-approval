@@ -77,7 +77,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $overviewPage,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(
                 array_filter([
@@ -130,7 +132,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage);
+        return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage, $inBackend);
     }
 
     public function forYearbookRelease(TraversableNodeInterface $site, Node $yearbookRelease, ContentContext $subgraph, bool $inBackend): Page
@@ -138,7 +140,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($yearbookRelease, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage);
+        return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage, $inBackend);
     }
 
     public function forHannsRelease(TraversableNodeInterface $site, Node $hannsRelease, ContentContext $subgraph, bool $inBackend): Page
@@ -146,11 +148,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($hannsRelease, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage);
+        return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage, $inBackend);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, Node $document, ContentContext $subgraph, SlotInterface $stage): Page
-    {
+    public function forDocumentWithIntroduction(
+        TraversableNodeInterface $site,
+        Node $document,
+        ContentContext $subgraph,
+        SlotInterface $stage,
+        bool $inBackend
+    ): Page {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -179,7 +186,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $document,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend
             ),
             Collection::fromIterable(
                 array_filter([
