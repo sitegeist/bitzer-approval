@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Hoerbiger\HoerbigerCom\Command;
 
 use Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTask;
+use Hoerbiger\HoerbigerCom\Domain\Translation\TranslationExport;
 use Neos\ContentRepository\DimensionSpace\Dimension\ContentDimensionIdentifier;
 use Neos\ContentRepository\DimensionSpace\DimensionSpace\DimensionSpacePoint;
 use Neos\ContentRepository\Domain\Model\Node;
@@ -37,6 +38,9 @@ class TranslationCommandController extends CommandController
      */
     #[Flow\InjectConfiguration(path: 'autoTranslationReview.assignments')]
     protected array $translationTaskAssignmentSettings;
+
+    #[Flow\Inject]
+    protected TranslationExport $translationExport;
 
     public function __construct(
         private readonly ContentContextFactory $contentContextFactory,
@@ -193,6 +197,16 @@ class TranslationCommandController extends CommandController
         if ($node->getNodeType()->isOfType('Neos.Neos:Document')) {
             $this->persistenceManager->persistAll();
         }
+    }
+
+    public function exportCommand(string $targetLanguage): void
+    {
+        if (!array_key_exists($targetLanguage, $this->translationTaskAssignmentSettings['en'])) {
+            $this->outputLine($targetLanguage . ' is not a valid language');
+            return;
+        }
+
+        $this->translationExport->forLanguage($targetLanguage);
     }
 
     private function createContentContext(string $language): ContentContext

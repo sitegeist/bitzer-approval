@@ -152,6 +152,7 @@ module.exports = {
 			'sans-regular': 'var(--font-regular)',
 			'sans-bold': 'var(--font-bold)',
 			'serif-regular': 'var(--font-serif-regular)',
+			'neos': ['"Noto Sans"', 'sans-serif']
 		},
 
 		screens: {

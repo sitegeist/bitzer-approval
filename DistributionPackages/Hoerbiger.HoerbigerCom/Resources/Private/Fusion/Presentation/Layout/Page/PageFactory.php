@@ -55,7 +55,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph, $inBackend);
     }
 
     public function forPrivacyPage(TraversableNodeInterface $privacyPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): Page
@@ -63,7 +63,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($privacyPage, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph, $inBackend);
     }
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): Page
@@ -78,7 +78,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $homepage,
                 $homepage,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 // @TODO REMOVE old stage
@@ -161,7 +163,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $searchResultsPage,
                 $siteNode,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
@@ -185,7 +189,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($webPage, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $webPage, $stage, $subgraph, $inBackend);
     }
 
     public function forCareerRootPage(TraversableNodeInterface $site, TraversableNodeInterface $careerRootPage, bool $inBackend, ContentContext $subgraph): Page
@@ -193,7 +197,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($careerRootPage, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $careerRootPage, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $careerRootPage, $stage, $subgraph, $inBackend);
     }
 
     public function forPeopleAndCultureWebPage(TraversableNodeInterface $careerPage, TraversableNodeInterface $siteNode, bool $inBackend, ContentContext $subgraph): Page
@@ -201,7 +205,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($careerPage, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($siteNode, $careerPage, $stage, $subgraph, $inBackend);
     }
 
     public function forContactPage(TraversableNodeInterface $site, TraversableNodeInterface $contactPage, bool $inBackend, ContentContext $subgraph): Page
@@ -223,7 +227,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $contactPage,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
@@ -263,7 +269,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($chroniclePage, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph, $inBackend);
     }
 
     public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage, ContentContext $subgraph, bool $inBackend): Page
@@ -281,7 +287,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $notFoundPage,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 count($anchors) > 0
@@ -302,7 +310,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): Page
+    public function forDocumentWithIntroduction(
+        TraversableNodeInterface $site,
+        TraversableNodeInterface $document,
+        SlotInterface $stage,
+        ContentContext $subgraph,
+        bool $inBackend,
+    ): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -317,7 +331,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $document,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(

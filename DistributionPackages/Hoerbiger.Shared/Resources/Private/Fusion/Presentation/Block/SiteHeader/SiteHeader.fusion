@@ -328,6 +328,9 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </div>
                     </nav>
                 </div>
+                <div @if.1={presentationObject.exportButton} class='p-[15px] flex justify-end'>
+                    <Hoerbiger.Shared:Block.Button presentationObject={presentationObject.exportButton} />
+                </div>
             </header>
         </div>
     `

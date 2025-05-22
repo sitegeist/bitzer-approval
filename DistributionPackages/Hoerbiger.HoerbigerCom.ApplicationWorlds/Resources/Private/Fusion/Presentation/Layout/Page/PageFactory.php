@@ -72,7 +72,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $applicationWorld,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
