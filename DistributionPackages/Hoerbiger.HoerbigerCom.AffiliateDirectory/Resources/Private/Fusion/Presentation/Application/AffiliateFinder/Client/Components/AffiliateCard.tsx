@@ -35,7 +35,8 @@ export const AffiliateCard = ({affiliates}: AffiliateCardProps): JSX.Element => 
 								? affiliate.email.map(mail => (
 									<a
 										key={mail}
-										href={`mailto:${mail}`}
+										href={mail.includes('@') ? `mailto:${mail}` : mail }
+										target="_blank"
 										className="flex items-center gap-ch"
 									>
 										<StampedeIcon
