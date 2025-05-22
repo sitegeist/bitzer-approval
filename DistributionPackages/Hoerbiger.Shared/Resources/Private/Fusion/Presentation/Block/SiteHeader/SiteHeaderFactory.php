@@ -21,6 +21,9 @@ use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -109,8 +112,14 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
 
             $exportButton = new Button(
                 ButtonType::TYPE_LINK,
-                ButtonVariant::VARIANT_PLAIN,
-                Value::fromString('Export Translation'),
+                ButtonVariant::VARIANT_NEOS,
+                new Grid(
+                    GridVariant::VARIANT_ICONLEFT,
+                    Collection::fromIterable([
+                        new Icon("shared", "translation", IconSize::SIZE_SIZE_1),
+                        Value::fromString('Export Translations')
+                    ])
+                ),
                 new Uri($uriBuilder->uriFor(
                     'exportDocument',
                     [
