@@ -96,6 +96,9 @@ class TranslationCommandController extends CommandController
         $rootNode = $sourceContext->getCurrentSiteNode();
 
         $this->refreshNode($rootNode, $targetContext, $sourceLanguage, $targetLanguage);
+
+        $targetSiteNode = $targetContext->getNodeByIdentifier($rootNode->getIdentifier());
+        $targetSiteNode?->setHidden(true);
     }
 
     private function refreshNode(
@@ -124,15 +127,12 @@ class TranslationCommandController extends CommandController
             $this->output->outputLine('Translating node ' . $node->getLabel());
             /** @var Node $targetNode */
             $targetNode = $targetContext->adoptNode($node);
-            $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
             if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
-                $targetNode->setHidden(true);
                 $createReviewTask = true;
             }
         } elseif ($targetNode->isTethered()) {
             $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
             if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
-                $targetNode->setHiddenAfterDateTime(new \DateTime('yesterday noon'));
                 $createReviewTask = true;
             }
         } elseif ($node->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Mixin.Introduction')) {
