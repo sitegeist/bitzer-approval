@@ -1,3 +1,3 @@
-id,description,en,de
-label.addressCountry,the label of the country,Country,Land
-input.activeCountry.all,Label in select to select all countries,All,Alle
+id,description,en,de,zh
+label.addressCountry,"the label of the country",Country,Land,国家
+input.activeCountry.all,"Label in select to select all countries",All,Alle,全部

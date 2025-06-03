@@ -1,50 +1,50 @@
-id,description,en,de
-customerGroup.existingCustomer,existing customer,Existing customer,Bestandskunde
-customerGroup.newCustomer,new customer,New customer,Neukunde
-customerGroup.supplier,supplier,Supplier,Lieferant
-customerGroup.jobCandidate,job candidate,Job candidate,Bewerber
-customerGroup.mediaRepresentative,media representative,Media representative,Medienvertreter
-salutation.Mr.,Mr.,Mr.,Herr
-salutation.Ms.,Ms.,Ms.,Frau
-salutation.none,none,none,divers
-customerConfirmation.subject,Subject,Your contact request,Ihre Kontaktanfrage
-customerConfirmation.salutation.Mr.,Salutation (Mr.),Dear Mr. {givenName} {familyName},Sehr geehrter Herr {familyName}
-customerConfirmation.salutation.Ms.,Salutation (Ms.),Dear Ms. {givenName} {familyName},Sehr geehrte Frau {familyName}
-customerConfirmation.salutation.none,Salutation (None),Dear {givenName} {familyName},Hallo {givenName} {familyName}
-customerConfirmation.message,Message,Your contact request has been received and will be processed shortly.,vielen Dank für Ihre Anfrage an HOERBIGER.<br /><br />Wir kümmern uns um Ihr Anliegen und melden uns so bald wie möglich.
-customerConfirmation.closing,Closing,"Yours sincerely,<br />HOERBIGER",Viele Grüße<br />Ihr HOERBIGER-Team
-form.label.salutation,salutation,salutation,Anrede
-form.label.givenName,given name,given name,Vorname
-form.placeholder.givenName,givenName,Max,Max
-form.error.givenName,Error for givenName,Please enter given name,Bitte Vornamen eintragen.
-form.label.familyName,family name,family name,Nachname
-form.placeholder.familyName,familyName,Mustermann,Mustermann
-form.error.familyName,Error for familyName,Please enter family name,Bitte Familiennamen eintragen.
-form.label.emailAddress,emailAddress,eMail,E-Mail Adresse
-form.placeholder.emailAddress,emailAddress,max.mustermann@mail.com,max.mustermann@mail.com
-form.error.emailAddress,Error for emailAddress,Please enter a valid email,Bitte gültige E-Mail Adresse eintragen.
-form.label.worksFor,worksFor,company,Unternehmen
-form.placeholder.worksFor,worksFor,Muster Company,Musterfirma
-form.label.telephone,telephone,telephone,Telefonnummer
-form.placeholder.telephone,+49 (0) 123456789,+49 (0) 123456789,+49 (0) 123456789
-form.label.streetAddress,streetAddress,street + no,Strasse + Nr.
-form.placeholder.streetAddress,Musterstr. 42,Musterstr. 42,Musterstr. 42
-form.label.postalCode,postalCode,postal code,PLZ
-form.placeholder.postalCode,12345,12345,12345
-form.label.addressLocality,city,location,Ort
-form.placeholder.addressLocality,Musterstadt,Musterstadt,Musterstadt
-form.label.addressCountry,country,country,Land
-form.error.addressCountry,Error for addressCountry,select country,Bitte ein Land auswählen.
-form.label.message,message,message,Anliegen
-form.placeholder.message,Ask your question or describe your concern here,Ask your question or describe your concern here,Stellen Sie hier Ihre Frage oder schildern Sie Ihr Anliegen
-form.error.message,Error for message,Please enter a message,Bitte teilen Sie uns Ihr Anliegen mit.
-form.label.customerGroup,customerGroup,Who are you?,Wer sind Sie?
-form.placeholder.customerGroup,select customer group,select customer group,Anwendergruppe auswählen
-form.dontknowoption.customerGroup,I dont know my customerGroup,I'm not sure about that,Ich bin mir nicht sicher
-form.error.customerGroup,Error for customerGroup,Please select an option,Bitte wählen Sie eine Option aus.
-form.label.applicationWorld,applicationWorld,Which area is your company most likely to be assigned to?,Welchem Gebiet ist Ihr Unternehmen am ehesten zuzuordnen?
-form.placeholder.applicationWorld,select applicationWorld,select applicationWorld,Gebiet auswählen
-form.dontknowoption.applicationWorld,I dont know the applicationWorld,I'm not sure about that,Ich bin mir nicht sicher
-form.error.applicationWorld,Error for applicationWorld,Please select an option,Bitte wählen Sie eine Option aus.
-form.content.fillRequiredFields,Fill required fields,* Fill these fields,* Felder müssen ausgefüllt sein
-form.submit,Submit label,Submit request,Anfrage absenden
+id,description,en,de,zh
+customerGroup.existingCustomer,"existing customer","Existing customer",Bestandskunde,现有的客户
+customerGroup.newCustomer,"new customer","New customer",Neukunde,新客户
+customerGroup.supplier,supplier,Supplier,Lieferant,供应商
+customerGroup.jobCandidate,"job candidate","Job candidate",Bewerber,求职者
+customerGroup.mediaRepresentative,"media representative","Media representative",Medienvertreter,媒体代表
+salutation.Mr.,Mr.,Mr.,Herr,先生
+salutation.Ms.,Ms.,Ms.,Frau,女士
+salutation.none,none,none,divers,无
+customerConfirmation.subject,Subject,"Your contact request","Ihre Kontaktanfrage",您的联系请求
+customerConfirmation.salutation.Mr.,"Salutation (Mr.)","Dear Mr. {givenName} {familyName}","Sehr geehrter Herr {familyName}",尊敬的｛名｝｛姓｝先生
+customerConfirmation.salutation.Ms.,"Salutation (Ms.)","Dear Ms. {givenName} {familyName}","Sehr geehrte Frau {familyName}",尊敬的｛名｝｛姓｝先生
+customerConfirmation.salutation.none,"Salutation (None)","Dear {givenName} {familyName}","Hallo {givenName} {familyName}",尊敬的｛名｝｛姓｝先生
+customerConfirmation.message,Message,"Your contact request has been received and will be processed shortly.","vielen Dank für Ihre Anfrage an HOERBIGER.<br /><br />Wir kümmern uns um Ihr Anliegen und melden uns so bald wie möglich.",您的联系请求已收到，我们将很快处理
+customerConfirmation.closing,Closing,"Yours sincerely,<br />HOERBIGER","Viele Grüße<br />Ihr HOERBIGER-Team",您的诚挚的，贺尔碧格
+form.label.salutation,salutation,salutation,Anrede,招呼
+form.label.givenName,"given name","given name",Vorname,名
+form.placeholder.givenName,givenName,Max,Max,小明
+form.error.givenName,"Error for givenName","Please enter given name","Bitte Vornamen eintragen.",请输入您的名
+form.label.familyName,"family name","family name",Nachname,姓
+form.placeholder.familyName,familyName,Mustermann,Mustermann,王
+form.error.familyName,"Error for familyName","Please enter family name","Bitte Familiennamen eintragen.",请输入您的姓
+form.label.emailAddress,emailAddress,eMail,"E-Mail Adresse",邮件
+form.placeholder.emailAddress,emailAddress,max.mustermann@mail.com,max.mustermann@mail.com,xiaomin.wang@mail.com
+form.error.emailAddress,"Error for emailAddress","Please enter a valid email","Bitte gültige E-Mail Adresse eintragen.",请输入有效的电子邮件
+form.label.worksFor,worksFor,company,Unternehmen,公司
+form.placeholder.worksFor,worksFor,"Muster Company",Musterfirma,某某公司
+form.label.telephone,telephone,telephone,Telefonnummer,电话
+form.placeholder.telephone,"+49 (0) 123456789","+49 (0) 123456789","+49 (0) 123456789","+86 (0) 123456789"
+form.label.streetAddress,streetAddress,"street + no","Strasse + Nr.",街道、门牌号
+form.placeholder.streetAddress,"Musterstr. 42","Musterstr. 42","Musterstr. 42",某某街道42号
+form.label.postalCode,postalCode,"postal code",PLZ,邮政编码
+form.placeholder.postalCode,12345,12345,12345,12345
+form.label.addressLocality,city,location,Ort,位置
+form.placeholder.addressLocality,Musterstadt,Musterstadt,Musterstadt,城市
+form.label.addressCountry,country,country,Land,国家
+form.error.addressCountry,"Error for addressCountry","select country","Bitte ein Land auswählen.",选择国家
+form.label.message,message,message,Anliegen,短信
+form.placeholder.message,"Ask your question or describe your concern here","Ask your question or describe your concern here","Stellen Sie hier Ihre Frage oder schildern Sie Ihr Anliegen",在此处提出您的问题或描述您的担忧
+form.error.message,"Error for message","Please enter a message","Bitte teilen Sie uns Ihr Anliegen mit.",请输入信息
+form.label.customerGroup,customerGroup,"Who are you?","Wer sind Sie?",您是谁？
+form.placeholder.customerGroup,"select customer group","select customer group","Anwendergruppe auswählen",选择客户群
+form.dontknowoption.customerGroup,"I dont know my customerGroup","I'm not sure about that","Ich bin mir nicht sicher",我对此不太确定
+form.error.customerGroup,"Error for customerGroup","Please select an option","Bitte wählen Sie eine Option aus.",请选择一个选项
+form.label.applicationWorld,applicationWorld,"Which area is your company most likely to be assigned to?","Welchem Gebiet ist Ihr Unternehmen am ehesten zuzuordnen?",你的公司最有可能被归属到哪个领域?
+form.placeholder.applicationWorld,"select applicationWorld","select applicationWorld","Gebiet auswählen",选择applicationWorld
+form.dontknowoption.applicationWorld,"I dont know the applicationWorld","I'm not sure about that","Ich bin mir nicht sicher",我不确定
+form.error.applicationWorld,"Error for applicationWorld","Please select an option","Bitte wählen Sie eine Option aus.",请选择一个选项
+form.content.fillRequiredFields,"Fill required fields","* Fill these fields","* Felder müssen ausgefüllt sein","* 填写这些字段"
+form.submit,"Submit label","Submit request","Anfrage absenden",提交请求

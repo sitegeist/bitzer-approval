@@ -1,5 +1,5 @@
-id,description,de,en
-contact_form_link_subline,ContactFormLinkSubline,KONTAKT,Contact
-contact_form_link_headline,ContactFormLinkHeadline,Wie können wir Ihnen weiterhelfen?,How can we help you?
-contact_form_link_text,ContactFormLinkText,"Nutzen Sie das Kontaktformular, falls Sie Fragen haben oder weitere Informationen zu unserem Unternehmen, unseren Produkten und Services, zu aktuellen Stellenausschreibungen und Karrieremöglichkeiten oder der HOERBIGER Stiftung erhalten möchten.","Use the contact form if you have any questions or would like to receive further information about our company, our products and services, current job vacancies and career opportunities, or the HOERBIGER Foundation."
-contact_form_link_button,ContactFormLinkButton,Zum Kontaktformular,To the contact form
+id,description,de,en,zh
+contact_form_link_subline,ContactFormLinkSubline,KONTAKT,Contact,联系方式
+contact_form_link_headline,ContactFormLinkHeadline,"Wie können wir Ihnen weiterhelfen?","How can we help you?",我们能为您做些什么？
+contact_form_link_text,ContactFormLinkText,"Nutzen Sie das Kontaktformular, falls Sie Fragen haben oder weitere Informationen zu unserem Unternehmen, unseren Produkten und Services, zu aktuellen Stellenausschreibungen und Karrieremöglichkeiten oder der HOERBIGER Stiftung erhalten möchten.","Use the contact form if you have any questions or would like to receive further information about our company, our products and services, current job vacancies and career opportunities, or the HOERBIGER Foundation.",如果您对贺尔碧格公司、我们的产品和服务、当前的职位空缺和职业机会或贺尔碧格基金会有任何疑问或希望获得更多信息，请使用以下联系表格。
+contact_form_link_button,ContactFormLinkButton,"Zum Kontaktformular","To the contact form",转到联系表格

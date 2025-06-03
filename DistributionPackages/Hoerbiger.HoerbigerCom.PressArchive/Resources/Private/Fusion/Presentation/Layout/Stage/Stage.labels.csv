@@ -1,5 +1,5 @@
-id,description,en,de
-label.yearbook,yearbook,Yearbook,Jahrbuch
-label.hanns,hanns,HANNS. A pioneers magazine,HANNS. A pioneers magazine
-label.news,news,Hoerbiger News,Hoerbiger News
-label.button.getNewestRelease,submit newest release,Get the newest release,Jetzt die neueste Ausgabe anfordern
+id,description,en,de,zh
+label.yearbook,yearbook,Yearbook,Jahrbuch,年鉴
+label.hanns,hanns,"HANNS. A pioneers magazine","HANNS. A pioneers magazine","HANNS. 先锋杂志"
+label.news,news,"Hoerbiger News","Hoerbiger News",贺尔碧格新闻
+label.button.getNewestRelease,"submit newest release","Get the newest release","Jetzt die neueste Ausgabe anfordern",获取最新版本
