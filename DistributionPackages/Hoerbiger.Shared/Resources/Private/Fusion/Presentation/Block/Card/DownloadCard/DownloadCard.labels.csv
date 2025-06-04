@@ -1,5 +1,5 @@
-id,description,en,de
-download,download,Download now,Jetzt herunterladen
-pdf,pdf,PDF document,PDF-Dokument
-ppt,ppt,PPT document,Powerpoint
-pptx,ppt,PPT document,Powerpoint
+id,description,en,de,zh,ja
+download,download,"Download now","Jetzt herunterladen",,今すぐダウンロード
+pdf,pdf,"PDF document",PDF-Dokument,"PDF 文件",PDFファイル
+ppt,ppt,"PPT document",Powerpoint,"PPT 文件",PPTファイル
+pptx,ppt,"PPT document",Powerpoint,"PPT 文件",PPTファイル

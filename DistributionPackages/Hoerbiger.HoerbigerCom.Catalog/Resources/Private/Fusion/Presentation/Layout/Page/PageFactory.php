@@ -49,21 +49,21 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($catalog, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $catalog, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $catalog, $stage, $subgraph, $inBackend);
     }
 
     public function forProductCategory(TraversableNodeInterface $site, TraversableNodeInterface $productCategory,  bool $inBackend, ContentContext $subgraph): Page
     {
         $stage = $this->catalogStageFactory->forProductAndCategoryIntroduction($productCategory, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $productCategory,$stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $productCategory,$stage, $subgraph, $inBackend);
     }
 
     public function forProduct(TraversableNodeInterface $site, TraversableNodeInterface $product, bool $inBackend, ContentContext $subgraph): Page
     {
         $stage = $this->catalogStageFactory->forProductAndCategoryIntroduction($product, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $product, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $product, $stage, $subgraph, $inBackend);
     }
 
     public function forIndustrySolutions(TraversableNodeInterface $site, TraversableNodeInterface $industrySolutions, bool $inBackend, ContentContext $subgraph): Page
@@ -84,7 +84,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $industrySolutions,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
@@ -137,7 +139,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $industrySolution,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
@@ -166,8 +170,13 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $stage, ContentContext $subgraph): Page
-    {
+    public function forDocumentWithIntroduction(
+        TraversableNodeInterface $site,
+        TraversableNodeInterface $document,
+        SlotInterface $stage,
+        ContentContext $subgraph,
+        bool $inBackend
+    ): Page {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -181,7 +190,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $document,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 count($anchors) > 0

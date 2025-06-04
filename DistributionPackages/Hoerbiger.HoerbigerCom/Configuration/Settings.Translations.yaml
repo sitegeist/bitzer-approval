@@ -2,5 +2,16 @@ Sitegeist:
   CsvPO:
     management:
       packageKeys:
-        - 'Hoerbiger.HoerbigerCom'
-        - 'Hoerbiger.Shared'
+        hoerbiger: 'Hoerbiger.HoerbigerCom'
+      locales:
+        - en
+        - zh
+        - ja
+Hoerbiger:
+  HoerbigerCom:
+    translation:
+      referenceLanguage: en
+      listenerDimensions:
+        - zh
+        - ja
+      bypassEnabled: false

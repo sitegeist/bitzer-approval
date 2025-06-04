@@ -10,7 +10,7 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     slider__preview__description:
       type: 'string'
       ui:
@@ -23,7 +23,7 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     video:
       type: 'Neos\Media\Domain\Model\Asset'
       ui:
@@ -51,7 +51,7 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     slider__preview__image__title:
       type: 'string'
       ui:
@@ -79,7 +79,7 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     slider__preview__background__title:
       type: 'string'
       ui:
@@ -89,4 +89,4 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
-        translateOnAdoption: true
+        automaticTranslation: true

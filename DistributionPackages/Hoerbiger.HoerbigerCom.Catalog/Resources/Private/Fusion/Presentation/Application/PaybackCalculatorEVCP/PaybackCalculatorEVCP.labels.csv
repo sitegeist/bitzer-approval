@@ -1,97 +1,81 @@
-id,description,en,de
-input_cost_dryNaturalGas,Price dry natural gas,Price dry natural gas:,Price dry natural gas:
-input_cost_NGL,Price NGL composite,Price NGL composite:,Price NGL composite:
-input_compressor_annualOperationHours,Annual operating hours,Annual operating hours:,Annual operating hours:
-input_compressor_cylindersNumber,Number of 1st stage cylinders,Number of 1st stage cylinders:,Number of 1st stage cylinders:
-input_compressor_nominalFlowRate,Compressor nominal flow rate without eVCP,Compressor nominal flow rate without eVCP:,Compressor nominal flow rate without eVCP:
-input_compressor_outputIncrease,Increase of output thanks to eVCP,Increase of output thanks to eVCP:,Increase of output thanks to eVCP:
-
-label.headline.naturalGasGathering,"Compressed gas value input","Compressed gas value input","Compressed gas value input",
-label.headline.compressorOperatingData,"Compressor operating data input","Compressor operating data input","Compressor operating data input"
-label.headline.gasComposition,"Heating value for natural gas (average):","Heating value for natural gas (average):","Heating value for natural gas (average):"
-label.headline.conversionFactors,"Conversion factors","Conversion factors","Conversion factors"
-label.headline.gasCompositionRaw,"Gas composition of raw natural gas (typical):","Gas composition of raw natural gas (typical):","Gas composition of raw natural gas (typical):"
-
-label.prices.dryNaturalGas,Price dry natural gas:,Price dry natural gas:,Price dry natural gas:
-label.prices.NGL,"Price NGL composite:","Price NGL composite:","Price NGL composite:"
-label.conversionFactor.btu,"1 Btu","1 Btu","1 Btu"
-label.conversionFactor.mmBtu,"1 MMBtu (million)","1 MMBtu (million)","1 MMBtu (million)"
-label.conversionFactor.scf,"1 scf, standard cubic feet","1 scf, standard cubic feet", "1 scf, standard cubic feet"
-label.conversionFactor.avgHeatingValue4NG,"1 scf, standard cubic feet","1 scf, standard cubic feet","1 scf, standard cubic feet"
-label.addRevenues.dryNaturalGas,"Dry natural gas:","Dry natural gas:","Dry natural gas:"
-label.addRevenues.NGL,"NGL:","NGL:","NGL:"
-label.addRevenues.others,"Others:","Others:","Others:"
-label.addRevenues.total,"Total","Total","Total"
-
-label.unit.prices.dryNaturalGas,"$ per MMBtu","$ per MMBtu","$ per MMBtu"
-label.unit.prices.NGL,"$ per MMBtu","$ per MMBtu","$ per MMBtu"
-label.unit.addRevenues.dryNaturalGas,"%","%","%"
-label.unit.addRevenues.NGL,"%","%","%"
-label.unit.addRevenues.others,"%","%","%"
-label.unit.addRevenues.total,"%","%","%"
-label.unit.conversionFactor.btu,"kJ","kJ","kJ"
-label.unit.conversionFactor.mmBtu,"GJ","GJ","GJ"
-label.unit.conversionFactor.scf,"Nm3/h","Nm3/h","Nm3/h"
-label.unit.conversionFactor.avgHeatingValue4NG,"Btu","Btu","Btu"
-
-label.projectCost.numberOfCompressors,"Total number of eVCPs per compressor","Total number of eVCPs per compressor","Total number of eVCPs per compressor"
-label.projectCost.actuators,"eVCP actuators per piece","eVCP actuators per piece","eVCP actuators per piece"
-label.projectCost.localPanel,"Local panel per eVCP","Local panel per eVCP","Local panel per eVCP"
-label.projectCost.installation,"Cabling, labour mechanical and electrical installation","Cabling, labour mechanical and electrical installation","Cabling, labour mechanical and electrical installation"
-label.projectCost.subTotal,"Subtotal per eVCP","Subtotal per eVCP","Subtotal per eVCP"
-
-label.projectCost.generalSubtotal,"Subtotal for total number of eVCPs","Subtotal for total number of eVCPs","Subtotal for total number of eVCPs"
-label.projectCost.scheduleAndControl,"Technical clarification meeting, development of control scheme and compressor loading schedule","Technical clarification meeting, development of control scheme and compressor loading schedule","Technical clarification meeting, development of control scheme and compressor loading schedule"
-label.projectCost.customerIntegration,"Integration into customer control system","Integration into customer control system","Integration into customer control system"
-label.projectCost.commission,"Commissioning / start-up services","Commissioning / start-up services","Commissioning / start-up services"
-label.projectCost.total,"Total","Total","Total"
-
-label.unit.dollar,"$","$","$"
-label.unit.percentage,"%","%","%"
-
-label.showDerivation,"show details","show details","show details"
-label.disableDerivation,"hide details","hide details","hide details"
-
-label.compressor.annualOperatingHours,"Annual operating hours","Annual operating hours","Annual operating hours"
-label.compressor.cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders","Number of 1st stage cylinders"
-label.compressor.nominalFlowRate,"Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP"
-label.compressor.outputIncrease,"Increase of output thanks to eVCP","Increase of output thanks to eVCP","Increase of output thanks to eVCP"
-
-label.unit.compressor.annualOperatingHours,"hours","hours","hours"
-label.unit.compressor.cylindersNumber,"pcs","pcs","pcs"
-label.unit.compressor.nominalFlowRate,"MMSCFD","MMSCFD","MMSCFD"
-label.unit.compressor.outputIncrease,"","",""
-
-label.footnote,"*) Note: The presented increase in delivery volume in a range of 1 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 1 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 1 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER."
-label.disclaimer,"Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation."
-
-label.chart.title,"Payback calculation result","Payback calculation result","Payback calculation result"
-label.chart.barChartLabel,"Additional revenue per year [USD]","Additional revenue per year [USD]","Additional revenue per year [USD]"
-label.chart.lineChartLabel,"Payback time [months]","Payback time [months]","Payback time [months]"
-label.chart.xAxisLabel,"Increase of compressor output with eVCP in % (typical range 1%...10%*)","Increase of compressor output with eVCP in % (typical range 1%...10%*)","Increase of compressor output with eVCP in % (typical range 1%...10%*)"
-label.chart.yLeftLabel,"Additional revenue per year in USD","Additional revenue per year in USD","Additional revenue per year in USD"
-label.chart.yRightLabel,"Payback time in months","Payback time in months","Payback time in months"
-label.chart.extension,"increase of output thanks to eVCP","increase of output thanks to eVCP","increase of output thanks to eVCP"
-
-error.message.cost,"Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99", "Invalid input, the value must be in the range from 0.01 to 99"
-error.message.annualOperationHours,"Invalid input, the value must be in the range from 1 to 8760","Invalid input, the value must be in the range from 1 to 8760","Invalid input, the value must be in the range from 1 to 8760"
-error.message.cylindersNumber,"Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10"
-error.message.nominalFlowRate,"Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99"
-error.message.outputIncrease,"Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10"
-error.message.noDiagram,"A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries"
-
-abbreviation.btu,"Btu","Btu","Btu"
-abbreviation.mmbtu,"MMBtu","MMBtu","MMBtu"
-abbreviation.mmscfd,"MMSCFD","MMSCFD","MMSCFD"
-abbreviation.ngl,"NGL","NGL","NGL"
-abbreviation.vvcp,"VVCP","VVCP","VVCP"
-
-description.btu,"British thermal unit","British thermal unit","British thermal unit"
-description.mmbtu,"million British thermal units","million British thermal units","million British thermal units"
-description.mmscfd,"million standard cubic feet per day","million standard cubic feet per day","million standard cubic feet per day"
-description.ngl,"non-gaseous liquids","non-gaseous liquids","non-gaseous liquids"
-description.vvcp,"variable volume clearance pocket","variable volume clearance pocket","variable volume clearance pocket"
-
-notice.dryNaturalGas,"US Energy Administration daily spot price Henry Hub, as per 9th August 2023","US Energy Administration daily spot price Henry Hub, as per 9th August 2023","US Energy Administration daily spot price Henry Hub, as per 9th August 2023"
-notice.NGL,"US Energy Administration month Mai 2023, as per 9th August 2023","US Energy Administration month Mai 2023, as per 9th August 2023","US Energy Administration month Mai 2023, as per 9th August 2023"
-
+id,description,en,de,zh
+input_cost_dryNaturalGas,"Price dry natural gas","Price dry natural gas:","Price dry natural gas:",干燥天然气价格:
+input_cost_NGL,"Price NGL composite","Price NGL composite:","Price NGL composite:",液化天然气复合材料价格：
+input_compressor_annualOperationHours,"Annual operating hours","Annual operating hours:","Annual operating hours:",年度运行小时数：
+input_compressor_cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders:","Number of 1st stage cylinders:",第一级气缸数量：
+input_compressor_nominalFlowRate,"Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP:","Compressor nominal flow rate without eVCP:",无eVCP的压缩机公称流量：
+input_compressor_outputIncrease,"Increase of output thanks to eVCP","Increase of output thanks to eVCP:","Increase of output thanks to eVCP:",eVCP带来的排量增加:
+label.headline.naturalGasGathering,"Compressed gas value input","Compressed gas value input","Compressed gas value input",压缩气体值输入
+label.headline.compressorOperatingData,"Compressor operating data input","Compressor operating data input","Compressor operating data input",压缩机运行数据输入
+label.headline.gasComposition,"Heating value for natural gas (average):","Heating value for natural gas (average):","Heating value for natural gas (average):",天然气热值（平均）：
+label.headline.conversionFactors,"Conversion factors","Conversion factors","Conversion factors",换算因子
+label.headline.gasCompositionRaw,"Gas composition of raw natural gas (typical):","Gas composition of raw natural gas (typical):","Gas composition of raw natural gas (typical):",原料天然气的气体成分（典型）：
+label.prices.dryNaturalGas,"Price dry natural gas:","Price dry natural gas:","Price dry natural gas:",干燥天然气价格：
+label.prices.NGL,"Price NGL composite:","Price NGL composite:","Price NGL composite:",液化天然气复合材料价格：
+label.conversionFactor.btu,"1 Btu","1 Btu","1 Btu","1 Btu"
+label.conversionFactor.mmBtu,"1 MMBtu (million)","1 MMBtu (million)","1 MMBtu (million)","	1 MMBtu (百万)"
+label.conversionFactor.scf,"1 scf, standard cubic feet","1 scf, standard cubic feet","1 scf, standard cubic feet","1 scf，标准立方英尺"
+label.conversionFactor.avgHeatingValue4NG,"1 scf, standard cubic feet","1 scf, standard cubic feet","1 scf, standard cubic feet","1 scf，标准立方英尺"
+label.addRevenues.dryNaturalGas,"Dry natural gas:","Dry natural gas:","Dry natural gas:","干燥天然气 "
+label.addRevenues.NGL,NGL:,NGL:,NGL:,液化天然
+label.addRevenues.others,Others:,Others:,Others:,其它:
+label.addRevenues.total,Total,Total,Total,总的
+label.unit.prices.dryNaturalGas,"$ per MMBtu","$ per MMBtu","$ per MMBtu",美元/MMBtu
+label.unit.prices.NGL,"$ per MMBtu","$ per MMBtu","$ per MMBtu",美元/MMBtu
+label.unit.addRevenues.dryNaturalGas,%,%,%,%
+label.unit.addRevenues.NGL,%,%,%,%
+label.unit.addRevenues.others,%,%,%,%
+label.unit.addRevenues.total,%,%,%,%
+label.unit.conversionFactor.btu,kJ,kJ,kJ,kJ
+label.unit.conversionFactor.mmBtu,GJ,GJ,GJ,GJ
+label.unit.conversionFactor.scf,Nm3/h,Nm3/h,Nm3/h,Nm3/h
+label.unit.conversionFactor.avgHeatingValue4NG,Btu,Btu,Btu,Btu
+label.projectCost.numberOfCompressors,"Total number of eVCPs per compressor","Total number of eVCPs per compressor","Total number of eVCPs per compressor",每台压缩机eVCPs总数
+label.projectCost.actuators,"eVCP actuators per piece","eVCP actuators per piece","eVCP actuators per piece",每件eVCP执行器
+label.projectCost.localPanel,"Local panel per eVCP","Local panel per eVCP","Local panel per eVCP",每个eVCP的本地面板
+label.projectCost.installation,"Cabling, labour mechanical and electrical installation","Cabling, labour mechanical and electrical installation","Cabling, labour mechanical and electrical installation",布线、人工机械和电气安装
+label.projectCost.subTotal,"Subtotal per eVCP","Subtotal per eVCP","Subtotal per eVCP",每个eVCP的小计
+label.projectCost.generalSubtotal,"Subtotal for total number of eVCPs","Subtotal for total number of eVCPs","Subtotal for total number of eVCPs",eVCPs总数小计
+label.projectCost.scheduleAndControl,"Technical clarification meeting, development of control scheme and compressor loading schedule","Technical clarification meeting, development of control scheme and compressor loading schedule","Technical clarification meeting, development of control scheme and compressor loading schedule",技术澄清会、控制方案制定和压缩机加载计划
+label.projectCost.customerIntegration,"Integration into customer control system","Integration into customer control system","Integration into customer control system",集成到客户控制系统
+label.projectCost.commission,"Commissioning / start-up services","Commissioning / start-up services","Commissioning / start-up services",调试/启动服务
+label.projectCost.total,Total,Total,Total,总计
+label.unit.dollar,$,$,$,美元
+label.unit.percentage,%,%,%,%
+label.showDerivation,"show details","show details","show details",显示详细信息
+label.disableDerivation,"hide details","hide details","hide details",隐藏详细信息
+label.compressor.annualOperatingHours,"Annual operating hours","Annual operating hours","Annual operating hours",年度运行小时数
+label.compressor.cylindersNumber,"Number of 1st stage cylinders","Number of 1st stage cylinders","Number of 1st stage cylinders",第一级气缸数量
+label.compressor.nominalFlowRate,"Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP","Compressor nominal flow rate without eVCP",无eVCP的压缩机公称流量：
+label.compressor.outputIncrease,"Increase of output thanks to eVCP","Increase of output thanks to eVCP","Increase of output thanks to eVCP",eVCP带来的排量增加:
+label.unit.compressor.annualOperatingHours,hours,hours,hours,小时
+label.unit.compressor.cylindersNumber,pcs,pcs,pcs,件数
+label.unit.compressor.nominalFlowRate,MMSCFD,MMSCFD,MMSCFD,MMSCFD
+label.unit.compressor.outputIncrease,,,,
+label.footnote,"*) Note: The presented increase in delivery volume in a range of 1 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 1 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.","*) Note: The presented increase in delivery volume in a range of 1 to 10 percent is based on empirical values from past projects. The actual possible increase in delivery volume depends on several parameters and must be determined on a project-specific basis as part of a performance calculation by HOERBIGER.",*)注：排量在5%至10%范围内的增长是基于过去项目的经验值。交付量的实际可能增加取决于几个参数，必须根据具体项目确定，作为贺尔碧格性能计算的一部分。
+label.disclaimer,"Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.","Disclaimer: The results presented are based on certain assumptions and simplifications, which have been made by HOERBIGER on the basis of experience and to the best of its knowledge and belief. The assumed application is Natural Gas Gathering. The price of natural gas and NGLs is subject to volatility, which cannot be reflected in this calculation on a daily basis.  Therefore results are not binding and must be confirmed in the course of a binding quotation.",免责声明：所呈现的结果基于某些假设和简化，这些假设和简化是贺尔碧格根据经验并尽其所知所信做出的。假设的应用是天然气集输。天然气和液化天然气的价格会波动，这无法在每日的计算中反映出来。因此，结果不具有约束力，必须在有约束力的报价过程中予以确认。
+label.chart.title,"Payback calculation result","Payback calculation result","Payback calculation result",投资回收计算结果
+label.chart.barChartLabel,"Additional revenue per year [USD]","Additional revenue per year [USD]","Additional revenue per year [USD]",每年额外收入[美元]
+label.chart.lineChartLabel,"Payback time [months]","Payback time [months]","Payback time [months]",投资回收期[月]
+label.chart.xAxisLabel,"Increase of compressor output with eVCP in % (typical range 1%...10%*)","Increase of compressor output with eVCP in % (typical range 1%...10%*)","Increase of compressor output with eVCP in % (typical range 1%...10%*)",使用eVCP增加压缩机排量的百分比（典型范围为5%…10%*）
+label.chart.yLeftLabel,"Additional revenue per year in USD","Additional revenue per year in USD","Additional revenue per year in USD",每年额外收入（美元）
+label.chart.yRightLabel,"Payback time in months","Payback time in months","Payback time in months",投资回收期（月）
+label.chart.extension,"increase of output thanks to eVCP","increase of output thanks to eVCP","increase of output thanks to eVCP",eVCP带来的排量增加:
+error.message.cost,"Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99",输入无效，该值必须在0.01到99的范围内
+error.message.annualOperationHours,"Invalid input, the value must be in the range from 1 to 8760","Invalid input, the value must be in the range from 1 to 8760","Invalid input, the value must be in the range from 1 to 8760",输入无效，该值必须在1到8760的范围内
+error.message.cylindersNumber,"Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10",输入无效，该值必须在1到10的范围内
+error.message.nominalFlowRate,"Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99","Invalid input, the value must be in the range from 0.01 to 99",输入无效，该值必须在0.01到99的范围内
+error.message.outputIncrease,"Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10","Invalid input, the value must be in the range from 1 to 10",输入无效，该值必须在5到10的范围内
+error.message.noDiagram,"A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries","A calculation is not possible due to incorrect values in the input fields. Please correct the marked entries",由于输入字段中的值不正确，无法进行计算。请更正标记的条目。
+abbreviation.btu,Btu,Btu,Btu,Btu
+abbreviation.mmbtu,MMBtu,MMBtu,MMBtu,MMBtu
+abbreviation.mmscfd,MMSCFD,MMSCFD,MMSCFD,MMSCFD
+abbreviation.ngl,NGL,NGL,NGL,液化天然气
+abbreviation.vvcp,VVCP,VVCP,VVCP,VVCP
+description.btu,"British thermal unit","British thermal unit","British thermal unit",英热单位
+description.mmbtu,"million British thermal units","million British thermal units","million British thermal units",百万英热单位
+description.mmscfd,"million standard cubic feet per day","million standard cubic feet per day","million standard cubic feet per day",百万标准立方英尺/天
+description.ngl,"non-gaseous liquids","non-gaseous liquids","non-gaseous liquids",非气态液体
+description.vvcp,"variable volume clearance pocket","variable volume clearance pocket","variable volume clearance pocket",余隙腔可变容积
+notice.dryNaturalGas,"US Energy Administration daily spot price Henry Hub, as per 9th August 2023","US Energy Administration daily spot price Henry Hub, as per 9th August 2023","US Energy Administration daily spot price Henry Hub, as per 9th August 2023","根据2023年8月9日，美国能源管理局每日现货价格Henry Hub。"
+notice.NGL,"US Energy Administration month Mai 2023, as per 9th August 2023","US Energy Administration month Mai 2023, as per 9th August 2023","US Energy Administration month Mai 2023, as per 9th August 2023",根据2023年8月9日，美国能源管理局2023年5月。

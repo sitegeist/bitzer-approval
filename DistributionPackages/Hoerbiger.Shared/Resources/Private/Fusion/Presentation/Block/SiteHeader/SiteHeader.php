@@ -5,6 +5,7 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
@@ -23,7 +24,8 @@ final class SiteHeader extends AbstractComponentPresentationObject
         public readonly Icon $subLevelIcon,
         public readonly UriInterface $searchTargetUri,
         public readonly Icon $searchIcon,
-        public readonly string $labels
+        public readonly string $labels,
+        public readonly ?Button $exportButton,
     ) {
 
     }

@@ -17,3 +17,5 @@
         reloadPageIfChanged: true
         inspector:
           group: 'anchor'
+    lastUpdateAction:
+      type: DateTime

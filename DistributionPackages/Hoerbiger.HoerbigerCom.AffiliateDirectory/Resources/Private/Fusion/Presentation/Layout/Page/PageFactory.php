@@ -53,7 +53,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $application = (new AffiliateFinderFactory())->create($subGraph->getDimensions()['language'][0]);
 
         return new Page(
-            $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph),
+            $this->siteHeaderFactory->forDocument($affiliateFinder, $site, $subGraph, $inBackend, null),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
                     ContentContainerVariant::VARIANT_BLANK_BOTTOM,

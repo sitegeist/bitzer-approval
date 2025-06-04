@@ -13,6 +13,7 @@ use Hoerbiger\HoerbigerCom\PressArchive\Presentation\EnumProvider\Press\PressVar
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Layout\Stage\StageFactory as PressArchiveStageFactory;
 use Hoerbiger\Shared\Domain\Anchor;
 use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
@@ -59,6 +60,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         private readonly SiteHeaderFactory $siteHeaderFactory,
         private readonly LinkFactory $linkFactory,
         private readonly BreadcrumbFactory $breadcrumbFactory,
+        private readonly CsvPOTranslator $csvPOTranslator,
     ) {
     }
 
@@ -75,7 +77,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $overviewPage,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(
                 array_filter([
@@ -93,13 +97,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                 new Separator(
                                     SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                                     Value::fromString(
-                                        $this->translator->translateById(
-                                            'overview.filters',
-                                            [],
-                                            null,
-                                            null,
+                                        $this->csvPOTranslator->getLabelFromTranslationResource(
+                                            'Hoerbiger.HoerbigerCom.PressArchive',
                                             'PressReleases',
-                                            'Hoerbiger.HoerbigerCom.PressArchive'
+                                            'overview.filters'
                                         )
                                         ?: 'filters'
                                     )
@@ -131,7 +132,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($pressRelease, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage);
+        return $this->forDocumentWithIntroduction($site, $pressRelease, $subgraph, $stage, $inBackend);
     }
 
     public function forYearbookRelease(TraversableNodeInterface $site, Node $yearbookRelease, ContentContext $subgraph, bool $inBackend): Page
@@ -139,7 +140,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($yearbookRelease, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage);
+        return $this->forDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage, $inBackend);
     }
 
     public function forHannsRelease(TraversableNodeInterface $site, Node $hannsRelease, ContentContext $subgraph, bool $inBackend): Page
@@ -147,11 +148,16 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->pressArchiveStageFactory->forPressReleaseIntroduction($hannsRelease, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage);
+        return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage, $inBackend);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, Node $document, ContentContext $subgraph, SlotInterface $stage): Page
-    {
+    public function forDocumentWithIntroduction(
+        TraversableNodeInterface $site,
+        Node $document,
+        ContentContext $subgraph,
+        SlotInterface $stage,
+        bool $inBackend
+    ): Page {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -180,7 +186,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $document,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend
             ),
             Collection::fromIterable(
                 array_filter([

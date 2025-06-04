@@ -28,6 +28,150 @@
 	font-display: swap;
 }
 
+/*    Chinese Font - Start  */
+
+@font-face {
+	font-family:"NotoSansCjkBlack";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansCJKsc-Black.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkBold";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansCJKsc-Bold.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkDemiLight";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansCJKsc-DemiLight.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkLight";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansCJKsc-Light.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkMedium";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansCJKsc-Medium.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkRegular";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansCJKsc-Regular.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkThin";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansCJKsc-Thin.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansMonoCjkBold";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansMonoCJKsc-Bold.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansMonoCjkRegular";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKsc/NotoSansMonoCJKsc-Regular.otf) format("opentype");
+	font-display: swap;
+}
+
+/*    Chinese Font - End  */
+
+/*    Japanese Font - Start   */
+
+@font-face {
+	font-family:"NotoSansCjkBlackJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansCJKjp-Black.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkDemiLightJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansCJKjp-DemiLight.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkLightJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansCJKjp-Light.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkMediumJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansCJKjp-Medium.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkRegularJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansCJKjp-Regular.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansCjkThinJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansCJKjp-Thin.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansMonoCjkBoldJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansMonoCJKjp-Bold.otf) format("opentype");
+	font-display: swap;
+}
+
+@font-face {
+	font-family:"NotoSansMonoCjkRegularJp";
+	src:
+		local(''),
+		url(../../Fonts/NotoSansCJKjp/NotoSansMonoCJKjp-Regular.otf) format("opentype");
+	font-display: swap;
+}
+
+/*    Japanese Font - End  */
+
 .NEOS_BE_HELPER_Block_DefinitionList > div {
 	@apply w-full grid grid-cols-2 col-span-2
 }
@@ -158,8 +302,28 @@ details summary::-webkit-details-marker {
 }
 
 u {
-	text-decoration: none;
-	font-family: "TradeGothicNextBold", sans-serif;
-	color: red;
-	padding: 0 4px;
+	@apply no-underline text-[red] px-[4px] py-0 font-sans-bold;
+}
+
+@layer base {
+	:root {
+		--font-light: 'TradeGothicNextLight', 'Helvetica', 'Arial', 'sans-serif';
+		--font-regular: 'TradeGothicNextRegular', 'Helvetica', 'Arial', 'sans-serif';
+		--font-bold: 'TradeGothicNextBold', 'Helvetica', 'Arial', 'sans-serif';
+		--font-serif-regular: 'Times New Roman', 'Times', 'serif';
+	}
+
+	[data-lang="zh"] {
+		--font-light: 'NotoSansCjkLight';
+		--font-regular: 'NotoSansCjkRegular';
+		--font-bold: 'NotoSansCjkBold';
+		--font-serif-regular: 'Times New Roman', 'Times', 'serif';
+	}
+
+	[data-lang="ja"] {
+		--font-light: 'NotoSansCjkLightJp';
+		--font-regular: 'NotoSansCjkRegularJp';
+		--font-bold: 'NotoSansMonoCjkBoldJp';
+		--font-serif-regular: 'Times New Roman', 'Times', 'serif';
+	}
 }

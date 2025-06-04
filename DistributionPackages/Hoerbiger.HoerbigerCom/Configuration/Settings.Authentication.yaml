@@ -1,0 +1,11 @@
+Neos:
+  Flow:
+    security:
+      authentication:
+        providers:
+          'Neos.Neos:Backend':
+            requestPatterns:
+              'Hoerbiger.HoerbigerCom:TranslationExport':
+                pattern: 'ControllerObjectName'
+                patternOptions:
+                  controllerObjectNamePattern: 'Hoerbiger\HoerbigerCom\Application\Controller\TranslationController'

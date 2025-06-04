@@ -58,6 +58,8 @@
         reloadIfChanged: true
         inspector:
           group: 'news'
+      options:
+        automaticTranslation: true
 
 'Hoerbiger.HoerbigerCom:Document.HomePage':
   childNodes:

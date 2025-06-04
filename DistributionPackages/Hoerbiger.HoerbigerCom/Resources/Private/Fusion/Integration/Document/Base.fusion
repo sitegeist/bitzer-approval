@@ -13,7 +13,6 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             metaViewport = '<meta name="viewport" content="width=device-width">'
             favicons = Hoerbiger.HoerbigerCom:Resource.Favicons
             stylesheets = ${props.stylesheets}
-            fonts = Hoerbiger.Shared:Resource.Fonts
 
             titleTag {
                 content = ${props.titleOverride ? props.titleOverride : props.title}
@@ -32,6 +31,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             }
         }
 
+        htmlTag.attributes.data-lang = ${documentNode.context.dimensions.language[0]}
+
         body = ${props.body}
         body.@process.contentElementWrapping {
             expression = Neos.Neos:ContentElementWrapping {
@@ -45,6 +46,18 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             }
             default = ${value}
         }
+
+        body.@process.addInfo = Neos.Fusion:Join {
+            info = Neos.Fusion:Tag {
+                attributes.style = "margin-top:150px;"
+                content = Sitegeist.LostInTranslation:Document.TranslationInformation {
+                    referenceLanguage = ${Configuration.setting('Hoerbiger.HoerbigerCom.translation.referenceLanguage')}
+                }
+            }
+            content = ${value}
+        }
+
+        body.@process.addInfo.@if.onlyListenerLanguages = ${Array.indexOf(Configuration.setting('Hoerbiger.HoerbigerCom.translation.listenerDimensions'), Array.first(node.context.dimensions.language)) > -1}
 
         bodyScripts = ${props.bodyScripts}
         bodyScripts.@position = 'before closingBodyTag'

@@ -8,51 +8,67 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Command;
 
+use Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTask;
+use Hoerbiger\HoerbigerCom\Domain\Translation\TranslationExport;
+use Neos\ContentRepository\DimensionSpace\Dimension\ContentDimensionIdentifier;
+use Neos\ContentRepository\DimensionSpace\DimensionSpace\DimensionSpacePoint;
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Model\NodeInterface;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Cli\CommandController;
 use Neos\Flow\Persistence\PersistenceManagerInterface;
+use Neos\Flow\Security\Policy\Role;
 use Neos\Neos\Domain\Service\ContentContext;
 use Neos\Neos\Domain\Service\ContentContextFactory;
+use Sitegeist\Bitzer\Application\Bitzer;
+use Sitegeist\Bitzer\Domain\Agent\Agent;
+use Sitegeist\Bitzer\Domain\Task\Command\ScheduleTask;
+use Sitegeist\Bitzer\Domain\Task\NodeAddress;
+use Sitegeist\Bitzer\Domain\Task\Schedule;
+use Sitegeist\Bitzer\Domain\Task\TaskClassName;
+use Sitegeist\Bitzer\Domain\Task\TaskIdentifier;
+use Sitegeist\LostInTranslation\ContentRepository\NodeTranslationService;
 use Sitegeist\LostInTranslation\Domain\TranslationServiceInterface;
 
-/**
- * @Flow\Scope("singleton")
- */
+#[Flow\Scope('singleton')]
 class TranslationCommandController extends CommandController
 {
     /**
-     * @Flow\Inject
-     * @var ContentContextFactory
+     * @var array<string,mixed>
      */
-    protected $contentContextFactory;
+    #[Flow\InjectConfiguration(path: 'autoTranslationReview.assignments')]
+    protected array $translationTaskAssignmentSettings;
 
-    /**
-     * @Flow\Inject
-     * @var TranslationServiceInterface
-     */
-    protected $translationService;
+    #[Flow\Inject]
+    protected TranslationExport $translationExport;
 
-    /**
-     * @Flow\Inject
-     * @var PersistenceManagerInterface
-     */
-    protected $persistenceManager;
-
-    public function resetCommand(): void
-    {
-        $sourceContext = $this->createContentContext('de');
-        $targetContext = $this->createContentContext('en');
-
-        $rootNode = $sourceContext->getCurrentSiteNode();
-        $this->resetNode($rootNode, $targetContext);
+    public function __construct(
+        private readonly ContentContextFactory $contentContextFactory,
+        private readonly TranslationServiceInterface $translationService,
+        private readonly NodeTranslationService $nodeTranslationService,
+        private readonly PersistenceManagerInterface $persistenceManager,
+        private readonly Bitzer $bitzer,
+        private readonly Schedule $schedule,
+    ) {
+        parent::__construct();
     }
 
-    private function resetNode(NodeInterface $node, ContentContext $targetContext): void
+    public function resetCommand(string $sourceLanguage, string $targetLanguage): void
     {
-        if ($node->getIdentifier() === '6e41f976-3e9d-4d46-ac19-808bc22e5887' // Wasserstoff
-            || $node->getIdentifier() === 'd0669f6b-37da-4178-8d40-1560e6328395' // Produkte für Kolbenkompressoren
-            || $node->getIdentifier() === '9f494fc9-274f-4eb4-9102-d4706597501f' // Services für Kolbenkompressoren
+        $sourceContext = $this->createContentContext($sourceLanguage);
+        $targetContext = $this->createContentContext($targetLanguage);
+
+        $rootNode = $sourceContext->getCurrentSiteNode();
+        $this->resetNode($rootNode, $targetContext, $targetLanguage);
+    }
+
+    private function resetNode(NodeInterface $node, ContentContext $targetContext, string $targetLanguage): void
+    {
+        if ($targetLanguage === 'en'
+            && ($node->getIdentifier() === '6e41f976-3e9d-4d46-ac19-808bc22e5887' // Wasserstoff
+                || $node->getIdentifier() === 'd0669f6b-37da-4178-8d40-1560e6328395' // Produkte für Kolbenkompressoren
+                || $node->getIdentifier() === '9f494fc9-274f-4eb4-9102-d4706597501f' // Services für Kolbenkompressoren
+            )
         ) {
             // already properly translated
             return;
@@ -68,36 +84,57 @@ class TranslationCommandController extends CommandController
         }
 
         foreach ($node->getChildNodes() as $childNode) {
-            $this->resetNode($childNode, $targetContext);
+            $this->resetNode($childNode, $targetContext, $targetLanguage);
         }
     }
 
-    public function refreshCommand(): void
+    public function refreshCommand(string $sourceLanguage, string $targetLanguage): void
     {
-        $sourceContext = $this->createContentContext('de');
-        $targetContext = $this->createContentContext('en');
+        $sourceContext = $this->createContentContext($sourceLanguage);
+        $targetContext = $this->createContentContext($targetLanguage);
 
         $rootNode = $sourceContext->getCurrentSiteNode();
-        $this->refreshNode($rootNode, $targetContext);
+
+        $this->refreshNode($rootNode, $targetContext, $sourceLanguage, $targetLanguage);
+
+        $targetSiteNode = $targetContext->getNodeByIdentifier($rootNode->getIdentifier());
+        $targetSiteNode?->setHidden(true);
     }
 
-    private function refreshNode(NodeInterface $node, ContentContext $targetContext): void
-    {
+    private function refreshNode(
+        NodeInterface $node,
+        ContentContext $targetContext,
+        string $sourceLanguage,
+        string $targetLanguage
+    ): void {
         if ($node->getNodeType()->getName() === 'Hoerbiger.Shared:Document.AssetDirectory') {
             return;
         }
-        if ($node->getIdentifier() === '6e41f976-3e9d-4d46-ac19-808bc22e5887' // Wasserstoff
+        if ($targetLanguage === 'en'
+            && ($node->getIdentifier() === '6e41f976-3e9d-4d46-ac19-808bc22e5887' // Wasserstoff
             || $node->getIdentifier() === 'd0669f6b-37da-4178-8d40-1560e6328395' // Produkte für Kolbenkompressoren
             || $node->getIdentifier() === '9f494fc9-274f-4eb4-9102-d4706597501f' // Services für Kolbenkompressoren
+            )
         ) {
             // already properly translated
             return;
         }
-        /** @var ?NodeInterface $targetNode */
+        /** @var ?Node $targetNode */
         $targetNode = $targetContext->getNodeByIdentifier($node->getIdentifier());
-        if (is_null($targetNode)) {
+
+        $createReviewTask = false;
+        if (is_null($targetNode) || !$targetNode->getDimensions()) {
             $this->output->outputLine('Translating node ' . $node->getLabel());
-            $targetContext->adoptNode($node);
+            /** @var Node $targetNode */
+            $targetNode = $targetContext->adoptNode($node);
+            if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
+                $createReviewTask = true;
+            }
+        } elseif ($targetNode->isTethered()) {
+            $this->nodeTranslationService->translateNode($node, $targetNode, $targetContext);
+            if ($targetNode->getNodeType()->isOfType('Neos.Neos:Document')) {
+                $createReviewTask = true;
+            }
         } elseif ($node->getNodeType()->isOfType('Hoerbiger.HoerbigerCom:Mixin.Introduction')) {
             $this->output->outputLine('Translating properties of node ' . $node->getLabel());
             $texts = [
@@ -106,21 +143,70 @@ class TranslationCommandController extends CommandController
             ];
             $translations = $this->translationService->translate(
                 $texts,
-                'en',
-                'de'
+                $targetLanguage,
+                $sourceLanguage
             );
             foreach ($translations as $propertyName => $translation) {
                 $targetNode->setProperty($propertyName, $translation);
             }
+            $createReviewTask = true;
+        }
+        $targetNode->setIndex($node->getIndex());
+        $targetNode->setHiddenInIndex($node->isHiddenInIndex());
+
+        if ($createReviewTask) {
+            $dimensionSpacePoint = DimensionSpacePoint::fromLegacyDimensionArray(
+                $node->getContext()->getDimensions()
+            )->vary(
+                new ContentDimensionIdentifier('language'),
+                $targetLanguage
+            );
+
+            $objectAddress = new NodeAddress(
+                'live', // will be replaced in the backend module
+                $dimensionSpacePoint,
+                $targetNode->getNodeAggregateIdentifier(),
+            );
+            $presentTaskIds = $this->schedule->findActiveOrPotentialTaskIdsForObject(
+                $objectAddress,
+                TaskClassName::createFromString(AutoTranslationReviewTask::class),
+            );
+            if (empty($presentTaskIds)) {
+                $targetConfiguration = $this->translationTaskAssignmentSettings[$sourceLanguage][$targetLanguage];
+                foreach ($targetConfiguration['agents'] as $agent) {
+                    $this->bitzer->handleScheduleTask(new ScheduleTask(
+                        TaskIdentifier::create(),
+                        TaskClassName::createFromString(AutoTranslationReviewTask::class),
+                        (new \DateTimeImmutable())
+                            ->add(new \DateInterval($targetConfiguration['interval'] ?? 'P1D')),
+                        Agent::fromRole(new Role($agent)),
+                        $objectAddress,
+                        null,
+                        [
+                            'description' => 'autogenerated translation review task'
+                        ]
+                    ));
+                }
+            }
         }
 
         foreach ($node->getChildNodes() as $childNode) {
-            $this->refreshNode($childNode, $targetContext);
+            $this->refreshNode($childNode, $targetContext, $sourceLanguage, $targetLanguage);
         }
 
         if ($node->getNodeType()->isOfType('Neos.Neos:Document')) {
             $this->persistenceManager->persistAll();
         }
+    }
+
+    public function exportCommand(string $targetLanguage): void
+    {
+        if (!array_key_exists($targetLanguage, $this->translationTaskAssignmentSettings['en'])) {
+            $this->outputLine($targetLanguage . ' is not a valid language');
+            return;
+        }
+
+        $this->translationExport->forLanguage($targetLanguage);
     }
 
     private function createContentContext(string $language): ContentContext

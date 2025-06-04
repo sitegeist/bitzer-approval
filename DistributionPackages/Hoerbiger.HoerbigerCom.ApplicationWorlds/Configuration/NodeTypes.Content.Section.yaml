@@ -24,7 +24,7 @@
         elasticSearchMapping:
           type: text
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     image:
       options:
         preset: 'image.landscape'
@@ -47,7 +47,7 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     tab__image__title:
       type: 'string'
       ui:
@@ -57,7 +57,7 @@
       validation:
         'Neos.Neos/Validation/NotEmptyValidator': { }
       options:
-        translateOnAdoption: true
+        automaticTranslation: true
     icon:
       ui:
         inspector:

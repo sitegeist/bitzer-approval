@@ -9,6 +9,10 @@ namespace Hoerbiger\Shared\Presentation\Block\SiteHeader;
  */
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\Shared\Domain\IsInsideHiddenParent;
+use Hoerbiger\Shared\Presentation\Block\Button\Button;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
@@ -17,6 +21,9 @@ use Hoerbiger\Shared\Presentation\Block\NavigationItem\NavigationItems;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use Neos\Flow\I18n\Service as LocalizationService;
 use Neos\Flow\Mvc\ActionRequest;
 use Neos\Neos\Domain\Service\ContentContext;
@@ -24,6 +31,7 @@ use Neos\Neos\Exception;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use Neos\ContentRepository\Domain\Service\ContentDimensionPresetSourceInterface;
 use Neos\Neos\Domain\Service\ContentContextFactory;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 use Sitegeist\CsvPO\Domain\TranslationLabel;
 use Sitegeist\CsvPO\Domain\TranslationLabelSourceRepository;
 use Neos\Flow\Annotations as Flow;
@@ -62,7 +70,8 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         TraversableNodeInterface $document,
         TraversableNodeInterface $site,
         ContentContext $subgraph,
-        ?ActionRequest $actionRequest = null
+        bool $inBackend,
+        ?ActionRequest $actionRequest = null,
     ): SiteHeader {
         $siteHeaderVariant = match ($document->getNodeType()->getName()) {
             'Hoerbiger.HoerbigerCom:Document.HomePage',
@@ -93,16 +102,50 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             ))->getTranslation() ?: $label->getIdentifier();
         }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
 
+        $language = $subgraph->getDimensions()['language'][0];
+
+        $exportButton = null;
+
+        if ($inBackend && !in_array($language, ['de', 'en'])) {
+            $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
+            $uriBuilder->setFormat('json');
+
+            $exportButton = new Button(
+                ButtonType::TYPE_LINK,
+                ButtonVariant::VARIANT_NEOS,
+                new Grid(
+                    GridVariant::VARIANT_ICONLEFT,
+                    Collection::fromIterable([
+                        new Icon("shared", "translation", IconSize::SIZE_SIZE_1),
+                        Value::fromString('Export Translations')
+                    ])
+                ),
+                new Uri($uriBuilder->uriFor(
+                    'exportDocument',
+                    [
+                        'documentIdentifier' => (string)$document->getNodeAggregateIdentifier(),
+                        'language' => $language,
+                    ],
+                    'Translation',
+                    'Hoerbiger.HoerbigerCom',
+                    'Application'
+                )),
+                '_self',
+                null
+            );
+        }
+
         return new SiteHeader(
             $siteHeaderVariant,
             $this->uriService->getNodeUri($site),
             $this->getChildNavigationNodes($site, $document, 1),
-            $this->getLanguageNavigationItems($document, $subgraph, $actionRequest),
+            $this->getLanguageNavigationItems($site, $document, $subgraph, $actionRequest),
             new Icon("shared", "naviChevron", IconSize::SIZE_SIZE_0_5),
             new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
             $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true),
             new Icon("shared", "search", IconSize::SIZE_SIZE_1_5),
-            json_encode($labels) ?: '{}'
+            json_encode($labels) ?: '{}',
+            $exportButton
         );
     }
 
@@ -203,6 +246,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
     }
 
     protected function getLanguageNavigationItems(
+        TraversableNodeInterface $site,
         TraversableNodeInterface $documentNode,
         ContentContext $subgraph,
         ?ActionRequest $request
@@ -227,14 +271,15 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             /** @var ContentContext $contentContext */
             $contentContext = $this->contentContextFactory->create($contextProperties);
 
-            /** @var TraversableNodeInterface $variant */
+            /** @var TraversableNodeInterface|null $variant */
             $variant = $contentContext->getNodeByIdentifier((string)$documentNode->getNodeAggregateIdentifier())
-                ?: $contentContext->getCurrentSiteNode();
+                ?: null;
 
-            $identifier = strtoupper($localeIdentifier);
-
-            $language = [$this->uriService->getNodeUri($variant), $identifier];
-            $languages[] = $language;
+            if ($variant && !IsInsideHiddenParent::isSatisfiedByNode($contentContext, $site, $variant)) {
+                $identifier = strtoupper($localeIdentifier);
+                $language = [$this->uriService->getNodeUri($variant), $identifier];
+                $languages[] = $language;
+            }
         }
         $children = [];
 

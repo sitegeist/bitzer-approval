@@ -1,0 +1,18 @@
+Hoerbiger:
+  HoerbigerCom:
+    autoTranslationReview:
+      assignments:
+        en:
+          zh:
+            agents: ['Hoerbiger.Shared:ChineseEditor']
+            interval: 'P7D'
+          ja:
+            agents: [ 'Hoerbiger.Shared:JapaneseEditor' ]
+            interval: 'P7D'
+
+
+Sitegeist:
+  Bitzer:
+    factories:
+      'Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTask': 'Hoerbiger\HoerbigerCom\Domain\Lifecycle\AutoTranslationReview\AutoTranslationReviewTaskFactory'
+    upcomingInterval: 'P9D' # The interval in which future tasks are considered "upcoming"

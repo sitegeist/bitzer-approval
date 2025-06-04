@@ -61,7 +61,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $magazine,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 new ContentContainer(
@@ -89,10 +91,10 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->successStoriesStageFactory->forSuccessStoryIntroduction($successStory, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $successStory, $stage, $subgraph);
+        return $this->forDocumentWithIntroduction($site, $successStory, $stage, $subgraph, $inBackend);
     }
 
-    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $introSection, ContentContext $subgraph): Page
+    public function forDocumentWithIntroduction(TraversableNodeInterface $site, TraversableNodeInterface $document, SlotInterface $introSection, ContentContext $subgraph, bool $inBackend): Page
     {
         $identity = function (SlotInterface $slot) {
             return $slot;
@@ -107,7 +109,9 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
             $this->siteHeaderFactory->forDocument(
                 $document,
                 $site,
-                $subgraph
+                $subgraph,
+                $inBackend,
+                null,
             ),
             Collection::fromIterable(array_filter([
                 count($anchors) > 0

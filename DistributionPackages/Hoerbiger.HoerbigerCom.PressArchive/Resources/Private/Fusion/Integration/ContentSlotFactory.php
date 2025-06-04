@@ -342,19 +342,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             )
         );
     }
-
-    /**
-     * @param array<mixed,mixed> $arguments
-     */
-    private function getLabel(string $identifier, array $arguments = []): string
+    private function getLabel(string $identifier): string
     {
-        return $this->translator->translateById(
-            $identifier,
-            $arguments,
-            null,
-            null,
+        return $this->csvPOTranslator->getLabelFromTranslationResource(
+            'Hoerbiger.HoerbigerCom.PressArchive',
             'PressReleases',
-            'Hoerbiger.HoerbigerCom.PressArchive'
-        ) ?: $identifier;
+            $identifier
+        );
     }
 }

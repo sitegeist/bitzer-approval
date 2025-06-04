@@ -1,7 +1,7 @@
-id,description,en,de
-label.filterStories,filter stories,Filter stories,Stories filtern
-label.resetFilters,reset filters,Reset filters,Filter zurücksetzen
-label.filter.yearbook,yearbook,Yearbook,Jahrbuch
-label.filter.hanns,hanns,HANNS.,HANNS.
-label.filter.news,news,News,News
-label.button.getNewestRelease,submit newest release,Get the newest release,Jetzt die neueste Ausgabe anfordern
+id,description,en,de,zh
+label.filterStories,"filter stories","Filter stories","Stories filtern",内容筛选
+label.resetFilters,"reset filters","Reset filters","Filter zurücksetzen",重置筛选
+label.filter.yearbook,yearbook,Yearbook,Jahrbuch,年鉴
+label.filter.hanns,hanns,HANNS.,HANNS.,HANNS.
+label.filter.news,news,News,News,新闻
+label.button.getNewestRelease,"submit newest release","Get the newest release","Jetzt die neueste Ausgabe anfordern",获取最新版本

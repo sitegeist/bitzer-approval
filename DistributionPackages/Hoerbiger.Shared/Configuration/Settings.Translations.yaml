@@ -7,5 +7,5 @@ Sitegeist:
   CsvPO:
     management:
       packageKeys:
-        - 'Hoerbiger.Shared'
+        shared: 'Hoerbiger.Shared'
       fileExtension: '.labels.csv'

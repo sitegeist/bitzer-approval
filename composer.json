@@ -101,6 +101,10 @@
         "bitzer-approval": {
             "type": "git",
             "url": "https://github.com/sitegeist/bitzer-approval.git"
+        },
+        "bitzer-translation": {
+            "type": "git",
+            "url": "https://github.com/sitegeist/bitzer-translation.git"
         }
     }
 }
