@@ -40,6 +40,11 @@ set('composer_options', function() {
     return '{{composer_action}} --verbose --prefer-dist --no-progress --no-interaction --no-dev --optimize-autoloader';
 });
 
+set('shared_files', [
+    'Web/tracking.js'
+]);
+
+
 /**
  * Servers
  */

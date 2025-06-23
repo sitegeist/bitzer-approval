@@ -25,6 +25,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             javascripts {
                 matomoTagManager = Hoerbiger.Shared:Application.Tracking.MatomoTagManager {
                     @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
+                    baseUri = ${String.toString(BaseUri.getConfiguredBaseUriOrFallbackToCurrentRequest(request.httpRequest))}
                 }
                 cookies = ${props.cookies}
                 fontShop = ${props.fontShop}
