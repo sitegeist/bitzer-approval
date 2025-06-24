@@ -6,6 +6,7 @@ stages:
   - 'housekeeping'
   - 'testing'
   - 'deploy'
+  - 'smoke-test'
 
 variables:
   DEPLOYMENT_IMAGE: $CI_REGISTRY/sitegeist/automata/deployment-php
@@ -89,3 +90,27 @@ deployment-main:
     url: https://www.hoerbiger.com
   script:
     - 'composer2 deploy:main'
+
+smoke-test:
+  stage: smoke-test
+  only:
+    - main
+  needs:
+    - deployment-main
+  variables:
+    GIT_STRATEGY: none
+  script:
+    - |
+      : Check URLs from CI Variable URL_FILE, exit 1 if not http code 200
+      set -e
+      failed_urls=()
+      while IFS= read -r url || [ -n "${url}" ]; do
+        [ -z "${url}" ] && continue
+        status=$(curl -sL -o /dev/null -w "%{http_code}" "${url}" || true)
+        [ "${status}" -ne "200" ] && failed_urls+=("${url}:${status}")
+        true
+      done < "${URL_FILE}"
+      if [ ${#failed_urls[@]} -ne 0 ]; then
+        printf '%s\n' "${failed_urls[@]}"
+        exit 1
+      fi
