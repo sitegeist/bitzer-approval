@@ -93,8 +93,10 @@ deployment-main:
 
 smoke-test:
   stage: smoke-test
-  only:
-    - main
+  tags
+    - deploy
+  rules:
+    - if: $CI_COMMIT_BRANCH == "main"
   needs:
     - deployment-main
   variables:
