@@ -50,6 +50,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
 
         body.@process.addInfo = Neos.Fusion:Join {
             info = Neos.Fusion:Tag {
+                attributes.style = 'margin-top:195px;position:relative;z-index:999;'
                 content = Sitegeist.LostInTranslation:Document.TranslationInformation {
                     referenceLanguage = ${Configuration.setting('Hoerbiger.HoerbigerCom.translation.referenceLanguage')}
                 }
