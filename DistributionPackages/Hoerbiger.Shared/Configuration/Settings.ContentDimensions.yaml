@@ -12,7 +12,7 @@ Neos:
             values: ['de']
             uriSegment: de
             options:
-              translationStrategy: 'none'
+              translationStrategy: 'once'
           en:
             label: English
             values: ['en']
