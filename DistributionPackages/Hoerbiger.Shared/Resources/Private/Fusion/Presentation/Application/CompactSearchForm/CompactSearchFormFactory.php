@@ -37,7 +37,7 @@ final class CompactSearchFormFactory extends AbstractComponentPresentationObject
         $labels = array_map(function (TranslationLabel $label): string {
             return $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
-            ))->getTranslation() ?: $label->getIdentifier();
+            ))?->getTranslation() ?: $label->getIdentifier();
         }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
 
         return new CompactSearchForm(

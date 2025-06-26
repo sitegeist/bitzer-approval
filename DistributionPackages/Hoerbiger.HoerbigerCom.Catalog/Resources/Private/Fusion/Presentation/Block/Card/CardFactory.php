@@ -163,7 +163,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         $translatedLabel = $label
             ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
-            ))->getTranslation()
+            ))?->getTranslation()
             : null;
 
         $supportingText = $highlight ?: $thing->getProperty('preview__description');

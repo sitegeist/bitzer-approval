@@ -87,11 +87,13 @@ final class CsvPOTranslator
     }
     private function getTranslationForLabel(TranslationLabel $label): string
     {
-        return (string)$label->findTranslationForLocaleChain(
+        $translation = $label->findTranslationForLocaleChain(
             $this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
             )
-        ) ?: $label->getIdentifier();
+        );
+
+        return !is_null($translation) ? (string)$translation : $label->getIdentifier();
     }
 
     private function getLabelSourceFor(string $componentClassName): ?TranslationLabelSource
