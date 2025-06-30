@@ -99,7 +99,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         $labels = array_map(function (TranslationLabel $label): string {
             return $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
-            ))->getTranslation() ?: $label->getIdentifier();
+            ))?->getTranslation() ?: $label->getIdentifier();
         }, $labelSource ? $labelSource->findAllTranslationLabels() : []);
 
         $language = $subgraph->getDimensions()['language'][0];
@@ -178,7 +178,7 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             $this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
             )
-        )->getTranslation();
+        )?->getTranslation() ?? '';
 
         if ($currentLevel <= $maxDepth) {
             $menuItems = [];

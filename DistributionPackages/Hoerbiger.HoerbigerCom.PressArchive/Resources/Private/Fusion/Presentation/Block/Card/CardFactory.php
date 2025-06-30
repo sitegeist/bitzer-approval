@@ -69,7 +69,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         return $label
             ? $label->findTranslationForLocaleChain($this->localizationService->getLocaleChain(
                 $this->localizationService->getConfiguration()->getCurrentLocale()
-            ))->getTranslation() ?: $typeIdentifier
+            ))?->getTranslation() ?: $typeIdentifier
             : $typeIdentifier;
     }
 }
