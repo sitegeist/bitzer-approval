@@ -18,7 +18,7 @@ Neos:
             values: ['en']
             uriSegment: en
             options:
-              translationStrategy: 'none'
+              translationStrategy: 'once'
           zh:
             label: Chinese
             values: ['zh']
