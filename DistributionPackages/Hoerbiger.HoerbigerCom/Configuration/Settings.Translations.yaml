@@ -12,7 +12,6 @@ Hoerbiger:
     translation:
       referenceLanguage: en
       listenerDimensions:
-        - de
         - zh
         - ja
       bypassEnabled: false
