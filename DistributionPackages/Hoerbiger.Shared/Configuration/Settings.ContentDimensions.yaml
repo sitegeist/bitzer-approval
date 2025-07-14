@@ -12,13 +12,13 @@ Neos:
             values: ['de']
             uriSegment: de
             options:
-              translationStrategy: 'none'
+              translationStrategy: 'once'
           en:
             label: English
             values: ['en']
             uriSegment: en
             options:
-              translationStrategy: 'none'
+              translationStrategy: 'once'
           zh:
             label: Chinese
             values: ['zh']
