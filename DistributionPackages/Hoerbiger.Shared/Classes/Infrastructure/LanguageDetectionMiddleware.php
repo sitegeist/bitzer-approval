@@ -6,12 +6,16 @@ namespace Hoerbiger\Shared\Infrastructure;
  **/
 
 use GuzzleHttp\Psr7\Response;
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\I18n\Detector;
+use Neos\Neos\Domain\Service\ContentContext;
+use Neos\Neos\Domain\Service\ContentContextFactory;
 use Neos\Neos\Domain\Service\ContentDimensionPresetSourceInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\StreamFactoryInterface;
+use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
@@ -26,14 +30,18 @@ class LanguageDetectionMiddleware implements MiddlewareInterface
 
     private ContentDimensionPresetSourceInterface $contentDimensionPresetSource;
 
+    private ContentContextFactory $contentContextFactory;
+
     public function __construct(
         Detector $localeDetector,
         StreamFactoryInterface $contentFactory,
-        ContentDimensionPresetSourceInterface $contentDimensionPresetSource
+        ContentDimensionPresetSourceInterface $contentDimensionPresetSource,
+        ContentContextFactory $contentContextFactory,
     ) {
         $this->localeDetector = $localeDetector;
         $this->contentFactory = $contentFactory;
         $this->contentDimensionPresetSource = $contentDimensionPresetSource;
+        $this->contentContextFactory = $contentContextFactory;
     }
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
@@ -44,11 +52,10 @@ class LanguageDetectionMiddleware implements MiddlewareInterface
             return $response;
         }
 
-        $browserLanguage = $this->localeDetector
-            ->detectLocaleFromHttpHeader($_SERVER['HTTP_ACCEPT_LANGUAGE'])
-            ->getLanguage();
-        $languageSegment = $this->resolveLanguageUriPathSegment($browserLanguage);
-        $targetUri = $request->getUri()->withPath('/' . $languageSegment . $request->getUri()->getPath());
+        $requestUri = $request->getUri();
+
+        $languageSegment = $this->resolveLanguageUriPathSegment($requestUri);
+        $targetUri = $request->getUri()->withPath('/' . $languageSegment . $requestUri->getPath());
 
         $redirectResponse = new Response();
         $redirectBodyContent = sprintf(
@@ -62,13 +69,40 @@ class LanguageDetectionMiddleware implements MiddlewareInterface
             ->withHeader('Location', (string)$targetUri);
     }
 
-    private function resolveLanguageUriPathSegment(string $browserLanguage): string
+    private function resolveLanguageUriPathSegment(UriInterface $uri): string
     {
+        $browserLanguage = explode(
+            '-',
+            $this->localeDetector->detectLocaleFromHttpHeader(
+                $_SERVER['HTTP_ACCEPT_LANGUAGE']
+            )->getLanguage()
+        )[0];
+
+
         /** @var array<string,mixed> $languagePresets */
         $languagePresets = $this->contentDimensionPresetSource->getAllPresets()['language'];
-        $matchingPreset = $languagePresets['presets'][$browserLanguage]
-            ?? $languagePresets['presets'][$languagePresets['defaultPreset']];
+        $matchingPreset = $languagePresets['presets'][$browserLanguage] ?? null;
 
-        return $matchingPreset['uriSegment'];
+        if ($matchingPreset) {
+            // check if home page is online
+
+            /** @var ContentContext $contentContext */
+            $contentContext = $this->contentContextFactory->create([
+                'dimensions' => [
+                    'language' => $matchingPreset['values']
+                ],
+                'targetDimensions' => [
+                    'language' => reset($matchingPreset['values'])
+                ],
+                'invisibleContentShown' => false,
+            ]);
+
+            $homePage = $contentContext->getCurrentSiteNode();
+            if ($homePage instanceof Node && !$homePage->isHidden()) {
+                return $browserLanguage;
+            }
+        }
+
+        return $languagePresets['presets'][$languagePresets['defaultPreset']]['uriSegment'];
     }
 }
