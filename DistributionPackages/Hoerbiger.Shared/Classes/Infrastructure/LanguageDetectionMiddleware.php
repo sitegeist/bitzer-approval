@@ -103,6 +103,6 @@ class LanguageDetectionMiddleware implements MiddlewareInterface
             }
         }
 
-        return $languagePresets['presets'][$languagePresets['defaultPreset']]['uriSegment'];
+        return 'en';
     }
 }
