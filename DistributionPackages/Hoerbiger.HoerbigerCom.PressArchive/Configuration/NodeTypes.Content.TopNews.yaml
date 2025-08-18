@@ -13,7 +13,7 @@
   properties:
     compact:
       type: boolean
-      defaultValue: true
+      defaultValue: false
       ui:
         label: 'Kompakt'
         reloadPageIfChanged: true
