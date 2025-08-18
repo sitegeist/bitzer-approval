@@ -8,7 +8,8 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                 "[Block.Card.PressReleaseCard (" + presentationObject.variant.value + ")]",
                 "flex flex-col space-y-[10px] justify-between",
                 presentationObject.variant.equals('meta') && 'bg-hanns p-xs relative',
-                presentationObject.variant.equals('hanns') && 'bg-hanns p-xs relative'
+                presentationObject.variant.equals('hanns') && 'bg-hanns p-xs relative',
+                presentationObject.variant.equals('topCompact') && 'group'
             ]}
         >
             <div class="flex flex-col space-y-[10px] justify-between">
@@ -45,6 +46,7 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                         class={[
                             (presentationObject.variant.equals('news')) && "font-sans-bold text-xl",
                             (presentationObject.variant.equals('top')) && "font-sans-bold text-sm",
+                            (presentationObject.variant.equals('topCompact')) && "font-sans-bold text-sm group-hover:text-service-lightGrey transition-colors",
                             (presentationObject.variant.equals('topNews')) && "text-lg",
                             (presentationObject.variant.equals('yearbook')) && "text-2xl",
                             (presentationObject.variant.equals('hanns')) && "text-2xl",
@@ -63,14 +65,14 @@ prototype(Hoerbiger.Shared:Block.Card.PressReleaseCard) < prototype(Hoerbiger.Sh
                         presentationObject.variant.equals('top') && "text-[14px]",
                         presentationObject.variant.equals('topNews') && "text-[14px]"
                     ]}
-                    @if.1={presentationObject.supportingText}
+                    @if.1={presentationObject.supportingText && !presentationObject.variant.equals('topCompact')}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
                 </div>
             </div>
             <div
                 class=""
-                @if.1={presentationObject.buttons}
+                @if.1={presentationObject.buttons && !presentationObject.variant.equals('topCompact')}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} />
             </div>

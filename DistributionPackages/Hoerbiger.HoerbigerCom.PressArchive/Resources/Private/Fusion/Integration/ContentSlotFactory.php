@@ -232,13 +232,14 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
 
         $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
+        $compact = $topNewsNode->getProperty('compact');
 
         $pressReleases = Collection::fromNodes(
             TraversableNodes::fromArray(
                 $topNewsNode->getProperty('news') ? array_slice($topNewsNode->getProperty('news'), 0, 8, true)
                     : []
             ),
-            function(Node $pressRelease) use($inBackend, $labels){
+            function(Node $pressRelease) use($inBackend, $labels, $compact){
                 $pressVariant = PressVariant::tryFromNode($pressRelease);
 
                 $datePublished = $this->formattedDateFactory->createFullDate(
@@ -257,7 +258,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ->asPlainLabel()->withContent(
                         new PressReleaseCard(
                             $pressVariant === PressVariant::VARIANT_NEWS
-                                ? PressReleaseCardVariant::VARIANT_TOP
+                                ? ($compact
+                                    ? PressReleaseCardVariant::VARIANT_TOP_COMPACT
+                                    : PressReleaseCardVariant::VARIANT_TOP)
                                 : PressReleaseCardVariant::VARIANT_TOP_NEWS,
                             $pressVariant === PressVariant::VARIANT_NEWS
                                 ? Value::fromString($datePublished ?: '')

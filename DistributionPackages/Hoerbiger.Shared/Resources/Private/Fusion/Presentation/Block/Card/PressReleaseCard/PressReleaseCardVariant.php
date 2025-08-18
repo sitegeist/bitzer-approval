@@ -15,6 +15,7 @@ enum PressReleaseCardVariant: string implements ProtectedContextAwareInterface
     case VARIANT_META = 'meta';
     case VARIANT_NEWS = 'news';
     case VARIANT_TOP = 'top';
+    case VARIANT_TOP_COMPACT = 'topCompact';
     case VARIANT_TOP_NEWS = 'topNews';
     case VARIANT_HANNS = 'hanns';
     case VARIANT_YEARBOOK = 'yearbook';
