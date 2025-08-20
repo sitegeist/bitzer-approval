@@ -11,6 +11,14 @@
           label: 'News'
           icon: 'star'
   properties:
+    compact:
+      type: boolean
+      defaultValue: false
+      ui:
+        label: 'Kompakt'
+        reloadPageIfChanged: true
+        inspector:
+          group: news
     metaHeadline:
       options:
         preset: 'rte.plainWithStrong'
