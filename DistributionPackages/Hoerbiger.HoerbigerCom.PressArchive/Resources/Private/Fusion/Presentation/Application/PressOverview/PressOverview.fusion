@@ -59,7 +59,7 @@ prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.PressOverview) < proto
                 data-grid="cards"
                 class={[
                     presentationObject.variant.value == 'regular' && "press-overview-grid-mobile md:press-overview-grid-tablet lg:press-overview-grid",
-                    presentationObject.variant.value == 'topNews' && "press-overview-grid-tablet md:press-overview-grid lg:press-overview-top-news-grid"
+                    presentationObject.variant.value == 'topNews' && "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-xl md:gap-sm"
                 ]}
             >
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.cards} />
