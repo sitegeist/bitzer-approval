@@ -6,7 +6,6 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
     body = null
     bodyScripts = Hoerbiger.Shared:Resource.BodyScripts
     fontShop = Hoerbiger.Shared:Resource.FontShop
-    cookies = Hoerbiger.Shared:Resource.CookieBot
 
     renderer = Neos.Neos:Page {
         head {
@@ -27,7 +26,7 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
                     @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
                     baseUri = ${String.toString(BaseUri.getConfiguredBaseUriOrFallbackToCurrentRequest(request.httpRequest))}
                 }
-                cookies = ${props.cookies}
+
                 fontShop = ${props.fontShop}
             }
         }
