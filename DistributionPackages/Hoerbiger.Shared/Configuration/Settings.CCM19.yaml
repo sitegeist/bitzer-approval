@@ -1,0 +1,7 @@
+Hoerbiger:
+  Shared:
+    ccm19:
+      isEnabled: false
+      endPoint: 'https://cloud.ccm19.de/app.js'
+      apiKey: ''
+      domain: ''

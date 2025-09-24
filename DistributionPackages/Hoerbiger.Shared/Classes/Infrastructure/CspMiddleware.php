@@ -31,14 +31,15 @@ final class CspMiddleware implements MiddlewareInterface
                     '; ',
                     /** @codingStandardsIgnoreStart */
                     [
-                        "connect-src 'self' *.hoerbiger.com hoerbiger.com *.googleapis.com *.cookiebot.com",
+                        "connect-src 'self' *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de",
                         "default-src 'self' *.hoerbiger.com hoerbiger.com",
-                        "font-src 'self' *.hoerbiger.com hoerbiger.com",
+                        "font-src 'self' *.hoerbiger.com hoerbiger.com cloud.ccm19.de",
                         "frame-src 'self' https://consentcdn.cookiebot.com https://consent.cookiebot.com https://piwik.hoerbiger.com",
-                        "img-src 'self' https: data: *.hoerbiger.com hoerbiger.com *.googleapis.com *.cookiebot.com *.gstatic.com",
+                        "img-src 'self' https: data: *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de *.gstatic.com cloud.ccm19.de",
                         "media-src 'self'",
-                        "script-src 'self' " . implode(' ', $inlineScriptHashes) . " *.hoerbiger.com hoerbiger.com *.cookiebot.com *.googleapis.com *.recruitmentplatform.com",
-                        "style-src 'self' 'unsafe-inline' *.hoerbiger.com *.cookiebot.com *.googleapis.com fast.fonts.net",
+                        "script-src 'self' " . implode(' ', $inlineScriptHashes) . " *.hoerbiger.com hoerbiger.com cloud.ccm19.de *.googleapis.com *.recruitmentplatform.com cloud.ccm19.de",
+                        "script-src-elem 'self' cloud.ccm19.de",
+                        "style-src 'self' 'unsafe-inline' *.hoerbiger.com cloud.ccm19.de *.googleapis.com fast.fonts.net",
                     ]
                     /** @codingStandardsIgnoreEnd */
                 )

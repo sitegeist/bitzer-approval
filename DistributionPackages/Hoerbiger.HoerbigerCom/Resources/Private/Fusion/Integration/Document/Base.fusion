@@ -22,6 +22,13 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
             }
 
             javascripts {
+                cookies = Hoerbiger.Shared:Resource.CCM19 {
+                    domain = ${Configuration.setting('Hoerbiger.Shared.ccm19.domain')}
+                    endPoint = ${Configuration.setting('Hoerbiger.Shared.ccm19.endPoint')}
+                    apiKey = ${Configuration.setting('Hoerbiger.Shared.ccm19.apiKey')}
+
+                    @if.isEnabled = ${Configuration.setting('Hoerbiger.Shared.ccm19.isEnabled')}
+                }
                 matomoTagManager = Hoerbiger.Shared:Application.Tracking.MatomoTagManager {
                     @if.isEnabled = ${Configuration.setting('Hoerbiger.HoerbigerCom.tracking.isEnabled')}
                     baseUri = ${String.toString(BaseUri.getConfiguredBaseUriOrFallbackToCurrentRequest(request.httpRequest))}
