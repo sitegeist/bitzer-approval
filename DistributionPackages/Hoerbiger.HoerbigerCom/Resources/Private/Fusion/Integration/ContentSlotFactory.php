@@ -11,8 +11,10 @@ namespace Hoerbiger\HoerbigerCom\Integration;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
 use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
+use Hoerbiger\Shared\Presentation\Block\CookieDeclaration\CookieDeclaration;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\ListItem\ListItemFactory;
 use Hoerbiger\Shared\Presentation\Block\Figure\FigureFactory;
@@ -85,6 +87,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         private readonly VideoFactory $videoFactory,
         private readonly WantedNodeRepository $wantedNodeRepository,
         private readonly LinkFactory $linkFactory,
+        private readonly CsvPOTranslator $csvPOTranslator,
     ) {
     }
 
@@ -1085,7 +1088,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
-            Value::fromString('<script id="CookieDeclaration" src="https://consent.cookiebot.com/aa81a090-a42f-459c-9c12-35f852ed4015/cd.js" type="text/javascript" async></script>')
+            new CookieDeclaration(
+                $this->csvPOTranslator->getLabels(CookieDeclaration::class)
+            )
         );
     }
 

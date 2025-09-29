@@ -1,0 +1,11 @@
+prototype(Hoerbiger.Shared:Block.CookieDeclaration) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\CookieDeclaration\\CookieDeclaration'
+
+    @styleguide {
+        title = 'CookieDeclaration'
+    }
+
+    renderer = afx`
+        <div class="ccm-cookie-declaration">{presentationObject.labels['label.javascriptActivationNotification']}</div>
+    `
+}
