@@ -1,0 +1,6 @@
+prototype(Hoerbiger.Shared:Resource.CCM19) < prototype(Neos.Fusion:Component) {
+    endPoint = ''
+    apiKey = ''
+    domain = ''
+    renderer = ${'<script src="' + props.endPoint + '?apiKey=' + props.apiKey + '&amp;domain=' + props.domain + '" referrerpolicy="origin"></script>'}
+}
