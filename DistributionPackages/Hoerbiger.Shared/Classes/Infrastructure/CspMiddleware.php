@@ -18,11 +18,13 @@ final class CspMiddleware implements MiddlewareInterface
             $inlineScriptHashes = match ($request->getUri()->getHost()) {
                 'www.hoerbiger.com', 'hoerbiger.com', 'www-prod.hoerbiger.com', 'vpro0994.proserver.punkt.de' => [
                     "'sha256-votYlhJgQQL7B5uCEicJFHHUkeq0oHcReTNP3Fqsuqk='",
-                    "'sha256-DYcV0zWq4vQusrIN0layNTr7/PQ5qiMZvWBdy/YQkaY='"
+                    "'sha256-DYcV0zWq4vQusrIN0layNTr7/PQ5qiMZvWBdy/YQkaY='",
+                    "'sha256-tE5FqWv+yqmPEClXs60CkxqJl/7p7o0wB46nNZm/aVY='"
                 ],
                 default => [
                     "'sha256-syzaMKYH4pbBEkODhTM5Fg82yrKuWyNCC8KOnsq9v50='",
-                    "'sha256-DYcV0zWq4vQusrIN0layNTr7/PQ5qiMZvWBdy/YQkaY='"
+                    "'sha256-DYcV0zWq4vQusrIN0layNTr7/PQ5qiMZvWBdy/YQkaY='",
+                    "'sha256-tE5FqWv+yqmPEClXs60CkxqJl/7p7o0wB46nNZm/aVY='"
                 ]
             };
             $response = $response->withHeader(
@@ -38,7 +40,7 @@ final class CspMiddleware implements MiddlewareInterface
                         "img-src 'self' https: data: *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de *.gstatic.com cloud.ccm19.de",
                         "media-src 'self'",
                         "script-src 'self' " . implode(' ', $inlineScriptHashes) . " *.hoerbiger.com hoerbiger.com cloud.ccm19.de *.googleapis.com *.recruitmentplatform.com cloud.ccm19.de *.piwik.hoerbiger.com",
-                        "script-src-elem 'self' cloud.ccm19.de *.googleapis.com *.piwik.hoerbiger.com",
+                        "script-src-elem 'self' *.hoerbiger.com cloud.ccm19.de *.googleapis.com *.piwik.hoerbiger.com 'sha256-tE5FqWv+yqmPEClXs60CkxqJl/7p7o0wB46nNZm/aVY='",
                         "style-src 'self' 'unsafe-inline' *.hoerbiger.com cloud.ccm19.de *.googleapis.com fast.fonts.net",
                     ]
                     /** @codingStandardsIgnoreEnd */
