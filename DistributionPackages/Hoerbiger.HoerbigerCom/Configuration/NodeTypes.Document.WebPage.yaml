@@ -22,6 +22,7 @@
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true

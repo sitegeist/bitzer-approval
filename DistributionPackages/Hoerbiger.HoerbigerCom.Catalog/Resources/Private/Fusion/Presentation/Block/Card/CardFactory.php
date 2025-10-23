@@ -228,6 +228,50 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
+    public function forGroupedLinksNode(TraversableNodeInterface $groupedLinkListNode, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($groupedLinkListNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forProductCard($imageSource)
+            : null;
+
+        $links = Collection::fromNodes(
+            TraversableNodes::fromArray($groupedLinkListNode->getProperty('links') ?: []),
+            function (TraversableNodeInterface $productDocument) {
+                $link = $this->linkFactory
+                    ->forLinkToDocument($productDocument, null)
+                    ->asPlainLabel();
+
+                return $link->withContent(
+                    new Grid(
+                        GridVariant::VARIANT_ICONRIGHT,
+                        Collection::fromIterable([
+                            new Tag(
+                                'span',
+                                TagVariant::VARIANT_BRANDCOLOR,
+                                Value::fromString(
+                                    $productDocument->getProperty('headline')
+                                        ?: $productDocument->getLabel()
+                                )
+                            ),
+                            new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5)
+                        ], function (SlotInterface $slot) {
+                            return $slot;
+                        })
+                    )
+                );
+            }
+        );
+
+        return new ProductCard(
+            $figure,
+            Editable::fromNodeProperty($groupedLinkListNode, 'name'),
+            null,
+            null,
+            $links
+        );
+    }
+
     /**
      * @param array<int,TraversableNodeInterface> $products
      */

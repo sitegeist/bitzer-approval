@@ -1,0 +1,32 @@
+'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks':
+  superTypes:
+    'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+  ui:
+    icon: 'object-ungroup'
+    label: 'Grouped Links'
+    inspector:
+      groups:
+        links:
+          label: 'Links'
+          icon: 'link'
+  properties:
+    name:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter title'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
+    links:
+      type: references
+      ui:
+        label: 'Links'
+        reloadIfChanged: true
+        inspector:
+          group: links

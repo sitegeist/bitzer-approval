@@ -6,8 +6,9 @@
     nodeTypes:
       '*': false
       'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts': true
+      'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks': true
   ui:
-    label: 'Produkt List'
+    label: 'Produkt & Link List'
     icon: 'object-group'
   options:
     template:
