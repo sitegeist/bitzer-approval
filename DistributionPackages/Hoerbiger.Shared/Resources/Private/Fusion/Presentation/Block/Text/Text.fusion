@@ -17,7 +17,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             "[&_a]:font-sans-bold",
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
-                : presentationObject.variant.equals('centered')
+                : (presentationObject.variant.equals('centered') || presentationObject.variant.equals('fullWidth'))
                     ? "max-w-content-full"
                     : "max-w-content-tight",
             presentationObject.variant.equals('default') && "prose-brand",

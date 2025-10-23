@@ -13,6 +13,7 @@
       constraints:
         nodeTypes:
           '*': false
+          'Hoerbiger.HoerbigerCom:Content.Accordion': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
