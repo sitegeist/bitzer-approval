@@ -2,6 +2,7 @@
   superTypes:
     'Neos.Neos:ContentCollection': true
     'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   constraints:
     nodeTypes:
       '*': false

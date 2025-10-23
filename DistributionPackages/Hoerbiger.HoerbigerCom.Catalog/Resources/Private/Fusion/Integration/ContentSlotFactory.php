@@ -10,15 +10,22 @@ namespace Hoerbiger\HoerbigerCom\Catalog\Integration;
 
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Application\PaybackCalculatorEVCP\PaybackCalculatorEVCPFactory;
 use Hoerbiger\HoerbigerCom\Catalog\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
+use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
 use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
 use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
+use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
+use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
 
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
@@ -31,7 +38,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     {
         switch ((string)$contentNode->getNodeTypeName()) {
             case 'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList':
-                return $this->forProductListNode($contentNode);
+                return $this->forProductListNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts':
                 return (new CardFactory())->forGroupedProductsNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks':
@@ -43,21 +50,33 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         }
     }
 
-    public function forProductListNode(TraversableNodeInterface $productListNode): SlotInterface
+    public function forProductListNode(TraversableNodeInterface $productListNode, bool $inBackend): SlotInterface
     {
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
-            new Grid(
-                GridVariant::VARIANT_THREECOLUMNSGAP,
-                Collection::fromNodes(
-                    $productListNode->findChildNodes(),
-                    function (TraversableNodeInterface $groupedProduct) {
-                        return Content::fromNode(
-                            $groupedProduct,
-                            'Hoerbiger.HoerbigerCom.Catalog:ContentSlot'
-                        );
-                    }
-                )
+            new Stack(
+                StackVariant::VARIANT_SM,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $productListNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineSize::SIZE_MEDIUM_ITALIC,
+                            HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                            HeadlineType::TYPE_H2,
+                            Editable::fromNodeProperty($productListNode, 'headline')
+                        ) : null,
+                    new Grid(
+                        GridVariant::VARIANT_THREECOLUMNSGAP,
+                        Collection::fromNodes(
+                            $productListNode->findChildNodes(),
+                            function (TraversableNodeInterface $groupedProduct) {
+                                return Content::fromNode(
+                                    $groupedProduct,
+                                    'Hoerbiger.HoerbigerCom.Catalog:ContentSlot'
+                                );
+                            }
+                        )
+                    )
+                ]))
             )
         );
     }
