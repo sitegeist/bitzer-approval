@@ -1274,14 +1274,25 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ContentContainerVariant::VARIANT_REGULAR,
             new Stack(
                 StackVariant::VARIANT_SM,
-                Collection::fromSlots(
-                    Collection::fromNodes(
-                        $accordionNode->findChildNodes(),
-                        function (Node $accordionItemNode): Content {
-                            return Content::fromNode($accordionItemNode, 'Hoerbiger.HoerbigerCom:ContentSlot');
-                        }
+                Collection::fromIterable(array_filter([
+                    $inBackend || $accordionNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineSize::SIZE_MEDIUM_ITALIC,
+                            HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                            HeadlineType::TYPE_H2,
+                            Editable::fromNodeProperty($accordionNode, 'headline')
+                        ) : null,
+                    Collection::fromSlots(
+                        Collection::fromNodes(
+                            $accordionNode->findChildNodes(),
+                            function (Node $accordionItemNode): Content {
+                                return Content::fromNode($accordionItemNode, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                            }
+                        )
                     )
-                )
+                ]))
+
+
             )
         );
     }

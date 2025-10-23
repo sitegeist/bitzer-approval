@@ -3,6 +3,7 @@
   superTypes:
     'Hoerbiger.HoerbigerCom:Content': true
     'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
   ui:
     label: 'Accordion'
     icon: 'list'
