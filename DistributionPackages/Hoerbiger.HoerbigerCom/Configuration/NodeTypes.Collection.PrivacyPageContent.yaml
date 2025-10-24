@@ -8,6 +8,7 @@
     nodeTypes:
       '*': false
       'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+      'Hoerbiger.HoerbigerCom:Collection.Teaser': true
       'Hoerbiger.HoerbigerCom:Content.Image': true
       'Hoerbiger.HoerbigerCom:Content.Text': true
       'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
