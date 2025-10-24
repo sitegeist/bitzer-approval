@@ -242,6 +242,9 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                     ->forLinkToDocument($productDocument, null)
                     ->asPlainLabel();
 
+                $headline = $productDocument->getProperty('preview__headline')
+                    ?: ($productDocument->getProperty('headline') ?: $productDocument->getLabel());
+
                 return $link->withContent(
                     new Grid(
                         GridVariant::VARIANT_ICONRIGHT,
@@ -250,8 +253,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
                                 'span',
                                 TagVariant::VARIANT_BRANDCOLOR,
                                 Value::fromString(
-                                    $productDocument->getProperty('headline')
-                                        ?: $productDocument->getLabel()
+                                    $headline
                                 )
                             ),
                             new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5)
