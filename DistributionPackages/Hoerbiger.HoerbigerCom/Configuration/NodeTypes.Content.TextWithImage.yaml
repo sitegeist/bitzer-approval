@@ -33,6 +33,23 @@
         inspector:
           group: 'image'
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+    column:
+      type: string
+      defaultValue: '50_50'
+      ui:
+        label: 'Spalten'
+        reloadIfChanged: true
+        inspector:
+          group: 'image'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+    showMobileImageFirst:
+      type: boolean
+      defaultValue: true
+      ui:
+        label: 'Image first (on mobile)'
+        reloadPageIfChanged: true
+        inspector:
+          group: 'image'
     text__block__image:
       type: 'Neos\Media\Domain\Model\ImageInterface'
       ui:
@@ -60,3 +77,9 @@
         enumName: Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout
         propertyNames:
           - layout
+    columns:
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider
+      postprocessorOptions:
+        enumName: Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Columns
+        propertyNames:
+          - column
