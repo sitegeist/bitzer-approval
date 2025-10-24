@@ -1,0 +1,24 @@
+'Hoerbiger.HoerbigerCom:Content.TeaserItem':
+  label: "${q(node).property('headline') || node.nodeType.label}"
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
+  ui:
+    label: 'Teaser Item'
+    icon: 'angle-down'
+    inspector:
+      groups:
+        teaserOption:
+          label: Teaser Settings
+          icon: 'folder-open'
+  properties:
+    isFontColorBlack:
+      type: boolean
+      defaultValue: false
+      ui:
+        reloadIfChanged: true
+        label: 'Schriftfarbe schwarz'
+        inspector:
+          group: 'teaserOption'
