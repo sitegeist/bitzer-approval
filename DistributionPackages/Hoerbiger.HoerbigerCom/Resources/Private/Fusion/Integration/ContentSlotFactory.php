@@ -292,7 +292,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $text = new Text(
             TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
             Editable::fromNodeProperty($textNode, 'text'),
-            $columns === Columns::VALUE_MAX_TWO
+            $columns === Columns::VALUE_MAX_TWO,
+            $textNode->getProperty('hasStickyTableHeader')
         );
 
         if ($columns === Columns::VALUE_MAX_ONE_HEADLINE_LEFT_SIDE) {
