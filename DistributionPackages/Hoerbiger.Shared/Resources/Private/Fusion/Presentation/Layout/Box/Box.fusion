@@ -14,14 +14,15 @@ prototype(Hoerbiger.Shared:Layout.Box) < prototype(PackageFactory.AtomicFusion.P
         <div id={presentationObject.identifier} class={[
             "[Layout.Box (" + presentationObject.variant.value + ")]",
             "relative w-full",
-            presentationObject.variant.equals('textCenter') && "flex items-center p-md p-md",
+            presentationObject.variant.equals('textCenter') && "flex items-center p-md",
             presentationObject.variant.equals('neutral') && "bg-neutral-lighter p-md",
             presentationObject.variant.equals('decorative') && "bg-neutral-lighter p-md",
             presentationObject.variant.equals('excite') && "bg-neutral-lighter before:bg-excite p-md",
             presentationObject.variant.equals('experience') && "bg-neutral-lighter before:bg-experience p-md",
             presentationObject.variant.equals('lite') && "bg-neutral-lighter before:bg-lite p-md",
             presentationObject.variant.equals('service') && "bg-neutral-lighter before:bg-service p-md",
-            presentationObject.variant.equals('light') && "bg-light py-xs"
+            presentationObject.variant.equals('light') && "bg-light py-xs",
+            presentationObject.variant.equals('orderFirst') && "order-first lg:order-none"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

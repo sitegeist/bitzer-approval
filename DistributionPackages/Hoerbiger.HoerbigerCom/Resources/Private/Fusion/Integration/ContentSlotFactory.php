@@ -47,6 +47,7 @@ use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
 use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns;
+use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Columns as TextWithImageColumns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
@@ -472,6 +473,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $layout = Layout::tryFrom($textWithImageNode->getProperty('layout') ?: '')
             ?: Layout::VALUE_IMAGEFIRST;
 
+        $column = TextWithImageColumns::tryFrom($textWithImageNode->getProperty('column') ?: '')
+            ?: TextWithImageColumns::VALUE_50_50;
+
+        if ($figure && $layout === Layout::VALUE_IMAGELAST && $textWithImageNode->getProperty('showMobileImageFirst')) {
+            $figure = new Box(
+                BoxVariant::VARIANT_ORDER_FIRST,
+                $figure
+            );
+        }
+
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
             Collection::fromIterable(array_filter([
@@ -481,7 +492,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Editable::fromNodeProperty($textWithImageNode, 'metaHeadline')
                     ): null,
                 new Grid(
-                    GridVariant::VARIANT_TWOCOLUMNSNOGAP,
+                    ($column === TextWithImageColumns::VALUE_33_66)
+                        ? GridVariant::VARIANT_TWO_33_66
+                        : (($column === TextWithImageColumns::VALUE_66_33)
+                            ? GridVariant::VARIANT_TWO_66_33
+                            : GridVariant::VARIANT_TWOCOLUMNSNOGAP
+                        ),
                     $layout === Layout::VALUE_IMAGEFIRST
                         ? Collection::fromIterable([$figure, $text], $identity)
                         : Collection::fromIterable([$text, $figure], $identity)

@@ -25,6 +25,7 @@ enum BoxVariant:string implements ProtectedContextAwareInterface
     case VARIANT_LIGHT = 'light';
     case VARIANT_SERVICE = 'service';
     case VARIANT_DEFAULT = 'default';
+    case VARIANT_ORDER_FIRST = 'orderFirst';
 
     public static function tryFromTheme(?Theme $theme): ?self
     {
