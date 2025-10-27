@@ -421,11 +421,11 @@ table {
 	@apply min-w-full;
 }
 
-tr:nth-child(odd) {
+tr:nth-child(odd) td {
 	@apply bg-light;
 }
 
-tr:nth-child(even) {
+tr:nth-child(even) td {
 	@apply bg-neutral-lighter;
 }
 

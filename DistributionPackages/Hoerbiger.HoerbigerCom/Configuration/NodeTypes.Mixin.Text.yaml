@@ -20,11 +20,3 @@
         fulltextExtractor: ${Indexing.extractInto('p', value)}
         elasticSearchMapping:
           type: text
-    hasStickyTableHeader:
-      type: boolean
-      defaultValue: false
-      ui:
-        reloadIfChanged: true
-        label: 'Table with Sticky Header'
-        inspector:
-          group: table

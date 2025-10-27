@@ -31,6 +31,15 @@
         inspector:
           group: 'adjust'
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+    hasStickyTableHeader:
+      type: boolean
+      defaultValue: false
+      ui:
+        reloadIfChanged: true
+        label: 'Table with Sticky Column'
+        inspector:
+          group: table
+
   postprocessors:
     columns:
       postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider
