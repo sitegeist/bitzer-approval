@@ -18,7 +18,7 @@
       type: DateTime
     showContactWidget:
       type: boolean
-      defaultValue: true
+      defaultValue: false
       ui:
         label: 'Kontakt-Widget anzeigen'
         reloadPageIfChanged: true
