@@ -1,0 +1,12 @@
+Sandstorm:
+  NeosTwoFactorAuthentication:
+    enforceTwoFactorAuthentication: false
+
+
+Hoerbiger:
+  Shared:
+    ccm19:
+      isEnabled: true
+      endPoint: 'https://cloud.ccm19.de/app.js'
+      apiKey: b9919331b79198af469ae8d7124827a354b38d6a5db27e44
+      domain: 68d3de0e34a6ae01f507f8e6

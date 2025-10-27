@@ -1,5 +1,12 @@
 'Hoerbiger.HoerbigerCom:Document':
   abstract: true
+  ui:
+    inspector:
+      groups:
+        contactWidget:
+          label: 'Kontakt-Widget'
+          icon: 'at'
+
   superTypes:
     'Neos.Neos:Document': true
   constraints:
@@ -9,3 +16,11 @@
   properties:
     lastUpdateAction:
       type: DateTime
+    showContactWidget:
+      type: boolean
+      defaultValue: true
+      ui:
+        label: 'Kontakt-Widget anzeigen'
+        reloadPageIfChanged: true
+        inspector:
+          group: contactWidget

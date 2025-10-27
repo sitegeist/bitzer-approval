@@ -1,0 +1,38 @@
+prototype(Hoerbiger.Shared:Block.ContactWidget) < prototype(Neos.Fusion:Component) {
+
+    @styleguide {
+        title = 'ContactWidget'
+
+        props {
+            variant = 'regular'
+            content = '- Add Slot Content -'
+        }
+    }
+
+    showContactWidget = ${q(documentNode).property("showContactWidget")}
+
+    contactWidgetUri = ${q(site).property("contactWidgetUri")}
+    contactWidgetUri.@process.convertUris = Neos.Neos:ConvertUris
+
+    inBackend = ${documentNodede.context.inBackend}
+
+    renderer = afx`
+        <Neos.Fusion:Tag
+            @if={props.showContactWidget && props.contactWidgetUri}
+            tagName={(props.contactWidgetUri && !inBackend) ? 'a' : 'div'}
+            attributes.href={props.contactWidgetUri}
+            attributes.href.@if={(props.contactWidgetUri && !inBackend)}
+            attributes.class={[
+                "[Block.ContactWidget] fixed bottom-0 right-0 z-[999] shadow-lg border border-neutral-footer",
+                "grid place-items-center text-[black] bg-neutral-lighter m-[35px] p-[16px] aspect-square"
+            ]}
+        >
+            <Sitegeist.Stampede:Icon
+                collection="shared"
+                icon="email"
+                style="fill: currentColor;"
+                class="w-[35px] h-[35px]"
+            />
+        </Neos.Fusion:Tag>
+    `
+}
