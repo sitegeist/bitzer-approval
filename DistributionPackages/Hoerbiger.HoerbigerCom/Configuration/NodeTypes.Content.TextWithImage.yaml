@@ -44,7 +44,7 @@
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
     showMobileImageFirst:
       type: boolean
-      defaultValue: true
+      defaultValue: false
       ui:
         label: 'Image first (on mobile)'
         reloadPageIfChanged: true
