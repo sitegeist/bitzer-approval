@@ -870,6 +870,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         TraversableNodeInterface $documentNode,
         bool $inBackend,
     ): SlotInterface {
+        $parentNode = $teaserItemNode->findParentNode();
+
+        $layout = TeaserLayout::tryFrom($parentNode->getProperty('columns') ?: 'threeColumns');
 
         $imageSource = $this->imageSourceFactory->forImageMixin($teaserItemNode, $inBackend);
         $figure = $imageSource
@@ -901,9 +904,15 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new TeaserItem(
             Editable::fromNodeProperty($teaserItemNode, 'headline'),
+            $inBackend || $teaserItemNode->getProperty('text')
+                ? Editable::fromNodeProperty($teaserItemNode, 'text')
+                : null,
             $figure,
             $button,
             $teaserItemNode->getProperty('isFontColorBlack'),
+            !$teaserItemNode->getProperty('isIndentedText')
+                ? TeaserLayout::VALUE_THREE_COLUMNS
+                : ($layout ?: TeaserLayout::VALUE_THREE_COLUMNS)
         );
     }
 

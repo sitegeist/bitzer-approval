@@ -10,6 +10,7 @@ namespace Hoerbiger\Shared\Presentation\Block\TeaserItem;
 
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\Figure\Figure;
+use Hoerbiger\Shared\Presentation\EnumProvider\Teaser\Layout;
 use Neos\Flow\Annotations as Flow;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObject;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\StringLike;
@@ -19,9 +20,11 @@ final class TeaserItem extends AbstractComponentPresentationObject
 {
     public function __construct(
         public readonly StringLike $header,
+        public readonly ?StringLike $teaserText,
         public readonly Figure $figure,
         public readonly Button $button,
-        public readonly bool $isFontColorBlack
+        public readonly bool $isFontColorBlack,
+        public readonly Layout $layout
     ) {
     }
 }
