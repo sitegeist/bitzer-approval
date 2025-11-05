@@ -4,6 +4,13 @@ import * as ReactDom from "react-dom";
 import {Client} from "./Client";
 import {ApplicationData} from "./Client/Definitions";
 
+declare global {
+	interface Window {
+		/* eslint-disable  @typescript-eslint/no-explicit-any */
+		CCM: any;
+	}
+}
+
 export default ($node: Element): void => {
 	if ($node instanceof HTMLElement) {
 		const {labels, ...applicationData} = JSON.parse($node.querySelector("script[data-select=applicationData]")?.textContent ?? "null");
