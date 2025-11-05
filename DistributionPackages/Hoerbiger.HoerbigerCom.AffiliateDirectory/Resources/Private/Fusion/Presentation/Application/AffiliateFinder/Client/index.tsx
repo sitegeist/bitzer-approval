@@ -53,6 +53,10 @@ const initMapsFallBack = (): boolean => {
 export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: ApplicationData): JSX.Element => {
 	const [mapsFallback, setMapsFallBack] = React.useState<boolean>(initMapsFallBack());
 
+	window.addEventListener("ccm19WidgetClosed", function () {
+		setMapsFallBack(initMapsFallBack());
+	});
+
 	const countries = React.useRef<Countries>(groupAffiliatesByCountries(affiliates));
 	const [state, dispatch] = React.useReducer((state: ActiveState, action: ActiveStateAction) => {
 		switch (action.type) {
@@ -85,40 +89,44 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 			{
 				mapsFallback
 					? <div
-						className="flex flex-col font-sans-regular"
+						className={cx(
+							"w-full mx-auto p-lg md:p-sm bg-nav-card shadow-textbox"
+						)}
 					>
-						<div>
-							{getLabelFor("maps.hintOne")}
-						</div>
-						<div>
-							{getLabelFor("maps.hintTwo")}
-						</div>
-						<div>
-							<div
-								className="cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch font-semibold font-sans-bold px-0 [&amp;_svg]:pt-[3px]"
-								onClick={
-									() => {
-										window.CCM.openWidget();
-									}
-								}
-							>
+						<div className="flex flex-col font-sans-regular space-y-[6px]">
+							<div>
+								{getLabelFor("maps.hintOne")}
+							</div>
+							<div>
+								{getLabelFor("maps.hintTwo")}
+							</div>
+							<div>
 								<div
-									className="[Layout.Grid (iconLeft)] grid w-full gap-x-ch-xs grid-cols-2-max-1fr items-center"
+									className="cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch font-semibold font-sans-bold px-0 [&amp;_svg]:pt-[3px]"
+									onClick={
+										() => {
+											window.CCM.openWidget();
+										}
+									}
 								>
-									<svg
-										className="w-[1em] h-[1em]"
-										viewBox="0 0 14 9"
-										fill="none"
-										xmlns="http://www.w3.org/2000/svg"
+									<div
+										className="[Layout.Grid (iconLeft)] grid w-full gap-x-ch-xs grid-cols-2-max-1fr items-center"
 									>
-										<path
-											fillRule="evenodd"
-											clipRule="evenodd"
-											d="M8.85355 0.146484L13.2071 4.50004L8.85355 8.85359L8.14645 8.14648L11.2929 5.00004H0V4.00004H11.2929L8.14645 0.853591L8.85355 0.146484Z"
-											fill="currentColor"
-										></path>
-									</svg>
-									{getLabelFor("maps.hintButton")}
+										<svg
+											className="w-[1em] h-[1em]"
+											viewBox="0 0 14 9"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
+										>
+											<path
+												fillRule="evenodd"
+												clipRule="evenodd"
+												d="M8.85355 0.146484L13.2071 4.50004L8.85355 8.85359L8.14645 8.14648L11.2929 5.00004H0V4.00004H11.2929L8.14645 0.853591L8.85355 0.146484Z"
+												fill="currentColor"
+											></path>
+										</svg>
+										{getLabelFor("maps.hintButton")}
+									</div>
 								</div>
 							</div>
 						</div>
