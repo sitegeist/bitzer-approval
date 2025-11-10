@@ -228,7 +228,7 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
-    public function forGroupedLinksNode(TraversableNodeInterface $groupedLinkListNode, bool $inBackend): SlotInterface
+    public function forGroupedLinksNode(TraversableNodeInterface $groupedLinkListNode, ContentContext $subgraph, bool $inBackend): SlotInterface
     {
         $imageSource = $this->imageSourceFactory->forImageMixin($groupedLinkListNode, $inBackend);
         $figure = $imageSource
@@ -236,14 +236,25 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
             : null;
 
         $links = Collection::fromNodes(
-            TraversableNodes::fromArray($groupedLinkListNode->getProperty('links') ?: []),
-            function (TraversableNodeInterface $productDocument) {
+            $groupedLinkListNode->findChildNodes(),
+            function (TraversableNodeInterface $linkItemNode) use ($subgraph) {
                 $link = $this->linkFactory
-                    ->forLinkToDocument($productDocument, null)
-                    ->asPlainLabel();
+                    ->forLinkMixinPlainVariant($linkItemNode, $subgraph);
 
-                $headline = $productDocument->getProperty('preview__headline')
-                    ?: ($productDocument->getProperty('headline') ?: $productDocument->getLabel());
+                if (!$link) {
+                    return Value::fromString("");
+                }
+
+                $rawLinkTarget = $linkItemNode->getProperty('link__target') ?: '';
+                if (\mb_substr($rawLinkTarget, 0, 7) === 'node://') {
+                    /** @var TraversableNodeInterface|null $targetNode */
+                    $targetNode = $subgraph->getNodeByIdentifier(\mb_substr($rawLinkTarget, 7));
+
+                    $headline = $linkItemNode->getProperty('link__label')
+                        ?: ($targetNode ? ($targetNode->getProperty('headline') ?: $targetNode->getLabel() ?: '') : '');
+                } else {
+                    $headline = $linkItemNode->getProperty('link__label') ?: $linkItemNode->getProperty('link__target') ?: '';
+                }
 
                 return $link->withContent(
                     new Grid(

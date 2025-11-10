@@ -42,7 +42,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedProducts':
                 return (new CardFactory())->forGroupedProductsNode($contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks':
-                return (new CardFactory())->forGroupedLinksNode($contentNode, $inBackend);
+                return (new CardFactory())->forGroupedLinksNode($contentNode, $subgraph, $inBackend);
             case 'Hoerbiger.HoerbigerCom.Catalog:Content.PaybackCalculatorEVCP':
                 return $this->forPaybackCalculatorEVCPNode($contentNode, $subgraph, $inBackend);
             default:

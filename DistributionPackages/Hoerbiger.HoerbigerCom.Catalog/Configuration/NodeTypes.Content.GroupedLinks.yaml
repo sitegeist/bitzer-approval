@@ -11,6 +11,17 @@
         links:
           label: 'Links'
           icon: 'link'
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks.Item': true
+  options:
+    template:
+      childNodes:
+        link1:
+          type: 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks.Item'
+        link2:
+          type: 'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks.Item'
   properties:
     name:
       options:
@@ -23,10 +34,15 @@
         fulltextExtractor: ${Indexing.extractInto('h2', value)}
         elasticSearchMapping:
           type: text
-    links:
-      type: references
-      ui:
-        label: 'Links'
-        reloadIfChanged: true
-        inspector:
-          group: links
+
+'Hoerbiger.HoerbigerCom.Catalog:Content.GroupedLinks.Item':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
+  ui:
+    label: 'Link Item'
+    icon: 'link'
+  properties:
+    link__target:
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': { }
