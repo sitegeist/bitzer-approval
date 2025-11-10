@@ -16,7 +16,8 @@ final class Text extends AbstractComponentPresentationObject
     public function __construct(
         public readonly TextVariant $variant,
         public readonly SlotInterface $content,
-        public readonly bool $canHaveColumns
+        public readonly bool $canHaveColumns,
+        public readonly ?bool $tableStickyHeader = false
     ) {
     }
 }
