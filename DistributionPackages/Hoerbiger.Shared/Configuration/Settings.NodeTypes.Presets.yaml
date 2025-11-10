@@ -38,6 +38,11 @@ Neos:
                       sup: true
                       a: true
                       removeFormat: true
+                      left: true
+                      right: true
+                      center: true
+                      justify: true
+                      table: true
             'plainWithStrong':
               type: 'string'
               ui:
