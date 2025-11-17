@@ -32,7 +32,7 @@ Neos:
             options:
               translationStrategy: 'once'
           es:
-            label: Spanisch
+            label: Spanish
             values: [ 'es' ]
             uriSegment: es
             options:

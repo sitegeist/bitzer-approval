@@ -53,7 +53,8 @@ final class LanguageBasedRoleId
     {
         $languagePresets = $contentDimensionPresetSource->getAllPresets()['language']['presets'];
 
-        $roleDimension = rtrim(ltrim($this->value, self::ROLE_ID_PREFIX), self::ROLE_ID_SUFFIX);
+        $roleDimension = \mb_substr($this->value, \mb_strlen(self::ROLE_ID_PREFIX));
+        $roleDimension = \mb_substr($roleDimension, 0, -\mb_strlen(self::ROLE_ID_SUFFIX));
         $roleDimension = $roleDimension === 'German' ? 'Deutsch' : $roleDimension;
 
         foreach ($languagePresets as $languagePreset) {
