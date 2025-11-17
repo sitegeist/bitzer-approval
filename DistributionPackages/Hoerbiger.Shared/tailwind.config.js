@@ -345,6 +345,8 @@ module.exports = {
 				'2-160-auto': '160px auto',
 				'2-slider-bubbles': '1fr 1fr',
 				'slider-tabs': 'clamp(200px, 35%, 430px) 1fr',
+				'2-33-66': '1fr 2fr',
+				'2-66-33': '2fr 1fr',
 			},
 
 			gridTemplateRows: {
