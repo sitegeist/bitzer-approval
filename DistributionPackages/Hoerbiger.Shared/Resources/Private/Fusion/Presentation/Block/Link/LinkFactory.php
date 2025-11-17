@@ -187,4 +187,21 @@ final class LinkFactory extends AbstractComponentPresentationObjectFactory
             )
             : null;
     }
+
+    public function forLinkMixinPlainVariant(TraversableNodeInterface $node, ContentContext $subgraph): ?Link
+    {
+        $href = $this->resolveRawLinkTargetUri($node->getProperty('link__target'), $subgraph);
+        $linkTarget = LinkTarget::forLinkPropertyValue($node->getProperty('link__target') ?: '');
+        return $href
+            ? new Link(
+                LinkVariant::VARIANT_PLAINLABEL,
+                $href,
+                $linkTarget,
+                $linkTarget === LinkTarget::TARGET_BLANK ? 'noopener nofollow' : null,
+                Value::fromString($node->getProperty('link__label') ?: ''),
+                null
+            )
+            : null;
+    }
+
 }
