@@ -22,8 +22,8 @@ export default ($node: Element): void => {
 						}
 					});
 				}
-
-				counterItem.textContent = (currentSlide + 1).toString();
+				const newLetter = navigationItems[currentSlide].querySelector("[data-first-letter]") as HTMLElement;
+				counterItem.textContent = newLetter.dataset.firstLetter ?? ".";
 			};
 
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment

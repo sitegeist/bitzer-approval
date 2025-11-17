@@ -54,6 +54,7 @@ final class SliderFactory extends AbstractComponentPresentationObjectFactory
                     $thumbnailImageSource->setAsync(true);
                 }
                 $thumNavigationItem = new SliderTextNavigationItem(
+                    mb_substr($targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '', 0, 1),
                     $targetNode->getProperty('slider__preview__headline') ?: $targetNode->getProperty('headline') ?: '',
                 );
 
