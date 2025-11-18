@@ -269,7 +269,53 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($chroniclePage, $subgraph, $inBackend);
 
-        return $this->forDocumentWithIntroduction($site, $chroniclePage, $stage, $subgraph, $inBackend);
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = $this->breadcrumbFactory->forPage($chroniclePage, $subgraph);
+
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($chroniclePage);
+
+        $contentSection = $chroniclePage->findNamedChildNode(NodeName::fromString('content'));
+
+        return new Page(
+            $this->siteHeaderFactory->forDocument(
+                $chroniclePage,
+                $site,
+                $subgraph,
+                $inBackend,
+                null,
+            ),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
+                    $stage
+                ),
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                    AnchorNavigationVariant::VARIANT_REGULAR,
+                    array_map(
+                        fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
+                        $anchors
+                    )
+                )
+                    : null,
+
+                ($contentSection->findChildNodes()->count() > 0)
+                    ? new ContentContainer(
+                        ContentContainerVariant::VARIANT_REGULAR,
+                        Content::fromNode($contentSection),
+                    )
+                    : null,
+                Content::fromNode($chroniclePage->findNamedChildNode(NodeName::fromString('main'))),
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_REGULARX,
+                    $breadcrumb
+                )
+            ]), $identity)
+        );
     }
 
     public function forNotFoundPage(TraversableNodeInterface $site, TraversableNodeInterface $notFoundPage, ContentContext $subgraph, bool $inBackend): Page
