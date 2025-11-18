@@ -228,6 +228,63 @@ final class CardFactory extends AbstractComponentPresentationObjectFactory imple
         );
     }
 
+    public function forGroupedLinksNode(TraversableNodeInterface $groupedLinkListNode, ContentContext $subgraph, bool $inBackend): SlotInterface
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($groupedLinkListNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forProductCard($imageSource)
+            : null;
+
+        $links = Collection::fromNodes(
+            $groupedLinkListNode->findChildNodes(),
+            function (TraversableNodeInterface $linkItemNode) use ($subgraph) {
+                $link = $this->linkFactory
+                    ->forLinkMixinPlainVariant($linkItemNode, $subgraph);
+
+                if (!$link) {
+                    return Value::fromString("");
+                }
+
+                $rawLinkTarget = $linkItemNode->getProperty('link__target') ?: '';
+                if (\mb_substr($rawLinkTarget, 0, 7) === 'node://') {
+                    /** @var TraversableNodeInterface|null $targetNode */
+                    $targetNode = $subgraph->getNodeByIdentifier(\mb_substr($rawLinkTarget, 7));
+
+                    $headline = $linkItemNode->getProperty('link__label')
+                        ?: ($targetNode ? ($targetNode->getProperty('headline') ?: $targetNode->getLabel() ?: '') : '');
+                } else {
+                    $headline = $linkItemNode->getProperty('link__label') ?: $linkItemNode->getProperty('link__target') ?: '';
+                }
+
+                return $link->withContent(
+                    new Grid(
+                        GridVariant::VARIANT_ICONRIGHT,
+                        Collection::fromIterable([
+                            new Tag(
+                                'span',
+                                TagVariant::VARIANT_BRANDCOLOR,
+                                Value::fromString(
+                                    $headline
+                                )
+                            ),
+                            new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5)
+                        ], function (SlotInterface $slot) {
+                            return $slot;
+                        })
+                    )
+                );
+            }
+        );
+
+        return new ProductCard(
+            $figure,
+            Editable::fromNodeProperty($groupedLinkListNode, 'name'),
+            null,
+            null,
+            $links
+        );
+    }
+
     /**
      * @param array<int,TraversableNodeInterface> $products
      */

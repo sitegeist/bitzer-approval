@@ -1,0 +1,44 @@
+'Hoerbiger.HoerbigerCom:Content.Accordion':
+  label: "${q(node).property('sectionHeadline') || q(node).property('subHeadline') || node.nodeType.label}"
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+  ui:
+    label: 'Accordion'
+    icon: 'list'
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.AccordionItem': true
+  options:
+    template:
+      childNodes:
+        accordion1:
+          type: 'Hoerbiger.HoerbigerCom:Content.AccordionItem'
+        accordion2:
+          type: 'Hoerbiger.HoerbigerCom:Content.AccordionItem'
+
+'Hoerbiger.HoerbigerCom:Content.AccordionItem':
+  label: "${q(node).property('headline') || node.nodeType.label}"
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Text': true
+  ui:
+    label: 'Accordion Item'
+    icon: 'angle-down'
+    inspector:
+      groups:
+        accordionOption:
+          label: Accordion Settings
+          icon: 'folder-open'
+  properties:
+    isAccordionOpen:
+      type: boolean
+      defaultValue: false
+      ui:
+        reloadIfChanged: true
+        label: 'is Accordion Open?'
+        inspector:
+          group: 'accordionOption'

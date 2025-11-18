@@ -13,6 +13,7 @@
       constraints:
         nodeTypes:
           '*': false
+          'Hoerbiger.HoerbigerCom:Content.Accordion': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery': true
           'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
@@ -28,6 +29,7 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Content.ImageWithLink': true
+          'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
     careerroot:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerRootPage'
       position: 128

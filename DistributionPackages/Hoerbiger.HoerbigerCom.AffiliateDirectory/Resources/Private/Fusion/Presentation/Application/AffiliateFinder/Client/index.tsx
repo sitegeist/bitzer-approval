@@ -35,7 +35,28 @@ const groupAffiliatesByCountries = (affiliates: Affiliate[]): Countries => affil
 		};
 	}, {});
 
+const initMapsFallBack = (): boolean => {
+	let response = true;
+	if (typeof window.CCM == "undefined") {
+		response = false;
+	} else {
+		window.CCM.acceptedEmbeddings.forEach((element: { name: string; }) => {
+			if (element.name === "Google Maps") {
+				response = false;
+			}
+		});
+	}
+
+	return response;
+};
+
 export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: ApplicationData): JSX.Element => {
+	const [mapsFallback, setMapsFallBack] = React.useState<boolean>(initMapsFallBack());
+
+	window.addEventListener("ccm19WidgetClosed", function () {
+		setMapsFallBack(initMapsFallBack());
+	});
+
 	const countries = React.useRef<Countries>(groupAffiliatesByCountries(affiliates));
 	const [state, dispatch] = React.useReducer((state: ActiveState, action: ActiveStateAction) => {
 		switch (action.type) {
@@ -65,63 +86,110 @@ export const Client = ({affiliates, googleMapsApiKey, language, getLabelFor}: Ap
 
 	return (
 		<div className="flex flex-col space-y-sm">
-			<div className={cx(
-				"grid",
-				"grid-cols-1 xl:grid-cols-affiliates-map-list gap-sm"
-			)}>
-				{
-					isMapToBeRendered && (
-						<div className="relative w-full h-0 pt-ratio-google-map">
-							<div className="absolute inset-0">
-								<Map
-									{...{googleMapsApiKey, language, state, dispatch}}
-									countries={countries.current}
-								/>
+			{
+				mapsFallback
+					? <div
+						className={cx(
+							"w-full mx-auto p-lg md:p-sm bg-nav-card shadow-textbox"
+						)}
+					>
+						<div className="flex flex-col font-sans-regular space-y-[6px]">
+							<div>
+								{getLabelFor("maps.hintOne")}
 							</div>
-							{
-								state.country
-									? (
-										<div
-											className="absolute top-xs left-xs bg-decorative text-decorative-contrast p-ch rounded-ch cursor-pointer"
-											onClick={() => dispatch({type: "reset"})}
+							<div>
+								{getLabelFor("maps.hintTwo")}
+							</div>
+							<div>
+								<div
+									className="cursor-pointer whitespace-nowrap overflow-ellipsis flex justify-center items-center space-x-[1em] min-h-touch max-h-touch font-semibold font-sans-bold px-0 [&amp;_svg]:pt-[3px]"
+									onClick={
+										() => {
+											window.CCM.openWidget();
+										}
+									}
+								>
+									<div
+										className="[Layout.Grid (iconLeft)] grid w-full gap-x-ch-xs grid-cols-2-max-1fr items-center"
+									>
+										<svg
+											className="w-[1em] h-[1em]"
+											viewBox="0 0 14 9"
+											fill="none"
+											xmlns="http://www.w3.org/2000/svg"
 										>
-											<StampedeIcon iconName="globe" size={2}/>
-										</div>
+											<path
+												fillRule="evenodd"
+												clipRule="evenodd"
+												d="M8.85355 0.146484L13.2071 4.50004L8.85355 8.85359L8.14645 8.14648L11.2929 5.00004H0V4.00004H11.2929L8.14645 0.853591L8.85355 0.146484Z"
+												fill="currentColor"
+											></path>
+										</svg>
+										{getLabelFor("maps.hintButton")}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					: <div className={cx(
+						"grid",
+						"grid-cols-1 xl:grid-cols-affiliates-map-list gap-sm"
+					)}>
+						{
+							isMapToBeRendered && (
+								<div className="relative w-full h-0 pt-ratio-google-map">
+									<div className="absolute inset-0">
+										<Map
+											{...{googleMapsApiKey, language, state, dispatch}}
+											countries={countries.current}
+										/>
+									</div>
+									{
+										state.country
+											? (
+												<div
+													className="absolute top-xs left-xs bg-decorative text-decorative-contrast p-ch rounded-ch cursor-pointer"
+													onClick={() => dispatch({type: "reset"})}
+												>
+													<StampedeIcon iconName="globe" size={2}/>
+												</div>
+											)
+											: null
+									}
+								</div>
+							)
+						}
+						<div className="flex flex-col space-y-sm w-full">
+							<CountryForm
+								onSubmit={onSubmit}
+								countries={countries.current}
+								currentCountry={state.country}
+								getLabelFor={getLabelFor}
+							/>
+							{
+								hasAffiliatesList && state.country
+									? (
+										<AffiliatesList
+											affiliateGroups={state.country?.affiliateGroups}
+											hasPages={isMapToBeRendered}
+											selectedGeoIdentifier={state.geoIdentifier}
+											onSelectGeoIdentifier={(geoIdentifier: string) => {
+												if (state.country) {
+													dispatch({
+														type: "selectGeoIdentifier",
+														country: state.country,
+														geoIdentifier
+													});
+												}
+											}}
+										/>
 									)
 									: null
 							}
 						</div>
-					)
-				}
-				<div className="flex flex-col space-y-sm w-full">
-					<CountryForm
-						onSubmit={onSubmit}
-						countries={countries.current}
-						currentCountry={state.country}
-						getLabelFor={getLabelFor}
-					/>
-					{
-						hasAffiliatesList && state.country
-							? (
-								<AffiliatesList
-									affiliateGroups={state.country?.affiliateGroups}
-									hasPages={isMapToBeRendered}
-									selectedGeoIdentifier={state.geoIdentifier}
-									onSelectGeoIdentifier={(geoIdentifier: string) => {
-										if (state.country) {
-											dispatch({
-												type: "selectGeoIdentifier",
-												country: state.country,
-												geoIdentifier
-											});
-										}
-									}}
-								/>
-							)
-							: null
-					}
-				</div>
-			</div>
+					</div>
+
+			}
 		</div>
 	);
 

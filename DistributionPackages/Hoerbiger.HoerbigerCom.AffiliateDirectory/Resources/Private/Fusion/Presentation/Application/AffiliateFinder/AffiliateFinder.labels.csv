@@ -1,3 +1,7 @@
 id,description,en,de,zh
 label.addressCountry,"the label of the country",Country,Land,国家
 input.activeCountry.all,"Label in select to select all countries",All,Alle,全部
+
+maps.hintOne,"An dieser Stelle wurde das Laden einer Ressource von maps.googleapis.com unterbunden.","Loading a resource from maps.googleapis.com was blocked.","An dieser Stelle wurde das Laden einer Ressource von maps.googleapis.com unterbunden.","maps.googleapis.com からのリソースの読み込みがブロックされました。"
+maps.hintTwo,"Zum Anzeigen der Standortkarte müssen Sie in den Cookie-Einstellungen die Google Maps Cookies akzeptieren.","To display the location map, you must accept the Google Maps cookies in the cookie settings.","Zum Anzeigen der Standortkarte müssen Sie in den Cookie-Einstellungen die Google Maps Cookies akzeptieren.","位置情報マップを表示するには、Cookie設定で Google Maps のCookieを許可してください。"
+maps.hintButton,"Cookie-Einstellungen öffnen","Open cookie settings","Cookie-Einstellungen öffnen","Cookie設定を開く"

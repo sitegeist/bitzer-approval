@@ -13,11 +13,11 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <div class={[
             "[Block.Text (" + presentationObject.variant.value + ")]",
-            "prose",
+            "prose textContainer max-w-full",
             "[&_a]:font-sans-bold",
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
-                : presentationObject.variant.equals('centered')
+                : (presentationObject.variant.equals('centered') || presentationObject.variant.equals('fullWidth'))
                     ? "max-w-content-full"
                     : "max-w-content-tight",
             presentationObject.variant.equals('default') && "prose-brand",
@@ -33,7 +33,9 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.equals('serviceContrast') && "prose-service",
             presentationObject.variant.equals('serviceRed') && "text-service-red font-sans-bold text-[16px] text-center",
             presentationObject.variant.equals('sm') && "text-sm",
-            presentationObject.variant.equals('neutralSmall') && "text-small text-light-contrast"
+            presentationObject.variant.equals('neutralSmall') && "text-small text-light-contrast",
+
+            presentationObject.tableStickyHeader && "scrollingTable"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>

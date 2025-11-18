@@ -18,6 +18,7 @@ enum TextVariant: string implements ProtectedContextAwareInterface
 
     case VARIANT_DEFAULT = 'default';
     case VARIANT_CENTERED = 'centered';
+    case VARIANT_FULL_WIDTH = 'fullWidth';
     case VARIANT_LIGHT_CONTRAST = 'lightContrast';
     case VARIANT_BRAND_CONTRAST = 'brandContrast';
     case VARIANT_BRAND_CONTRAST_BOLD = 'brandContrastBold';

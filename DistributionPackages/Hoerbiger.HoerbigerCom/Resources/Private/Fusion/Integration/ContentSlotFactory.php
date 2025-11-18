@@ -13,6 +13,7 @@ use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
+use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItem;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
@@ -51,6 +52,7 @@ use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
 use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns;
+use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Columns as TextWithImageColumns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
 use Hoerbiger\Shared\Presentation\EnumProvider\Teaser\Layout as TeaserLayout;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
@@ -97,8 +99,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
     ) {
     }
 
-    public function forContentNode(TraversableNodeInterface $contentNode, ContentContext $subgraph, bool $inBackend, TraversableNodeInterface $site, TraversableNodeInterface $documentNode): SlotInterface
-    {
+    public function forContentNode(
+        TraversableNodeInterface $contentNode,
+        ContentContext $subgraph,
+        bool $inBackend,
+        TraversableNodeInterface $site,
+        TraversableNodeInterface $documentNode
+    ): SlotInterface {
         $productClass = ProductClass::tryFrom($documentNode->getProperty('productClass'));
         $theme = $productClass?->toTheme();
 
@@ -201,6 +208,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 $subgraph,
                 $inBackend
             ),
+            'Hoerbiger.HoerbigerCom:Content.Accordion' => $this->forAccordionNode(
+                $contentNode,
+                $subgraph,
+                $inBackend
+            ),
+            'Hoerbiger.HoerbigerCom:Content.AccordionItem' => $this->forAccordionItemNode(
+                $contentNode,
+                $subgraph,
+                $inBackend
+            ),
             default => throw new \InvalidArgumentException(
                 'Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName()
             ),
@@ -215,10 +232,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 StackVariant::VARIANT_SM,
                 Collection::fromIterable(array_filter([
                     $inBackend || $downloadsNode->getProperty('metaHeadline')
-                    ? new Separator(
+                        ? new Separator(
                         SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                         Editable::fromNodeProperty($downloadsNode, 'metaHeadline')
-                    ): null,
+                    ) : null,
                     new Grid(
                         GridVariant::VARIANT_THREECOLUMNSGAP,
                         Collection::fromNodes(
@@ -253,9 +270,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $node->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($node, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($node, 'metaHeadline')
+                    ) : null,
                     $partialFigureEclipse
                 ]))
             )
@@ -271,9 +288,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $node->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($node, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($node, 'metaHeadline')
+                    ) : null,
                     new CacheSegment(
                         new Grid(
                             GridVariant::VARIANT_THREECOLUMNSGAP,
@@ -291,8 +308,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forTextNode(TraversableNodeInterface $textNode, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
-    {
+    public function forTextNode(
+        TraversableNodeInterface $textNode,
+        ContentContext $subgraph,
+        bool $inBackend,
+        ?Theme $theme
+    ): SlotInterface {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -309,7 +330,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         $text = new Text(
             TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
             Editable::fromNodeProperty($textNode, 'text'),
-            $columns === Columns::VALUE_MAX_TWO
+            $columns === Columns::VALUE_MAX_TWO,
+            $textNode->getProperty('hasStickyTableHeader')
         );
 
         if ($columns === Columns::VALUE_MAX_ONE_HEADLINE_LEFT_SIDE) {
@@ -325,33 +347,35 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     ]), $identity)
                 ]), $identity)
             );
-        } else if ($columns === Columns::VALUE_MAX_ONE_HEADLINE_TEXT_SMALL) {
-            $content = [
-                $inBackend || $textNode->getProperty('headline')
-                    ? $headline
-                    : null,
-                $inBackend || $textNode->getProperty('text')
-                    ? new ContentContainer(
-                    ContentContainerVariant::VARIANT_SMALL_TEXT,
-                    $text
-                )
-                    : null,
-                $inBackend || $textNode->getProperty('link__target')
-                    ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
-                    : null
-            ];
         } else {
-            $content = [
-                $inBackend || $textNode->getProperty('headline')
-                    ? $headline
-                    : null,
-                $inBackend || $textNode->getProperty('text')
-                    ? $text
-                    : null,
-                $inBackend || $textNode->getProperty('link__target')
-                    ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
-                    : null
-            ];
+            if ($columns === Columns::VALUE_MAX_ONE_HEADLINE_TEXT_SMALL) {
+                $content = [
+                    $inBackend || $textNode->getProperty('headline')
+                        ? $headline
+                        : null,
+                    $inBackend || $textNode->getProperty('text')
+                        ? new ContentContainer(
+                        ContentContainerVariant::VARIANT_SMALL_TEXT,
+                        $text
+                    )
+                        : null,
+                    $inBackend || $textNode->getProperty('link__target')
+                        ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
+                        : null
+                ];
+            } else {
+                $content = [
+                    $inBackend || $textNode->getProperty('headline')
+                        ? $headline
+                        : null,
+                    $inBackend || $textNode->getProperty('text')
+                        ? $text
+                        : null,
+                    $inBackend || $textNode->getProperty('link__target')
+                        ? (new ButtonFactory())->forButtonMixin($textNode, $subgraph)
+                        : null
+                ];
+            }
         }
 
         return new ContentContainer(
@@ -361,18 +385,21 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textNode->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($textNode, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($textNode, 'metaHeadline')
+                    ) : null,
                     new ContentContainer(
                         $columns === Columns::VALUE_MAX_ONE
                             ? ContentContainerVariant::VARIANT_TIGHTX
                             : ContentContainerVariant::VARIANT_BLANK,
                         new Stack(
                             StackVariant::VARIANT_XS,
-                            Collection::fromIterable(array_filter(
-                                $content
-                            ), $identity)
+                            Collection::fromIterable(
+                                array_filter(
+                                    $content
+                                ),
+                                $identity
+                            )
                         )
                     )
                 ]))
@@ -380,8 +407,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forTextWithMetaTextNode(TraversableNodeInterface $textWithMetaTextNode, ContentContext $subgraph, bool $inBackend, ?Theme $theme): SlotInterface
-    {
+    public function forTextWithMetaTextNode(
+        TraversableNodeInterface $textWithMetaTextNode,
+        ContentContext $subgraph,
+        bool $inBackend,
+        ?Theme $theme
+    ): SlotInterface {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -391,12 +422,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Grid(
                 GridVariant::VARIANT_TWOCOLUMNSPRESS,
                 Collection::fromIterable([
-                    new ContentContainer(
-                        ContentContainerVariant::VARIANT_VISIBLE_MD,
                         new ContentContainer(
-                            ContentContainerVariant::VARIANT_Y_CENTERED,
-                            $inBackend || $textWithMetaTextNode->getProperty('meta_text')
-                                ? new Stack(
+                            ContentContainerVariant::VARIANT_VISIBLE_MD,
+                            new ContentContainer(
+                                ContentContainerVariant::VARIANT_Y_CENTERED,
+                                $inBackend || $textWithMetaTextNode->getProperty('meta_text')
+                                    ? new Stack(
                                     StackVariant::VARIANT_META_PRESS,
                                     Collection::fromIterable(array_filter([
                                         new Separator(
@@ -410,36 +441,41 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                         )
                                     ]))
                                 )
-                                : Value::fromString('')
-                        )
-                    ),
-                    new Stack(
-                        StackVariant::VARIANT_XS,
-                        Collection::fromIterable(array_filter([
-                            $inBackend || $textWithMetaTextNode->getProperty('headline')
-                                ? new Headline(
+                                    : Value::fromString('')
+                            )
+                        ),
+                        new Stack(
+                            StackVariant::VARIANT_XS,
+                            Collection::fromIterable(array_filter([
+                                $inBackend || $textWithMetaTextNode->getProperty('headline')
+                                    ? new Headline(
                                     $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
                                     HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                                     HeadlineType::TYPE_H2,
                                     Editable::fromNodeProperty($textWithMetaTextNode, 'headline')
-                            )
-                                : null,
-                            $inBackend || $textWithMetaTextNode->getProperty('text')
-                                ? new Text(
+                                )
+                                    : null,
+                                $inBackend || $textWithMetaTextNode->getProperty('text')
+                                    ? new Text(
                                     TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
                                     Editable::fromNodeProperty($textWithMetaTextNode, 'text'),
                                     false
-                            )
-                                : null
-                        ]), $identity)
-                    )]
+                                )
+                                    : null
+                            ]), $identity)
+                        )
+                    ]
                 )
             )
         );
     }
 
-    public function forTextWithImageNode(TraversableNodeInterface $textWithImageNode, bool $inBackend, ContentContext $subgraph, ?Theme $theme): SlotInterface
-    {
+    public function forTextWithImageNode(
+        TraversableNodeInterface $textWithImageNode,
+        bool $inBackend,
+        ContentContext $subgraph,
+        ?Theme $theme
+    ): SlotInterface {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -466,11 +502,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $textWithImageNode->getProperty('headline')
                         ? new Headline(
-                            $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
-                            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
-                            HeadlineType::TYPE_DIV,
-                            Editable::fromNodeProperty($textWithImageNode, 'headline')
-                        )
+                        $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
+                        HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                        HeadlineType::TYPE_DIV,
+                        Editable::fromNodeProperty($textWithImageNode, 'headline')
+                    )
                         : null,
                     new Text(
                         TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
@@ -480,25 +516,40 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     $this->linkFactory->forLinkMixin($textWithImageNode, $subgraph, $theme),
                     $textBlockFigure
                         ? new ContentContainer(
-                            ContentContainerVariant::VARIANT_HALF_WITH,
-                            $textBlockFigure
-                        ) : null
+                        ContentContainerVariant::VARIANT_HALF_WITH,
+                        $textBlockFigure
+                    ) : null
                 ]), $identity)
             )
         );
         $layout = Layout::tryFrom($textWithImageNode->getProperty('layout') ?: '')
             ?: Layout::VALUE_IMAGEFIRST;
 
+        $column = TextWithImageColumns::tryFrom($textWithImageNode->getProperty('column') ?: '')
+            ?: TextWithImageColumns::VALUE_50_50;
+
+        if ($figure && $layout === Layout::VALUE_IMAGELAST && $textWithImageNode->getProperty('showMobileImageFirst')) {
+            $figure = new Box(
+                BoxVariant::VARIANT_ORDER_FIRST,
+                $figure
+            );
+        }
+
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
             Collection::fromIterable(array_filter([
                 $inBackend || $textWithImageNode->getProperty('metaHeadline')
                     ? new Separator(
-                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                        Editable::fromNodeProperty($textWithImageNode, 'metaHeadline')
-                    ): null,
+                    SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                    Editable::fromNodeProperty($textWithImageNode, 'metaHeadline')
+                ) : null,
                 new Grid(
-                    GridVariant::VARIANT_TWOCOLUMNSNOGAP,
+                    ($column === TextWithImageColumns::VALUE_33_66)
+                        ? GridVariant::VARIANT_TWO_33_66
+                        : (($column === TextWithImageColumns::VALUE_66_33)
+                            ? GridVariant::VARIANT_TWO_66_33
+                            : GridVariant::VARIANT_TWOCOLUMNSNOGAP
+                        ),
                     $layout === Layout::VALUE_IMAGEFIRST
                         ? Collection::fromIterable([$figure, $text], $identity)
                         : Collection::fromIterable([$text, $figure], $identity)
@@ -511,8 +562,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         TraversableNodeInterface $documentNode,
         TraversableNodeInterface $imageNode,
         bool $inBackend
-    ): SlotInterface
-    {
+    ): SlotInterface {
         $imageSource = $this->imageSourceFactory->forImageMixin($imageNode, $inBackend);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Property "image" is required for content element image.');
@@ -544,7 +594,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         ? new Separator(
                         SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                         Editable::fromNodeProperty($imageNode, 'metaHeadline')
-                    ): null,
+                    ) : null,
                     new ContentContainer(
                         ContentContainerVariant::VARIANT_TIGHTX,
                         $image
@@ -554,8 +604,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forMostWantedNode(TraversableNodeInterface $mostWantedNode, bool $inBackend, ContentContext $subgraph, TraversableNodeInterface $site): SlotInterface
-    {
+    public function forMostWantedNode(
+        TraversableNodeInterface $mostWantedNode,
+        bool $inBackend,
+        ContentContext $subgraph,
+        TraversableNodeInterface $site
+    ): SlotInterface {
         $identity = function (SlotInterface $slot) {
             return $slot;
         };
@@ -574,11 +628,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $mostWantedNode->getProperty('headline')
                         ? new Headline(
-                            HeadlineSize::SIZE_LARGE,
-                            HeadlineColor::COLOR_BRAND,
-                            HeadlineType::TYPE_H2,
-                            Editable::fromNodeProperty($mostWantedNode, 'headline')
-                        )
+                        HeadlineSize::SIZE_LARGE,
+                        HeadlineColor::COLOR_BRAND,
+                        HeadlineType::TYPE_H2,
+                        Editable::fromNodeProperty($mostWantedNode, 'headline')
+                    )
                         : null,
                     new Text(
                         TextVariant::VARIANT_LIGHT_CONTRAST,
@@ -615,9 +669,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $mostWantedNode->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($mostWantedNode, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($mostWantedNode, 'metaHeadline')
+                    ) : null,
                     new Box(
                         BoxVariant::VARIANT_NEUTRAL,
                         new Grid(
@@ -630,8 +684,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forQuotationNode(TraversableNodeInterface $quotationNode, ?Theme $theme, bool $inBackend): SlotInterface
-    {
+    public function forQuotationNode(
+        TraversableNodeInterface $quotationNode,
+        ?Theme $theme,
+        bool $inBackend
+    ): SlotInterface {
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
             new Stack(
@@ -639,9 +696,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $quotationNode->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($quotationNode, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($quotationNode, 'metaHeadline')
+                    ) : null,
                     new ContentContainer(
                         ContentContainerVariant::VARIANT_TIGHTX,
                         new Quotation(
@@ -664,9 +721,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $NewsquotationNode->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($NewsquotationNode, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($NewsquotationNode, 'metaHeadline')
+                    ) : null,
                     new ContentContainer(
                         ContentContainerVariant::VARIANT_BLANKY,
                         new NewsQuotation(
@@ -690,9 +747,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $galleryNode->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($galleryNode, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($galleryNode, 'metaHeadline')
+                    ) : null,
                     new ContentContainer(
                         ContentContainerVariant::VARIANT_TIGHTX,
                         new Row(
@@ -726,7 +783,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     Editable::fromNodeProperty($galleryImageNode, 'caption'),
                     false
                 )
-            ], fn (SlotInterface $slot): SlotInterface => $slot)
+            ], fn(SlotInterface $slot): SlotInterface => $slot)
         );
     }
 
@@ -739,9 +796,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $videoNode->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($videoNode, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($videoNode, 'metaHeadline')
+                    ) : null,
                     new ContentContainer(
                         ContentContainerVariant::VARIANT_TIGHTX,
                         $this->videoFactory->forVideo($videoNode, $inBackend, $theme)
@@ -800,9 +857,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable(array_filter([
                     $inBackend || $tabBox->getProperty('metaHeadline')
                         ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($tabBox, 'metaHeadline')
-                        ): null,
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($tabBox, 'metaHeadline')
+                    ) : null,
                     new Box(
                         BoxVariant::tryFromTheme($theme) ?: BoxVariant::VARIANT_DECORATIVE,
                         new Stack(
@@ -933,11 +990,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             Collection::fromIterable(array_filter([
                 $inBackend || $textTabNode->getProperty('headline')
                     ? new Headline(
-                        $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
-                        HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
-                        HeadlineType::TYPE_DIV,
-                        Editable::fromNodeProperty($textTabNode, 'headline')
-                    )
+                    $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
+                    HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                    HeadlineType::TYPE_DIV,
+                    Editable::fromNodeProperty($textTabNode, 'headline')
+                )
                     : null,
                 new Text(
                     TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_NEUTRAL_CONTRAST,
@@ -964,11 +1021,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     Collection::fromIterable(array_filter([
                         $icon ?
                             new Tag(
-                            'span',
-                            TagVariant::VARIANT_NEUTRAL_CONTRAST,
-                            Icon::fromStampedeDataSourceValue(
-                                $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
-                                IconSize::SIZE_SIZE_3
+                                'span',
+                                TagVariant::VARIANT_NEUTRAL_CONTRAST,
+                                Icon::fromStampedeDataSourceValue(
+                                    $textTabNode->getProperty('icon') ?: 'peopleAndCulture:faqs',
+                                    IconSize::SIZE_SIZE_3
                                 )
                             )
                             : null,
@@ -1031,18 +1088,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $benefitsNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::SIZE_MEDIUM_ITALIC,
-                                    HeadlineColor::COLOR_NEUTRAL_CONTRAST,
-                                    HeadlineType::TYPE_H2,
-                                    Editable::fromNodeProperty($benefitsNode, 'headline')
-                                )
+                                HeadlineSize::SIZE_MEDIUM_ITALIC,
+                                HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                                HeadlineType::TYPE_H2,
+                                Editable::fromNodeProperty($benefitsNode, 'headline')
+                            )
                                 : null,
                             $inBackend || $benefitsNode->getProperty('text')
                                 ? new Text(
-                                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
-                                    Editable::fromNodeProperty($benefitsNode, 'text'),
-                                    false
-                                )
+                                TextVariant::VARIANT_NEUTRAL_CONTRAST,
+                                Editable::fromNodeProperty($benefitsNode, 'text'),
+                                false
+                            )
                                 : null,
                         ]), $identity),
                     ),
@@ -1095,18 +1152,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $peopleStoriesNode->getProperty('headline')
                                 ? new Headline(
-                                    HeadlineSize::SIZE_MEDIUM_ITALIC,
-                                    HeadlineColor::COLOR_NEUTRAL_CONTRAST,
-                                    HeadlineType::TYPE_H2,
-                                    Editable::fromNodeProperty($peopleStoriesNode, 'headline')
-                                )
+                                HeadlineSize::SIZE_MEDIUM_ITALIC,
+                                HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                                HeadlineType::TYPE_H2,
+                                Editable::fromNodeProperty($peopleStoriesNode, 'headline')
+                            )
                                 : null,
                             $inBackend || $peopleStoriesNode->getProperty('text')
                                 ? new Text(
-                                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
-                                    Editable::fromNodeProperty($peopleStoriesNode, 'text'),
-                                    false
-                                )
+                                TextVariant::VARIANT_NEUTRAL_CONTRAST,
+                                Editable::fromNodeProperty($peopleStoriesNode, 'text'),
+                                false
+                            )
                                 : null,
                         ]), $identity),
                     ),
@@ -1138,17 +1195,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             ),
             $inBackend || $peopleStoryNode->getProperty('introduction')
                 ? new Text(
-                    TextVariant::VARIANT_NEUTRAL_CONTRAST,
-                    Editable::fromNodeProperty($peopleStoryNode, 'introduction'),
-                    false
-                )
+                TextVariant::VARIANT_NEUTRAL_CONTRAST,
+                Editable::fromNodeProperty($peopleStoryNode, 'introduction'),
+                false
+            )
                 : null,
             $inBackend || $peopleStoryNode->getProperty('text')
                 ? new Quotation(
-                    QuotationVariant::VARIANT_INLINE,
-                    Editable::fromNodeProperty($peopleStoryNode, 'text'),
-                    Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
-                )
+                QuotationVariant::VARIANT_INLINE,
+                Editable::fromNodeProperty($peopleStoryNode, 'text'),
+                Editable::fromNodeProperty($peopleStoryNode, 'spokenByCharacter')
+            )
                 : null,
             Editable::fromNodeProperty($peopleStoryNode, 'metaline'),
             Editable::fromNodeProperty($peopleStoryNode, 'tags')
@@ -1157,7 +1214,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forSectionIntroductionNode(TraversableNodeInterface $sectionIntroductionNode): SlotInterface
     {
-        $identity = fn (SlotInterface $slot): SlotInterface => $slot;
+        $identity = fn(SlotInterface $slot): SlotInterface => $slot;
 
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR_WITHOUT_BOTTOM,
@@ -1203,9 +1260,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    public function forImageWithLink(TraversableNodeInterface $imageWithLinkNode, ContentContext $subgraph, bool $inBackend): SlotInterface
-    {
-        $identity = fn (SlotInterface $slot): SlotInterface => $slot;
+    public function forImageWithLink(
+        TraversableNodeInterface $imageWithLinkNode,
+        ContentContext $subgraph,
+        bool $inBackend
+    ): SlotInterface {
+        $identity = fn(SlotInterface $slot): SlotInterface => $slot;
 
         $link = $this->linkFactory->forLinkMixin($imageWithLinkNode, $subgraph, null);
 
@@ -1228,9 +1288,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         Collection::fromIterable(array_filter([
                             $inBackend || $imageWithLinkNode->getProperty('metaHeadline')
                                 ? new Separator(
-                                    SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                                    Editable::fromNodeProperty($imageWithLinkNode, 'metaHeadline')
-                                ): null,
+                                SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                                Editable::fromNodeProperty($imageWithLinkNode, 'metaHeadline')
+                            ) : null,
                             new Grid(
                                 GridVariant::VARIANT_TWOCOLUMNSFRMAXGAP,
                                 Collection::fromIterable(array_filter([
@@ -1249,7 +1309,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 $link
                     ? $link->asContainer()->withContent($figure)
                     : $figure
-            ],$identity)
+            ], $identity)
         );
     }
 
@@ -1263,8 +1323,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forHeaderVideoStage(TraversableNodeInterface $videoStageNode, ContentContext $subgraph, bool $inBackend): SlotInterface
-    {
+    private function forHeaderVideoStage(
+        TraversableNodeInterface $videoStageNode,
+        ContentContext $subgraph,
+        bool $inBackend
+    ): SlotInterface {
         return new ContentContainer(
             ContentContainerVariant::VARIANT_FULL_VIEW_HEIGHT,
             new HeaderVideoStage(
@@ -1278,8 +1341,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
     }
 
-    private function forHeaderVideoStageSliderItem(TraversableNodeInterface $sliderItemNode, ContentContext $subgraph, bool $inBackend): SlotInterface
-    {
+    private function forHeaderVideoStageSliderItem(
+        TraversableNodeInterface $sliderItemNode,
+        ContentContext $subgraph,
+        bool $inBackend
+    ): SlotInterface {
         $imageSource = $this->imageSourceFactory->forImageMixin($sliderItemNode, $inBackend);
         if (!$imageSource) {
             throw new \InvalidArgumentException('Property "image" is required for content element image.');
@@ -1310,11 +1376,11 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         return new SliderItem(
             $sliderItemNode->getProperty("headline") || $inBackend
                 ? new Headline(
-                    HeadlineSize::SIZE_MEDIUM_ITALIC,
-                    HeadlineColor::COLOR_WHITE,
-                    HeadlineType::TYPE_DIV,
-                    Editable::fromNodeProperty($sliderItemNode, "headline")
-                )
+                HeadlineSize::SIZE_MEDIUM_ITALIC,
+                HeadlineColor::COLOR_WHITE,
+                HeadlineType::TYPE_DIV,
+                Editable::fromNodeProperty($sliderItemNode, "headline")
+            )
                 : null,
             $sliderItemNode->getProperty("link__target") && !$inBackend
                 ? $this->linkFactory->forLinkWithContent($sliderItemNode, $subgraph, $text)
@@ -1323,4 +1389,56 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             $this->videoFactory->forSliderVideo($sliderItemNode, $inBackend, Theme::VALUE_SLIDER)
         );
     }
+
+    public function forAccordionNode(
+        TraversableNodeInterface $accordionNode,
+        ContentContext $subgraph,
+        bool $inBackend,
+    ): SlotInterface {
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            new Stack(
+                StackVariant::VARIANT_SM,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $accordionNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineSize::SIZE_MEDIUM_ITALIC,
+                            HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                            HeadlineType::TYPE_H2,
+                            Editable::fromNodeProperty($accordionNode, 'headline')
+                        ) : null,
+                    Collection::fromSlots(
+                        Collection::fromNodes(
+                            $accordionNode->findChildNodes(),
+                            function (Node $accordionItemNode): Content {
+                                return Content::fromNode($accordionItemNode, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                            }
+                        )
+                    )
+                ]))
+
+
+            )
+        );
+    }
+
+    public function forAccordionItemNode(
+        TraversableNodeInterface $accordionItemNode,
+        ContentContext $subgraph,
+        bool $inBackend,
+    ): SlotInterface {
+        return new AccordionItem(
+            Editable::fromNodeProperty($accordionItemNode, 'headline'),
+            new Text(
+                TextVariant::VARIANT_FULL_WIDTH,
+                Editable::fromNodeProperty($accordionItemNode, 'text'),
+                false
+            ),
+            new Icon('shared', 'dash', IconSize::SIZE_SIZE_1_5),
+            new Icon('shared', 'plus', IconSize::SIZE_SIZE_1_5),
+            $accordionItemNode->getProperty('isAccordionOpen'),
+            $inBackend
+        );
+    }
+
 }
