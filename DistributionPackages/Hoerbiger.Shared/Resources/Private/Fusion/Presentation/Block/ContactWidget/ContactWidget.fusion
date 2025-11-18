@@ -23,8 +23,8 @@ prototype(Hoerbiger.Shared:Block.ContactWidget) < prototype(Neos.Fusion:Componen
             attributes.href={props.contactWidgetUri}
             attributes.href.@if={(props.contactWidgetUri && !inBackend)}
             attributes.class={[
-                "[Block.ContactWidget] fixed bottom-0 right-0 z-[999] shadow-lg border border-neutral-footer",
-                "grid place-items-center text-[black] bg-neutral-lighter m-[35px] p-[16px] aspect-square"
+                "[Block.ContactWidget] fixed bottom-0 right-0 z-[999] shadow-lg border bg-neutral-footer",
+                "grid place-items-center text-neutral-lighter m-[35px] p-[16px] aspect-square"
             ]}
         >
             <Sitegeist.Stampede:Icon
