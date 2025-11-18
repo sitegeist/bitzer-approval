@@ -218,6 +218,20 @@ final class FigureFactory extends AbstractComponentPresentationObjectFactory
         );
     }
 
+    public function forFullWidthImageWithCaption(ImageSourceHelperInterface $imageSource, ?SlotInterface $caption): Figure
+    {
+        return new Figure(
+            $imageSource,
+            true,
+            $this->sourceSetProvider->getFullSet(),
+            new QualifiedPresetIdentifiers([]),
+            '100w',
+            FigureObjectFit::FIT_CONTAIN,
+            FigureObjectPosition::POSITION_CENTER,
+            $caption
+        );
+    }
+
     public function forSlideStageBackground(ImageSourceHelperInterface $imageSource): Figure
     {
         return new Figure(

@@ -34,6 +34,7 @@ enum ContentContainerVariant:string implements ProtectedContextAwareInterface
     case VARIANT_PRESS_LEFT_BLANK = 'pressLeftBlank';
     case VARIANT_Y_CENTERED = 'yCentered';
     case VARIANT_PRESS_IMAGE = 'pressImage';
+    case VARIANT_PRESS_IMAGE_WITH_CAPTION = 'pressImageWithCaption';
     case VARIANT_VISIBLE_SM = 'visibleSm';
     case VARIANT_VISIBLE_MD = 'visibleMd';
     case VARIANT_VISIBLE_LG = 'visibleLg';
