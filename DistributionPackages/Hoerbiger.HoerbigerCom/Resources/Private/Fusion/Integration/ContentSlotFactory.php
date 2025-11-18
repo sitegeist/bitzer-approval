@@ -940,6 +940,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             return Value::fromString("Fehler");
         }
 
+        $buttonLabel = $teaserItemNode->getProperty('link__label')
+            ?: $this->csvPOTranslator->getLabelFromTranslationResource('Hoerbiger.HoerbigerCom', 'NavigationCard', 'link.label');
+
         $button = new Button(
             ButtonType::TYPE_LINK,
             $teaserItemNode->getProperty('isFontColorBlack')
@@ -950,7 +953,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 Collection::fromIterable([
                     new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
                     Value::fromString(
-                        $this->csvPOTranslator->getLabelFromTranslationResource('Hoerbiger.HoerbigerCom', 'NavigationCard', 'link.label')
+                        $buttonLabel
                     )
                 ])
             ),
