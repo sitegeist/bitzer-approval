@@ -65,6 +65,8 @@ prototype(Hoerbiger.HoerbigerCom:Document.Base) < prototype(Neos.Fusion:Componen
         }
 
         body.@process.addInfo.@if.onlyListenerLanguages = ${Array.indexOf(Configuration.setting('Hoerbiger.HoerbigerCom.translation.listenerDimensions'), Array.first(node.context.dimensions.language)) > -1}
+        body.@process.addInfo.@if.inBackend = ${node && node.context.inBackend && node.context.currentRenderingMode.edit}
+
         lastVisitedNodeScript = null
         bodyScripts = ${props.bodyScripts}
         bodyScripts.@position = 'before closingBodyTag'
