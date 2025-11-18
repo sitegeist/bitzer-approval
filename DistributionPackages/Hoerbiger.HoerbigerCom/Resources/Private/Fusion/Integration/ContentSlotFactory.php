@@ -563,9 +563,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease' ||
             $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease'
         ) {
+            $image = $this->figureFactory->forFullWidthImageWithCaption(
+                $imageSource,
+                Editable::fromNodeProperty($imageNode, 'image__caption')
+            );
+
             return new ContentContainer(
-                ContentContainerVariant::VARIANT_PRESS_IMAGE,
-                $this->figureFactory->forSlideStageIcon($imageSource)
+                ($inBackend || $imageNode->getProperty('image__caption'))
+                    ? ContentContainerVariant::VARIANT_PRESS_IMAGE_WITH_CAPTION
+                    : ContentContainerVariant::VARIANT_PRESS_IMAGE,
+                $image
             );
         }
 
