@@ -7,6 +7,7 @@ Sitegeist:
         - en
         - zh
         - ja
+        - es
 Hoerbiger:
   HoerbigerCom:
     translation:
@@ -14,4 +15,5 @@ Hoerbiger:
       listenerDimensions:
         - zh
         - ja
+        - es
       bypassEnabled: false
