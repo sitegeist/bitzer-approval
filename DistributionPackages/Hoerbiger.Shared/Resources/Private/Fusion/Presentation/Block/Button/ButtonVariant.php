@@ -16,5 +16,6 @@ enum ButtonVariant: string implements ProtectedContextAwareInterface
     case VARIANT_CTA_CONTRAST = 'ctaContrast';
     case VARIANT_CONTRAST = 'contrast';
     case VARIANT_PLAIN = 'plain';
+    case VARIANT_PLAIN_CONTRAST = 'plainContrast';
     case VARIANT_NEOS = 'neos';
 }

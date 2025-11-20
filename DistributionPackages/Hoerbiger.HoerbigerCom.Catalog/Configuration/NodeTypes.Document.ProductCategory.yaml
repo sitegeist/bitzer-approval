@@ -24,6 +24,7 @@
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Collection.Teaser': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
   constraints:
     nodeTypes:

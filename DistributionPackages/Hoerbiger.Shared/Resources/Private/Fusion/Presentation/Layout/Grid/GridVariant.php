@@ -18,6 +18,7 @@ enum GridVariant:string implements ProtectedContextAwareInterface
     case VARIANT_TWOCOLUMNSNOGAP = 'twoColumnsNoGap';
     case VARIANT_TWOCOLUMNSGAP = 'twoColumnsGap';
     case VARIANT_THREECOLUMNSGAP = 'threeColumnsGap';
+    case VARIANT_THREECOLUMNSFIX = 'threeColumnsFix';
     case VARIANT_THREECOLUMNSNARROWGAP = 'threeColumnsNarrowGap';
     case VARIANT_TWOCOLUMNSFRMAXGAP = 'twoColumnsFrMaxGap';
     case VARIANT_TWOCOLUMNSTHIRDAUTOGAP = 'twoColumnsThirdAutoGap';
