@@ -8,6 +8,7 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
@@ -964,7 +965,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     )
                 ])
             ),
-            $this->uriService->getNodeUri($documentNode),
+            $this->linkFactory->resolveRawLinkTargetUri(
+                $teaserItemNode->getProperty('link__target'),
+                $subgraph
+            ) ?: new Uri('#'),
             '_self',
             null
         );
@@ -975,7 +979,9 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 ? Editable::fromNodeProperty($teaserItemNode, 'text')
                 : null,
             $figure,
-            $button,
+            $teaserItemNode->getProperty('link__target')
+                ? $button
+                : null,
             $teaserItemNode->getProperty('isFontColorBlack'),
             !$teaserItemNode->getProperty('isIndentedText')
                 ? TeaserLayout::VALUE_THREE_COLUMNS
