@@ -59,7 +59,9 @@ prototype(Hoerbiger.Shared:Block.TeaserItem) < prototype(PackageFactory.AtomicFu
                                 />
                             </div>
 
-                            <div>
+                            <div
+                                @if.1={presentationObject.button}
+                            >
                                 <Hoerbiger.Shared:Block.Button presentationObject={presentationObject.button} />
                             </div>
                         </div>

@@ -22,7 +22,7 @@ final class TeaserItem extends AbstractComponentPresentationObject
         public readonly StringLike $header,
         public readonly ?StringLike $teaserText,
         public readonly Figure $figure,
-        public readonly Button $button,
+        public readonly ?Button $button,
         public readonly bool $isFontColorBlack,
         public readonly Layout $layout
     ) {
