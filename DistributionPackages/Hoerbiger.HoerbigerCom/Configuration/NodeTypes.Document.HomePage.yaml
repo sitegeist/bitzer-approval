@@ -129,3 +129,11 @@
       ui:
         <<: *footerMenu
         label: 'Tertiary Footer Menu Items'
+    contactWidgetUri:
+      type: string
+      ui:
+        reloadPageIfChanged: true
+        label: 'Kontakt-Widget Url'
+        inspector:
+          group: 'contactWidget'
+          editor: 'Sitegeist.Archaeopteryx/Inspector/Editors/LinkEditor'

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <g fill="none" stroke="currentColor" stroke-width="20" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Window -->
+    <rect x="48" y="72" width="320" height="256" rx="28" ry="28"/>
+    <!-- Top bar curve / tab -->
+    <path d="M80 128 H224              C248 128 256 104 280 104              H336"/>
+    <!-- Text lines -->
+    <line x1="112" y1="208" x2="240" y2="208"/>
+    <line x1="112" y1="248" x2="208" y2="248"/>
+    <!-- Cursor pointer -->
+    <path d="M312 308 L424 372 L372 384 L388 436 L348 448 L332 396 L284 428 Z"/>
+  </g>
+</svg>
