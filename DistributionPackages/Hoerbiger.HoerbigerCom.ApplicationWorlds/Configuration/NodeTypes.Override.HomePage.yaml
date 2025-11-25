@@ -15,6 +15,9 @@
     applicationworld4:
       type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
       position: 292
+    applicationworld6:
+      type: 'Hoerbiger.HoerbigerCom.ApplicationWorlds:Document.ApplicationWorld'
+      position: 293
     main:
       constraints:
         nodeTypes:
