@@ -27,6 +27,7 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </main>
             <Neos.Fusion:Renderer renderPath="/siteFooter" />
+            <Hoerbiger.Shared:Block.ContactWidget />
         </div>
     `
 }

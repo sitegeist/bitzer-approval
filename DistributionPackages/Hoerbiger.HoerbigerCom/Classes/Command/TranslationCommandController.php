@@ -105,7 +105,8 @@ class TranslationCommandController extends CommandController
         NodeInterface $node,
         ContentContext $targetContext,
         string $sourceLanguage,
-        string $targetLanguage
+        string $targetLanguage,
+        bool $singleDocument = false
     ): void {
         if ($node->getNodeType()->getName() === 'Hoerbiger.Shared:Document.AssetDirectory') {
             return;
@@ -150,6 +151,10 @@ class TranslationCommandController extends CommandController
                 $targetNode->setProperty($propertyName, $translation);
             }
             $createReviewTask = true;
+        } else {
+            if ($singleDocument) {
+                return;
+            }
         }
         $targetNode->setIndex($node->getIndex());
         $targetNode->setHiddenInIndex($node->isHiddenInIndex());
@@ -190,13 +195,57 @@ class TranslationCommandController extends CommandController
             }
         }
 
-        foreach ($node->getChildNodes() as $childNode) {
+        foreach ($node->getChildNodes(
+            $singleDocument
+                ? 'Neos.Neos:Content,Neos.Neos:ContentCollection,!Neos.Neos:Document'
+                : null
+        ) as $childNode
+        ) {
             $this->refreshNode($childNode, $targetContext, $sourceLanguage, $targetLanguage);
         }
 
         if ($node->getNodeType()->isOfType('Neos.Neos:Document')) {
             $this->persistenceManager->persistAll();
         }
+    }
+
+    public function refreshSingleNodeCommand(
+        string $sourceLanguage,
+        string $targetLanguage,
+        string $nodeIdentifier,
+    ): void {
+
+        $sourceContext = $this->createContentContext($sourceLanguage);
+        $targetContext = $this->createContentContext($targetLanguage);
+
+        $siteNode = $sourceContext->getCurrentSiteNode();
+
+        $sourceNode = $sourceContext->getNodeByIdentifier($nodeIdentifier);
+
+
+        if (!$sourceNode) {
+            $this->output->outputLine('node was not found');
+            return;
+        }
+
+        if ($sourceNode !== $siteNode) {
+            $parentNode = $sourceNode->getParent();
+
+            $targetParent = $targetContext->getNodeByIdentifier($parentNode->getIdentifier());
+
+            if (!$targetParent) {
+                $this->output->outputLine('Please translate the parent node first: ' . $parentNode->getIdentifier());
+                return;
+            }
+        }
+
+        $this->refreshNode(
+            $sourceNode,
+            $targetContext,
+            $sourceLanguage,
+            $targetLanguage,
+            true
+        );
     }
 
     public function exportCommand(string $targetLanguage): void

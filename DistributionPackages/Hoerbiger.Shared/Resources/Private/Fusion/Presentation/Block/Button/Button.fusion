@@ -47,8 +47,11 @@ prototype(Hoerbiger.Shared:Block.Button) < prototype(PackageFactory.AtomicFusion
                 plain = "font-sans-bold px-0 [&_svg]:pt-[3px]"
                 plain.@if.1 = ${presentationObject.variant.equals('plain')}
 
+                plainContrast = "font-sans-bold px-0 [&_svg]:pt-[3px] text-light"
+                plainContrast.@if.1 = ${presentationObject.variant.equals('plainContrast')}
+
                 notPlain = "px-8 rounded-full "
-                notPlain.@if.1 = ${!presentationObject.variant.equals('plain') && !presentationObject.variant.equals('contrast') && !presentationObject.variant.equals('neos')}
+                notPlain.@if.1 = ${!presentationObject.variant.equals('plain') && !presentationObject.variant.equals('plainContrast') && !presentationObject.variant.equals('contrast') && !presentationObject.variant.equals('neos')}
 
                 neos = "bg-[#3f3f3f] text-brand-contrast w-fit px-4 hover:bg-[#00adee] text-neos text-[14px]"
                 neos.@if.1 = ${presentationObject.variant.equals('neos')}

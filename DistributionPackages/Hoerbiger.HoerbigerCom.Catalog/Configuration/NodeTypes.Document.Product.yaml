@@ -23,6 +23,7 @@
           'Hoerbiger.HoerbigerCom:Content.Accordion': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
           'Hoerbiger.HoerbigerCom:Collection.TabBox': true
+          'Hoerbiger.HoerbigerCom:Collection.Teaser': true
           'Hoerbiger.HoerbigerCom:Content.DummyText': true
           'Hoerbiger.HoerbigerCom:Content.DummyTextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.Video': true

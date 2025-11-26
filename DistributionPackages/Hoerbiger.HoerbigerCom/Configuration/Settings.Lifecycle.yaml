@@ -9,6 +9,9 @@ Hoerbiger:
           ja:
             agents: [ 'Hoerbiger.Shared:JapaneseEditor' ]
             interval: 'P7D'
+          es:
+            agents: [ 'Hoerbiger.Shared:SpanishEditor' ]
+            interval: 'P7D'
 
 
 Sitegeist:

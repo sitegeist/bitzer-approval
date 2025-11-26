@@ -15,6 +15,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
             "[Block.Text (" + presentationObject.variant.value + ")]",
             "prose textContainer max-w-full",
             "[&_a]:font-sans-bold",
+            "[&_td]:p-[10px]",
             presentationObject.canHaveColumns
                 ? "column-gap-md lg:column-count-2 max-w-none"
                 : (presentationObject.variant.equals('centered') || presentationObject.variant.equals('fullWidth'))

@@ -5,6 +5,12 @@
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
     'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
+    content:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
     main:
       type: 'Hoerbiger.HoerbigerCom:Collection.Milestones'
   ui:

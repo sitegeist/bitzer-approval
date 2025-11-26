@@ -1,0 +1,42 @@
+'Hoerbiger.HoerbigerCom:Collection.Teaser':
+  label: "${q(node).property('sectionHeadline') || q(node).property('subHeadline') || node.nodeType.label}"
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Neos.Neos:ContentCollection': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+  ui:
+    label: 'Teaser'
+    icon: 'list'
+    inspector:
+      groups:
+        teaserOption:
+          label: Teaser Settings
+          icon: 'folder-open'
+  constraints:
+    nodeTypes:
+      '*': false
+      'Hoerbiger.HoerbigerCom:Content.TeaserItem': true
+  options:
+    template:
+      childNodes:
+        accordion1:
+          type: 'Hoerbiger.HoerbigerCom:Content.TeaserItem'
+        accordion2:
+          type: 'Hoerbiger.HoerbigerCom:Content.TeaserItem'
+  properties:
+    columns:
+      type: string
+      defaultValue: twoColumns
+      ui:
+        label: 'Columns'
+        reloadIfChanged: true
+        inspector:
+          group: 'teaserOption'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+  postprocessors:
+    columns:
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider
+      postprocessorOptions:
+        enumName: Hoerbiger\Shared\Presentation\EnumProvider\Teaser\Layout
+        propertyNames:
+          - columns

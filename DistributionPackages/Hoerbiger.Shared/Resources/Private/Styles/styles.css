@@ -421,12 +421,8 @@ table {
 	@apply min-w-full;
 }
 
-tr:nth-child(odd) td {
-	@apply bg-light;
-}
-
-tr:nth-child(even) td {
-	@apply bg-neutral-lighter;
+tr td {
+	@apply border-b border-b-light-contrast;
 }
 
 th {

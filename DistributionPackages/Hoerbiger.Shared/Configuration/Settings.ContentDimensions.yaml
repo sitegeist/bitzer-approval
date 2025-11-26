@@ -31,6 +31,12 @@ Neos:
             uriSegment: ja
             options:
               translationStrategy: 'once'
+          es:
+            label: Spanish
+            values: [ 'es' ]
+            uriSegment: es
+            options:
+              translationStrategy: 'once'
 
   Neos:
     routing:

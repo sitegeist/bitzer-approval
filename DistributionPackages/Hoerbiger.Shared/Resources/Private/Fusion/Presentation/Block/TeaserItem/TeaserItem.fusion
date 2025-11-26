@@ -1,0 +1,73 @@
+prototype(Hoerbiger.Shared:Block.TeaserItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\TeaserItem\\TeaserItem'
+
+    @styleguide {
+        title = 'TeaserItem'
+
+        @caseFactory = 'Hoerbiger\\Shared\\Presentation\\Block\\TeaserItem\\TeaserItemFactory'
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                "[Block.TeaserItem (" + presentationObject.layout.value + ")]",
+                "w-full relative flex flex-col"
+            ]}
+        >
+            <div class="flex w-full h-[320px] max-h-[320px] relative">
+                <div class="w-full h-0 pt-ratio-16-10 z-30">
+                    <div class="absolute inset-0">
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.figure}
+                            @if.1={presentationObject.figure}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class="absolute inset-0 z-50 flex justify-end items-end p-[50px]"
+                >
+                    <div class={[
+                        "w-full",
+                        presentationObject.layout.equals("oneColumn") && "w-full md:w-1/2",
+                        presentationObject.layout.equals("twoColumns") && "w-full md:w-2/3",
+                        presentationObject.layout.equals("threeColumns") && "w-full"
+                    ]}>
+                        <div class="flex flex-col gap-[12px]">
+                            <div
+                                class={[
+                                    "font-sans-bold text-3xl",
+                                    "drop-shadow-xl",
+                                    (presentationObject.isFontColorBlack) ? 'text-light-contrast' : 'text-light'
+                                ]}
+                            >
+                                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                                    presentationObject={presentationObject.header}
+                                />
+                            </div>
+
+                            <div
+                                @if.1={presentationObject.teaserText}
+                                class={[
+                                    "font-sans-bold",
+                                    "drop-shadow-xl",
+                                    (presentationObject.isFontColorBlack) ? 'text-light-contrast' : 'text-light'
+                                ]}
+                            >
+                                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                                    presentationObject={presentationObject.teaserText}
+                                />
+                            </div>
+
+                            <div
+                                @if.1={presentationObject.button}
+                            >
+                                <Hoerbiger.Shared:Block.Button presentationObject={presentationObject.button} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+}

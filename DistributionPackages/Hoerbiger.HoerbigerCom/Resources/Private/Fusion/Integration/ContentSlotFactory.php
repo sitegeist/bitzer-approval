@@ -8,12 +8,16 @@ namespace Hoerbiger\HoerbigerCom\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom package.
  */
 
+use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
+use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItem;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\IconCard\IconCard;
 use Hoerbiger\Shared\Presentation\Block\CookieDeclaration\CookieDeclaration;
 use Hoerbiger\Shared\Presentation\Block\DefinitionList\DefinitionListFactory;
@@ -42,6 +46,7 @@ use Hoerbiger\Shared\Presentation\Block\Separator\Separator;
 use Hoerbiger\Shared\Presentation\Block\Separator\SeparatorVariant;
 use Hoerbiger\Shared\Presentation\Block\Tag\Tag;
 use Hoerbiger\Shared\Presentation\Block\Tag\TagVariant;
+use Hoerbiger\Shared\Presentation\Block\TeaserItem\TeaserItem;
 use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
@@ -50,6 +55,7 @@ use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Columns as TextWithImageColumns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
+use Hoerbiger\Shared\Presentation\EnumProvider\Teaser\Layout as TeaserLayout;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
 use Hoerbiger\Shared\Presentation\Layout\Box\BoxVariant;
@@ -159,6 +165,17 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 $contentNode,
                 $inBackend,
                 null
+            ),
+            'Hoerbiger.HoerbigerCom:Collection.Teaser' => $this->forTeaserNode(
+                $contentNode,
+                $subgraph,
+                $inBackend
+            ),
+            'Hoerbiger.HoerbigerCom:Content.TeaserItem' => $this->forTeaserItemNode(
+                $contentNode,
+                $subgraph,
+                $documentNode,
+                $inBackend
             ),
             'Hoerbiger.HoerbigerCom:Content.TextTab' => $this->forTextTabNode($contentNode, $inBackend, $theme),
             'Hoerbiger.HoerbigerCom:Content.DefinitionListTab' => $this->forDefinitionListTabNode($contentNode),
@@ -563,9 +580,16 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease' ||
             $documentNode->getNodeTypeName() == 'Hoerbiger.HoerbigerCom.PressArchive:Document.PressRelease'
         ) {
+            $image = $this->figureFactory->forFullWidthImageWithCaption(
+                $imageSource,
+                Editable::fromNodeProperty($imageNode, 'image__caption')
+            );
+
             return new ContentContainer(
-                ContentContainerVariant::VARIANT_PRESS_IMAGE,
-                $this->figureFactory->forSlideStageIcon($imageSource)
+                ($inBackend || $imageNode->getProperty('image__caption'))
+                    ? ContentContainerVariant::VARIANT_PRESS_IMAGE_WITH_CAPTION
+                    : ContentContainerVariant::VARIANT_PRESS_IMAGE,
+                $image
             );
         }
 
@@ -862,6 +886,106 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     )
                 ]))
             )
+        );
+    }
+
+    public function forTeaserNode(
+        TraversableNodeInterface $teaserNode,
+        ContentContext $subgraph,
+        bool $inBackend,
+    ): SlotInterface {
+        $layout = TeaserLayout::tryFrom($teaserNode->getProperty('columns') ?: '');
+        $gridVariant = ($layout == TeaserLayout::VALUE_ONE_COLUMN)
+            ? GridVariant::VARIANT_ONECOLUMN
+            : (($layout == TeaserLayout::VALUE_THREE_COLUMNS)
+                ? GridVariant::VARIANT_THREECOLUMNSFIX
+                : GridVariant::VARIANT_TWOCOLUMNS);
+
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            new Stack(
+                StackVariant::VARIANT_SM,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $teaserNode->getProperty('headline')
+                        ? new Headline(
+                        HeadlineSize::SIZE_MEDIUM_ITALIC,
+                        HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                        HeadlineType::TYPE_H2,
+                        Editable::fromNodeProperty($teaserNode, 'headline')
+                    ) : null,
+                    new Grid(
+                        $gridVariant,
+                        Collection::fromSlots(
+                            Collection::fromNodes(
+                                $teaserNode->findChildNodes(),
+                                function (Node $teaserItemNode): Content {
+                                    return Content::fromNode($teaserItemNode, 'Hoerbiger.HoerbigerCom:ContentSlot');
+                                }
+                            )
+                        )
+                    )
+                ]))
+            )
+        );
+    }
+
+    public function forTeaserItemNode(
+        TraversableNodeInterface $teaserItemNode,
+        ContentContext $subgraph,
+        TraversableNodeInterface $documentNode,
+        bool $inBackend,
+    ): SlotInterface {
+        $parentNode = $teaserItemNode->findParentNode();
+
+        $layout = TeaserLayout::tryFrom($parentNode->getProperty('columns') ?: 'threeColumns');
+
+        $imageSource = $this->imageSourceFactory->forImageMixin($teaserItemNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forTwoColumnGrid($imageSource)
+            : null;
+
+        if (!$figure) {
+            return Value::fromString("Fehler");
+        }
+
+        $buttonLabel = $teaserItemNode->getProperty('link__label')
+            ?: $this->csvPOTranslator->getLabelFromTranslationResource('Hoerbiger.HoerbigerCom', 'NavigationCard', 'link.label');
+
+        $button = new Button(
+            ButtonType::TYPE_LINK,
+            $teaserItemNode->getProperty('isFontColorBlack')
+                ? ButtonVariant::VARIANT_PLAIN
+                : ButtonVariant::VARIANT_PLAIN_CONTRAST,
+            new Grid(
+                GridVariant::VARIANT_ICONLEFT,
+                Collection::fromIterable([
+                    new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
+                    Value::fromString(
+                        $buttonLabel
+                    )
+                ])
+            ),
+            $this->linkFactory->resolveRawLinkTargetUri(
+                $teaserItemNode->getProperty('link__target'),
+                $subgraph
+            ) ?: new Uri('#'),
+            '_self',
+            null
+        );
+
+        return new TeaserItem(
+            Editable::fromNodeProperty($teaserItemNode, 'headline'),
+            $inBackend || $teaserItemNode->getProperty('text')
+                ? Editable::fromNodeProperty($teaserItemNode, 'text')
+                : null,
+            $figure,
+            $teaserItemNode->getProperty('link__target')
+                ? $button
+                : null,
+            $teaserItemNode->getProperty('isFontColorBlack'),
+            !$teaserItemNode->getProperty('isIndentedText')
+                ? TeaserLayout::VALUE_THREE_COLUMNS
+                : ($layout ?: TeaserLayout::VALUE_THREE_COLUMNS)
         );
     }
 
