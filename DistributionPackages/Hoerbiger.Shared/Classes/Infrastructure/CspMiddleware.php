@@ -37,7 +37,7 @@ final class CspMiddleware implements MiddlewareInterface
                         "connect-src 'self' *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de",
                         "default-src 'self' *.hoerbiger.com hoerbiger.com",
                         "font-src 'self' *.hoerbiger.com hoerbiger.com cloud.ccm19.de",
-                        "frame-src 'self' https://consentcdn.cookiebot.com https://consent.cookiebot.com https://piwik.hoerbiger.com https://www.youtube.com",
+                        "frame-src 'self' https://consentcdn.cookiebot.com https://consent.cookiebot.com https://piwik.hoerbiger.com https://cloud.ccm19.de https://www.youtube.com",
                         "img-src 'self' https: data: *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de *.gstatic.com cloud.ccm19.de *.youtube.com",
                         "media-src 'self'",
                         "script-src 'self' " . implode(' ', $inlineScriptHashes) . " *.hoerbiger.com hoerbiger.com cloud.ccm19.de *.googleapis.com *.recruitmentplatform.com cloud.ccm19.de *.piwik.hoerbiger.com",

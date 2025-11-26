@@ -26,8 +26,7 @@ prototype(Hoerbiger.Shared:Block.YouTubeVideo) < prototype(PackageFactory.Atomic
                 <iframe data-select="iframe"
                         data-src={presentationObject.source}
                         class="absolute inset-0 border-none z-10 w-full h-full"
-                        allow="autoplay; fullscreen"
-                        allowfullscreen
+                        allow="autoplay;"
                 ></iframe>
                 <div
                     @if.1={presentationObject.figure}
