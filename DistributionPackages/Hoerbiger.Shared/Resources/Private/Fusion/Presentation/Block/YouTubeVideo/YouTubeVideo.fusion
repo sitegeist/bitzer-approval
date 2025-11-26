@@ -21,7 +21,7 @@ prototype(Hoerbiger.Shared:Block.YouTubeVideo) < prototype(PackageFactory.Atomic
                 presentationObject.aspectRatio.equals('ratio_4_3') && "pt-ratio-4-3",
                 presentationObject.aspectRatio.equals('ratio_16_9') && "pt-ratio-16-9",
                 presentationObject.aspectRatio.equals('ratio_16_10') && "pt-ratio-16-10",
-                !presentationObject.poster && "border border-neutral-lighter"
+                !presentationObject.figure && "border border-neutral-lighter"
             ]}>
                 <iframe data-select="iframe"
                         data-src={presentationObject.source}
@@ -41,8 +41,7 @@ prototype(Hoerbiger.Shared:Block.YouTubeVideo) < prototype(PackageFactory.Atomic
                 ]}>
                     <img
                         class={[
-                                "w-full h-full object-contain",
-                                (!presentationObject.variant.equals('regular')) && "rounded-full"
+                                "w-full h-full object-contain"
                             ]}
                         src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircleVariants/service.svg')}
                     />
