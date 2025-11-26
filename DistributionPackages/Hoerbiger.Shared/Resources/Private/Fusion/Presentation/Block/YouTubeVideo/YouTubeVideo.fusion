@@ -1,0 +1,53 @@
+prototype(Hoerbiger.Shared:Block.YouTubeVideo) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\YouTubeVideo\\YouTubeVideo'
+
+    @styleguide {
+        title = 'YouTubeVideo'
+
+        props {
+            source = 'Text'
+            figure = '- Add Slot Content -'
+        }
+    }
+
+
+    renderer = afx`
+        <div class={[
+            "[Block.YouTubeVideo (" + presentationObject.aspectRatio.value + ")]",
+            "relative w-full mx-auto mt-xs"
+        ]}>
+            <div class={[
+                "relative w-full",
+                presentationObject.aspectRatio.equals('ratio_4_3') && "pt-ratio-4-3",
+                presentationObject.aspectRatio.equals('ratio_16_9') && "pt-ratio-16-9",
+                presentationObject.aspectRatio.equals('ratio_16_10') && "pt-ratio-16-10",
+                !presentationObject.poster && "border border-neutral-lighter"
+            ]}>
+                <iframe data-select="iframe"
+                        data-src={presentationObject.source}
+                        class="absolute inset-0 border-none z-10 w-full h-full"
+                        allow="autoplay; fullscreen"
+                        allowfullscreen
+                ></iframe>
+                <div
+                    @if.1={presentationObject.figure}
+                    class="absolute inset-0 z-20"
+                >
+                    <Hoerbiger.Shared:Block.Figure presentationObject={presentationObject.figure}/>
+                </div>
+                <div class={[
+                    "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[10vw] h-[10vw]",
+                    "min-h-touch min-w-touch max-h-[100px] max-w-[100px] bg-neutral-lighter rounded-full z-20 cursor-pointer"
+                ]}>
+                    <img
+                        class={[
+                                "w-full h-full object-contain",
+                                (!presentationObject.variant.equals('regular')) && "rounded-full"
+                            ]}
+                        src={StaticResource.uri('Hoerbiger.Shared', 'Public/Images/playCircleVariants/service.svg')}
+                    />
+                </div>
+            </div>
+        </div>
+    `
+}

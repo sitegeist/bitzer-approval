@@ -1,0 +1,44 @@
+'Hoerbiger.HoerbigerCom:Content.YouTubeVideo':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.ImageWithCaption': true
+  ui:
+    label: 'Youtube Video'
+    icon: video
+    inspector:
+      groups:
+        video:
+          label: 'Video'
+          position: start
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+    videoIdentifier:
+      type: 'Hoerbiger\Shared\Domain\VideoIdentifier'
+      ui:
+        label: 'Video'
+        reloadIfChanged: true
+        inspector:
+          group: video
+          editor: Sitegeist.InspectorGadget/Inspector/Editor
+          editorOptions:
+            isNullable: true
+            labels:
+              create: 'Video erstellen'
+      validation:
+        'Neos.Neos/Validation/NotEmptyValidator': { }
+    image:
+      validation: ~
+    image__alt:
+      validation: ~
+    image__title:
+      validation: ~
