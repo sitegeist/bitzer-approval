@@ -50,7 +50,7 @@ prototype(Hoerbiger.Shared:Layout.Slider) < prototype(PackageFactory.AtomicFusio
                             ]}
                             data-slide-counter
                         >
-                            1
+                            &nbsp;
                         </div>
 
                         <div

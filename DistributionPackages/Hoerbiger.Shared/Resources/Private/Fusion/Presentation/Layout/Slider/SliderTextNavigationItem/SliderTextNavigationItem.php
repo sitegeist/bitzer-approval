@@ -16,6 +16,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPres
 final class SliderTextNavigationItem extends AbstractComponentPresentationObject
 {
     public function __construct(
+        public readonly string $firstLetter,
         public readonly string $label
     ) {
     }
