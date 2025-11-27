@@ -1,0 +1,64 @@
+'Hoerbiger.HoerbigerCom.Events:Mixin.EventData':
+  abstract: true
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Mixin.Image': true
+
+  ui:
+    inspector:
+      groups:
+        event:
+          label: 'Event'
+          icon: 'calendar-times'
+
+  properties:
+    image:
+      options:
+        preset: 'image.24x5'
+    startDate:
+      type: DateTime
+      ui:
+        label: 'Start Date'
+        inspector:
+          group: event
+          editorOptions:
+            format: 'Y-m-d H:i'
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
+    previewImage:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      ui:
+        label: 'Preview Image (4:3 at least 430x330)'
+        reloadIfChanged: true
+        inspector:
+          group: 'preview'
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
+      options:
+        preset: 'image.4x3'
+    endDate:
+      type: DateTime
+      ui:
+        label: 'End Date'
+        inspector:
+          group: event
+          editorOptions:
+            format: 'Y-m-d H:i'
+    location:
+      type: string
+      ui:
+        label: 'Location'
+        inspector:
+          group: event
+    detailedLocation:
+      type: string
+      ui:
+        label: 'Hall / Stand'
+        inspector:
+          group: event
+      options:
+        automaticTranslation: true
+    __year:
+      search:
+        indexing: "${Date.format(q(node).property('startDate'), 'Y')}"
+        elasticSearchMapping:
+          type: keyword

@@ -55,6 +55,7 @@
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
+      'Hoerbiger.HoerbigerCom.Events:Document.Events': true
   ui:
     icon: globe
     label: 'Homepage'

@@ -9,7 +9,8 @@
         },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
-            "neos/composer-plugin": true
+            "neos/composer-plugin": true,
+            "php-http/discovery": true
         }
     },
     "minimum-stability": "dev",
@@ -22,7 +23,8 @@
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "hoerbiger/hoerbigercom-affiliatedirectory": "*",
         "hoerbiger/hoerbigercom-catalog-calculator": "*",
-        "hoerbiger/hoerbigercom-hr": "*"
+        "hoerbiger/hoerbigercom-hr": "*",
+        "hoerbiger/hoerbigercom-events": "*"
     },
     "require-dev": {
         "neos/buildessentials": "^8.3",

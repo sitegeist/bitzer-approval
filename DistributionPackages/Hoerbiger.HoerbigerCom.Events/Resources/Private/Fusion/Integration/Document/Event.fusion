@@ -1,0 +1,7 @@
+prototype(Hoerbiger.HoerbigerCom.Events:Document.Event) < prototype(Neos.Fusion:Component) {
+    renderer = Hoerbiger.HoerbigerCom:Document.Base {
+        body = Hoerbiger.Shared:Layout.Page {
+            presentationObject = ${Events.Page.forEventPage(site, documentNode, documentNode.context, documentNode.context.inBackend)}
+        }
+    }
+}

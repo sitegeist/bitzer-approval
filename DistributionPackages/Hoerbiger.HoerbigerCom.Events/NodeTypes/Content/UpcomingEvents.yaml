@@ -1,0 +1,31 @@
+'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+
+  ui:
+    icon: calendar-alt
+    label: 'Upcoming Events'
+    inspector:
+      groups:
+        calendar:
+          icon: 'calendar-alt'
+          label: 'Events'
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+    numberOfEvents:
+      type: integer
+      defaultValue: 3
+      ui:
+        label: 'Number Of Events'
+        reloadIfChanged: true
+        inspector:
+          group: calendar
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}

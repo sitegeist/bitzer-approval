@@ -1,0 +1,11 @@
+'Hoerbiger.HoerbigerCom.Events:Document.ExternalEvent':
+  superTypes:
+    'Hoerbiger.HoerbigerCom.Events:Document.Shortcut': true
+    'Hoerbiger.HoerbigerCom.Events:Mixin.EventData': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+
+  ui:
+    icon: share-square
+    label: 'Event (only external link)'
+
+  properties:

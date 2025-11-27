@@ -1,0 +1,55 @@
+prototype(Hoerbiger.HoerbigerCom.Events:Block.EventCard) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Events\\Presentation\\Block\\EventCard\\EventCard'
+
+    @styleguide {
+        title = 'EventCard'
+
+        @caseFactory = 'Hoerbiger\\HoerbigerCom\\Events\\Presentation\\Block\\EventCard\\EventCardFactory'
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                "[Block.EventCard]",
+                "flex flex-col"
+            ]}
+        >
+            <div class="w-full h-0 pt-ratio-16-10 relative z-30">
+                <div class="absolute inset-0">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media} @if.1={presentationObject.media} />
+                </div>
+            </div>
+            <div class={[
+                "flex-grow flex flex-col space-y-xs p-md sm:p-xs mx-sm mt-minus-md bg-light z-50",
+                "border border-neutral-lighter shadow-textbox bg-nav-card"
+            ]}>
+
+
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                    presentationObject={presentationObject.meta}
+                    @if.1={presentationObject.meta}
+                />
+
+                <div
+                    @if.1={presentationObject.header}
+                    class="uppercase font-sans-bold text-base"
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
+                </div>
+
+                <div class="flex-grow [&_div]:text-small flex flex-col">
+                    <div @if.1={presentationObject.date}>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.date} />
+                    </div>
+                    <div @if.1={presentationObject.eventLocation}>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.eventLocation} />
+                    </div>
+                    <div @if.1={presentationObject.eventDetailLocation}>
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.eventDetailLocation} />
+                    </div>
+                </div>
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} @if.1={presentationObject.buttons} />
+            </div>
+        </div>
+    `
+}

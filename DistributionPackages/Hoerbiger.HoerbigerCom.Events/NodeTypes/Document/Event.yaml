@@ -1,0 +1,18 @@
+'Hoerbiger.HoerbigerCom.Events:Document.Event':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom.Events:Mixin.EventData': true
+
+  ui:
+    icon: calendar-times
+    label: 'Event (internal link to the details page)'
+
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Text': true

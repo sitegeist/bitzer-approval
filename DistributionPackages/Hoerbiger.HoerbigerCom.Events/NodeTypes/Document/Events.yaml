@@ -1,0 +1,51 @@
+'Hoerbiger.HoerbigerCom.Events:Document.Events':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+  ui:
+    icon: calendar-alt
+    label: 'Events'
+
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom.Events:Document.Event': true
+      'Hoerbiger.HoerbigerCom.Events:Document.ExternalEvent': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+    eventsHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
+    eventsText:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter text'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text

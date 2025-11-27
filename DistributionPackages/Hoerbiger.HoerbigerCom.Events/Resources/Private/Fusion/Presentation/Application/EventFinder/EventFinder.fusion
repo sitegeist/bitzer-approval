@@ -1,0 +1,22 @@
+prototype(Hoerbiger.HoerbigerCom.Events:Application.EventFinder) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\Events\\Presentation\\Application\\EventFinder\\EventFinder'
+
+    @styleguide {
+        title = 'EventFinder'
+
+        props {
+            applicationData = 'Text'
+        }
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                "[Application.EventFinder]",
+                "min-h-[450px]"
+            ]}
+            data-application-data={presentationObject.applicationData}
+        >
+        </div>
+    `
+}

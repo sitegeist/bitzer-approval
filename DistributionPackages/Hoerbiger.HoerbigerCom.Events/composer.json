@@ -1,0 +1,19 @@
+{
+    "name": "hoerbiger/hoerbigercom-events",
+    "type": "neos-hoerbiger",
+    "require": {
+        "hoerbiger/hoerbigercom": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Hoerbiger\\HoerbigerCom\\Events\\": "Classes/",
+            "Hoerbiger\\HoerbigerCom\\Events\\Presentation\\": "Resources/Private/Fusion/Presentation/",
+            "Hoerbiger\\HoerbigerCom\\Events\\Integration\\": "Resources/Private/Fusion/Integration/"
+        }
+    },
+    "extra": {
+        "neos": {
+            "package-key": "Hoerbiger.HoerbigerCom.Events"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+Neos:
+  Flow:
+    http:
+      middlewares:
+        'eventsEndpoint':
+          position: 'before dispatch'
+          middleware: 'Hoerbiger\HoerbigerCom\Events\Application\EventsEndpoint'

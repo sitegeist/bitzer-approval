@@ -47,6 +47,7 @@ module.exports = {
 		'../Hoerbiger.HoerbigerCom/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.AffiliateDirectory/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.Catalog/Resources/Private/Fusion/**/*',
+		'../Hoerbiger.HoerbigerCom.Events/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.PressArchive/Resources/Private/Fusion/**/*',
 		'../Hoerbiger.HoerbigerCom.SuccessStories/Resources/Private/Fusion/**/*',
 	],
