@@ -27,6 +27,7 @@
           'Hoerbiger.HoerbigerCom:Content.SectionIntroduction': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
   constraints:
     nodeTypes:

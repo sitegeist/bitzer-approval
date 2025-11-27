@@ -10,3 +10,8 @@ Neos:
               baseNodeType: 'Hoerbiger.Shared:Tag.DocumentTreeItem'
         structureTree:
           loadingDepth: 2
+    Ui:
+      resources:
+        javascript:
+          '@hoerbiger/shared-editors':
+            resource: 'resource://Hoerbiger.Shared/Public/Neos.Ui/Plugin.js'
