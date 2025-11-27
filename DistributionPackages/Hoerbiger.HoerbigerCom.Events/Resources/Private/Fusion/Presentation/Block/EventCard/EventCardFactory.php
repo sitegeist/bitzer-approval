@@ -74,12 +74,30 @@ final class EventCardFactory extends AbstractComponentPresentationObjectFactory
                 ? Value::fromString("Meta external")
                 : Value::fromString("Meta internal"),
             Value::fromString($event->getLabel()),
-            $date,
+            new Grid(
+                GridVariant::VARIANT_ICONLEFT,
+                Collection::fromIterable([
+                    new Icon("shared", "calendarWeek", IconSize::SIZE_SIZE_1),
+                    $date
+                ])
+            ),
             $event->getProperty('location')
-                ? Value::fromString($event->getProperty('location'))
+                ? new Grid(
+                    GridVariant::VARIANT_ICONLEFT,
+                    Collection::fromIterable([
+                        new Icon("shared", "geo", IconSize::SIZE_SIZE_1),
+                        Value::fromString($event->getProperty('location'))
+                    ])
+                )
                 : null,
             $event->getProperty('detailedLocation')
-                ? Value::fromString($event->getProperty('detailedLocation'))
+                ? new Grid(
+                GridVariant::VARIANT_ICONLEFT,
+                    Collection::fromIterable([
+                        new Icon("shared", "house", IconSize::SIZE_SIZE_1),
+                        Value::fromString($event->getProperty('detailedLocation'))
+                    ])
+                )
                 : null,
             new Button(
                 ButtonType::TYPE_LINK,
