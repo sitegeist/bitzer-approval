@@ -16,7 +16,8 @@ final class CspMiddleware implements MiddlewareInterface
         $response = $handler->handle($request);
         if (!\str_starts_with($request->getUri()->getPath(), '/neos')) {
             $inlineScriptHashes = match ($request->getUri()->getHost()) {
-                'www.hoerbiger.com', 'hoerbiger.com', 'www-prod.hoerbiger.com', 'vpro0994.proserver.punkt.de' => [
+                'www-dev.hoerbiger.com', 'www-stage.hoerbiger.com', 'www.hoerbiger.com', 'hoerbiger.com',
+                'www-prod.hoerbiger.com', 'vpro0994.proserver.punkt.de' => [
                     "'sha256-votYlhJgQQL7B5uCEicJFHHUkeq0oHcReTNP3Fqsuqk='",
                     "'sha256-DYcV0zWq4vQusrIN0layNTr7/PQ5qiMZvWBdy/YQkaY='",
                     "'sha256-tE5FqWv+yqmPEClXs60CkxqJl/7p7o0wB46nNZm/aVY='"
@@ -36,8 +37,8 @@ final class CspMiddleware implements MiddlewareInterface
                         "connect-src 'self' *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de",
                         "default-src 'self' *.hoerbiger.com hoerbiger.com",
                         "font-src 'self' *.hoerbiger.com hoerbiger.com cloud.ccm19.de",
-                        "frame-src 'self' https://consentcdn.cookiebot.com https://consent.cookiebot.com https://piwik.hoerbiger.com",
-                        "img-src 'self' https: data: *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de *.gstatic.com cloud.ccm19.de",
+                        "frame-src 'self' https://consentcdn.cookiebot.com https://consent.cookiebot.com https://piwik.hoerbiger.com https://cloud.ccm19.de https://www.youtube.com",
+                        "img-src 'self' https: data: *.hoerbiger.com hoerbiger.com *.googleapis.com cloud.ccm19.de *.gstatic.com cloud.ccm19.de *.youtube.com",
                         "media-src 'self'",
                         "script-src 'self' " . implode(' ', $inlineScriptHashes) . " *.hoerbiger.com hoerbiger.com cloud.ccm19.de *.googleapis.com *.recruitmentplatform.com cloud.ccm19.de *.piwik.hoerbiger.com",
                         "script-src-elem 'self' *.hoerbiger.com cloud.ccm19.de *.googleapis.com *.piwik.hoerbiger.com 'sha256-tE5FqWv+yqmPEClXs60CkxqJl/7p7o0wB46nNZm/aVY='",

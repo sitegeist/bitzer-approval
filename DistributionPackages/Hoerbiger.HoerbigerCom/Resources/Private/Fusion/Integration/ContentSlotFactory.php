@@ -52,6 +52,7 @@ use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
 use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
+use Hoerbiger\Shared\Presentation\Block\YouTubeVideo\YouTubeVideoFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Columns as TextWithImageColumns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
@@ -94,6 +95,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         private readonly PartialFigureEclipseFactory $partialFigureEclipseFactory,
         private readonly TimelineFactory $timelineFactory,
         private readonly VideoFactory $videoFactory,
+        private readonly YouTubeVideoFactory $youTubeVideoFactory,
         private readonly WantedNodeRepository $wantedNodeRepository,
         private readonly LinkFactory $linkFactory,
         private readonly CsvPOTranslator $csvPOTranslator,
@@ -155,6 +157,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 $inBackend
             ),
             'Hoerbiger.HoerbigerCom:Content.Video' => $this->forVideoNode($contentNode, $inBackend, $theme),
+            'Hoerbiger.HoerbigerCom:Content.YouTubeVideo' => $this->forYouTubeVideoNode($contentNode, $inBackend, $theme),
             'Hoerbiger.HoerbigerCom:Collection.Milestones' => $this->forMilestonesNode($contentNode),
             'Hoerbiger.HoerbigerCom:Content.Milestone' => $this->milestoneFactory->forMilestone($contentNode),
             'Hoerbiger.HoerbigerCom:Content.MilestoneImage' => $this->forMilestoneImageNode($contentNode, $inBackend),
@@ -811,6 +814,31 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         ContentContainerVariant::VARIANT_TIGHTX,
                         $this->videoFactory->forVideo($videoNode, $inBackend, $theme)
                     )
+                ]))
+            )
+        );
+    }
+
+    public function forYouTubeVideoNode(TraversableNodeInterface $youTubeVideoNode, bool $inBackend, ?Theme $theme): SlotInterface
+    {
+        $youTubeVideo = $this->youTubeVideoFactory->forYoutubeVideo($youTubeVideoNode, $inBackend, $theme);
+
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            new Stack(
+                StackVariant::VARIANT_SM,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $youTubeVideoNode->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($youTubeVideoNode, 'metaHeadline')
+                    ) : null,
+                    $youTubeVideo
+                        ? new ContentContainer(
+                            ContentContainerVariant::VARIANT_TIGHTX,
+                            $youTubeVideo
+                        )
+                        : null
                 ]))
             )
         );

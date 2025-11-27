@@ -20,6 +20,7 @@ prototype(Hoerbiger.Shared:Layout.Slider.SliderTextNavigationItem) < prototype(P
                 "flex flex-col cursor-pointer",
                 "bg-transparent justify-between smx-sm md:mx-0 py-[10px] xl:py-[15px]"
             ]}
+            data-first-letter={presentationObject.firstLetter}
         >
             <div>
                 <span
