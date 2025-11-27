@@ -59,6 +59,13 @@
             "rm -rf ./bin/*"
         ],
 
+        "spec:render": [
+            "./flow openapidocument:render calendar > DistributionPackages/Hoerbiger.HoerbigerCom.Events/Resources/Private/OpenApi/calendar.openapi.json"
+        ],
+        "spec:verify": [
+            "./flow openapidocument:verify calendar DistributionPackages/Hoerbiger.HoerbigerCom.Events/Resources/Private/OpenApi/calendar.openapi.json"
+        ],
+
         "lint:editorconfig": "ec",
         "lint:phpcs": "phpcs --colors --standard=PSR2 ./DistributionPackages/*/Classes --ignore=./DistributionPackages/Hoerbiger.HoerbigerCom.Catalog.Calculator/",
         "lint:phpstan": "phpstan analyse",

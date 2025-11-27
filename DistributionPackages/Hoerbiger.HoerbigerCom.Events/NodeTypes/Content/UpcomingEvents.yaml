@@ -19,6 +19,9 @@
         inline:
           editorOptions:
             placeholder: 'Please enter headline'
+      search:
+        elasticSearchMapping:
+          type: text
     numberOfEvents:
       type: integer
       defaultValue: 3

@@ -1,0 +1,9 @@
+-
+  name:  'Calendar query'
+  uriPattern: 'calendar/query'
+  defaults:
+    '@package':    'Hoerbiger.HoerbigerCom.Events'
+    '@subpackage': 'Application\CalendarQuery'
+    '@controller': 'Calendar'
+    '@action':     'get'
+  httpMethods: ['GET']

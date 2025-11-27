@@ -31,7 +31,7 @@ final class ThingFactory extends AbstractComponentPresentationObjectFactory
         /** @var array<int,Node> $nodes */
         $nodes = $traversableNodes->toArray();
 
-        return new Things(array_map(
+        return new Things(...array_map(
             fn (Node $node): Thing => $this->createThing($node),
             $nodes
         ));

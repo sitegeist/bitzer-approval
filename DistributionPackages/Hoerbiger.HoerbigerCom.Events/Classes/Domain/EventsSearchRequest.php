@@ -84,7 +84,7 @@ final class EventsSearchRequest implements \JsonSerializable
     public function withPage(SearchPage $page): self
     {
         $request = $this->request;
-        $request['from'] = ($page->getValue() - 1) * self::DEFAULT_LIMIT;
+        $request['from'] = ($page->value - 1) * self::DEFAULT_LIMIT;
 
         return new self($request);
     }

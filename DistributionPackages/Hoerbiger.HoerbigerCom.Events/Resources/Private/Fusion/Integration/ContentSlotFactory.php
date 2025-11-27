@@ -8,7 +8,7 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Events\Integration;
 
-use Hoerbiger\HoerbigerCom\Events\Domain\Events;
+use Hoerbiger\HoerbigerCom\Events\Domain\Calendar;
 use Hoerbiger\HoerbigerCom\Events\Presentation\Application\EventFinder\EventFinder;
 use Hoerbiger\HoerbigerCom\Events\Presentation\Block\EventCard\EventCardFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
@@ -38,7 +38,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
     public function __construct(
-        private readonly Events $events,
+        private readonly Calendar $events,
         private readonly CsvPOTranslator $csvPOTranslator,
         private readonly EventCardFactory $eventCardFactory,
     ) {

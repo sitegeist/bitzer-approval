@@ -27,6 +27,9 @@
         inline:
           editorOptions:
             placeholder: 'Please enter headline'
+      search:
+        elasticSearchMapping:
+          type: text
     eventsHeadline:
       options:
         preset: 'rte.plainWithStrong'

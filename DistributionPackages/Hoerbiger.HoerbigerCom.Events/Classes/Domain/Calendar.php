@@ -21,7 +21,7 @@ use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Domain\Service\ContentContext;
 
 #[Flow\Scope('singleton')]
-final class Events
+final class Calendar
 {
     public function __construct(
         private readonly ElasticSearchClient $searchClient,
@@ -30,16 +30,16 @@ final class Events
     ) {
     }
 
-    public function findByQuery(EventsQuery $query): StuffResponse
+    public function findByQuery(CalendarQuery $query): StuffResponse
     {
         $subgraph = $this->contentContextFactory->createContentContext($query->locale);
         $siteNode = $subgraph->getCurrentSiteNode();
         $this->searchClient->setContextNode($siteNode);
         $request = EventsSearchRequest::create();
 
-        foreach ($query->activeFilters as $propertyName => $propertyValue) {
-            if ($propertyValue) {
-                $request = $request->withPropertyValue($propertyName, $propertyValue);
+        foreach ($query->activeFilters->items as $activeFilter) {
+            if ($activeFilter->value) {
+                $request = $request->withPropertyValue($activeFilter->name, $activeFilter->value);
             }
         }
         $request = $request->withArchiveState($query->archived);
@@ -70,7 +70,7 @@ final class Events
             (int)ceil($totalNumberOfResults / EventsSearchRequest::DEFAULT_LIMIT),
             $this->thingFactory->forNodes($thingNodes),
             $totalNumberOfResults,
-            new TypeOptions([])
+            new TypeOptions(...[])
         );
     }
 

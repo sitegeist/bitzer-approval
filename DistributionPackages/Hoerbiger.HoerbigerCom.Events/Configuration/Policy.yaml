@@ -1,0 +1,11 @@
+privilegeTargets:
+  'Neos\Flow\Security\Authorization\Privilege\Method\MethodPrivilege':
+    'Hoerbiger.HoerbigerCom.Events:CalendarQuery':
+      matcher: 'method(Hoerbiger\HoerbigerCom\Events\Application\CalendarQuery\Controller\CalendarQueryController->getAction())'
+
+roles:
+  'Neos.Flow:Anonymous':
+    privileges:
+      -
+        privilegeTarget: 'Hoerbiger.HoerbigerCom.Events:CalendarQuery'
+        permission: GRANT

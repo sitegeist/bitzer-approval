@@ -60,7 +60,7 @@ final class Stuff
         $this->searchClient->setContextNode($siteNode);
         /** @var TraversableNodeInterface $siteNode */
         $request = StuffRequest::create($siteNode);
-        $request = $request->withPage($query->getPage()->getValue());
+        $request = $request->withPage($query->getPage()->value);
         $period = $query->getPeriod();
         if ($period) {
             $request = $request->withPeriod($period);
@@ -93,7 +93,7 @@ final class Stuff
 
         return new StuffResponse(
             (int)($totalNumberOfHits / StuffRequest::DEFAULT_LIMIT),
-            new Things($things),
+            new Things(...$things),
             $totalNumberOfHits,
             TypeOptions::fromAggregations($result['aggregations'])
         );

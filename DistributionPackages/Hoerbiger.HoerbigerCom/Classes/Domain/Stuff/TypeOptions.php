@@ -1,34 +1,22 @@
-<?php declare(strict_types=1);
-namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
+<?php
 
-/*
- * This file is part of the Hoerbiger.HoerbigerCom package
- */
+declare(strict_types=1);
+
+namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 
 use Neos\Flow\Annotations as Flow;
 
-/**
- * @Flow\Proxy(false)
- * @implements \IteratorAggregate<int,TypeOption>
- */
-final class TypeOptions implements \IteratorAggregate, \Countable, \JsonSerializable
+#[Flow\Proxy(false)]
+final readonly class TypeOptions implements \JsonSerializable
 {
     /**
      * @var array<int,TypeOption>
      */
-    private array $options;
+    public array $items;
 
-    /**
-     * @param array<int,TypeOption> $array
-     */
-    public function __construct(array $array)
+    public function __construct(TypeOption ...$items)
     {
-        foreach ($array as $element) {
-            if (!$element instanceof TypeOption) {
-                throw new \InvalidArgumentException(self::class . ' can only consist of ' . TypeOption::class);
-            }
-        }
-        $this->options = $array;
+        $this->items = array_values($items);
     }
 
     /**
@@ -36,7 +24,7 @@ final class TypeOptions implements \IteratorAggregate, \Countable, \JsonSerializ
      */
     public static function fromAggregations(array $aggregations): self
     {
-        return new self(array_map(function (array $bucket): TypeOption {
+        return new self(...array_map(function (array $bucket): TypeOption {
             return new TypeOption(
                 $bucket['key'],
                 $bucket['doc_count']
@@ -45,23 +33,10 @@ final class TypeOptions implements \IteratorAggregate, \Countable, \JsonSerializ
     }
 
     /**
-     * @return \ArrayIterator<int,TypeOption>
-     */
-    public function getIterator(): \ArrayIterator
-    {
-        return new \ArrayIterator($this->options);
-    }
-
-    public function count(): int
-    {
-        return count($this->options);
-    }
-
-    /**
      * @return array<int,TypeOption>
      */
     public function jsonSerialize(): array
     {
-        return $this->options;
+        return $this->items;
     }
 }
