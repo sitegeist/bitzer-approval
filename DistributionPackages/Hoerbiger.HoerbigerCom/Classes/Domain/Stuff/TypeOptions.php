@@ -22,7 +22,7 @@ final readonly class TypeOptions implements \JsonSerializable
     /**
      * @param array<string,mixed> $aggregations
      */
-    public static function fromAggregations(array $aggregations): self
+    public static function fromSearchTypeAggregation(array $aggregations): self
     {
         return new self(...array_map(function (array $bucket): TypeOption {
             return new TypeOption(

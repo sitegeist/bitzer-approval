@@ -9,7 +9,7 @@ use Neos\Flow\Annotations as Flow;
 #[Flow\Proxy(false)]
 final readonly class ActiveFilter
 {
-    private function __construct(
+    public function __construct(
         public string $name,
         public string $value
     ) {

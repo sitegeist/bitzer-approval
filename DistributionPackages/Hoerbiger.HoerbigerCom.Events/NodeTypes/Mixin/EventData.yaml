@@ -2,14 +2,13 @@
   abstract: true
   superTypes:
     'Hoerbiger.HoerbigerCom:Mixin.Image': true
-
   ui:
     inspector:
       groups:
         event:
           label: 'Event'
           icon: 'calendar-times'
-
+          position: 'before image'
   properties:
     image:
       options:
@@ -24,17 +23,6 @@
             format: 'Y-m-d H:i'
       validation:
         Neos.Neos/Validation/NotEmptyValidator: {}
-    previewImage:
-      type: 'Neos\Media\Domain\Model\ImageInterface'
-      ui:
-        label: 'Preview Image (4:3 at least 430x330)'
-        reloadIfChanged: true
-        inspector:
-          group: 'preview'
-      validation:
-        Neos.Neos/Validation/NotEmptyValidator: {}
-      options:
-        preset: 'image.4x3'
     endDate:
       type: DateTime
       ui:
@@ -57,8 +45,36 @@
           group: event
       options:
         automaticTranslation: true
+    countryCode:
+      type: string
+      ui:
+        label: 'Country'
+        inspector:
+          group: event
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+    type:
+      type: string
+      ui:
+        label: 'Type'
+        inspector:
+          group: event
+          editor: 'Neos.Neos/Inspector/Editors/SelectBoxEditor'
+          editorOptions:
+            values:
+              tradeShow:
+                label: 'Trade Show'
+              conference:
+                label: 'Conference'
+              techDays:
+                label: 'Tech Days'
     __year:
       search:
         indexing: "${Date.format(q(node).property('startDate'), 'Y')}"
         elasticSearchMapping:
           type: keyword
+  postprocessors:
+    countryCodes:
+      postprocessor: Hoerbiger\Shared\Application\CountryCodeProvider
+      postprocessorOptions:
+        propertyNames:
+          - countryCode

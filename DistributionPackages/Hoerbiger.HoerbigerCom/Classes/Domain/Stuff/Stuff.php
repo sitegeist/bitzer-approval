@@ -95,7 +95,7 @@ final class Stuff
             (int)($totalNumberOfHits / StuffRequest::DEFAULT_LIMIT),
             new Things(...$things),
             $totalNumberOfHits,
-            TypeOptions::fromAggregations($result['aggregations'])
+            TypeOptions::fromSearchTypeAggregation($result['aggregations'])
         );
     }
 

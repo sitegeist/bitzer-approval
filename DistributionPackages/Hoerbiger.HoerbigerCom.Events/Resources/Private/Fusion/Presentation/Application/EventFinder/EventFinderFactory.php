@@ -9,7 +9,9 @@ declare(strict_types=1);
 namespace Hoerbiger\HoerbigerCom\Events\Presentation\Application\EventFinder;
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\Shared\Application\CountryDirectory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
+use Neos\Flow\I18n\Locale;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 
@@ -17,6 +19,7 @@ final class EventFinderFactory extends AbstractComponentPresentationObjectFactor
 {
     public function __construct(
         private readonly CsvPOTranslator $csvPOTranslator,
+        private readonly CountryDirectory $countryDirectory,
     ) {
     }
 
@@ -25,11 +28,14 @@ final class EventFinderFactory extends AbstractComponentPresentationObjectFactor
         $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()->setCreateAbsoluteUri(true);
 
+        $labels = $this->csvPOTranslator->getLabels(EventFinder::class);
+        foreach ($this->countryDirectory->findAll(new Locale($locale)) as $country) {
+            $labels['label.filters.countryCode.' . $country->getCode()] = $country->getName();
+        }
+
         return new EventFinder(
             locale: $locale,
-            labels: array_merge(
-                $this->csvPOTranslator->getLabels(EventFinder::class)
-            ),
+            labels: $labels,
             endpointUri: new Uri($uriBuilder->uriFor(
                 actionName: 'get',
                 controllerName: 'Calendar',

@@ -15,7 +15,7 @@ final readonly class CalendarQuery
         public string $locale,
         public ActiveFilters $activeFilters,
         public SearchPage $page,
-        public bool $archived
+        public bool $archived = false,
     ) {
     }
 }

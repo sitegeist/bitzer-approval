@@ -28,11 +28,11 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "",
+                        "description": "Calendar events",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_StuffResponse"
+                                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Events_Domain_CalendarResponse"
                                 }
                             }
                         }
@@ -44,9 +44,9 @@
     "webhooks": [],
     "components": {
         "schemas": {
-            "Hoerbiger_HoerbigerCom_Domain_Stuff_StuffResponse": {
+            "Hoerbiger_HoerbigerCom_Events_Domain_CalendarResponse": {
                 "type": "object",
-                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_StuffResponse",
+                "name": "Hoerbiger_HoerbigerCom_Events_Domain_CalendarResponse",
                 "properties": {
                     "numberOfPages": {
                         "type": "integer"
@@ -57,15 +57,15 @@
                     "totalNumberOfResults": {
                         "type": "integer"
                     },
-                    "typeOptions": {
-                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_TypeOptions"
+                    "availableFilters": {
+                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilters"
                     }
                 },
                 "required": [
                     "numberOfPages",
                     "results",
                     "totalNumberOfResults",
-                    "typeOptions"
+                    "availableFilters"
                 ]
             },
             "Hoerbiger_HoerbigerCom_Events_Domain_CalendarQuery": {
@@ -88,8 +88,7 @@
                 "required": [
                     "locale",
                     "activeFilters",
-                    "page",
-                    "archived"
+                    "page"
                 ]
             },
             "Hoerbiger_HoerbigerCom_Domain_Stuff_Things": {
@@ -99,11 +98,11 @@
                     "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_Thing"
                 }
             },
-            "Hoerbiger_HoerbigerCom_Domain_Stuff_TypeOptions": {
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilters": {
                 "type": "array",
-                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_TypeOptions",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilters",
                 "items": {
-                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_TypeOption"
+                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilter"
                 }
             },
             "Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilters": {
@@ -133,20 +132,20 @@
                     "content"
                 ]
             },
-            "Hoerbiger_HoerbigerCom_Domain_Stuff_TypeOption": {
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilter": {
                 "type": "object",
-                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_TypeOption",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilter",
                 "properties": {
-                    "identifier": {
+                    "name": {
                         "type": "string"
                     },
-                    "totalNumberOfResults": {
-                        "type": "integer"
+                    "options": {
+                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOptions"
                     }
                 },
                 "required": [
-                    "identifier",
-                    "totalNumberOfResults"
+                    "name",
+                    "options"
                 ]
             },
             "Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilter": {
@@ -163,6 +162,29 @@
                 "required": [
                     "name",
                     "value"
+                ]
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOptions": {
+                "type": "array",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOptions",
+                "items": {
+                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOption"
+                }
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOption": {
+                "type": "object",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOption",
+                "properties": {
+                    "value": {
+                        "type": "string"
+                    },
+                    "numberOfResults": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "value",
+                    "numberOfResults"
                 ]
             }
         },

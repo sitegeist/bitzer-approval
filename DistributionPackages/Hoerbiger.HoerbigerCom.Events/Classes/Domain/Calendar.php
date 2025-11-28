@@ -8,8 +8,8 @@ declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Events\Domain;
 
+use Hoerbiger\HoerbigerCom\Domain\Stuff\AvailableFilters;
 use Hoerbiger\HoerbigerCom\Domain\Stuff\StuffContentContextFactory;
-use Hoerbiger\HoerbigerCom\Domain\Stuff\StuffResponse;
 use Hoerbiger\HoerbigerCom\Domain\Stuff\TypeOptions;
 use Hoerbiger\HoerbigerCom\Events\Integration\ThingFactory;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeAggregateIdentifier;
@@ -30,7 +30,7 @@ final class Calendar
     ) {
     }
 
-    public function findByQuery(CalendarQuery $query): StuffResponse
+    public function findByQuery(CalendarQuery $query): CalendarResponse
     {
         $subgraph = $this->contentContextFactory->createContentContext($query->locale);
         $siteNode = $subgraph->getCurrentSiteNode();
@@ -44,10 +44,11 @@ final class Calendar
         }
         $request = $request->withArchiveState($query->archived);
 
-        /**
-         * @TODO not working
-         */
-        // $request = $request->facet(['__year']);
+        $request = $request->facet([
+            'countryCode',
+            '__year',
+            'type',
+        ]);
         $request = $request->withDateSorting($query->archived)
             ->withPage($query->page);
 
@@ -66,11 +67,11 @@ final class Calendar
             )
         );
 
-        return new StuffResponse(
-            (int)ceil($totalNumberOfResults / EventsSearchRequest::DEFAULT_LIMIT),
-            $this->thingFactory->forNodes($thingNodes),
-            $totalNumberOfResults,
-            new TypeOptions(...[])
+        return new CalendarResponse(
+            numberOfPages: (int)ceil($totalNumberOfResults / EventsSearchRequest::DEFAULT_LIMIT),
+            results: $this->thingFactory->forNodes($thingNodes),
+            totalNumberOfResults: $totalNumberOfResults,
+            availableFilters: AvailableFilters::fromFacetAggregation($result['aggregations']['facets'])
         );
     }
 

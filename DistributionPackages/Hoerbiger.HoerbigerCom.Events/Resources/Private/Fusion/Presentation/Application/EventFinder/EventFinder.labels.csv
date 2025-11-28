@@ -7,9 +7,12 @@ label.isFetching,"Suche nach Ergebnissen...","Searching for results...","Suche n
 label.noResults,"Leider haben wir keine Ergebnisse gefunden.","Unfortunately we didn't find any results","Leider haben wir keine Ergebnisse gefunden.","Malheureusement, nous n'avons trouvé aucun résultat","Niestety, nie znaleziono żadnych wyników","Bohužel jsme nenašli žádné výsledky"
 label.error,"Ooooops, da ist was schief gelaufen!","Ooooops, something went wrong!","Ooooops, da ist was schief gelaufen!","Ooooops, quelque chose n'a pas fonctionné !","Ups, coś poszło nie tak!","Oops, něco se pokazilo!"
 label.totalResults,Ergebnisse,results,Ergebnisse,résultats,Wyniki,výsledky
-label.availableOptions.industries,Industrie,Industry,Industrie,"Secteur d'activité",Branża,Odvětví
-label.availableOptions.countryAssignments,Land,Country,Land,Pays,"Kraj  ",Země
-label.countryAssignments.NULL,all,all,alle,tous,Wszystko,vše
+label.availableOptions.countryCode,Land,Country,Land,Pays,"Kraj  ",Země
+label.countryCode.NULL,all,all,alle,tous,Wszystko,vše
+label.availableOptions.type,Typ,Type,Typ,Type,Type,Type
+label.filters.type.tradeShow,Trade Show,Trade Show,Trade Show,Trade Show,Trade Show,Trade Show
+label.filters.type.conference,Conference,Conference,Conference,Conference,Conference,Conference
+label.filters.type.techDays,Tech Days,Tech Days,Tech Days,Tech Days,Tech Days,Tech Days
 label.availableOptions.__year,Jahr,Year,Jahr,Année,Rok,Rok
 label.toWebsite,"To website","to website","zur Website","vers le site web","do strony","na webové stránce"
 label.readMore,"Read more","Read more","mehr erfahren","Plus d'informations","Czytaj dalej","Číst více"
