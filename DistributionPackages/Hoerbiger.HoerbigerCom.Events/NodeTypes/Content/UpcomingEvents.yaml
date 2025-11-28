@@ -22,13 +22,14 @@
       search:
         elasticSearchMapping:
           type: text
-    numberOfEvents:
-      type: integer
-      defaultValue: 3
+    events:
+      type: references
       ui:
-        label: 'Number Of Events'
+        label: 'Events'
         reloadIfChanged: true
         inspector:
           group: calendar
+          editorOptions:
+            nodeTypes: ['Hoerbiger.HoerbigerCom.Events:Document.Event', 'Hoerbiger.HoerbigerCom.Events:Document.ExternalEvent']
       validation:
         Neos.Neos/Validation/NotEmptyValidator: {}

@@ -1,17 +1,10 @@
 <?php
 
-/*
- * This file is part of the Hoerbiger.HoerbigerCom.Events package.
- */
-
 declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Events\Integration;
 
-use Hoerbiger\HoerbigerCom\Events\Domain\Calendar;
-use Hoerbiger\HoerbigerCom\Events\Presentation\Application\EventFinder\EventFinder;
 use Hoerbiger\HoerbigerCom\Events\Presentation\Block\EventCard\EventCardFactory;
-use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
@@ -25,7 +18,6 @@ use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stack\Stack;
 use Hoerbiger\Shared\Presentation\Layout\Stack\StackVariant;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
-use Neos\Flow\Annotations as Flow;
 use Neos\ContentRepository\Domain\Model\Node;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
@@ -38,8 +30,6 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 final class ContentSlotFactory extends AbstractComponentPresentationObjectFactory
 {
     public function __construct(
-        private readonly Calendar $events,
-        private readonly CsvPOTranslator $csvPOTranslator,
         private readonly EventCardFactory $eventCardFactory,
     ) {
     }
@@ -67,14 +57,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         ContentContext $subgraph,
         bool $inBackend
     ): SlotInterface {
-        $allNewsLabel = $this->csvPOTranslator->getLabel(EventFinder::class, 'label.readMore');
-
-        $upcomingEvents = $this->events->findLatest(
-            null,
-            null,
-            $upcomingEventNode->getProperty('numberOfEvents'),
-            $subgraph
-        )->toArray();
+        $upcomingEvents = $upcomingEventNode->getProperty('events');
 
         return $upcomingEvents
             ?   new ContentContainer(
@@ -105,7 +88,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                             function (TraversableNodeInterface $event): SlotInterface {
                                                 /** @var Node $event */
                                                 $isExternalEvent = $event->getNodeType()->isOfType(
-                                                    'Hoeriger.HoerbigerCom.Events:Document.ExternalEvent'
+                                                    'Hoerbiger.HoerbigerCom.Events:Document.ExternalEvent'
                                                 );
                                                 $targetProperty = $event->getProperty('target');
                                                 return $this->eventCardFactory->forEvent(

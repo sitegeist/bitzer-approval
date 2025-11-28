@@ -112,7 +112,7 @@ final class EventCardFactory extends AbstractComponentPresentationObjectFactory
                     ])
                 ),
                 $linkUri,
-                '_self',
+                $isExternalEvent ? '_blank' : '_self',
                 null
             )
         );
