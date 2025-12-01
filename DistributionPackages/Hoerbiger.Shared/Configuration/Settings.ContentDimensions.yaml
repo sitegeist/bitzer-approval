@@ -37,6 +37,13 @@ Neos:
             uriSegment: es
             options:
               translationStrategy: 'once'
+          pt-BR:
+            label: Brazilian
+            values: [ 'pt-BR' ]
+            uriSegment: pt-BR
+            options:
+              translationStrategy: 'once'
+              deeplLanguage: 'PT-BR'
 
   Neos:
     routing:
