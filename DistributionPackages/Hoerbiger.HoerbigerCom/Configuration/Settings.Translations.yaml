@@ -8,6 +8,7 @@ Sitegeist:
         - zh
         - ja
         - es
+        - pt-BR
 Hoerbiger:
   HoerbigerCom:
     translation:
@@ -16,4 +17,5 @@ Hoerbiger:
         - zh
         - ja
         - es
+        - pt-BR
       bypassEnabled: false
