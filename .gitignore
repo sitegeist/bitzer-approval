@@ -8,6 +8,7 @@
 /Configuration/Development/*
 !/Configuration/Development/Docker
 !/Configuration/Development/ddev
+/Configuration/Development/ddev/Settings.LocalAdjustments.yaml
 /Configuration/Production/*
 /Configuration/Testing/*
 /Custom/
