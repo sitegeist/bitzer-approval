@@ -8,10 +8,10 @@ declare(strict_types=1);
 
 namespace Hoerbiger\Shared\Application;
 
+use Hoerbiger\Shared\Infrastructure\LanguageBasedRoleIds;
 use Neos\Eel\ProtectedContextAwareInterface;
 use Neos\Neos\Domain\Service\ContentDimensionPresetSourceInterface;
 use Neos\Neos\Service\UserService;
-use Hoerbiger\Shared\Infrastructure\LanguageBasedRoleId;
 
 class NeosUiContentDimensionsProvider implements ProtectedContextAwareInterface
 {
@@ -38,17 +38,19 @@ class NeosUiContentDimensionsProvider implements ProtectedContextAwareInterface
                 $preselectedDimensionPresets[$dimensionName] = $preset['identifier'];
             }
         }
-        $roleId = LanguageBasedRoleId::tryFromUser($this->userService->getBackendUser());
+        $roleIds = LanguageBasedRoleIds::tryFromUser($this->userService->getBackendUser());
 
         foreach ($preselectedDimensionPresets as $dimensionName => $presetName) {
             $presets = $this->contentDimensionPresetSource->getAllowedDimensionPresetsAccordingToPreselection(
                 $dimensionName,
                 $preselectedDimensionPresets
             );
-            if ($dimensionName === 'language' && $roleId) {
-                $allowedPresets[$dimensionName] = [
-                    $roleId->toContentDimensionValue($this->contentDimensionPresetSource)
-                ];
+            if ($dimensionName === 'language' && $roleIds) {
+                foreach ($roleIds as $roleId) {
+                    $allowedPresets[$dimensionName] = [
+                        $roleId->toContentDimensionValue($this->contentDimensionPresetSource)
+                    ];
+                }
             } else {
                 $allowedPresets[$dimensionName] = array_keys($presets[$dimensionName]['presets']);
             }
@@ -62,17 +64,18 @@ class NeosUiContentDimensionsProvider implements ProtectedContextAwareInterface
      */
     public function contentDimensionsByName(): array
     {
+        $allowedPresets = [];
         $availablePresets = $this->contentDimensionPresetSource->getAllPresets();
-        $roleId = LanguageBasedRoleId::tryFromUser($this->userService->getBackendUser());
-        if ($roleId) {
-            $availablePresets['language']['presets'] = [
-                $roleId->toContentDimensionValue($this->contentDimensionPresetSource)
-                => $availablePresets['language']['presets'][
-                    $roleId->toContentDimensionValue($this->contentDimensionPresetSource)
-                ]
-            ];
+        $roleIds = LanguageBasedRoleIds::tryFromUser($this->userService->getBackendUser());
+        if ($roleIds) {
+            foreach ($roleIds as $roleId) {
+                $language = $roleId->toContentDimensionValue($this->contentDimensionPresetSource);
+                $allowedPresets['language']['presets'][$language] = $availablePresets['language']['presets'][$language];
+            }
+        } else {
+            $allowedPresets = $availablePresets;
         }
-        return $availablePresets;
+        return $allowedPresets;
     }
 
     public function allowsCallOfMethod($methodName): bool

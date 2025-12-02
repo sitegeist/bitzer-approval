@@ -12,6 +12,9 @@ Hoerbiger:
           es:
             agents: [ 'Hoerbiger.Shared:SpanishEditor' ]
             interval: 'P7D'
+          pt-BR:
+            agents: [ 'Hoerbiger.Shared:BrazilianEditor' ]
+            interval: 'P7D'
 
 
 Sitegeist:
