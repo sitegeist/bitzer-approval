@@ -47,10 +47,10 @@ final class LanguageEditorZookeeper implements MiddlewareInterface
         ) {
             $backendUser = $this->userService->getBackendUser();
 
-            $roleId = LanguageBasedRoleId::tryFromUser($backendUser);
+            $roleIds = LanguageBasedRoleIds::tryFromUser($backendUser);
 
-            if ($roleId) {
-                $this->redirectToNode($this->resolveNodeToRedirectTo($roleId), $request);
+            if ($roleIds) {
+                $this->redirectToNode($this->resolveNodeToRedirectTo($roleIds->getFirst()), $request);
             }
         }
 

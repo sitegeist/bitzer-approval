@@ -10,7 +10,6 @@ namespace Hoerbiger\Shared\Infrastructure;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Security\Policy\Role;
-use Neos\Neos\Domain\Model\User;
 use Neos\Neos\Domain\Service\ContentDimensionPresetSourceInterface;
 
 #[Flow\Proxy(false)]
@@ -20,24 +19,12 @@ final class LanguageBasedRoleId
     private const ROLE_ID_SUFFIX = 'Editor';
 
     private const ABSTRACT_TRANSLATOR_ROLE = 'Hoerbiger.Shared:TranslationEditor';
+
     public function __construct(
         private readonly string $value
     ) {
     }
 
-    public static function tryFromUser(?User $user): ?self
-    {
-        $roleId = null;
-        foreach ($user?->getAccounts() ?: [] as $account) {
-            foreach ($account->getRoles() as $role) {
-                $roleId = self::tryFromRole($role);
-                if (!$roleId) {
-                    return null;
-                }
-            }
-        }
-        return $roleId;
-    }
     public static function tryFromRole(Role $role): ?self
     {
         $abstractTranslatorRole = new Role(self::ABSTRACT_TRANSLATOR_ROLE);

@@ -1,0 +1,4 @@
+Sandstorm:
+  NeosTwoFactorAuthentication:
+    # disable 2FA for development environment
+    enforceTwoFactorAuthentication: false
