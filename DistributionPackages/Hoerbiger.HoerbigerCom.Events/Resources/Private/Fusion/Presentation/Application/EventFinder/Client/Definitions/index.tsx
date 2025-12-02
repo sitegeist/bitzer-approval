@@ -9,7 +9,8 @@ export interface ApplicationData {
 }
 
 export interface ActiveFilters {
-	__year?: string | null;
+	name: string;
+	value: string;
 }
 
 export interface FilterFormProps {
@@ -21,7 +22,7 @@ export interface FilterFormProps {
 
 export interface EventFinderRequestParams {
 	locale: string;
-	activeFilters: ActiveFilters;
+	activeFilters: ActiveFilters[];
 	page: number;
 	archived: boolean;
 }
@@ -30,12 +31,12 @@ export type EventFinderSearchRequest = (params: EventFinderRequestParams)
 	=>  Promise<EventFinderSearchResponse|null>
 
 export interface AvailableFilter {
-	identifier: string;
+	name: string;
 	options: FilterOption[];
 }
 
 export interface FilterOption {
-	identifier: string;
+	value: string;
 	totalNumberOfResults: number;
 }
 

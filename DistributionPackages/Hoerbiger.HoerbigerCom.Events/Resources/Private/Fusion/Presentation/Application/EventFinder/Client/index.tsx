@@ -12,6 +12,7 @@ import { requestEventsFinderApi } from "./Request/requestEventsFinderApi";
 
 import cx from "classnames";
 import {Paginator} from "./Components/Paginator";
+import {FilterForms} from "./Components/FilterForms";
 
 
 export const EventFinderClient = (props: ApplicationData): JSX.Element => {
@@ -22,7 +23,7 @@ export const EventFinderClient = (props: ApplicationData): JSX.Element => {
 
 	const [requestParams, setRequestParams] = React.useState<EventFinderRequestParams>({
 		locale: props.locale,
-		activeFilters: {},
+		activeFilters: [],
 		page: 1,
 		archived: false
 	});
@@ -66,13 +67,12 @@ export const EventFinderClient = (props: ApplicationData): JSX.Element => {
 		isInitialized.current && response
 			?(
 				<div>
-					{/* Filters */}
-					{/*<FilterForms*/}
-					{/*	totalNumberOfResults={response.totalNumberOfResults}*/}
-					{/*	onSubmit={onUpdateRequestParams}*/}
-					{/*	availableFilter={availableFilters}*/}
-					{/*	getLabelFor={props.getLabelFor}*/}
-					{/*/>*/}
+					<FilterForms
+						totalNumberOfResults={response.totalNumberOfResults}
+						onSubmit={onUpdateRequestParams}
+						availableFilter={availableFilters}
+						getLabelFor={props.getLabelFor}
+					/>
 
 					{/* Results */}
 					<div

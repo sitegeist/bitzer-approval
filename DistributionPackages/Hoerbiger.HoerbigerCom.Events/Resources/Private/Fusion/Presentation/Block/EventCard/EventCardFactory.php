@@ -45,7 +45,7 @@ final class EventCardFactory extends AbstractComponentPresentationObjectFactory
         $inBackend = false;
         $link = $this->linkFactory->forLinkToDocument($event, null);
 
-        $imageSource = $this->imageSourceFactory->forImageProperty($event, $inBackend, 'previewImage');
+        $imageSource = $this->imageSourceFactory->forImageProperty($event, $inBackend, 'preview__image');
         $figure = $imageSource
             ? $link->asContainer()->withContent($this->figureFactory->forNavigationCard($imageSource))
             : null;
@@ -70,9 +70,9 @@ final class EventCardFactory extends AbstractComponentPresentationObjectFactory
 
         return new EventCard(
             $figure,
-            $isExternalEvent
-                ? Value::fromString("Meta external")
-                : Value::fromString("Meta internal"),
+            $event->getProperty('type')
+                ? Value::fromString($event->getProperty('type'))
+                : null,
             Value::fromString($event->getLabel()),
             new Grid(
                 GridVariant::VARIANT_ICONLEFT,
