@@ -29,6 +29,7 @@
           'Hoerbiger.HoerbigerCom:Collection.Teaser': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true

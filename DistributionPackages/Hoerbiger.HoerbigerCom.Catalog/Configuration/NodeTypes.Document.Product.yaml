@@ -30,6 +30,7 @@
           'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
   ui:
     icon: barcode
     label: 'Product'

@@ -26,6 +26,7 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
           'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
