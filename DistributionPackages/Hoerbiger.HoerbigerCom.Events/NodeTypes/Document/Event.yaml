@@ -34,3 +34,14 @@
           'Hoerbiger.HoerbigerCom:Content.ImageWithLink': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
           'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+
+  properties:
+    preview__image:
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
+    preview__image__alt:
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
+    preview__image__title:
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
