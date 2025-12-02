@@ -67,6 +67,12 @@
                 label: 'Conference'
               techDays:
                 label: 'Tech Days'
+              training:
+                label: 'Training'
+              opening:
+                label: 'Opening'
+              other:
+                label: 'Other'
     __year:
       search:
         indexing: "${Date.format(q(node).property('startDate'), 'Y')}"

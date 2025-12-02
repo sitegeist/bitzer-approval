@@ -9,6 +9,7 @@ declare(strict_types=1);
 namespace Hoerbiger\HoerbigerCom\Events\Presentation\Block\EventCard;
 
 use GuzzleHttp\Psr7\Uri;
+use Hoerbiger\HoerbigerCom\Events\Presentation\Application\EventFinder\EventFinder;
 use Hoerbiger\Shared\Domain\FormattedDateFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
@@ -71,7 +72,12 @@ final class EventCardFactory extends AbstractComponentPresentationObjectFactory
         return new EventCard(
             $figure,
             $event->getProperty('type')
-                ? Value::fromString($event->getProperty('type'))
+                ? Value::fromString(
+                    $this->csvPOTranslator->getLabel(
+                        EventFinder::class,
+                        'label.filters.type.' . $event->getProperty('type')
+                    )
+                )
                 : null,
             Value::fromString($event->getLabel()),
             new Grid(

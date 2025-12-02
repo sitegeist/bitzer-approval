@@ -10,9 +10,12 @@ label.totalResults,Ergebnisse,results,Ergebnisse,résultats,Wyniki,výsledky
 label.availableOptions.countryCode,Land,Country,Land,Pays,"Kraj  ",Země
 label.countryCode.NULL,all,all,alle,tous,Wszystko,vše
 label.availableOptions.type,Typ,Type,Typ,Type,Type,Type
-label.filters.type.tradeShow,Trade Show,Trade Show,Trade Show,Trade Show,Trade Show,Trade Show
-label.filters.type.conference,Conference,Conference,Conference,Conference,Conference,Conference
+label.filters.type.tradeShow,Trade Show,Trade Show,Messe,Salon professionnel,Targi,Veletrh
+label.filters.type.conference,Conference,Conference,Konferenz,Conférence,Konferencja,Konference
 label.filters.type.techDays,Tech Days,Tech Days,Tech Days,Tech Days,Tech Days,Tech Days
+label.filters.type.training,Training,Training,Training,Formation,Szkolenie,Školení
+label.filters.type.opening,Opening,Opening,Eröffnung,Ouverture,Otwarcie,Zahájení
+label.filters.type.other,Other,Other,Sonstiges,Autre,Inne,Ostatní
 label.availableOptions.__year,Jahr,Year,Jahr,Année,Rok,Rok
 label.toWebsite,"To website","to website","zur Website","vers le site web","do strony","na webové stránce"
 label.readMore,"Read more","Read more","mehr erfahren","Plus d'informations","Czytaj dalej","Číst více"
