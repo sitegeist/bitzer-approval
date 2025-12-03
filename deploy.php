@@ -27,7 +27,6 @@ set('writable_chmod_mode', '0775');
 set('writable_dirs', ['.']);
 set('writable_chmod_recursive', false);
 set('default_timeout', 1800);
-set( 'keep_releases', -1 );
 
 // composer
 set('bin/composer', function () {
