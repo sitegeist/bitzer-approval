@@ -1,20 +1,17 @@
-<?php declare(strict_types=1);
-namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
+<?php
 
-/*
- * This file is part of the Hoerbiger.Shared package.
- */
+declare(strict_types=1);
+
+namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 
 use Neos\Flow\Annotations as Flow;
 
 #[Flow\Proxy(false)]
-final class SearchPage implements \JsonSerializable
+final readonly class SearchPage implements \JsonSerializable
 {
-    private int $value;
-
-    private function __construct(int $value)
-    {
-        $this->value = $value;
+    public function __construct(
+        public int $value
+    ) {
     }
 
     public static function fromInt(int $int): self
@@ -24,11 +21,6 @@ final class SearchPage implements \JsonSerializable
         }
 
         return new self($int);
-    }
-
-    public function getValue(): int
-    {
-        return $this->value;
     }
 
     public function jsonSerialize(): int

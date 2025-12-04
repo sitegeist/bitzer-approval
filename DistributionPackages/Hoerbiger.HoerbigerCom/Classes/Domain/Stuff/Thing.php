@@ -1,33 +1,18 @@
-<?php declare(strict_types=1);
-namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
+<?php
 
-/*
- * This file is part of the Hoerbiger.HoerbigerCom package.
- */
+declare(strict_types=1);
+
+namespace Hoerbiger\HoerbigerCom\Domain\Stuff;
 
 use Neos\Flow\Annotations as Flow;
 
 #[Flow\Proxy(false)]
-final class Thing implements \JsonSerializable
+final readonly class Thing implements \JsonSerializable
 {
-    private string $identifier;
-
-    private string $content;
-
-    public function __construct(string $identifier, string $content)
-    {
-        $this->identifier = $identifier;
-        $this->content = $content;
-    }
-
-    public function getIdentifier(): string
-    {
-        return $this->identifier;
-    }
-
-    public function getContent(): string
-    {
-        return $this->content;
+    public function __construct(
+        public string $identifier,
+        public string $content,
+    ) {
     }
 
     /**

@@ -31,6 +31,7 @@
           'Hoerbiger.HoerbigerCom:Content.SectionIntroduction': true
           'Hoerbiger.HoerbigerCom:Collection.Benefits': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage': true

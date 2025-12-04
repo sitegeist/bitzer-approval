@@ -1,0 +1,35 @@
+'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+
+  ui:
+    icon: calendar-alt
+    label: 'Upcoming Events'
+    inspector:
+      groups:
+        calendar:
+          icon: 'calendar-alt'
+          label: 'Events'
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+      search:
+        elasticSearchMapping:
+          type: text
+    events:
+      type: references
+      ui:
+        label: 'Events'
+        reloadIfChanged: true
+        inspector:
+          group: calendar
+          editorOptions:
+            nodeTypes: ['Hoerbiger.HoerbigerCom.Events:Document.Event', 'Hoerbiger.HoerbigerCom.Events:Document.ExternalEvent']
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}

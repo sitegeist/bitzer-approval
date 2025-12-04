@@ -1,0 +1,71 @@
+'Hoerbiger.HoerbigerCom.Events:Document.Events':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+  ui:
+    icon: calendar-alt
+    label: 'Events'
+
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom.Events:Document.Event': true
+      'Hoerbiger.HoerbigerCom.Events:Document.ExternalEvent': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Accordion': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
+          'Hoerbiger.HoerbigerCom:Collection.TabBox': true
+          'Hoerbiger.HoerbigerCom:Collection.Teaser': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.MostWanted': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Content.ImageWithLink': true
+          'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+      search:
+        elasticSearchMapping:
+          type: text
+    eventsHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('h2', value)}
+        elasticSearchMapping:
+          type: text
+    eventsText:
+      options:
+        preset: 'rte.text'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter text'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text

@@ -23,7 +23,8 @@
         "hoerbiger/hoerbigercom-application-worlds": "*",
         "hoerbiger/hoerbigercom-affiliatedirectory": "*",
         "hoerbiger/hoerbigercom-catalog-calculator": "*",
-        "hoerbiger/hoerbigercom-hr": "*"
+        "hoerbiger/hoerbigercom-hr": "*",
+        "hoerbiger/hoerbigercom-events": "*"
     },
     "require-dev": {
         "neos/buildessentials": "^8.3",
@@ -56,6 +57,13 @@
             "rm -rf ./Data/Temporary/*",
             "rm -rf ./Packages/*",
             "rm -rf ./bin/*"
+        ],
+
+        "spec:render": [
+            "./flow openapidocument:render calendar > DistributionPackages/Hoerbiger.HoerbigerCom.Events/Resources/Private/OpenApi/calendar.openapi.json"
+        ],
+        "spec:verify": [
+            "./flow openapidocument:verify calendar DistributionPackages/Hoerbiger.HoerbigerCom.Events/Resources/Private/OpenApi/calendar.openapi.json"
         ],
 
         "lint:editorconfig": "ec",

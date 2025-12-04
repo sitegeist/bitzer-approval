@@ -26,10 +26,12 @@
           'Hoerbiger.HoerbigerCom:Content.Video': true
           'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
   constraints:
     nodeTypes:
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
+      'Hoerbiger.HoerbigerCom.Events:Document.Events': true
   ui:
     icon: file
     label: 'Web Page'

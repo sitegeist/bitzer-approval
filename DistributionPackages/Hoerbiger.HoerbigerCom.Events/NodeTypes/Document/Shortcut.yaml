@@ -1,0 +1,9 @@
+'Hoerbiger.HoerbigerCom.Events:Document.Shortcut':
+  superTypes:
+    'Neos.Neos:Shortcut': true
+    'Hoerbiger.HoerbigerCom:Document': true
+
+  properties:
+    target:
+      options:
+        synchronizationStrategy: 'once'

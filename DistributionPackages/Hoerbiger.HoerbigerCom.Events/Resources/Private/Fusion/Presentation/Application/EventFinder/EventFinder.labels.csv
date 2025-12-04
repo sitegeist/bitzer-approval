@@ -1,0 +1,25 @@
+id,description,en,de,fr,pl,cs,es,zh,pt-BR
+label.filter.headline,Filter,Filter,Filter,Filtre,"Filtr ",Filtr,Filter,Filter,Filter
+label.submit,Anwenden,Apply,Anwenden,Appliquer,"Zastosuj  ",Použít,Apply,Apply,Apply
+label.select.reset,"Filter zurücksetzen","Reset filters","Filter zurücksetzen","Réinitialiser les filtres","Wyczyść filtry","Vynulovat filtry","Reset filters","Reset filters","Reset filters"
+label.initialize,"Suche nach Ergebnissen...","Searching for results...","Suche nach Ergebnissen...","Recherche de résultats...","Wyszukiwanie wyników…","Hledání výsledků...","Searching for results...","Searching for results...","Searching for results..."
+label.isFetching,"Suche nach Ergebnissen...","Searching for results...","Suche nach Ergebnissen...","Recherche de résultats...","Wyszukiwanie wyników…","Hledání výsledků...","Searching for results...","Searching for results...","Searching for results..."
+label.noResults,"Leider haben wir keine Ergebnisse gefunden.","Unfortunately we didn't find any results","Leider haben wir keine Ergebnisse gefunden.","Malheureusement, nous n'avons trouvé aucun résultat","Niestety, nie znaleziono żadnych wyników","Bohužel jsme nenašli žádné výsledky"
+label.error,"Ooooops, da ist was schief gelaufen!","Ooooops, something went wrong!","Ooooops, da ist was schief gelaufen!","Ooooops, quelque chose n'a pas fonctionné !","Ups, coś poszło nie tak!","Oops, něco se pokazilo!","Unfortunately we didn't find any results","Unfortunately we didn't find any results","Unfortunately we didn't find any results"
+label.totalResults,Ergebnisse,results,Ergebnisse,résultats,Wyniki,výsledky,results,results,results
+label.availableOptions.countryCode,Land,Country,Land,Pays,"Kraj  ",Země,Country,Country,Country
+label.countryCode.NULL,all,all,alle,tous,Wszystko,vše,all,all,all
+label.availableOptions.type,Typ,Type,Typ,Type,Type,Type,Tipo,类型,Tipo
+label.filters.type.tradeShow,Trade Show,Trade Show,Messe,Salon professionnel,Targi,Veletrh,Feria Comercial,展览会,Feira Comercial
+label.filters.type.conference,Conference,Conference,Konferenz,Conférence,Konferencja,Konference,Conferencia,行业会议,Conferência
+label.filters.type.techDays,Tech Days,Tech Days,Tech Days,Tech Days,Tech Days,Tech Days,Jornada Tecnológica,技术交流日,Dia de tecnologia
+label.filters.type.training,Training,Training,Training,Formation,Szkolenie,Školení,Entrenamiento,培训,Treinamento
+label.filters.type.opening,Opening,Opening,Eröffnung,Ouverture,Otwarcie,Zahájení,Apertura,开幕,Abertura
+label.filters.type.other,Other,Other,Sonstiges,Autre,Inne,Ostatní,Otro (a),其他,Outro (a)
+label.availableOptions.__year,Jahr,Year,Jahr,Année,Rok,Rok,Year,Year,Year
+label.toWebsite,"To website","to website","zur Website","vers le site web","do strony","na webové stránce","to website","to website","to website"
+label.readMore,"Read more","Read more","mehr erfahren","Plus d'informations","Czytaj dalej","Číst více","Read more","Read more","Read more"
+label.paginator.prev,zurück,prev,zurück,précédent,poprzednia,předchozí,prev,prev,prev
+label.paginator.next,vor,next,vor,suivant,następna,další,next,next,next
+label.showArchived,"Archivierte Events anzeigen","Show archived events","Archivierte Events anzeigen","Afficher les événements archivés","Pokaż archiwalne wydarzenia","Zobrazit archivované události","Show archived events","Show archived events","Show archived events"
+label.showCurrent,"Aktuelle Events anzeigen","Show current events","Aktuelle Events anzeigen","Afficher les événements actuels","Pokaż bieżące wydarzenia","Zobrazit aktuální události","Show current events","Show current events","Show current events"

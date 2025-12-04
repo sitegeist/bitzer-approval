@@ -1,0 +1,47 @@
+'Hoerbiger.HoerbigerCom.Events:Document.Event':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom.Events:Mixin.EventData': true
+
+  ui:
+    icon: calendar-times
+    label: 'Event (internal link to the details page)'
+
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Accordion': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
+          'Hoerbiger.HoerbigerCom:Collection.TabBox': true
+          'Hoerbiger.HoerbigerCom:Collection.Teaser': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.MostWanted': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Content.ImageWithLink': true
+          'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+
+  properties:
+    preview__image:
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
+    preview__image__alt:
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}
+    preview__image__title:
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: {}

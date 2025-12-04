@@ -5,14 +5,16 @@
     "version": "1.0.0",
     "require": {
         "internezzo/childreload": "^1.0",
-        "neos/neos": "^8.3.0",
-        "neos/neos-ui": "^8.3.0",
+        "neos/neos": "~8.3.0",
+        "neos/neos-ui": "~8.3.0",
         "neos/seo": "^3.3",
         "neos/swiftmailer": "^7.1",
         "neos/redirecthandler-ui": "^2.4",
         "neos/redirecthandler-neosadapter": "^4.3",
         "neos/redirecthandler-databasestorage": "^5.0",
         "neos/content-repository-dimensionspace": "1.0.x-dev",
+
+        "guzzlehttp/guzzle": "*",
 
         "packagefactory/atomicfusion-presentationobjects": "^4.0",
 
@@ -26,6 +28,7 @@
         "sitegeist/kaleidoscope": "^6.0",
         "sitegeist/lazybones": "^3.0",
         "sitegeist/csvpo": "^2.0",
+        "sitegeist/schemeonyou": "^1.3",
         "sitegeist/stampede": "^1.5",
         "sitegeist/inspectorgadget": "*",
         "sitegeist/bitzer-approval": "~1.0",

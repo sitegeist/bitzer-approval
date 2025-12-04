@@ -1,0 +1,8 @@
+Sitegeist:
+  SchemeOnYou:
+    # we do this via nginx snippet
+    sendCORSHeaders: false
+    documents:
+      calendar:
+        classNames:
+          - 'Hoerbiger\HoerbigerCom\Events\Application\**\Controller\*'

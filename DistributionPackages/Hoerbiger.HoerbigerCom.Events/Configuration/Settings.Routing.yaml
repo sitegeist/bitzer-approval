@@ -1,0 +1,6 @@
+Neos:
+  Flow:
+    mvc:
+      routes:
+        'Hoerbiger.HoerbigerCom.Events':
+          position: 'before Neos.Neos'

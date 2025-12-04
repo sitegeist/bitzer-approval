@@ -1,0 +1,15 @@
+prototype(Hoerbiger.HoerbigerCom.Events:CacheSegment.UpcomingEventsList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:CacheSegment) {
+    @cache {
+        entryIdentifier {
+            node = ${node}
+        }
+        entryTags {
+            // whenever the node changes (eg: when the references property changes) the list may change
+            node = ${Neos.Caching.nodeTag(node)}
+            // whenever an event document changes, the list may change
+            event = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Events:Document.Event', node)}
+            // whenever an external event document changes, the list may change
+            externalEvent = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.Events:Document.ExternalEvent', node)}
+        }
+    }
+}

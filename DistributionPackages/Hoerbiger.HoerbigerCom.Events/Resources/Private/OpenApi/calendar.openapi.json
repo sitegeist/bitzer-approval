@@ -1,0 +1,204 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": ""
+    },
+    "servers": [],
+    "paths": {
+        "/calendar/query": {
+            "get": {
+                "parameters": [
+                    {
+                        "required": true,
+                        "name": "query",
+                        "in": "query",
+                        "description": "",
+                        "schema": {
+                            "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Events_Domain_CalendarQuery"
+                        },
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Events_Domain_CalendarQuery"
+                                }
+                            }
+                        },
+                        "style": "deepObject"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Calendar events",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Events_Domain_CalendarResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "webhooks": [],
+    "components": {
+        "schemas": {
+            "Hoerbiger_HoerbigerCom_Events_Domain_CalendarResponse": {
+                "type": "object",
+                "name": "Hoerbiger_HoerbigerCom_Events_Domain_CalendarResponse",
+                "properties": {
+                    "numberOfPages": {
+                        "type": "integer"
+                    },
+                    "results": {
+                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_Things"
+                    },
+                    "totalNumberOfResults": {
+                        "type": "integer"
+                    },
+                    "availableFilters": {
+                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilters"
+                    }
+                },
+                "required": [
+                    "numberOfPages",
+                    "results",
+                    "totalNumberOfResults",
+                    "availableFilters"
+                ]
+            },
+            "Hoerbiger_HoerbigerCom_Events_Domain_CalendarQuery": {
+                "type": "object",
+                "name": "Hoerbiger_HoerbigerCom_Events_Domain_CalendarQuery",
+                "properties": {
+                    "locale": {
+                        "type": "string"
+                    },
+                    "activeFilters": {
+                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilters"
+                    },
+                    "page": {
+                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_SearchPage"
+                    },
+                    "archived": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "locale",
+                    "activeFilters",
+                    "page"
+                ]
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_Things": {
+                "type": "array",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_Things",
+                "items": {
+                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_Thing"
+                }
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilters": {
+                "type": "array",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilters",
+                "items": {
+                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilter"
+                }
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilters": {
+                "type": "array",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilters",
+                "items": {
+                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilter"
+                }
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_SearchPage": {
+                "type": "integer",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_SearchPage"
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_Thing": {
+                "type": "object",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_Thing",
+                "properties": {
+                    "identifier": {
+                        "type": "string"
+                    },
+                    "content": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "identifier",
+                    "content"
+                ]
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilter": {
+                "type": "object",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_AvailableFilter",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "options": {
+                        "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOptions"
+                    }
+                },
+                "required": [
+                    "name",
+                    "options"
+                ]
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilter": {
+                "type": "object",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilter",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "value": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "name",
+                    "value"
+                ]
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOptions": {
+                "type": "array",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOptions",
+                "items": {
+                    "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOption"
+                }
+            },
+            "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOption": {
+                "type": "object",
+                "name": "Hoerbiger_HoerbigerCom_Domain_Stuff_FilterOption",
+                "properties": {
+                    "value": {
+                        "type": "string"
+                    },
+                    "numberOfResults": {
+                        "type": "integer"
+                    }
+                },
+                "required": [
+                    "value",
+                    "numberOfResults"
+                ]
+            }
+        },
+        "responses": [],
+        "parameters": [],
+        "examples": [],
+        "requestBodies": [],
+        "headers": [],
+        "securitySchemes": [],
+        "links": [],
+        "callbacks": [],
+        "pathItems": []
+    },
+    "security": [],
+    "tags": [],
+    "externalDocs": []
+}
