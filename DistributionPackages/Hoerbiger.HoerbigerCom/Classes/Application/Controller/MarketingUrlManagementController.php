@@ -62,11 +62,11 @@ class MarketingUrlManagementController extends AbstractModuleController
     {
         $subgraph = $this->getSubgraph();
         $marketingUrls = [];
-        foreach ($this->marketingUrlRepository->findAll() as $marketingUrl) {
+        foreach ($this->marketingUrlRepository->findAll() as $key => $marketingUrl) {
             /** @var ?NodeInterface $node */
             $node = $subgraph->getNodeByIdentifier((string)$marketingUrl->getNodeAggregateIdentifier());
             $marketingUrls[] = [
-                'identifier' => \str_replace('/', '-', $marketingUrl->getPath()),
+                'identifier' => '-id-'. $key,
                 'path' => $marketingUrl->getPath(),
                 'label' => $node ? $node->getLabel() : 'Unbekannter Knoten',
                 'updateFormUri' => $this->getActionUri(
