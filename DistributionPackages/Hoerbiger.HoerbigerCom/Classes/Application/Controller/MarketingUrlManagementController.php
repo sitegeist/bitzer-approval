@@ -202,6 +202,9 @@ class MarketingUrlManagementController extends AbstractModuleController
             'Verweise' => []
         ];
         foreach ($documents as $document) {
+            if ($document->isHidden()) {
+                continue;
+            }
             if ($document->getNodeType()->isOfType('Neos.Neos:Shortcut')) {
                 $type = 'Verweise';
             } elseif ($document->getNodeType()->isOfType('Hoerbiger.HoerbigerCom.Catalog:Document.Product')) {
