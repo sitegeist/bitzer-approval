@@ -10,7 +10,6 @@ namespace Hoerbiger\HoerbigerCom\Events\Domain;
 
 use Hoerbiger\HoerbigerCom\Domain\Stuff\AvailableFilters;
 use Hoerbiger\HoerbigerCom\Domain\Stuff\StuffContentContextFactory;
-use Hoerbiger\HoerbigerCom\Domain\Stuff\TypeOptions;
 use Hoerbiger\HoerbigerCom\Events\Integration\ThingFactory;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeAggregateIdentifier;
 use Flowpack\ElasticSearch\ContentRepositoryAdaptor\ElasticSearchClient;
@@ -33,9 +32,10 @@ final class Calendar
     public function findByQuery(CalendarQuery $query): CalendarResponse
     {
         $subgraph = $this->contentContextFactory->createContentContext($query->locale);
-        $siteNode = $subgraph->getCurrentSiteNode();
-        $this->searchClient->setContextNode($siteNode);
-        $request = EventsSearchRequest::create();
+        /** @var Node $contextNode */
+        $contextNode = $subgraph->getNodeByIdentifier($query->calendarId) ?: $subgraph->getCurrentSiteNode();
+        $this->searchClient->setContextNode($contextNode);
+        $request = EventsSearchRequest::create($contextNode);
 
         foreach ($query->activeFilters->items as $activeFilter) {
             if ($activeFilter->value) {
@@ -84,9 +84,10 @@ final class Calendar
         int $numberOfEvents,
         ContentContext $subgraph
     ): TraversableNodes {
+        /** @var Node $siteNode */
         $siteNode = $subgraph->getCurrentSiteNode();
         $this->searchClient->setContextNode($siteNode);
-        $request = EventsSearchRequest::create();
+        $request = EventsSearchRequest::create($siteNode);
 
         $request = $request->withLimit($numberOfEvents)
             ->withArchiveState(false)

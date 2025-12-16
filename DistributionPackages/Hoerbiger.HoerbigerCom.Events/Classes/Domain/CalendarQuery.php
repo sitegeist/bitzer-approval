@@ -13,6 +13,7 @@ final readonly class CalendarQuery
 {
     public function __construct(
         public string $locale,
+        public string $calendarId,
         public ActiveFilters $activeFilters,
         public SearchPage $page,
         public bool $archived = false,

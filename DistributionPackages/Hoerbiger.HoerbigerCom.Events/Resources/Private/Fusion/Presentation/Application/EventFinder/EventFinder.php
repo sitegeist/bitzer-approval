@@ -23,11 +23,13 @@ final class EventFinder extends AbstractComponentPresentationObject
      */
     public function __construct(
         string $locale,
+        string $calendarId,
         array $labels,
         UriInterface $endpointUri
     ) {
         $this->applicationData = \json_encode([
             'locale' => $locale,
+            'calendarId' => $calendarId,
             'labels' => $labels,
             'endpointUri' => (string)$endpointUri
         ], JSON_THROW_ON_ERROR);

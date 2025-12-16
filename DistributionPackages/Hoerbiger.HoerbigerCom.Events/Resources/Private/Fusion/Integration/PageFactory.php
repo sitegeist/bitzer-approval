@@ -1,9 +1,5 @@
 <?php
 
-/*
- * This file is part of the Hoerbiger.HoerbigerCom.Events package.
- */
-
 declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Events\Integration;
@@ -104,8 +100,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                             new ContentContainer(
                                 ContentContainerVariant::VARIANT_BLANK,
                                 $this->eventFinderFactory->create(
-                                    $subgraph->getTargetDimensions()['language'],
-                                    $subgraph
+                                    locale: $subgraph->getTargetDimensions()['language'],
+                                    calendarId: $calendarPage->getIdentifier(),
                                 )
                             )
                         ]))
