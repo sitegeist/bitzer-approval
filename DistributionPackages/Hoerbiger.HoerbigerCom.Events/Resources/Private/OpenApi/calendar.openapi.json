@@ -75,6 +75,9 @@
                     "locale": {
                         "type": "string"
                     },
+                    "calendarId": {
+                        "type": "string"
+                    },
                     "activeFilters": {
                         "$ref": "#/components/schemas/Hoerbiger_HoerbigerCom_Domain_Stuff_ActiveFilters"
                     },
@@ -87,6 +90,7 @@
                 },
                 "required": [
                     "locale",
+                    "calendarId",
                     "activeFilters",
                     "page"
                 ]
