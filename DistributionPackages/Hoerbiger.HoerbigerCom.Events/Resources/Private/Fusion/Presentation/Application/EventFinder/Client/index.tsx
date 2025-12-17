@@ -25,7 +25,8 @@ export const EventFinderClient = (props: ApplicationData): JSX.Element => {
 		locale: props.locale,
 		activeFilters: [],
 		page: 1,
-		archived: false
+		archived: false,
+		calendarId: props.calendarId
 	});
 
 	const onUpdateRequestParams = (update: Partial<EventFinderRequestParams>) => {
