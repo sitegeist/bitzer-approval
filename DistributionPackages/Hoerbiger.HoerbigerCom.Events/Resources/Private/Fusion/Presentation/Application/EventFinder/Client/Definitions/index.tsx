@@ -6,6 +6,7 @@ export interface ApplicationData {
 	endpointUri: string;
 	applicationRoot: HTMLElement;
 	showArchived: boolean;
+	calendarId: string;
 }
 
 export interface ActiveFilters {
@@ -25,6 +26,7 @@ export interface EventFinderRequestParams {
 	activeFilters: ActiveFilters[];
 	page: number;
 	archived: boolean;
+	calendarId: string;
 }
 
 export type EventFinderSearchRequest = (params: EventFinderRequestParams)

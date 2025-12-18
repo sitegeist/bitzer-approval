@@ -23,7 +23,7 @@ final class EventFinderFactory extends AbstractComponentPresentationObjectFactor
     ) {
     }
 
-    public function create(string $locale, ContentContext $subgraph): EventFinder
+    public function create(string $locale, string $calendarId): EventFinder
     {
         $uriBuilder = clone $this->uriService->getControllerContext()->getUriBuilder();
         $uriBuilder->reset()->setCreateAbsoluteUri(true);
@@ -35,6 +35,7 @@ final class EventFinderFactory extends AbstractComponentPresentationObjectFactor
 
         return new EventFinder(
             locale: $locale,
+            calendarId: $calendarId,
             labels: $labels,
             endpointUri: new Uri($uriBuilder->uriFor(
                 actionName: 'get',

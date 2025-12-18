@@ -1,14 +1,11 @@
 <?php
 
-/*
- * This file is part of the EulerHermes.Calendar package.
- */
-
 declare(strict_types=1);
 
 namespace Hoerbiger\HoerbigerCom\Events\Domain;
 
 use Hoerbiger\HoerbigerCom\Domain\Stuff\SearchPage;
+use Neos\ContentRepository\Domain\Model\Node;
 use Neos\Flow\Annotations as Flow;
 
 #[Flow\Proxy(false)]
@@ -29,8 +26,10 @@ final class EventsSearchRequest implements \JsonSerializable
         $this->request = $request;
     }
 
-    public static function create(): self
+    public static function create(Node $calendarNode): self
     {
+        $path = $calendarNode->getPath();
+
         return new self([
             'size' => self::DEFAULT_LIMIT,
             'query' => [
@@ -38,6 +37,22 @@ final class EventsSearchRequest implements \JsonSerializable
                     'filter' => [
                         'bool' => [
                             'must' => [
+                                [
+                                    'bool' => [
+                                        'should' => [
+                                            [
+                                                'term' => [
+                                                    'neos_parent_path' => $path
+                                                ]
+                                            ],
+                                            [
+                                                'term' => [
+                                                    'neos_path' => $path
+                                                ]
+                                            ]
+                                        ],
+                                    ],
+                                ],
                                 [
                                     'terms' => [
                                         'neos_type_and_supertypes' => [
