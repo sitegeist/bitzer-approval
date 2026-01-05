@@ -13,7 +13,7 @@ prototype(Hoerbiger.Shared:Block.Text) < prototype(PackageFactory.AtomicFusion.P
     renderer = afx`
         <div class={[
             "[Block.Text (" + presentationObject.variant.value + ")]",
-            "prose textContainer max-w-full",
+            "prose prose-brand textContainer max-w-full",
             "[&_a]:font-sans-bold",
             "[&_td]:p-[10px]",
             presentationObject.canHaveColumns
