@@ -448,3 +448,12 @@ td {
 td:first-child {
 	@apply text-left;
 }
+
+body {
+	position: relative;
+}
+
+#pi_tracking_opt_in_div {
+	top: unset!important;
+	bottom: 0!important;
+}
