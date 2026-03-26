@@ -14,4 +14,5 @@ enum SiteHeaderVariant: string implements ProtectedContextAwareInterface
 
     case VARIANT_REGULAR = 'regular';
     case VARIANT_TRANSPARENT = 'transparent';
+    case VARIANT_MINIMAL = 'minimal';
 }

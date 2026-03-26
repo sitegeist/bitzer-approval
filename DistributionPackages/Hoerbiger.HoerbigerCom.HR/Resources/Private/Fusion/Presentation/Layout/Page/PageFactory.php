@@ -64,7 +64,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity)
+            ]), $identity),
+            true
         );
     }
 
@@ -149,7 +150,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity)
+            ]), $identity),
+            true
         );
     }
 }

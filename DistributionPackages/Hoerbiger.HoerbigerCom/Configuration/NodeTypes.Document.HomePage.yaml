@@ -35,6 +35,9 @@
     careerroot:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerRootPage'
       position: 128
+    protectedarea:
+      type: 'Hoerbiger.HoerbigerCom:Document.ProtectedArea'
+      position: 150
     contact:
       type: 'Hoerbiger.HoerbigerCom:Document.ContactPage'
       position: 256

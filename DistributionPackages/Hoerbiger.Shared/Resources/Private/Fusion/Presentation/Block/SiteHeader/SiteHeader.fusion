@@ -71,7 +71,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                         </a>
                     </div>
 
-                    <nav class="flex items-center justify-end w-full h-full">
+                    <nav class="flex items-center justify-end w-full h-full" @if.isSet={presentationObject.mainNavigation}>
                         <!-- MAINNAVIGATION -->
                         <div
                             class="hidden menuToggle:flex font-sans-bold w-full h-full justify-center pl-3ch"
@@ -145,7 +145,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                             </Neos.Fusion:Loop>
                         </div>
 
-                        <div class="flex items-center z-30">
+                        <div class="flex items-center z-30" @if.isSet={presentationObject.languageNavigation}>
 
                             <!-- LANGUAGES -->
                             <div
@@ -210,6 +210,7 @@ prototype(Hoerbiger.Shared:Block.SiteHeader) < prototype(PackageFactory.AtomicFu
                                     class={[
                                         "[Application.CompactSearchForm]"
                                     ]}
+                                    @if.isSet={presentationObject.searchTargetUri}
                                 >
                                     <div
                                         data-select="applicationRoot"

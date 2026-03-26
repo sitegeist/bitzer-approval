@@ -90,8 +90,12 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
             'Hoerbiger.HoerbigerCom.Catalog:Document.IndustrySolution',
             'Hoerbiger.HoerbigerCom.AffiliateDirectory:Document.AffiliateFinder',
             'Hoerbiger.HoerbigerCom:Document.PeopleAndCultureWebPage' => SiteHeaderVariant::VARIANT_TRANSPARENT,
+            'Hoerbiger.HoerbigerCom:Document.ProtectedPage',
+            'Hoerbiger.HoerbigerCom:Document.ProtectedArea' => SiteHeaderVariant::VARIANT_MINIMAL,
             default => SiteHeaderVariant::VARIANT_REGULAR,
         };
+
+        $hasMinimalHeader = $siteHeaderVariant === SiteHeaderVariant::VARIANT_MINIMAL;
 
         $labelSource = $this->translationLabelSourceRepository->findOneByIdentifier(
             'resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/SiteHeader/SiteHeader.translation.csv'
@@ -138,12 +142,22 @@ final class SiteHeaderFactory extends AbstractComponentPresentationObjectFactory
         return new SiteHeader(
             $siteHeaderVariant,
             $this->uriService->getNodeUri($site),
-            $this->getChildNavigationNodes($site, $document, 1),
-            $this->getLanguageNavigationItems($site, $document, $subgraph, $actionRequest),
-            new Icon("shared", "naviChevron", IconSize::SIZE_SIZE_0_5),
-            new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1),
-            $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true),
-            new Icon("shared", "search", IconSize::SIZE_SIZE_1_5),
+            !$hasMinimalHeader ? $this->getChildNavigationNodes($site, $document, 1) : null,
+            !$hasMinimalHeader
+                ? $this->getLanguageNavigationItems($site, $document, $subgraph, $actionRequest)
+                : null,
+            !$hasMinimalHeader
+                ? new Icon("shared", "naviChevron", IconSize::SIZE_SIZE_0_5)
+                : null,
+            !$hasMinimalHeader
+                ? new Icon("shared", "arrowRight", IconSize::SIZE_SIZE_1)
+                : null,
+            !$hasMinimalHeader
+                ? $this->uriService->getNodeUri($site->findNamedChildNode(NodeName::fromString('searchresults')), true)
+                : null,
+            !$hasMinimalHeader
+                ? new Icon("shared", "search", IconSize::SIZE_SIZE_1_5)
+                : null,
             json_encode($labels) ?: '{}',
             $exportButton
         );

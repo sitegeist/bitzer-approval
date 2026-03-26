@@ -125,7 +125,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $this->breadcrumbFactory->forPage($applicationWorld, $subgraph)
                 )
-            ]), $identity)
+            ]), $identity),
+            true
         );
     }
 }

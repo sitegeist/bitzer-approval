@@ -1,0 +1,70 @@
+'Hoerbiger.HoerbigerCom:Document.ProtectedArea':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.FullMedia': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.Accordion': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Square': true
+          'Hoerbiger.HoerbigerCom:Collection.Gallery.Portrait': true
+          'Hoerbiger.HoerbigerCom:Collection.TabBox': true
+          'Hoerbiger.HoerbigerCom:Collection.Teaser': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Content.Quotation': true
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
+          'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Content.Video': true
+          'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
+          'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
+          'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+  constraints:
+    nodeTypes:
+      'Hoerbiger.HoerbigerCom:Document.ProtectedPage': true
+      'Hoerbiger.HoerbigerCom:Document.Shortcut': true
+  ui:
+    icon: shield-alt
+    label: 'Schonarbeitsplatz'
+    inspector:
+      groups:
+        access:
+          icon: lock
+          label: Access
+          position: before default
+
+  properties:
+    username:
+      type: string
+      ui:
+        label: Username
+        inspector:
+          group: access
+      validation:
+#        Neos.Neos/Validation/NotEmptyValidator: { }
+        Neos.Neos/Validation/RegularExpressionValidator:
+          regularExpression: '/^[a-zA-Z0-9_-]+$/i'
+    password:
+      type: string
+      ui:
+        label: Password
+        #showInCreationDialog: true
+        inspector:
+          group: access
+      validation:
+        Neos.Neos/Validation/NotEmptyValidator: { }
+        Neos.Neos/Validation/RegularExpressionValidator:
+          regularExpression: '/^[a-zA-Z0-9_]+$/i'
+    title:
+      defaultValue: 'Schonarbeitsplatz'
+    uriPathSegment:
+      defaultValue: 'schonarbeitsplatz'
+    _hiddenInIndex:
+      defaultValue: true
