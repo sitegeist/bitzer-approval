@@ -67,9 +67,9 @@ final class AffiliateManagementController extends AbstractModuleController
         $pathInfo = $file->getClientFilename() ? pathinfo($file->getClientFilename()) : [];
         if ($file->getStream()->getSize() > 0 &&
             isset($pathInfo['extension']) &&
-            $pathInfo['extension'] === 'xls'
+            in_array($pathInfo['extension'], ['xlsx', 'xls'])
         ) {
-            $this->saveUpload($file);
+            $this->saveUpload($file, $pathInfo['extension']);
             $this->addFlashMessage(
                 'Datei mit wurde erfolgreich hochgeladen.'
             );
@@ -79,7 +79,7 @@ final class AffiliateManagementController extends AbstractModuleController
             );
         } else {
             $this->addFlashMessage(
-                'The uploaded image was empty or did not conform to the required format (xls).
+                'The uploaded file was empty or did not conform to the required format (xlsx or xls).
             Please try a new one.',
                 "",
                 Error\Message::SEVERITY_ERROR
@@ -120,18 +120,32 @@ final class AffiliateManagementController extends AbstractModuleController
         $this->getControllerContext()->getFlashMessageContainer()->flush();
     }
 
-    protected function saveUpload(FlowUploadedFile $file) :void
+    protected function saveUpload(FlowUploadedFile $file, string $uploadedExtension) :void
     {
-        $targetFile = $this->dataSetPath;
-        $targetPath = dirname($targetFile);
+        $targetPath = dirname($this->dataSetPath);
+        $baseName = pathinfo($this->dataSetPath, PATHINFO_FILENAME);
         $now = new \DateTime();
-        rename(
-            $targetFile,
-            $targetPath . '/' . basename($targetFile, '.xls') . '_' . $now->format('Y-m-d-H-i')  . '.xls'
-        );
+        $extensions = ['xls', 'xlsx'];
+
+        foreach ($extensions as $ext) {
+            $fileToCheck = $targetPath . '/' . $baseName . '.' . $ext;
+            if (file_exists($fileToCheck)) {
+                // Archive the existing file
+                rename(
+                    $fileToCheck,
+                    $targetPath . '/' . $baseName
+                    . '_' . $now->format('Y-m-d-H-i')
+                    . '.' . $ext
+                );
+            }
+        }
+
+        $targetFile = $targetPath . '/' . $baseName . '.' . $uploadedExtension;
+
         file_put_contents($targetFile, $file->getStream());
 
         $backupFiles = glob($targetPath . '/Affiliates_*');
+
         if ($backupFiles) {
             usort($backupFiles, function ($a, $b) {
                 return filemtime($a) - filemtime($b);

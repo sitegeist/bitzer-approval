@@ -5,7 +5,7 @@ prototype(Hoerbiger.HoerbigerCom.AffiliateDirectory:Module.AffiliateManagement.I
             icon = 'fas fa-file-upload'
             title = 'Standorte hochladen'
             uri = ${affiliateUploadForm}
-            description = 'Dieses Modul ermöglicht das Hochladen der Standortdatei (Affiliates.xls)'
+            description = 'Dieses Modul ermöglicht das Hochladen der Standortdatei (Affiliates.(xlsx oder xls))'
         }
     }
 

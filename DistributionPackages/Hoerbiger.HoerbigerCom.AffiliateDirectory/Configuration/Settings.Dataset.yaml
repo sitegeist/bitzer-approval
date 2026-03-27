@@ -2,4 +2,4 @@ Hoerbiger:
   HoerbigerCom:
     AffiliateDirectory:
       affiliateFinder:
-        datasetPath: '%FLOW_PATH_DATA%Persistent/Affiliates/Affiliates.xls'
+        datasetPath: '%FLOW_PATH_DATA%Persistent/Affiliates/Affiliates.xlsx'
