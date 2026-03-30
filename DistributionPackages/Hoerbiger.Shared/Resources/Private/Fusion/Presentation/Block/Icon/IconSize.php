@@ -13,6 +13,7 @@ enum IconSize: string implements ProtectedContextAwareInterface
     use StringComponentVariant;
 
     case SIZE_SIZE_0_5 = 'size_0_5';
+    case SIZE_SIZE_0_75 = 'size_0_75';
     case SIZE_SIZE_1 = 'size_1';
     case SIZE_SIZE_1_5 = 'size_1_5';
     case SIZE_SIZE_2 = 'size_2';

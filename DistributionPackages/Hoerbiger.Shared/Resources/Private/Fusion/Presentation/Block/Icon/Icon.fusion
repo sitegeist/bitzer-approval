@@ -19,8 +19,11 @@ prototype(Hoerbiger.Shared:Block.Icon) < prototype(PackageFactory.AtomicFusion.P
             // base = "fill-current"
             @glue = " "
 
-            size_1 = "w-[0.5em] h-[0.5em]"
-            size_1.@if.1 = ${presentationObject.size.equals('size_0_5')}
+            size_0_5 = "w-[0.5em] h-[0.5em]"
+            size_0_5.@if.1 = ${presentationObject.size.equals('size_0_5')}
+
+            size_0_75 = "w-[0.75em] h-[0.75em]"
+            size_0_75.@if.1 = ${presentationObject.size.equals('size_0_75')}
 
             size_1 = "w-[1em] h-[1em]"
             size_1.@if.1 = ${presentationObject.size.equals('size_1')}

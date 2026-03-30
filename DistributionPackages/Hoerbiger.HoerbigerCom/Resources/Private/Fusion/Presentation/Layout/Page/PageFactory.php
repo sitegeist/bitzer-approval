@@ -461,7 +461,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                 new Icon(
                                     'shared',
                                     'chevronLeft',
-                                    IconSize::SIZE_SIZE_1,
+                                    IconSize::SIZE_SIZE_0_75,
                                     IconColor::COLOR_CURRENT
                                 ),
                                 Value::fromString($labels['label.backToOverview']),
