@@ -151,6 +151,22 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         return $this->forDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage, $inBackend);
     }
 
+    public function forYearbookOverview(TraversableNodeInterface $site, Node $yearbookRelease, ContentContext $subgraph, bool $inBackend): Page
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->pressArchiveStageFactory->forPressReleaseOverview($yearbookRelease, $inBackend);
+
+        return $this->forOverviewDocumentWithIntroduction($site, $yearbookRelease, $subgraph, $stage, $inBackend);
+    }
+
+    public function forHannsOverview(TraversableNodeInterface $site, Node $hannsRelease, ContentContext $subgraph, bool $inBackend): Page
+    {
+        /** @var SlotInterface $stage */
+        $stage = $this->pressArchiveStageFactory->forPressReleaseOverview($hannsRelease, $inBackend);
+
+        return $this->forOverviewDocumentWithIntroduction($site, $hannsRelease, $subgraph, $stage, $inBackend);
+    }
+
     public function forDocumentWithIntroduction(
         TraversableNodeInterface $site,
         Node $document,
@@ -230,6 +246,57 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                         )
                         : null,
                     $content,
+                    new ContentContainer(
+                        ContentContainerVariant::VARIANT_REGULARX,
+                        $breadcrumb
+                    ),
+                ]),
+                $identity
+            )
+        );
+    }
+
+    public function forOverviewDocumentWithIntroduction(
+        TraversableNodeInterface $site,
+        Node $document,
+        ContentContext $subgraph,
+        SlotInterface $stage,
+        bool $inBackend
+    ): Page {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = $this->breadcrumbFactory->forPage($document, $subgraph);
+
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
+
+        return new Page(
+            $this->siteHeaderFactory->forDocument(
+                $document,
+                $site,
+                $subgraph,
+                $inBackend
+            ),
+            Collection::fromIterable(
+                array_filter([
+                    count($anchors) > 0
+                        ? new AnchorNavigation(
+                            AnchorNavigationVariant::VARIANT_REGULAR,
+                            array_map(
+                                fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
+                                $anchors
+                            )
+                        )
+                        : null,
+                    new ContentContainer(
+                        ContentContainerVariant::VARIANT_STACKSTAGE,
+                        $stage
+                    ),
+
+                    Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+
                     new ContentContainer(
                         ContentContainerVariant::VARIANT_REGULARX,
                         $breadcrumb

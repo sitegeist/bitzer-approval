@@ -13,6 +13,7 @@ use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
+use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
 use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItem;
 use Hoerbiger\Shared\Presentation\Block\Button\ButtonFactory;
@@ -134,6 +135,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 $theme
             ),
             'Hoerbiger.HoerbigerCom:Content.TextWithImage' => $this->forTextWithImageNode(
+                $contentNode,
+                $inBackend,
+                $subgraph,
+                $theme
+            ),
+            'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended' => $this->forTextWithImageExtendedNode(
                 $contentNode,
                 $inBackend,
                 $subgraph,
@@ -557,6 +564,66 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     $layout === Layout::VALUE_IMAGEFIRST
                         ? Collection::fromIterable([$figure, $text], $identity)
                         : Collection::fromIterable([$text, $figure], $identity)
+                )
+            ]))
+        );
+    }
+
+    public function forTextWithImageExtendedNode(
+        TraversableNodeInterface $textWithImageNode,
+        bool $inBackend,
+        ContentContext $subgraph,
+        ?Theme $theme
+    ): SlotInterface {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        $imageSource = $this->imageSourceFactory->forImageMixin($textWithImageNode, $inBackend);
+        $figure = $imageSource
+            ? $this->figureFactory->forTwoColumnGrid($imageSource)
+            : null;
+
+        $headline = new Headline(
+            HeadlineSize::SIZE_MEDIUM_ITALIC,
+            HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+            HeadlineType::TYPE_DIV,
+            Editable::fromNodeProperty($textWithImageNode, 'headline')
+        );
+
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            Collection::fromIterable(array_filter([
+                $inBackend || $textWithImageNode->getProperty('metaHeadline')
+                    ? new Separator(
+                    SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                    Editable::fromNodeProperty($textWithImageNode, 'metaHeadline')
+                ) : null,
+                new Grid(
+                    GridVariant::VARIANT_TEXT_IMAGE_EXTENDED,
+                    Collection::fromIterable([
+                        $headline,
+                        new Stack(
+                            StackVariant::VARIANT_XS,
+                            Collection::fromIterable(array_filter([
+                                $inBackend || $textWithImageNode->getProperty('text')
+                                    ? new Text(
+                                        TextVariant::VARIANT_LIGHT_CONTRAST,
+                                        Editable::fromNodeProperty($textWithImageNode, 'text'),
+                                        false
+                                    )
+                                    : null,
+                                $figure,
+                                $inBackend || $textWithImageNode->getProperty('secondText')
+                                    ? new Text(
+                                        TextVariant::VARIANT_LIGHT_CONTRAST,
+                                        Editable::fromNodeProperty($textWithImageNode, 'secondText'),
+                                        false
+                                    )
+                                    : null,
+                            ]), $identity)
+                        )
+                    ], $identity)
                 )
             ]))
         );
@@ -1472,6 +1539,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         bool $inBackend,
     ): SlotInterface {
         return new AccordionItem(
+            AccordionItemVariant::VARIANT_REGULAR,
             Editable::fromNodeProperty($accordionItemNode, 'headline'),
             new Text(
                 TextVariant::VARIANT_FULL_WIDTH,

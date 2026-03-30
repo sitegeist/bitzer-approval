@@ -5,6 +5,11 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.
  */
 
+use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItem;
+use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItemVariant;
+use Hoerbiger\Shared\Presentation\Block\Card\HannsReleaseCard\HannsReleaseCard;
+use Hoerbiger\Shared\Presentation\Block\Card\HannsReleaseCard\HannsReleaseCardVariant;
+use Hoerbiger\Shared\Presentation\EnumProvider\HannsList\Layout;
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverview;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverviewVariant;
@@ -92,6 +97,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 return $this->forLatestPressReleases($site, $contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.PressArchive:Content.TopNews':
                 return $this->forTopNewsNode($site, $contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom.PressArchive:Content.HannsList':
+                return $this->forHannsListNode($site, $contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListBig':
+                return $this->forYearbookListBigNode($site, $contentNode, $inBackend);
+            case 'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListSmall':
+                return $this->forYearbookListSmallNode($site, $contentNode, $inBackend);
             default:
                 throw new \InvalidArgumentException('Don\'t know how to render nodes of type ' . $contentNode->getNodeTypeName());
         }
@@ -345,6 +356,414 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             )
         );
     }
+
+    public function forHannsListNode(
+        TraversableNodeInterface $site,
+        TraversableNodeInterface $hannsListNode,
+        bool $inBackend
+    ): SlotInterface
+    {
+        $targetUri = $this->uriService->getNodeUri(
+            $site->findNamedChildNode(NodeName::fromString('pressarchive'))
+        );
+
+        $overViewButton = new Button(
+            ButtonType::TYPE_LINK,
+            ButtonVariant::VARIANT_CONTRAST,
+            new Grid(
+                GridVariant::VARIANT_ICONLEFT,
+                Collection::fromIterable(array_filter([
+                    new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
+                    Value::fromString($hannsListNode->getProperty('linkLabel') ?: $this->getLabel('list.seeOverview.hanns') ?: '')
+                ]))
+            ),
+            $targetUri,
+            '_self',
+            null
+        );
+
+        $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
+
+        $layout = HannsReleaseCardVariant::tryFrom($hannsListNode->getProperty('layout') ?: '')
+            ?: HannsReleaseCardVariant::VARIANT_IMAGE_FIRST;
+
+        $pressReleases = Collection::fromNodes(
+            TraversableNodes::fromArray(
+                $hannsListNode->getProperty('news')
+                    ? $hannsListNode->getProperty('news')
+                    : []
+            ),
+            function(Node $pressRelease, int $index) use($inBackend, $labels, $layout){
+                $pressVariant = PressVariant::tryFromNode($pressRelease);
+
+                $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
+
+                $figure = $imageSource
+                    ? $this->figureFactory->forPressReleaseCard($imageSource)
+                    : null;
+
+                return $this->linkFactory->forLinkToDocument($pressRelease, null)
+                    ->asPlainLabel()->withContent(
+                        new HannsReleaseCard(
+                            $layout === HannsReleaseCardVariant::VARIANT_ALTERNATING
+                                ? ($index % 2 == 0 ? HannsReleaseCardVariant::VARIANT_IMAGE_FIRST : HannsReleaseCardVariant::VARIANT_IMAGE_LAST)
+                                : $layout,
+                            null,
+                            $figure,
+                            Value::fromString(
+                                $pressRelease->getProperty('preview__headline')
+                                    ?: $pressRelease->getProperty('headline')
+                                    ?: ''
+                            ),
+                            Value::fromString(
+                                ($labels['label.filter.' . $pressVariant?->value] ?? '')
+                                . ' ' . $pressRelease->getProperty('edition')
+                            ),
+                            Value::fromString(
+                                $pressRelease->getProperty('preview__description')
+                                    ?: $pressRelease->getProperty('abstract')
+                                    ?: ''
+                            ),
+                            new Button(
+                                ButtonType::TYPE_REGULAR,
+                                ButtonVariant::VARIANT_CONTRAST,
+                                new Grid(
+                                    GridVariant::VARIANT_ICONLEFT,
+                                    Collection::fromIterable(array_filter([
+                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
+                                        new Text(
+                                            TextVariant::VARIANT_SM,
+                                            Value::fromString($this->getLabel('list.learnMore')),
+                                            false
+                                        )
+                                    ]))
+                                ),
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    );
+            }
+        );
+
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            new Stack(
+                StackVariant::VARIANT_XS,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $hannsListNode->getProperty('metaHeadline')
+                        ? new Separator(
+                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                            Editable::fromNodeProperty($hannsListNode, 'metaHeadline')
+                        )
+                        : null,
+                    new AccordionItem(
+                        AccordionItemVariant::VARIANT_HANNS_LIST,
+                        Editable::fromNodeProperty($hannsListNode, 'headline'),
+                        new Stack(
+                            StackVariant::VARIANT_XS,
+                            Collection::fromIterable(array_filter([
+                                $overViewButton,
+                                $pressReleases
+                            ]))
+                        ),
+                        new Icon('shared', 'chevronUp', IconSize::SIZE_SIZE_1_5),
+                        new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5),
+                        $hannsListNode->getProperty('isAccordionOpen'),
+                        $inBackend
+                    )
+                ]))
+            )
+        );
+    }
+
+    public function forYearbookListBigNode(
+        TraversableNodeInterface $site,
+        TraversableNodeInterface $topNewsNode,
+        bool $inBackend
+    ): SlotInterface
+    {
+        $targetUri = $this->uriService->getNodeUri(
+            $site->findNamedChildNode(NodeName::fromString('pressarchive'))
+        );
+        if ($topNewsNode->getProperty('category')) {
+            $targetUri = $targetUri->withFragment($topNewsNode->getProperty('category'));
+        }
+
+        $overViewButton = new Button(
+            ButtonType::TYPE_LINK,
+            ButtonVariant::VARIANT_CONTRAST,
+            new Grid(
+                GridVariant::VARIANT_ICONLEFT,
+                Collection::fromIterable(array_filter([
+                    new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
+                    Value::fromString($topNewsNode->getProperty('linkLabel') ?: $this->getLabel('list.seeOverview') ?: '')
+                ]))
+            ),
+            $targetUri,
+            '_self',
+            null
+        );
+
+        $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
+        $compact = $topNewsNode->getProperty('compact');
+
+        $pressReleases = Collection::fromNodes(
+            TraversableNodes::fromArray(
+                $topNewsNode->getProperty('news') ? array_slice($topNewsNode->getProperty('news'), 0, 8, true)
+                    : []
+            ),
+            function(Node $pressRelease) use($inBackend, $labels, $compact){
+                $pressVariant = PressVariant::tryFromNode($pressRelease);
+
+                $datePublished = $this->formattedDateFactory->createFullDate(
+                    $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
+                );
+
+                $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
+
+                $showImage = ($pressVariant !== PressVariant::VARIANT_NEWS) || $pressRelease->getProperty('showImage');
+
+                $figure = $imageSource && $showImage
+                    ? $this->figureFactory->forPressReleaseCard($imageSource)
+                    : null;
+
+                return $this->linkFactory->forLinkToDocument($pressRelease, null)
+                    ->asPlainLabel()->withContent(
+                        new PressReleaseCard(
+                            $pressVariant === PressVariant::VARIANT_NEWS
+                                ? ($compact
+                                ? PressReleaseCardVariant::VARIANT_TOP_COMPACT
+                                : PressReleaseCardVariant::VARIANT_TOP)
+                                : PressReleaseCardVariant::VARIANT_TOP_NEWS,
+                            $pressVariant === PressVariant::VARIANT_NEWS
+                                ? Value::fromString($datePublished ?: '')
+                                : null,
+                            $figure,
+                            Value::fromString(
+                                $pressRelease->getProperty('preview__headline')
+                                    ?: $pressRelease->getProperty('headline')
+                                    ?: ''
+                            ),
+                            Value::fromString(
+                                ($labels['label.filter.' . $pressVariant?->value] ?? '')
+                                . ' ' . $pressRelease->getProperty('edition')
+                            ),
+                            Value::fromString(
+                                $pressRelease->getProperty('preview__description')
+                                    ?: $pressRelease->getProperty('abstract')
+                                    ?: ''
+                            ),
+                            new Button(
+                                ButtonType::TYPE_REGULAR,
+                                ButtonVariant::VARIANT_CONTRAST,
+                                new Grid(
+                                    GridVariant::VARIANT_ICONLEFT,
+                                    Collection::fromIterable(array_filter([
+                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
+                                        new Text(
+                                            TextVariant::VARIANT_SM,
+                                            Value::fromString($this->getLabel('list.learnMore')),
+                                            false
+                                        )
+                                    ]))
+                                ),
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    );
+            }
+        );
+
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            new Stack(
+                StackVariant::VARIANT_SM,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $topNewsNode->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
+                    ): null,
+                    new Grid(
+                        GridVariant::VARIANT_TWOCOLUMNSTHIRDAUTOGAP,
+                        Collection::fromIterable([
+                            new Stack(
+                                StackVariant::VARIANT_SM,
+                                Collection::fromIterable(array_filter([
+                                        $inBackend || $topNewsNode->getProperty('headline')
+                                            ? new Headline(
+                                            HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
+                                            HeadlineColor::COLOR_TEXT,
+                                            HeadlineType::TYPE_H2,
+                                            Editable::fromNodeProperty($topNewsNode, 'headline')
+                                        )
+                                            : null,
+                                        $overViewButton
+                                    ])
+                                )
+                            ),
+                            new CacheSegment(
+                                new PressOverview(
+                                    PressOverviewVariant::VARIANT_TOP_NEWS,
+                                    [],
+                                    $pressReleases
+                                ),
+                                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
+                            )
+                        ])
+                    )
+                ]))
+            )
+        );
+    }
+
+    public function forYearbookListSmallNode(
+        TraversableNodeInterface $site,
+        TraversableNodeInterface $topNewsNode,
+        bool $inBackend
+    ): SlotInterface
+    {
+        $targetUri = $this->uriService->getNodeUri(
+            $site->findNamedChildNode(NodeName::fromString('pressarchive'))
+        );
+        if ($topNewsNode->getProperty('category')) {
+            $targetUri = $targetUri->withFragment($topNewsNode->getProperty('category'));
+        }
+
+        $overViewButton = new Button(
+            ButtonType::TYPE_LINK,
+            ButtonVariant::VARIANT_CONTRAST,
+            new Grid(
+                GridVariant::VARIANT_ICONLEFT,
+                Collection::fromIterable(array_filter([
+                    new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
+                    Value::fromString($topNewsNode->getProperty('linkLabel') ?: $this->getLabel('list.seeOverview') ?: '')
+                ]))
+            ),
+            $targetUri,
+            '_self',
+            null
+        );
+
+        $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
+        $compact = $topNewsNode->getProperty('compact');
+
+        $pressReleases = Collection::fromNodes(
+            TraversableNodes::fromArray(
+                $topNewsNode->getProperty('news') ? array_slice($topNewsNode->getProperty('news'), 0, 8, true)
+                    : []
+            ),
+            function(Node $pressRelease) use($inBackend, $labels, $compact){
+                $pressVariant = PressVariant::tryFromNode($pressRelease);
+
+                $datePublished = $this->formattedDateFactory->createFullDate(
+                    $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
+                );
+
+                $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
+
+                $showImage = ($pressVariant !== PressVariant::VARIANT_NEWS) || $pressRelease->getProperty('showImage');
+
+                $figure = $imageSource && $showImage
+                    ? $this->figureFactory->forPressReleaseCard($imageSource)
+                    : null;
+
+                return $this->linkFactory->forLinkToDocument($pressRelease, null)
+                    ->asPlainLabel()->withContent(
+                        new PressReleaseCard(
+                            $pressVariant === PressVariant::VARIANT_NEWS
+                                ? ($compact
+                                ? PressReleaseCardVariant::VARIANT_TOP_COMPACT
+                                : PressReleaseCardVariant::VARIANT_TOP)
+                                : PressReleaseCardVariant::VARIANT_TOP_NEWS,
+                            $pressVariant === PressVariant::VARIANT_NEWS
+                                ? Value::fromString($datePublished ?: '')
+                                : null,
+                            $figure,
+                            Value::fromString(
+                                $pressRelease->getProperty('preview__headline')
+                                    ?: $pressRelease->getProperty('headline')
+                                    ?: ''
+                            ),
+                            Value::fromString(
+                                ($labels['label.filter.' . $pressVariant?->value] ?? '')
+                                . ' ' . $pressRelease->getProperty('edition')
+                            ),
+                            Value::fromString(
+                                $pressRelease->getProperty('preview__description')
+                                    ?: $pressRelease->getProperty('abstract')
+                                    ?: ''
+                            ),
+                            new Button(
+                                ButtonType::TYPE_REGULAR,
+                                ButtonVariant::VARIANT_CONTRAST,
+                                new Grid(
+                                    GridVariant::VARIANT_ICONLEFT,
+                                    Collection::fromIterable(array_filter([
+                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
+                                        new Text(
+                                            TextVariant::VARIANT_SM,
+                                            Value::fromString($this->getLabel('list.learnMore')),
+                                            false
+                                        )
+                                    ]))
+                                ),
+                                null,
+                                null,
+                                null
+                            )
+                        )
+                    );
+            }
+        );
+
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            new Stack(
+                StackVariant::VARIANT_SM,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $topNewsNode->getProperty('metaHeadline')
+                        ? new Separator(
+                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                        Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
+                    ): null,
+                    new Grid(
+                        GridVariant::VARIANT_TWOCOLUMNSTHIRDAUTOGAP,
+                        Collection::fromIterable([
+                            new Stack(
+                                StackVariant::VARIANT_SM,
+                                Collection::fromIterable(array_filter([
+                                        $inBackend || $topNewsNode->getProperty('headline')
+                                            ? new Headline(
+                                            HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
+                                            HeadlineColor::COLOR_TEXT,
+                                            HeadlineType::TYPE_H2,
+                                            Editable::fromNodeProperty($topNewsNode, 'headline')
+                                        )
+                                            : null,
+                                        $overViewButton
+                                    ])
+                                )
+                            ),
+                            new CacheSegment(
+                                new PressOverview(
+                                    PressOverviewVariant::VARIANT_TOP_NEWS,
+                                    [],
+                                    $pressReleases
+                                ),
+                                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
+                            )
+                        ])
+                    )
+                ]))
+            )
+        );
+    }
+
     private function getLabel(string $identifier): string
     {
         return $this->csvPOTranslator->getLabelFromTranslationResource(

@@ -1,0 +1,25 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsOverview':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.HannsList': true
+
+          'Hoerbiger.HoerbigerCom:Content.Text': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.Image': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+  ui:
+    icon: header
+    label: 'HANNS Overview'
+  properties:
+    searchType:
+      search:
+        indexing: '${"HANNS Overview"}'

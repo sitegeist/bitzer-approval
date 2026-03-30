@@ -93,4 +93,21 @@ final class StageFactory extends AbstractComponentPresentationObjectFactory
             null
         );
     }
+
+    public function forPressReleaseOverview(Node $pressRelease, bool $inBackend): StackStage
+    {
+        $imageSource = $this->imageSourceFactory->forImageMixin($pressRelease, $inBackend, true);
+
+        return new StackStage(
+            StageVariant::VARIANT_PRESS_OVERVIEW,
+            null,
+            null,
+            null,
+            null,
+            $imageSource
+                ? $this->figureFactory->forStackStage($imageSource)
+                : null,
+            null
+        );
+    }
 }

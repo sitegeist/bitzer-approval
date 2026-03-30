@@ -1,0 +1,85 @@
+prototype(Hoerbiger.Shared:Block.Card.HannsReleaseCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Card\\HannsReleaseCard\\HannsReleaseCard'
+    renderer = afx`
+        <div
+            data-card="press"
+            data-card-type={presentationObject.variant.value}
+            class={[
+                "[Block.Card.HannsReleaseCard (" + presentationObject.variant.value + ")]",
+                "flex flex-col space-y-[10px] justify-between"
+            ]}
+        >
+            <div
+                class={[
+                    "flex flex-col md:gap-sm space-y-[10px] justify-between",
+                    presentationObject.variant.equals('imageFirst') && "md:flex-row",
+                    presentationObject.variant.equals('imageLast') && "md:flex-row-reverse"
+                ]}
+            >
+                <div
+                    class="flex-1"
+                >
+                    <div
+                        @if.1={presentationObject.media}
+                        class="h-[441px]"
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.media}
+                        />
+                    </div>
+                </div>
+
+                <div
+                    class={[
+                        "flex-1",
+                        presentationObject.variant.equals('imageLast') && "md:text-right"
+                    ]}
+                >
+                    <div
+                        class="uppercase text-xs font-sans-bold text-service-red"
+                        @if.1={presentationObject.subheader}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.subheader}
+                        />
+                    </div>
+                    <div>
+                        <div
+                            class="uppercase text-xs text-service-lightGrey font-sans-bold"
+                            @if.1={presentationObject.datePublished}
+                        >
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                                presentationObject={presentationObject.datePublished}
+                            />
+                        </div>
+                        <div
+                            class={[
+                            (presentationObject.variant.equals('imageFirst')) && "text-2xl"
+                        ]}
+                            @if.1={presentationObject.header}
+                        >
+                            <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                                presentationObject={presentationObject.header}
+                            />
+                        </div>
+                    </div>
+                    <div
+                        class={[
+                        "card-hyphens"
+                    ]}
+                        @if.1={presentationObject.supportingText}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
+                    </div>
+
+                    <div
+                        class=""
+                        @if.1={presentationObject.buttons}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    `
+}

@@ -2,7 +2,8 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
     renderer = afx`
         <div class={[
             "[Layout.StackStage (" + presentationObject.variant.value + ")]",
-            "relative w-full flex flex-col pt-sm space-y-[40px]"
+            "relative w-full flex flex-col space-y-[40px]",
+            !presentationObject.variant.equals('pressOverview') && "pt-sm"
         ]}>
             <div
                 class="uppercase font-sans-bold"
@@ -15,7 +16,7 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
                 presentationObject={presentationObject.headline}
             />
             <hr
-                @if.1={!presentationObject.variant.equals('press') && !presentationObject.variant.equals('pressLarge')}
+                @if.1={!presentationObject.variant.equals('press') && !presentationObject.variant.equals('pressLarge') && !presentationObject.variant.equals('pressOverview')}
                 class="text-neutral mt-sm mb-xs"
             />
             <div
@@ -30,7 +31,8 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
             />
             <div
                 class={[
-                        "mt-sm",
+                        !presentationObject.variant.equals('pressOverview') && "mt-sm",
+                        presentationObject.variant.equals('pressOverview') && "mb-sm",
                         presentationObject.variant.equals('press') && "w-full max-w-[1050px] mx-auto",
                         presentationObject.variant.equals('pressLarge') && "w-full max-w-[1600px] mx-auto"
                     ]}

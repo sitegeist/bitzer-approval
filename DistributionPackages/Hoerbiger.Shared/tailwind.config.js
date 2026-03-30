@@ -348,6 +348,7 @@ module.exports = {
 				'slider-tabs': 'clamp(200px, 35%, 430px) 1fr',
 				'2-33-66': '1fr 2fr',
 				'2-66-33': '2fr 1fr',
+				'textWithImageExtended': '1fr 60%',
 			},
 
 			gridTemplateRows: {
