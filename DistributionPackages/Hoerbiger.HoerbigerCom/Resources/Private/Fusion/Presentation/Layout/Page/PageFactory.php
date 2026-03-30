@@ -450,28 +450,29 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 )
                     : null,
                 Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
-                new ContentContainer(
+                $overviewPageUri
+                    ? new ContentContainer(
                     ContentContainerVariant::VARIANT_REGULARX,
-                    new Button(
-                        ButtonType::TYPE_LINK,
-                        ButtonVariant::VARIANT_CONTRAST,
-                        new Grid(
-                            GridVariant::VARIANT_ICONLEFT,
-                            Collection::fromIterable(array_filter([
-                                new Icon(
-                                    'shared',
-                                    'chevronLeft',
-                                    IconSize::SIZE_SIZE_0_75,
-                                    IconColor::COLOR_CURRENT
-                                ),
-                                Value::fromString($labels['label.backToOverview']),
-                            ]))
+                        new Button(
+                            ButtonType::TYPE_LINK,
+                            ButtonVariant::VARIANT_CONTRAST,
+                            new Grid(
+                                GridVariant::VARIANT_ICONLEFT,
+                                Collection::fromIterable(array_filter([
+                                    new Icon(
+                                        'shared',
+                                        'chevronLeft',
+                                        IconSize::SIZE_SIZE_0_75,
+                                        IconColor::COLOR_CURRENT
+                                    ),
+                                    Value::fromString($labels['label.backToOverview']),
+                                ]))
+                            ),
+                            $overviewPageUri,
+                            '_self',
+                            null
                         ),
-                        $overviewPageUri,
-                        '_self',
-                        null
-                    ),
-                ),
+                    ): null,
                 new ContentContainer(
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
