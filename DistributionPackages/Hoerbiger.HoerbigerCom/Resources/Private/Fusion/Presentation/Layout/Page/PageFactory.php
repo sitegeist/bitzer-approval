@@ -85,7 +85,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         /** @var SlotInterface $stage */
         $stage = $this->stageFactory->forHeaderStage($protectedArea, $subgraph, $inBackend);
 
-        return $this->forPageWithoutFooter($siteNode, $protectedArea, null, $stage, $subgraph, $inBackend);
+        return $this->forPageWithSimpleFooter($siteNode, $protectedArea, null, $stage, $subgraph, $inBackend);
     }
 
     public function forProtectedPage(
@@ -100,7 +100,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $protectedAreaPage = $siteNode->findNamedChildNode(NodeName::fromString('protectedarea'));
 
 
-        return $this->forPageWithoutFooter(
+        return $this->forPageWithSimpleFooter(
             $siteNode,
             $protectedPage,
             $protectedAreaPage,
@@ -184,8 +184,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ]))
                 ),
                 Content::fromNode($homepage->findNamedChildNode(NodeName::fromString('main')))
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 
@@ -225,8 +224,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 
@@ -306,8 +304,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 
@@ -361,8 +358,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 
@@ -400,12 +396,11 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main')))
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 
-    private function forPageWithoutFooter(
+    private function forPageWithSimpleFooter(
         TraversableNodeInterface $site,
         TraversableNodeInterface $document,
         ?TraversableNodeInterface $overviewPageUri,
@@ -478,7 +473,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $breadcrumb
                 )
             ]), $identity),
-            false
+            simpleFooter: true
         );
     }
 
@@ -526,8 +521,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 }

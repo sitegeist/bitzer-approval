@@ -112,8 +112,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 
@@ -147,8 +146,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     $stage
                 ),
                 Content::fromNode($eventPage->findNamedChildNode(NodeName::fromString('main'))),
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 

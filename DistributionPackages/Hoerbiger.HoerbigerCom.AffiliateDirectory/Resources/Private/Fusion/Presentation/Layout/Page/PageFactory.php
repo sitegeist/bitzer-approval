@@ -87,8 +87,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ContentContainerVariant::VARIANT_REGULARX,
                     $breadcrumb
                 )
-            ]), $identity),
-            true
+            ]), $identity)
         );
     }
 }

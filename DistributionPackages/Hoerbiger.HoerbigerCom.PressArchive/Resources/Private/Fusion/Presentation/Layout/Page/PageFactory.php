@@ -122,9 +122,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ),
                 ]),
                 $identity
-            ),
-            true
-
+            )
         );
     }
 
@@ -237,8 +235,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                     ),
                 ]),
                 $identity
-            ),
-            true
+            )
         );
     }
 }

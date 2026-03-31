@@ -26,7 +26,8 @@ prototype(Hoerbiger.Shared:Layout.Page) < prototype(PackageFactory.AtomicFusion.
             <main class="flex-grow flex flex-col items-stretch z-content">
                 <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
             </main>
-            <Neos.Fusion:Renderer renderPath="/siteFooter" @if.hasFooter={presentationObject.hasFooter}/>
+            <Neos.Fusion:Renderer renderPath="/siteFooterSimple" @if.simpleFooter={presentationObject.simpleFooter} />
+            <Neos.Fusion:Renderer renderPath="/siteFooter" @if.defaultFooter={!presentationObject.simpleFooter} />
             <Hoerbiger.Shared:Block.ContactWidget />
         </div>
     `

@@ -16,7 +16,7 @@ final class Page extends AbstractComponentPresentationObject
     public function __construct(
         public readonly SiteHeader $siteHeader,
         public readonly SlotInterface $content,
-        public readonly bool $hasFooter
+        public readonly bool $simpleFooter = false
     ) {
     }
 }
