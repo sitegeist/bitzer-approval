@@ -98,12 +98,23 @@ class AffiliateRepository
 
     public function getDataSet(): Spreadsheet
     {
+        $basePath = pathinfo($this->dataSetPath, PATHINFO_DIRNAME);
+        $baseName = pathinfo($this->dataSetPath, PATHINFO_FILENAME);
+
+        if (file_exists($basePath . '/' . $baseName . '.xlsx')) {
+            $fileToLoad = $basePath . '/' . $baseName . '.xlsx';
+        } elseif (file_exists($basePath . '/' . $baseName . '.xls')) {
+            $fileToLoad = $basePath . '/' . $baseName . '.xls';
+        } else {
+            throw new \RuntimeException('No dataset file found for' . $baseName);
+        }
+
         $reader = IOFactory::createReaderForFile(
-            $this->dataSetPath
+            $fileToLoad
         );
 
         $reader->setReadDataOnly(true);
 
-        return $reader->load($this->dataSetPath);
+        return $reader->load($fileToLoad);
     }
 }
