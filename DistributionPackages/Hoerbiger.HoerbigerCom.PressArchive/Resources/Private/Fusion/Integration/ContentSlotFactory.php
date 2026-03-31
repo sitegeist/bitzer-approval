@@ -5,10 +5,14 @@ namespace Hoerbiger\HoerbigerCom\PressArchive\Integration;
  * This file is part of the Hoerbiger.HoerbigerCom.PressArchive package.
  */
 
+use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\YearbookOverview\YearbookOverview;
+use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\YearbookOverview\YearbookOverviewVariant;
 use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItem;
 use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\HannsReleaseCard\HannsReleaseCard;
 use Hoerbiger\Shared\Presentation\Block\Card\HannsReleaseCard\HannsReleaseCardVariant;
+use Hoerbiger\Shared\Presentation\Block\Card\YearbookReleaseCard\YearbookReleaseCard;
+use Hoerbiger\Shared\Presentation\Block\Card\YearbookReleaseCard\YearbookReleaseCardVariant;
 use Hoerbiger\Shared\Presentation\EnumProvider\HannsList\Layout;
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverview;
@@ -502,14 +506,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
 
         $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
-        $compact = $topNewsNode->getProperty('compact');
 
         $pressReleases = Collection::fromNodes(
             TraversableNodes::fromArray(
                 $topNewsNode->getProperty('news') ? array_slice($topNewsNode->getProperty('news'), 0, 8, true)
                     : []
             ),
-            function(Node $pressRelease) use($inBackend, $labels, $compact){
+            function(Node $pressRelease) use($inBackend, $labels){
                 $pressVariant = PressVariant::tryFromNode($pressRelease);
 
                 $datePublished = $this->formattedDateFactory->createFullDate(
@@ -526,12 +529,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
                 return $this->linkFactory->forLinkToDocument($pressRelease, null)
                     ->asPlainLabel()->withContent(
-                        new PressReleaseCard(
-                            $pressVariant === PressVariant::VARIANT_NEWS
-                                ? ($compact
-                                ? PressReleaseCardVariant::VARIANT_TOP_COMPACT
-                                : PressReleaseCardVariant::VARIANT_TOP)
-                                : PressReleaseCardVariant::VARIANT_TOP_NEWS,
+                        new YearbookReleaseCard(
+                            YearbookReleaseCardVariant::VARIANT_BIG,
                             $pressVariant === PressVariant::VARIANT_NEWS
                                 ? Value::fromString($datePublished ?: '')
                                 : null,
@@ -556,12 +555,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 new Grid(
                                     GridVariant::VARIANT_ICONLEFT,
                                     Collection::fromIterable(array_filter([
-                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
-                                        new Text(
-                                            TextVariant::VARIANT_SM,
-                                            Value::fromString($this->getLabel('list.learnMore')),
-                                            false
-                                        )
+                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1)
                                     ]))
                                 ),
                                 null,
@@ -583,33 +577,19 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                         Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
                     ): null,
-                    new Grid(
-                        GridVariant::VARIANT_TWOCOLUMNSTHIRDAUTOGAP,
-                        Collection::fromIterable([
-                            new Stack(
-                                StackVariant::VARIANT_SM,
-                                Collection::fromIterable(array_filter([
-                                        $inBackend || $topNewsNode->getProperty('headline')
-                                            ? new Headline(
-                                            HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
-                                            HeadlineColor::COLOR_TEXT,
-                                            HeadlineType::TYPE_H2,
-                                            Editable::fromNodeProperty($topNewsNode, 'headline')
-                                        )
-                                            : null,
-                                        $overViewButton
-                                    ])
-                                )
-                            ),
-                            new CacheSegment(
-                                new PressOverview(
-                                    PressOverviewVariant::VARIANT_TOP_NEWS,
-                                    [],
-                                    $pressReleases
-                                ),
-                                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
-                            )
-                        ])
+                    $inBackend || $topNewsNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
+                            HeadlineColor::COLOR_TEXT,
+                            HeadlineType::TYPE_H2,
+                            Editable::fromNodeProperty($topNewsNode, 'headline')
+                        )
+                        : null,
+
+
+                    new YearbookOverview(
+                        YearbookOverviewVariant::VARIANT_BIG_CARDS,
+                        $pressReleases
                     )
                 ]))
             )
@@ -645,14 +625,13 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         );
 
         $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
-        $compact = $topNewsNode->getProperty('compact');
 
         $pressReleases = Collection::fromNodes(
             TraversableNodes::fromArray(
                 $topNewsNode->getProperty('news') ? array_slice($topNewsNode->getProperty('news'), 0, 8, true)
                     : []
             ),
-            function(Node $pressRelease) use($inBackend, $labels, $compact){
+            function(Node $pressRelease) use($inBackend, $labels){
                 $pressVariant = PressVariant::tryFromNode($pressRelease);
 
                 $datePublished = $this->formattedDateFactory->createFullDate(
@@ -669,12 +648,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
                 return $this->linkFactory->forLinkToDocument($pressRelease, null)
                     ->asPlainLabel()->withContent(
-                        new PressReleaseCard(
-                            $pressVariant === PressVariant::VARIANT_NEWS
-                                ? ($compact
-                                ? PressReleaseCardVariant::VARIANT_TOP_COMPACT
-                                : PressReleaseCardVariant::VARIANT_TOP)
-                                : PressReleaseCardVariant::VARIANT_TOP_NEWS,
+                        new YearbookReleaseCard(
+                            YearbookReleaseCardVariant::VARIANT_SMALL,
                             $pressVariant === PressVariant::VARIANT_NEWS
                                 ? Value::fromString($datePublished ?: '')
                                 : null,
@@ -699,12 +674,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 new Grid(
                                     GridVariant::VARIANT_ICONLEFT,
                                     Collection::fromIterable(array_filter([
-                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
-                                        new Text(
-                                            TextVariant::VARIANT_SM,
-                                            Value::fromString($this->getLabel('list.learnMore')),
-                                            false
-                                        )
+                                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1)
                                     ]))
                                 ),
                                 null,
@@ -726,33 +696,18 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                         SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
                         Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
                     ): null,
-                    new Grid(
-                        GridVariant::VARIANT_TWOCOLUMNSTHIRDAUTOGAP,
-                        Collection::fromIterable([
-                            new Stack(
-                                StackVariant::VARIANT_SM,
-                                Collection::fromIterable(array_filter([
-                                        $inBackend || $topNewsNode->getProperty('headline')
-                                            ? new Headline(
-                                            HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
-                                            HeadlineColor::COLOR_TEXT,
-                                            HeadlineType::TYPE_H2,
-                                            Editable::fromNodeProperty($topNewsNode, 'headline')
-                                        )
-                                            : null,
-                                        $overViewButton
-                                    ])
-                                )
-                            ),
-                            new CacheSegment(
-                                new PressOverview(
-                                    PressOverviewVariant::VARIANT_TOP_NEWS,
-                                    [],
-                                    $pressReleases
-                                ),
-                                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.PressReleaseList'
-                            )
-                        ])
+                    $inBackend || $topNewsNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
+                            HeadlineColor::COLOR_TEXT,
+                                HeadlineType::TYPE_H2,
+                            Editable::fromNodeProperty($topNewsNode, 'headline')
+                        )
+                        : null,
+
+                    new YearbookOverview(
+                        YearbookOverviewVariant::VARIANT_SMALL_CARDS,
+                        $pressReleases
                     )
                 ]))
             )
