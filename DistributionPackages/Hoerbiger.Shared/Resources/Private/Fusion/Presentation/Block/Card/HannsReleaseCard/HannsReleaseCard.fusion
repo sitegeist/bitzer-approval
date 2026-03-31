@@ -11,7 +11,7 @@ prototype(Hoerbiger.Shared:Block.Card.HannsReleaseCard) < prototype(Hoerbiger.Sh
         >
             <div
                 class={[
-                    "flex flex-col md:gap-sm space-y-[10px] justify-between",
+                    "flex flex-col md:gap-sm space-y-[10px] md:space-y-0 justify-between",
                     presentationObject.variant.equals('imageFirst') && "md:flex-row",
                     presentationObject.variant.equals('imageLast') && "md:flex-row-reverse"
                 ]}
@@ -31,41 +31,30 @@ prototype(Hoerbiger.Shared:Block.Card.HannsReleaseCard) < prototype(Hoerbiger.Sh
 
                 <div
                     class={[
-                        "flex-1",
+                        "flex-1 flex flex-col gap-[16px]",
                         presentationObject.variant.equals('imageLast') && "md:text-right"
                     ]}
                 >
                     <div
-                        class="uppercase text-xs font-sans-bold text-service-red"
+                        class="uppercase text-xl font-sans-bold text-service-red"
                         @if.1={presentationObject.subheader}
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot
                             presentationObject={presentationObject.subheader}
                         />
                     </div>
-                    <div>
-                        <div
-                            class="uppercase text-xs text-service-lightGrey font-sans-bold"
-                            @if.1={presentationObject.datePublished}
-                        >
-                            <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                                presentationObject={presentationObject.datePublished}
-                            />
-                        </div>
-                        <div
-                            class={[
-                            (presentationObject.variant.equals('imageFirst')) && "text-2xl"
-                        ]}
-                            @if.1={presentationObject.header}
-                        >
-                            <PackageFactory.AtomicFusion.PresentationObjects:Slot
-                                presentationObject={presentationObject.header}
-                            />
-                        </div>
+                    <div
+                        class={["text-2xl"]}
+                        @if.1={presentationObject.header}
+                    >
+                        <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                            presentationObject={presentationObject.header}
+                        />
                     </div>
+
                     <div
                         class={[
-                        "card-hyphens"
+                        "card-hyphens text-lg"
                     ]}
                         @if.1={presentationObject.supportingText}
                     >
@@ -73,7 +62,9 @@ prototype(Hoerbiger.Shared:Block.Card.HannsReleaseCard) < prototype(Hoerbiger.Sh
                     </div>
 
                     <div
-                        class=""
+                        class={[
+                            presentationObject.variant.equals('imageLast') &&  "flex justify-end"
+                        ]}
                         @if.1={presentationObject.buttons}
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} />

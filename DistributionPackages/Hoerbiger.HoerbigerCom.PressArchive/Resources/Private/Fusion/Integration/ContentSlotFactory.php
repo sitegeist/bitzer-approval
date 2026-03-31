@@ -408,7 +408,6 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             $layout === HannsReleaseCardVariant::VARIANT_ALTERNATING
                                 ? ($index % 2 == 0 ? HannsReleaseCardVariant::VARIANT_IMAGE_FIRST : HannsReleaseCardVariant::VARIANT_IMAGE_LAST)
                                 : $layout,
-                            null,
                             $figure,
                             Value::fromString(
                                 $pressRelease->getProperty('preview__headline')
@@ -431,11 +430,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                     GridVariant::VARIANT_ICONLEFT,
                                     Collection::fromIterable(array_filter([
                                         new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
-                                        new Text(
-                                            TextVariant::VARIANT_SM,
-                                            Value::fromString($this->getLabel('list.learnMore')),
-                                            false
-                                        )
+                                        Value::fromString("")
                                     ]))
                                 ),
                                 null,

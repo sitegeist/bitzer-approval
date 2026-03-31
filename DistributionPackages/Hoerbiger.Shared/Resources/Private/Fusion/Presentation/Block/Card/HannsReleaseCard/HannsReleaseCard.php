@@ -15,7 +15,6 @@ final class HannsReleaseCard extends AbstractComponentPresentationObject
 {
     public function __construct(
         public readonly HannsReleaseCardVariant $variant,
-        public readonly ?SlotInterface $datePublished,
         public readonly ?SlotInterface $media,
         public readonly ?SlotInterface $header,
         public readonly ?SlotInterface $subheader,

@@ -3,7 +3,8 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
         <div class={[
             "[Layout.StackStage (" + presentationObject.variant.value + ")]",
             "relative w-full flex flex-col space-y-[40px]",
-            !presentationObject.variant.equals('pressOverview') && "pt-sm"
+            !presentationObject.variant.equals('pressOverview') && "pt-sm",
+            presentationObject.variant.equals('pressOverview') && "h-[500px] max-h-[500px]"
         ]}>
             <div
                 class="uppercase font-sans-bold"
@@ -32,14 +33,17 @@ prototype(Hoerbiger.Shared:Layout.Stage.StackStage) < prototype(Hoerbiger.Shared
             <div
                 class={[
                         !presentationObject.variant.equals('pressOverview') && "mt-sm",
-                        presentationObject.variant.equals('pressOverview') && "mb-sm",
+                        presentationObject.variant.equals('pressOverview') && "mb-sm h-full",
                         presentationObject.variant.equals('press') && "w-full max-w-[1050px] mx-auto",
                         presentationObject.variant.equals('pressLarge') && "w-full max-w-[1600px] mx-auto"
                     ]}
             >
                 <div
                     @if.1={presentationObject.media}
-                    class="w-full pt-[5px]"
+                    class={[
+                        "w-full pt-[5px]",
+                        presentationObject.variant.equals('pressOverview') && "h-full"
+                    ]}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.media}/>
                 </div>
