@@ -12,10 +12,6 @@
           '*': false
           'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
           'Hoerbiger.HoerbigerCom.PressArchive:Content.HannsList': true
-
-          'Hoerbiger.HoerbigerCom:Content.Text': true
-          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-          'Hoerbiger.HoerbigerCom:Content.Image': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
   ui:
     icon: header

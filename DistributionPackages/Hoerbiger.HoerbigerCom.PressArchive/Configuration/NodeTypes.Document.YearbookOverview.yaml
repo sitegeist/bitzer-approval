@@ -13,10 +13,6 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
           'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListBig': true
           'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListSmall': true
-
-          'Hoerbiger.HoerbigerCom:Content.Text': true
-          'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
-          'Hoerbiger.HoerbigerCom:Content.Image': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
   ui:
     icon: book
