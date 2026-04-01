@@ -59,6 +59,8 @@
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
       'Hoerbiger.HoerbigerCom.Events:Document.Events': true
+      'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsOverview': true
+      'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookOverview': true
   ui:
     icon: globe
     label: 'Homepage'
