@@ -10,7 +10,7 @@ prototype(Hoerbiger.Shared:Block.AccordionItem) < prototype(PackageFactory.Atomi
     renderer = afx`
         <div
             class={[
-                "[Block.AccordionItem]",
+                "[Block.AccordionItem (" + presentationObject.variant.value + ")]",
                 "w-full",
                 presentationObject.variant.equals("regular") && "bg-neutral-lighter w-full"
             ]}
@@ -60,7 +60,8 @@ prototype(Hoerbiger.Shared:Block.AccordionItem) < prototype(PackageFactory.Atomi
                 </summary>
                 <section
                     class={[
-                        presentationObject.variant.equals("regular") && "px-xs"
+                        presentationObject.variant.equals("regular") && "px-xs",
+                        presentationObject.variant.equals("hannsList") && "pt-xs"
                     ]}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />

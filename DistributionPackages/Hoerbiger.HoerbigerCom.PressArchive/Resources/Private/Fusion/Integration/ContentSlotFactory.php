@@ -13,7 +13,6 @@ use Hoerbiger\Shared\Presentation\Block\Card\HannsReleaseCard\HannsReleaseCard;
 use Hoerbiger\Shared\Presentation\Block\Card\HannsReleaseCard\HannsReleaseCardVariant;
 use Hoerbiger\Shared\Presentation\Block\Card\YearbookReleaseCard\YearbookReleaseCard;
 use Hoerbiger\Shared\Presentation\Block\Card\YearbookReleaseCard\YearbookReleaseCardVariant;
-use Hoerbiger\Shared\Presentation\EnumProvider\HannsList\Layout;
 use Neos\Flow\Annotations as Flow;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverview;
 use Hoerbiger\HoerbigerCom\PressArchive\Presentation\Application\PressOverview\PressOverviewVariant;
@@ -54,6 +53,7 @@ use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\NodeAggregate\NodeName;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
+use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection;
@@ -93,6 +93,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forContentNode(
         TraversableNodeInterface $contentNode,
+        ContentContext $subgraph,
         bool $inBackend,
         TraversableNodeInterface $site
     ): SlotInterface {
@@ -102,7 +103,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             case 'Hoerbiger.HoerbigerCom.PressArchive:Content.TopNews':
                 return $this->forTopNewsNode($site, $contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.PressArchive:Content.HannsList':
-                return $this->forHannsListNode($site, $contentNode, $inBackend);
+                return $this->forHannsListNode($site, $subgraph, $contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListBig':
                 return $this->forYearbookListBigNode($site, $contentNode, $inBackend);
             case 'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListSmall':
@@ -363,28 +364,32 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forHannsListNode(
         TraversableNodeInterface $site,
+        ContentContext $subgraph,
         TraversableNodeInterface $hannsListNode,
         bool $inBackend
     ): SlotInterface
     {
-        $targetUri = $this->uriService->getNodeUri(
-            $site->findNamedChildNode(NodeName::fromString('pressarchive'))
-        );
+        $overViewButton = null;
 
-        $overViewButton = new Button(
-            ButtonType::TYPE_LINK,
-            ButtonVariant::VARIANT_CONTRAST,
-            new Grid(
-                GridVariant::VARIANT_ICONLEFT,
-                Collection::fromIterable(array_filter([
-                    new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
-                    Value::fromString($hannsListNode->getProperty('linkLabel') ?: $this->getLabel('list.seeOverview.hanns') ?: '')
-                ]))
-            ),
-            $targetUri,
-            '_self',
-            null
-        );
+        if ($hannsListNode->getProperty('link__target')) {
+            $overViewButton = new Button(
+                ButtonType::TYPE_LINK,
+                ButtonVariant::VARIANT_CONTRAST,
+                new Grid(
+                    GridVariant::VARIANT_ICONLEFT,
+                    Collection::fromIterable(array_filter([
+                        new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1_5),
+                        Value::fromString($hannsListNode->getProperty('link__label') ?: '')
+                    ]))
+                ),
+                $this->linkFactory->resolveRawLinkTargetUri(
+                    $hannsListNode->getProperty('link__target'),
+                    $subgraph
+                ),
+                '_self',
+                null
+            );
+        }
 
         $labels = $this->csvPOTranslator->getLabels(PressOverview::class);
 

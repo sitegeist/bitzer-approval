@@ -29,7 +29,7 @@ prototype(Hoerbiger.Shared:Block.Card.YearbookReleaseCard) < prototype(Hoerbiger
 
                 <div
                     class={[
-                        "card-hyphens text-2xl"
+                        "card-hyphens text-2xl h-[66px] line-clamp-2"
                     ]}
                     @if.1={presentationObject.header}
                 >
