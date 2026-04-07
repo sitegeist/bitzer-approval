@@ -15,7 +15,7 @@ prototype(Hoerbiger.Shared:Block.TeaserItem) < prototype(PackageFactory.AtomicFu
             ]}
         >
             <div class="flex w-full h-[320px] max-h-[320px] relative">
-                <div class="w-full h-0 pt-ratio-16-10 z-30">
+                <div class="w-full h-0 z-30">
                     <div class="absolute inset-0">
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot
                             presentationObject={presentationObject.figure}
