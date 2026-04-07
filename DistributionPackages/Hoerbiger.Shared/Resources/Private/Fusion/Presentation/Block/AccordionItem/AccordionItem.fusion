@@ -60,7 +60,7 @@ prototype(Hoerbiger.Shared:Block.AccordionItem) < prototype(PackageFactory.Atomi
                 </summary>
                 <section
                     class={[
-                        presentationObject.variant.equals("regular") && "px-xs",
+                        presentationObject.variant.equals("regular") && "p-xs",
                         presentationObject.variant.equals("hannsList") && "pt-xs"
                     ]}
                 >
