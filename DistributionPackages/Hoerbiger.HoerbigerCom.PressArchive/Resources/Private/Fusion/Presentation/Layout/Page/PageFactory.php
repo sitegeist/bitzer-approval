@@ -123,7 +123,6 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ]),
                 $identity
             )
-
         );
     }
 

@@ -1,0 +1,40 @@
+prototype(Hoerbiger.HoerbigerCom:Document.ProtectedPage) < prototype(Neos.Fusion:Case) {
+    @context.protectedAreaNode = ${q(site).find('protectedarea').get(0)}
+    backend {
+        condition = ${node.context.inBackend}
+        renderer = Hoerbiger.HoerbigerCom:Document.Base {
+            body = Hoerbiger.Shared:Layout.Page {
+                presentationObject = ${Hoerbiger.Page.forProtectedPage(documentNode, site, documentNode.context.inBackend, site.context)}
+            }
+        }
+    }
+
+    fe-authorized {
+        condition = ${!node.context.inBackend && request.httpRequest.headers['Authorization'][0] == 'Basic ' + String.base64encode(q(protectedAreaNode).property("username") + ':' + q(protectedAreaNode).property("password"))}
+        renderer = Hoerbiger.HoerbigerCom:Document.Base {
+            body = Hoerbiger.Shared:Layout.Page {
+                presentationObject = ${Hoerbiger.Page.forProtectedPage(documentNode, site, documentNode.context.inBackend, site.context)}
+            }
+        }
+    }
+
+    fe-unauthorized {
+        condition = true
+        renderer = Neos.Fusion:Http.Message {
+            httpResponseHead = Neos.Fusion:Http.ResponseHead {
+                statusCode = 401
+                headers {
+                    WWW-Authenticate = ${'Basic realm="hoerbiger - ' + q(documentNode).property("title")  + '", charset="UTF-8"'}
+                }
+            }
+        }
+    }
+    @cache {
+        mode = "uncached"
+        context {
+            1 = 'node'
+            2 = 'documentNode'
+            3 = 'site'
+        }
+    }
+}

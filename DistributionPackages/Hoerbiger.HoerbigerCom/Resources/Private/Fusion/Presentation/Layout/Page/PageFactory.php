@@ -8,16 +8,22 @@ namespace Hoerbiger\HoerbigerCom\Presentation\Layout\Page;
 use Hoerbiger\HoerbigerCom\Presentation\Application\SearchForm\SearchFormFactory;
 use Hoerbiger\Shared\Domain\Anchor;
 use Hoerbiger\Shared\Domain\Sailor;
+use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigation;
 use Hoerbiger\Shared\Presentation\Block\AnchorNavigation\AnchorNavigationVariant;
+use Hoerbiger\Shared\Presentation\Block\Button\Button;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonType;
+use Hoerbiger\Shared\Presentation\Block\Button\ButtonVariant;
 use Hoerbiger\Shared\Presentation\Block\Figure\ImageSourceFactory;
-use Hoerbiger\HoerbigerCom\ApplicationWorlds\Presentation\Layout\Slidable\SlidableFactory;
 use Hoerbiger\HoerbigerCom\Presentation\Application\ContactForm\ContactFormFactory;
 use Hoerbiger\Shared\Presentation\Block\Breadcrumb\BreadcrumbFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineColor;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineSize;
 use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
+use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
+use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory;
@@ -26,6 +32,8 @@ use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Layout\AnimatedContentContainer\AnimatedContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\AnimatedContentContainer\AnimatedContentContainerFactory;
 use Hoerbiger\Shared\Presentation\Layout\AnimatedContentContainer\AnimatedContentContainerVariant;
+use Hoerbiger\Shared\Presentation\Layout\Grid\Grid;
+use Hoerbiger\Shared\Presentation\Layout\Grid\GridVariant;
 use Hoerbiger\Shared\Presentation\Layout\Stage\StageFactory;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainer;
 use Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerVariant;
@@ -38,6 +46,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 final class PageFactory extends AbstractComponentPresentationObjectFactory
 {
@@ -47,6 +56,7 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         private readonly SiteHeaderFactory $siteHeaderFactory,
         private readonly LinkFactory $linkFactory,
         private readonly BreadcrumbFactory $breadcrumbFactory,
+        private readonly CsvPOTranslator $csvPOTranslator,
     ) {
     }
 
@@ -64,6 +74,40 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
         $stage = $this->stageFactory->forHeaderStage($privacyPage, $subgraph, $inBackend);
 
         return $this->forDocumentWithIntroduction($siteNode, $privacyPage, $stage, $subgraph, $inBackend);
+    }
+
+    public function forProtectedArea(
+        TraversableNodeInterface $protectedArea,
+        TraversableNodeInterface $siteNode,
+        bool $inBackend,
+        ContentContext $subgraph
+    ): Page {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forHeaderStage($protectedArea, $subgraph, $inBackend);
+
+        return $this->forPageWithSimpleFooter($siteNode, $protectedArea, null, $stage, $subgraph, $inBackend);
+    }
+
+    public function forProtectedPage(
+        TraversableNodeInterface $protectedPage,
+        TraversableNodeInterface $siteNode,
+        bool $inBackend,
+        ContentContext $subgraph
+    ): Page {
+        /** @var SlotInterface $stage */
+        $stage = $this->stageFactory->forHeaderStage($protectedPage, $subgraph, $inBackend);
+
+        $protectedAreaPage = $siteNode->findNamedChildNode(NodeName::fromString('protectedarea'));
+
+
+        return $this->forPageWithSimpleFooter(
+            $siteNode,
+            $protectedPage,
+            $protectedAreaPage,
+            $stage,
+            $subgraph,
+            $inBackend
+        );
     }
 
     public function forHomePage(TraversableNodeInterface $homepage, bool $inBackend, ContentContext $subgraph): Page
@@ -353,6 +397,83 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                 ),
                 Content::fromNode($notFoundPage->findNamedChildNode(NodeName::fromString('main')))
             ]), $identity)
+        );
+    }
+
+    private function forPageWithSimpleFooter(
+        TraversableNodeInterface $site,
+        TraversableNodeInterface $document,
+        ?TraversableNodeInterface $overviewPageUri,
+        SlotInterface $stage,
+        ContentContext $subgraph,
+        bool $inBackend,
+    ): Page
+    {
+        $labels = $this->csvPOTranslator->getLabels(Button::class);
+
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        /** @var SlotInterface $breadcrumb */
+        $breadcrumb = $this->breadcrumbFactory->forPage($document, $subgraph);
+
+        $anchors = (new Sailor())->findAvailableAnchorsForDocument($document);
+
+        $overviewPageUri = $overviewPageUri ? $this->uriService->getNodeUri($overviewPageUri) : null;
+
+        return new Page(
+            $this->siteHeaderFactory->forDocument(
+                $document,
+                $site,
+                $subgraph,
+                $inBackend,
+                null,
+            ),
+            Collection::fromIterable(array_filter([
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_BLANK_BOTTOM,
+                    $stage
+                ),
+                count($anchors) > 0
+                    ? new AnchorNavigation(
+                    AnchorNavigationVariant::VARIANT_REGULAR,
+                    array_map(
+                        fn(Anchor $anchor): Link => $this->linkFactory->forAnchor($anchor),
+                        $anchors
+                    )
+                )
+                    : null,
+                Content::fromNode($document->findNamedChildNode(NodeName::fromString('main'))),
+                $overviewPageUri
+                    ? new ContentContainer(
+                    ContentContainerVariant::VARIANT_REGULARX,
+                        new Button(
+                            ButtonType::TYPE_LINK,
+                            ButtonVariant::VARIANT_CONTRAST,
+                            new Grid(
+                                GridVariant::VARIANT_ICONLEFT,
+                                Collection::fromIterable(array_filter([
+                                    new Icon(
+                                        'shared',
+                                        'chevronLeft',
+                                        IconSize::SIZE_SIZE_0_75,
+                                        IconColor::COLOR_CURRENT
+                                    ),
+                                    Value::fromString($labels['label.backToOverview']),
+                                ]))
+                            ),
+                            $overviewPageUri,
+                            '_self',
+                            null
+                        ),
+                    ): null,
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_REGULARX,
+                    $breadcrumb
+                )
+            ]), $identity),
+            simpleFooter: true
         );
     }
 

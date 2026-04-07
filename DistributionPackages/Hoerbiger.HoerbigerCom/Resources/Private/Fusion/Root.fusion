@@ -16,3 +16,7 @@ siteFooter = Hoerbiger.Shared:Block.SiteFooter {
         }
     }
 }
+
+siteFooterSimple = Hoerbiger.Shared:Block.SiteFooterSimple {
+    presentationObject = ${Shared.SiteFooterSimple.forDocument(documentNode, site)}
+}

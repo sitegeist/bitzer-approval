@@ -4,6 +4,7 @@ Neos:
       DimensionResolution: Hoerbiger\Shared\Application\DimensionResolutionHelper
       Shared.SiteHeader: Hoerbiger\Shared\Presentation\Block\SiteHeader\SiteHeaderFactory
       Shared.SiteFooter: Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterFactory
+      Shared.SiteFooterSimple: Hoerbiger\Shared\Presentation\Block\SiteFooter\SiteFooterSimpleFactory
       Shared.Page: Hoerbiger\Shared\Presentation\Layout\Page\PageFactory
       Shared.Quotation: Hoerbiger\Shared\Presentation\Block\Quotation\QuotationFactory
       Shared.ContentContainer: Hoerbiger\Shared\Presentation\Layout\ContentContainer\ContentContainerFactory

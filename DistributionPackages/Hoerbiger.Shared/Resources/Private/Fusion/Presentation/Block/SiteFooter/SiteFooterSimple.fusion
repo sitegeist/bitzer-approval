@@ -1,0 +1,25 @@
+prototype(Hoerbiger.Shared:Block.SiteFooterSimple) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\SiteFooter\\SiteFooterSimple'
+
+    renderer = afx`
+        <footer class={[
+            "[Block.SiteFooterSimple]",
+            "w-full max-w-screen flex-flex-col items-stretch z-[0]"
+        ]}>
+            <div class="bg-neutral-footer border border-t-2 border-t-light font-sans-regular">
+                <div class="mx-auto max-w-content-full px-md py-sm">
+                    <a href={presentationObject.siteUri}>
+                        <img
+                            alt="Logo Hoerbiger"
+                            title="Hoerbiger"
+                            class="max-w-[160px] block"
+                            width="169"
+                            height="80"
+                            src={presentationObject.logoUri}
+                        />
+                    </a>
+                </div>
+            </div>
+        </footer>
+    `
+}
