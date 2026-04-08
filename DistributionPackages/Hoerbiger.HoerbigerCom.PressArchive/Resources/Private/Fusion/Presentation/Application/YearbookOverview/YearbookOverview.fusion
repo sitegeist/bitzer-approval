@@ -1,0 +1,39 @@
+prototype(Hoerbiger.HoerbigerCom.PressArchive:Application.YearbookOverview) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\PressArchive\\Presentation\\Application\\YearbookOverview\\YearbookOverview'
+
+    @styleguide {
+        title = 'YearbookOverview'
+
+        props {
+            metaCard = '- Add Slot Content -'
+            cards = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                "[Application.YearbookOverview]",
+                "w-full"
+            ]}
+        >
+            <div
+                class={[
+                    "grid w-full",
+                    presentationObject.variant.equals('smallCards') && "grid-cols-1 gap-xs",
+                    presentationObject.variant.equals('smallCards') && Array.length(presentationObject.cards.items) == 1 && "mx-auto md:max-w-[33%] xl:max-w-[20%]",
+                    presentationObject.variant.equals('smallCards') && Array.length(presentationObject.cards.items) == 2 && "md:grid-cols-2 mx-auto md:max-w-[66%] xl:max-w-[40%]",
+                    presentationObject.variant.equals('smallCards') && Array.length(presentationObject.cards.items) == 3 && "md:grid-cols-2 lg:grid-cols-3 mx-auto xl:max-w-[60%]",
+                    presentationObject.variant.equals('smallCards') && Array.length(presentationObject.cards.items) == 4 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-auto xl:max-w-[80%]",
+                    presentationObject.variant.equals('smallCards') && Array.length(presentationObject.cards.items) > 4 && "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-xs",
+
+                    presentationObject.variant.equals('bigCards') && Array.length(presentationObject.cards.items) == 1 && "grid-cols-1 mx-auto md:max-w-[66%] lg:max-w-[33%]",
+                    presentationObject.variant.equals('bigCards') && Array.length(presentationObject.cards.items) == 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md mx-auto lg:max-w-[66%]",
+                    presentationObject.variant.equals('bigCards') && Array.length(presentationObject.cards.items) > 2 && "grid-cols-1 gap-xl md:grid-cols-2 md:gap-x-sm md:gap-y-md lg:grid-cols-3"
+                ]}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.cards} />
+            </div>
+        </div>
+    `
+}

@@ -1,0 +1,23 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookOverview':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Document': true
+    'Hoerbiger.HoerbigerCom:Mixin.Preview': true
+    'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
+    'Hoerbiger.Shared:Mixin.Searchable': true
+  childNodes:
+    main:
+      type: 'Neos.Neos:ContentCollection'
+      constraints:
+        nodeTypes:
+          '*': false
+          'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListBig': true
+          'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListSmall': true
+          'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+  ui:
+    icon: book
+    label: 'Yearbook Overview'
+  properties:
+    searchType:
+      search:
+        indexing: '${"Yearbook Overview"}'

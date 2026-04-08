@@ -1,0 +1,56 @@
+prototype(Hoerbiger.Shared:Block.Card.YearbookReleaseCard) < prototype(Hoerbiger.Shared:Block.AbstractCard) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\Card\\YearbookReleaseCard\\YearbookReleaseCard'
+    renderer = afx`
+        <div
+            class={[
+                "[Block.Card.YearbookReleaseCard (" + presentationObject.variant.value + ")]",
+                "flex flex-col w-full h-full relative"
+            ]}
+        >
+            <div
+                class="relative w-full h-0 pt-ratio-1-1 mb-xs md:mb-ch"
+                @if.1={presentationObject.media}
+            >
+                <div class="absolute inset-0">
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.media}
+                    />
+                </div>
+            </div>
+            <div class="flex flex-col space-y-ch">
+                <div
+                    class="uppercase text-xl font-sans-bold text-service-red"
+                    @if.1={presentationObject.subheader}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.subheader}
+                    />
+                </div>
+
+                <div
+                    class={[
+                        "card-hyphens text-2xl h-[66px] line-clamp-2"
+                    ]}
+                    @if.1={presentationObject.header}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot
+                        presentationObject={presentationObject.header}
+                    />
+                </div>
+
+                <div
+                    class="card-hyphens text-xl"
+                    @if.1={presentationObject.supportingText && !presentationObject.variant.equals('topCompact')}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.supportingText} />
+                </div>
+
+                <div
+                    @if.1={presentationObject.buttons}
+                >
+                    <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.buttons} />
+                </div>
+            </div>
+        </div>
+    `
+}

@@ -29,4 +29,7 @@ enum GridVariant:string implements ProtectedContextAwareInterface
 
     case VARIANT_TWO_33_66 = 'twoColumns3366';
     case VARIANT_TWO_66_33 = 'twoColumns6633';
+
+    case VARIANT_PRESS_OVERVIEW = 'pressOverview';
+    case VARIANT_TEXT_IMAGE_EXTENDED = 'textImageExtended';
 }

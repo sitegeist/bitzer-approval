@@ -1,0 +1,44 @@
+'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListSmall':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+    'Hoerbiger.HoerbigerCom:Mixin.Link': true
+  ui:
+    label: 'Yearbook List (small)'
+    icon: star
+    inspector:
+      groups:
+        yearbook:
+          label: 'Yearbook'
+          icon: 'star'
+  properties:
+    metaHeadline:
+      options:
+        preset: 'rte.plainWithStrong'
+      ui:
+        inline:
+          editorOptions:
+            placeholder: 'Please enter headline'
+      search:
+        fulltextExtractor: ${Indexing.extractInto('p', value)}
+        elasticSearchMapping:
+          type: text
+    news:
+      type: references
+      ui:
+        label: 'Yearbook Releases'
+        reloadPageIfChanged: true
+        inspector:
+          group: 'yearbook'
+          editorOptions:
+            nodeTypes:
+              - 'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease'
+    linkLabel:
+      type: string
+      ui:
+        label: 'Link-Label'
+        reloadIfChanged: true
+        inspector:
+          group: 'news'
+      options:
+        automaticTranslation: true

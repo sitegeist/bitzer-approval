@@ -18,6 +18,7 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\StringLike
 final class AccordionItem extends AbstractComponentPresentationObject
 {
     public function __construct(
+        public readonly AccordionItemVariant $variant,
         public readonly StringLike $header,
         public readonly SlotInterface $content,
         public readonly Icon $dashIcon,

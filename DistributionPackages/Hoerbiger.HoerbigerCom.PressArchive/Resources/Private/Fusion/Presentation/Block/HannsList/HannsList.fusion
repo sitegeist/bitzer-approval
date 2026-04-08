@@ -1,0 +1,29 @@
+prototype(Hoerbiger.HoerbigerCom.PressArchive:Block.HannsList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\HoerbigerCom\\PressArchive\\Presentation\\Block\\HannsList\\HannsList'
+
+    @styleguide {
+        title = 'HannsList'
+
+        props {
+            metaCard = '- Add Slot Content -'
+            cards = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                "[Application.HannsList]"
+            ]}
+        >
+            <div
+                data-grid="cards"
+                class={[
+                    "press-overview-grid-mobile md:press-overview-grid-tablet lg:press-overview-grid"
+                ]}
+            >
+                <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.cards} />
+            </div>
+        </div>
+    `
+}

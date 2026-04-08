@@ -24,6 +24,7 @@
           'Hoerbiger.HoerbigerCom:Content.Quotation': true
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
+          'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
           'Hoerbiger.HoerbigerCom:Content.ImageOverlappedByText': true
           'Hoerbiger.HoerbigerCom:Content.MostWanted': true
           'Hoerbiger.HoerbigerCom:Content.Video': true
@@ -61,6 +62,8 @@
       'Hoerbiger.HoerbigerCom:Document.WebPage': true
       'Hoerbiger.HoerbigerCom:Document.Shortcut': true
       'Hoerbiger.HoerbigerCom.Events:Document.Events': true
+      'Hoerbiger.HoerbigerCom.PressArchive:Document.HannsOverview': true
+      'Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookOverview': true
   ui:
     icon: globe
     label: 'Homepage'

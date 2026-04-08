@@ -27,6 +27,7 @@ enum StageVariant:string implements ProtectedContextAwareInterface
     case VARIANT_DEFAULT = 'default';
     case VARIANT_PRESS = 'press';
     case VARIANT_PRESS_LARGE = 'pressLarge';
+    case VARIANT_PRESS_OVERVIEW = 'pressOverview';
 
     public static function fromTheme(?Theme $theme): self
     {

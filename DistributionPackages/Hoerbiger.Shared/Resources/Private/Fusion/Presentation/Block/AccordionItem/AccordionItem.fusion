@@ -10,8 +10,9 @@ prototype(Hoerbiger.Shared:Block.AccordionItem) < prototype(PackageFactory.Atomi
     renderer = afx`
         <div
             class={[
-                "[Block.AccordionItem]",
-                "bg-neutral-lighter w-full"
+                "[Block.AccordionItem (" + presentationObject.variant.value + ")]",
+                "w-full",
+                presentationObject.variant.equals("regular") && "bg-neutral-lighter w-full"
             ]}
         >
             <Neos.Fusion:Tag
@@ -23,11 +24,15 @@ prototype(Hoerbiger.Shared:Block.AccordionItem) < prototype(PackageFactory.Atomi
                 attributes.open.@if.1={presentationObject.isOpen}
             >
                 <summary class={[
-                    "group-open:bg-neutral",
+                    presentationObject.variant.equals("regular") && "group-open:bg-neutral",
                     "flex justify-between items-center",
-                    "list-none px-xs pt-[16px] pb-[13px] cursor-pointer"
+                    "list-none cursor-pointer",
+                    presentationObject.variant.equals("regular") && "px-xs pt-[16px] pb-[13px]"
                 ]}>
-                    <div class="text-xl font-sans-regular">
+                    <div class={[
+                        presentationObject.variant.equals("regular") && "text-xl font-sans-regular",
+                        presentationObject.variant.equals("hannsList") && "font-sans-light text-3xl sm:text-4xl lg:text-5xl xl:text-5xl"
+                    ]}>
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.header} />
                     </div>
                     <div>
@@ -36,15 +41,28 @@ prototype(Hoerbiger.Shared:Block.AccordionItem) < prototype(PackageFactory.Atomi
                                 presentationObject={presentationObject.plusIcon}
                             />
                         </div>
-                        <div class="pb-[3px] hidden group-open:flex">
+                        <div
+                            class={[
+                                "pb-[3px] hidden group-open:flex",
+                                presentationObject.variant.equals("hannsList") && "rotate-180"
+                            ]}
+                        >
                             <Hoerbiger.Shared:Block.Icon
                                 presentationObject={presentationObject.dashIcon}
+                                @if={presentationObject.variant.equals("regular")}
+                            />
+                            <Hoerbiger.Shared:Block.Icon
+                                presentationObject={presentationObject.plusIcon}
+                                @if={presentationObject.variant.equals("hannsList")}
                             />
                         </div>
                     </div>
                 </summary>
                 <section
-                    class="p-xs"
+                    class={[
+                        presentationObject.variant.equals("regular") && "p-xs",
+                        presentationObject.variant.equals("hannsList") && "pt-xs"
+                    ]}
                 >
                     <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
                 </section>
