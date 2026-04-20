@@ -43,6 +43,7 @@ final class CspMiddleware implements MiddlewareInterface
                         "script-src 'self' " . implode(' ', $inlineScriptHashes) . " *.hoerbiger.com hoerbiger.com cloud.ccm19.de *.googleapis.com *.recruitmentplatform.com cloud.ccm19.de *.piwik.hoerbiger.com",
                         "script-src-elem 'self' *.hoerbiger.com cloud.ccm19.de *.googleapis.com *.piwik.hoerbiger.com 'sha256-tE5FqWv+yqmPEClXs60CkxqJl/7p7o0wB46nNZm/aVY='",
                         "style-src 'self' 'unsafe-inline' *.hoerbiger.com cloud.ccm19.de *.googleapis.com fast.fonts.net",
+                        "frame-ancestors 'self' https://portal.welcomeyou.de",
                     ]
                     /** @codingStandardsIgnoreEnd */
                 )
