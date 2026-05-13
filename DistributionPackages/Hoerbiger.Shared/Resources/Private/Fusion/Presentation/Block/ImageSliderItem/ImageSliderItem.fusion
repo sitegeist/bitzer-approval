@@ -1,0 +1,26 @@
+prototype(Hoerbiger.Shared:Block.ImageSliderItem) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ImageSliderItem\\ImageSliderItem'
+
+    renderer = afx`
+        <div class={[
+            '[Block.ImageSliderItem] group/embla__slide w-full h-auto',
+            'transition-[colors,opacity] duration-200',
+            'opacity-60 [&.is-active]:opacity-100 group-[.slider-inactive]:opacity-100',
+            'flex pl-[var(--slide-spacing)]',
+            presentationObject.orientation == 'Square' && 'flex-[0_0_45%] sm:flex-[0_0_35%] lg:flex-[0_0_25%]',
+            presentationObject.orientation == 'Vertical' && 'flex-[0_0_45%] sm:flex-[0_0_35%] lg:flex-[0_0_25%]',
+            presentationObject.orientation == 'Horizontal' && 'flex-[0_0_75%] sm:flex-[0_0_65%] md:flex-[0_0_55%] lg:flex-[0_0_45%]'
+        ]}>
+            <img
+                src={presentationObject.src}
+                alt={presentationObject.alt}
+                title={presentationObject.title}
+                data-orientation={presentationObject.orientation}
+                class={[
+                    'w-full h-full object-contain border-transparent transition-transform duration-200',
+                    'scale-90 group-[.is-active]/embla__slide:scale-100 group-[.slider-inactive]:scale-100'
+                ]}
+            />
+        </div>
+    `
+}

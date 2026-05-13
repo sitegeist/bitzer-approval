@@ -33,6 +33,7 @@ use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
 use Hoerbiger\Shared\Presentation\Block\ImageSlider\ImageSlider;
+use Hoerbiger\Shared\Presentation\Block\ImageSliderItem\ImageSliderItem;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
@@ -77,6 +78,7 @@ use Neos\ContentRepository\Domain\Model\Node;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Flow\Annotations as Flow;
+use Neos\Flow\ResourceManagement\ResourceManager;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
@@ -84,6 +86,8 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Collection
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Editable;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\SlotInterface;
+use Sitegeist\Kaleidoscope\ValueObjects\ImageSourceProxyCollection;
+use Sitegeist\Kaleidoscope\ValueObjects\Factory\ImageAssetFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Value;
 
 #[Flow\Scope('singleton')]
@@ -98,6 +102,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         private readonly TimelineFactory $timelineFactory,
         private readonly VideoFactory $videoFactory,
         private readonly YouTubeVideoFactory $youTubeVideoFactory,
+        private readonly ImageAssetFactory $imageAssetFactory,
+        private readonly ResourceManager $resourceManager,
         private readonly WantedNodeRepository $wantedNodeRepository,
         private readonly LinkFactory $linkFactory,
         private readonly CsvPOTranslator $csvPOTranslator,
@@ -1560,24 +1566,66 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
     public function forImageSliderNode(TraversableNodeInterface $imageSliderNode, bool $inBackend): SlotInterface
     {
-        return new ContentContainer(
-            ContentContainerVariant::VARIANT_REGULAR,
-            new Stack(
-                StackVariant::VARIANT_SM,
-                Collection::fromIterable(array_filter([
-                    $inBackend || $imageSliderNode->getProperty('headline')
-                        ? new Headline(
+        $imageOrientation = $imageSliderNode->getProperty('imageOrientation');
+        $images = match ($imageOrientation) {
+            'Vertical' => $imageSliderNode->getProperty('imagesVertical'),
+            'Horizontal' => $imageSliderNode->getProperty('imagesHorizontal'),
+            default => $imageSliderNode->getProperty('imagesSquare')
+        };
+
+        $slides = Collection::fromIterable(
+            $images instanceof ImageSourceProxyCollection ? $images->items : [],
+            function ($image) use ($imageOrientation): SlotInterface {
+                $assetProxy = is_object($image) && property_exists($image, 'asset')
+                    ? $image->asset
+                    : null;
+
+                $asset = $assetProxy
+                    ? $this->imageAssetFactory->tryCreateFromProxy($assetProxy)
+                    : null;
+
+                if (!$asset) {
+                    return Value::fromString('');
+                }
+
+                $src = $this->resourceManager->getPublicPersistentResourceUri($asset->getResource());
+                if (!is_string($src) || $src === '') {
+                    return Value::fromString('');
+                }
+
+                return new ImageSliderItem(
+                    $src,
+                    is_object($image) && property_exists($image, 'alt') ? (string)$image->alt : '',
+                    is_object($image) && property_exists($image, 'title') ? (string)$image->title : '',
+                    (string)$imageOrientation
+                );
+            },
+        );
+
+        return new Stack(
+            StackVariant::VARIANT_NOGAP,
+            Collection::fromIterable(array_filter([
+                $inBackend || $imageSliderNode->getProperty('headline')
+                    ? new ContentContainer(
+                        ContentContainerVariant::VARIANT_REGULAR,
+                        new Headline(
                             HeadlineSize::SIZE_MEDIUM_ITALIC,
                             HeadlineColor::COLOR_NEUTRAL_CONTRAST,
                             HeadlineType::TYPE_H2,
                             Editable::fromNodeProperty($imageSliderNode, 'headline')
-                        ) : null,
+                        ),
+                    )
+                    : null,
+                new ContentContainer(
+                    ContentContainerVariant::VARIANT_BLANKY,
                     new ImageSlider(
                         new Icon('shared', 'chevronLeft', IconSize::SIZE_SIZE_1),
-                        new Icon('shared', 'chevronRight', IconSize::SIZE_SIZE_1)
+                        new Icon('shared', 'chevronRight', IconSize::SIZE_SIZE_1),
+                        $slides,
+                        $imageSliderNode->getProperty('interval')
                     )
-                ]))
-            )
+                ),
+            ]))
         );
     }
 

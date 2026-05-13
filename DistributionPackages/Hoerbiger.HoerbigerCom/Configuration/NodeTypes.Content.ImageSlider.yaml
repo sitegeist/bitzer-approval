@@ -7,20 +7,22 @@
     icon: 'images'
   properties:
     imageOrientation:
+      defaultOption: Square
       type: string
       defaultValue: twoColumns
       ui:
         label: 'Image Format'
-        reloadIfChanged: true
+        reloadPageIfChanged: true
         inspector:
           group: 'default'
           editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
     imagesVertical:
       type: Sitegeist\Kaleidoscope\ValueObjects\ImageSourceProxyCollection
       ui:
-        label: Images
+        reloadPageIfChanged: true
+        label: Images (Vertical)
         inspector:
-          hidden: 'ClientEval:node.properties.imageOrientation == "Vertical"'
+          hidden: 'ClientEval:!(node.properties.imageOrientation == "Vertical")'
           group: default
           editorOptions:
             crop:
@@ -36,9 +38,10 @@
     imagesHorizontal:
       type: Sitegeist\Kaleidoscope\ValueObjects\ImageSourceProxyCollection
       ui:
-        label: Images
+        reloadPageIfChanged: true
+        label: Images (Horizontal)
         inspector:
-          hidden: 'ClientEval:node.properties.imageOrientation == "Horizontal"'
+          hidden: 'ClientEval:!(node.properties.imageOrientation == "Horizontal")'
           group: default
           editorOptions:
             crop:
@@ -54,9 +57,10 @@
     imagesSquare:
       type: Sitegeist\Kaleidoscope\ValueObjects\ImageSourceProxyCollection
       ui:
-        label: Images
+        reloadPageIfChanged: true
+        label: Images (Square)
         inspector:
-          hidden: 'ClientEval:node.properties.imageOrientation == "Square"'
+          hidden: 'ClientEval:!(node.properties.imageOrientation == "Square")'
           group: default
           editorOptions:
             crop:
@@ -69,6 +73,14 @@
                     width: 1
                     height: 1
                     label: '1 x 1'
+    interval:
+      type: integer
+      defaultValue: 5
+      ui:
+        label: 'Slide Duration (in Sekunden)'
+        reloadPageIfChanged: true
+        inspector:
+          group: 'default'
   postprocessors:
     imageOrientation:
       postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider

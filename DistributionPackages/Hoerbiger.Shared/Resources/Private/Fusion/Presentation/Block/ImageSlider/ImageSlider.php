@@ -15,7 +15,9 @@ final class ImageSlider extends AbstractComponentPresentationObject
 {
     public function __construct(
         public readonly Icon $prevSlideIcon,
-        public readonly Icon $nextSlideIcon
+        public readonly Icon $nextSlideIcon,
+        public readonly SlotInterface $content,
+        public readonly ?int $interval
     ) {
     }
 }
