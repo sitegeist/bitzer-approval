@@ -17,6 +17,7 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
           'Hoerbiger.HoerbigerCom:Content.TileNavigation': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
     contactonsuccess:
       type: 'Hoerbiger.HoerbigerCom:Content.Text'
     contactonfail:

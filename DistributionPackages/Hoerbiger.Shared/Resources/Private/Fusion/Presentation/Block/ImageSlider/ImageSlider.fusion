@@ -1,0 +1,53 @@
+prototype(Hoerbiger.Shared:Block.ImageSlider) < prototype(PackageFactory.AtomicFusion.PresentationObjects:PresentationObjectComponent) {
+    @presentationObjectInterface = 'Hoerbiger\\Shared\\Presentation\\Block\\ImageSlider\\ImageSlider'
+
+    @styleguide {
+        title = 'ImageSlider'
+
+        props {
+            content = '- Add Slot Content -'
+        }
+    }
+
+    renderer = afx`
+        <div
+            class={[
+                '[Block.ImageSlider] select-none overflow-hidden group w-full',
+                '-mx-space24 md:-mx-space40 xl:-mx-space80 pageContent:-mx-space160 [--slide-spacing:16px] xl:[--slide-spacing:32px]'
+            ]}
+        >
+            <div class='px-space24 md:px-space40 xl:px-space80 pageContent:px-space160 overflow-visible embla__viewport flex flex-col gap-space32 relative'>
+                <div
+                    class={[
+                        'flex [&>*]:flex [&>*]:flex-[0_0_75%] [&>*]:h-[350px] [&>*]:sm:flex-[0_0_55%] [&>*]:xl:flex-[0_0_calc(100%/3)] [&>*]:pl-[var(--slide-spacing)]',
+                        'touch-pan-y touch-pinch-zoom ml-[calc(var(--slide-spacing)*-1)]'
+                    ]}
+                >
+                    <div><div class="bg-[red] w-full">item 1</div></div>
+                    <div><div class="bg-[red] w-full">item 2</div></div>
+                    <div><div class="bg-[red] w-full">item 3</div></div>
+                    <div><div class="bg-[red] w-full">item 4</div></div>
+                </div>
+                <button
+                    class={[
+                        "absolute p-[12px] top-1/2 -translate-y-1/2 p left-0 bg-service-darker text-brand-contrast rounded-full",
+                        "embla__button--prev disabled:opacity-20 opacity-100 [&>svg]:fill-current"
+                    ]}
+                    type="button"
+                >
+                    <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.prevSlideIcon} />
+                </button>
+
+                <button
+                    class={[
+                        "absolute p-[12px] top-1/2 -translate-y-1/2 right-0 bg-service-darker text-brand-contrast rounded-full",
+                        "embla__button--next disabled:opacity-20 opacity-100 [&>svg]:fill-current"
+                    ]}
+                    type="button"
+                >
+                    <Hoerbiger.Shared:Block.Icon presentationObject={presentationObject.nextSlideIcon} />
+                </button>
+            </div>
+        </div>
+    `
+}

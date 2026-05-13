@@ -29,6 +29,7 @@
           'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
           'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
     career:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerPage'
   constraints:

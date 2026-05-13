@@ -32,6 +32,7 @@ use Hoerbiger\Shared\Presentation\Block\Headline\HeadlineType;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconColor;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
+use Hoerbiger\Shared\Presentation\Block\ImageSlider\ImageSlider;
 use Hoerbiger\Shared\Presentation\Block\Link\Link;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkFactory;
 use Hoerbiger\Shared\Presentation\Block\Link\LinkTarget;
@@ -227,6 +228,10 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             'Hoerbiger.HoerbigerCom:Content.AccordionItem' => $this->forAccordionItemNode(
                 $contentNode,
                 $subgraph,
+                $inBackend
+            ),
+            'Hoerbiger.HoerbigerCom:Content.ImageSlider' => $this->forImageSliderNode(
+                $contentNode,
                 $inBackend
             ),
             default => throw new \InvalidArgumentException(
@@ -1550,6 +1555,29 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             new Icon('shared', 'plus', IconSize::SIZE_SIZE_1_5),
             $accordionItemNode->getProperty('isAccordionOpen'),
             $inBackend
+        );
+    }
+
+    public function forImageSliderNode(TraversableNodeInterface $imageSliderNode, bool $inBackend): SlotInterface
+    {
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            new Stack(
+                StackVariant::VARIANT_SM,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $imageSliderNode->getProperty('headline')
+                        ? new Headline(
+                            HeadlineSize::SIZE_MEDIUM_ITALIC,
+                            HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                            HeadlineType::TYPE_H2,
+                            Editable::fromNodeProperty($imageSliderNode, 'headline')
+                        ) : null,
+                    new ImageSlider(
+                        new Icon('shared', 'chevronLeft', IconSize::SIZE_SIZE_1),
+                        new Icon('shared', 'chevronRight', IconSize::SIZE_SIZE_1)
+                    )
+                ]))
+            )
         );
     }
 

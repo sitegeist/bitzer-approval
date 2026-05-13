@@ -1,0 +1,78 @@
+'Hoerbiger.HoerbigerCom:Content.ImageSlider':
+  superTypes:
+    'Hoerbiger.HoerbigerCom:Content': true
+    'Hoerbiger.HoerbigerCom:Mixin.Headline': true
+  ui:
+    label: 'Image Slider'
+    icon: 'images'
+  properties:
+    imageOrientation:
+      type: string
+      defaultValue: twoColumns
+      ui:
+        label: 'Image Format'
+        reloadIfChanged: true
+        inspector:
+          group: 'default'
+          editor: Neos.Neos/Inspector/Editors/SelectBoxEditor
+    imagesVertical:
+      type: Sitegeist\Kaleidoscope\ValueObjects\ImageSourceProxyCollection
+      ui:
+        label: Images
+        inspector:
+          hidden: 'ClientEval:node.properties.imageOrientation == "Vertical"'
+          group: default
+          editorOptions:
+            crop:
+              aspectRatio:
+                forceCrop: true
+                allowCustom: false
+                defaultOption: 3/4
+                options:
+                  3/4:
+                    width: 3
+                    height: 4
+                    label: '3 x 4'
+    imagesHorizontal:
+      type: Sitegeist\Kaleidoscope\ValueObjects\ImageSourceProxyCollection
+      ui:
+        label: Images
+        inspector:
+          hidden: 'ClientEval:node.properties.imageOrientation == "Horizontal"'
+          group: default
+          editorOptions:
+            crop:
+              aspectRatio:
+                forceCrop: true
+                allowCustom: false
+                defaultOption: 16/9
+                options:
+                  16/9:
+                    width: 16
+                    height: 9
+                    label: '16 x 9'
+    imagesSquare:
+      type: Sitegeist\Kaleidoscope\ValueObjects\ImageSourceProxyCollection
+      ui:
+        label: Images
+        inspector:
+          hidden: 'ClientEval:node.properties.imageOrientation == "Square"'
+          group: default
+          editorOptions:
+            crop:
+              aspectRatio:
+                forceCrop: true
+                allowCustom: false
+                defaultOption: 1/1
+                options:
+                  1/1:
+                    width: 1
+                    height: 1
+                    label: '1 x 1'
+  postprocessors:
+    imageOrientation:
+      postprocessor: PackageFactory\AtomicFusion\PresentationObjects\Application\EnumProvider
+      postprocessorOptions:
+        enumName: Hoerbiger\Shared\Presentation\EnumProvider\Image\Orientation
+        propertyNames:
+          - imageOrientation
