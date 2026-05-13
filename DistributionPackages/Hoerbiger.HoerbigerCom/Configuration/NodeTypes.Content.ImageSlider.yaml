@@ -9,7 +9,7 @@
     imageOrientation:
       defaultOption: Square
       type: string
-      defaultValue: twoColumns
+      defaultValue: Horizontal
       ui:
         label: 'Image Format'
         reloadPageIfChanged: true
