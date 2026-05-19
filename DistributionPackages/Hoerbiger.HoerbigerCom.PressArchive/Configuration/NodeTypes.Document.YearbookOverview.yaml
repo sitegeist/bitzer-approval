@@ -14,6 +14,7 @@
           'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListBig': true
           'Hoerbiger.HoerbigerCom.PressArchive:Content.YearbookListSmall': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
   ui:
     icon: book
     label: 'Yearbook Overview'

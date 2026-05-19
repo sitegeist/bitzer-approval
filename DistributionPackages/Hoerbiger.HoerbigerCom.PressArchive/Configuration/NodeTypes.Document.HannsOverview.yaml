@@ -13,6 +13,7 @@
           'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
           'Hoerbiger.HoerbigerCom.PressArchive:Content.HannsList': true
           'Hoerbiger.HoerbigerCom:Collection.Downloads': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
   ui:
     icon: header
     label: 'HANNS Overview'
