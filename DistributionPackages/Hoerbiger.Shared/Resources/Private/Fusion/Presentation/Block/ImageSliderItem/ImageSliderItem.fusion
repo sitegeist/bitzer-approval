@@ -15,10 +15,13 @@ prototype(Hoerbiger.Shared:Block.ImageSliderItem) < prototype(PackageFactory.Ato
                 src={presentationObject.src}
                 alt={presentationObject.alt}
                 title={presentationObject.title}
+                loading="lazy"
                 data-orientation={presentationObject.orientation}
+                data-lightbox-src={presentationObject.src}
+                data-lightbox-alt={presentationObject.alt}
                 class={[
-                    'w-full h-full object-contain border-transparent transition-transform duration-200',
-                    'scale-90 group-[.is-active]/embla__slide:scale-100 group-[.slider-inactive]:scale-100'
+                    'w-full h-full object-contain border-transparent transition-transform duration-200 cursor-default group-[.is-active]/embla__slide:cursor-zoom-in',
+                    'scale-100 group-[.is-active]/embla__slide:scale-100 group-[.slider-inactive]:scale-100'
                 ]}
             />
         </div>

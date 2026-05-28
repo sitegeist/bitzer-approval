@@ -24,6 +24,8 @@ export default (el: HTMLElement):void => {
 
 	const emblaApi = EmblaCarousel(emblaViewport, OPTIONS, [autoplayPlugin]);
 
+	let lightboxOpen = false;
+
 	const updateSelected = (): void => {
 		const slides = emblaApi.slideNodes();
 		const selectedIndex = emblaApi.selectedScrollSnap();
@@ -46,9 +48,10 @@ export default (el: HTMLElement):void => {
 		updateSliderState();
 		const canSlide = emblaApi.canScrollPrev() || emblaApi.canScrollNext();
 		if (!canAutoplay) return;
-		if (!canSlide) emblaApi.plugins().autoplay?.stop();
+		if (!canSlide || lightboxOpen) emblaApi.plugins().autoplay?.stop();
 		else emblaApi.plugins().autoplay?.play();
 	};
+
 	emblaApi.on("select", refreshSlider);
 	emblaApi.on("reInit", refreshSlider);
 	refreshSlider();
@@ -59,8 +62,67 @@ export default (el: HTMLElement):void => {
 		nextBtnNode
 	);
 
-	emblaApi.on("destroy", (): void => {
-		emblaApi.plugins().autoplay?.stop();
-		removePrevNextBtnsClickHandlers();
-	});
+	const lightboxOverlay = el.querySelector<HTMLElement>(".lightbox");
+	const lightboxImages = Array.from(
+		el.querySelectorAll<HTMLImageElement>("[data-lightbox-src]")
+	);
+
+	if (lightboxOverlay) {
+		document.body.appendChild(lightboxOverlay);
+
+		const lightboxImg = lightboxOverlay.querySelector<HTMLImageElement>("img")!;
+		const lightboxCaption = lightboxOverlay.querySelector<HTMLElement>("figcaption")!;
+
+		const closeLightbox = (): void => {
+			lightboxOpen = false;
+			delete lightboxOverlay.dataset.open;
+			lightboxOverlay.setAttribute("aria-hidden", "true");
+			document.body.style.overflow = "";
+
+			const canSlide = emblaApi.canScrollPrev() || emblaApi.canScrollNext();
+			if (canAutoplay && canSlide) emblaApi.plugins().autoplay?.play();
+		};
+
+		const openLightbox = (src: string, alt: string, title: string, orientation: string): void => {
+			lightboxOpen = true;
+			lightboxImg.src = src;
+			lightboxImg.alt = alt;
+			lightboxImg.title = title;
+			lightboxImg.dataset.orientation = orientation;
+			lightboxCaption.textContent = title;
+			lightboxOverlay.dataset.open = "";
+			lightboxOverlay.setAttribute("aria-hidden", "false");
+			document.body.style.overflow = "hidden";
+			emblaApi.plugins().autoplay?.stop();
+		};
+
+		const onImageClick = (e: Event): void => {
+			const img = e.currentTarget as HTMLImageElement;
+			const clickedIndex = lightboxImages.indexOf(img);
+			if (clickedIndex !== emblaApi.selectedScrollSnap()) return;
+			openLightbox(img.dataset.lightboxSrc ?? img.src, img.dataset.lightboxAlt ?? img.alt, img.title ?? "", img.dataset.orientation ?? "");
+		};
+
+		const onKeyDown = (e: KeyboardEvent): void => {
+			if (e.key === "Escape") closeLightbox();
+		};
+
+		lightboxImages.forEach((img) => img.addEventListener("click", onImageClick));
+		lightboxOverlay.addEventListener("click", closeLightbox);
+		document.addEventListener("keydown", onKeyDown);
+
+		emblaApi.on("destroy", (): void => {
+			emblaApi.plugins().autoplay?.stop();
+			removePrevNextBtnsClickHandlers();
+			lightboxImages.forEach((img) => img.removeEventListener("click", onImageClick));
+			lightboxOverlay.removeEventListener("click", closeLightbox);
+			document.removeEventListener("keydown", onKeyDown);
+			lightboxOverlay.remove();
+		});
+	} else {
+		emblaApi.on("destroy", (): void => {
+			emblaApi.plugins().autoplay?.stop();
+			removePrevNextBtnsClickHandlers();
+		});
+	}
 };
