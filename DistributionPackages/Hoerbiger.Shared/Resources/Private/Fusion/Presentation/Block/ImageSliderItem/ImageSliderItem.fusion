@@ -5,8 +5,8 @@ prototype(Hoerbiger.Shared:Block.ImageSliderItem) < prototype(PackageFactory.Ato
         <div class={[
             '[Block.ImageSliderItem] group/embla__slide w-full h-auto',
             'transition-[colors,opacity] duration-200',
-            'opacity-60 [&.is-active]:opacity-100 group-[.slider-inactive]:opacity-100',
-            'flex pl-[var(--slide-spacing)]',
+            'opacity-40 [&.is-active]:opacity-100 group-[.slider-inactive]:opacity-100',
+            'relative flex pl-[var(--slide-spacing)]',
             presentationObject.orientation == 'Square' && 'flex-[0_0_45%] sm:flex-[0_0_35%] lg:flex-[0_0_25%]',
             presentationObject.orientation == 'Vertical' && 'flex-[0_0_45%] sm:flex-[0_0_35%] lg:flex-[0_0_25%]',
             presentationObject.orientation == 'Horizontal' && 'flex-[0_0_75%] sm:flex-[0_0_65%] md:flex-[0_0_55%] lg:flex-[0_0_45%]'
@@ -20,10 +20,22 @@ prototype(Hoerbiger.Shared:Block.ImageSliderItem) < prototype(PackageFactory.Ato
                 data-lightbox-src={presentationObject.src}
                 data-lightbox-alt={presentationObject.alt}
                 class={[
-                    'w-full h-full object-contain border-transparent transition-transform duration-200 cursor-default group-[.is-active]/embla__slide:cursor-zoom-in',
-                    'scale-100 group-[.is-active]/embla__slide:scale-100 group-[.slider-inactive]:scale-100'
+                    'w-full my-auto h-1/2 object-cover group-[.is-active]/embla__slide::object-contain border-transparent transition-height duration-200 cursor-default group-[.is-active]/embla__slide:cursor-zoom-in',
+                    'group-[.is-active]/embla__slide:h-full group-[.slider-inactive]:h-full'
                 ]}
             />
+            <span class={[
+                'absolute bottom-xs right-xs',
+                'opacity-0 group-[.is-active]/embla__slide:opacity-100 group-[.slider-inactive]:opacity-0',
+                'transition-opacity duration-200 pointer-events-none'
+            ]}>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-12 h-12 [filter:drop-shadow(0_2px_8px_rgba(0,0,0,0.9))_drop-shadow(0_0px_2px_rgba(0,0,0,1))]">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    <line x1="11" y1="8" x2="11" y2="14" />
+                    <line x1="8" y1="11" x2="14" y2="11" />
+                </svg>
+            </span>
         </div>
     `
 }
