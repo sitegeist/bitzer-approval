@@ -20,8 +20,8 @@ prototype(Hoerbiger.Shared:Block.ImageSliderItem) < prototype(PackageFactory.Ato
                 data-lightbox-src={presentationObject.src}
                 data-lightbox-alt={presentationObject.alt}
                 class={[
-                    'w-full my-auto h-1/2 object-cover group-[.is-active]/embla__slide::object-contain border-transparent transition-height duration-200 cursor-default group-[.is-active]/embla__slide:cursor-zoom-in',
-                    'group-[.is-active]/embla__slide:h-full group-[.slider-inactive]:h-full'
+                    'w-full object-contain border-transparent cursor-default group-[.is-active]/embla__slide:cursor-zoom-in',
+                    'transition-transform duration-300 scale-75 group-[.is-active]/embla__slide:scale-100 group-[.slider-inactive]:scale-100'
                 ]}
             />
             <span class={[

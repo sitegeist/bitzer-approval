@@ -61,7 +61,7 @@ prototype(Hoerbiger.Shared:Block.ImageSlider) < prototype(PackageFactory.AtomicF
                             'object-cover select-none m-auto',
                             'data-[orientation=Horizontal]:w-full',
                             'data-[orientation=Vertical]:h-full',
-                            'data-[orientation=Square]:w-full data-[orientation=Square]:h-full'
+                            'data-[orientation=Square]:h-full'
                         ]}
                         alt=""
                     />
