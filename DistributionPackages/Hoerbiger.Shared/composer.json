@@ -26,6 +26,7 @@
         "sitegeist/klarschiff": "^3.0",
         "sitegeist/monocle": "^7.2",
         "sitegeist/kaleidoscope": "^6.0",
+        "sitegeist/kaleidoscope-valueobjects": "^1.6.0",
         "sitegeist/lazybones": "^3.0",
         "sitegeist/csvpo": "^2.0",
         "sitegeist/schemeonyou": "^1.3",

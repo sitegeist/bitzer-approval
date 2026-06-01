@@ -26,6 +26,7 @@
           'Hoerbiger.HoerbigerCom:Content.YouTubeVideo': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
           'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
   ui:
     icon: user-lock
     label: 'Schonarbeitsplatz-Seite'

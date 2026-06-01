@@ -33,6 +33,7 @@
           'Hoerbiger.HoerbigerCom:Content.ImageWithLink': true
           'Hoerbiger.HoerbigerCom.Catalog:Collection.ProductList': true
           'Hoerbiger.HoerbigerCom.Events:Content.UpcomingEvents': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
     careerroot:
       type: 'Hoerbiger.HoerbigerCom:Document.CareerRootPage'
       position: 128

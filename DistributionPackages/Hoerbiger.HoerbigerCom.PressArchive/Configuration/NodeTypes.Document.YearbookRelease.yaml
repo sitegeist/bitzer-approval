@@ -13,6 +13,7 @@
           'Hoerbiger.HoerbigerCom:Content.Image': true
           'Hoerbiger.HoerbigerCom:Content.NewsQuotation': true
           'Hoerbiger.HoerbigerCom:Content.TextWithMetaText': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
   ui:
     icon: book
     label: 'Yearbook'

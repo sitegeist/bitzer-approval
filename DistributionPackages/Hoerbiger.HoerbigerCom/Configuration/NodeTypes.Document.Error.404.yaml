@@ -16,6 +16,7 @@
           'Hoerbiger.HoerbigerCom:Content.Text': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImage': true
           'Hoerbiger.HoerbigerCom:Content.TextWithImageExtended': true
+          'Hoerbiger.HoerbigerCom:Content.ImageSlider': true
   ui:
     icon: exclamation-triangle
     label: '404 Page'
