@@ -58,10 +58,7 @@ prototype(Hoerbiger.Shared:Block.ImageSlider) < prototype(PackageFactory.AtomicF
                 <div class="h-full w-full flex flex-col items-center justify-center">
                     <img
                         class={[
-                            'object-cover select-none m-auto',
-                            'data-[orientation=Horizontal]:w-full',
-                            'data-[orientation=Vertical]:h-full',
-                            'data-[orientation=Square]:h-full'
+                            'object-cover select-none m-auto max-w-full max-h-full'
                         ]}
                         alt=""
                     />
