@@ -647,7 +647,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
                 );
 
-                $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
+                $imageSource = $this->imageSourceFactory->forYearbookListPreviewMixin($pressRelease, $inBackend);
 
                 $showImage = ($pressVariant !== PressVariant::VARIANT_NEWS) || $pressRelease->getProperty('showImage');
 
@@ -664,7 +664,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 : null,
                             $figure,
                             Value::fromString(
-                                $pressRelease->getProperty('preview__headline')
+                                $pressRelease->getProperty('preview__headline_yearbook_list')
+                                    ?: $pressRelease->getProperty('preview__headline')
                                     ?: $pressRelease->getProperty('headline')
                                     ?: ''
                             ),
@@ -673,7 +674,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 . ' ' . $pressRelease->getProperty('edition')
                             ),
                             Value::fromString(
-                                $pressRelease->getProperty('preview__description')
+                                $pressRelease->getProperty('preview__description_yearbook_list')
+                                    ?: $pressRelease->getProperty('preview__description')
                                     ?: $pressRelease->getProperty('abstract')
                                     ?: ''
                             ),

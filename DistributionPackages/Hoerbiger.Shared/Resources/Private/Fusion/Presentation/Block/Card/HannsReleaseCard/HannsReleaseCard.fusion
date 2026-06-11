@@ -6,7 +6,7 @@ prototype(Hoerbiger.Shared:Block.Card.HannsReleaseCard) < prototype(Hoerbiger.Sh
             data-card-type={presentationObject.variant.value}
             class={[
                 "[Block.Card.HannsReleaseCard (" + presentationObject.variant.value + ")]",
-                "flex flex-col space-y-[10px] justify-between"
+                "flex flex-col space-y-[10px] justify-between w-full"
             ]}
         >
             <div

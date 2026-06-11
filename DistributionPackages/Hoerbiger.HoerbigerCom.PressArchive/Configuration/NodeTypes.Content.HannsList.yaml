@@ -50,7 +50,7 @@
         automaticTranslation: true
     isAccordionOpen:
       type: boolean
-      defaultValue: false
+      defaultValue: true
       ui:
         reloadIfChanged: true
         label: 'is Accordion Open?'
