@@ -21,3 +21,6 @@
     searchType:
       search:
         indexing: '${"HANNS Overview"}'
+    image:
+      options:
+        preset: 'image.panorama'

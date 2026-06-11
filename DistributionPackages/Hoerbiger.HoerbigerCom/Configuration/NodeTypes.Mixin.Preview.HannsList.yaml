@@ -1,0 +1,58 @@
+'Hoerbiger.HoerbigerCom:Mixin.Preview.HannsList':
+  abstract: true
+  ui:
+    inspector:
+      tabs:
+        previewHannsList:
+          label: 'Preview für CE Hanns List'
+          icon: 'eye'
+          position: 'after default'
+      groups:
+        previewHannsList:
+          tab: previewHannsList
+          label: 'Preview für CE Hanns List'
+          icon: eye
+  properties:
+    preview__image_hanns_list:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      ui:
+        label: 'Preview Image'
+        inspector:
+          group: 'previewHannsList'
+      options:
+        preset: 'image.16_9'
+    preview__image_hanns_list__alt:
+      type: 'string'
+      ui:
+        label: 'Alt Text'
+        inspector:
+          group: 'previewHannsList'
+      options:
+        automaticTranslation: true
+    preview__image_hanns_list__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text'
+        inspector:
+          group: 'previewHannsList'
+      options:
+        automaticTranslation: true
+    preview__headline_hanns_list:
+      type: 'string'
+      ui:
+        label: 'Preview Headline'
+        inspector:
+          group: 'previewHannsList'
+      options:
+        automaticTranslation: true
+    preview__description_hanns_list:
+      type: 'string'
+      ui:
+        label: 'Preview Description'
+        inspector:
+          group: 'previewHannsList'
+          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
+          editorOptions:
+            rows: 7
+      options:
+        automaticTranslation: true
