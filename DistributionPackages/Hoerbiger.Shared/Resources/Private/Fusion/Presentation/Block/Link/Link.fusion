@@ -32,6 +32,7 @@ prototype(Hoerbiger.Shared:Block.Link) < prototype(PackageFactory.AtomicFusion.P
                 presentationObject.variant.equals('squareTouchIcon') && "flex items-center h-full max-h-touch max-w-touch",
                 presentationObject.variant.equals('siteFooter') && "text-light min-h-touch xl:min-h-full flex items-center whitespace-nowrap",
                 presentationObject.variant.equals('plainLabel') && "min-h-touch flex items-center",
+                presentationObject.variant.equals('plainLabelFullWidth') && "min-h-touch w-full flex items-center",
                 presentationObject.variant.equals('iconLabel') && "min-h-touch flex items-center justify-between",
                 presentationObject.variant.equals('labelDefault') && "flex items-center min-h-touch min-w-touch font-sans-bold text-xl"
             ]}

@@ -412,7 +412,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     : null;
 
                 return $this->linkFactory->forLinkToDocument($pressRelease, null)
-                    ->asPlainLabel()->withContent(
+                    ->asPlainLabelFullWidth()->withContent(
                         new HannsReleaseCard(
                             $layout === HannsReleaseCardVariant::VARIANT_ALTERNATING
                                 ? ($index % 2 == 0 ? HannsReleaseCardVariant::VARIANT_IMAGE_FIRST : HannsReleaseCardVariant::VARIANT_IMAGE_LAST)
