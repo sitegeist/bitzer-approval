@@ -22,3 +22,6 @@
     searchType:
       search:
         indexing: '${"Yearbook Overview"}'
+    image:
+      options:
+        preset: 'image.panorama'

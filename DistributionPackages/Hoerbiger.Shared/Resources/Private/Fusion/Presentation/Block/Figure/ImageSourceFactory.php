@@ -64,6 +64,28 @@ final class ImageSourceFactory extends AbstractComponentPresentationObjectFactor
             ?: $this->forImageMixin($node, $inBackend, $hasFallbackInBackend);
     }
 
+    public function forHannsListPreviewMixin(
+        TraversableNodeInterface $node,
+        bool $inBackend,
+        bool $hasFallbackInBackend = true
+    ): ?ImageSourceHelperInterface
+    {
+        return $this->forImageProperty($node, $inBackend, 'preview__image_hanns_list', false)
+            ?: $this->forImageProperty($node, $inBackend, 'preview__image', false)
+            ?: $this->forImageMixin($node, $inBackend, $hasFallbackInBackend);
+    }
+
+    public function forYearbookListPreviewMixin(
+        TraversableNodeInterface $node,
+        bool $inBackend,
+        bool $hasFallbackInBackend = true
+    ): ?ImageSourceHelperInterface
+    {
+        return $this->forImageProperty($node, $inBackend, 'preview__image_yearbook_list', false)
+            ?: $this->forImageProperty($node, $inBackend, 'preview__image', false)
+            ?: $this->forImageMixin($node, $inBackend, $hasFallbackInBackend);
+    }
+
     public function forImageProperty(
         TraversableNodeInterface $node,
         bool $inBackend,

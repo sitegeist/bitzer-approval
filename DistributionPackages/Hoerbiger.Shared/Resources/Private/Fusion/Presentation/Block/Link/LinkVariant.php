@@ -23,6 +23,7 @@ enum LinkVariant: string implements ProtectedContextAwareInterface
     case VARIANT_NOSTYLES = 'noStyles';
     case VARIANT_SITEFOOTER = 'siteFooter';
     case VARIANT_PLAINLABEL = 'plainLabel';
+    case VARIANT_PLAINLABEL_FULLWIDTH = 'plainLabelFullWidth';
     case VARIANT_ICONLABEL = 'iconLabel';
     case VARIANT_LABELEXCITE = 'labelExcite';
     case VARIANT_LABELEXPERIENCE = 'labelExperience';

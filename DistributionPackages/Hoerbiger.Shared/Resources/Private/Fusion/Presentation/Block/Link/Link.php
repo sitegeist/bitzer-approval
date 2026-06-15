@@ -53,6 +53,11 @@ final class Link extends AbstractComponentPresentationObject
         return $this->withLinkVariant(LinkVariant::VARIANT_PLAINLABEL);
     }
 
+    public function asPlainLabelFullWidth(): self
+    {
+        return $this->withLinkVariant(LinkVariant::VARIANT_PLAINLABEL_FULLWIDTH);
+    }
+
     public function asIconLabel(): self
     {
         return $this->withLinkVariant(LinkVariant::VARIANT_ICONLABEL);

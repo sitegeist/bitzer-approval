@@ -405,21 +405,22 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
             function(Node $pressRelease, int $index) use($inBackend, $labels, $layout){
                 $pressVariant = PressVariant::tryFromNode($pressRelease);
 
-                $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
+                $imageSource = $this->imageSourceFactory->forHannsListPreviewMixin($pressRelease, $inBackend);
 
                 $figure = $imageSource
                     ? $this->figureFactory->forPressReleaseCard($imageSource)
                     : null;
 
                 return $this->linkFactory->forLinkToDocument($pressRelease, null)
-                    ->asPlainLabel()->withContent(
+                    ->asPlainLabelFullWidth()->withContent(
                         new HannsReleaseCard(
                             $layout === HannsReleaseCardVariant::VARIANT_ALTERNATING
                                 ? ($index % 2 == 0 ? HannsReleaseCardVariant::VARIANT_IMAGE_FIRST : HannsReleaseCardVariant::VARIANT_IMAGE_LAST)
                                 : $layout,
                             $figure,
                             Value::fromString(
-                                $pressRelease->getProperty('preview__headline')
+                                $pressRelease->getProperty('preview__headline_hanns_list')
+                                    ?: $pressRelease->getProperty('preview__headline')
                                     ?: $pressRelease->getProperty('headline')
                                     ?: ''
                             ),
@@ -428,7 +429,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 . ' ' . $pressRelease->getProperty('edition')
                             ),
                             Value::fromString(
-                                $pressRelease->getProperty('preview__description')
+                                $pressRelease->getProperty('preview__description_hanns_list')
+                                    ?: $pressRelease->getProperty('preview__description')
                                     ?: $pressRelease->getProperty('abstract')
                                     ?: ''
                             ),
@@ -453,31 +455,34 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
-            new Stack(
-                StackVariant::VARIANT_XS,
-                Collection::fromIterable(array_filter([
-                    $inBackend || $hannsListNode->getProperty('metaHeadline')
-                        ? new Separator(
-                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                            Editable::fromNodeProperty($hannsListNode, 'metaHeadline')
+            new CacheSegment(
+                new Stack(
+                    StackVariant::VARIANT_XS,
+                    Collection::fromIterable(array_filter([
+                        $inBackend || $hannsListNode->getProperty('metaHeadline')
+                            ? new Separator(
+                                SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                                Editable::fromNodeProperty($hannsListNode, 'metaHeadline')
+                            )
+                            : null,
+                        new AccordionItem(
+                            AccordionItemVariant::VARIANT_HANNS_LIST,
+                            Editable::fromNodeProperty($hannsListNode, 'headline'),
+                            new Stack(
+                                StackVariant::VARIANT_XS,
+                                Collection::fromIterable(array_filter([
+                                    $overViewButton,
+                                    $pressReleases
+                                ]))
+                            ),
+                            new Icon('shared', 'chevronUp', IconSize::SIZE_SIZE_1_5),
+                            new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5),
+                            $hannsListNode->getProperty('isAccordionOpen'),
+                            $inBackend
                         )
-                        : null,
-                    new AccordionItem(
-                        AccordionItemVariant::VARIANT_HANNS_LIST,
-                        Editable::fromNodeProperty($hannsListNode, 'headline'),
-                        new Stack(
-                            StackVariant::VARIANT_XS,
-                            Collection::fromIterable(array_filter([
-                                $overViewButton,
-                                $pressReleases
-                            ]))
-                        ),
-                        new Icon('shared', 'chevronUp', IconSize::SIZE_SIZE_1_5),
-                        new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5),
-                        $hannsListNode->getProperty('isAccordionOpen'),
-                        $inBackend
-                    )
-                ]))
+                    ]))
+                ),
+                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.HannsReleaseList'
             )
         );
     }
@@ -524,7 +529,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
                 );
 
-                $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
+                $imageSource = $this->imageSourceFactory->forYearbookListPreviewMixin($pressRelease, $inBackend);
 
                 $showImage = ($pressVariant !== PressVariant::VARIANT_NEWS) || $pressRelease->getProperty('showImage');
 
@@ -541,7 +546,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 : null,
                             $figure,
                             Value::fromString(
-                                $pressRelease->getProperty('preview__headline')
+                                $pressRelease->getProperty('preview__headline_yearbook_list')
+                                    ?: $pressRelease->getProperty('preview__headline')
                                     ?: $pressRelease->getProperty('headline')
                                     ?: ''
                             ),
@@ -550,7 +556,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 . ' ' . $pressRelease->getProperty('edition')
                             ),
                             Value::fromString(
-                                $pressRelease->getProperty('preview__description')
+                                $pressRelease->getProperty('preview__description_yearbook_list')
+                                    ?: $pressRelease->getProperty('preview__description')
                                     ?: $pressRelease->getProperty('abstract')
                                     ?: ''
                             ),
@@ -574,29 +581,32 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
-            new Stack(
-                StackVariant::VARIANT_SM,
-                Collection::fromIterable(array_filter([
-                    $inBackend || $topNewsNode->getProperty('metaHeadline')
-                        ? new Separator(
-                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                        Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
-                    ): null,
-                    $inBackend || $topNewsNode->getProperty('headline')
-                        ? new Headline(
+            new CacheSegment(
+                new Stack(
+                    StackVariant::VARIANT_SM,
+                    Collection::fromIterable(array_filter([
+                        $inBackend || $topNewsNode->getProperty('metaHeadline')
+                            ? new Separator(
+                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                            Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
+                        ): null,
+                        $inBackend || $topNewsNode->getProperty('headline')
+                            ? new Headline(
                             HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
                             HeadlineColor::COLOR_TEXT,
                             HeadlineType::TYPE_H2,
                             Editable::fromNodeProperty($topNewsNode, 'headline')
                         )
-                        : null,
+                            : null,
 
 
-                    new YearbookOverview(
-                        YearbookOverviewVariant::VARIANT_BIG_CARDS,
-                        $pressReleases
-                    )
-                ]))
+                        new YearbookOverview(
+                            YearbookOverviewVariant::VARIANT_BIG_CARDS,
+                            $pressReleases
+                        )
+                    ]))
+                ),
+                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.YearBookReleaseList'
             )
         );
     }
@@ -643,7 +653,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                     $pressRelease->getProperty('datePublished') ?: $pressRelease->getCreationDateTime()
                 );
 
-                $imageSource = $this->imageSourceFactory->forPreviewMixin($pressRelease, $inBackend);
+                $imageSource = $this->imageSourceFactory->forYearbookListPreviewMixin($pressRelease, $inBackend);
 
                 $showImage = ($pressVariant !== PressVariant::VARIANT_NEWS) || $pressRelease->getProperty('showImage');
 
@@ -660,7 +670,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 : null,
                             $figure,
                             Value::fromString(
-                                $pressRelease->getProperty('preview__headline')
+                                $pressRelease->getProperty('preview__headline_yearbook_list')
+                                    ?: $pressRelease->getProperty('preview__headline')
                                     ?: $pressRelease->getProperty('headline')
                                     ?: ''
                             ),
@@ -669,7 +680,8 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                                 . ' ' . $pressRelease->getProperty('edition')
                             ),
                             Value::fromString(
-                                $pressRelease->getProperty('preview__description')
+                                $pressRelease->getProperty('preview__description_yearbook_list')
+                                    ?: $pressRelease->getProperty('preview__description')
                                     ?: $pressRelease->getProperty('abstract')
                                     ?: ''
                             ),
@@ -693,28 +705,31 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
 
         return new ContentContainer(
             ContentContainerVariant::VARIANT_REGULAR,
-            new Stack(
-                StackVariant::VARIANT_SM,
-                Collection::fromIterable(array_filter([
-                    $inBackend || $topNewsNode->getProperty('metaHeadline')
-                        ? new Separator(
-                        SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
-                        Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
-                    ): null,
-                    $inBackend || $topNewsNode->getProperty('headline')
-                        ? new Headline(
+            new CacheSegment(
+                new Stack(
+                    StackVariant::VARIANT_SM,
+                    Collection::fromIterable(array_filter([
+                        $inBackend || $topNewsNode->getProperty('metaHeadline')
+                            ? new Separator(
+                            SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                            Editable::fromNodeProperty($topNewsNode, 'metaHeadline')
+                        ): null,
+                        $inBackend || $topNewsNode->getProperty('headline')
+                            ? new Headline(
                             HeadlineSize::SIZE_SUPER_LARGE_LIGHT,
                             HeadlineColor::COLOR_TEXT,
-                                HeadlineType::TYPE_H2,
+                            HeadlineType::TYPE_H2,
                             Editable::fromNodeProperty($topNewsNode, 'headline')
                         )
-                        : null,
+                            : null,
 
-                    new YearbookOverview(
-                        YearbookOverviewVariant::VARIANT_SMALL_CARDS,
-                        $pressReleases
-                    )
-                ]))
+                        new YearbookOverview(
+                            YearbookOverviewVariant::VARIANT_SMALL_CARDS,
+                            $pressReleases
+                        )
+                    ]))
+                ),
+                'Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.YearBookReleaseList'
             )
         );
     }

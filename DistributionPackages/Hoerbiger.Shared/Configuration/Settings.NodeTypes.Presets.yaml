@@ -166,3 +166,17 @@ Neos:
                         locked:
                           width: 5
                           height: 3
+            '16_9':
+              type: 'Neos\Media\Domain\Model\ImageInterface'
+              ui:
+                inspector:
+                  group: 'image'
+                  editorOptions:
+                    features:
+                      crop: true
+                    crop:
+                      aspectRatio:
+                        forceCrop: true
+                        locked:
+                          width: 16
+                          height: 9

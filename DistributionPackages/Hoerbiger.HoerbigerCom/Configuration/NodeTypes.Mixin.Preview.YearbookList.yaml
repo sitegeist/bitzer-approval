@@ -1,0 +1,58 @@
+'Hoerbiger.HoerbigerCom:Mixin.Preview.YearbookList':
+  abstract: true
+  ui:
+    inspector:
+      tabs:
+        previewYearbookList:
+          label: 'Preview für CE Yearbook List (big) und (small)'
+          icon: 'eye'
+          position: 'after default'
+      groups:
+        previewYearbookList:
+          tab: previewYearbookList
+          label: 'Preview für CE Yearbook List (big) und (small)'
+          icon: eye
+  properties:
+    preview__image_yearbook_list:
+      type: 'Neos\Media\Domain\Model\ImageInterface'
+      ui:
+        label: 'Preview Image'
+        inspector:
+          group: 'previewYearbookList'
+      options:
+        preset: 'image.square'
+    preview__image_yearbook_list__alt:
+      type: 'string'
+      ui:
+        label: 'Alt Text'
+        inspector:
+          group: 'previewYearbookList'
+      options:
+        automaticTranslation: true
+    preview__image_yearbook_list__title:
+      type: 'string'
+      ui:
+        label: 'Title-Text'
+        inspector:
+          group: 'previewYearbookList'
+      options:
+        automaticTranslation: true
+    preview__headline_yearbook_list:
+      type: 'string'
+      ui:
+        label: 'Preview Headline'
+        inspector:
+          group: 'previewYearbookList'
+      options:
+        automaticTranslation: true
+    preview__description_yearbook_list:
+      type: 'string'
+      ui:
+        label: 'Preview Description'
+        inspector:
+          group: 'previewYearbookList'
+          editor: 'Neos.Neos/Inspector/Editors/TextAreaEditor'
+          editorOptions:
+            rows: 7
+      options:
+        automaticTranslation: true
