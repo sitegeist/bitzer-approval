@@ -1,4 +1,4 @@
-'Hoerbiger.HoerbigerCom:Mixin.Preview.HannsList':
+'Hoerbiger.HoerbigerCom.PressArchive:Mixin.Preview.HannsList':
   abstract: true
   ui:
     inspector:

@@ -1,0 +1,11 @@
+prototype(Hoerbiger.HoerbigerCom.PressArchive:CacheSegment.YearBookReleaseList) < prototype(PackageFactory.AtomicFusion.PresentationObjects:CacheSegment) {
+    @cache {
+        entryIdentifier {
+            node = ${node}
+        }
+        entryTags {
+            1 = ${Neos.Caching.nodeTag(node)}
+            2 = ${Neos.Caching.nodeTypeTag('Hoerbiger.HoerbigerCom.PressArchive:Document.YearbookRelease', node)}
+        }
+    }
+}

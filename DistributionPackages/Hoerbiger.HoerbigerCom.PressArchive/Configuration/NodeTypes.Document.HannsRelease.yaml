@@ -3,7 +3,7 @@
     'Hoerbiger.HoerbigerCom:Document': true
     'Hoerbiger.HoerbigerCom:Mixin.Introduction.Stack': true
     'Hoerbiger.HoerbigerCom:Mixin.Preview': true
-    'Hoerbiger.HoerbigerCom:Mixin.Preview.HannsList': true
+    'Hoerbiger.HoerbigerCom.PressArchive:Mixin.Preview.HannsList': true
     'Hoerbiger.Shared:Mixin.Searchable': true
   childNodes:
     main:
