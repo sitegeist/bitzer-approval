@@ -9,3 +9,7 @@ Sitegeist:
       packageKeys:
         shared: 'Hoerbiger.Shared'
       fileExtension: '.labels.csv'
+  LostInTranslation:
+    DeepLApi:
+      defaultOptions:
+        tag_handling: 'html'
