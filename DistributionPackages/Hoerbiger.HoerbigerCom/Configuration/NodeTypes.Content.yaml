@@ -19,3 +19,10 @@
           group: 'anchor'
     lastUpdateAction:
       type: DateTime
+    showAnchor:
+      type: boolean
+      defaultValue: false
+      ui:
+        label: 'Show Anchor'
+        inspector:
+          group: 'anchor'

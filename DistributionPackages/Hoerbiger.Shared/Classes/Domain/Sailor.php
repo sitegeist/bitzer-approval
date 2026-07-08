@@ -69,7 +69,7 @@ class Sailor
         $anchors = [];
         foreach ($contentCollectionNode->findChildNodes() as $contentNode) {
             $anchorLabel = $contentNode->getProperty('anchorLabel');
-            if ($anchorLabel) {
+            if ($anchorLabel && $contentNode->getProperty('showAnchor')) {
                 $anchors[] = $this->anchorFactory->fromAnchorLabel($anchorLabel);
             }
         }
