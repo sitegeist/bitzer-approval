@@ -15,6 +15,7 @@ prototype(Hoerbiger.Shared:Block.ContactWidget) < prototype(Neos.Fusion:Componen
     contactWidgetUri.@process.convertUris = Neos.Neos:ConvertUris
 
     inBackend = ${documentNodede.context.inBackend}
+    i18n = ${CsvPO.create('resource://Hoerbiger.Shared/Private/Fusion/Presentation/Block/ContactWidget/ContactWidget.translation.csv')}
 
     renderer = afx`
         <Neos.Fusion:Tag
@@ -24,14 +25,15 @@ prototype(Hoerbiger.Shared:Block.ContactWidget) < prototype(Neos.Fusion:Componen
             attributes.href.@if={(props.contactWidgetUri && !inBackend)}
             attributes.class={[
                 "[Block.ContactWidget] fixed bottom-0 right-0 z-[999] shadow-lg border bg-neutral-footer",
-                "grid place-items-center text-neutral-lighter m-[35px] p-[16px] aspect-square"
+                "text-neutral-lighter m-[35px] p-[16px] flex flex-row gap-2xs items-center"
             ]}
         >
+            <div>{props.i18n.contact}</div>
             <Sitegeist.Stampede:Icon
                 collection="shared"
                 icon="email"
                 style="fill: currentColor;"
-                class="w-[35px] h-[35px]"
+                class="w-[35px] h-[35px] shrink-0"
             />
         </Neos.Fusion:Tag>
     `
