@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file original="EnumProvider.TextWithVideo" product-name="Hoerbiger.Shared" source-language="en" target-language="de" datatype="plaintext">
+        <body>
+            <trans-unit id="layout.videoFirst" xml:space="preserve">
+                <source>Video left, text right</source>
+                <target>Video links, Text rechts</target>
+            </trans-unit>
+            <trans-unit id="layout.videoLast" xml:space="preserve">
+                <source>Text left, video right</source>
+                <target>Text links, Video rechts</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

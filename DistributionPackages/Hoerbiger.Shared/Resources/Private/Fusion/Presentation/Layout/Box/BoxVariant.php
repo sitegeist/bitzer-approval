@@ -17,6 +17,7 @@ enum BoxVariant:string implements ProtectedContextAwareInterface
     use StringComponentVariant;
 
     case VARIANT_TEXTCENTER = 'textCenter';
+    case VARIANT_TEXTHORIZONTALCENTER = 'textHorizontalCenter';
     case VARIANT_NEUTRAL = 'neutral';
     case VARIANT_DECORATIVE = 'decorative';
     case VARIANT_EXCITE = 'excite';

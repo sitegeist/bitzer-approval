@@ -19,7 +19,7 @@ final class YouTubeVideo extends AbstractComponentPresentationObject
         public readonly UriInterface $source,
         public readonly ?Figure $figure,
         public readonly ?Icon $playIcon,
-
+        public readonly ?bool $centered = false
     ) {
     }
 }

@@ -22,7 +22,8 @@ prototype(Hoerbiger.Shared:Layout.Box) < prototype(PackageFactory.AtomicFusion.P
             presentationObject.variant.equals('lite') && "bg-neutral-lighter before:bg-lite p-md",
             presentationObject.variant.equals('service') && "bg-neutral-lighter before:bg-service p-md",
             presentationObject.variant.equals('light') && "bg-light py-xs",
-            presentationObject.variant.equals('orderFirst') && "order-first lg:order-none"
+            presentationObject.variant.equals('orderFirst') && "order-first lg:order-none",
+            presentationObject.variant.equals('textHorizontalCenter') && "flex items-center px-md max-lg:py-md"
         ]}>
             <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={presentationObject.content} />
         </div>
