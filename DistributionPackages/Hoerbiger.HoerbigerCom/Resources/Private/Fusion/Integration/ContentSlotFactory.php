@@ -12,6 +12,7 @@ use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Domain\VideoIdentifier;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
@@ -663,11 +664,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         };
 
         $imageSource = $this->imageSourceFactory->forImageMixin($textWithImageNode, $inBackend);
-        $youtubeSource = $textWithImageNode->getProperty('videoSource');
+        $videoSource = $textWithImageNode->getProperty('videoSource');
+        /** @var ?VideoIdentifier $youtubeVideo */
         $youtubeVideo = $textWithImageNode->getProperty('youtubeVideo');
 
-        $video = $youtubeSource == 'internal' ?
-            new Video(
+        $video = $videoSource === 'internal'
+            ? new Video(
                 $textWithImageNode->getProperty('video') ?: '',
                 $imageSource
                     ? $this->figureFactory->forVideoPoster($imageSource)
@@ -675,14 +677,24 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 null,
                 VideoVariant::VARIANT_FULL
             )
-        : new YouTubeVideo(
-                YouTubeVideoAspectRatio::from($youtubeVideo->aspectRatio->value),
-                $youtubeVideo->renderUri(),
-                $imageSource
-                    ? $this->figureFactory->forVideoPoster($imageSource)
-                    : null,
-                new Icon('shared', 'pdf'),
-                true
+            : ($youtubeVideo
+                ? new YouTubeVideo(
+                    YouTubeVideoAspectRatio::from($youtubeVideo->aspectRatio->value),
+                    $youtubeVideo->renderUri(),
+                    $imageSource
+                        ? $this->figureFactory->forVideoPoster($imageSource)
+                        : null,
+                    new Icon('shared', 'pdf'),
+                    true
+                )
+                : ($inBackend
+                    ? new Text(
+                        TextVariant::VARIANT_DEFAULT,
+                        Value::fromString('Bitte YouTube-Video auswählen'),
+                        false
+                    )
+                    : Value::fromString('')
+                )
             );
 
         $textBlockImageSource = $this->imageSourceFactory->forImageProperty(

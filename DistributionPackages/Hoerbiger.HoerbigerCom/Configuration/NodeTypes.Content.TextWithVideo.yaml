@@ -104,7 +104,7 @@
               create: 'Video erstellen'
     videoSource:
       type: string
-      defaultValue: 'secondary'
+      defaultValue: 'internal'
       ui:
         label: 'Video source'
         reloadIfChanged: true
