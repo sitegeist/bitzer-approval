@@ -86,6 +86,7 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Media\Domain\Model\AssetInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
@@ -668,15 +669,21 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         /** @var ?VideoIdentifier $youtubeVideo */
         $youtubeVideo = $textWithImageNode->getProperty('youtubeVideo');
 
-        $video = $videoSource === 'internal'
+        $videoAsset = $textWithImageNode->getProperty('video');
+
+        $internalVideo = $videoAsset instanceof AssetInterface
             ? new Video(
-                $textWithImageNode->getProperty('video') ?: '',
+                (string)$this->uriService->getAssetUri($videoAsset),
                 $imageSource
                     ? $this->figureFactory->forVideoPoster($imageSource)
                     : null,
                 null,
                 VideoVariant::VARIANT_FULL
             )
+            : Value::fromString('');
+
+        $video = $videoSource === 'internal'
+            ? $internalVideo
             : ($youtubeVideo
                 ? new YouTubeVideo(
                     YouTubeVideoAspectRatio::from($youtubeVideo->aspectRatio->value),

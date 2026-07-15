@@ -85,8 +85,10 @@
           hidden: 'ClientEval:!(node.properties.videoSource == "internal")'
           position: 3
           group: 'video'
-      constraints:
-        mediaTypes: [ 'video/mp4', 'video/webm' ]
+          editorOptions:
+            constraints:
+              mediaTypes: [ 'video/mp4', 'video/webm' ]
+
 
     youtubeVideo:
       type: 'Hoerbiger\Shared\Domain\VideoIdentifier'
