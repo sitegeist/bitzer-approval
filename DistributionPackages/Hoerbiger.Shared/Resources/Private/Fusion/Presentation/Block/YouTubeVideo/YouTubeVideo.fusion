@@ -14,7 +14,8 @@ prototype(Hoerbiger.Shared:Block.YouTubeVideo) < prototype(PackageFactory.Atomic
     renderer = afx`
         <div class={[
             "[Block.YouTubeVideo (" + presentationObject.aspectRatio.value + ")]",
-            "relative w-full mx-auto mt-xs"
+            "relative w-full mx-auto",
+            presentationObject.centered ? "my-auto" : "mt-xs"
         ]}>
             <div class={[
                 "relative w-full",

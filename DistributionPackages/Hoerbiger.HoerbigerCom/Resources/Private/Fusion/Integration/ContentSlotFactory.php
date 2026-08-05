@@ -12,6 +12,7 @@ use GuzzleHttp\Psr7\Uri;
 use Hoerbiger\HoerbigerCom\Catalog\Domain\ProductClass;
 use Hoerbiger\HoerbigerCom\Domain\MostWanted\WantedNodeRepository;
 use Hoerbiger\HoerbigerCom\Presentation\Block\Card\CardFactory;
+use Hoerbiger\Shared\Domain\VideoIdentifier;
 use Hoerbiger\Shared\Infrastructure\CsvPOTranslator;
 use Hoerbiger\Shared\Presentation\Block\AccordionItem\AccordionItemVariant;
 use Hoerbiger\Shared\Presentation\Block\Button\Button;
@@ -54,11 +55,17 @@ use Hoerbiger\Shared\Presentation\Block\Text\Text;
 use Hoerbiger\Shared\Presentation\Block\Text\TextVariant;
 use Hoerbiger\Shared\Presentation\Block\Timeline\MileStone\MileStoneFactory;
 use Hoerbiger\Shared\Presentation\Block\Timeline\TimelineFactory;
+use Hoerbiger\Shared\Presentation\Block\Video\Video;
 use Hoerbiger\Shared\Presentation\Block\Video\VideoFactory;
+use Hoerbiger\Shared\Presentation\Block\Video\VideoVariant;
+use Hoerbiger\Shared\Presentation\Block\YouTubeVideo\YouTubeVideo;
+use Hoerbiger\Shared\Presentation\Block\YouTubeVideo\YouTubeVideoAspectRatio;
 use Hoerbiger\Shared\Presentation\Block\YouTubeVideo\YouTubeVideoFactory;
 use Hoerbiger\Shared\Presentation\EnumProvider\Text\Columns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Columns as TextWithImageColumns;
 use Hoerbiger\Shared\Presentation\EnumProvider\TextWithImage\Layout;
+use Hoerbiger\Shared\Presentation\EnumProvider\TextWithVideo\Columns as TextWithVideoColumns;
+use Hoerbiger\Shared\Presentation\EnumProvider\TextWithVideo\Layout as TextWithVideoLayout;
 use Hoerbiger\Shared\Presentation\EnumProvider\Teaser\Layout as TeaserLayout;
 use Hoerbiger\Shared\Presentation\EnumProvider\Theme\Theme;
 use Hoerbiger\Shared\Presentation\Layout\Box\Box;
@@ -79,6 +86,7 @@ use Neos\ContentRepository\Domain\Projection\Content\TraversableNodeInterface;
 use Neos\ContentRepository\Domain\Projection\Content\TraversableNodes;
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\ResourceManagement\ResourceManager;
+use Neos\Media\Domain\Model\AssetInterface;
 use Neos\Neos\Domain\Service\ContentContext;
 use PackageFactory\AtomicFusion\PresentationObjects\Fusion\AbstractComponentPresentationObjectFactory;
 use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\CacheSegment;
@@ -142,6 +150,12 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                 $theme
             ),
             'Hoerbiger.HoerbigerCom:Content.TextWithImage' => $this->forTextWithImageNode(
+                $contentNode,
+                $inBackend,
+                $subgraph,
+                $theme
+            ),
+            'Hoerbiger.HoerbigerCom:Content.TextWithVideo' => $this->forTextWithVideoNode(
                 $contentNode,
                 $inBackend,
                 $subgraph,
@@ -635,6 +649,129 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             ]), $identity)
                         )
                     ], $identity)
+                )
+            ]))
+        );
+    }
+
+    public function forTextWithVideoNode(
+        TraversableNodeInterface $textWithImageNode,
+        bool $inBackend,
+        ContentContext $subgraph,
+        ?Theme $theme
+    ): SlotInterface {
+        $identity = function (SlotInterface $slot) {
+            return $slot;
+        };
+
+        $imageSource = $this->imageSourceFactory->forImageMixin($textWithImageNode, $inBackend);
+        $videoSource = $textWithImageNode->getProperty('videoSource');
+        /** @var ?VideoIdentifier $youtubeVideo */
+        $youtubeVideo = $textWithImageNode->getProperty('youtubeVideo');
+
+        $videoAsset = $textWithImageNode->getProperty('video');
+
+        $internalVideo = $videoAsset instanceof AssetInterface
+            ? new Video(
+                (string)$this->uriService->getAssetUri($videoAsset),
+                $imageSource
+                    ? $this->figureFactory->forVideoPoster($imageSource)
+                    : null,
+                null,
+                VideoVariant::VARIANT_FULL
+            )
+            : Value::fromString('');
+
+        $video = $videoSource === 'internal'
+            ? $internalVideo
+            : ($youtubeVideo
+                ? new YouTubeVideo(
+                    YouTubeVideoAspectRatio::from($youtubeVideo->aspectRatio->value),
+                    $youtubeVideo->renderUri(),
+                    $imageSource
+                        ? $this->figureFactory->forVideoPoster($imageSource)
+                        : null,
+                    new Icon('shared', 'pdf'),
+                    true
+                )
+                : ($inBackend
+                    ? new Text(
+                        TextVariant::VARIANT_DEFAULT,
+                        Value::fromString('Bitte YouTube-Video auswählen'),
+                        false
+                    )
+                    : Value::fromString('')
+                )
+            );
+
+        $textBlockImageSource = $this->imageSourceFactory->forImageProperty(
+            $textWithImageNode,
+            $inBackend,
+            'text__block__image'
+        );
+
+        $textBlockFigure = $textBlockImageSource
+            ? $this->figureFactory->forTextBlockImage($textBlockImageSource)
+            : null;
+
+        $text = new Box(
+            BoxVariant::VARIANT_TEXTHORIZONTALCENTER,
+            new Stack(
+                StackVariant::VARIANT_XS,
+                Collection::fromIterable(array_filter([
+                    $inBackend || $textWithImageNode->getProperty('headline')
+                        ? new Headline(
+                        $theme ? HeadlineSize::SIZE_LARGE : HeadlineSize::SIZE_MEDIUM_ITALIC,
+                        HeadlineColor::tryFromTheme($theme, false) ?: HeadlineColor::COLOR_NEUTRAL_CONTRAST,
+                        HeadlineType::TYPE_DIV,
+                        Editable::fromNodeProperty($textWithImageNode, 'headline')
+                    )
+                        : null,
+                    new Text(
+                        TextVariant::tryFromTheme($theme, false) ?: TextVariant::VARIANT_LIGHT_CONTRAST,
+                        Editable::fromNodeProperty($textWithImageNode, 'text'),
+                        false
+                    ),
+                    $this->linkFactory->forLinkMixin($textWithImageNode, $subgraph, $theme),
+                    $textBlockFigure
+                        ? new ContentContainer(
+                        ContentContainerVariant::VARIANT_HALF_WITH,
+                        $textBlockFigure
+                    ) : null
+                ]), $identity)
+            )
+        );
+        $layout = TextWithVideoLayout::tryFrom($textWithImageNode->getProperty('layout') ?: '')
+            ?: TextWithVideoLayout::VALUE_VIDEOFIRST;
+
+        $column = TextWithVideoColumns::tryFrom($textWithImageNode->getProperty('column') ?: '')
+            ?: TextWithVideoColumns::VALUE_50_50;
+
+        if ($layout === TextWithVideoLayout::VALUE_VIDEOLAST && $textWithImageNode->getProperty('showMobileVideoFirst')) {
+            $video = new Box(
+                BoxVariant::VARIANT_ORDER_FIRST,
+                $video
+            );
+        }
+
+        return new ContentContainer(
+            ContentContainerVariant::VARIANT_REGULAR,
+            Collection::fromIterable(array_filter([
+                $inBackend || $textWithImageNode->getProperty('metaHeadline')
+                    ? new Separator(
+                    SeparatorVariant::VARIANT_FULL_WIDTH_WITH_CONTENT,
+                    Editable::fromNodeProperty($textWithImageNode, 'metaHeadline')
+                ) : null,
+                new Grid(
+                    ($column === TextWithVideoColumns::VALUE_33_66)
+                        ? GridVariant::VARIANT_TWO_33_66
+                        : (($column === TextWithVideoColumns::VALUE_66_33)
+                            ? GridVariant::VARIANT_TWO_66_33
+                            : GridVariant::VARIANT_TWOCOLUMNSNOGAP
+                        ),
+                    $layout === TextWithVideoLayout::VALUE_VIDEOFIRST
+                        ? Collection::fromIterable([$video, $text], $identity)
+                        : Collection::fromIterable([$text, $video], $identity)
                 )
             ]))
         );

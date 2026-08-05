@@ -23,6 +23,7 @@ enum VideoVariant: string implements ProtectedContextAwareInterface
     case VARIANT_SERVICE = 'service';
     case VARIANT_SLIDER = 'slider';
     case VARIANT_SIMPLE_LOOP = 'simpleLoop';
+    case VARIANT_FULL = 'full';
 
     public static function tryFromTheme(?Theme $theme): self
     {
