@@ -80,15 +80,18 @@ prototype(Hoerbiger.Shared:Layout.TabBox) < prototype(PackageFactory.AtomicFusio
                             <Hoerbiger.Shared:Block.Icon presentationObject={item.accordionIcon} />
                         </span>
                     </div>
-                    <div
-                        class={[
+                    <Neos.Fusion:Tag
+                        tagName="div"
+                        attributes.class={[
                             !iterator.isFirst &&"hidden",
                             "py-sm tabBoxToggle:py-0"
                         ]}
-                        data-select="tab-content"
+                        attributes.id={item.anchorId}
+                        attributes.id.@if.1={item.anchorId}
+                        attributes.data-select="tab-content"
                     >
                         <PackageFactory.AtomicFusion.PresentationObjects:Slot presentationObject={item.content} />
-                    </div>
+                    </Neos.Fusion:Tag>
                 </Neos.Fusion:Loop>
             </div>
         </div>

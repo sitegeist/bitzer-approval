@@ -113,7 +113,8 @@ final class PageFactory extends AbstractComponentPresentationObjectFactory
                                     ),
                                     null,
                                     new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5, IconColor::COLOR_CURRENT),
-                                    $this->productListFactory->forSection($section, $subgraph, $inBackend)
+                                    $this->productListFactory->forSection($section, $subgraph, $inBackend),
+                                    null
                                 );
                             }
                         )

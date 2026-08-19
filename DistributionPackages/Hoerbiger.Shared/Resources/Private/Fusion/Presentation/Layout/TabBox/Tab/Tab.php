@@ -20,7 +20,8 @@ final class Tab extends AbstractComponentPresentationObject
         public readonly SlotInterface $label,
         public readonly ?Icon $tabIcon,
         public readonly ?Icon $accordionIcon,
-        public readonly SlotInterface $content
+        public readonly SlotInterface $content,
+        public readonly ?string $anchorId
     ) {
     }
 }

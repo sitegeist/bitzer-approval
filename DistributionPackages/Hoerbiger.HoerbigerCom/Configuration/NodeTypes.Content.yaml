@@ -15,6 +15,16 @@
       ui:
         label: 'Anchor Label'
         reloadPageIfChanged: true
+        help:
+          message: >-
+            ClientEval:node.properties.anchorLabel
+              ? '#' + node.properties.anchorLabel
+                  .toLowerCase()
+                  .replace(/[äüöß]/g, char => ({ä:'ae', ü:'ue', ö:'oe', ß:'ss'})[char])
+                  .replace(/[^a-z0-9_\s-]/g, '')
+                  .replace(/[\s_-]+/g, ' ')
+                  .replace(/[\s_-]/g, '-')
+              : ''
         inspector:
           group: 'anchor'
     lastUpdateAction:

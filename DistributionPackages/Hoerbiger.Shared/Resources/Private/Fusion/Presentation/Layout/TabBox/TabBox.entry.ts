@@ -21,16 +21,20 @@ export default ($node: Element): void => {
 				});
 			};
 
-			const onUpdateIndex = (index: number) => {
+			const scrollToElement = ($element: Element): void => {
+				const scrollPos = ($element.getBoundingClientRect().top + window.scrollY) - headerHeight;
+				window.scrollTo({top: scrollPos, behavior: "smooth"});
+			};
+
+			const onUpdateIndex = (index: number, scrollToBox = true) => {
 				if (index >= 0) {
-					const $boxId = $tabs[index].getAttribute("data-box-id");
+					const $boxId = scrollToBox ? $tabs[index].getAttribute("data-box-id") : null;
 					if ($boxId) {
 						const $parentElements = $node.parentNode?.parentNode?.parentNode;
 						if ($parentElements) {
 							const $element = $parentElements.querySelector(`#${$boxId}`);
 							if ($element) {
-								const scrollPos = ($element.getBoundingClientRect().top + window.scrollY) - headerHeight;
-								window.scrollTo({top: scrollPos, behavior: "smooth"});
+								scrollToElement($element);
 							}
 						}
 					}
@@ -64,6 +68,35 @@ export default ($node: Element): void => {
 				}
 			};
 
+			const getHashIdentifier = (): string => {
+				const hash = window.location.hash.slice(1);
+
+				try {
+					return decodeURIComponent(hash);
+				} catch {
+					return hash;
+				}
+			};
+
+			const openTabFromHash = (): void => {
+				const identifier = getHashIdentifier();
+
+				if (!identifier) {
+					return;
+				}
+
+				const $target = document.getElementById(identifier);
+				if (!$target) {
+					return;
+				}
+
+				const index = $tabs.findIndex(($tab, i) => $tab === $target || $tabContents[i].contains($target));
+				onUpdateIndex(index, false);
+				if (index >= 0) {
+					window.requestAnimationFrame(() => scrollToElement($target));
+				}
+			};
+
 			const onNeosEvent = (e: NeosEvent) => {
 				switch (e.type) {
 				case NEOS_NODE_SELECTED:
@@ -85,6 +118,8 @@ export default ($node: Element): void => {
 			if($isHorizontal){
 				updateInnerButtons(0);
 			}
+			window.addEventListener("hashchange", openTabFromHash);
+			openTabFromHash();
 		}
 	}
 };
