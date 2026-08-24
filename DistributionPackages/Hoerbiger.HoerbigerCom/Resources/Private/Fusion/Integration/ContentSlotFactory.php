@@ -115,6 +115,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
         private readonly WantedNodeRepository $wantedNodeRepository,
         private readonly LinkFactory $linkFactory,
         private readonly CsvPOTranslator $csvPOTranslator,
+        private readonly TabBoxFactory $tabBoxFactory,
     ) {
     }
 
@@ -1117,7 +1118,7 @@ final class ContentSlotFactory extends AbstractComponentPresentationObjectFactor
                             StackVariant::VARIANT_XS_STRETCH,
                             Collection::fromIterable(array_filter([
                                 $theme ? $headline : null,
-                                (new TabBoxFactory())->forTabBox(
+                                $this->tabBoxFactory->forTabBox(
                                     $theme ? null : $headline,
                                     $tabBox,
                                     $identifier,

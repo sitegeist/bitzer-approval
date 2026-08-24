@@ -8,6 +8,7 @@ namespace Hoerbiger\Shared\Presentation\Layout\TabBox;
  * This file is part of the Hoerbiger.Shared package.
  */
 
+use Hoerbiger\Shared\Domain\AnchorFactory;
 use Hoerbiger\Shared\Presentation\Block\Headline\Headline;
 use Hoerbiger\Shared\Presentation\Block\Icon\Icon;
 use Hoerbiger\Shared\Presentation\Block\Icon\IconSize;
@@ -21,6 +22,10 @@ use PackageFactory\AtomicFusion\PresentationObjects\Presentation\Slot\Content;
 
 final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
 {
+    public function __construct(
+        private readonly AnchorFactory $anchorFactory,
+    ) {
+    }
 
     public function forTabBox(
         ?Headline $headline,
@@ -35,11 +40,18 @@ final class TabBoxFactory extends AbstractComponentPresentationObjectFactory
             Collection::fromNodes(
                 $tabBox->findChildNodes(),
                 function (TraversableNodeInterface $tabNode) use ($theme) {
+                    $anchorLabel = $tabNode->getProperty('anchorLabel');
+
                     return new Tab(
                         Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:TabLabel'),
                         new Icon('shared', 'arrowRight', IconSize::SIZE_SIZE_1),
                         new Icon('shared', 'chevronDown', IconSize::SIZE_SIZE_1_5, IconColor::tryFromTheme($theme, false) ?: IconColor::COLOR_CURRENT),
-                        Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:ContentSlot')
+                        Content::fromNode($tabNode, 'Hoerbiger.HoerbigerCom:ContentSlot'),
+                        is_string($anchorLabel) && trim($anchorLabel) !== ''
+                            ? $this->anchorFactory->extractReadableIdentifierFromLabel(
+                                $anchorLabel
+                            )
+                            : null
                     );
                 }
             ),
