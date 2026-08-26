@@ -35,7 +35,7 @@ async function dynamicScript(src: string): Promise<boolean> {
 
 async function loadComponent(identifier: string): Promise<null | ComponentFn> {
 	const [packageName, componentName] = identifier.split(":");
-	const src = `/_Resources/Static/Packages/${packageName}/Build/JavaScript/components.js`;
+	const src = `/_Resources/Static/Packages/${packageName}/Build/JavaScript/components.js?t=${Date.now()}`;
 
 	if (await dynamicScript(src)) {
 		/* eslint-disable */
