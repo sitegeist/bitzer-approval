@@ -95,7 +95,7 @@ export function buildComponentsConfig(composerJson: ComposerJson, entry?: string
 			...(common.plugins as any[]),
 			new webpack.container.ModuleFederationPlugin({
 				name: composerJson.extra.neos['package-key'].replace(/\./g, '_'),
-				filename: 'JavaScript/components.js',
+				filename: `JavaScript/components.js?t=${Date.now()}`,
 				exposes: components.reduce<{ [key: string]: string }>(
 					(entries, pathToEntryFile) => {
 						const componentName = path.basename(pathToEntryFile, '.entry.ts');
