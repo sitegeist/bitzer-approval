@@ -36,7 +36,7 @@ prototype(Hoerbiger.Shared:Block.TeaserItem) < prototype(PackageFactory.AtomicFu
                         <div class="flex flex-col gap-[12px]">
                             <div
                                 class={[
-                                    "font-sans-bold text-3xl",
+                                    "font-sans-bold text-xl sm:text-2xl md:text-3xl",
                                     "drop-shadow-xl",
                                     (presentationObject.isFontColorBlack) ? 'text-light-contrast' : 'text-light'
                                 ]}
