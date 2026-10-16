@@ -34,7 +34,7 @@
         "sitegeist/inspectorgadget": "*",
         "sitegeist/bitzer-approval": "~1.0",
         "sitegeist/lostintranslation": "~2.3",
-        "sitegeist/archaeopteryx": "^1.3",
+        "sitegeist/archaeopteryx": "^1.7.1",
         "flownative/workspace-preview": "^2.0",
         "sandstorm/neostwofactorauthentication": "^1.4"
     },
